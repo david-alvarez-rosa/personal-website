@@ -1,0 +1,27 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+ <title>Image from the Silk icon theme by Mark James</title>
+ <desc>Image from the Silk icon theme by Mark James, traced from http://commons.wikimedia.org/wiki/File:Email.png by CMG Lee.</desc>
+ <defs>
+  <radialGradient id="grad_1" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+   <stop offset="80%" stop-color="#588ac8"/>
+   <stop offset="100%" stop-color="#2b518e"/>
+  </radialGradient>
+  <radialGradient id="grad_2" cx="50%" cy="25%" r="70%" fx="50%" fy="25%">
+   <stop offset="0%" stop-color="#85aae2"/>
+   <stop offset="100%" stop-color="#dcebfe"/>
+  </radialGradient>
+  <radialGradient id="grad_3" cx="50%" cy="10%" r="70%" fx="50%" fy="10%">
+   <stop offset="0%" stop-color="#dae9fd"/>
+   <stop offset="80%" stop-color="#ffffff"/>
+   <stop offset="100%" stop-color="#dee8f7"/>
+  </radialGradient>
+ </defs>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <rect x="0" y="2" width="16" height="11" rx="1" ry="1" fill="url(#grad_1)"/>
+  <rect x="1" y="3" width="14" height="9" fill="#eef3f8"/>
+  <rect x="2" y="4" width="12" height="7" fill="url(#grad_2)"/>
+  <path d="M 2 11 l 4 -4 q 2 -2 4 0 l 4 4" stroke="#bbccdd" fill="none"/>
+  <path d="M 2 4 l 4 4 q 2 2 4 0 l 4 -4" stroke="#85aae2" fill="url(#grad_3)"/>
+ </g>
+</svg>
