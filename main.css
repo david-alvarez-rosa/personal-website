@@ -1,0 +1,237 @@
+/* David \'Alvarez Rosa's web main CSS Styles. */
+
+
+/* Basic. */
+@import url("SourceSansPro.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		font-weight: 400;
+		line-height: 1.75em;
+}
+
+p {
+    color: #a2a2a2;
+    margin: 0 0 2em 0;
+}
+
+/* Header. */
+#header {
+		background-color: #1f1815;
+		background-attachment: scroll,                    scroll;
+		background-image:      url("images/overlay.png"), url("../../images/bg.jpg");
+		background-position:   top left,                  top left;
+		background-repeat:     repeat,                    no-repeat;
+		background-size:       auto,								      150%;
+
+    text-align: right;
+		padding: 7em 4em;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 35%;
+    height: 100%
+}
+
+#img-avatar {
+    border-radius: 100%;
+    border: 0;
+    display: inline-block;
+    width: 6.25em;
+    margin-bottom: 2em;
+}
+
+#header h1, h2 {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#header h1 {
+		font-size: 2em;
+}
+
+#header h2 {
+    font-size: 1em;
+}
+
+#header strong {
+    color: #ffffff;
+}
+
+
+/* Main. */
+#main {
+    margin-left: 35%;
+    max-width: 54em;
+    padding: 7em 4em 4em 4em;
+    width: calc(100% - 35%);
+}
+
+#main > section {
+    border-top: solid 2px #efefef;
+    margin: 4em 0 0 0;
+    padding: 4em 0 0 0;
+}
+
+#main > section:first-child {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#main h2 {
+    font-size: 2em;
+		color: #787878;
+    line-height: 1.5em;
+    margin: 0 0 1em 0;
+}
+
+
+/* Footer. */
+#footer {
+    text-align: right;
+		padding-right: 4em;
+
+    position: fixed;
+    top: 30em;
+    left: 0;
+    width: 35%;
+}
+
+#footer ul {
+    list-style: none;
+}
+
+#footer ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+
+/* XLarge. */
+@media screen and (max-width: 1800px) {
+
+}
+
+
+/* Large. */
+@media screen and (max-width: 1280px) {
+    /* Header. */
+    #header {
+		    padding: 6em 3em 3em 3em;
+		    width: 33%;
+    }
+
+    #header h1 {
+        font-size: 1.85em;
+    }
+
+    #header h2 {
+        font-size: 0.95em;
+    }
+
+    /* Main. */
+    #main {
+        margin-left: 33%;
+        max-width: none;
+        padding: 6em 3em 3em 3em;
+        width: calc(100% - 33%);
+    }
+
+    /* Footer. */
+    #footer {
+        top: 33em;
+    }
+}
+
+
+/* Medium. */
+@media screen and (max-width: 980px) {
+    /* Header. */
+		#header {
+				background-attachment: scroll;
+				background-position: top left, center center;
+				background-size: auto,         cover;
+				left: auto;
+				padding: 6em 4em;
+				position: relative;
+				text-align: center;
+				top: auto;
+				width: 100%;
+				display: block;
+		}
+
+    #header h1 {
+        font-size: 2.25em;
+    }
+
+    #header h2 {
+        font-size: 1em;
+    }
+
+    /* Main. */
+		#main {
+				margin: 0;
+				padding: 6em 4em 0 4em;
+				width: 100%;
+		}
+
+    /* Footer. */
+		#footer {
+				background-attachment: scroll;
+				background-color: #1f1815;
+				background-image:    url("images/overlay.png"), url("../../images/bg.jpg");
+				background-position: top left,						      bottom center;
+				background-repeat:   repeat,							      no-repeat;
+				background-size:     auto,							        cover;
+				padding: 7em 4em 7em 4em;
+				position: relative;
+        top: 4em;
+				text-align: center;
+				width: 100%;
+		}
+}
+
+
+/* Small. */
+@media screen and (max-width: 736px) {
+    /* Header. */
+    #header {
+        padding: 2.25em 1.5em;
+    }
+    #header h1 {
+        font-size: 2em;
+    }
+
+    #header h2 {
+        font-size: 1em;
+    }
+
+    /* Main. */
+		#main {
+				padding: 2.25em 1.5em 0.25em 1.5em;
+		}
+
+		#main > section {
+				margin: 2.25em 0 0 0;
+				padding: 2.25em 0 0 0;
+		}
+
+		/* Footer. */
+		#footer {
+				padding: 2.25em 1.5em;
+		}
+}
+
+
+/* XSmall. */
+@media screen and (max-width: 480px) {
+    /* Header. */
+		#header {
+				padding: 4.5em 1.5em;
+		}
+}
