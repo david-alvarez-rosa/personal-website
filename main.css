@@ -1,35 +1,85 @@
 /* David \'Alvarez Rosa's web main CSS Styles. */
 
 
-/* Basic. */
-@import url("SourceSansPro.css");
-
+/* Global. */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
-		font-family: "Source Sans Pro", Helvetica, sans-serif;
-		font-weight: 400;
-		line-height: 1.75em;
+    font-family: Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 1.75em;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 p {
-    color: #a2a2a2;
-    margin: 0 0 2em 0;
+    color: #A2A2A2;
+    margin-bottom: 1.5em;
+    text-align: justify;
 }
+
+a {
+    text-decoration: none;
+}
+
+
+/* Scroll back to top button. */
+#scrollTop {
+    visibility: hidden;
+    position: fixed;
+    bottom: 20px;
+    right: 0px;
+    transition: visibility 0.5s, opacity 0.5s linear;
+    z-index: 999;
+    /* background-color: #FDB553; */
+    /* background-color: #fc9403; */
+    background-color: rgb(212, 91, 18, 85%);
+    border-radius: 600px 0 0 600px;
+}
+
+#scrollTop img {
+    vertical-align: middle;
+    width: 35px;
+    margin: .5em;
+    margin-right: .75em;
+}
+
+
+/* Navigation bar. */
+#navBar {
+    overflow: hidden;
+    margin-left: calc(35% + 4em);
+    margin-top: 1em;
+    max-width: 54em;
+    padding: 0em 4em;
+    width: calc(100% - 35% - 8.5em);
+    background-color: #333;
+}
+
+#navBar a {
+    float: left;
+    display: block;
+    color: #F2F2F2;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 17px;
+}
+
 
 /* Header. */
 #header {
-		background-color: #1f1815;
-		background-attachment: scroll,                    scroll;
-		background-image:      url("images/overlay.png"), url("../../images/bg.jpg");
-		background-position:   top left,                  top left;
-		background-repeat:     repeat,                    no-repeat;
-		background-size:       auto,								      150%;
+    background-color: #1F1815;
+    background-image:      url("images/overlay.png"), url("images/background.jpg");
+    background-position:   top left,                  top left;
+    background-repeat:     repeat,                    no-repeat;
+    background-size:       auto,                      cover;
 
     text-align: right;
-		padding: 7em 4em;
+    padding: 10em 4em;
 
     position: fixed;
     top: 0;
@@ -38,28 +88,22 @@ p {
     height: 100%
 }
 
-#img-avatar {
-    border-radius: 100%;
-    border: 0;
-    display: inline-block;
-    width: 6.25em;
-    margin-bottom: 2em;
-}
-
 #header h1, h2 {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.75);
 }
 
 #header h1 {
-		font-size: 2em;
+    font-size: 2em;
+    font-weight: 600;
 }
 
 #header h2 {
-    font-size: 1em;
+    font-size: 1.1em;
+    font-weight: 550;
 }
 
 #header strong {
-    color: #ffffff;
+    color: #FFFFFF;
 }
 
 
@@ -67,37 +111,54 @@ p {
 #main {
     margin-left: 35%;
     max-width: 54em;
-    padding: 7em 4em 4em 4em;
+    padding: 3em 4em;
     width: calc(100% - 35%);
 }
 
-#main > section {
-    border-top: solid 2px #efefef;
-    margin: 4em 0 0 0;
-    padding: 4em 0 0 0;
-}
-
-#main > section:first-child {
-    border-top: 0;
-    margin-top: 0;
-    padding-top: 0;
+#main h2, h3 {
+    color: #787878;
+    line-height: 1.5em;
 }
 
 #main h2 {
     font-size: 2em;
-		color: #787878;
-    line-height: 1.5em;
-    margin: 0 0 1em 0;
+}
+
+#main h3 {
+    font-size: 1.25em;
+    padding-bottom: -1em;
+}
+
+#main hr {
+    margin-bottom: 1.5em;
+}
+
+#main section {
+    padding-bottom: 0.5em;
+}
+
+#main ul {
+    padding-left: 3em;
+}
+
+#main section ul li img {
+    width: 20px;
+    vertical-align: middle;
+}
+
+#main ul li img:hover {
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
 }
 
 
 /* Footer. */
 #footer {
     text-align: right;
-		padding-right: 4em;
+    padding-right: 4em;
 
     position: fixed;
-    top: 30em;
+    top: 87.5%;
     left: 0;
     width: 35%;
 }
@@ -109,6 +170,18 @@ p {
 #footer ul li {
     display: inline-block;
     list-style: none;
+    width: 4em;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+}
+
+#footer ul li img {
+    height: 25px;
+}
+
+#footer ul li img:hover {
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
 }
 
 
@@ -120,10 +193,9 @@ p {
 
 /* Large. */
 @media screen and (max-width: 1280px) {
-    /* Header. */
     #header {
-		    padding: 6em 3em 3em 3em;
-		    width: 33%;
+        padding: 6em 3em 3em 3em;
+        width: 33%;
     }
 
     #header h1 {
@@ -134,36 +206,29 @@ p {
         font-size: 0.95em;
     }
 
-    /* Main. */
     #main {
         margin-left: 33%;
         max-width: none;
-        padding: 6em 3em 3em 3em;
+        padding-left: 3em;
+        padding-right: 3em;
         width: calc(100% - 33%);
-    }
-
-    /* Footer. */
-    #footer {
-        top: 33em;
     }
 }
 
 
 /* Medium. */
 @media screen and (max-width: 980px) {
-    /* Header. */
-		#header {
-				background-attachment: scroll;
-				background-position: top left, center center;
-				background-size: auto,         cover;
-				left: auto;
-				padding: 6em 4em;
-				position: relative;
-				text-align: center;
-				top: auto;
-				width: 100%;
-				display: block;
-		}
+    #header {
+        background-position: top left, center center;
+
+        left: auto;
+        padding: 6em 4em;
+        text-align: center;
+        position: relative;
+        top: auto;
+        width: 100%;
+        display: block;
+    }
 
     #header h1 {
         font-size: 2.25em;
@@ -173,35 +238,34 @@ p {
         font-size: 1em;
     }
 
-    /* Main. */
-		#main {
-				margin: 0;
-				padding: 6em 4em 0 4em;
-				width: 100%;
-		}
+    #main {
+        margin: 0;
+        padding-left: 5em;
+        padding-right: 5em;
+        width: 100%;
+    }
 
-    /* Footer. */
-		#footer {
-				background-attachment: scroll;
-				background-color: #1f1815;
-				background-image:    url("images/overlay.png"), url("../../images/bg.jpg");
-				background-position: top left,						      bottom center;
-				background-repeat:   repeat,							      no-repeat;
-				background-size:     auto,							        cover;
-				padding: 7em 4em 7em 4em;
-				position: relative;
+    #footer {
+        background-attachment: scroll;
+        background-color: #1F1815;
+        background-image:    url("images/overlay.png"), url("images/background.jpg");
+        background-position: top left,                  bottom center;
+        background-repeat:   repeat,                    no-repeat;
+        background-size:     auto,                      cover;
+
+        padding: 7em 4em;
+        position: relative;
         top: 4em;
-				text-align: center;
-				width: 100%;
-		}
+        text-align: center;
+        width: 100%;
+    }
 }
 
 
 /* Small. */
 @media screen and (max-width: 736px) {
-    /* Header. */
     #header {
-        padding: 2.25em 1.5em;
+        padding: 3.5em 1.5em;
     }
     #header h1 {
         font-size: 2em;
@@ -211,27 +275,27 @@ p {
         font-size: 1em;
     }
 
-    /* Main. */
-		#main {
-				padding: 2.25em 1.5em 0.25em 1.5em;
-		}
+    #main {
+        padding-left: 2.5em;
+        padding-right: 2.5em;
+    }
 
-		#main > section {
-				margin: 2.25em 0 0 0;
-				padding: 2.25em 0 0 0;
-		}
-
-		/* Footer. */
-		#footer {
-				padding: 2.25em 1.5em;
-		}
+    #footer {
+        padding-top: 5em;
+        padding-bottom: 5em;
+    }
 }
 
 
 /* XSmall. */
 @media screen and (max-width: 480px) {
-    /* Header. */
-		#header {
-				padding: 4.5em 1.5em;
-		}
+    #header {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    }
+
+    #main {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+    }
 }
