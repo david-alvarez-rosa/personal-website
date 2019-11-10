@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
-    <title>David Álvarez's Homepage</title>
     <meta charset="utf-8" />
+    <title>David Álvarez's Website</title>
+    <link rel="icon" type="image/x-ico" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="fontawesome/css/brands.css" />
   </head>
 
 
   <body>
-    <nav id="navBar">
-      <a href="#sec-about">About</a>
-      <a href="#sec-education">Education</a>
-      <a href="#sec-courses">Courses</a>
-      <a href="#sec-projects">Projects</a>
-      <a href="#sec-inspiration">Inspiration</a>
-    </nav>
-
-
-    <!-- Scroll back to top button. -->
-    <div id="scrollTop">
-      <a href="#" title="Scroll back to top.">
-        <img src="icons/arrow-circle-up.svg" alt="Arrow up icon."/>
-      </a>
-    </div>
-
-
     <header id="header">
-      <a href="#"><h1>David Álvarez Rosa</h1></a>
+      <a href="https://david.alvarezrosa.com" title="David Álvarez Rosa's personal website.">
+        <h1>David Álvarez Rosa</h1>
+      </a>
       <h2>
         <strong>Mathematics</strong> and <br />
         <strong>Industrial Engineering</strong> student.
@@ -36,194 +25,309 @@
     </header>
 
 
-    <div id="main">
-      <section id="about">
+    <nav class="navBar" id="navBar">
+      <button onclick="expandNavBar()" title="Expand navigation bar.">
+        <i class="fas fa-bars fa-2x"></i>
+      </button>
+      <a class="current" href="#sec-about" title="Scroll to about me section.">About</a><!--
+      --><a href="#sec-education" title="Scroll to education section.">Education</a><!--
+      --><a href="#sec-courses" title="Scroll to courses section.">Courses</a><!--
+      --><a ref="#sec-projects" title="Scroll to projects section.">Projects</a><!--
+      --><a href="#sec-inspiration" title="Scroll to inspiration section.">Inspiration</a><!--
+      --><a href="#sec-skills" title="Scroll to skills section.">Skills</a><!--
+      --><a href="#sec-languages" title="Scroll to languages section.">Languages</a><!--
+      --><a href="#sec-awards" title="Scroll to awards section.">Awards</a><!--
+      --><a href="#sec-others" title="Scroll to others section.">Others</a><!--
+      --><a href="#sec-interests" title="Scroll to interests section.">Interests</a><!--
+      --><a href="#sec-touch" title="Scroll to get in touch section.">Get in touch</a>
+    </nav>
+
+
+    <!-- Scroll back to top button. -->
+    <div id="scrollTop">
+      <a class="fas fa-arrow-circle-up fa-2x"
+         href="#"
+         title="Scroll back to top.">
+      </a>
+    </div>
+
+
+    <main>
+      <p style="margin-top: 2em;">
+        This website does not (and won't ever) use cookies. I value your privacy.
+      </p>
+
+      <section class="hidden" id="sec-about">
         <h2>About me</h2>
-        <hr />
         <p>
           I'm an undergraduate student in my final year towards a double degree in
           Mathematics and Industrial Technology Engineering, under the CFIS
           program of the Polytechnic University of Catalonia in Barcelona (Spain).
         </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
         <ul>
           <li>
             Gitlab
-            <a rel="external"
+            <a class="fab fa-gitlab fa-lg"
+               rel="external"
                href="https://gitlab.com/DavidAlvarez"
                target="_blank"
                title="Personal Gitlab page.">
-              <img src="icons/gitlab.svg" alt="Gitlab icon." />
             </a>
           </li>
 
           <li>
             Email
-            <img src="icons/at.svg" alt="Email icon." />
+            <a class="icon fas fa-at fa-lg"
+               rel="nofollow"
+               href="mailto:david@alvarezrosa.com"
+               title="Send me and email.">
+            </a>
           </li>
 
           <li>
             Phone
-            <img src="icons/phone.svg" alt="Phone icon." />
+            <a class="fas fa-phone fa-lg"
+               rel="nofollow"
+               href="tel:+34647133930"
+               title="Call me.">
+            </a>
           </li>
 
           <li>
             Envelope
-            <img src="icons/envelope.svg" alt="Envelope icon." />
+            <a class="icon fas fa-envelope fa-lg"
+               rel="nofollow"> <!-- TODO: finish this. -->
+            </a>
           </li>
         </ul>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
       </section>
 
-      <section id="sec-education">
+      <section class="hidden" id="sec-education">
         <h2>Education</h2>
-        <hr />
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          realmente ver cómo quedará en un futuro la web y tiene tildes y
-          web y tenemos texto con diferentes formas colores y tamaños.más algo.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Degree in Mathematics</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Degree in Industrial Technology Engineering</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Scientific and Technological Baccalaureate</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
         </p>
         <h3>Compulsory Secondary Education</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
         </p>
       </section>
 
-      <section id="sec-courses">
+      <section class="hidden" id="sec-courses">
         <h2>Courses</h2>
-        <hr />
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          realmente ver cómo quedará en un futuro la web y tiene tildes y
-          web y tenemos texto con diferentes formas colores y tamaños.más algo.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Game theory</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Introduction to Machine Learning & Deep Learning</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </section>
 
-      <section id="sec-projects">
+      <section class="hidden" id="sec-projects">
         <h2>Projects</h2>
-        <hr />
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          realmente ver cómo quedará en un futuro la web y tiene tildes y
-          web y tenemos texto con diferentes formas colores y tamaños.más algo.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Driverless - Motorsport</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Robotic Arm - Tic-tac-toe</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Email server</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <h3>Study Schedule</h3>
         <p>
-          Aquí el main que es bastante largo e interesante, y contiene diversos
-          recursos linguisticos y se puede encontrar en diferentes formas y
-          posiciones y es un texto con suficientes variaciones para que se pueda
-          es un texto con suficientes variaciones para que se pueda realmente
-          ver cómo quedará en un futuro la web y tiene tildes.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+          sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </section>
 
-      <section id="sec-inspiration">
+      <section class="hidden" id="sec-inspiration">
         <h2>Inspiration</h2>
-        <hr />
         <p>
-          Diversos recursos linguisticos y se puede encontrar en diferentes
-          ver cómo quedará en un futuro la web.
-    </div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+        </p>
+      </section>
+
+      <section class="hidden" id="sec-touch">
+        <h2>Get in touch</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+          nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        </p>
+        <form method="post" action="">
+          <div style="width: 65%; float: left;">
+            <input id="half" type="text" placeholder="Name" />
+            <input id="half" type="email" placeholder="Email" />
+            <textarea placeholder="Message" rows="5"></textarea>
+					  <input type="submit" value="Send Message" class="primary" />
+            <input type="reset" value="Reset" />
+          </div>
+          <div id="width: 35%; margin-left: 65%;">
+            <ul>
+              <li>
+                <h3 class="fas fa-home"></h3>
+                1234 Somewhere Rd. <br />
+                Nashville, TN 00000 <br />
+                United States
+              </li>
+              <li>
+                <h3 class="fas fa-phone"></h3>
+                647 13 39 30
+              </li>
+              <li>
+                <h3 class="fas fa-envelope"></h3>
+                hello@untiled.tld
+              </li>
+            </ul>
+          </div>
+          <!-- Give parent size (the above divs are floating). -->
+          <div style="clear: both;"></div>
+        </form>
+      </section>
+    </main>
 
 
     <footer id="footer">
       <ul>
         <li>
-          <a rel="external"
+          <a class="icon fab fa-gitlab fa-2x"
+             rel="external"
              href="https://gitlab.com/DavidAlvarez"
              target="_blank"
              title="Personal Gitlab page.">
-            <img src="icons/gitlab.svg" alt="Gitlab icon." />
           </a>
           <br />
           Gitlab
         </li>
 
         <li>
-          <img src="icons/at.svg" alt="Email icon." />
+          <a class="icon fas fa-at fa-2x"
+             rel="nofollow"
+             href="mailto:david@alvarezrosa.com"
+             title="Send me and email.">
+          </a>
           <br />
           Email
         </li>
 
         <li>
-          <img src="icons/phone.svg" alt="Phone icon." />
+          <a class="icon fas fa-phone fa-2x"
+             rel="nofollow"
+             href="tel:+34647133930"
+             title="Call me.">
+          </a>
           <br />
           Phone
         </li>
 
         <li>
-          <img src="icons/envelope.svg" alt="Envelope icon." />
+          <a class="icon fas fa-envelope fa-2x"
+             rel="nofollow"> <!-- TODO: finish this. -->
+          </a>
           <br />
           Envelope
         </li>
       </ul>
     </footer>
 
-    <script src="script.js"></script>
+
+    <script src="main.js"></script>
+
   </body>
 </html>

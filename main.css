@@ -7,7 +7,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: Helvetica, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.75em;
 }
@@ -24,6 +24,12 @@ p {
 
 a {
     text-decoration: none;
+    outline: 0;
+}
+
+button {
+    border: none;
+    background-color: transparent;
 }
 
 
@@ -35,38 +41,53 @@ a {
     right: 0px;
     transition: visibility 0.5s, opacity 0.5s linear;
     z-index: 999;
-    /* background-color: #FDB553; */
-    /* background-color: #fc9403; */
-    background-color: rgb(212, 91, 18, 85%);
+    background-color: #D45B12;
     border-radius: 600px 0 0 600px;
 }
 
-#scrollTop img {
+#scrollTop a {
+    color: #000000;
     vertical-align: middle;
-    width: 35px;
-    margin: .5em;
-    margin-right: .75em;
+    margin: .275em;
+    margin-right: .35em;
 }
 
 
 /* Navigation bar. */
-#navBar {
+.navBar {
     overflow: hidden;
-    margin-left: calc(35% + 4em);
-    margin-top: 1em;
-    max-width: 54em;
-    padding: 0em 4em;
-    width: calc(100% - 35% - 8.5em);
+    margin-left: 35%;
+    padding: .8em 0em;
+    width: calc(100% - 35%);
     background-color: #333;
+    opacity: 0.85;
+    position: fixed;
+    white-space: nowrap;
 }
 
-#navBar a {
-    float: left;
-    display: block;
+.navBar a {
     color: #F2F2F2;
     text-align: center;
-    padding: 14px 16px;
-    font-size: 17px;
+    padding: 1.5em;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 1s;
+}
+
+.navBar a:hover {
+  color: #000000;
+  background-color: #DDD;
+}
+
+.navBar a.current {
+    transition: background-color 1s;
+    color: #000000;
+    background-color: #D45B12
+}
+
+.navBar button {
+    display: none;
+    cursor: pointer;
 }
 
 
@@ -79,7 +100,7 @@ a {
     background-size:       auto,                      cover;
 
     text-align: right;
-    padding: 10em 4em;
+    padding: 8.5em 4em;
 
     position: fixed;
     top: 0;
@@ -108,47 +129,38 @@ a {
 
 
 /* Main. */
-#main {
+main {
     margin-left: 35%;
     max-width: 54em;
-    padding: 3em 4em;
+    padding: 3em 4em 7.5em 4em;
     width: calc(100% - 35%);
 }
 
-#main h2, h3 {
+main h2, h3 {
     color: #787878;
     line-height: 1.5em;
 }
 
-#main h2 {
+main h2 {
     font-size: 2em;
 }
 
-#main h3 {
+main h3 {
     font-size: 1.25em;
     padding-bottom: -1em;
 }
 
-#main hr {
-    margin-bottom: 1.5em;
-}
-
-#main section {
+main section {
     padding-bottom: 0.5em;
 }
 
-#main ul {
+main section h2 {
+    border-bottom: solid 2px #CCCCCC;
+    margin-bottom: .75em;
+}
+
+main ul {
     padding-left: 3em;
-}
-
-#main section ul li img {
-    width: 20px;
-    vertical-align: middle;
-}
-
-#main ul li img:hover {
-    transform: scale(1.2);
-    transition: transform .1s linear .1s;
 }
 
 
@@ -158,7 +170,8 @@ a {
     padding-right: 4em;
 
     position: fixed;
-    top: 87.5%;
+    top: 85%;
+    min-top: 600px;
     left: 0;
     width: 35%;
 }
@@ -175,26 +188,105 @@ a {
     color: rgba(255, 255, 255, 1);
 }
 
-#footer ul li img {
-    height: 25px;
+#footer .icon {
+    color: rgba(255, 255, 255, .75);
 }
 
-#footer ul li img:hover {
+#footer a:hover {
     transform: scale(1.2);
     transition: transform .1s linear .1s;
+    color: #D45B12;
 }
 
 
-/* XLarge. */
-@media screen and (max-width: 1800px) {
+/* Inputs. */
+input[type="submit"], input[type="reset"] {
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 0.35em;
+		border: solid 3px #EFEFEF;
+		color: #787878 !important;
+		cursor: pointer;
+		display: inline-block;
+		font-weight: 400;
+		height: 3.15em;
+		line-height: 2.75em;
+		min-width: 12em;
+		padding: 0 1.5em;
+    margin-right: 1.5em;
+		text-align: center;
+		white-space: nowrap;
+}
 
+input[type="submit"]:hover, input[type="reset"]:hover {
+		border-color: #D45B12;
+    color: #D45B12 !important;
+}
+
+input[type="text"], input[type="email"], textarea {
+    background: #f7f7f7;
+		color: #787878 !important;
+    font-size: 1em;
+    border-radius: 0.5em;
+		line-height: 1.75em;
+    border: solid 2px transparent;
+    display: inline-block;
+    padding: .75em 1em;
+    margin: 1em .5em 1em 0;
+    outline: 0;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+		border-color: #D45B12;
+}
+
+textarea {
+    width: calc(100% - 1em);
+}
+
+#half {
+    width: calc(50% - 1em);
 }
 
 
-/* Large. */
+/* Animations. */
+#navBar {
+    animation: slideInFromTop 1.5s;
+}
+
+#header {
+    animation: slideInFromLeft 1.5s;
+}
+
+/* All elements in hidden class will fade in when appear in screen. */
+.hidden {
+    opacity: 0;
+}
+
+.fadeIn {
+    animation: fadeIn 1.5s;
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-100%); }
+    to { transofrm: translateY(0); }
+}
+
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(.7,.7) }
+    to { opacity: 1; }
+}
+
+
+/* Large screen size. */
 @media screen and (max-width: 1280px) {
     #header {
-        padding: 6em 3em 3em 3em;
+        padding: 7em 3em 3em 3em;
         width: 33%;
     }
 
@@ -206,7 +298,12 @@ a {
         font-size: 0.95em;
     }
 
-    #main {
+    .navBar {
+        margin-left: 33%;
+        width: calc(100% - 33%);
+    }
+
+    main {
         margin-left: 33%;
         max-width: none;
         padding-left: 3em;
@@ -216,11 +313,10 @@ a {
 }
 
 
-/* Medium. */
+/* Medium screen size. */
 @media screen and (max-width: 980px) {
     #header {
         background-position: top left, center center;
-
         left: auto;
         padding: 6em 4em;
         text-align: center;
@@ -238,8 +334,27 @@ a {
         font-size: 1em;
     }
 
-    #main {
+    .navBar {
+        z-index: 999;
+        width: 30px;
+        position: absolute;
+        right: 5em;
+        padding: 0;
+        padding-top: 20px;
+        background-color: transparent;
+    }
+
+    .navBar a {
+        display: none;
+    }
+
+    .navBar button {
+        display: block;
+    }
+
+    main {
         margin: 0;
+        padding-top: 2em;
         padding-left: 5em;
         padding-right: 5em;
         width: 100%;
@@ -262,7 +377,7 @@ a {
 }
 
 
-/* Small. */
+/* Small screen size. */
 @media screen and (max-width: 736px) {
     #header {
         padding: 3.5em 1.5em;
@@ -275,7 +390,29 @@ a {
         font-size: 1em;
     }
 
-    #main {
+    .navBar {
+        right: 2.5em;
+    }
+
+    .navBar.responsive {
+        position: relative;
+        width: 700px;
+        background-color: #333;
+        margin: 0 auto;
+    }
+
+    .navBar.responsive button {
+        position: relative;
+        left: calc(700px - 30px);
+    }
+
+    .navBar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+    }
+
+    main {
         padding-left: 2.5em;
         padding-right: 2.5em;
     }
@@ -287,15 +424,27 @@ a {
 }
 
 
-/* XSmall. */
+/* XSmall screen size. */
 @media screen and (max-width: 480px) {
     #header {
         padding-left: 1.5em;
         padding-right: 1.5em;
     }
 
-    #main {
+    .navBar {
+        right: 1.5em;
+    }
+
+    main {
         padding-left: 1.5em;
         padding-right: 1.5em;
+    }
+}
+
+
+/* Screen of small height. */
+@media screen and (max-height: 400px) {
+    #footer {
+        display: none;
     }
 }
