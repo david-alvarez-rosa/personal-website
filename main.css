@@ -12,6 +12,10 @@
     line-height: 1.75em;
 }
 
+body {
+    overflow: hidden,
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -61,47 +65,62 @@ button {
 
 
 /* Navigation bar. */
-.navBar {
-    overflow: hidden;
+nav {
+    overflow: auto;
     margin-left: 35%;
-    padding: 0.8em 0;
-    width: calc(100% - 35%);
-    background-color: #333;
+    padding: 0.75em 0;
+    width: calc(100% - 35% - 4.35em);
+    background-color: #333333;
     opacity: 0.85;
     position: fixed;
     white-space: nowrap;
     transition: padding .4s linear;
 }
 
-.navBar a {
+nav a {
     color: #F2F2F2;
     text-align: center;
     padding: 1.5em;
     font-size: 1.1em;
     font-weight: 600;
-    transition: all 1s;
-    background-position: left bottom;
-    background-image: linear-gradient(#DDD, #DDD);
+    background-image: linear-gradient(#DDDDDD, #DDDDDD);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: 0% 100%;
-    transition: background-size .5s ease, color .5s ease;
+    transition: background-size .5s ease, color .5s ease, padding .4s linear;
 }
 
-.navBar a:hover {
+nav a:hover {
   color: #000000;
   background-size: 100% 100%;
 }
 
-.navBar a.current {
+nav a.current {
     color: #000000;
     background-color: #D45B12;
     background-position: right bottom;
 }
 
-.navBar button {
-    display: none;
+#navButton {
     cursor: pointer;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: #FFFFFF;
+    padding: 1.33em 1.5em 1.1em 1.5em;
+    background-color: #1A1A1A;
+    opacity: 0.85;
+    z-index: 9999;
+    background-image: linear-gradient(#BFBFBF, #BFBFBF);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size .5s ease, color .5s ease, padding .4s linear;
+}
+
+#navButton:hover {
+  color: #000000;
+  background-size: 100% 100%;
 }
 
 
@@ -264,8 +283,12 @@ textarea {
 
 
 /* Animations. */
-#navBar {
+nav {
     animation: slideInFromTop 1.5s;
+}
+
+#navButton {
+    animation: slideInFromBottom 2s ease;
 }
 
 #header {
@@ -283,6 +306,11 @@ textarea {
 
 @keyframes slideInFromTop {
     from { transform: translateY(-100%); }
+    to { transofrm: translateY(0); }
+}
+
+@keyframes slideInFromBottom {
+    from { transform: translateY(750px); }
     to { transofrm: translateY(0); }
 }
 
@@ -312,7 +340,7 @@ textarea {
         font-size: 0.95em;
     }
 
-    .navBar {
+    nav {
         margin-left: 33%;
         width: calc(100% - 33%);
     }
@@ -348,21 +376,22 @@ textarea {
         font-size: 1em;
     }
 
-    .navBar {
-        z-index: 999;
-        width: 30px;
-        position: absolute;
-        right: 5em;
-        padding: 0;
-        padding-top: 20px;
-        background-color: transparent;
+    nav {
+        width: 100%;
+        margin-left: 0em;
+        position: relative;
     }
 
-    .navBar a {
+    nav.sticky {
+        position: fixed;
+        top: 0;
+    }
+
+    nav a {
         display: none;
     }
 
-    .navBar button {
+    #navButton {
         display: block;
     }
 
@@ -404,28 +433,6 @@ textarea {
         font-size: 1em;
     }
 
-    .navBar {
-        right: 2.5em;
-    }
-
-    .navBar.responsive {
-        position: relative;
-        width: 700px;
-        background-color: #333;
-        margin: 0 auto;
-    }
-
-    .navBar.responsive button {
-        position: relative;
-        left: calc(700px - 30px);
-    }
-
-    .navBar.responsive a {
-        display: block;
-        float: none;
-        text-align: left;
-    }
-
     main {
         padding-left: 2.5em;
         padding-right: 2.5em;
@@ -445,10 +452,6 @@ textarea {
         padding-right: 1.5em;
     }
 
-    .navBar {
-        right: 1.5em;
-    }
-
     main {
         padding-left: 1.5em;
         padding-right: 1.5em;
@@ -462,3 +465,73 @@ textarea {
         display: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    nav.responsive {
+        position: relative;
+        width: 700px;
+        background-color: #333333;
+        margin: 0 auto;
+    }
+
+    /* TODO: be careful with this nav button (now it is not inside nav). */
+    nav.responsive button {
+        position: relative;
+        left: calc(700px - 30px);
+    }
+
+    nav.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+    }

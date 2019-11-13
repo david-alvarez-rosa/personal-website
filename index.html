@@ -25,10 +25,10 @@
     </header>
 
 
-    <nav class="navBar" id="navBar">
-      <button onclick="toggleNavBar()" title="Expand navigation bar.">
-        <i class="fas fa-bars fa-2x"></i>
-      </button>
+    <button id="navButton" onclick="toggleNavBar()" title="Expand navigation bar.">
+      <i class="fas fa-bars fa-2x" id="navIcon"></i>
+    </button>
+    <nav>
       <a class="current" href="#sec-about" title="Scroll to about me section.">About</a><!--
       --><a href="#sec-education" title="Scroll to education section.">Education</a><!--
       --><a href="#sec-courses" title="Scroll to courses section.">Courses</a><!--
@@ -53,7 +53,7 @@
 
 
     <main>
-      <p style="margin-top: 2em;">
+      <p style="margin-top: 2.5em;">
         This website does not (and won't ever) use cookies. I value your privacy.
       </p>
 
