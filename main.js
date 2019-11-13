@@ -26,18 +26,15 @@ function expandNavBar() {
 }
 
 
+// Script for fade in animations.
 var windowHeight;
 var elementsHidden = document.querySelectorAll(".hidden");
-var elementCurrent = document.querySelector(".current");
-var navBar = document.getElementById("navBar");
-var navBarLinks = navBar.getElementsByTagName("a");
 
-
-function init() {
+function getWindowHeight() {
     windowHeight = window.innerHeight;
 }
 
-function checkPosition() {
+function setFadeInAnimations() {
     for (var i = 0; i < elementsHidden.length; ++i) {
         var elementHidden = elementsHidden[i];
         var positionFromTop = elementsHidden[i].getBoundingClientRect().top;
@@ -49,8 +46,32 @@ function checkPosition() {
     }
 }
 
-window.addEventListener("scroll", checkPosition);
-window.addEventListener("resize", init);
+window.addEventListener("scroll", setFadeInAnimations);
+window.addEventListener("resize", getWindowHeight);
 
-init();
-checkPosition();
+getWindowHeight();
+setFadeInAnimations();
+
+
+// Get nearer section to user position (so navbar can be updated).
+var windowHeight;
+var elementCurrent = document.querySelector(".current");
+var sections = document.getElementsByTagName("section");
+var navBar = document.getElementById("navBar");
+var navBarLinks = navBar.getElementsByTagName("a");
+
+function setNavBarSection() {
+    for (var i = 0; i < sections.length; ++i) {
+        var section = sections[i];
+        var positionFromTop = section.getBoundingClientRect().top;
+
+        if (positionFromTop - windowHeight <= -250) {
+            elementCurrent.classList.remove("current");
+            elementCurrent = navBarLinks[i];
+            elementCurrent.classList.add("current");
+        }
+    }
+}
+
+window.addEventListener("scroll", setNavBarSection);
+setNavBarSection()
