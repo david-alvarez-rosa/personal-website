@@ -32,6 +32,13 @@ button {
     background-color: transparent;
 }
 
+.anchor {
+    display: block;
+    height: 5em;
+    margin-top: -5em;
+    visibility: hidden;
+}
+
 
 /* Scroll back to top button. */
 #scrollTop {
