@@ -12,9 +12,11 @@ function setScrollButtonVisibility() {
     }
 }
 
+window.addEventListener("scroll", setScrollButtonVisibility);
+
 
 // Expand the navigation bar.
-function expandNavBar() {
+function toggleNavBar() {
     navBar = document.getElementById("navBar");
     if (navBar.className === "navBar")
         navBar.className += " responsive";

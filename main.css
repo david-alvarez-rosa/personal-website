@@ -79,18 +79,24 @@ button {
     padding: 1.5em;
     font-size: 1.1em;
     font-weight: 600;
-    transition: background-color 1s;
+    transition: all 1s;
+    background-position: left bottom;
+    background-image: linear-gradient(#DDD, #DDD);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size .5s ease, color .5s ease;
 }
 
 .navBar a:hover {
   color: #000000;
-  background-color: #DDD;
+  background-size: 100% 100%;
 }
 
 .navBar a.current {
-    transition: background-color 1s;
     color: #000000;
-    background-color: #D45B12
+    background-color: #D45B12;
+    background-position: right bottom;
 }
 
 .navBar button {
