@@ -64,12 +64,13 @@ button {
 .navBar {
     overflow: hidden;
     margin-left: 35%;
-    padding: .8em 0em;
+    padding: 0.8em 0;
     width: calc(100% - 35%);
     background-color: #333;
     opacity: 0.85;
     position: fixed;
     white-space: nowrap;
+    transition: padding .4s linear;
 }
 
 .navBar a {

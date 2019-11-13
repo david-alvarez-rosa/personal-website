@@ -1,10 +1,7 @@
 // Get the scroll back to top button.
 var scrollTop = document.getElementById("scrollTop");
 
-// When the user scrolls down 750px from the top of the document, show the button.
-window.addEventListener("scroll", scrollFunction);
-
-function scrollFunction() {
+function setScrollButtonVisibility() {
     if (document.body.scrollTop > 750 || document.documentElement.scrollTop > 750) {
         scrollTop.style.visibility = "visible";
         scrollTop.style.opacity = 1;
@@ -75,3 +72,17 @@ function setNavBarSection() {
 
 window.addEventListener("scroll", setNavBarSection);
 setNavBarSection()
+
+
+// Change size of navbar in scroll.
+var navBar = document.getElementById("navBar");
+
+function navBarResize() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100)
+        navBar.style.padding = "0.75em 0";
+    else
+        navBar.style.padding = "1.25em 0";
+}
+
+navBarResize();
+window.addEventListener("scroll", navBarResize);
