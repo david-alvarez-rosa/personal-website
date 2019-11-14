@@ -10,10 +10,9 @@
     font-family: Helvetica, Arial, sans-serif;
     font-weight: 400;
     line-height: 1.75em;
-}
 
-body {
-    overflow: hidden,
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 html {
@@ -34,6 +33,7 @@ a {
 button {
     border: none;
     background-color: transparent;
+    outline: none;
 }
 
 .anchor {
@@ -43,6 +43,16 @@ button {
     visibility: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+}
+
+
+::-moz-focus-inner {
+    border: none;
+}
+
 
 /* Scroll back to top button. */
 #scrollTop {
@@ -50,7 +60,7 @@ button {
     position: fixed;
     bottom: 20px;
     right: 0px;
-    transition: visibility 0.5s, opacity 0.5s linear;
+    transition: visibility .5s, opacity .5s linear;
     z-index: 999;
     background-color: #D45B12;
     border-radius: 600px 0 0 600px;
@@ -66,66 +76,102 @@ button {
 
 /* Navigation bar. */
 nav {
-    overflow: auto;
+    overflow-x: auto;
     margin-left: 35%;
-    padding: 0.75em 0;
+    padding: .75em 0;
     width: calc(100% - 35% - 4.35em);
-    background-color: #333333;
-    opacity: 0.85;
     position: fixed;
     white-space: nowrap;
     transition: padding .4s linear;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(51, 51, 51, .85) 0%,
+        rgba(51, 51, 51, .85) 95%,
+        transparent 95%,
+        transparent 100%);
+    z-index: 99;
 }
 
 nav a {
     color: #F2F2F2;
     text-align: center;
-    padding: 1.5em;
+    padding: 1.5em 1em;
     font-size: 1.1em;
     font-weight: 600;
     background-image: linear-gradient(#DDDDDD, #DDDDDD);
-    background-position: 50% 50%;
+    background-position: 50% 0;
     background-repeat: no-repeat;
-    background-size: 0% 100%;
-    transition: background-size .5s ease, color .5s ease, padding .4s linear;
+    background-size: 0 95%;
+    transition: background-color .25s, color .25s ease, background-size .5s, padding .4s linear;
 }
 
-nav a:hover {
+nav a:hover, nav a:focus, nav a:active {
   color: #000000;
-  background-size: 100% 100%;
+  background-size: 100% 95%;
 }
 
 nav a.current {
     color: #000000;
     background-color: #D45B12;
-    background-position: right bottom;
 }
 
-#navButton {
+nav a.current:hover, nav a.current:focus, nav a.current:active {
+    background-color: transparent;
+    background-size: 100% 100%;
+}
+
+nav.responsive {
+    position: fixed;
+    right: 0;
+    top: 0;
+    overflow-y: auto;
+    width: 300px;
+    max-width: 100%;
+    background-color: #333333;
+    margin: 0 auto;
+    padding: 0;
+    opacity: .95;
+    z-index: 99999;
+}
+
+nav.responsive a {
+    display: block;
+    float: none;
+    text-align: left;
+    margin: -.25em 0;
+}
+
+#navBarButton {
     cursor: pointer;
     position: fixed;
     top: 0;
     right: 0;
     color: #FFFFFF;
-    padding: 1.33em 1.5em 1.1em 1.5em;
+    width: 4.75em;
+    height: 4.6em;
+    padding-top: .15em;
     background-color: #1A1A1A;
-    opacity: 0.85;
+    opacity: .85;
     z-index: 9999;
     background-image: linear-gradient(#BFBFBF, #BFBFBF);
     background-position: 100% 50%;
     background-repeat: no-repeat;
     background-size: 0% 100%;
-    transition: background-size .5s ease, color .5s ease, padding .4s linear;
+    transition: background-size .5s ease, color .5s ease, height .4s linear;
 }
 
-#navButton:hover {
+#navBarButton:hover, #navBarButton:focus, #navBarButton:active {
   color: #000000;
   background-size: 100% 100%;
 }
 
+#navBarButton i {
+    padding: .3em;
+}
+
 
 /* Header. */
-#header {
+header {
     background-color: #1F1815;
     background-image:      url("images/overlay.png"), url("images/background.jpg");
     background-position:   top left,                  top left;
@@ -142,21 +188,21 @@ nav a.current {
     height: 100%
 }
 
-#header h1, h2 {
-    color: rgba(255, 255, 255, 0.75);
+header h1, h2 {
+    color: rgba(255, 255, 255, .75);
 }
 
-#header h1 {
+header h1 {
     font-size: 2em;
     font-weight: 600;
 }
 
-#header h2 {
+header h2 {
     font-size: 1.1em;
     font-weight: 550;
 }
 
-#header strong {
+header strong {
     color: #FFFFFF;
 }
 
@@ -184,7 +230,7 @@ main h3 {
 }
 
 main section {
-    padding-bottom: 0.5em;
+    padding-bottom: .5em;
 }
 
 main section h2 {
@@ -198,7 +244,7 @@ main ul {
 
 
 /* Footer. */
-#footer {
+footer {
     text-align: right;
     padding-right: 4em;
 
@@ -209,11 +255,11 @@ main ul {
     width: 35%;
 }
 
-#footer ul {
+footer ul {
     list-style: none;
 }
 
-#footer ul li {
+footer ul li {
     display: inline-block;
     list-style: none;
     width: 4em;
@@ -221,11 +267,11 @@ main ul {
     color: rgba(255, 255, 255, 1);
 }
 
-#footer .icon {
+footer .icon {
     color: rgba(255, 255, 255, .75);
 }
 
-#footer a:hover {
+footer a:hover, footer a:focus, footer a:active {
     transform: scale(1.2);
     transition: transform .1s linear .1s;
     color: #D45B12;
@@ -234,9 +280,9 @@ main ul {
 
 /* Inputs. */
 input[type="submit"], input[type="reset"] {
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+		transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
 		background-color: transparent;
-		border-radius: 0.35em;
+		border-radius: .35em;
 		border: solid 3px #EFEFEF;
 		color: #787878 !important;
 		cursor: pointer;
@@ -251,7 +297,7 @@ input[type="submit"], input[type="reset"] {
 		white-space: nowrap;
 }
 
-input[type="submit"]:hover, input[type="reset"]:hover {
+input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active, input[type="reset"]:hover, input[type="reset"]:focus, input[type="reset"]:active {
 		border-color: #D45B12;
     color: #D45B12 !important;
 }
@@ -260,7 +306,7 @@ input[type="text"], input[type="email"], textarea {
     background: #f7f7f7;
 		color: #787878 !important;
     font-size: 1em;
-    border-radius: 0.5em;
+    border-radius: .5em;
 		line-height: 1.75em;
     border: solid 2px transparent;
     display: inline-block;
@@ -287,11 +333,11 @@ nav {
     animation: slideInFromTop 1.5s;
 }
 
-#navButton {
+#navBarButton {
     animation: slideInFromBottom 2s ease;
 }
 
-#header {
+header {
     animation: slideInFromLeft 1.5s;
 }
 
@@ -327,22 +373,22 @@ nav {
 
 /* Large screen size. */
 @media screen and (max-width: 1280px) {
-    #header {
+    header {
         padding: 7em 3em 3em 3em;
         width: 33%;
     }
 
-    #header h1 {
+    header h1 {
         font-size: 1.85em;
     }
 
-    #header h2 {
-        font-size: 0.95em;
+    header h2 {
+        font-size: .95em;
     }
 
     nav {
         margin-left: 33%;
-        width: calc(100% - 33%);
+        width: calc(100% - 33% - 4.35em);
     }
 
     main {
@@ -357,7 +403,7 @@ nav {
 
 /* Medium screen size. */
 @media screen and (max-width: 980px) {
-    #header {
+    header {
         background-position: top left, center center;
         left: auto;
         padding: 6em 4em;
@@ -368,18 +414,27 @@ nav {
         display: block;
     }
 
-    #header h1 {
+    header h1 {
         font-size: 2.25em;
     }
 
-    #header h2 {
+    header h2 {
         font-size: 1em;
     }
 
     nav {
-        width: 100%;
+        padding: 0.75em 0;
+        width: calc(100% - 4.35em);
         margin-left: 0em;
         position: relative;
+    }
+
+    nav a {
+        padding: 1.05em 1em;
+    }
+
+    #navBarButton {
+        height: 3.55em;
     }
 
     nav.sticky {
@@ -387,12 +442,10 @@ nav {
         top: 0;
     }
 
-    nav a {
-        display: none;
-    }
-
-    #navButton {
-        display: block;
+    #navBarButton {
+        height: 3.55em;
+        position: absolute;
+        right: 0;
     }
 
     main {
@@ -403,7 +456,7 @@ nav {
         width: 100%;
     }
 
-    #footer {
+    footer {
         background-attachment: scroll;
         background-color: #1F1815;
         background-image:    url("images/overlay.png"), url("images/background.jpg");
@@ -422,14 +475,14 @@ nav {
 
 /* Small screen size. */
 @media screen and (max-width: 736px) {
-    #header {
+    header {
         padding: 3.5em 1.5em;
     }
-    #header h1 {
+    header h1 {
         font-size: 2em;
     }
 
-    #header h2 {
+    header h2 {
         font-size: 1em;
     }
 
@@ -438,7 +491,7 @@ nav {
         padding-right: 2.5em;
     }
 
-    #footer {
+    footer {
         padding-top: 5em;
         padding-bottom: 5em;
     }
@@ -447,7 +500,7 @@ nav {
 
 /* XSmall screen size. */
 @media screen and (max-width: 480px) {
-    #header {
+    header {
         padding-left: 1.5em;
         padding-right: 1.5em;
     }
@@ -461,77 +514,7 @@ nav {
 
 /* Screen of small height. */
 @media screen and (max-height: 400px) {
-    #footer {
+    footer {
         display: none;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    nav.responsive {
-        position: relative;
-        width: 700px;
-        background-color: #333333;
-        margin: 0 auto;
-    }
-
-    /* TODO: be careful with this nav button (now it is not inside nav). */
-    nav.responsive button {
-        position: relative;
-        left: calc(700px - 30px);
-    }
-
-    nav.responsive a {
-        display: block;
-        float: none;
-        text-align: left;
-    }

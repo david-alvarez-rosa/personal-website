@@ -13,21 +13,23 @@ function setScrollButtonVisibility() {
 }
 
 window.addEventListener("scroll", setScrollButtonVisibility);
+window.addEventListener("resize", setScrollButtonVisibility);
+
 
 
 // Expand the navigation bar.
 function toggleNavBar() {
-    navBar = document.getElementsByTagName("nav")[0];
     navBar.classList.toggle("responsive");
 }
 
 
 // Script for fade in animations.
-var windowHeight;
+var windowHeight; var windowWidth;
 var elementsHidden = document.querySelectorAll(".hidden");
 
-function getWindowHeight() {
+function getWindowDimensions() {
     windowHeight = window.innerHeight;
+    windowWidth = window.innerWidth;
 }
 
 function setFadeInAnimations() {
@@ -43,14 +45,14 @@ function setFadeInAnimations() {
 }
 
 window.addEventListener("scroll", setFadeInAnimations);
-window.addEventListener("resize", getWindowHeight);
+window.addEventListener("resize", setFadeInAnimations);
+window.addEventListener("resize", getWindowDimensions);
 
-getWindowHeight();
+getWindowDimensions();
 setFadeInAnimations();
 
 
 // Get nearer section to user position (so navBar can be updated).
-var windowHeight;
 var elementCurrent = document.querySelector(".current");
 var sections = document.getElementsByTagName("section");
 var navBar = document.getElementsByTagName("nav")[0];
@@ -59,61 +61,82 @@ var navBarLinks = navBar.getElementsByTagName("a");
 function setNavBarSection() {
     for (var i = 0; i < sections.length; ++i) {
         var section = sections[i];
-        var positionFromTop = section.getBoundingClientRect().top;
+        var positionFromBottom = section.getBoundingClientRect().bottom;
 
-        if (positionFromTop - windowHeight <= -250) {
+        if (positionFromBottom > windowHeight / 2) {
             elementCurrent.classList.remove("current");
             elementCurrent = navBarLinks[i];
             elementCurrent.classList.add("current");
             elementCurrent.scrollIntoView();
+            break;
         }
     }
 }
 
 window.addEventListener("scroll", setNavBarSection);
+window.addEventListener("resize", setNavBarSection);
 setNavBarSection()
 
 
 // Change size of navBar in scroll.
-var navButton = document.getElementById("navButton");
+var navBarButton = document.getElementById("navBarButton");
 
 function navBarResize() {
-    if (window.innerWidth <= 980)
+    if (window.innerWidth <= 980) {
+        navBar.style.padding = "0.75em 0";
         return;
+    }
 
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         navBar.style.padding = "0.75em 0";
-        navButton.style.padding = ".85em 1.5em .5em 1.5em";
+        navBarButton.style.height = "3.55em";
         for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.05em 1.5em";
+            navBarLinks[i].style.padding = "1.05em 1em";
     }
     else {
         navBar.style.padding = "1.25em 0";
-        navButton.style.padding = "1.33em 1.5em 1.1em 1.5em";
+        navBarButton.style.height = "4.6em";
         for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.5em 1.5em";
+            navBarLinks[i].style.padding = "1.5em 1em";
     }
 }
 
 navBarResize();
 window.addEventListener("scroll", navBarResize);
+window.addEventListener("resize", navBarResize);
 
 
 // Make navBar sticky for Medium to XSmall screens (as defined in main.css).
-var sticky = navBar.offsetTop;
+var sticky;
+
+function getNavBarStickyOffset() {
+    sticky = navBar.offsetTop;
+    navBarButton.style.top = sticky + "px";
+}
 
 function navBarSticky() {
-    if (window.innerWidth > 980) // If width greater than 980px.
-        return;
-
-    if (window.pageYOffset >= sticky)
-        navBar.classList.add("sticky");
-    else
+    if (windowWidth > 980 || windowHeight < 300) {
         navBar.classList.remove("sticky");
+        return;
+    }
+
+    if (window.pageYOffset >= sticky) {
+        navBar.classList.add("sticky");
+        navBarButton.style.position = "fixed";
+        navBarButton.style.top = "0";
+    }
+    else {
+        navBar.classList.remove("sticky");
+        navBarButton.style.position = "absolute";
+        navBarButton.style.top = sticky + "px";
+    }
 }
 
 navBarSticky();
+getNavBarStickyOffset();
 window.addEventListener("scroll", navBarSticky);
+window.addEventListener("resize", navBarSticky);
+window.addEventListener("resize", getNavBarStickyOffset);
 
 
 // Hide navBar when click outside.
