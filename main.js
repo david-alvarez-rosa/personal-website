@@ -12,9 +12,10 @@ function setScrollButtonVisibility() {
     }
 }
 
+setScrollButtonVisibility()
+
 window.addEventListener("scroll", setScrollButtonVisibility);
 window.addEventListener("resize", setScrollButtonVisibility);
-
 
 
 // Expand the navigation bar.
@@ -46,12 +47,12 @@ function setFadeInAnimations() {
     }
 }
 
+getWindowDimensions();
+setFadeInAnimations();
+
 window.addEventListener("scroll", setFadeInAnimations);
 window.addEventListener("resize", setFadeInAnimations);
 window.addEventListener("resize", getWindowDimensions);
-
-getWindowDimensions();
-setFadeInAnimations();
 
 
 // Get nearer section to user position (so navBar can be updated).
@@ -88,9 +89,9 @@ function setNavBarSection() {
     }
 }
 
+setNavBarSection()
 window.addEventListener("scroll", setNavBarSection);
 window.addEventListener("resize", setNavBarSection);
-setNavBarSection()
 
 
 // Change size of navBar in scroll.

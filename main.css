@@ -58,7 +58,7 @@ button {
 #scrollTop {
     visibility: hidden;
     position: fixed;
-    bottom: 20px;
+    bottom: 25px;
     right: 0px;
     transition: visibility .5s, opacity .5s linear;
     z-index: 999;
@@ -66,11 +66,20 @@ button {
     border-radius: 600px 0 0 600px;
 }
 
-#scrollTop a {
+#scrollTop i {
     color: #000000;
     vertical-align: middle;
     margin: .275em;
     margin-right: .35em;
+}
+
+#scrollTopSpan {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #000000;
+    padding-left: .75em;
+    margin-right: -.5em;
+    display: none;
 }
 
 

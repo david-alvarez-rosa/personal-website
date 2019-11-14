@@ -44,10 +44,12 @@
 
 
     <!-- Scroll back to top button. -->
-    <div id="scrollTop">
-      <a class="fas fa-arrow-circle-up fa-2x"
-         href="#"
-         title="Scroll back to top.">
+    <div id="scrollTop"
+         onmouseover="document.getElementById('scrollTopSpan').style.display = 'inline-block';"
+         onmouseout="document.getElementById('scrollTopSpan').style.display = 'none';">
+      <a href="#" title="Scroll back to top.">
+        <span id="scrollTopSpan">Go to top</span>
+        <i class="fas fa-arrow-circle-up fa-2x"></i>
       </a>
     </div>
 
