@@ -106,8 +106,8 @@ nav a {
 }
 
 nav a:hover, nav a:focus, nav a:active {
-  color: #000000;
-  background-size: 100% 95%;
+    color: #000000;
+    background-size: 100% 95%;
 }
 
 nav a.current {
@@ -161,8 +161,8 @@ nav.responsive a {
 }
 
 #navBarButton:hover, #navBarButton:focus, #navBarButton:active {
-  color: #000000;
-  background-size: 100% 100%;
+    color: #000000;
+    background-size: 100% 100%;
 }
 
 #navBarButton i {
@@ -280,34 +280,34 @@ footer a:hover, footer a:focus, footer a:active {
 
 /* Inputs. */
 input[type="submit"], input[type="reset"] {
-		transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
-		background-color: transparent;
-		border-radius: .35em;
-		border: solid 3px #EFEFEF;
-		color: #787878 !important;
-		cursor: pointer;
-		display: inline-block;
-		font-weight: 400;
-		height: 3.15em;
-		line-height: 2.75em;
-		min-width: 12em;
-		padding: 0 1.5em;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+    background-color: transparent;
+    border-radius: .35em;
+    border: solid 3px #EFEFEF;
+    color: #787878 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 400;
+    height: 3.15em;
+    line-height: 2.75em;
+    min-width: 12em;
+    padding: 0 1.5em;
     margin-right: 1.5em;
-		text-align: center;
-		white-space: nowrap;
+    text-align: center;
+    white-space: nowrap;
 }
 
 input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active, input[type="reset"]:hover, input[type="reset"]:focus, input[type="reset"]:active {
-		border-color: #D45B12;
+    border-color: #D45B12;
     color: #D45B12 !important;
 }
 
 input[type="text"], input[type="email"], textarea {
     background: #f7f7f7;
-		color: #787878 !important;
+    color: #787878 !important;
     font-size: 1em;
     border-radius: .5em;
-		line-height: 1.75em;
+    line-height: 1.75em;
     border: solid 2px transparent;
     display: inline-block;
     padding: .75em 1em;
@@ -316,7 +316,7 @@ input[type="text"], input[type="email"], textarea {
 }
 
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-		border-color: #D45B12;
+    border-color: #D45B12;
 }
 
 textarea {
