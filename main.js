@@ -63,8 +63,7 @@ var navBarLinks = navBar.getElementsByTagName("a");
 
 function setNavBarSection() {
     for (var i = 0; i < sections.length; ++i) {
-        var section = sections[i];
-        var positionFromBottom = section.getBoundingClientRect().bottom;
+        var positionFromBottom = sections[i].getBoundingClientRect().bottom;
 
         if (positionFromBottom > windowHeight / 2) {
             elementCurrent.classList.remove("current");
@@ -129,9 +128,18 @@ window.addEventListener("resize", navBarResize);
 
 
 // Hide navBar when click outside.
-function navBarHideClick(event) {
-    if (event.target.id !== "navIcon")
-        navBar.classList.remove("responsive");
+function hideAll(event) {
+    console.log(event.target);
+    if (document.getElementsByTagName("main")[0].contains(event.target) ||
+        document.getElementsByTagName("header")[0].contains(event.target) ||
+        document.getElementsByTagName("footer")[0].contains(event.target))
+        closeInformation();
 }
 
-window.addEventListener("click", navBarHideClick);
+window.addEventListener("click", hideAll);
+
+
+// Show information if visitor uses Google Chrome.
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+if (isChrome)
+    document.getElementById("welcomeChromeUser").style.display = "block";

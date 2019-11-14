@@ -1,30 +1,36 @@
-// Add keyboard shortcuts.
-
+// Configuration variables.
 var scrollStep = 100;
+var maxCommandCounter = 10;
+var showInformationVar = true;
+
+// Counters to identify visitor.
 var emacsCommandCounter = 0;
 var vimCommandCounter = 0;
 var noobCommandCounter = 0;
 
 
 function showInformation() {
-    if (emacsCommandCounter === 10) {
-        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
+    if (showInformationVar === false)
+        return;
+
+    if (emacsCommandCounter === maxCommandCounter) {
         document.getElementById("welcomeEmacsUser").style.display = "block";
+        showInformationVar = false;
         return;
     }
-    if (vimCommandCounter === 10) {
-        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
+    if (vimCommandCounter === maxCommandCounter) {
         document.getElementById("welcomeVimUser").style.display = "block";
+        showInformationVar = false;
         return;
     }
-    if (noobCommandCounter === 10) {
-        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
+    if (noobCommandCounter === maxCommandCounter) {
         document.getElementById("welcomeNoobUser").style.display = "block";
+        showInformationVar = false;
     }
 }
 
 
-function closeAll() {
+function closeInformation() {
     document.getElementsByTagName("nav")[0].classList.remove("responsive");
     document.getElementById("welcomeEmacsUser").style.display = "none";
     document.getElementById("welcomeVimUser").style.display = "none";
@@ -32,6 +38,28 @@ function closeAll() {
 }
 
 
+// Scroll to next o previous section depending on sign parameter.
+function scrollToSection(sign) {
+    var sections = document.getElementsByTagName("section");
+    var navBar = document.getElementsByTagName("nav")[0];
+    var navBarLinks = navBar.getElementsByTagName("a");
+    var windowHeight = window.innerHeight;
+
+    for (var i = 0; i < sections.length; ++i) {
+        var positionFromBottom = sections[i].getBoundingClientRect().bottom;
+
+        if (sign < 0)
+            windowHeight /= 2; // Hacky trick for small height sections.
+
+        if (positionFromBottom > windowHeight / 2) {
+            navBarLinks[i + sign].click();
+            break;
+        }
+    }
+}
+
+
+// Add keyboard shortcuts.
 function keyboardShortcuts(event) {
     console.log(event.key);
 
@@ -43,6 +71,14 @@ function keyboardShortcuts(event) {
         break;
     case "p":
         window.scrollBy(0, -scrollStep);
+        ++emacsCommandCounter;
+        break;
+    case "f":
+        scrollToSection(1);
+        ++emacsCommandCounter;
+        break;
+    case "b":
+        scrollToSection(-1);
         ++emacsCommandCounter;
         break;
     case ">":
@@ -63,6 +99,14 @@ function keyboardShortcuts(event) {
         window.scrollBy(0, -scrollStep);
         ++vimCommandCounter;
         break;
+    case "l":
+        scrollToSection(+1);
+        ++vimCommandCounter;
+        break;
+    case "h":
+        scrollToSection(-1);
+        ++vimCommandCounter;
+        break;
     case "g":
         window.scrollTo(0, 0);
         ++vimCommandCounter;
@@ -72,7 +116,7 @@ function keyboardShortcuts(event) {
         ++vimCommandCounter;
         break;
     case "q":
-        closeAll();
+        closeInformation();
         ++vimCommandCounter;
         break;
     case "d":
@@ -103,7 +147,13 @@ function keyboardShortcuts(event) {
         toggleNavBar();
         break;
     case "Escape":
-        closeAll();
+        closeInformation();
+        break;
+    case "?":
+        document.getElementById("welcomeNoobUser").style.display = "block";
+        break;
+    case "H":
+        document.getElementById("welcomeNoobUser").style.display = "block";
         break;
     }
 
@@ -111,12 +161,3 @@ function keyboardShortcuts(event) {
 }
 
 window.addEventListener("keydown", keyboardShortcuts);
-
-
-// Hide information divs when click outside.
-function navBarHideClick(event) {
-    if (event.target.className !== "info" && event.target.id !== "navIcon")
-        closeAll();
-}
-
-window.addEventListener("click", navBarHideClick);
