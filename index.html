@@ -14,21 +14,132 @@
 
 
   <body>
+
     <!-- Information divs. -->
     <div class="info" id="welcomeEmacsUser">
       <p>
-        Hey Emacs user! You are more than welcome.
+        Hey Emacs user! You are more than welcome. If you want to take a look at
+        my Emacs configuration,
+        <a href="https://gitlab.com/DavidAlvarez/dotfiles/blob/master/.emacs.d/config.org"
+           title="My Emacs cofiguration files."
+           rel="external"
+           target="_blank">
+          here
+        </a>
+        it is.
+      </p>
+      <a href="https://www.gnu.org/software/emacs/"
+         rel="nofollow"
+         target="_blank"
+         title="GNU Emacs official website.">
+      <img src="images/emacs.png"
+           style="float: left; margin-left: 30px;"
+           height="150px"
+           alt="Emacs icon." />
+      </a>
+      <a href="https://stallman.org"
+         rel="nofollow"
+         target="_blank"
+         title="Richard Stallman's Personal Site.">
+      <img src="images/richard_stallman.png"
+           style="float: right; margin-right: 30px;"
+           height="150px"
+           alt="Richard Stallmann with Emacs icon." />
+      </a>
+      <div style="clear: both;"></div>
+      <p style="font-size: .8em; margin-top: 2em;">
+        You can exit by pressing q or ESC or clicking outside this box.
       </p>
     </div>
+
     <div class="info" id="welcomeVimUser">
       <p>
         Hey Vim user! You are more than welcome.
       </p>
+      <a href="https://www.vim.org/"
+         rel="nofollow"
+         target="_blank"
+         title="Vim official website.">
+      <img src="images/vim.png"
+           style="margin-left: calc(50% - 175px/2);"
+           width="175px"
+           alt="Vim icon." />
+      </a>
+      <div style="clear: both;"></div>
+      <p style="font-size: .8em; margin-top: 1.5em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
     </div>
-    <div class="info" id="welcomeNoobUser">
+
+    <div class="info" id="welcomeNoobUser" style="height: 500px; top: calc(50% - 500px/2);">
       <p>
-        Hey noob user! You are more than welcome. Please be aware that you can
-        navigate with (better) shortcuts.
+        Hey visitor! It seems that you like to use the keyboard to
+        scroll. Please consider <em>upgrading</em> to (maybe better) shortcuts.
+      </p>
+      <ul style="float: left; margin-left: 25px;">
+        <li style="margin-left: 35px;"><strong>Emacs</strong></li>
+        <li><strong>n</strong>: scroll next.</li>
+        <li><strong>p</strong>: scroll previous.</li>
+        <li><strong>f</strong>: forward section.</li>
+        <li><strong>b</strong>: backward section.</li>
+        <li><strong><</strong>: go top.</li>
+        <li><strong>></strong>: go bottom.</li>
+      </ul>
+      <ul style="float: right; margin-right: 50px;">
+        <li style="margin-left: 35px;"><strong>Vim</strong></li>
+        <li><strong>j</strong>: scroll next.</li>
+        <li><strong>k</strong>: scroll previous.</li>
+        <li><strong>l</strong>: forward section.</li>
+        <li><strong>h</strong>: backward section.</li>
+        <li><strong>g</strong>: go top.</li>
+        <li><strong>G</strong>: go bottom.</li>
+      </ul>
+      <div style="clear: both;"></div>
+      <ul style="margin-top: 1em; margin-left: 150px;">
+        <li style="margin-left: 35px;"><strong>Others</strong></li>
+        <li><strong>d</strong>: scroll down.</li>
+        <li><strong>u</strong>: scroll up.</li>
+        <li><strong>m</strong>: toggle navigation.</li>
+        <li><strong>?</strong> or <strong>H</strong>: show this help.</li>
+      </ul>
+      <p style="font-size: .8em; margin-top: 1.5em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
+    </div>
+
+    <div class="info" id="welcomeChromeUser" style="height: 325px; top: calc(50% - 325px/2);">
+      <p>
+        Hey visitor! It seems that your are using Google Chrome. You are more
+        than welcome, but your browser is not: read
+        <a href="https://www.gnu.org/proprietary/malware-google.html"
+           title="Google's Software is Malware."
+           rel="nofollow"
+           target="_blank">
+          why.
+        </a>
+        Please considerer changing it.
+      </p>
+      <a href="https://qutebrowser.org/"
+         rel="nofollow"
+         target="_blank"
+         title="Qutebrowser official website.">
+      <img src="images/qutebrowser.png"
+           style="float: left; margin-left: 30px;"
+           height="150px"
+           alt="Qutebrowser icon." />
+      </a>
+      <a href="https://gnu.org"
+         rel="nofollow"
+         target="_blank"
+         title="GNU Operating System official website.">
+      <img src="images/gnu.png"
+           style="float: right; margin-right: 30px;"
+           height="150px"
+           alt="GNU Operating System icon." />
+      </a>
+      <div style="clear: both;"></div>
+      <p style="font-size: .8em; margin-top: 2em;">
+        You can exit by pressing q or ESC or clicking outside this box.
       </p>
     </div>
 
@@ -423,6 +534,7 @@
     </footer>
 
 
+    <!-- Javascript files. -->
     <script src="main.js"></script>
     <script src="shortcuts.js"></script>
 

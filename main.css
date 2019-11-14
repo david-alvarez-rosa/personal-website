@@ -313,8 +313,27 @@ footer a:hover, footer a:focus, footer a:active {
     box-shadow: 10px 10px 8px #000000;
 }
 
+.info strong {
+    color: #D45B12;
+    font-weight: 750;
+}
+
 .info p {
     color: #F2F2F2;
+}
+
+.info a {
+    color: #D45B12;
+    font-weight: 750;
+}
+
+.info ul {
+    list-style: none;
+}
+
+.info img:hover, .info img:focus, .info img:active {
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
 }
 
 
