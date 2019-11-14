@@ -77,6 +77,7 @@ button {
 /* Navigation bar. */
 nav {
     overflow-x: auto;
+    overflow-y: hidden;
     margin-left: 35%;
     padding: .75em 0;
     width: calc(100% - 35% - 4.35em);
@@ -121,17 +122,19 @@ nav a.current:hover, nav a.current:focus, nav a.current:active {
 }
 
 nav.responsive {
-    position: fixed;
-    right: 0;
+    position: sticky;
+    margin-left: calc(100% - 250px);
     top: 0;
     overflow-y: auto;
-    width: 300px;
+    width: 250px;
+    height: 500px;
+    max-height: 100%;
     max-width: 100%;
     background-color: #333333;
-    margin: 0 auto;
     padding: 0;
     opacity: .95;
-    z-index: 99999;
+    border: 3px solid #D45B12;
+    z-index: 99;
 }
 
 nav.responsive a {
@@ -423,10 +426,13 @@ header {
     }
 
     nav {
+        position: sticky;
+        top: 0;
         padding: 0.75em 0;
         width: calc(100% - 4.35em);
         margin-left: 0em;
-        position: relative;
+        float: left;
+        margin-top: -3.25em;
     }
 
     nav a {
@@ -435,17 +441,9 @@ header {
 
     #navBarButton {
         height: 3.55em;
-    }
-
-    nav.sticky {
-        position: fixed;
+        position: sticky;
         top: 0;
-    }
-
-    #navBarButton {
-        height: 3.55em;
-        position: absolute;
-        right: 0;
+        float: right;
     }
 
     main {
@@ -503,6 +501,10 @@ header {
     header {
         padding-left: 1.5em;
         padding-right: 1.5em;
+    }
+
+    nav.responsive {
+        width: 200px;
     }
 
     main {
