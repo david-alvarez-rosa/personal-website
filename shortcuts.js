@@ -2,6 +2,35 @@
 
 var scrollStep = 100;
 var emacsCommandCounter = 0;
+var vimCommandCounter = 0;
+var noobCommandCounter = 0;
+
+
+function showInformation() {
+    if (emacsCommandCounter === 10) {
+        ++emacsCommandCounter;
+        document.getElementById("welcomeEmacsUser").style.display = "block";
+        return;
+    }
+    if (vimCommandCounter === 10) {
+        ++vimCommandCounter;
+        document.getElementById("welcomeVimUser").style.display = "block";
+        return;
+    }
+    if (noobCommandCounter === 10) {
+        ++noobCommandCounter;
+        document.getElementById("welcomeNoobUser").style.display = "block";
+    }
+}
+
+
+function closeAll() {
+    document.getElementsByTagName("nav")[0].classList.remove("responsive");
+    document.getElementById("welcomeEmacsUser").style.display = "none";
+    document.getElementById("welcomeVimUser").style.display = "none";
+    document.getElementById("welcomeNoobUser").style.display = "none";
+ }
+
 
 function keyboardShortcuts(event) {
     console.log(event.key);
@@ -53,6 +82,20 @@ function keyboardShortcuts(event) {
     case "u":
         window.scrollBy(0, -3 * scrollStep);
         ++vimCommandCounter;
+        break;
+
+        // Count noob commands.
+    case "ArrowDown":
+        ++noobCommandCounter;
+        break;
+    case "ArrowUp":
+        ++noobCommandCounter;
+        break;
+    case "ArrowLeft":
+        ++noobCommandCounter;
+        break;
+    case "ArrowRight":
+        ++noobCommandCounter;
         break;
 
         // Other commands.

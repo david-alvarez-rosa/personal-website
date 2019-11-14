@@ -290,6 +290,34 @@ footer a:hover, footer a:focus, footer a:active {
 }
 
 
+/* Information div. */
+.info {
+    position: fixed;
+    width: 500px;
+    max-width: 100%;
+    height: 300px;
+    left: calc(50% - 500px/2);
+    top: calc(50% - 300px/2);
+    z-index: 9999;
+    background: #333333;
+    opacity: .95;
+    color: #F2F2F2;
+    font-size: 1em;
+    border-radius: .5em;
+    line-height: 1.75em;
+    border: solid 3px #D45B12;
+    display: none;
+    padding: .75em 1em;
+    margin: 1em .5em 1em 0;
+    outline: 0;
+    box-shadow: 10px 10px 8px #000000;
+}
+
+.info p {
+    color: #F2F2F2;
+}
+
+
 /* Inputs. */
 input[type="submit"], input[type="reset"] {
     transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
