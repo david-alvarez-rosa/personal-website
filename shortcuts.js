@@ -8,17 +8,17 @@ var noobCommandCounter = 0;
 
 function showInformation() {
     if (emacsCommandCounter === 10) {
-        ++emacsCommandCounter;
+        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
         document.getElementById("welcomeEmacsUser").style.display = "block";
         return;
     }
     if (vimCommandCounter === 10) {
-        ++vimCommandCounter;
+        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
         document.getElementById("welcomeVimUser").style.display = "block";
         return;
     }
     if (noobCommandCounter === 10) {
-        ++noobCommandCounter;
+        emacsCommandCounter = vimCommandCounter = noobCommandCounter = 11;
         document.getElementById("welcomeNoobUser").style.display = "block";
     }
 }
@@ -29,7 +29,7 @@ function closeAll() {
     document.getElementById("welcomeEmacsUser").style.display = "none";
     document.getElementById("welcomeVimUser").style.display = "none";
     document.getElementById("welcomeNoobUser").style.display = "none";
- }
+}
 
 
 function keyboardShortcuts(event) {
@@ -111,3 +111,12 @@ function keyboardShortcuts(event) {
 }
 
 window.addEventListener("keydown", keyboardShortcuts);
+
+
+// Hide information divs when click outside.
+function navBarHideClick(event) {
+    if (event.target.className !== "info" && event.target.id !== "navIcon")
+        closeAll();
+}
+
+window.addEventListener("click", navBarHideClick);
