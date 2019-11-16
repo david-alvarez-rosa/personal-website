@@ -1,4 +1,4 @@
-/* David \'Alvarez Rosa's web main CSS Styles. */
+/* David \'Alvarez Rosa's website main CSS Styles. */
 
 
 /* Global. */
@@ -51,6 +51,99 @@ button {
 
 ::-moz-focus-inner {
     border: none;
+}
+
+
+/* Loading spinner. */
+.preload * {
+    animation-play-state: paused !important;
+}
+
+@keyframes spin {
+    50% { transform: rotateZ(180deg); border-radius: 55%; }
+    100% { transform: rotateZ(360deg); }
+}
+
+#loadingSpinner {
+    width: 125px;
+    height: 125px;
+    position: fixed;
+    top: calc(50% - 125px/2);
+    left: calc(50% - 125px/2);
+    z-index: 99999;
+    display: flex;
+    padding: 20px;
+}
+
+#loadingSpinner::before {
+    content: "";
+    height: 30px;
+    width: 30px;
+    border-radius: 10%;
+    border: 25px inset #E65C00;
+    animation: spin 1s infinite ease-in-out;
+}
+
+.hideLoadingSpinner {
+    transition: 3s transform 1s linear;
+    transform: translateY(1500px);
+}
+
+
+/* Information div. */
+.info {
+    position: fixed;
+    width: 500px;
+    max-width: 100%;
+    height: 300px;
+    left: calc(50% - 500px/2);
+    top: calc(50% - 300px/2);
+    z-index: 9999;
+    background: #333333;
+    opacity: .9;
+    color: #F2F2F2;
+    font-size: 1em;
+    border-radius: .5em;
+    line-height: 1.75em;
+    border: solid 3px #D45B12;
+    display: none;
+    padding: .75em 1em;
+    margin: 1em .5em 1em 0;
+    outline: 0;
+    box-shadow: 10px 10px 8px #000000;
+}
+
+.info strong {
+    color: #D45B12;
+    font-weight: 750;
+}
+
+.info p {
+    color: #F2F2F2;
+}
+
+.info a {
+    color: #D45B12;
+    font-weight: 750;
+}
+
+.info ul {
+    list-style: none;
+}
+
+.info img:hover, .info img:focus, .info img:active {
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
+}
+
+#blurBackground {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 998;
+    background-color: #000000;
+    opacity: .5;
+    display: none;
 }
 
 
@@ -289,51 +382,16 @@ footer a:hover, footer a:focus, footer a:active {
     color: #D45B12;
 }
 
-
-/* Information div. */
-.info {
-    position: fixed;
-    width: 500px;
-    max-width: 100%;
-    height: 300px;
-    left: calc(50% - 500px/2);
-    top: calc(50% - 300px/2);
-    z-index: 9999;
-    background: #333333;
-    opacity: .95;
-    color: #F2F2F2;
-    font-size: 1em;
-    border-radius: .5em;
-    line-height: 1.75em;
-    border: solid 3px #D45B12;
-    display: none;
-    padding: .75em 1em;
-    margin: 1em .5em 1em 0;
-    outline: 0;
-    box-shadow: 10px 10px 8px #000000;
+footer p {
+    margin: 1em 0 0 0;
+    color: rgba(255, 255, 255, .75);
+    text-align: right;
+    font-size: .75em;
+    font-weight: 580;
 }
 
-.info strong {
-    color: #D45B12;
-    font-weight: 750;
-}
-
-.info p {
-    color: #F2F2F2;
-}
-
-.info a {
-    color: #D45B12;
-    font-weight: 750;
-}
-
-.info ul {
-    list-style: none;
-}
-
-.info img:hover, .info img:focus, .info img:active {
-    transform: scale(1.2);
-    transition: transform .1s linear .1s;
+footer p a {
+    color: rgba(255, 255, 255, .75);
 }
 
 
@@ -378,14 +436,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: #D45B12;
 }
 
-textarea {
-    width: calc(100% - 1em);
-}
-
-#half {
-    width: calc(50% - 1em);
-}
-
 
 /* Animations. */
 nav {
@@ -393,11 +443,18 @@ nav {
 }
 
 #navBarButton {
-    animation: slideInFromBottom 2s ease;
+    animation: slideInFromBottom 2.5s ease;
 }
 
 header {
     animation: slideInFromLeft 1.5s;
+}
+
+footer {
+    opacity: 0;
+    transform: translateX(-400px);
+    animation: 1s bounceInFromLeft 1.5s;
+    animation-fill-mode: forwards;
 }
 
 /* All elements in hidden class will fade in when appear in screen. */

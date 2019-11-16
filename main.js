@@ -1,3 +1,12 @@
+// Add loading spinner animation while page is loading.
+window.addEventListener("load", function() { setTimeout(loadingSpinner, 500); });
+function loadingSpinner() {
+    document.getElementById("loadingSpinner").classList.add("hideLoadingSpinner");
+    document.getElementsByTagName("body")[0].classList.remove("preload");
+    setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
+}
+
+
 // Get the scroll back to top button.
 var scrollTop = document.getElementById("scrollTop");
 
@@ -142,4 +151,15 @@ window.addEventListener("click", hideAll);
 // Show information if visitor uses Google Chrome.
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (isChrome)
-    document.getElementById("welcomeChromeUser").style.display = "block";
+    setTimeout(function () {
+        document.getElementById("welcomeChromeUser").style.display = "block";
+        document.getElementById("welcomeChromeUser").classList.add("bounceInFromRight");
+        document.getElementById("blurBackground").style.display = "block";
+    }, 15000);
+
+// Warn that this website is under construction.
+setTimeout(function () {
+    document.getElementById("welcomeUser").style.display = "block";
+    document.getElementById("welcomeUser").classList.add("bounceInFromRight");
+    document.getElementById("blurBackground").style.display = "block";
+}, 6000);

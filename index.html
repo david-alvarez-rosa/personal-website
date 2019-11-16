@@ -13,9 +13,49 @@
   </head>
 
 
-  <body>
+  <body class="preload">
+    <!-- Loading spinner. -->
+    <div id="loadingSpinner"></div>
+
 
     <!-- Information divs. -->
+    <div class="info" id="welcomeUser" style="width: 600px; left: calc(50% - 600px/2);">
+      <p>
+        This website is under construction.
+      </p>
+      <a href="https://whatwg.org/"
+         rel="nofollow"
+         target="_blank"
+         title="HTML website.">
+      <img src="images/html.png"
+           style="float: left; margin-left: 30px;"
+           height="150px"
+           alt="HTML logo." />
+      </a>
+      <a href="https://www.w3.org/Style/CSS/Overview.en.html"
+         rel="nofollow"
+         target="_blank"
+         title="Cascading Style Sheets home page.">
+      <img src="images/css.png"
+           style="float: right; margin-right: 30px;"
+           height="150px"
+           alt="CSS logo." />
+      </a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+         rel="nofollow"
+         target="_blank"
+         title="JavaScript website.">
+      <img src="images/js.png"
+           style="float: right; margin-right: 30px;"
+           height="150px"
+           alt="JavaScript logo." />
+      </a>
+      <div style="clear: both;"></div>
+      <p style="font-size: .8em; margin-top: 3.5em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
+    </div>
+
     <div class="info" id="welcomeEmacsUser">
       <p>
         Hey Emacs user! You are more than welcome. If you want to take a look at
@@ -77,7 +117,7 @@
         scroll. Please consider <em>upgrading</em> to (maybe better) shortcuts.
       </p>
       <ul style="float: left; margin-left: 25px;">
-        <li style="margin-left: 35px;"><strong>Emacs</strong></li>
+        <li style="margin-left: 32px;"><strong>Emacs</strong></li>
         <li><strong>n</strong>: scroll next.</li>
         <li><strong>p</strong>: scroll previous.</li>
         <li><strong>f</strong>: forward section.</li>
@@ -142,6 +182,8 @@
         You can exit by pressing q or ESC or clicking outside this box.
       </p>
     </div>
+
+    <div id="blurBackground"></div>
 
 
     <!-- Header. -->
@@ -458,9 +500,9 @@
         </p>
         <form method="post" action="">
           <div style="width: 65%; float: left;">
-            <input id="half" type="text" placeholder="Name" />
-            <input id="half" type="email" placeholder="Email" />
-            <textarea placeholder="Message" rows="5"></textarea>
+            <input type="text" placeholder="Name" style="width: calc(50% - 1em);" />
+            <input type="email" placeholder="Email" style="width: calc(50% - 1em);" />
+            <textarea placeholder="Message" rows="5" style="width: calc(100% - 1em);"></textarea>
             <input type="submit" value="Send Message" class="primary" />
             <input type="reset" value="Reset" />
           </div>
