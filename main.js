@@ -29,7 +29,14 @@ window.addEventListener("resize", setScrollButtonVisibility);
 
 // Expand the navigation bar.
 function toggleNavBar() {
-    navBar.classList.toggle("responsive");
+    if (navBar.classList.contains("responsive")) {
+        navBar.classList.remove("responsive");
+        document.getElementById("blurBackground").style.display = "none";
+    }
+    else {
+        navBar.classList.add("responsive");
+        document.getElementById("blurBackground").style.display = "block";
+    }
     if (document.documentElement.scrollTop <= 100)
         document.documentElement.scrollTop = 110;
 }
@@ -97,22 +104,18 @@ function setNavBarSection() {
     }
 }
 
-setNavBarSection()
+setNavBarSection();
 window.addEventListener("scroll", setNavBarSection);
-window.addEventListener("resize", setNavBarSection);
+window.addEventListener("resize", function () { setTimeout(setNavBarSection, 1000); } );
 
 
 // Change size of navBar in scroll.
 var navBarButton = document.getElementById("navBarButton");
 
 function navBarResize() {
-    if (window.innerWidth <= 480)
-        for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.05em .4em";
-    else if (window.innerWidth <= 736)
-        for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.05em .75em";
     if (window.innerWidth <= 980) {
+        navBar.style.padding = "0.75em 0";
+        navBarButton.style.height = "3.55em";
         navBar.style.padding = "0.75em 0";
         return;
     }
@@ -121,13 +124,13 @@ function navBarResize() {
         navBar.style.padding = "0.75em 0";
         navBarButton.style.height = "3.55em";
         for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.05em 1em";
+            navBarLinks[i].style.padding.bottom = navBarLinks[i].style.padding.top = "1.05em";
     }
     else {
         navBar.style.padding = "1.25em 0";
         navBarButton.style.height = "4.6em";
         for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding = "1.5em 1em";
+            navBarLinks[i].style.padding.bottom = navBarLinks[i].style.padding.top = "1.5em";
     }
 }
 
@@ -138,10 +141,7 @@ window.addEventListener("resize", navBarResize);
 
 // Hide navBar when click outside.
 function hideAll(event) {
-    console.log(event.target);
-    if (document.getElementsByTagName("main")[0].contains(event.target) ||
-        document.getElementsByTagName("header")[0].contains(event.target) ||
-        document.getElementsByTagName("footer")[0].contains(event.target))
+    if (document.getElementById("blurBackground").contains(event.target))
         closeInformation();
 }
 

@@ -14,16 +14,22 @@ function showInformation() {
         return;
 
     if (emacsCommandCounter === maxCommandCounter) {
+        document.getElementById("blurBackground").style.display = "block";
+        document.getElementById("welcomeEmacsUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeEmacsUser").style.display = "block";
         showInformationVar = false;
         return;
     }
     if (vimCommandCounter === maxCommandCounter) {
+        document.getElementById("blurBackground").style.display = "block";
+        document.getElementById("welcomeVimUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeVimUser").style.display = "block";
         showInformationVar = false;
         return;
     }
     if (noobCommandCounter === maxCommandCounter) {
+        document.getElementById("blurBackground").style.display = "block";
+        document.getElementById("welcomeNoobUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeNoobUser").style.display = "block";
         showInformationVar = false;
     }
@@ -32,9 +38,11 @@ function showInformation() {
 
 function closeInformation() {
     document.getElementsByTagName("nav")[0].classList.remove("responsive");
-    document.getElementById("welcomeEmacsUser").style.display = "none";
-    document.getElementById("welcomeVimUser").style.display = "none";
-    document.getElementById("welcomeNoobUser").style.display = "none";
+    document.getElementById("blurBackground").style.display = "none";
+
+    var infoDivs = document.getElementsByClassName("info");
+    for (var i = 0; i < infoDivs.length; ++i)
+        infoDivs[i].style.display = "none";
 }
 
 
@@ -150,9 +158,13 @@ function keyboardShortcuts(event) {
         closeInformation();
         break;
     case "?":
+        document.getElementById("blurBackground").style.display = "block";
+        document.getElementById("welcomeNoobUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeNoobUser").style.display = "block";
         break;
     case "H":
+        document.getElementById("blurBackground").style.display = "block";
+        document.getElementById("welcomeNoobUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeNoobUser").style.display = "block";
         break;
     }
