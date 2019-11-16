@@ -154,7 +154,7 @@ button {
     bottom: 25px;
     right: 0px;
     transition: visibility .5s, opacity .5s linear;
-    z-index: 999;
+    z-index: 9;
     background-color: #D45B12;
     border-radius: 600px 0 0 600px;
 }
@@ -234,9 +234,9 @@ nav.responsive {
     max-width: 100%;
     background-color: #333333;
     padding: 0;
-    opacity: .95;
+    opacity: .9;
     border: 3px solid #D45B12;
-    z-index: 99;
+    z-index: 999;
 }
 
 nav.responsive a {
@@ -257,7 +257,7 @@ nav.responsive a {
     padding-top: .15em;
     background-color: #1A1A1A;
     opacity: .85;
-    z-index: 9999;
+    z-index: 1000;
     background-image: linear-gradient(#BFBFBF, #BFBFBF);
     background-position: 100% 50%;
     background-repeat: no-repeat;
@@ -284,7 +284,7 @@ header {
     background-size:       auto,                      cover;
 
     text-align: right;
-    padding: 8.5em 4em;
+    padding: 9% 4em;
 
     position: fixed;
     top: 0;
