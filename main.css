@@ -352,9 +352,8 @@ main ul {
 footer {
     text-align: right;
     padding-right: 4em;
-
     position: fixed;
-    top: 85%;
+    bottom: 2%;
     min-top: 600px;
     left: 0;
     width: 35%;
@@ -367,7 +366,7 @@ footer ul {
 footer ul li {
     display: inline-block;
     list-style: none;
-    width: 4em;
+    width: 4.15em;
     text-align: center;
     color: rgba(255, 255, 255, 1);
 }
@@ -468,12 +467,12 @@ footer {
 
 @keyframes slideInFromTop {
     from { transform: translateY(-100%); }
-    to { transofrm: translateY(0); }
+    to { transform: translateY(0); }
 }
 
 @keyframes slideInFromBottom {
-    from { transform: translateY(750px); }
-    to { transofrm: translateY(0); }
+    from { transform: translateY(1000px); }
+    to { transform: translateY(0); }
 }
 
 @keyframes slideInFromLeft {
@@ -481,9 +480,27 @@ footer {
     to { transform: translateX(0); }
 }
 
+@keyframes bounceInFromLeft {
+    0% { opacity: 0; transform: translateX(-400px); }
+    60% { transform: translateX(30px); }
+    80% { transform: translateX(-10px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(.7,.7) }
+    from { opacity: 0; transform: scale(.5,.5) }
     to { opacity: 1; }
+}
+
+.bounceInFromRight {
+    animation: 1.5s bounceInFromRight ease;
+}
+
+@keyframes bounceInFromRight {
+    0% { opacity: 0; transform: translateX(400px); }
+    60% { transform: translateX(-30px); }
+    80% { transform: translateX(10px); }
+    100% { opacity: .9; transform: translateX(0); }
 }
 
 
@@ -548,10 +565,6 @@ footer {
         margin-top: -3.25em;
     }
 
-    nav a {
-        padding: 1.05em 1em;
-    }
-
     #navBarButton {
         height: 3.55em;
         position: sticky;
@@ -575,11 +588,25 @@ footer {
         background-repeat:   repeat,                    no-repeat;
         background-size:     auto,                      cover;
 
-        padding: 7em 4em;
+        padding: 7em 4em 5em 4em;
         position: relative;
         top: 4em;
         text-align: center;
         width: 100%;
+    }
+
+    footer p {
+        text-align: center;
+        margin-top: 5em;
+    }
+
+    nav {
+        animation: slideInFromRight 1.5s;
+    }
+
+    @keyframes slideInFromRight {
+        from { transform: translateX(100%); }
+        to { transform: translateX(0); }
     }
 }
 
@@ -589,12 +616,18 @@ footer {
     header {
         padding: 3.5em 1.5em;
     }
+
     header h1 {
         font-size: 2em;
     }
 
     header h2 {
         font-size: 1em;
+    }
+
+    nav a {
+        padding-left: .75em;
+        padding-right: .75em;
     }
 
     main {
@@ -604,20 +637,38 @@ footer {
 
     footer {
         padding-top: 5em;
-        padding-bottom: 5em;
+        padding-bottom: 2.5em;
     }
 }
 
 
 /* XSmall screen size. */
 @media screen and (max-width: 480px) {
+    .info {
+        margin-left: calc(500px/2 - 50%);
+    }
+
+    #welcomeUser {
+        margin-left: calc(600px/2 - 50%);
+    }
+
+    #welcomeUser a {
+        display: none;
+    }
+
     header {
         padding-left: 1.5em;
         padding-right: 1.5em;
     }
 
+    nav a {
+        padding-left: .4em;
+        padding-right: .4em;
+    }
+
     nav.responsive {
         width: 200px;
+        margin-left: calc(100% - 200px);
     }
 
     main {
