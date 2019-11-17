@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^alvarezrosa\.com$ [NC]
+RewriteRule ^(.*)$ https://david.alvarezrosa.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www.alvarezrosa\.com$ [NC]
+RewriteRule ^(.*)$ https://david.alvarezrosa.com/$1 [R=301,L]

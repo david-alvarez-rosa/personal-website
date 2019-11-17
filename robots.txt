@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /tres-en-raya/jugar/*movs=*
+
+Sitemap: https://david.alvarezrosa.com/sitemap.xml
