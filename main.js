@@ -1,9 +1,19 @@
 // Add loading spinner animation while page is loading.
-window.addEventListener("load", function() { setTimeout(loadingSpinner, 500); });
+window.addEventListener("load", loadingSpinner);
 function loadingSpinner() {
     document.getElementById("loadingSpinner").classList.add("hideLoadingSpinner");
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
+
+    // Lazy load images in information divs.
+    var infoDivs = document.getElementsByClassName("info");
+    for (var i = 0; i < infoDivs.length; ++i) {
+        var images = infoDivs[i].getElementsByTagName("img");
+        for (var j = 0; j < images.length; ++j) {
+            var image = images[j];
+            image.src = image.dataset.src;
+        }
+    }
 }
 
 
@@ -162,4 +172,4 @@ setTimeout(function () {
     document.getElementById("welcomeUser").style.display = "block";
     document.getElementById("welcomeUser").classList.add("bounceInFromRight");
     document.getElementById("blurBackground").style.display = "block";
-}, 6000);
+}, 5000);
