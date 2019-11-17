@@ -278,7 +278,7 @@ nav.responsive a {
 /* Header. */
 header {
     background-color: #1F1815;
-    background-image:      url("images/overlay.png"), url("images/background.jpg");
+    background-image:      url("images/overlay.png"), url("images/background.jpeg");
     background-position:   top left,                  top left;
     background-repeat:     repeat,                    no-repeat;
     background-size:       auto,                      cover;
@@ -583,7 +583,7 @@ footer {
     footer {
         background-attachment: scroll;
         background-color: #1F1815;
-        background-image:    url("images/overlay.png"), url("images/background.jpg");
+        background-image:    url("images/overlay.png"), url("images/background.jpeg");
         background-position: top left,                  bottom center;
         background-repeat:   repeat,                    no-repeat;
         background-size:     auto,                      cover;
