@@ -21,13 +21,13 @@ html {
 
 p {
     color: #A2A2A2;
-    margin-bottom: 1.5em;
     text-align: justify;
 }
 
 a {
     text-decoration: none;
     outline: 0;
+    color: inherit;
 }
 
 button {
@@ -120,6 +120,7 @@ button {
 
 .info p {
     color: #F2F2F2;
+    margin-bottom: 1.5em;
 }
 
 .info a {
@@ -146,6 +147,20 @@ button {
     display: none;
 }
 
+#infoEmail {
+    height: 150px;
+    top: calc(50% - 150px/2);
+}
+
+#infoPhone {
+    height: 200px;
+    top: calc(50% - 200px/2);
+}
+
+#infoAddress {
+    height: 215px;
+    top: calc(50% - 215px/2);
+}
 
 /* Scroll back to top button. */
 #scrollTop {
@@ -334,6 +349,20 @@ main h3 {
     padding-bottom: -1em;
 }
 
+main p a {
+    text-decoration: underline;
+}
+
+main a:hover, main a:focus, main a:active {
+    color: #D45B12;
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
+}
+
+main p {
+    margin-bottom: 1.5em;
+}
+
 main section {
     padding-bottom: .5em;
 }
@@ -345,6 +374,27 @@ main section h2 {
 
 main ul {
     padding-left: 3em;
+    color: #A2A2A2;
+    list-style: none;
+}
+
+#getInTouch {
+    width: 75%;
+    float: left;
+}
+
+#getInTouchRight {
+    width: 35%;
+    margin-left: 70%;
+    padding: 5.5em 0 0 .25em;
+}
+
+#getInTouchRight ul li {
+    padding-bottom: .5em;
+}
+
+#getInTouchRight ul li a {
+    padding-left: .25em;
 }
 
 
@@ -357,6 +407,7 @@ footer {
     min-top: 600px;
     left: 0;
     width: 35%;
+    color: rgba(255, 255, 255, .75);
 }
 
 footer ul {
@@ -368,29 +419,19 @@ footer ul li {
     list-style: none;
     width: 4.15em;
     text-align: center;
-    color: rgba(255, 255, 255, 1);
-}
-
-footer .icon {
-    color: rgba(255, 255, 255, .75);
 }
 
 footer a:hover, footer a:focus, footer a:active {
+    color: #D45B12;
     transform: scale(1.2);
     transition: transform .1s linear .1s;
-    color: #D45B12;
 }
 
 footer p {
     margin: 1em 0 0 0;
-    color: rgba(255, 255, 255, .75);
     text-align: right;
     font-size: .75em;
     font-weight: 580;
-}
-
-footer p a {
-    color: rgba(255, 255, 255, .75);
 }
 
 
@@ -633,6 +674,15 @@ footer {
     main {
         padding-left: 2.5em;
         padding-right: 2.5em;
+    }
+
+    #getInTouch {
+        width: 100%;
+        float: none;
+    }
+
+    #getInTouchRight {
+        display: none;
     }
 
     footer {

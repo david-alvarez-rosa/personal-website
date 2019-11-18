@@ -5,6 +5,9 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
+    // Warn that this website is under construction.
+    setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+
     // Lazy load images in information divs.
     var infoDivs = document.getElementsByClassName("info");
     for (var i = 0; i < infoDivs.length; ++i) {
@@ -162,14 +165,13 @@ window.addEventListener("click", hideAll);
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (isChrome)
     setTimeout(function () {
-        document.getElementById("welcomeChromeUser").style.display = "block";
-        document.getElementById("welcomeChromeUser").classList.add("bounceInFromRight");
-        document.getElementById("blurBackground").style.display = "block";
+        showInfo("welcomeChromeUser");
     }, 15000);
 
-// Warn that this website is under construction.
-setTimeout(function () {
-    document.getElementById("welcomeUser").style.display = "block";
-    document.getElementById("welcomeUser").classList.add("bounceInFromRight");
+
+// Show information general funcion.
+function showInfo(id) {
+    document.getElementById(id).style.display = "block";
+    document.getElementById(id).classList.add("bounceInFromRight");
     document.getElementById("blurBackground").style.display = "block";
-}, 5000);
+}

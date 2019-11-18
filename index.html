@@ -192,6 +192,54 @@
       </p>
     </div>
 
+    <div class="info" id="infoEmail">
+      <p>
+        This is my email. For security reasons it is included as an image.
+      </p>
+      <a href="images/email.png"
+         title="Personal email.">
+        <img data-src="images/email.png"
+             style="margin-left: calc(50% - 200px/2);"
+             width="200px"
+             alt="Personal email." />
+      </a>
+      <p style="font-size: .8em; margin-top: 1.75em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
+    </div>
+
+    <div class="info" id="infoPhone">
+      <p>
+        This is my phone number. For security reasons it is included as an image.
+      </p>
+      <a href="images/phone-number.png"
+         title="Personal phone number.">
+        <img data-src="images/phone-number.png"
+             style="margin-left: calc(50% - 200px/2);"
+             width="200px"
+             alt="Personal phone number." />
+      </a>
+      <p style="font-size: .8em; margin-top: 1.75em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
+    </div>
+
+    <div class="info" id="infoAddress">
+      <p>
+        This is my address. For security reasons it is included as an image.
+      </p>
+      <a href="images/address.png"
+         title="Personal phone number.">
+        <img data-src="images/address.png"
+             style="margin-left: calc(50% - 275px/2);"
+             width="275px"
+             alt="Personal phone number." />
+      </a>
+      <p style="font-size: .8em; margin-top: 2.5em;">
+        You can exit by pressing q or ESC or clicking outside this box.
+      </p>
+    </div>
+
     <div id="blurBackground"></div>
 
 
@@ -273,25 +321,33 @@
           <li>
             Email
             <a class="icon fas fa-at fa-lg"
-               rel="nofollow"
-               href="mailto:david@alvarezrosa.com"
-               title="Send me and email.">
+               href="javascript:showInfo('infoEmail');"
+               title="Show my personal email.">
             </a>
           </li>
 
           <li>
             Phone
             <a class="fas fa-phone fa-lg"
-               rel="nofollow"
-               href="tel:+34647133930"
+               href="javascript:showInfo('infoPhone');"
                title="Call me.">
             </a>
           </li>
 
           <li>
-            Envelope
-            <a class="icon fas fa-envelope fa-lg"
-               rel="nofollow"> <!-- TODO: finish this. -->
+            Curriculum Vitae
+            <a class="fas fa-file-alt fa-lg"
+               rel="nofollow"
+               href="curriculum_vitae.pdf"
+               title="My personal Curriculum Vitae.">
+            </a>
+          </li>
+
+          <li>
+            Address
+            <a class="fas fa-envelope fa-lg"
+               href="javascript:showInfo('infoAddress');"
+               title="My personal address.">
             </a>
           </li>
         </ul>
@@ -508,28 +564,35 @@
           nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         </p>
         <form method="post" action="">
-          <div style="width: 65%; float: left;">
+          <div id="getInTouch">
             <input type="text" placeholder="Name" style="width: calc(50% - 1em);" />
             <input type="email" placeholder="Email" style="width: calc(50% - 1em);" />
             <textarea placeholder="Message" rows="5" style="width: calc(100% - 1em);"></textarea>
             <input type="submit" value="Send Message" class="primary" />
             <input type="reset" value="Reset" />
           </div>
-          <div id="width: 35%; margin-left: 65%;">
+          <div id="getInTouchRight">
             <ul>
               <li>
-                <h3 class="fas fa-home"></h3>
-                1234 Somewhere Rd. <br />
-                Nashville, TN 00000 <br />
-                United States
+                <i class="fas fa-envelope fa-lg"></i>
+                <a href="javascript:showInfo('infoAddress');"
+                   title="Show my personal address.">
+                  Show address.
+                </a>
               </li>
               <li>
-                <h3 class="fas fa-phone"></h3>
-                647 13 39 30
+                <i class="fas fa-phone"></i>
+                <a href="javascript:showInfo('infoPhone');"
+                   title="Show my personal phone number.">
+                  Show phone number.
+                </a>
               </li>
               <li>
-                <h3 class="fas fa-envelope"></h3>
-                hello@untiled.tld
+                <i class="fas fa-at"></i>
+                <a href="javascript:showInfo('infoEmail');"
+                   title="Show my personal email.">
+                  Show email.
+                </a>
               </li>
             </ul>
           </div>
@@ -544,7 +607,7 @@
     <footer>
       <ul>
         <li>
-          <a class="icon fab fa-gitlab fa-2x"
+          <a class="fab fa-gitlab fa-2x"
              rel="external"
              href="https://gitlab.com/DavidAlvarez"
              target="_blank"
@@ -555,31 +618,30 @@
         </li>
 
         <li>
-          <a class="icon fas fa-at fa-2x"
-             rel="nofollow"
-             href="mailto:david@alvarezrosa.com"
-             title="Send me and email.">
+          <a class="fas fa-at fa-2x"
+             href="javascript:showInfo('infoEmail');"
+             title="Show my personal email.">
           </a>
           <br />
           Email
         </li>
 
         <li>
-          <a class="icon fas fa-phone fa-2x"
-             rel="nofollow"
-             href="tel:+34647133930"
-             title="Call me.">
+          <a class="fas fa-phone fa-2x"
+             href="javascript:showInfo('infoPhone');"
+             title="Show my personal phone number.">
           </a>
           <br />
           Phone
         </li>
 
         <li>
-          <a class="icon fas fa-envelope fa-2x"
-             rel="nofollow"> <!-- TODO: finish this. -->
+          <a class="fas fa-envelope fa-2x"
+             href="javascript:showInfo('infoAddress');"
+             title="Show my personal address.">
           </a>
           <br />
-          Envelope
+          Address
         </li>
       </ul>
 
@@ -590,7 +652,7 @@
            rel="author"
            title="David Álvarez Rosa's personal website.">
           @David.
-          </a>
+        </a>
       </p>
     </footer>
 
