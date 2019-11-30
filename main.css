@@ -148,8 +148,8 @@ button {
 }
 
 #infoEmail {
-    height: 150px;
-    top: calc(50% - 150px/2);
+    height: 175px;
+    top: calc(50% - 175px/2);
 }
 
 #infoPhone {
@@ -344,9 +344,19 @@ main h2 {
     font-size: 2em;
 }
 
+main h2 i {
+    float: right;
+    font-size: .75em;
+    padding-top: .5em;
+}
+
 main h3 {
     font-size: 1.25em;
     padding-bottom: -1em;
+}
+
+main h3 i {
+    float: right;
 }
 
 main p a {
@@ -355,6 +365,7 @@ main p a {
 
 main a:hover, main a:focus, main a:active {
     color: #D45B12;
+    font-weight: 600;
     transform: scale(1.2);
     transition: transform .1s linear .1s;
 }
@@ -364,7 +375,7 @@ main p {
 }
 
 main section {
-    padding-bottom: .5em;
+    padding-bottom: 2em;
 }
 
 main section h2 {

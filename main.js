@@ -45,10 +45,14 @@ function toggleNavBar() {
     if (navBar.classList.contains("responsive")) {
         navBar.classList.remove("responsive");
         document.getElementById("blurBackground").style.display = "none";
+        navBarButton.getElementsByTagName("i")[0].classList.remove("fa-times");
+        navBarButton.getElementsByTagName("i")[0].classList.add("fa-bars");
     }
     else {
         navBar.classList.add("responsive");
         document.getElementById("blurBackground").style.display = "block";
+        navBarButton.getElementsByTagName("i")[0].classList.remove("fa-bars");
+        navBarButton.getElementsByTagName("i")[0].classList.add("fa-times");
     }
     if (document.documentElement.scrollTop <= 100)
         document.documentElement.scrollTop = 110;
