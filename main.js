@@ -155,7 +155,7 @@ window.addEventListener("click", hideAll);
 
 // Show information if visitor uses Google Chrome.
 var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-if (isChrome)
+if (isChrome && Math.random() > 0.7)
     setTimeout(function () {
         showInfo("welcomeChromeUser");
     }, 15000);

@@ -39,7 +39,6 @@ function showInformation() {
 function closeInformation() {
     document.getElementsByTagName("nav")[0].classList.remove("responsive");
     document.getElementById("blurBackground").style.display = "none";
-
     navBarButton.getElementsByTagName("i")[0].classList.remove("fa-times");
     navBarButton.getElementsByTagName("i")[0].classList.add("fa-bars");
 
