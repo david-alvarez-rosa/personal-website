@@ -54,8 +54,6 @@ function toggleNavBar() {
         navBarButton.getElementsByTagName("i")[0].classList.remove("fa-bars");
         navBarButton.getElementsByTagName("i")[0].classList.add("fa-times");
     }
-    if (document.documentElement.scrollTop <= 100)
-        document.documentElement.scrollTop = 110;
 }
 
 
@@ -130,25 +128,14 @@ window.addEventListener("resize", function () { setTimeout(setNavBarSection, 100
 var navBarButton = document.getElementById("navBarButton");
 
 function navBarResize() {
-    if (window.innerWidth <= 980) {
-        navBar.style.padding = "0.75em 0";
-        navBarButton.style.height = "3.55em";
-        navBar.style.padding = "0.75em 0";
-        return;
+    if (document.documentElement.scrollTop > 100 || window.innerWidth <= 980) {
+        navBar.style.padding = "12px 0";
+        navBarButton.style.height = "55px";
+        return
     }
 
-    if (document.documentElement.scrollTop > 100) {
-        navBar.style.padding = "0.75em 0";
-        navBarButton.style.height = "3.55em";
-        for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding.bottom = navBarLinks[i].style.padding.top = "1.05em";
-    }
-    else {
-        navBar.style.padding = "1.25em 0";
-        navBarButton.style.height = "4.6em";
-        for (var i = 0; i < navBarLinks.length; ++i)
-            navBarLinks[i].style.padding.bottom = navBarLinks[i].style.padding.top = "1.5em";
-    }
+    navBar.style.padding = "20px 0";
+    navBarButton.style.height = "67px";
 }
 
 navBarResize();
@@ -158,7 +145,8 @@ window.addEventListener("resize", navBarResize);
 
 // Hide navBar when click outside.
 function hideAll(event) {
-    if (document.getElementById("blurBackground").contains(event.target))
+    if (document.getElementById("blurBackground").contains(event.target) ||
+       navBar.contains(event.target))
         closeInformation();
 }
 
