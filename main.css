@@ -133,7 +133,7 @@ button {
     list-style: none;
 }
 
-.info img:hover, .info img:focus, .info img:active {
+.info img:hover, .info img:focus {
     transform: scale(1.2);
     transition: transform .1s linear .1s;
 }
@@ -224,7 +224,7 @@ nav a {
     transition: background-color .25s, color .25s ease, background-size .5s, padding .4s linear;
 }
 
-nav a:hover, nav a:focus, nav a:active {
+nav a:hover, nav a:focus {
     color: #000000;
     background-size: 100% 95%;
 }
@@ -234,7 +234,7 @@ nav a.current {
     background-color: #D45B12;
 }
 
-nav a.current:hover, nav a.current:focus, nav a.current:active {
+nav a.current:hover, nav a.current:focus {
     background-color: transparent;
     background-size: 100% 100%;
 }
@@ -280,7 +280,7 @@ nav.responsive a {
     transition: background-size .5s ease, color .5s ease, height .4s linear;
 }
 
-#navBarButton:hover, #navBarButton:focus, #navBarButton:active {
+#navBarButton:hover, #navBarButton:focus {
     color: #000000;
     background-size: 100% 100%;
 }
@@ -363,7 +363,7 @@ main p a {
     text-decoration: underline;
 }
 
-main a:hover, main a:focus, main a:active {
+main a:hover, main a:focus {
     color: #D45B12;
     font-weight: 600;
     transform: scale(1.2);
@@ -438,7 +438,7 @@ footer ul li {
     text-align: center;
 }
 
-footer a:hover, footer a:focus, footer a:active {
+footer a:hover, footer a:focus {
     color: #D45B12;
     transform: scale(1.2);
     transition: transform .1s linear .1s;
@@ -471,7 +471,7 @@ input[type="submit"], input[type="reset"] {
     white-space: nowrap;
 }
 
-input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:active, input[type="reset"]:hover, input[type="reset"]:focus, input[type="reset"]:active {
+input[type="submit"]:hover, input[type="submit"]:focus, input[type="reset"]:hover, input[type="reset"]:focus {
     border-color: #D45B12;
     color: #D45B12 !important;
 }
