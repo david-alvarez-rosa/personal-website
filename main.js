@@ -101,19 +101,19 @@ function setNavBarSection() {
             elementCurrent = navBarLinks[i];
             elementCurrent.classList.add("current");
 
-
-            if (windowWidth > 980)
-                elementCurrent.scrollIntoView();
-            else {
-                var positionFromLeft = elementCurrent.getBoundingClientRect().left;
-                var positionFromRight = elementCurrent.getBoundingClientRect().right;
-                var scrollStep =  positionFromRight - positionFromLeft;
-                if (positionFromLeft < 0)
-                    navBar.scrollLeft -= scrollStep;
-                var positionFromRight = elementCurrent.getBoundingClientRect().right;
-                if (positionFromRight > windowWidth - 100)
-                    navBar.scrollLeft += scrollStep;
+            var positionFromRight = elementCurrent.getBoundingClientRect().right;
+            var positionFromLeft = elementCurrent.getBoundingClientRect().left;
+            var scrollStep =  positionFromRight - positionFromLeft;
+            if (windowWidth > 980) {
+                positionFromLeft = elementCurrent.getBoundingClientRect().left -
+                    document.getElementsByTagName("header")[0].getBoundingClientRect().width;
             }
+            if (positionFromLeft < 0)
+                navBar.scrollLeft -= scrollStep;
+            var positionFromRight = elementCurrent.getBoundingClientRect().right;
+            if (positionFromRight > windowWidth - 100)
+                navBar.scrollLeft += scrollStep;
+
             break;
         }
     }
