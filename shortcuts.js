@@ -71,6 +71,9 @@ function scrollToSection(sign) {
 
 // Add keyboard shortcuts.
 function keyboardShortcuts(event) {
+    if (event.target.nodeName === "INPUT" || event.target.nodeName === "TEXTAREA")
+        return;
+
     switch (event.key) {
         // Emacs-like commands.
     case "n":
