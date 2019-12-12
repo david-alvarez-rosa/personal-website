@@ -49,9 +49,12 @@ button {
     height: 0 !important;
 }
 
-
 ::-moz-focus-inner {
     border: none;
+}
+
+.clear {
+    clear: both;
 }
 
 
@@ -335,7 +338,7 @@ main {
     width: calc(100% - 35%);
 }
 
-main h2, h3 {
+main h2, h3, h4, h5 {
     color: #787878;
     line-height: 1.5em;
 }
@@ -357,6 +360,17 @@ main h3 {
 
 main h3 i {
     float: right;
+    padding-top: 5px;
+}
+
+main h4 {
+    font-size: .9em;
+    padding-bottom: .25em;
+}
+
+main h5 {
+    font-size: .9em;
+    padding-bottom: .75em;
 }
 
 main p a {
@@ -379,19 +393,32 @@ main strong {
 }
 
 main section {
-    padding-bottom: 2em;
+    padding-bottom: 2.25em;
 }
 
 main section h2 {
-    border-bottom: solid 2px #CCCCCC;
+    border-bottom: solid 2px #B3B3B3;
+    margin-bottom: .75em;
+}
+
+main section h3 {
+    border-bottom: solid 1px #CCCCCC;
     margin-bottom: .75em;
 }
 
 main ul {
     margin-top: -.75em;
-    padding-left: 3em;
+    margin-bottom: 1.5em;
+    padding-left: 2.5em;
     color: #A2A2A2;
-    list-style: none;
+}
+
+main .date {
+    float: left;
+}
+
+main .location {
+    float: right;
 }
 
 #getInTouch {
@@ -403,7 +430,7 @@ main ul {
 #getInTouchRight {
     width: 35%;
     margin-left: 70%;
-    padding: 5.5em 0 0 .25em;
+    padding: 6em 0 0 .25em;
 }
 
 #getInTouchRight ul li {
@@ -520,7 +547,7 @@ footer {
 }
 
 .fadeIn {
-    animation: fadeIn 1.5s;
+    animation: fadeIn 1.25s;
 }
 
 @keyframes slideInFromTop {
@@ -651,7 +678,7 @@ footer {
     footer {
         background-attachment: scroll;
         background-color: #1F1815;
-        background-image:    url("images/overlay.png"), url("images/background.jpeg");
+        background-image:    url("/images/overlay.png"), url("/images/background.jpeg");
         background-position: top left,                  bottom center;
         background-repeat:   repeat,                    no-repeat;
         background-size:     auto,                      cover;
@@ -752,6 +779,10 @@ footer {
         padding-left: 1.5em;
         padding-right: 1.5em;
     }
+
+    main .date, main .location {
+        float: none;
+    }
 }
 
 
@@ -761,3 +792,46 @@ footer {
         display: none;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ::-webkit-scrollbar { */
+/*     width: 5px !important; */
+/* } */
+
+/* ::-webkit-scrollbar-track { */
+/*     background-color: rgba(0, 0, 0, .25); */
+/*     border-radius: 10px; */
+/* } */
+
+/* ::-webkit-scrollbar-thumb { */
+/*     background-color: #D45B12; */
+/*     border-radius: 10px; */
+/* } */
