@@ -316,21 +316,118 @@
 
 
     <!-- Navigation bar. -->
-    <button id="navBarButton" onclick="toggleNavBar()" title="Expand navigation bar.">
-      <i class="fas fa-bars fa-2x" id="navIcon"></i>
-    </button>
-    <nav>
-      <a class="current" href="#sec-about" title="Scroll to about me section.">About</a><!--
-      --><a href="#sec-education" title="Scroll to education section.">Education</a><!--
-      --><a href="#sec-courses" title="Scroll to courses section.">Courses</a><!--
-      --><a href="#sec-projects" title="Scroll to projects section.">Projects</a><!--
-      --><a href="#sec-inspiration" title="Scroll to inspiration section.">Inspiration</a><!--
-      --><a href="#sec-skills" title="Scroll to skills section.">Skills</a><!--
-      --><a href="#sec-languages" title="Scroll to languages section.">Languages</a><!--
-      --><a href="#sec-awards" title="Scroll to awards section.">Awards</a><!--
-      --><a href="#sec-others" title="Scroll to others section.">Others</a><!--
-      --><a href="#sec-interests" title="Scroll to interests section.">Interests</a><!--
-      --><a href="#sec-touch" title="Scroll to get in touch section.">Get In Touch</a>
+    <nav id="navBar">
+      <div id="navBarDiv">
+        <a class="current" href="#sec-about" title="Scroll to about me section.">
+          About
+        </a>
+        <a href="#sec-education" title="Scroll to education section.">
+          Education
+        </a>
+        <a href="#sec-courses" title="Scroll to courses section.">
+          Courses
+        </a>
+        <a href="#sec-projects" title="Scroll to projects section.">
+          Projects
+        </a>
+        <a href="#sec-inspiration" title="Scroll to inspiration section.">
+          Inspiration
+        </a>
+        <a href="#sec-skills" title="Scroll to skills section.">
+          Skills
+        </a>
+        <a href="#sec-languages" title="Scroll to languages section.">
+          Languages
+        </a>
+        <a href="#sec-awards" title="Scroll to awards section.">
+          Awards
+        </a>
+        <a href="#sec-others" title="Scroll to others section.">
+          Others
+        </a>
+        <a href="#sec-interests" title="Scroll to interests section.">
+          Interests
+        </a>
+        <a href="#sec-touch" title="Scroll to get in touch section.">
+          Get In Touch
+        </a>
+      </div>
+      <button id="navBarButton" onclick="toggleNavBar()" title="Expand navigation bar.">
+        <i class="fas fa-bars fa-2x" id="navIcon"></i>
+      </button>
+    </nav>
+
+
+    <!-- Navigation bar expanded. -->
+    <nav id="navBarExpanded">
+      <button id="navBarExpandedButton" onclick="toggleNavBar()" title="Expand navigation bar.">
+        <i class="fas fa-times fa-2x" id="navIcon"></i>
+      </button>
+      <ul>
+        <li class="title">
+          Sections
+        </li>
+        <li>
+          <a class="current" href="#sec-about" title="Scroll to about me section.">
+            About <i class="fas fa-address-card"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-education" title="Scroll to education section.">
+            Education <i class="fas fa-graduation-cap"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-courses" title="Scroll to courses section.">
+            Courses <i class="fas fa-book"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-projects" title="Scroll to projects section.">
+            Projects <i class="fas fa-cogs"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-inspiration" title="Scroll to inspiration section.">
+            Inspiration <i class="fas fa-quote-right"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-skills" title="Scroll to skills section.">
+            Skills <i class="fas fa-unlock-alt"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-languages" title="Scroll to languages section.">
+            Languages <i class="fas fa-language"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-awards" title="Scroll to awards section.">
+            Awards <i class="fas fa-trophy"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-others" title="Scroll to others section.">
+            Others <i class="fas fa-asterisk"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-interests" title="Scroll to interests section.">
+            Interests <i class="fas fa-search"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-touch" title="Scroll to get in touch section.">
+            Get In Touch <i class="fas fa-fingerprint"></i>
+          </a>
+        </li>
+        <li>
+          <p>
+            @David 2020
+          </p>
+        </li>
+      </ul>
     </nav>
 
 
@@ -483,13 +580,13 @@
           providing a solid knowledge in its applications (algorithms,
           computing).
         </p>
-          <ul>
-            <li>Relevant <strong>subjects</strong>: Linear Algebra, Calculus,
-              Mathematical Programming, Algorithmics, Abstract Algebra,
-              Geometry, Analysis, Differential Equations, Probability and
-              Statistics.
-            </li>
-          </ul>
+        <ul>
+          <li>Relevant <strong>subjects</strong>: Linear Algebra, Calculus,
+            Mathematical Programming, Algorithmics, Abstract Algebra,
+            Geometry, Analysis, Differential Equations, Probability and
+            Statistics.
+          </li>
+        </ul>
         <h3>
           <a href="https://www.upc.edu/en/bachelors/industrial-technology-engineering-barcelona-etseib"
              rel="nofollow"

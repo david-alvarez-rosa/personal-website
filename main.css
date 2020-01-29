@@ -20,7 +20,7 @@ html {
 }
 
 p {
-    color: #A2A2A2;
+    color: #737373;
     text-align: justify;
 }
 
@@ -196,22 +196,27 @@ button {
 
 
 /* Navigation bar. */
-nav {
+#navBar {
+    margin-left: 35%;
+    width: calc(100% - 35%);
+    position: fixed;
+    z-index: 99;
+}
+
+#navBar div {
     overflow-x: auto;
     overflow-y: hidden;
-    margin-left: 35%;
+    width: calc(100% - 70px);
     padding: 12px 0;
-    width: calc(100% - 35% - 70px);
-    position: fixed;
+    height: 70px;
     white-space: nowrap;
-    transition: padding .4s linear;
+    transition: padding .4s linear, height .4s linear;
     background-image: linear-gradient(
         to bottom,
         rgba(51, 51, 51, .85) 0%,
         rgba(51, 51, 51, .85) 95%,
         transparent 95%,
         transparent 100%);
-    z-index: 99;
 }
 
 nav a {
@@ -242,33 +247,11 @@ nav a.current:hover, nav a.current:focus {
     background-size: 100% 100%;
 }
 
-nav.responsive {
-    position: fixed;
-    margin-left: calc(100% - 250px);
-    overflow-y: auto;
-    width: 250px;
-    height: 500px;
-    max-height: 100%;
-    max-width: 100%;
-    background-color: #333333;
-    padding: 0;
-    opacity: .9;
-    border: 3px solid #D45B12;
-    z-index: 999;
-}
-
-nav.responsive a {
-    display: block;
-    float: none;
-    text-align: left;
-    margin: -.25em 0;
-}
-
 #navBarButton {
-    cursor: pointer;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
+    cursor: pointer;
     color: #FFFFFF;
     width: 70px;
     height: 67px;
@@ -283,13 +266,81 @@ nav.responsive a {
     transition: background-size .5s ease, color .5s ease, height .4s linear;
 }
 
-#navBarButton:hover, #navBarButton:focus {
+#navBarButton:hover, #navBarButton:focus, #navBarExpandedButton:hover, #navBarExpandedButton:focus {
     color: #000000;
     background-size: 100% 100%;
 }
 
-#navBarButton i {
+#navBarButton i, #navBarExpandedButton {
     padding: .3em;
+}
+
+#navBarExpanded {
+    width: 190px;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #333333;
+    z-index: 100;
+    overflow-y: auto;
+    border-left: 3px solid #D45B12;
+    display: none;
+    animation: slideInFromRight 1.5s;
+}
+
+#navBarExpanded ul {
+    list-style: none;
+}
+
+.title {
+    padding: .5em;
+    color: #D45B12;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: 700;
+    border-bottom: 3px solid #D45B12;
+}
+
+#navBarExpanded ul li a {
+    display: block;
+    width: 100%;
+    padding: 1.25em;
+    border-bottom: 1px solid #787878;
+    background-size: 0 100%;
+    text-align: right;
+}
+
+#navBarExpanded a:hover, #navBarExpanded a:focus {
+    background-size: 100% 100%;
+}
+
+#navBarExpanded ul li i {
+    padding-left: .75em;
+}
+
+#navBarExpanded ul li p {
+    vertical-align: center;
+    padding: 1.5em;
+    font-size: .9em;
+    text-align: right;
+}
+
+#navBarExpandedButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: #FFFFFF;
+    width: 55px;
+    height: 65px;
+    padding-top: .75em;
+    z-index: 1000;
+    background-image: linear-gradient(#BFBFBF, #BFBFBF);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size .5s ease, color .5s ease, height .4s linear;
 }
 
 
@@ -336,6 +387,11 @@ main {
     max-width: 54em;
     padding: 3em 4em 7.5em 4em;
     width: calc(100% - 35%);
+}
+
+.mainShrunken {
+    width: calc(100% - 35% - 190px);
+    padding: .75em 2.75em 4em 2.75em;
 }
 
 main h2, h3, h4, h5 {
@@ -416,7 +472,7 @@ main ul {
     margin-top: -.75em;
     margin-bottom: 1.5em;
     padding-left: 2.5em;
-    color: #A2A2A2;
+    color: #737373;
 }
 
 main .date {
@@ -528,7 +584,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 
 /* Animations. */
-nav {
+#navBar {
     animation: slideInFromTop 1.5s;
 }
 
@@ -610,9 +666,9 @@ footer {
         font-size: .95em;
     }
 
-    nav {
+    #navBar {
         margin-left: 33%;
-        width: calc(100% - 33% - 4.35em);
+        width: calc(100% - 33%);
     }
 
     main {
@@ -621,6 +677,11 @@ footer {
         padding-left: 3em;
         padding-right: 3em;
         width: calc(100% - 33%);
+    }
+
+    .mainShrunken {
+        width: calc(100% - 33% - 180px);
+        padding: .75em 2.75em 4em 2.75em;
     }
 }
 
@@ -646,39 +707,27 @@ footer {
         font-size: 1em;
     }
 
-    nav {
+    #navBar {
         position: sticky;
         top: 0;
         padding: 12px 0;
-        width: calc(100% - 70px);
+        width: 100%;
         margin-left: 0em;
-        margin-top: -3.45em;
     }
 
-    #navBarButton {
-        height: 55px;
-        position: sticky;
-        top: 0;
-        left: 100%;
-    }
-
-    nav.responsive {
-        width: 350px;
-        height: 500px;
-        margin: 0;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    nav.responsive a {
-        text-align: center;
+    #navBarDiv {
+        margin-top: -.75em;
     }
 
     main {
         margin: 0;
         padding: 0 5em 5em 5em;
         width: 100%;
+    }
+
+    .mainShrunken {
+        width: calc(100% - 190px);
+        padding: .5em 2.75em 5em 2.75em;
     }
 
     footer {
@@ -701,7 +750,7 @@ footer {
         margin-top: 5em;
     }
 
-    nav {
+    #navBar {
         animation: slideInFromRight 1.5s;
     }
 
@@ -726,13 +775,18 @@ footer {
         font-size: 1em;
     }
 
-    nav a {
+    #navBar a {
         padding-left: .75em;
         padding-right: .75em;
     }
 
     main {
         padding: 0 2.5em 1.5em 2.5em;
+    }
+
+    .mainShrunken {
+        width: calc(100% - 190px);
+        padding: .5em 2.5em 5em 2.5em;
     }
 
     main p {
@@ -776,18 +830,22 @@ footer {
         padding-right: 1.5em;
     }
 
-    nav a {
+    #navBar a {
         padding-left: .4em;
         padding-right: .4em;
     }
 
-    nav.responsive {
-        width: 300px;
+    #navBarExpanded {
+        width: 100%;
     }
 
     main {
         padding-left: 1.5em;
         padding-right: 1.5em;
+    }
+
+    .mainShrunken {
+        width: 100%;
     }
 
     main .date, main .location {

@@ -37,10 +37,10 @@ function showInformation() {
 
 
 function closeInformation() {
-    document.getElementsByTagName("nav")[0].classList.remove("responsive");
     document.getElementById("blurBackground").style.display = "none";
-    navBarButton.getElementsByTagName("i")[0].classList.remove("fa-times");
-    navBarButton.getElementsByTagName("i")[0].classList.add("fa-bars");
+    navBarExpanded.style.display = "none";
+    navBar.style.display = "block";
+    mainDiv.classList.remove("mainShrunken");
 
     var infoDivs = document.getElementsByClassName("info");
     for (var i = 0; i < infoDivs.length; ++i)

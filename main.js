@@ -41,18 +41,23 @@ window.addEventListener("resize", setScrollButtonVisibility);
 
 
 // Expand the navigation bar.
+var navBar = document.getElementById("navBar");
+var navBarExpanded = document.getElementById("navBarExpanded");
+navBarExpanded.style.display = "none";
+var mainDiv = document.getElementsByTagName("main")[0];
+
+console.log(mainDiv.offsetWidth);
+
 function toggleNavBar() {
-    if (navBar.classList.contains("responsive")) {
-        navBar.classList.remove("responsive");
-        document.getElementById("blurBackground").style.display = "none";
-        navBarButton.getElementsByTagName("i")[0].classList.remove("fa-times");
-        navBarButton.getElementsByTagName("i")[0].classList.add("fa-bars");
+    if (navBarExpanded.style.display === "none") {
+        navBarExpanded.style.display = "block";
+        navBar.style.display = "none";
+        mainDiv.classList.add("mainShrunken");
     }
     else {
-        navBar.classList.add("responsive");
-        document.getElementById("blurBackground").style.display = "block";
-        navBarButton.getElementsByTagName("i")[0].classList.remove("fa-bars");
-        navBarButton.getElementsByTagName("i")[0].classList.add("fa-times");
+        navBarExpanded.style.display = "none";
+        navBar.style.display = "block";
+        mainDiv.classList.remove("mainShrunken");
     }
 }
 
@@ -87,10 +92,37 @@ window.addEventListener("resize", getWindowDimensions);
 
 
 // Get nearer section to user position (so navBar can be updated).
-var elementCurrent = document.querySelector(".current");
+var elementCurrent = document.getElementsByClassName("current")[0];
+var elementCurrentExpanded = document.getElementsByClassName("current")[1];
 var sections = document.getElementsByTagName("section");
-var navBar = document.getElementsByTagName("nav")[0];
+var navBar = document.getElementById("navBar");
 var navBarLinks = navBar.getElementsByTagName("a");
+var navBarExpanded = document.getElementById("navBarExpanded");
+var navBarExpandedLinks = navBarExpanded.getElementsByTagName("a");
+
+function scrollNavBarToView() {
+    // Scroll navigation bar to show current section.
+    var positionFromRight = elementCurrent.getBoundingClientRect().right;
+    var positionFromLeft = elementCurrent.getBoundingClientRect().left;
+    var scrollStep =  positionFromRight - positionFromLeft;
+    if (windowWidth > 980) {
+        positionFromLeft = elementCurrent.getBoundingClientRect().left -
+            document.getElementsByTagName("header")[0].getBoundingClientRect().width;
+    }
+    if (positionFromLeft < 0)
+        navBar.scrollLeft -= scrollStep;
+    var positionFromRight = elementCurrent.getBoundingClientRect().right;
+    if (positionFromRight > windowWidth - 100)
+        navBar.scrollLeft += scrollStep;
+
+    // Scroll expanded navigation bar to show current section.
+    var positionFromBottom = elementCurrentExpanded.getBoundingClientRect().bottom;
+    if (positionFromBottom > windowHeight - 15)
+        navBarExpanded.scrollTop += windowHeight / 6;
+    var positionFromTop = elementCurrentExpanded.getBoundingClientRect().top;
+    if (positionFromTop < 15)
+        navBarExpanded.scrollTop -= windowHeight / 6;
+}
 
 function setNavBarSection() {
     for (var i = 0; i < sections.length; ++i) {
@@ -101,19 +133,11 @@ function setNavBarSection() {
             elementCurrent = navBarLinks[i];
             elementCurrent.classList.add("current");
 
-            var positionFromRight = elementCurrent.getBoundingClientRect().right;
-            var positionFromLeft = elementCurrent.getBoundingClientRect().left;
-            var scrollStep =  positionFromRight - positionFromLeft;
-            if (windowWidth > 980) {
-                positionFromLeft = elementCurrent.getBoundingClientRect().left -
-                    document.getElementsByTagName("header")[0].getBoundingClientRect().width;
-            }
-            if (positionFromLeft < 0)
-                navBar.scrollLeft -= scrollStep;
-            var positionFromRight = elementCurrent.getBoundingClientRect().right;
-            if (positionFromRight > windowWidth - 100)
-                navBar.scrollLeft += scrollStep;
+            elementCurrentExpanded.classList.remove("current");
+            elementCurrentExpanded = navBarExpandedLinks[i];
+            elementCurrentExpanded.classList.add("current");
 
+            scrollNavBarToView();
             break;
         }
     }
@@ -125,16 +149,19 @@ window.addEventListener("resize", function () { setTimeout(setNavBarSection, 100
 
 
 // Change size of navBar in scroll.
+var navBarDiv = document.getElementById("navBarDiv");
 var navBarButton = document.getElementById("navBarButton");
 
 function navBarResize() {
     if (document.documentElement.scrollTop > 100 || window.innerWidth <= 980) {
-        navBar.style.padding = "12px 0";
-        navBarButton.style.height = "55px";
-        return
+        navBarDiv.style.padding = "12px 0";
+        navBarDiv.style.height = "54px";
+        navBarButton.style.height = "51px";
+        return;
     }
 
-    navBar.style.padding = "20px 0";
+    navBarDiv.style.padding = "20px 0";
+    navBarDiv.style.height = "70px";
     navBarButton.style.height = "67px";
 }
 
@@ -146,7 +173,8 @@ window.addEventListener("resize", navBarResize);
 // Hide navBar when click outside.
 function hideAll(event) {
     if (document.getElementById("blurBackground").contains(event.target) ||
-       navBar.contains(event.target))
+        document.getElementsByTagName("main")[0].contains(event.target) ||
+       navBarExpanded.contains(event.target))
         closeInformation();
 }
 
