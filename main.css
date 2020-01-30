@@ -21,7 +21,7 @@ html {
 
 p {
     color: #737373;
-    text-align: justify;
+    /* text-align: justify; */
 }
 
 a {
@@ -286,7 +286,6 @@ nav a.current:hover, nav a.current:focus {
     overflow-y: auto;
     border-left: 3px solid #D45B12;
     display: none;
-    animation: slideInFromRight 1.5s;
 }
 
 #navBarExpanded ul {
@@ -387,6 +386,7 @@ main {
     max-width: 54em;
     padding: 3em 4em 7.5em 4em;
     width: calc(100% - 35%);
+    transition: width .3s linear;
 }
 
 .mainShrunken {
@@ -395,7 +395,7 @@ main {
 }
 
 main h2, h3, h4, h5 {
-    color: #787878;
+    color: #666666;
     line-height: 1.5em;
 }
 
@@ -421,20 +421,15 @@ main h3 i {
 }
 
 main h4 {
-    font-size: .9em;
+    font-size: .95em;
     padding-bottom: .25em;
 }
 
-main h5 {
-    font-size: .9em;
-    padding-bottom: .75em;
-}
-
-main p a {
+main p a, main ul li a {
     color: #D45B12;
 }
 
-main p a[target="_blank"]::after {
+main p a[target="_blank"]::after, main ul li a[target="_blank"]::after {
     content: "\F08e";
     margin: 0 3px 0 5px;
 }
@@ -448,6 +443,10 @@ main a:hover, main a:focus {
 
 main p {
     margin-bottom: 1.5em;
+}
+
+.marginTop {
+    margin-top: .5em;
 }
 
 main strong {
@@ -475,11 +474,19 @@ main ul {
     color: #737373;
 }
 
-main .date {
+main .card {
+    border-radius: 8px;
+    border: 1px solid #DADCE0;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    padding: .75em 1.25em 0 1.25em;
+    margin-bottom: 1.25em;
+}
+
+main .dataLeft {
     float: left;
 }
 
-main .location {
+main .dataRight {
     float: right;
 }
 
@@ -585,21 +592,25 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 /* Animations. */
 #navBar {
-    animation: slideInFromTop 1.5s;
+    animation: slideInFromTop 1s;
+}
+
+#navBarExpanded {
+    animation: slideInFromTop 1s;
 }
 
 #navBarButton {
-    animation: slideInFromBottom 2.5s ease;
+    animation: slideInFromBottom 1.25s ease;
 }
 
 header {
-    animation: slideInFromLeft 1.5s;
+    animation: slideInFromLeft 1s;
 }
 
 footer {
     opacity: 0;
     transform: translateX(-400px);
-    animation: 1s bounceInFromLeft 1.5s;
+    animation: 1s bounceInFromLeft 1s;
     animation-fill-mode: forwards;
 }
 
@@ -751,7 +762,7 @@ footer {
     }
 
     #navBar {
-        animation: slideInFromRight 1.5s;
+        animation: slideInFromRight 1s;
     }
 
     @keyframes slideInFromRight {
@@ -848,7 +859,7 @@ footer {
         width: 100%;
     }
 
-    main .date, main .location {
+    main .dataRight, main .dataLeft {
         float: none;
     }
 }
