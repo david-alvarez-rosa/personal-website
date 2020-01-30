@@ -34,7 +34,7 @@ function setScrollButtonVisibility() {
     }
 }
 
-setScrollButtonVisibility()
+setScrollButtonVisibility();
 
 window.addEventListener("scroll", setScrollButtonVisibility);
 window.addEventListener("resize", setScrollButtonVisibility);
@@ -45,8 +45,6 @@ var navBar = document.getElementById("navBar");
 var navBarExpanded = document.getElementById("navBarExpanded");
 navBarExpanded.style.display = "none";
 var mainDiv = document.getElementsByTagName("main")[0];
-
-console.log(mainDiv.offsetWidth);
 
 function toggleNavBar() {
     if (navBarExpanded.style.display === "none") {
@@ -96,6 +94,7 @@ var elementCurrent = document.getElementsByClassName("current")[0];
 var elementCurrentExpanded = document.getElementsByClassName("current")[1];
 var sections = document.getElementsByTagName("section");
 var navBar = document.getElementById("navBar");
+var navBarDiv = document.getElementById("navBarDiv");
 var navBarLinks = navBar.getElementsByTagName("a");
 var navBarExpanded = document.getElementById("navBarExpanded");
 var navBarExpandedLinks = navBarExpanded.getElementsByTagName("a");
@@ -110,10 +109,10 @@ function scrollNavBarToView() {
             document.getElementsByTagName("header")[0].getBoundingClientRect().width;
     }
     if (positionFromLeft < 0)
-        navBar.scrollLeft -= scrollStep;
+        navBarDiv.scrollLeft -= scrollStep;
     var positionFromRight = elementCurrent.getBoundingClientRect().right;
     if (positionFromRight > windowWidth - 100)
-        navBar.scrollLeft += scrollStep;
+        navBarDiv.scrollLeft += scrollStep;
 
     // Scroll expanded navigation bar to show current section.
     var positionFromBottom = elementCurrentExpanded.getBoundingClientRect().bottom;
