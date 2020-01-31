@@ -473,7 +473,7 @@ main strong {
 }
 
 main section {
-    padding-bottom: 2.25em;
+    padding-bottom: 3.5em;
 }
 
 main section h2 {
@@ -526,6 +526,40 @@ main .dataRight {
 
 .quoteAuthor {
     float: right;
+}
+
+#skillsList {
+    margin-top: .5em;
+}
+
+.skills {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: space-between;
+    margin: .5em 0;
+    list-style: none;
+}
+
+.skills li {
+    border-radius: 10px;
+    border: 1px solid #C7CAD1;
+    background-color: #F2F2F2;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19);
+    padding: .25em .75em;
+    margin: .5em .5em;
+}
+
+.skills li i {
+    margin-left: .25em;
+}
+
+.skills li a {
+    color: #737373!important;
+}
+
+.skills li a:hover {
+    color: #D45B12!important;
 }
 
 #getInTouch {
