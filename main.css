@@ -509,6 +509,25 @@ main .dataRight {
     float: right;
 }
 
+.quote {
+    background-color: #F2F2F2;
+    padding: 1em 1em .5em 1em;
+    border-radius: 4px;
+}
+
+.quote p {
+    padding: 0;
+    margin: 0;
+}
+
+.quote p i {
+    margin-right: 1em;
+}
+
+.quoteAuthor {
+    float: right;
+}
+
 #getInTouch {
     width: 70%;
     float: left;
@@ -880,6 +899,10 @@ footer {
 
     main .dataRight, main .dataLeft {
         float: none;
+    }
+
+    .quote p i {
+        margin-right: .5em;
     }
 }
 
