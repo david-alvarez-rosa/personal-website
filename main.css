@@ -430,32 +430,36 @@ main h4 {
     padding-bottom: .25em;
 }
 
-main p a, main ul li a {
-    font-weight: bold;
+main a {
     position: relative;
-    color: #D45B12;
     text-decoration: none;
 }
 
-main p a:hover, main ul li a:hover {
+main p a, main ul li a {
     color: #D45B12;
 }
 
-main p a:before, main ul li a:before {
+main a:hover {
+    color: #D45B12;
+}
+
+main a:before {
     content: "";
     position: absolute;
     width: 100%;
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: #D45B12;
     visibility: hidden;
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0s;
 }
 
+main a:before {
+    background-color: #D45B12;
+}
 
-main p a:hover:before, main ul li a:hover:before {
+main a:hover:before {
     visibility: visible;
     transform: scaleX(1);
 }
