@@ -254,14 +254,45 @@
 
 
     <!-- Navigation bar. -->
-    <button id="navBarButton" onclick="toggleNavBar()" title="Expand navigation bar.">
-      <i class="fas fa-bars fa-2x" id="navIcon"></i>
-    </button>
-    <nav>
-      <a class="current" href="#sec-404" title="Scroll to 404 errormessage.">
-        Not found
-      </a><!--
-      --><a href="#sec-touch" title="Scroll to get in touch section.">Get In Touch</a>
+    <nav id="navBar">
+      <div id="navBarDiv">
+        <a class="current" href="#sec-404" title="Scroll to 404 error message.">
+          Not found
+        </a>
+        <a href="#sec-touch" title="Scroll to get in touch section.">
+          Get In Touch
+        </a>
+      </div>
+      <button id="navBarButton" onclick="toggleNavBar()" title="Expand navigation bar.">
+        <i class="fas fa-bars fa-2x" id="navIcon"></i>
+      </button>
+    </nav>
+
+    <!-- Navigation bar expanded. -->
+    <nav id="navBarExpanded">
+      <button id="navBarExpandedButton" onclick="toggleNavBar()" title="Expand navigation bar.">
+        <i class="fas fa-times fa-2x" id="navIcon"></i>
+      </button>
+      <ul>
+        <li class="title">
+          Sections
+        </li>
+        <li>
+          <a class="current" href="#sec-404" title="Scroll to 404 error message.">
+            Not found <i class="fas fa-bomb"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec-touch" title="Scroll to get in touch section.">
+            Get In Touch <i class="fas fa-fingerprint"></i>
+          </a>
+        </li>
+        <li>
+          <p>
+            @David 2020
+          </p>
+        </li>
+      </ul>
     </nav>
 
 
@@ -322,19 +353,21 @@
       <section class="hidden">
         <h2>Get In Touch<i class="fas fa-fingerprint"></i></h2>
         <p>
-          If you want to send my a message, my inbox is always open. Whether for
+          If you want to send me a message, my inbox is always open. Whether for
           a potential project or just to say hi, I'll try my best to answer your
           email!
         </p>
         <form method="post" action="javascript:showInfo('welcomeUser');">
           <div id="getInTouch">
             <input type="text"
-                   placeholder="Name"
+                   placeholder="&#xF007;  Name"
                    style="width: calc(50% - .5em); float: left;" />
             <input type="email"
-                   placeholder="Email"
+                   placeholder="&#xF1FA;  Email"
                    style="width: calc(50% - .5em); float: right; margin-right: 0;" />
-            <textarea placeholder="Message" rows="5" style="width: 100%;"></textarea>
+            <textarea placeholder="&#xF044;  Message"
+                      rows="5"
+                      style="width: 100%;"></textarea>
             <input type="submit" value="Send Message" class="primary" />
             <input type="reset" value="Reset" />
           </div>
@@ -364,7 +397,7 @@
             </ul>
           </div>
           <!-- Give parent size (the above divs are floating). -->
-          <div style="clear: both;"></div>
+          <div class="clear"></div>
         </form>
       </section>
     </main>

@@ -1,9 +1,10 @@
 /* David \'Alvarez Rosa's website 404 error page animation CSS Styles. */
-/* Stolen (and modified) from here: https://codepen.io/WithAnEs/pen/Fxzei */
+/* "Stolen" (and modified) from here: https://codepen.io/WithAnEs/pen/Fxzei */
 
 
 .error404page {
     width: 400px;
+    max-width: 100%;
     height: 320px;
     position: relative;
     top: -70px;
