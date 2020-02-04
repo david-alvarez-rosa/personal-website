@@ -1050,6 +1050,21 @@ footer {
         margin-left: -5em;
     }
 
+    .cardAward {
+        display: block;
+    }
+
+    .award {
+        width: 100%;
+        background: transparent;
+        margin: 0;
+        padding: 0;
+    }
+
+    .awardTrophyIcon {
+        padding: 0 0 .5em 0;
+        margin: auto;
+    }
 }
 
 
