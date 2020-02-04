@@ -498,6 +498,7 @@ main ul {
 }
 
 main .card {
+    overflow: hidden;
     border-radius: 8px;
     border: 1px solid #DADCE0;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
@@ -513,18 +514,18 @@ main .dataRight {
     float: right;
 }
 
-.quote {
+blockquote {
     background-color: #F2F2F2;
     padding: 1em 1em .5em 1em;
     border-radius: 4px;
 }
 
-.quote p {
+blockquote p {
     padding: 0;
     margin: 0;
 }
 
-.quote p i {
+blockquote p i {
     margin-right: 1em;
 }
 
@@ -564,6 +565,108 @@ main .dataRight {
 
 .skills li a:hover {
     color: #D45B12!important;
+}
+
+.language {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    margin-top: 1.25em;
+    margin-bottom: .25em;
+    padding: 2px;
+    border-radius: 6px 0 0 6px;
+    border: 1px solid #9DA2AF;
+    background-color: #F2F2F2;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 9px 0 rgba(0, 0, 0, 0.19);
+}
+
+.languageName {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    font-weight: 500;
+    line-height: 28px;
+    text-align: center;
+    border-right: 3px solid #9DA2AF;
+    border-radius: 6px 0 0 6px;
+    color: #737373!important;
+    background-color: #E6E6E6;
+}
+
+.languageLevel {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    background-color: #D45B12;
+    transition-property: width;
+    transition-delay: .5s;
+    transition-timing-function: ease-in-out;
+}
+
+.languageLevelQuick {
+    transition-delay: 0s!important;
+    transition-duration: 0s!important;
+}
+
+.languageLevel0 {
+    transition-duration: 1.5s;
+}
+
+.languageLevel1 {
+    transition-duration: 2s;
+}
+
+.languageLevel2 {
+    transition-duration: 2.5s;
+}
+
+.languageLevelAnimate0 {
+    width: calc(100% - 100px);
+}
+
+.languageLevelAnimate1 {
+    width: calc(85% - 100px);
+}
+
+.languageLevelAnimate2 {
+    width: calc(60% - 100px);
+}
+
+.languageText {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cardAward {
+    display: flex;
+}
+
+.award {
+    width: calc(100% - 30px);
+    padding-left: 1.5em;
+    margin-top: -.75em;
+    padding-top: .75em;
+    background-image: linear-gradient(#666666 20%, rgba(255,255,255,0) 0%);
+    background-position: left;
+    background-size: 1px 6px;
+    background-repeat: repeat-y;
+}
+
+.awardTrophyIcon {
+    width: 30px;
+    margin: auto .75em auto 0;
+    text-align: center;
+    color: #666666;
+    font-size: 1.25em;
+}
+
+.awardText {
+    margin: .75em 0;
 }
 
 #getInTouch {
@@ -939,9 +1042,14 @@ footer {
         float: none;
     }
 
-    .quote p i {
+    blockquote p i {
         margin-right: .5em;
     }
+
+    .skills {
+        margin-left: -5em;
+    }
+
 }
 
 

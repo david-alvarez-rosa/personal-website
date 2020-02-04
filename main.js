@@ -89,6 +89,32 @@ window.addEventListener("resize", setFadeInAnimations);
 window.addEventListener("resize", getWindowDimensions);
 
 
+// Set languages section animation.
+var languagesLevels = document.querySelectorAll(".languageLevel");
+
+function languagesLevelsAnimation() {
+    var languageSection = languagesLevels[0];
+    var positionFromTop = languageSection.getBoundingClientRect().top;
+
+    if (positionFromTop - windowHeight <= -100)
+        for (var i = 0; i < languagesLevels.length; ++i) {
+            languagesLevels[i].classList.remove("languageLevelQuick");
+            languagesLevels[i].classList.add("languageLevelAnimate" + i);
+        }
+
+    if (positionFromTop < -500 || positionFromTop > windowHeight + 250)
+        for (var i = 0; i < languagesLevels.length; ++i) {
+            languagesLevels[i].classList.add("languageLevelQuick");
+            languagesLevels[i].classList.remove("languageLevelAnimate" + i);
+        }
+}
+
+languagesLevelsAnimation();
+
+window.addEventListener("scroll", languagesLevelsAnimation);
+window.addEventListener("resize", languagesLevelsAnimation);
+
+
 // Get nearer section to user position (so navBar can be updated).
 var elementCurrent = document.getElementsByClassName("current")[0];
 var elementCurrentExpanded = document.getElementsByClassName("current")[1];
