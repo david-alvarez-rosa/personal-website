@@ -420,7 +420,7 @@ main h3 {
     padding-bottom: -1em;
 }
 
-main h3 i {
+.titleIcon {
     float: right;
     padding-top: 5px;
 }
@@ -441,6 +441,15 @@ main p a, main ul li a {
 
 main a:hover {
     color: #D45B12;
+}
+
+.hide {
+    margin-left: .15em;
+    display: none!important;
+}
+
+main a:hover .hide {
+    display: inline-block!important;
 }
 
 main a:before {
