@@ -220,3 +220,65 @@ function showInfo(id) {
     document.getElementById(id).classList.add("bounceInFromRight");
     document.getElementById("blurBackground").style.display = "block";
 }
+
+
+// Pie interestsChart interests section.
+window.chartColors = {
+	  red: "rgb(255, 99, 132)",
+	  orange: "rgb(255, 159, 64)",
+	  yellow: "rgb(255, 205, 86)",
+	  green: "rgb(75, 192, 192)",
+	  blue: "rgb(54, 162, 235)",
+	  purple: "rgb(153, 102, 255)",
+	  grey: "rgb(201, 203, 207)"
+};
+var config = {
+		type: "pie",
+		data: {
+				datasets: [{
+					  data: [100, 0, 0, 0, 0],
+					  backgroundColor: [
+						    window.chartColors.red,
+						    window.chartColors.orange,
+						    window.chartColors.yellow,
+						    window.chartColors.green,
+						    window.chartColors.blue,
+					  ]
+				}],
+				labels: [
+					  "Automation",
+					  "Robotics",
+					  "Sport",
+					  "Data analysis",
+					  "Family and friends"
+				]
+		},
+    options: {
+        aspectRatio: 1,
+        animation: {
+            duration: 2500,
+        }
+    }
+};
+
+var interestsChart = document.getElementById("interestsChart");
+var context = document.getElementById("interestsChartArea").getContext("2d");
+var chartAnimationFinished = true;
+
+function chartAnimation() {
+    var positionFromTop = interestsChart.getBoundingClientRect().top;
+    if (positionFromTop <= -350 || positionFromTop >= windowHeight + 100)
+        chartAnimationFinished = true;
+
+    if (!chartAnimationFinished)
+        return;
+
+    if (positionFromTop - windowHeight <= -250 && positionFromTop >= -100) {
+        chartAnimationFinished = false;
+        interestsChartPie = new Chart(context, config);
+    }
+}
+
+chartAnimation();
+window.addEventListener("scroll", chartAnimation);
+window.addEventListener("resize", chartAnimation);

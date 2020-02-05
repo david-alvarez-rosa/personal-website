@@ -678,6 +678,11 @@ blockquote p i {
     margin: .75em 0;
 }
 
+#interestsChart {
+    margin: auto;
+    width: 375px;
+}
+
 #getInTouch {
     width: 70%;
     float: left;
@@ -992,6 +997,10 @@ footer {
         text-align: left;
     }
 
+    #interestsChart {
+        width: 325px;
+    }
+
     #getInTouch {
         width: 100%;
         float: none;
@@ -1073,6 +1082,10 @@ footer {
     .awardTrophyIcon {
         padding: 0 0 .5em 0;
         margin: auto;
+    }
+
+    #interestsChart {
+        width: 90%;
     }
 }
 
