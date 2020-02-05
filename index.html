@@ -180,7 +180,7 @@
     <div class="info" id="welcomeNoobUser" style="height: 500px; top: calc(50% - 500px/2);">
       <p>
         Hey visitor! It seems that you like to use the keyboard to
-        scroll. Please consider <em>upgrading</em> to (probably better) shortcuts.
+        scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
       </p>
       <ul style="float: left; margin-left: 25px;">
         <li style="margin-left: 32px;"><strong>Emacs</strong></li>
@@ -1443,6 +1443,9 @@
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
+	      <div id="interestsChart">
+		      <canvas id="interestsChartArea"></canvas>
+	      </div>
       </section>
 
       <!-- Section get in touch.  -->
@@ -1513,7 +1516,6 @@
           <br />
           Gitlab
         </li>
-
         <li>
           <a class="fas fa-at fa-2x"
              href="javascript:showInfo('infoEmail');"
@@ -1522,7 +1524,6 @@
           <br />
           Email
         </li>
-
         <li>
           <a class="fas fa-phone fa-2x"
              href="javascript:showInfo('infoPhone');"
@@ -1531,7 +1532,6 @@
           <br />
           Phone
         </li>
-
         <li>
           <a class="fas fa-envelope fa-2x"
              href="javascript:showInfo('infoAddress');"
@@ -1541,8 +1541,7 @@
           Address
         </li>
       </ul>
-
-      <p>
+      <p id="author">
         Designed with <i class="fas fa-heart fa-lg" style="color: #D45B12;"></i>
         by
         <a href="https://david.alvarezrosa.com"
@@ -1555,6 +1554,7 @@
 
 
     <!-- Javascript files. -->
+    <script src="chart.js"></script>
     <script src="main.js"></script>
     <script src="shortcuts.js"></script>
 

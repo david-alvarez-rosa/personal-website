@@ -733,11 +733,19 @@ footer a:hover, footer a:focus {
     transition: transform .1s linear .1s;
 }
 
-footer p {
-    margin: 1em 0 0 0;
+#author {
+    margin: 1em -.75em 0 0;
+    border-radius: 0 6px 6px 0;
+    padding: .30em .75em .20em 0;
     text-align: right;
     font-size: .75em;
-    font-weight: 580;
+    font-weight: 600;
+    color: #1A1A1A;
+    background-color: rgba(255, 255, 255, .25);
+}
+
+#author a {
+    color: #1A1A1A;
 }
 
 
@@ -803,7 +811,7 @@ header {
 footer {
     opacity: 0;
     transform: translateX(-400px);
-    animation: 1s bounceInFromLeft 1s;
+    animation: 1.5s bounceInFromLeft 1.25s;
     animation-fill-mode: forwards;
 }
 
@@ -1096,10 +1104,6 @@ footer {
         display: none;
     }
 }
-
-
-
-
 
 
 
