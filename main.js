@@ -5,8 +5,8 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
-    // Warn that this website is under construction.
-    setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+    // // Warn that this website is under construction.
+    // setTimeout( function() { showInfo("welcomeUser"); }, 3500);
 
     // Lazy load images in information divs.
     var infoDivs = document.getElementsByClassName("info");
@@ -199,7 +199,7 @@ window.addEventListener("resize", navBarResize);
 function hideAll(event) {
     if (document.getElementById("blurBackground").contains(event.target) ||
         document.getElementsByTagName("main")[0].contains(event.target) ||
-       navBarExpanded.contains(event.target))
+        navBarExpanded.contains(event.target))
         closeInformation();
 }
 
@@ -224,35 +224,35 @@ function showInfo(id) {
 
 // Pie interestsChart interests section.
 window.chartColors = {
-	  red: "rgb(255, 99, 132)",
-	  orange: "rgb(255, 159, 64)",
-	  yellow: "rgb(255, 205, 86)",
-	  green: "rgb(75, 192, 192)",
-	  blue: "rgb(54, 162, 235)",
-	  purple: "rgb(153, 102, 255)",
-	  grey: "rgb(201, 203, 207)"
+    red: "rgb(255, 99, 132)",
+    orange: "rgb(255, 159, 64)",
+    yellow: "rgb(255, 205, 86)",
+    green: "rgb(75, 192, 192)",
+    blue: "rgb(54, 162, 235)",
+    purple: "rgb(153, 102, 255)",
+    grey: "rgb(201, 203, 207)"
 };
 var config = {
-		type: "pie",
-		data: {
-				datasets: [{
-					  data: [100, 0, 0, 0, 0],
-					  backgroundColor: [
-						    window.chartColors.red,
-						    window.chartColors.orange,
-						    window.chartColors.yellow,
-						    window.chartColors.green,
-						    window.chartColors.blue,
-					  ]
-				}],
-				labels: [
-					  "Automation",
-					  "Robotics",
-					  "Sport",
-					  "Data analysis",
-					  "Family and friends"
-				]
-		},
+    type: "pie",
+    data: {
+        datasets: [{
+            data: [100, 0, 0, 0, 0],
+            backgroundColor: [
+                window.chartColors.red,
+                window.chartColors.orange,
+                window.chartColors.yellow,
+                window.chartColors.green,
+                window.chartColors.blue,
+            ]
+        }],
+        labels: [
+            "Automation",
+            "Robotics",
+            "Sport",
+            "Data analysis",
+            "Family and friends"
+        ]
+    },
     options: {
         aspectRatio: 1,
         animation: {
