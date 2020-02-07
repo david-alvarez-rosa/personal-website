@@ -2,6 +2,10 @@
 
 
 /* Global. */
+:root {
+    /* --main-color: #D45B12; */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -55,7 +59,7 @@ button {
 
 ::selection {
     color: #000000;
-    background: #D45B12;
+    background: var(--main-color);
 }
 
 .clear {
@@ -89,7 +93,7 @@ button {
     height: 30px;
     width: 30px;
     border-radius: 10%;
-    border: 25px inset #E65C00;
+    border: 25px inset var(--main-color);
     animation: spin 1s infinite ease-in-out;
 }
 
@@ -114,7 +118,7 @@ button {
     font-size: 1em;
     border-radius: .5em;
     line-height: 1.75em;
-    border: solid 3px #D45B12;
+    border: solid 3px var(--main-color);
     display: none;
     padding: .75em 1em;
     margin: 1em .5em 1em 0;
@@ -123,7 +127,7 @@ button {
 }
 
 .info strong {
-    color: #D45B12;
+    color: var(--main-color);
     font-weight: 750;
 }
 
@@ -133,7 +137,7 @@ button {
 }
 
 .info a {
-    color: #D45B12;
+    color: var(--main-color);
     font-weight: 750;
 }
 
@@ -179,7 +183,7 @@ button {
     right: 0px;
     transition: visibility .5s, opacity .5s linear;
     z-index: 9;
-    background-color: #D45B12;
+    background-color: var(--main-color);
     border-radius: 600px 0 0 600px;
 }
 
@@ -244,7 +248,7 @@ nav a:hover, nav a:focus {
 
 nav a.current {
     color: #000000;
-    background-color: #D45B12;
+    background-color: var(--main-color);
 }
 
 nav a.current:hover, nav a.current:focus {
@@ -289,7 +293,7 @@ nav a.current:hover, nav a.current:focus {
     background-color: #333333;
     z-index: 100;
     overflow-y: auto;
-    border-left: 3px solid #D45B12;
+    border-left: 3px solid var(--main-color);
     display: none;
 }
 
@@ -299,11 +303,11 @@ nav a.current:hover, nav a.current:focus {
 
 .title {
     padding: .5em;
-    color: #D45B12;
+    color: var(--main-color);
     text-align: left;
     font-size: 1.5em;
     font-weight: 700;
-    border-bottom: 3px solid #D45B12;
+    border-bottom: 3px solid var(--main-color);
 }
 
 #navBarExpanded ul li a {
@@ -350,20 +354,39 @@ nav a.current:hover, nav a.current:focus {
 
 /* Header. */
 header {
-    background-color: #1F1815;
-    background-image:      url("images/overlay.png"), url("images/background.jpeg");
-    background-position:   top left,                  top left;
-    background-repeat:     repeat,                    no-repeat;
-    background-size:       auto,                      cover;
-
-    text-align: right;
-    padding: 9% 4em;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 35%;
-    height: 100%
+    height: 100%;
+    padding: 9% 4em;
+    text-align: right;
+    background-color: #1F1815;
+}
+
+#background, #overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -10;
+    overflow: hidden;
+}
+
+#overlay {
+    background-color: #000000;
+    opacity: .3;
+}
+
+.backgroundImage {
+    min-width: 100%;
+    position: absolute;
+    left: -1250px;
+}
+
+.backgroundImageFirst {
+    left: 0!important;
 }
 
 header h1, h2 {
@@ -436,11 +459,11 @@ main a {
 }
 
 main p a, main ul li a {
-    color: #D45B12;
+    color: var(--main-color);
 }
 
 main a:hover {
-    color: #D45B12;
+    color: var(--main-color);
 }
 
 .hide {
@@ -465,7 +488,7 @@ main a:before {
 }
 
 main a:before {
-    background-color: #D45B12;
+    background-color: var(--main-color);
 }
 
 main a:hover:before {
@@ -573,7 +596,7 @@ blockquote p i {
 }
 
 .skills li a:hover {
-    color: #D45B12!important;
+    color: var(--main-color)!important;
 }
 
 .language {
@@ -611,7 +634,7 @@ blockquote p i {
     display: inline-block;
     width: 0;
     height: 100%;
-    background-color: #D45B12;
+    background-color: var(--main-color);
     transition-property: width;
     transition-delay: .5s;
     transition-timing-function: ease-in-out;
@@ -728,7 +751,7 @@ footer ul li {
 }
 
 footer a:hover, footer a:focus {
-    color: #D45B12;
+    color: var(--main-color);
     transform: scale(1.2);
     transition: transform .1s linear .1s;
 }
@@ -742,6 +765,10 @@ footer a:hover, footer a:focus {
     font-weight: 600;
     color: #1A1A1A;
     background-color: rgba(255, 255, 255, .25);
+}
+
+#author i {
+    color: var(--main-color);
 }
 
 #author a {
@@ -769,8 +796,8 @@ input[type="submit"], input[type="reset"] {
 }
 
 input[type="submit"]:hover, input[type="submit"]:focus, input[type="reset"]:hover, input[type="reset"]:focus {
-    border-color: #D45B12;
-    color: #D45B12 !important;
+    border-color: var(--main-color);
+    color: var(--main-color) !important;
 }
 
 input[type="text"], input[type="email"], textarea {
@@ -787,11 +814,32 @@ input[type="text"], input[type="email"], textarea {
 }
 
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    border-color: #D45B12;
+    border-color: var(--main-color);
 }
 
 
 /* Animations. */
+header {
+    animation: slideInFromLeft 1s;
+}
+
+.imageIn {
+    animation: slideInFromLeftAux 3s forwards;
+}
+
+.imageOut {
+    animation: slideOutToRight 3s;
+}
+
+.imageInReverse {
+    left: 1250px;
+    animation: slideInFromRightAux 3s forwards;
+}
+
+.imageOutReverse {
+    animation: slideOutToLeft 3s forwards;
+}
+
 #navBar {
     animation: slideInFromTop 1s;
 }
@@ -802,10 +850,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 #navBarButton {
     animation: slideInFromBottom 1.25s ease;
-}
-
-header {
-    animation: slideInFromLeft 1s;
 }
 
 footer {
@@ -837,6 +881,26 @@ footer {
 @keyframes slideInFromLeft {
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    from { left: 0; }
+    to { left: 1250px; }
+}
+
+@keyframes slideOutToLeft {
+    from { left: 0; }
+    to { left: -1250px; }
+}
+
+@keyframes slideInFromLeftAux {
+    from { left: -1250px; }
+    to { left: 0; }
+}
+
+@keyframes slideInFromRightAux {
+    from { left: 1250px; }
+    to { left: 0; }
 }
 
 @keyframes bounceInFromLeft {
@@ -945,19 +1009,22 @@ footer {
     footer {
         background-attachment: scroll;
         background-color: #1F1815;
-        background-image:    url("/images/overlay.png"), url("/images/background.jpeg");
-        background-position: top left,                  bottom center;
-        background-repeat:   repeat,                    no-repeat;
-        background-size:     auto,                      cover;
+        background-image:    url("images/overlay.png"), url("images/autumn.jpeg");
+        background-position: top left,                   bottom center;
+        background-repeat:   repeat,                     no-repeat;
+        background-size:     auto,                       cover;
 
         padding: 7em 4em 5em 4em;
         position: relative;
         top: 4em;
         text-align: center;
         width: 100%;
+
+        animation: 1.5s bounceInFromLeft 1.25s forwards;
     }
 
-    footer p {
+    #author {
+        border-radius: 6px;
         text-align: center;
         margin-top: 5em;
     }
@@ -1128,8 +1195,6 @@ footer {
 
 
 
-
-
 /* ::-webkit-scrollbar { */
 /*     width: 5px !important; */
 /* } */
@@ -1140,6 +1205,6 @@ footer {
 /* } */
 
 /* ::-webkit-scrollbar-thumb { */
-/*     background-color: #D45B12; */
+/*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */

@@ -5,19 +5,88 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
-    // // Warn that this website is under construction.
-    // setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+    // Warn that this website is under construction.
+    setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+}
 
-    // Lazy load images in information divs.
+
+// Automatically update the background image.
+var imageIterator = 0;
+var images = document.getElementsByClassName("backgroundImage");
+var colors = ["#D45B12", "#006579", "#C98E03", "#3A6F1F", "#DF7E3A", "#56737B", "#405172"];
+
+function randomShuffle(array) {
+    var tmp, current, top = array.length;
+    if (top) while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = array[current];
+        array[current] = array[top];
+        array[top] = tmp;
+    }
+    return array;
+}
+
+var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
+imagesOrder = randomShuffle(imagesOrder);
+var header = document.getElementsByTagName("header")[0];
+var animationDuration = 12000; // In miliseconds.
+var reverse = "";
+
+function updateBackgroundImage() {
+    var currentImage = images[imagesOrder[imageIterator]];
+    currentImage.classList.remove("imageIn", "imageIn" + reverse);
+    currentImage.classList.add("imageOut" + reverse);
+
+    ++imageIterator;
+    if (imageIterator == images.length)
+        imageIterator = 0;
+
+    var nextImage = images[imagesOrder[imageIterator]];
+    nextImage.classList.add("imageIn" + reverse);
+    nextImage.classList.remove("imageOut", "imageOut" + reverse);
+
+    setTimeout(function() {
+        nextImage.classList.remove("imageIn", "imageIn" + reverse);
+    }, animationDuration);
+
+    setTimeout(function() {
+        document.documentElement.style.setProperty("--main-color",
+                                                   colors[imagesOrder[imageIterator]]);
+    }, 500);
+    header.style.backgroundColor = colors[imagesOrder[imageIterator]]
+    setTimeout(updateBackgroundImage, animationDuration);
+}
+
+var firstImage = images[imagesOrder[imageIterator]];
+firstImage.src = "images/backgrounds/" + firstImage.dataset.src + "_low.jpg";
+firstImage.classList.add("backgroundImageFirst");
+document.documentElement.style.setProperty("--main-color",
+                                           colors[imagesOrder[imageIterator]]);
+setTimeout(function() {
+    firstImage.classList.remove("backgroundImageFirst");
+    updateBackgroundImage();
+}, animationDuration);
+
+
+// Lazy loading of images.
+function lazyLoadImages() {
+    // Load images in information divs.
     var infoDivs = document.getElementsByClassName("info");
     for (var i = 0; i < infoDivs.length; ++i) {
-        var images = infoDivs[i].getElementsByTagName("img");
-        for (var j = 0; j < images.length; ++j) {
-            var image = images[j];
+        var infoImages = infoDivs[i].getElementsByTagName("img");
+        for (var j = 0; j < infoImages.length; ++j) {
+            var image = infoImages[j];
             image.src = image.dataset.src;
         }
     }
+    // Load background images.
+    for (var i = 0; i < images.length; ++i) {
+        var image = images[imagesOrder[i]];
+        image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
+    }
 }
+
+window.addEventListener("load", lazyLoadImages);
 
 
 // Get the scroll back to top button.
