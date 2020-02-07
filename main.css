@@ -389,6 +389,43 @@ header {
     left: 0!important;
 }
 
+header:hover #controllers {
+    opacity: 1;
+}
+
+#controllers {
+    position: absolute;
+    bottom: 225px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#controllers button i {
+    color: rgba(255, 255, 255, .75);
+}
+
+#controllers button {
+    position: absolute;
+}
+
+#controllers button:hover {
+    cursor: pointer;
+}
+
+#backward {
+    left: 75px;
+}
+
+#pause {
+    left: 225px;
+}
+
+#forward {
+    right: 75px;
+}
+
 header h1, h2 {
     color: rgba(255, 255, 255, .75);
 }

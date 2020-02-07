@@ -12,6 +12,7 @@ function loadingSpinner() {
 
 // Automatically update the background image.
 var imageIterator = 0;
+var imageIteratorNext = 1;
 var images = document.getElementsByClassName("backgroundImage");
 var colors = ["#D45B12", "#006579", "#C98E03", "#3A6F1F", "#DF7E3A", "#56737B", "#405172"];
 
@@ -29,32 +30,47 @@ function randomShuffle(array) {
 var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
 imagesOrder = randomShuffle(imagesOrder);
 var header = document.getElementsByTagName("header")[0];
-var animationDuration = 12000; // In miliseconds.
+var animationDuration = 15000; // In miliseconds.
 var reverse = "";
+var animationStop = false;
+var animationTimeout, animationTimeoutAux;
+
 
 function updateBackgroundImage() {
+    clearTimeout(animationTimeoutAux);
+
+    if (animationStop)
+        return;
+
     var currentImage = images[imagesOrder[imageIterator]];
-    currentImage.classList.remove("imageIn", "imageIn" + reverse);
+    currentImage.classList.remove("imageIn", "imageInReverse");
     currentImage.classList.add("imageOut" + reverse);
 
-    ++imageIterator;
-    if (imageIterator == images.length)
-        imageIterator = 0;
-
-    var nextImage = images[imagesOrder[imageIterator]];
+    var nextImage = images[imagesOrder[imageIteratorNext]];
     nextImage.classList.add("imageIn" + reverse);
-    nextImage.classList.remove("imageOut", "imageOut" + reverse);
+    nextImage.classList.remove("imageOut", "imageOutReverse");
 
-    setTimeout(function() {
-        nextImage.classList.remove("imageIn", "imageIn" + reverse);
+    animationTimeout = setTimeout(function() {
+        nextImage.classList.remove("imageIn", "imageInReverse");
     }, animationDuration);
 
     setTimeout(function() {
         document.documentElement.style.setProperty("--main-color",
-                                                   colors[imagesOrder[imageIterator]]);
+                                                   colors[imagesOrder[imageIteratorNext]]);
     }, 500);
-    header.style.backgroundColor = colors[imagesOrder[imageIterator]]
-    setTimeout(updateBackgroundImage, animationDuration);
+    header.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
+
+    setTimeout(function() {
+        imageIterator = imageIteratorNext;
+        if (imageIteratorNext == images.length - 1)
+            imageIteratorNext = 0
+        else
+            ++imageIteratorNext;
+    }, 750);
+
+    animationTimeoutAux = setTimeout( function() {
+        updateBackgroundImage();
+    }, animationDuration);
 }
 
 var firstImage = images[imagesOrder[imageIterator]];
@@ -65,7 +81,7 @@ document.documentElement.style.setProperty("--main-color",
 setTimeout(function() {
     firstImage.classList.remove("backgroundImageFirst");
     updateBackgroundImage();
-}, animationDuration);
+}, animationDuration - 5000);
 
 
 // Lazy loading of images.
@@ -351,3 +367,36 @@ function chartAnimation() {
 chartAnimation();
 window.addEventListener("scroll", chartAnimation);
 window.addEventListener("resize", chartAnimation);
+
+
+// Controllers for background animation.
+function forwardAnimation() {
+    updateBackgroundImage();
+}
+
+function backwardAnimation() {
+    reverse = "Reverse";
+    imageIteratorNext -= 2;
+    if (imageIteratorNext == -1)
+        imageIteratorNext = images.length - 1;
+    else if (imageIteratorNext == -2)
+        imageIteratorNext = images.length - 2;
+    updateBackgroundImage();
+    reverse = "";
+}
+
+function toggleAnimation() {
+    var toggleIcon = document.getElementById("toggleIcon");
+    if (toggleIcon.classList.contains("fa-pause")) {
+        toggleIcon.classList.remove("fa-pause");
+        toggleIcon.classList.add("fa-play");
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+    else {
+        toggleIcon.classList.remove("fa-play");
+        toggleIcon.classList.add("fa-pause");
+        animationStop = false;
+        updateBackgroundImage();
+    }
+}
