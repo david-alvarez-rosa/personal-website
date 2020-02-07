@@ -175,6 +175,28 @@ button {
     top: calc(50% - 215px/2);
 }
 
+
+/* Heart. */
+#heart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9998;
+    width: 300px;
+    height: 300px;
+    color: var(--main-color);
+    margin: auto;
+    animation: heartbeat 1.5s infinite;
+    opacity: 0;
+}
+
+#heart i {
+    font-size: 300px;
+}
+
+
 /* Scroll back to top button. */
 #scrollTop {
     visibility: hidden;
@@ -412,6 +434,12 @@ header:hover #controllers {
 
 #controllers button:hover {
     cursor: pointer;
+}
+
+#controllers button:hover i {
+    color: var(--main-color);
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
 }
 
 #backward {
@@ -877,6 +905,10 @@ header {
     animation: slideOutToLeft 3s forwards;
 }
 
+#heart {
+    transition: opacity 1s;
+}
+
 #navBar {
     animation: slideInFromTop 1s;
 }
@@ -961,6 +993,15 @@ footer {
     60% { transform: translateX(-30px); }
     80% { transform: translateX(10px); }
     100% { opacity: .9; transform: translateX(0); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale( .75 ); }
+    20% { transform: scale( 1 ); }
+    40% { transform: scale( .75 ); }
+    60% { transform: scale( 1 ); }
+    80% { transform: scale( .75 ); }
+    100% { transform: scale( .75 ); }
 }
 
 

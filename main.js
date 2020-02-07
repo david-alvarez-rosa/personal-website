@@ -400,3 +400,15 @@ function toggleAnimation() {
         updateBackgroundImage();
     }
 }
+
+
+// Functions for the heartbeat.
+function beatHeart() {
+    var heart = document.getElementById("heart");
+    heart.style.opacity = 1;
+}
+
+function hideHeart() {
+    var heart = document.getElementById("heart");
+    heart.style.opacity = 0;
+}
