@@ -30,7 +30,7 @@ function randomShuffle(array) {
 var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
 imagesOrder = randomShuffle(imagesOrder);
 var header = document.getElementsByTagName("header")[0];
-var animationDuration = 15000; // In miliseconds.
+var animationDuration = 18000; // In miliseconds.
 var reverse = "";
 var animationStop = false;
 var animationTimeout, animationTimeoutAux;
