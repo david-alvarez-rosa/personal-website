@@ -117,9 +117,7 @@ function lazyLoadImages() {
     for (var i = 0; i < headerImages.length; ++i) {
         var image = headerImages[imagesOrder[i]];
         image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
-    }
-    for (var i = 0; i < footerImages.length; ++i) {
-        var image = footerImages[imagesOrder[i]];
+        image = footerImages[imagesOrder[i]];
         image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
     }
 }
