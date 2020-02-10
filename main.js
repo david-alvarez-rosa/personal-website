@@ -34,7 +34,7 @@ var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
 imagesOrder = randomShuffle(imagesOrder);
 var headerBackground = header.getElementsByClassName("background")[0];
 var footerBackground = footer.getElementsByClassName("background")[0];
-var animationDuration = 3000; // In miliseconds.
+var animationDuration = 15000; // In miliseconds.
 var reverse = "";
 var animationStop = false;
 var animationTimeout, animationTimeoutAux;
