@@ -13,7 +13,10 @@ function loadingSpinner() {
 // Automatically update the background image.
 var imageIterator = 0;
 var imageIteratorNext = 1;
-var images = document.getElementsByClassName("backgroundImage");
+var header = document.getElementsByTagName("header")[0];
+var headerImages = header.getElementsByClassName("backgroundImage");
+var footer = document.getElementsByTagName("footer")[0];
+var footerImages = footer.getElementsByClassName("backgroundImage");
 var colors = ["#D45B12", "#006579", "#C98E03", "#3A6F1F", "#DF7E3A", "#56737B", "#405172"];
 
 function randomShuffle(array) {
@@ -29,20 +32,20 @@ function randomShuffle(array) {
 
 var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
 imagesOrder = randomShuffle(imagesOrder);
-var header = document.getElementsByTagName("header")[0];
-var animationDuration = 18000; // In miliseconds.
+var headerBackground = header.getElementsByClassName("background")[0];
+var footerBackground = footer.getElementsByClassName("background")[0];
+var animationDuration = 3000; // In miliseconds.
 var reverse = "";
 var animationStop = false;
 var animationTimeout, animationTimeoutAux;
 
 function updateBackgroundIterators() {
     imageIterator = imageIteratorNext;
-    if (imageIteratorNext == images.length - 1)
+    if (imageIteratorNext == headerImages.length - 1)
         imageIteratorNext = 0
     else
         ++imageIteratorNext;
 }
-
 
 function updateBackgroundImage() {
     clearTimeout(animationTimeoutAux);
@@ -50,16 +53,23 @@ function updateBackgroundImage() {
     if (animationStop)
         return;
 
-    var currentImage = images[imagesOrder[imageIterator]];
-    currentImage.classList.remove("imageIn", "imageInReverse");
-    currentImage.classList.add("imageOut" + reverse);
+    var currentHeaderImage = headerImages[imagesOrder[imageIterator]];
+    var currentFooterImage = footerImages[imagesOrder[imageIterator]];
+    currentHeaderImage.classList.remove("imageIn", "imageInReverse");
+    currentFooterImage.classList.remove("imageIn", "imageInReverse");
+    currentHeaderImage.classList.add("imageOut" + reverse);
+    currentFooterImage.classList.add("imageOut" + reverse);
 
-    var nextImage = images[imagesOrder[imageIteratorNext]];
-    nextImage.classList.add("imageIn" + reverse);
-    nextImage.classList.remove("imageOut", "imageOutReverse");
+    var nextHeaderImage = headerImages[imagesOrder[imageIteratorNext]];
+    var nextFooterImage = footerImages[imagesOrder[imageIteratorNext]];
+    nextHeaderImage.classList.add("imageIn" + reverse);
+    nextFooterImage.classList.add("imageIn" + reverse);
+    nextHeaderImage.classList.remove("imageOut", "imageOutReverse");
+    nextFooterImage.classList.remove("imageOut", "imageOutReverse");
 
     animationTimeout = setTimeout(function() {
-        nextImage.classList.remove("imageIn", "imageInReverse");
+        nextHeaderImage.classList.remove("imageIn", "imageInReverse");
+        nextFooterImage.classList.remove("imageIn", "imageInReverse");
     }, animationDuration);
 
     setTimeout(function() {
@@ -67,20 +77,27 @@ function updateBackgroundImage() {
                                                    colors[imagesOrder[imageIteratorNext]]);
         updateBackgroundIterators();
     }, 500);
-    background.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
+    headerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
+    footerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
 
     animationTimeoutAux = setTimeout( function() {
         updateBackgroundImage();
     }, animationDuration);
 }
 
-var firstImage = images[imagesOrder[imageIterator]];
-firstImage.src = "images/backgrounds/" + firstImage.dataset.src + "_low.jpg";
-firstImage.classList.add("backgroundImageFirst");
+var headerFirstImage = headerImages[imagesOrder[imageIterator]];
+var footerFirstImage = footerImages[imagesOrder[imageIterator]];
+headerFirstImage.src = "images/backgrounds/" +
+    headerFirstImage.dataset.src + "_low.jpg";
+footerFirstImage.src = "images/backgrounds/" +
+    headerFirstImage.dataset.src + "_low.jpg";
+headerFirstImage.classList.add("backgroundImageFirst");
+footerFirstImage.classList.add("backgroundImageFirst");
 document.documentElement.style.setProperty("--main-color",
                                            colors[imagesOrder[imageIterator]]);
 setTimeout(function() {
-    firstImage.classList.remove("backgroundImageFirst");
+    headerFirstImage.classList.remove("backgroundImageFirst");
+    footerFirstImage.classList.remove("backgroundImageFirst");
     updateBackgroundImage();
 }, animationDuration - 5000);
 
@@ -97,8 +114,12 @@ function lazyLoadImages() {
         }
     }
     // Load background images.
-    for (var i = 0; i < images.length; ++i) {
-        var image = images[imagesOrder[i]];
+    for (var i = 0; i < headerImages.length; ++i) {
+        var image = headerImages[imagesOrder[i]];
+        image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
+    }
+    for (var i = 0; i < footerImages.length; ++i) {
+        var image = footerImages[imagesOrder[i]];
         image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
     }
 }
@@ -372,7 +393,15 @@ window.addEventListener("resize", chartAnimation);
 
 // Controllers for background animation.
 function forwardAnimation() {
-    updateBackgroundImage();
+    if (animationStop) {
+        animationStop = false;
+        updateBackgroundImage();
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+    else {
+        updateBackgroundImage();
+    }
 }
 
 function backwardAnimation() {
@@ -382,7 +411,16 @@ function backwardAnimation() {
         imageIteratorNext = images.length - 1;
     else if (imageIteratorNext == -2)
         imageIteratorNext = images.length - 2;
-    updateBackgroundImage();
+
+    if (animationStop) {
+        animationStop = false;
+        updateBackgroundImage();
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+
+    else
+        updateBackgroundImage();
     reverse = "";
 }
 

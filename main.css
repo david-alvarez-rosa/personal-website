@@ -383,7 +383,7 @@ header {
     background-color: #1F1815;
 }
 
-.background, #overlay {
+.background, .overlay {
     position: absolute;
     left: 0;
     height: 100%;
@@ -413,7 +413,7 @@ header .background {
     left: 0!important;
 }
 
-header:hover #controllers {
+.overlay:hover #controllers, #controllers:hover, header:hover #controllers {
     opacity: 1;
 }
 
@@ -428,6 +428,7 @@ header:hover #controllers {
 
 #controllers button i {
     color: rgba(255, 255, 255, .75);
+    font-size: 22px;
 }
 
 #controllers button {
@@ -449,7 +450,7 @@ header:hover #controllers {
 }
 
 #pause {
-    left: 225px;
+    left: calc(50% - 11px);
 }
 
 #forward {
@@ -499,7 +500,11 @@ main h2 {
     font-weight: 600;
 }
 
-.rightIcon {
+main h2 a:hover::before {
+    visibility: hidden;
+}
+
+main h2 i {
     float: right;
     font-size: .75em;
     padding-top: .5em;
@@ -823,6 +828,22 @@ footer a:hover, footer a:focus {
     transition: transform .1s linear .1s;
 }
 
+footer .background {
+    display: none;
+}
+
+footer .overlay {
+    display: none;
+}
+
+footer .backgroundImage {
+    bottom: 0;
+}
+
+footer .background {
+    bottom: 0;
+}
+
 #author {
     margin: 1em -.75em 0 0;
     border-radius: 0 6px 6px 0;
@@ -1026,6 +1047,14 @@ footer {
         font-size: .95em;
     }
 
+    #backward {
+        left: 50px;
+    }
+
+    #forward {
+        right: 50px;
+    }
+
     #navBar {
         margin-left: 33%;
         width: calc(100% - 33%);
@@ -1053,10 +1082,11 @@ footer {
     }
 
     header {
+        padding: 8em 4em;
+        text-align: center;
         position: relative;
         top: auto;
         left: auto;
-        padding: 8em 4em;
         text-align: center;
         width: 100%;
         display: block;
@@ -1064,9 +1094,13 @@ footer {
     }
 
     .backgroundImage {
-        height: 150%;
+        height: auto;
         width: 100%;
-        min-width: 0;
+        min-height: 100%;
+    }
+
+    header .backgroundImage {
+        top: -175px;
     }
 
     header h1 {
@@ -1075,6 +1109,12 @@ footer {
 
     header h2 {
         font-size: 1em;
+    }
+
+    #controllers {
+        bottom: 0;
+        height: 50px;
+        z-index: 10000;
     }
 
     #navBar {
@@ -1111,6 +1151,14 @@ footer {
         animation: 1.5s bounceInFromLeft 1.25s forwards;
     }
 
+    footer .background {
+        display: block;
+    }
+
+    footer .overlay {
+        display: block;
+    }
+
     #author {
         border-radius: 6px;
         text-align: center;
@@ -1131,7 +1179,7 @@ footer {
 /* Small screen size. */
 @media screen and (max-width: 736px) {
     header {
-        padding: 7em 1.5em;
+        padding: 8em 1.5em;
     }
 
     header h1 {
@@ -1140,6 +1188,10 @@ footer {
 
     header h2 {
         font-size: 1em;
+    }
+
+    header .backgroundImage {
+        top: -75px;
     }
 
     #navBar a {
@@ -1197,8 +1249,11 @@ footer {
     }
 
     header {
-        padding-left: 1.5em;
-        padding-right: 1.5em;
+        padding: 5.5em 1.5em;
+    }
+
+    header .backgroundImage {
+        top: 0;
     }
 
     #navBar a {
@@ -1296,28 +1351,3 @@ footer {
 /*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-footer .backgroundImage {
-    bottom: 0;
-}
-
-footer .background {
-    bottom: 0;
-}
