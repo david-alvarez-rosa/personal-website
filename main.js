@@ -35,6 +35,14 @@ var reverse = "";
 var animationStop = false;
 var animationTimeout, animationTimeoutAux;
 
+function updateBackgroundIterators() {
+    imageIterator = imageIteratorNext;
+    if (imageIteratorNext == images.length - 1)
+        imageIteratorNext = 0
+    else
+        ++imageIteratorNext;
+}
+
 
 function updateBackgroundImage() {
     clearTimeout(animationTimeoutAux);
@@ -57,16 +65,9 @@ function updateBackgroundImage() {
     setTimeout(function() {
         document.documentElement.style.setProperty("--main-color",
                                                    colors[imagesOrder[imageIteratorNext]]);
+        updateBackgroundIterators();
     }, 500);
-    header.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
-
-    setTimeout(function() {
-        imageIterator = imageIteratorNext;
-        if (imageIteratorNext == images.length - 1)
-            imageIteratorNext = 0
-        else
-            ++imageIteratorNext;
-    }, 750);
+    background.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
 
     animationTimeoutAux = setTimeout( function() {
         updateBackgroundImage();
@@ -403,12 +404,19 @@ function toggleAnimation() {
 
 
 // Functions for the heartbeat.
+var heartAnimation;
+
 function beatHeart() {
+    clearTimeout(heartAnimation);
     var heart = document.getElementById("heart");
+    heart.style.display = "block";
     heart.style.opacity = 1;
 }
 
 function hideHeart() {
     var heart = document.getElementById("heart");
     heart.style.opacity = 0;
+    heartAnimation = setTimeout(function () {
+        heart.style.display = "none";
+    }, 1100);
 }

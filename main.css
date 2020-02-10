@@ -178,16 +178,13 @@ button {
 
 /* Heart. */
 #heart {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 9998;
     width: 300px;
     height: 300px;
+    position: fixed;
+    top: calc(50% - 150px);
+    left: calc(50% + 35%/2 - 150px);
+    z-index: 9998;
     color: var(--main-color);
-    margin: auto;
     animation: heartbeat 1.5s infinite;
     opacity: 0;
 }
@@ -386,9 +383,8 @@ header {
     background-color: #1F1815;
 }
 
-#background, #overlay {
+.background, #overlay {
     position: absolute;
-    top: 0;
     left: 0;
     height: 100%;
     width: 100%;
@@ -396,12 +392,18 @@ header {
     overflow: hidden;
 }
 
-#overlay {
+header .background {
+    top: 0;
+}
+
+.overlay {
+    top: 0;
     background-color: #000000;
     opacity: .3;
 }
 
 .backgroundImage {
+    height: 100%;
     min-width: 100%;
     position: absolute;
     left: -1250px;
@@ -497,7 +499,7 @@ main h2 {
     font-weight: 600;
 }
 
-main h2 i {
+.rightIcon {
     float: right;
     font-size: .75em;
     padding-top: .5em;
@@ -1007,6 +1009,10 @@ footer {
 
 /* Large screen size. */
 @media screen and (max-width: 1280px) {
+    #heart {
+        left: calc(50% + 33%/2 - 150px);
+    }
+
     header {
         padding: 7em 3em 3em 3em;
         width: 33%;
@@ -1042,15 +1048,25 @@ footer {
 
 /* Medium screen size. */
 @media screen and (max-width: 980px) {
+    #heart {
+        left: calc(50% - 150px);
+    }
+
     header {
-        background-position: top left, center center;
-        left: auto;
-        padding: 6em 4em;
-        text-align: center;
         position: relative;
         top: auto;
+        left: auto;
+        padding: 8em 4em;
+        text-align: center;
         width: 100%;
         display: block;
+        background: transparent;
+    }
+
+    .backgroundImage {
+        height: 150%;
+        width: 100%;
+        min-width: 0;
     }
 
     header h1 {
@@ -1085,19 +1101,13 @@ footer {
     }
 
     footer {
-        background-attachment: scroll;
         background-color: #1F1815;
-        background-image:    url("images/overlay.png"), url("images/autumn.jpeg");
-        background-position: top left,                   bottom center;
-        background-repeat:   repeat,                     no-repeat;
-        background-size:     auto,                       cover;
-
         padding: 7em 4em 5em 4em;
         position: relative;
-        top: 4em;
+        bottom: 0;
+        left: 0;
         text-align: center;
         width: 100%;
-
         animation: 1.5s bounceInFromLeft 1.25s forwards;
     }
 
@@ -1121,7 +1131,7 @@ footer {
 /* Small screen size. */
 @media screen and (max-width: 736px) {
     header {
-        padding: 3.5em 1.5em;
+        padding: 7em 1.5em;
     }
 
     header h1 {
@@ -1286,3 +1296,28 @@ footer {
 /*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .backgroundImage {
+    bottom: 0;
+}
+
+footer .background {
+    bottom: 0;
+}
