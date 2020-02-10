@@ -409,10 +409,29 @@ main h2 {
     font-weight: 600;
 }
 
-main h2 i {
+main h2 a:hover::before {
+    visibility: hidden;
+}
+
+.rightIcon {
     float: right;
     font-size: .75em;
     padding-top: .5em;
+}
+
+.linkIcon {
+    font-size: .55em;
+    padding-left: .25em;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+h2:hover .linkIcon {
+    opacity: 1;
+}
+
+.linkIcon:hover {
+    color: #D45B12;
 }
 
 main h3 {
@@ -681,6 +700,7 @@ blockquote p i {
 #interestsChart {
     margin: auto;
     width: 375px;
+    padding-bottom: 1em;
 }
 
 #getInTouch {
