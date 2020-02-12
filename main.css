@@ -2,6 +2,10 @@
 
 
 /* Global. */
+:root {
+    /* --main-color: #D45B12; */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -55,7 +59,7 @@ button {
 
 ::selection {
     color: #000000;
-    background: #D45B12;
+    background: var(--main-color);
 }
 
 .clear {
@@ -89,7 +93,7 @@ button {
     height: 30px;
     width: 30px;
     border-radius: 10%;
-    border: 25px inset #E65C00;
+    border: 25px inset var(--main-color);
     animation: spin 1s infinite ease-in-out;
 }
 
@@ -114,7 +118,7 @@ button {
     font-size: 1em;
     border-radius: .5em;
     line-height: 1.75em;
-    border: solid 3px #D45B12;
+    border: solid 3px var(--main-color);
     display: none;
     padding: .75em 1em;
     margin: 1em .5em 1em 0;
@@ -123,7 +127,7 @@ button {
 }
 
 .info strong {
-    color: #D45B12;
+    color: var(--main-color);
     font-weight: 750;
 }
 
@@ -133,7 +137,7 @@ button {
 }
 
 .info a {
-    color: #D45B12;
+    color: var(--main-color);
     font-weight: 750;
 }
 
@@ -171,6 +175,25 @@ button {
     top: calc(50% - 215px/2);
 }
 
+
+/* Heart. */
+#heart {
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: calc(50% - 150px);
+    left: calc(50% + 35%/2 - 150px);
+    z-index: 9998;
+    color: var(--main-color);
+    animation: heartbeat 1.5s infinite;
+    opacity: 0;
+}
+
+#heart i {
+    font-size: 300px;
+}
+
+
 /* Scroll back to top button. */
 #scrollTop {
     visibility: hidden;
@@ -179,7 +202,7 @@ button {
     right: 0px;
     transition: visibility .5s, opacity .5s linear;
     z-index: 9;
-    background-color: #D45B12;
+    background-color: var(--main-color);
     border-radius: 600px 0 0 600px;
 }
 
@@ -244,7 +267,7 @@ nav a:hover, nav a:focus {
 
 nav a.current {
     color: #000000;
-    background-color: #D45B12;
+    background-color: var(--main-color);
 }
 
 nav a.current:hover, nav a.current:focus {
@@ -289,7 +312,7 @@ nav a.current:hover, nav a.current:focus {
     background-color: #333333;
     z-index: 100;
     overflow-y: auto;
-    border-left: 3px solid #D45B12;
+    border-left: 3px solid var(--main-color);
     display: none;
 }
 
@@ -299,11 +322,11 @@ nav a.current:hover, nav a.current:focus {
 
 .title {
     padding: .5em;
-    color: #D45B12;
+    color: var(--main-color);
     text-align: left;
     font-size: 1.5em;
     font-weight: 700;
-    border-bottom: 3px solid #D45B12;
+    border-bottom: 3px solid var(--main-color);
 }
 
 #navBarExpanded ul li a {
@@ -350,20 +373,88 @@ nav a.current:hover, nav a.current:focus {
 
 /* Header. */
 header {
-    background-color: #1F1815;
-    background-image:      url("images/overlay.png"), url("images/background.jpeg");
-    background-position:   top left,                  top left;
-    background-repeat:     repeat,                    no-repeat;
-    background-size:       auto,                      cover;
-
-    text-align: right;
-    padding: 9% 4em;
-
     position: fixed;
     top: 0;
     left: 0;
     width: 35%;
-    height: 100%
+    height: 100%;
+    padding: 9% 4em;
+    text-align: right;
+    background-color: #1F1815;
+}
+
+.background, .overlay {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -10;
+    overflow: hidden;
+}
+
+header .background {
+    top: 0;
+}
+
+.overlay {
+    top: 0;
+    background-color: #000000;
+    opacity: .3;
+}
+
+.backgroundImage {
+    height: 100%;
+    min-width: 100%;
+    position: absolute;
+    left: -1250px;
+}
+
+.backgroundImageFirst {
+    left: 0!important;
+}
+
+.overlay:hover #controllers, #controllers:hover, header:hover #controllers {
+    opacity: 1;
+}
+
+#controllers {
+    position: absolute;
+    bottom: 225px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#controllers button i {
+    color: rgba(255, 255, 255, .75);
+    font-size: 22px;
+}
+
+#controllers button {
+    position: absolute;
+}
+
+#controllers button:hover {
+    cursor: pointer;
+}
+
+#controllers button:hover i {
+    color: var(--main-color);
+    transform: scale(1.2);
+    transition: transform .1s linear .1s;
+}
+
+#backward {
+    left: 75px;
+}
+
+#pause {
+    left: calc(50% - 11px);
+}
+
+#forward {
+    right: 75px;
 }
 
 header h1, h2 {
@@ -455,11 +546,11 @@ main a {
 }
 
 main p a, main ul li a {
-    color: #D45B12;
+    color: var(--main-color);
 }
 
 main a:hover {
-    color: #D45B12;
+    color: var(--main-color);
 }
 
 .hide {
@@ -484,7 +575,7 @@ main a:before {
 }
 
 main a:before {
-    background-color: #D45B12;
+    background-color: var(--main-color);
 }
 
 main a:hover:before {
@@ -658,7 +749,7 @@ blockquote p i {
 }
 
 .skills li a:hover {
-    color: #D45B12!important;
+    color: var(--main-color)!important;
 }
 
 .language {
@@ -696,7 +787,7 @@ blockquote p i {
     display: inline-block;
     width: 0;
     height: 100%;
-    background-color: #D45B12;
+    background-color: var(--main-color);
     transition-property: width;
     transition-delay: .5s;
     transition-timing-function: ease-in-out;
@@ -814,20 +905,40 @@ footer ul li {
 }
 
 footer a:hover, footer a:focus {
-    color: #D45B12;
+    color: var(--main-color);
     transform: scale(1.2);
     transition: transform .1s linear .1s;
+}
+
+footer .background {
+    display: none;
+}
+
+footer .overlay {
+    display: none;
+}
+
+footer .backgroundImage {
+    bottom: 0;
+}
+
+footer .background {
+    bottom: 0;
 }
 
 #author {
     margin: 1em -.75em 0 0;
     border-radius: 0 6px 6px 0;
-    padding: .30em .75em .20em 0;
+    padding: .35em .75em .20em 0;
     text-align: right;
     font-size: .75em;
     font-weight: 600;
     color: #1A1A1A;
     background-color: rgba(255, 255, 255, .25);
+}
+
+#author i {
+    color: var(--main-color);
 }
 
 #author a {
@@ -856,8 +967,8 @@ input[type="submit"], input[type="reset"] {
 }
 
 input[type="submit"]:hover, input[type="submit"]:focus, input[type="reset"]:hover, input[type="reset"]:focus {
-    border-color: #D45B12;
-    color: #D45B12 !important;
+    border-color: var(--main-color);
+    color: var(--main-color) !important;
 }
 
 input[type="text"], input[type="email"], textarea {
@@ -874,11 +985,36 @@ input[type="text"], input[type="email"], textarea {
 }
 
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-    border-color: #D45B12;
+    border-color: var(--main-color);
 }
 
 
 /* Animations. */
+header {
+    animation: slideInFromLeft 1s;
+}
+
+.imageIn {
+    animation: slideInFromLeftAux 3s forwards;
+}
+
+.imageOut {
+    animation: slideOutToRight 3s;
+}
+
+.imageInReverse {
+    left: 1250px;
+    animation: slideInFromRightAux 3s forwards;
+}
+
+.imageOutReverse {
+    animation: slideOutToLeft 3s forwards;
+}
+
+#heart {
+    transition: opacity 1s;
+}
+
 #navBar {
     animation: slideInFromTop 1s;
 }
@@ -889,10 +1025,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 #navBarButton {
     animation: slideInFromBottom 1.25s ease;
-}
-
-header {
-    animation: slideInFromLeft 1s;
 }
 
 footer {
@@ -924,6 +1056,26 @@ footer {
 @keyframes slideInFromLeft {
     from { transform: translateX(-100%); }
     to { transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    from { left: 0; }
+    to { left: 1250px; }
+}
+
+@keyframes slideOutToLeft {
+    from { left: 0; }
+    to { left: -1250px; }
+}
+
+@keyframes slideInFromLeftAux {
+    from { left: -1250px; }
+    to { left: 0; }
+}
+
+@keyframes slideInFromRightAux {
+    from { left: 1250px; }
+    to { left: 0; }
 }
 
 @keyframes bounceInFromLeft {
@@ -968,11 +1120,23 @@ blockquote:hover {
     60% { transform: translateX(2px); }
     80% { transform: translateX(-1px); }
     100% { transform: translateX(0); }
+
+@keyframes heartbeat {
+    0% { transform: scale( .75 ); }
+    20% { transform: scale( 1 ); }
+    40% { transform: scale( .75 ); }
+    60% { transform: scale( 1 ); }
+    80% { transform: scale( .75 ); }
+    100% { transform: scale( .75 ); }
 }
 
 
 /* Large screen size. */
 @media screen and (max-width: 1280px) {
+    #heart {
+        left: calc(50% + 33%/2 - 150px);
+    }
+
     header {
         padding: 7em 3em 3em 3em;
         width: 33%;
@@ -984,6 +1148,14 @@ blockquote:hover {
 
     header h2 {
         font-size: .95em;
+    }
+
+    #backward {
+        left: 50px;
+    }
+
+    #forward {
+        right: 50px;
     }
 
     #navBar {
@@ -1008,15 +1180,30 @@ blockquote:hover {
 
 /* Medium screen size. */
 @media screen and (max-width: 980px) {
+    #heart {
+        left: calc(50% - 150px);
+    }
+
     header {
-        background-position: top left, center center;
-        left: auto;
-        padding: 6em 4em;
+        padding: 8em 4em;
         text-align: center;
         position: relative;
         top: auto;
+        left: auto;
+        text-align: center;
         width: 100%;
         display: block;
+        background: transparent;
+    }
+
+    .backgroundImage {
+        height: auto;
+        width: 100%;
+        min-height: 100%;
+    }
+
+    header .backgroundImage {
+        top: -175px;
     }
 
     header h1 {
@@ -1025,6 +1212,12 @@ blockquote:hover {
 
     header h2 {
         font-size: 1em;
+    }
+
+    #controllers {
+        bottom: 0;
+        height: 50px;
+        z-index: 10000;
     }
 
     #navBar {
@@ -1051,21 +1244,26 @@ blockquote:hover {
     }
 
     footer {
-        background-attachment: scroll;
         background-color: #1F1815;
-        background-image:    url("/images/overlay.png"), url("/images/background.jpeg");
-        background-position: top left,                  bottom center;
-        background-repeat:   repeat,                    no-repeat;
-        background-size:     auto,                      cover;
-
         padding: 7em 4em 5em 4em;
         position: relative;
-        top: 4em;
+        bottom: 0;
+        left: 0;
         text-align: center;
         width: 100%;
+        animation: 1.5s bounceInFromLeft 1.25s forwards;
     }
 
-    footer p {
+    footer .background {
+        display: block;
+    }
+
+    footer .overlay {
+        display: block;
+    }
+
+    #author {
+        border-radius: 6px;
         text-align: center;
         margin-top: 5em;
     }
@@ -1084,7 +1282,7 @@ blockquote:hover {
 /* Small screen size. */
 @media screen and (max-width: 736px) {
     header {
-        padding: 3.5em 1.5em;
+        padding: 8em 1.5em;
     }
 
     header h1 {
@@ -1093,6 +1291,10 @@ blockquote:hover {
 
     header h2 {
         font-size: 1em;
+    }
+
+    header .backgroundImage {
+        top: -75px;
     }
 
     #navBar a {
@@ -1150,8 +1352,11 @@ blockquote:hover {
     }
 
     header {
-        padding-left: 1.5em;
-        padding-right: 1.5em;
+        padding: 5.5em 1.5em;
+    }
+
+    header .backgroundImage {
+        top: 0;
     }
 
     #navBar a {
@@ -1244,7 +1449,6 @@ blockquote:hover {
 
 
 
-
 /* ::-webkit-scrollbar { */
 /*     width: 5px !important; */
 /* } */
@@ -1255,6 +1459,6 @@ blockquote:hover {
 /* } */
 
 /* ::-webkit-scrollbar-thumb { */
-/*     background-color: #D45B12; */
+/*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */

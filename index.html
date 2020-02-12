@@ -303,15 +303,61 @@
     <div id="blurBackground"></div>
 
 
+    <!-- Heart. -->
+    <div id="heart"><i class="fas fa-heart"></i></div>
+
+
     <!-- Header. -->
     <header>
-      <a href="https://david.alvarezrosa.com" title="David Álvarez Rosa's personal website.">
+      <div class="background">
+        <img class="backgroundImage"
+             data-src="autumn"
+             alt="Background image: Autumn." />
+        <img class="backgroundImage"
+             data-src="beach"
+             alt="Background image: Beach." />
+        <img class="backgroundImage"
+             data-src="flower"
+             alt="Background image: Flower." />
+        <img class="backgroundImage"
+             data-src="leaves"
+             alt="Background image: Leaves." />
+        <img class="backgroundImage"
+             data-src="lighthouse"
+             alt="Background image: Lighthouse." />
+        <img class="backgroundImage"
+             data-src="mountain"
+             alt="Background image: Mountain." />
+        <img class="backgroundImage"
+             data-src="stars"
+             alt="Background image: Stars." />
+      </div>
+      <div class="overlay"></div>
+      <a href="https://david.alvarezrosa.com"
+         title="David Álvarez Rosa's personal website.">
         <h1>David Álvarez Rosa</h1>
       </a>
       <h2>
         <strong>Mathematics</strong> and <br />
         <strong>Industrial Engineering</strong> student.
       </h2>
+      <div id="controllers">
+        <button id="backward"
+                title="Show previous image."
+                onclick="backwardAnimation();">
+          <i class="fas fa-step-backward"></i>
+        </button>
+        <button id="pause"
+                title="Toggle background animation state."
+                onclick="toggleAnimation();">
+          <i id="toggleIcon" class="fas fa-pause"></i>
+        </button>
+        <button id="forward"
+                title="Show next image."
+                onclick="forwardAnimation();">
+          <i class="fas fa-step-forward"></i>
+        </button>
+      </div>
     </header>
 
 
@@ -1612,6 +1658,30 @@
 
     <!-- Footer. -->
     <footer>
+      <div class="background">
+        <img class="backgroundImage"
+             data-src="autumn"
+             alt="Background image: Autumn." />
+        <img class="backgroundImage"
+             data-src="beach"
+             alt="Background image: Beach." />
+        <img class="backgroundImage"
+             data-src="flower"
+             alt="Background image: Flower." />
+        <img class="backgroundImage"
+             data-src="leaves"
+             alt="Background image: Leaves." />
+        <img class="backgroundImage"
+             data-src="lighthouse"
+             alt="Background image: Lighthouse." />
+        <img class="backgroundImage"
+             data-src="mountain"
+             alt="Background image: Mountain." />
+        <img class="backgroundImage"
+             data-src="stars"
+             alt="Background image: Stars." />
+      </div>
+      <div class="overlay"></div>
       <ul>
         <li>
           <a class="fab fa-gitlab fa-2x"
@@ -1648,9 +1718,8 @@
           Address
         </li>
       </ul>
-      <p id="author">
-        Designed with <i class="fas fa-heart fa-lg" style="color: #D45B12;"></i>
-        by
+      <p id="author" onmouseover="beatHeart();" onmouseout="hideHeart();">
+        Designed with <i class="fas fa-heart fa-lg"></i> by
         <a href="https://david.alvarezrosa.com"
            rel="author"
            title="David Álvarez Rosa's personal website.">

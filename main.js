@@ -7,17 +7,122 @@ function loadingSpinner() {
 
     // Warn that this website is under construction.
     setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+}
 
-    // Lazy load images in information divs.
+
+// Automatically update the background image.
+var imageIterator = 0;
+var imageIteratorNext = 1;
+var header = document.getElementsByTagName("header")[0];
+var headerImages = header.getElementsByClassName("backgroundImage");
+var footer = document.getElementsByTagName("footer")[0];
+var footerImages = footer.getElementsByClassName("backgroundImage");
+var colors = ["#D45B12", "#006579", "#C98E03", "#3A6F1F", "#DF7E3A", "#56737B", "#405172"];
+
+function randomShuffle(array) {
+    var tmp, current, top = array.length;
+    if (top) while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = array[current];
+        array[current] = array[top];
+        array[top] = tmp;
+    }
+    return array;
+}
+
+var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
+imagesOrder = randomShuffle(imagesOrder);
+var headerBackground = header.getElementsByClassName("background")[0];
+var footerBackground = footer.getElementsByClassName("background")[0];
+var animationDuration = 15000; // In miliseconds.
+var reverse = "";
+var animationStop = false;
+var animationTimeout, animationTimeoutAux;
+
+function updateBackgroundIterators() {
+    imageIterator = imageIteratorNext;
+    if (imageIteratorNext == headerImages.length - 1)
+        imageIteratorNext = 0
+    else
+        ++imageIteratorNext;
+}
+
+function updateBackgroundImage() {
+    clearTimeout(animationTimeoutAux);
+
+    if (animationStop)
+        return;
+
+    var currentHeaderImage = headerImages[imagesOrder[imageIterator]];
+    var currentFooterImage = footerImages[imagesOrder[imageIterator]];
+    currentHeaderImage.classList.remove("imageIn", "imageInReverse");
+    currentFooterImage.classList.remove("imageIn", "imageInReverse");
+    currentHeaderImage.classList.add("imageOut" + reverse);
+    currentFooterImage.classList.add("imageOut" + reverse);
+
+    var nextHeaderImage = headerImages[imagesOrder[imageIteratorNext]];
+    var nextFooterImage = footerImages[imagesOrder[imageIteratorNext]];
+    nextHeaderImage.classList.add("imageIn" + reverse);
+    nextFooterImage.classList.add("imageIn" + reverse);
+    nextHeaderImage.classList.remove("imageOut", "imageOutReverse");
+    nextFooterImage.classList.remove("imageOut", "imageOutReverse");
+
+    animationTimeout = setTimeout(function() {
+        nextHeaderImage.classList.remove("imageIn", "imageInReverse");
+        nextFooterImage.classList.remove("imageIn", "imageInReverse");
+    }, animationDuration);
+
+    setTimeout(function() {
+        document.documentElement.style.setProperty("--main-color",
+                                                   colors[imagesOrder[imageIteratorNext]]);
+        updateBackgroundIterators();
+    }, 500);
+    headerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
+    footerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
+
+    animationTimeoutAux = setTimeout( function() {
+        updateBackgroundImage();
+    }, animationDuration);
+}
+
+var headerFirstImage = headerImages[imagesOrder[imageIterator]];
+var footerFirstImage = footerImages[imagesOrder[imageIterator]];
+headerFirstImage.src = "images/backgrounds/" +
+    headerFirstImage.dataset.src + "_low.jpg";
+footerFirstImage.src = "images/backgrounds/" +
+    headerFirstImage.dataset.src + "_low.jpg";
+headerFirstImage.classList.add("backgroundImageFirst");
+footerFirstImage.classList.add("backgroundImageFirst");
+document.documentElement.style.setProperty("--main-color",
+                                           colors[imagesOrder[imageIterator]]);
+setTimeout(function() {
+    headerFirstImage.classList.remove("backgroundImageFirst");
+    footerFirstImage.classList.remove("backgroundImageFirst");
+    updateBackgroundImage();
+}, animationDuration - 5000);
+
+
+// Lazy loading of images.
+function lazyLoadImages() {
+    // Load images in information divs.
     var infoDivs = document.getElementsByClassName("info");
     for (var i = 0; i < infoDivs.length; ++i) {
-        var images = infoDivs[i].getElementsByTagName("img");
-        for (var j = 0; j < images.length; ++j) {
-            var image = images[j];
+        var infoImages = infoDivs[i].getElementsByTagName("img");
+        for (var j = 0; j < infoImages.length; ++j) {
+            var image = infoImages[j];
             image.src = image.dataset.src;
         }
     }
+    // Load background images.
+    for (var i = 0; i < headerImages.length; ++i) {
+        var image = headerImages[imagesOrder[i]];
+        image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
+        image = footerImages[imagesOrder[i]];
+        image.src = "images/backgrounds/" + image.dataset.src + ".jpg";
+    }
 }
+
+window.addEventListener("load", lazyLoadImages);
 
 
 // Get the scroll back to top button.
@@ -282,3 +387,72 @@ function chartAnimation() {
 chartAnimation();
 window.addEventListener("scroll", chartAnimation);
 window.addEventListener("resize", chartAnimation);
+
+
+// Controllers for background animation.
+function forwardAnimation() {
+    if (animationStop) {
+        animationStop = false;
+        updateBackgroundImage();
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+    else {
+        updateBackgroundImage();
+    }
+}
+
+function backwardAnimation() {
+    reverse = "Reverse";
+    imageIteratorNext -= 2;
+    if (imageIteratorNext == -1)
+        imageIteratorNext = images.length - 1;
+    else if (imageIteratorNext == -2)
+        imageIteratorNext = images.length - 2;
+
+    if (animationStop) {
+        animationStop = false;
+        updateBackgroundImage();
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+
+    else
+        updateBackgroundImage();
+    reverse = "";
+}
+
+function toggleAnimation() {
+    var toggleIcon = document.getElementById("toggleIcon");
+    if (toggleIcon.classList.contains("fa-pause")) {
+        toggleIcon.classList.remove("fa-pause");
+        toggleIcon.classList.add("fa-play");
+        animationStop = true;
+        clearTimeout(animationTimeout);
+    }
+    else {
+        toggleIcon.classList.remove("fa-play");
+        toggleIcon.classList.add("fa-pause");
+        animationStop = false;
+        updateBackgroundImage();
+    }
+}
+
+
+// Functions for the heartbeat.
+var heartAnimation;
+
+function beatHeart() {
+    clearTimeout(heartAnimation);
+    var heart = document.getElementById("heart");
+    heart.style.display = "block";
+    heart.style.opacity = 1;
+}
+
+function hideHeart() {
+    var heart = document.getElementById("heart");
+    heart.style.opacity = 0;
+    heartAnimation = setTimeout(function () {
+        heart.style.display = "none";
+    }, 1100);
+}
