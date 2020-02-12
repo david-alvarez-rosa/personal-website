@@ -518,6 +518,66 @@ main section h3 {
     margin-bottom: .75em;
 }
 
+#personalData {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: space-between;
+    margin: 0 -1em 1.75em 0;
+}
+
+.data {
+    position: relative;
+    margin: 1em;
+    width: 125px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #DADCE0;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    transition: .35s transform, .35s border;
+}
+
+.data:hover {
+    transform: scale(.9);
+    border: 2px solid black;
+}
+
+.data i {
+    margin-top: 12px;
+    font-size: 40px;
+    color: #666666;
+}
+
+.data p {
+    position: absolute;
+    bottom: 8px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.dataUnder {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #D45B12;
+    transition: .35s top cubic-bezier(.17,.67,.5,1.03);;
+}
+
+.dataUnder * {
+    color: #000000!important;
+    font-weight: bold;
+}
+
+.data:hover .dataUnder {
+    top: 0;
+}
+
 main ul {
     margin-top: -.75em;
     margin-bottom: 1.5em;
@@ -1082,6 +1142,14 @@ footer {
 
     .mainShrunken {
         width: 100%;
+    }
+
+    #personalData {
+        margin: 0 -.5em;
+    }
+
+    .data {
+        margin: .5em;
     }
 
     main .dataRight, main .dataLeft {
