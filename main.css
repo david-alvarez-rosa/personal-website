@@ -7,7 +7,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: Helvetica, Arial, sans-serif, FontAwesome;
+    font-family: Helvetica, Arial, sans-serif, 'Font Awesome 5 Free';
     font-weight: 400;
     line-height: 1.75em;
 
@@ -592,6 +592,12 @@ main .card {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     padding: .75em 1.25em 0 1.25em;
     margin-bottom: 1.25em;
+    transition: box-shadow .5s, transform .5s;
+}
+
+main .card:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.4), 0 5px 18px 0 rgba(0, 0, 0, 0.39);
+    transform: scale(1.02);
 }
 
 main .dataLeft {
@@ -838,6 +844,7 @@ input[type="submit"], input[type="reset"] {
     color: #787878 !important;
     cursor: pointer;
     display: inline-block;
+    font-size: .9em;
     font-weight: 400;
     height: 3.15em;
     line-height: 2.75em;
@@ -940,6 +947,27 @@ footer {
     60% { transform: translateX(-30px); }
     80% { transform: translateX(10px); }
     100% { opacity: .9; transform: translateX(0); }
+}
+
+blockquote:hover {
+    animation: rotation3d .75s;
+}
+
+@keyframes rotation3d {
+    50% { transform: rotateX(120deg); }
+    100% { transform: rotateX(0); }
+}
+
+.skills li:hover {
+    animation: swing .75s ease;
+}
+
+@keyframes swing {
+    20% { transform: translateX(3px); }
+    40% { transform: translateX(-3px); }
+    60% { transform: translateX(2px); }
+    80% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
 }
 
 
@@ -1192,7 +1220,6 @@ footer {
         display: none;
     }
 }
-
 
 
 
