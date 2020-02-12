@@ -5,8 +5,8 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
-    // // Warn that this website is under construction.
-    // setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+    // Warn that this website is under construction.
+    setTimeout( function() { showInfo("welcomeUser"); }, 3500);
 
     // Lazy load images in information divs.
     var infoDivs = document.getElementsByClassName("info");
@@ -236,7 +236,7 @@ var config = {
     type: "pie",
     data: {
         datasets: [{
-            data: [100, 0, 0, 0, 0],
+            data: [20, 20, 10, 25, 35],
             backgroundColor: [
                 window.chartColors.red,
                 window.chartColors.orange,
