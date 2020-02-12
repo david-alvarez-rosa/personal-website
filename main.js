@@ -5,8 +5,8 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
-    // Warn that this website is under construction.
-    setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+    // // Warn that this website is under construction.
+    // setTimeout( function() { showInfo("welcomeUser"); }, 3500);
 }
 
 
@@ -34,7 +34,7 @@ var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
 imagesOrder = randomShuffle(imagesOrder);
 var headerBackground = header.getElementsByClassName("background")[0];
 var footerBackground = footer.getElementsByClassName("background")[0];
-var animationDuration = 15000; // In miliseconds.
+var animationDuration = 18000; // In miliseconds.
 var reverse = "";
 var animationStop = false;
 var animationTimeout, animationTimeoutAux;

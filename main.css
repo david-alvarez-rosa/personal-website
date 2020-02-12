@@ -522,7 +522,7 @@ h2:hover .linkIcon {
 }
 
 .linkIcon:hover {
-    color: #D45B12;
+    color: var(--main-color);
 }
 
 main h3 {
@@ -656,7 +656,7 @@ main section h3 {
     width: 100%;
     height: 100%;
     text-align: center;
-    background-color: #D45B12;
+    background-color: var(--main-color);
     transition: .35s top cubic-bezier(.17,.67,.5,1.03);;
 }
 
@@ -1120,6 +1120,7 @@ blockquote:hover {
     60% { transform: translateX(2px); }
     80% { transform: translateX(-1px); }
     100% { transform: translateX(0); }
+}
 
 @keyframes heartbeat {
     0% { transform: scale( .75 ); }
