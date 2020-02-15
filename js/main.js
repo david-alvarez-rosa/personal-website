@@ -99,7 +99,7 @@ setTimeout(function() {
     headerFirstImage.classList.remove("backgroundImageFirst");
     footerFirstImage.classList.remove("backgroundImageFirst");
     updateBackgroundImage();
-}, animationDuration - 5000);
+}, animationDuration);
 
 
 // Lazy loading of images.

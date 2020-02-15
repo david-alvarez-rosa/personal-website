@@ -68,7 +68,7 @@
            title="My Emacs cofiguration files."
            rel="external"
            target="_blank">
-          here
+          here <i class="fas fa-external-link-alt"></i>
         </a>
         it is.
       </p>
@@ -115,10 +115,10 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeNoobUser" style="height: 500px; top: calc(50% - 500px/2);">
+    <div class="info" id="welcomeNoobUser" style="height: 550px; top: calc(50% - 550px/2);">
       <p>
         Hey visitor! It seems that you like to use the keyboard to
-        scroll. Please consider <em>upgrading</em> to (probably better) shortcuts.
+        scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
       </p>
       <ul style="float: left; margin-left: 25px;">
         <li style="margin-left: 32px;"><strong>Emacs</strong></li>
@@ -138,12 +138,14 @@
         <li><strong>g</strong>: go top.</li>
         <li><strong>G</strong>: go bottom.</li>
       </ul>
-      <div style="clear: both;"></div>
+      <div class="clear"></div>
       <ul style="margin-top: 1em; margin-left: 150px;">
         <li style="margin-left: 35px;"><strong>Others</strong></li>
         <li><strong>d</strong>: scroll down.</li>
         <li><strong>u</strong>: scroll up.</li>
         <li><strong>m</strong>: toggle navigation.</li>
+        <li><strong>space</strong>: toggle animation.</li>
+        <li><strong>arrows</strong>: prev/next background.</li>
         <li><strong>?</strong> or <strong>H</strong>: show this help.</li>
       </ul>
       <p style="font-size: .8em; margin-top: 1.5em;">
@@ -159,8 +161,8 @@
            title="Google's Software is Malware."
            rel="nofollow"
            target="_blank">
-          why.
-        </a>
+          why <i class="fas fa-external-link-alt"></i>
+        </a>.
         Please consider changing it.
       </p>
       <a href="https://qutebrowser.org/"
@@ -181,7 +183,7 @@
              height="150px"
              alt="GNU Operating System icon." />
       </a>
-      <div style="clear: both;"></div>
+      <div class="clear"></div>
       <p style="font-size: .8em; margin-top: 2em;">
         You can exit by pressing q or ESC or clicking outside this box.
       </p>
@@ -241,15 +243,61 @@
     <div id="blurBackground"></div>
 
 
+    <!-- Heart. -->
+    <div id="heart"><i class="fas fa-heart"></i></div>
+
+
     <!-- Header. -->
     <header>
-      <a href="/" title="David Álvarez Rosa's personal website.">
+      <div class="background">
+        <img class="backgroundImage"
+             data-src="autumn"
+             alt="Background image: Autumn." />
+        <img class="backgroundImage"
+             data-src="beach"
+             alt="Background image: Beach." />
+        <img class="backgroundImage"
+             data-src="flower"
+             alt="Background image: Flower." />
+        <img class="backgroundImage"
+             data-src="leaves"
+             alt="Background image: Leaves." />
+        <img class="backgroundImage"
+             data-src="lighthouse"
+             alt="Background image: Lighthouse." />
+        <img class="backgroundImage"
+             data-src="mountain"
+             alt="Background image: Mountain." />
+        <img class="backgroundImage"
+             data-src="stars"
+             alt="Background image: Stars." />
+      </div>
+      <div class="overlay"></div>
+      <a href="https://david.alvarezrosa.com"
+         title="David Álvarez Rosa's personal website.">
         <h1>David Álvarez Rosa</h1>
       </a>
       <h2>
         <strong>Mathematics</strong> and <br />
         <strong>Industrial Engineering</strong> student.
       </h2>
+      <div id="controllers">
+        <button id="backward"
+                title="Show previous image."
+                onclick="backwardAnimation();">
+          <i class="fas fa-step-backward"></i>
+        </button>
+        <button id="pause"
+                title="Toggle background animation state."
+                onclick="toggleAnimation();">
+          <i id="toggleIcon" class="fas fa-pause"></i>
+        </button>
+        <button id="forward"
+                title="Show next image."
+                onclick="forwardAnimation();">
+          <i class="fas fa-step-forward"></i>
+        </button>
+      </div>
     </header>
 
 
@@ -405,6 +453,30 @@
 
     <!-- Footer. -->
     <footer>
+      <div class="background">
+        <img class="backgroundImage"
+             data-src="autumn"
+             alt="Background image: Autumn." />
+        <img class="backgroundImage"
+             data-src="beach"
+             alt="Background image: Beach." />
+        <img class="backgroundImage"
+             data-src="flower"
+             alt="Background image: Flower." />
+        <img class="backgroundImage"
+             data-src="leaves"
+             alt="Background image: Leaves." />
+        <img class="backgroundImage"
+             data-src="lighthouse"
+             alt="Background image: Lighthouse." />
+        <img class="backgroundImage"
+             data-src="mountain"
+             alt="Background image: Mountain." />
+        <img class="backgroundImage"
+             data-src="stars"
+             alt="Background image: Stars." />
+      </div>
+      <div class="overlay"></div>
       <ul>
         <li>
           <a class="fab fa-gitlab fa-2x"
@@ -416,7 +488,6 @@
           <br />
           Gitlab
         </li>
-
         <li>
           <a class="fas fa-at fa-2x"
              href="javascript:showInfo('infoEmail');"
@@ -425,7 +496,6 @@
           <br />
           Email
         </li>
-
         <li>
           <a class="fas fa-phone fa-2x"
              href="javascript:showInfo('infoPhone');"
@@ -434,7 +504,6 @@
           <br />
           Phone
         </li>
-
         <li>
           <a class="fas fa-envelope fa-2x"
              href="javascript:showInfo('infoAddress');"
@@ -444,11 +513,9 @@
           Address
         </li>
       </ul>
-
-      <p>
-        Made with <i class="fas fa-heart fa-lg" style="color: #D45B12;"></i>
-        by
-        <a href="/"
+      <p id="author" onmouseover="beatHeart();" onmouseout="hideHeart();">
+        Designed with <i class="fas fa-heart fa-lg"></i> by
+        <a href="https://david.alvarezrosa.com"
            rel="author"
            title="David Álvarez Rosa's personal website.">
           @David.
@@ -458,8 +525,8 @@
 
 
     <!-- Javascript files. -->
-    <script src="/js/main.js"></script>
-    <script src="/js/shortcuts.js"></script>
-
+    <script src="js/main.js"></script>
+    <script src="js/shortcuts.js"></script>
+    <script src="js/confetti.js"></script>
   </body>
 </html>
