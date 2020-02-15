@@ -903,6 +903,7 @@ footer ul li {
     list-style: none;
     width: 4.15em;
     text-align: center;
+    padding-top: 15px;
 }
 
 footer a:hover, footer a:focus {
