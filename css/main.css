@@ -185,8 +185,9 @@ button {
     left: calc(50% + 35%/2 - 150px);
     z-index: 9998;
     color: var(--main-color);
-    animation: heartbeat 1.5s infinite;
     opacity: 0;
+    transition: opacity 1s ease-in-out;
+    visibility: hidden;
 }
 
 #heart i {
@@ -231,7 +232,7 @@ button {
     z-index: 99;
 }
 
-#navBar div {
+#navBarDiv {
     overflow-x: auto;
     overflow-y: hidden;
     width: calc(100% - 70px);
@@ -627,11 +628,11 @@ main section h3 {
     border: 1px solid #DADCE0;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
-    transition: .35s transform, .35s border;
+    transition: .32s transform, .35s border;
 }
 
 .data:hover {
-    transform: scale(.9);
+    transform: scale(.96);
     border: 2px solid black;
 }
 
@@ -1012,7 +1013,7 @@ header {
 }
 
 #heart {
-    transition: opacity 1s;
+    animation: heartbeat 1.5s infinite;
 }
 
 #navBar {

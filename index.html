@@ -16,7 +16,7 @@
     <link rel="canonical" href="https://david.alvarezrosa.com/" />
     <link rel="icon" type="image/x-ico" href="images/favicon.ico" />
     <link rel="apple-touch-icon" sizes="158x180" href="images/apple-touch-icon.png">
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
     <link rel="stylesheet" href="fontawesome/css/solid.css" />
     <link rel="stylesheet" href="fontawesome/css/brands.css" />
@@ -177,7 +177,7 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeNoobUser" style="height: 500px; top: calc(50% - 500px/2);">
+    <div class="info" id="welcomeNoobUser" style="height: 550px; top: calc(50% - 550px/2);">
       <p>
         Hey visitor! It seems that you like to use the keyboard to
         scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
@@ -206,6 +206,8 @@
         <li><strong>d</strong>: scroll down.</li>
         <li><strong>u</strong>: scroll up.</li>
         <li><strong>m</strong>: toggle navigation.</li>
+        <li><strong>space</strong>: toggle animation.</li>
+        <li><strong>arrows</strong>: prev/next background.</li>
         <li><strong>?</strong> or <strong>H</strong>: show this help.</li>
       </ul>
       <p style="font-size: .8em; margin-top: 1.5em;">
@@ -525,7 +527,7 @@
         </p>
         <p>
           This site is intended to be a web version of my
-          <a href="curriculum-vitae.pdf#view=Fit"
+          <a href="pdf/curriculum-vitae.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
             resume
           </a> and be my corner on the Internet. I designed this website myself
@@ -563,7 +565,7 @@
               </div>
             </div>
           </a>
-          <a href="curriculum-vitae.pdf#view=Fit"
+          <a href="pdf/curriculum-vitae.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
             <div class="data">
               <i class="fas fa-file-alt"></i>
@@ -639,8 +641,8 @@
           <i class="rightIcon fas fa-graduation-cap"></i>
         </h2>
         <p>
-          Below, you will find the details of my education summarized listed in
-          reverse chronological order.
+          Below, you will find the details of my education summarized and listed
+          in reverse chronological order.
         </p>
         <div class="card">
           <h3>
@@ -1118,7 +1120,7 @@
           </p>
           <ul>
             <li>
-              Conﬁguration of a modern, secure personal email server based on
+              Configuration of a modern, secure personal email server based on
               free software (<!--
               --><a href="http://www.postfix.org/"
                  rel="nofollow"
@@ -1398,27 +1400,26 @@
           </div>
           <div class="award">
             <h3>
-              <a href="http://www.olimpiadamatematica.es/platea.pntic.mec.es/_csanchez/olimmain.html"
+              <a href="https://rsef.es/olimpiada-espanola-de-fisica"
                  rel="nofollow"
                  target="_blank"
-                 title="Spanish Mathematical Olympiad website.">
-                Spanish Mathematical Olympiad
+                 title="Spanish Physics Olympiad website.">
+                Spanish Physics Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
-                <i class="titleIcon fas fa-puzzle-piece"></i>
+                <i class="titleIcon fas fa-vial"></i>
               </a>
             </h3>
             <h4 class="dataLeft">
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; January 2016
+              &nbsp; April 2016
             </h4>
             <h4 class="dataRight">
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarre
+              &nbsp; Seville, Andalusia
             </h4>
             <div class="clear"></div>
             <p class="awardText">
-              Second position in the local phase.
-            </p>
+              Silver medal in the national phase.
           </div>
         </div>
         <div class="card cardAward">
@@ -1456,26 +1457,27 @@
           </div>
           <div class="award">
             <h3>
-              <a href="https://rsef.es/olimpiada-espanola-de-fisica"
+              <a href="http://www.olimpiadamatematica.es/platea.pntic.mec.es/_csanchez/olimmain.html"
                  rel="nofollow"
                  target="_blank"
-                 title="Spanish Physics Olympiad website.">
-                Spanish Physics Olympiad
+                 title="Spanish Mathematical Olympiad website.">
+                Spanish Mathematical Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
-                <i class="titleIcon fas fa-vial"></i>
+                <i class="titleIcon fas fa-puzzle-piece"></i>
               </a>
             </h3>
             <h4 class="dataLeft">
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; April 2016
+              &nbsp; January 2016
             </h4>
             <h4 class="dataRight">
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Seville, Andalusia
+              &nbsp; Pamplona, Navarre
             </h4>
             <div class="clear"></div>
             <p class="awardText">
-              Silver medal in the national phase.
+              Second position in the local phase.
+            </p>
           </div>
         </div>
       </section>
@@ -1509,7 +1511,7 @@
             </h4>
             <div class="clear"></div>
             <p class="awardText">
-              I played the violin in the conservatory in its ﬁrst courses.
+              I played the violin in the conservatory in its first courses.
           </div>
         </div>
         <div class="card cardAward">
@@ -1530,7 +1532,25 @@
           <div class="award">
             <h3>Linux user <i class="titleIcon fas fa-laptop"></i></h3>
             <p class="awardText">
-              Years of use of Linux distributions (Arch, Debian y Ubuntu).
+              Years of use of Linux distributions
+              (<a href="https://www.archlinux.org/"
+                  rel="nofollow"
+                  target="_blank"
+                  title="Arch Linux official website.">
+                Arch <i class="fas fa-external-link-alt"></i>
+              </a>,
+              <a href="https://www.debian.org/"
+                  rel="nofollow"
+                  target="_blank"
+                  title="Debian official website.">
+                Debian <i class="fas fa-external-link-alt"></i>
+              </a> and
+              <a href="https://ubuntu.com/"
+                  rel="nofollow"
+                  target="_blank"
+                  title="Ubuntu official website.">
+                Ubuntu <i class="fas fa-external-link-alt"></i>
+              </a>).
           </div>
         </div>
         <div class="card cardAward">
@@ -1540,9 +1560,24 @@
           <div class="award">
             <h3>System administrator <i class="titleIcon fas fa-terminal"></i></h3>
             <p class="awardText">
-              Administrator of a personal Virtual Private Server: data
-              synchronization between devices, website, email, personal Git
-              server.
+              Administrator of a personal
+              <a href="https://en.wikipedia.org/wiki/Virtual_private_server"
+                 rel="nofollow"
+                 target="_blank"
+                 title="Virtual private server - Wikipedia.">
+                Virtual Private Server <i class="fas fa-external-link-alt"></i>
+              </a>:
+              data synchronization between devices,
+              <a href="https://david.alvarezrosa.com/"
+                 title="David Álvarez Rosa's personal website.">
+                website
+              </a>, email, personal
+              <a href="https://en.wikipedia.org/wiki/Git"
+                 rel="nofollow"
+                 target="_blank"
+                 title="Git - Wikipedia.">
+                Git <i class="fas fa-external-link-alt"></i>
+              </a> server.
           </div>
         </div>
         <div class="card cardAward">
@@ -1730,9 +1765,9 @@
 
 
     <!-- Javascript files. -->
-    <script src="chart.js"></script>
-    <script src="main.js"></script>
-    <script src="shortcuts.js"></script>
-
+    <script src="js/chart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/shortcuts.js"></script>
+    <script src="js/confetti.js"></script>
   </body>
 </html>

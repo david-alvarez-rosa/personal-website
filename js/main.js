@@ -406,9 +406,9 @@ function backwardAnimation() {
     reverse = "Reverse";
     imageIteratorNext -= 2;
     if (imageIteratorNext == -1)
-        imageIteratorNext = images.length - 1;
+        imageIteratorNext = headerImages.length - 1;
     else if (imageIteratorNext == -2)
-        imageIteratorNext = images.length - 2;
+        imageIteratorNext = headerImages.length - 2;
 
     if (animationStop) {
         animationStop = false;
@@ -445,14 +445,15 @@ var heartAnimation;
 function beatHeart() {
     clearTimeout(heartAnimation);
     var heart = document.getElementById("heart");
-    heart.style.display = "block";
+    heart.style.visibility = "visible";
     heart.style.opacity = 1;
+    confetti.start(2000);
 }
 
 function hideHeart() {
     var heart = document.getElementById("heart");
     heart.style.opacity = 0;
     heartAnimation = setTimeout(function () {
-        heart.style.display = "none";
+        heart.style.visibility = "hidden";
     }, 1100);
 }

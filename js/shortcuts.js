@@ -146,12 +146,6 @@ function keyboardShortcuts(event) {
     case "ArrowUp":
         ++noobCommandCounter;
         break;
-    case "ArrowLeft":
-        ++noobCommandCounter;
-        break;
-    case "ArrowRight":
-        ++noobCommandCounter;
-        break;
 
         // Other commands.
     case "m":
@@ -169,6 +163,15 @@ function keyboardShortcuts(event) {
         document.getElementById("blurBackground").style.display = "block";
         document.getElementById("welcomeNoobUser").classList.add("bounceInFromRight");
         document.getElementById("welcomeNoobUser").style.display = "block";
+        break;
+    case " ":
+        toggleAnimation();
+        break;
+    case "ArrowLeft":
+        forwardAnimation();
+        break;
+    case "ArrowRight":
+        backwardAnimation();
         break;
     }
 
