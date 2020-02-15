@@ -417,9 +417,52 @@ header .background {
     opacity: 1;
 }
 
+#sites {
+    margin-top: 75px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+}
+
+#sites a {
+    width: 95px;
+    height: 40px;
+    text-align: center;
+    padding-top: 5px;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, .75);
+    margin: 0 0 12px 12px;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, .05);
+    color: rgba(255, 255, 255, .75);
+    background-size: 200% 100%;
+    background-image: linear-gradient(to right, transparent 50%, var(--main-color) 50%);
+    transition: all .4s ease-in-out;
+    display: inline-block;
+}
+
+#sites a:hover{
+    color: black;
+    background-position: -100% 100%;
+    border-color: var(--main-color);
+}
+
+#sites .currentSite::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color)!important;
+    opacity: .65;
+    z-index: -1;
+}
+
 #controllers {
     position: absolute;
-    bottom: 225px;
+    bottom: 200px;
     left: 0;
     width: 100%;
     opacity: 0;
@@ -1151,6 +1194,18 @@ blockquote:hover {
         font-size: .95em;
     }
 
+    #sites {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        max-width: 400px;
+        justify-content: space-evenly;
+    }
+
+    #sites a {
+        margin-left: 0;
+    }
+
     #backward {
         left: 50px;
     }
@@ -1463,3 +1518,50 @@ blockquote:hover {
 /*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sites a:hover{
+    animation: buzzOut .75s linear;
+}
+
+@keyframes buzzOut {
+    0% { transform: translateX(3px) rotate(2deg); }
+    20% { transform: translateX(-3px) rotate(-2deg); }
+    30% { transform: translateX(3px) rotate(2deg); }
+    40% { transform: translateX(-3px) rotate(-2deg); }
+    50% { transform: translateX(2px) rotate(1deg); }
+    60% { transform: translateX(-2px) rotate(-1deg); }
+    70% { transform: translateX(2px) rotate(1deg); }
+    80% { transform: translateX(-2px) rotate(-1deg); }
+    90% { transform: translateX(1px) rotate(0); }
+    100% { transform: translateX(-1px) rotate(0); }
+}
