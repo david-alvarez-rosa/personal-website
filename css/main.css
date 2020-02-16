@@ -11,7 +11,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: Helvetica, Arial, sans-serif, 'Font Awesome 5 Free';
+    font-family: Helvetica, Arial, sans-serif, "Font Awesome 5 Free";
     font-weight: 400;
     line-height: 1.75em;
 
@@ -428,8 +428,8 @@ header .background {
 #sites a {
     width: 95px;
     height: 40px;
+    line-height: 40px;
     text-align: center;
-    padding-top: 5px;
     position: relative;
     border: 2px solid rgba(255, 255, 255, .75);
     margin: 0 0 12px 12px;
@@ -598,12 +598,16 @@ main a:hover {
 }
 
 .hide {
-    margin-left: .15em;
-    display: none!important;
+    margin-left: -1em;
+    visibility: hidden;
+    opacity: .35;
+    transition: margin .5s, .15s opacity .25s;
 }
 
 main a:hover .hide {
-    display: inline-block!important;
+    margin-left: .15em;
+    visibility: visible;
+    opacity: 1;
 }
 
 main a:before {
@@ -790,6 +794,14 @@ blockquote p i {
 
 .skills li a {
     color: #737373!important;
+}
+
+.skills li .hide  {
+    display: none;
+}
+
+.skills li a:hover .hide {
+    display: inline-block;
 }
 
 .skills li a:hover {
@@ -1033,10 +1045,18 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: var(--main-color);
 }
 
+label {
+    display: none;
+}
+
 
 /* Animations. */
 header {
     animation: slideInFromLeft 1s;
+}
+
+#sites a:hover{
+    animation: buzzOut .75s linear;
 }
 
 .imageIn {
@@ -1174,6 +1194,19 @@ blockquote:hover {
     60% { transform: scale( 1 ); }
     80% { transform: scale( .75 ); }
     100% { transform: scale( .75 ); }
+}
+
+@keyframes buzzOut {
+    0% { transform: translateX(3px) rotate(2deg); }
+    20% { transform: translateX(-3px) rotate(-2deg); }
+    30% { transform: translateX(3px) rotate(2deg); }
+    40% { transform: translateX(-3px) rotate(-2deg); }
+    50% { transform: translateX(2px) rotate(1deg); }
+    60% { transform: translateX(-2px) rotate(-1deg); }
+    70% { transform: translateX(2px) rotate(1deg); }
+    80% { transform: translateX(-2px) rotate(-1deg); }
+    90% { transform: translateX(1px) rotate(0); }
+    100% { transform: translateX(-1px) rotate(0); }
 }
 
 
@@ -1520,50 +1553,3 @@ blockquote:hover {
 /*     background-color: var(--main-color); */
 /*     border-radius: 10px; */
 /* } */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#sites a:hover{
-    animation: buzzOut .75s linear;
-}
-
-@keyframes buzzOut {
-    0% { transform: translateX(3px) rotate(2deg); }
-    20% { transform: translateX(-3px) rotate(-2deg); }
-    30% { transform: translateX(3px) rotate(2deg); }
-    40% { transform: translateX(-3px) rotate(-2deg); }
-    50% { transform: translateX(2px) rotate(1deg); }
-    60% { transform: translateX(-2px) rotate(-1deg); }
-    70% { transform: translateX(2px) rotate(1deg); }
-    80% { transform: translateX(-2px) rotate(-1deg); }
-    90% { transform: translateX(1px) rotate(0); }
-    100% { transform: translateX(-1px) rotate(0); }
-}

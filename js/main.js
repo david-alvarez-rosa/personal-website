@@ -213,7 +213,7 @@ function scrollNavBarToView() {
     }
     if (positionFromLeft < 0)
         navBarDiv.scrollLeft -= scrollStep;
-    var positionFromRight = elementCurrent.getBoundingClientRect().right;
+
     if (positionFromRight > windowWidth - 100)
         navBarDiv.scrollLeft += scrollStep;
 
@@ -222,8 +222,8 @@ function scrollNavBarToView() {
     if (positionFromBottom > windowHeight - 15)
         navBarExpanded.scrollTop += windowHeight / 6;
     var positionFromTop = elementCurrentExpanded.getBoundingClientRect().top;
-    if (positionFromTop < 15)
-        navBarExpanded.scrollTop -= windowHeight / 6;
+    if (positionFromTop < 100)
+        navBarExpanded.scrollTop = 0;
 }
 
 function setNavBarSection() {
