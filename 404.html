@@ -419,13 +419,19 @@
         </p>
         <form method="post" action="javascript:showInfo('welcomeUser');">
           <div id="getInTouch">
+            <label for="inputName">Name</label>
             <input type="text"
+                   id="inputName"
                    placeholder="&#xF007;  Name"
                    style="width: calc(50% - .5em); float: left;" />
+            <label for="inputEmail">Email</label>
             <input type="email"
+                   id="inputEmail"
                    placeholder="&#xF1FA;  Email"
                    style="width: calc(50% - .5em); float: right; margin-right: 0;" />
-            <textarea placeholder="&#xF044;  Message"
+            <label for="inputMessage">Message</label>
+            <textarea id="inputMessage"
+                      placeholder="&#xF044;  Message"
                       rows="5"
                       style="width: 100%;"></textarea>
             <input type="submit" value="Send Message" class="primary" />
