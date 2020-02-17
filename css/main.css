@@ -379,7 +379,7 @@ header {
     left: 0;
     width: 35%;
     height: 100%;
-    padding: 9% 4em;
+    padding: 8% 4em;
     text-align: right;
     background-color: #1F1815;
 }
@@ -1055,6 +1055,17 @@ header {
     animation: slideInFromLeft 1s;
 }
 
+#sites {
+    animation: 1.5s lightSpeedIn 1.25s both;
+}
+
+@keyframes lightSpeedIn {
+  from { transform: translate3d(100%, 0, 0) skewX(-30deg); opacity: 0; }
+  60% { transform: skewX(20deg); opacity: 1; }
+  80% { transform: skewX(-5deg); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
 #sites a:hover{
     animation: buzzOut .75s linear;
 }
@@ -1511,7 +1522,15 @@ blockquote:hover {
 
 
 /* Screen of small height. */
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 550px) {
+    #controllers {
+        top: 30px;
+    }
+}
+
+
+/* Screen of XSmall height. */
+@media screen and (max-height: 450px) {
     footer {
         display: none;
     }

@@ -255,7 +255,9 @@ var navBarDiv = document.getElementById("navBarDiv");
 var navBarButton = document.getElementById("navBarButton");
 
 function navBarResize() {
-    if (document.documentElement.scrollTop > 100 || window.innerWidth <= 980) {
+    if ((window.innerWidth > 980 && document.documentElement.scrollTop > 100) ||
+        (window.innerWidth <= 980 &&
+         document.documentElement.scrollTop > header.clientHeight)) {
         navBarDiv.style.padding = "12px 0";
         navBarDiv.style.height = "54px";
         navBarButton.style.height = "51px";
