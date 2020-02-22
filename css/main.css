@@ -411,7 +411,7 @@ header .background {
 }
 
 .backgroundImageFirst {
-    left: 0!important;
+    left: 0;
 }
 
 .overlay:hover #controllers, #controllers:hover, header:hover #controllers {

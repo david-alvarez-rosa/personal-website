@@ -55,8 +55,8 @@ function updateBackgroundImage() {
 
     var currentHeaderImage = headerImages[imagesOrder[imageIterator]];
     var currentFooterImage = footerImages[imagesOrder[imageIterator]];
-    currentHeaderImage.classList.remove("imageIn", "imageInReverse");
-    currentFooterImage.classList.remove("imageIn", "imageInReverse");
+    currentHeaderImage.classList.remove("imageIn", "imageInReverse", "backgroundImageFirst");
+    currentFooterImage.classList.remove("imageIn", "imageInReverse", "backgroundImageFirst");
     currentHeaderImage.classList.add("imageOut" + reverse);
     currentFooterImage.classList.add("imageOut" + reverse);
 
@@ -93,11 +93,7 @@ headerFirstImage.classList.add("backgroundImageFirst");
 footerFirstImage.classList.add("backgroundImageFirst");
 document.documentElement.style.setProperty("--main-color",
                                            colors[imagesOrder[imageIterator]]);
-setTimeout(function() {
-    headerFirstImage.classList.remove("backgroundImageFirst");
-    footerFirstImage.classList.remove("backgroundImageFirst");
-    updateBackgroundImage();
-}, animationDuration);
+setTimeout(updateBackgroundImage, animationDuration);
 
 
 // Lazy loading of images.
@@ -301,7 +297,14 @@ function showInfo(id) {
 }
 
 // Controllers for background animation.
+var animationPause = false;
+
 function forwardAnimation() {
+    if (animationPause)
+        return;
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     if (animationStop) {
         animationStop = false;
         updateBackgroundImage();
@@ -314,6 +317,11 @@ function forwardAnimation() {
 }
 
 function backwardAnimation() {
+    if (animationPause)
+        return;
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     reverse = "Reverse";
     imageIteratorNext -= 2;
     if (imageIteratorNext == -1)
@@ -334,6 +342,11 @@ function backwardAnimation() {
 }
 
 function toggleAnimation() {
+    if (animationPause)
+        return;
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     var toggleIcon = document.getElementById("toggleIcon");
     if (toggleIcon.classList.contains("fa-pause")) {
         toggleIcon.classList.remove("fa-pause");
