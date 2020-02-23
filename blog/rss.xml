@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="https://blog.alvarezrosa.com/rss.xml"
+               rel="self"
+               type="application/rss+xml" />
+
+    <title>David Álvarez Rosa | Personal Blog</title>
+    <link>https://blog.alvarezrosa.com/</link>
+    <language>en</language>
+    <description>
+      My personal Blog site. Stuff I've written, mainly about Technology and
+      Mathematics. By David Álvarez Rosa.
+    </description>
+
+    <image>
+      <url>https://david.alvarezrosa.com/images/favicon.ico</url>
+      <title>Icon for David Álvarez Rosa Personal Website.</title>
+      <link>https://blog.alvarezrosa.com/</link>
+    </image>
+    <webMaster>admin@alvarezrosa.com (David Álvarez Rosa)</webMaster>
+
+    <item>
+      <title>First item</title>
+      <guid>https://blog.alvarezrosa.com/firs-item.html</guid>
+      <link>https://blog.alvarezrosa.com/firs-item.html</link>
+      <author>admin@alvarezrosa.com (David Álvarez Rosa)</author>
+      <pubDate>Sat, 01 Feb 2020 16:53:04 -0500</pubDate>
+      <category>technology</category>
+      <category>blog</category>
+      <description><![CDATA[ description if with tags.  ]]></description>
+    </item>
+  </channel>
+</rss>
