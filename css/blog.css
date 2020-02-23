@@ -1,0 +1,48 @@
+/* David \'Alvarez Rosa's blogsite CSS Styles. */
+
+
+blockquote {
+    margin-bottom: 1.5em;
+}
+
+.quoteAuthor {
+    padding-top: .75em;
+}
+
+figure {
+    margin: 0 auto 1.5em auto;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #DADCE0;
+    padding: 10px;
+}
+
+figure:hover {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+figure img {
+    width: 100%;
+}
+
+figcaption {
+    color: #666666;
+    text-align: center;
+    padding-top: .5em;
+}
+
+main h3 a:hover::before {
+    visibility: hidden;
+}
+
+h3 .linkIcon {
+    font-size: .75em;
+    padding-left: .25em;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+h3:hover .linkIcon {
+    opacity: 1;
+}
