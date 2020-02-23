@@ -803,12 +803,15 @@ main .card:hover {
     transform: scale(1.02);
 }
 
-main .dataLeft {
-    float: left;
+.rightLeftFlex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-right: -50px;
 }
 
-main .dataRight {
-    float: right;
+.rightLeftFlex h4 {
+    margin-right: 50px;
 }
 
 blockquote {
@@ -1545,10 +1548,6 @@ blockquote:hover {
 
     .data {
         margin: .5em;
-    }
-
-    main .dataRight, main .dataLeft {
-        float: none;
     }
 
     main p {

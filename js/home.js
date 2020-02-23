@@ -5,7 +5,7 @@
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
  *
- * Copyright (C) 2020  David Álvarez Rosa
+ * Copyright (C) 2020  David \'Alvarez Rosa
  *
  *
  * The JavaScript code in this page is free software: you can
