@@ -411,3 +411,23 @@ function hideHeart() {
         heart.style.visibility = "hidden";
     }, 1100);
 }
+
+
+// Add click event to relative links to show bouncing pointing hand to anchor.
+var links = document.getElementsByTagName("a");
+
+for (var i = 0; i < links.length; ++i) {
+    if (links[i].hash)
+        links[i].addEventListener("click", showBouncingHand);
+}
+
+function showBouncingHand(event) {
+    var linkHref;
+    if (event.target.classList.contains("linkIcon"))
+        linkHref = event.target.offsetParent.hash;
+    else
+        linkHref= event.target.hash;
+    var anchor = document.getElementById(linkHref.substring(1, linkHref.length));
+    anchor.style.visibility = "visible";
+    setTimeout(function () { anchor.style.visibility = "hidden"; }, 2500);
+}

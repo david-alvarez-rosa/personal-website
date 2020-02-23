@@ -43,9 +43,18 @@ button {
 
 .anchor {
     display: block;
+    position: relative;
     height: 5em;
     margin-top: -5em;
     visibility: hidden;
+}
+
+.anchor i {
+    position: absolute;
+    bottom: -45px;
+    left: -40px;
+    font-size: 35px;
+    color: var(--main-color);
 }
 
 ::-webkit-scrollbar {
@@ -817,7 +826,9 @@ main .card:hover {
 blockquote {
     background-color: #F2F2F2;
     padding: 1em 1em .5em 1em;
-    border-radius: 4px;
+    margin-bottom: 1.5em;
+    border-radius: 0 4px 4px 0;
+    border-left: 6px solid var(--main-color);
 }
 
 blockquote p {
@@ -831,6 +842,7 @@ blockquote p i {
 
 .quoteAuthor {
     float: right;
+    padding-top: .75em;
 }
 
 #skillsList {
@@ -1135,6 +1147,16 @@ header {
 
 #sites a:hover{
     animation: buzzOut .75s linear;
+}
+
+.anchor i {
+    animation: bounceHand 1s linear infinite;
+}
+
+@keyframes bounceHand {
+    from { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+    to { transform: translateX(0); }
 }
 
 .imageIn {
@@ -1480,6 +1502,12 @@ blockquote:hover {
         padding: .5em 2.5em 5em 2.5em;
     }
 
+    .anchor i {
+        bottom: -43px;
+        left: -32px;
+        font-size: 28px;
+    }
+
     #interestsChart {
         width: 325px;
     }
@@ -1540,6 +1568,12 @@ blockquote:hover {
 
     .mainShrunken {
         width: 100%;
+    }
+
+    .anchor i {
+        bottom: -41px;
+        left: -26px;
+        font-size: 26px;
     }
 
     #personalData {
