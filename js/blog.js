@@ -3,6 +3,15 @@ window.addEventListener("load", function() {
 })
 
 function loadMathJax() {
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
     var mathJaxScript = document.getElementById("MathJax-script");
     mathJaxScript.src = mathJaxScript.dataset.src;
 }
