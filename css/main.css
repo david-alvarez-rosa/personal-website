@@ -618,7 +618,7 @@ main h2 a:hover::before {
     padding-top: .85em;
 }
 
-.linkIcon {
+h2 .linkIcon {
     font-size: .55em;
     padding-left: .25em;
     opacity: 0;
