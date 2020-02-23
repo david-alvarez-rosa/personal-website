@@ -1,0 +1,201 @@
+/* David \'Alvarez Rosa's website animations CSS Styles. */
+
+
+header {
+    animation: slideInFromLeft 1s;
+}
+
+#sites {
+    animation: 1.5s lightSpeedIn 1.25s both;
+}
+
+@keyframes lightSpeedIn {
+    from { transform: translate3d(100%, 0, 0) skewX(-30deg); opacity: 0; }
+    60% { transform: skewX(20deg); opacity: 1; }
+    80% { transform: skewX(-5deg); }
+    to { transform: translate3d(0, 0, 0); }
+}
+
+#sites a:hover{
+    animation: buzzOut .75s linear;
+}
+
+.anchor i {
+    animation: bounceHand 1s linear infinite;
+}
+
+@keyframes bounceHand {
+    from { transform: translateX(0); }
+    50% { transform: translateX(-10px); }
+    to { transform: translateX(0); }
+}
+
+#selectLanguage {
+    animation: bounceInFromRightAux .9s;
+}
+
+@keyframes bounceInFromRightAux {
+    0% { transform: translateX(150px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+.imageIn {
+    animation: slideInFromLeftAux 3s forwards;
+}
+
+.imageOut {
+    animation: slideOutToRight 3s;
+}
+
+.imageInReverse {
+    left: 1250px;
+    animation: slideInFromRightAux 3s forwards;
+}
+
+.imageOutReverse {
+    animation: slideOutToLeft 3s forwards;
+}
+
+#heart {
+    animation: heartbeat 1.5s infinite;
+}
+
+#navBar {
+    animation: slideInFromTop 1s;
+}
+
+#navBarExpanded {
+    animation: slideInFromTop 1s;
+}
+
+#navBarButton {
+    animation: slideInFromBottom 1.25s ease;
+}
+
+footer {
+    opacity: 0;
+    transform: translateX(-400px);
+    animation: 1.5s bounceInFromLeft 1.25s;
+    animation-fill-mode: forwards;
+}
+
+#fastControlMsg {
+    animation: slideInFromRightAuxAux 1s;
+}
+
+@keyframes slideInFromRightAuxAux {
+    from { transform: translateX(250px); }
+    to { transform: translateX(0); }
+}
+
+/* All elements in hidden class will fade in when appear in screen. */
+.hidden {
+    opacity: 0;
+}
+
+.fadeIn {
+    animation: fadeIn 1.25s;
+}
+
+@keyframes slideInFromTop {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideInFromBottom {
+    from { transform: translateY(1000px); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slideInFromLeft {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slideOutToRight {
+    from { left: 0; }
+    to { left: 1250px; }
+}
+
+@keyframes slideOutToLeft {
+    from { left: 0; }
+    to { left: -1250px; }
+}
+
+@keyframes slideInFromLeftAux {
+    from { left: -1250px; }
+    to { left: 0; }
+}
+
+@keyframes slideInFromRightAux {
+    from { left: 1250px; }
+    to { left: 0; }
+}
+
+@keyframes bounceInFromLeft {
+    0% { opacity: 0; transform: translateX(-400px); }
+    60% { transform: translateX(30px); }
+    80% { transform: translateX(-10px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(.5,.5) }
+    to { opacity: 1; }
+}
+
+.bounceInFromRight {
+    animation: 1.5s bounceInFromRight ease;
+}
+
+@keyframes bounceInFromRight {
+    0% { opacity: 0; transform: translateX(400px); }
+    60% { transform: translateX(-30px); }
+    80% { transform: translateX(10px); }
+    100% { opacity: .9; transform: translateX(0); }
+}
+
+blockquote:hover {
+    animation: rotation3d .75s;
+}
+
+@keyframes rotation3d {
+    50% { transform: rotateX(120deg); }
+    100% { transform: rotateX(0); }
+}
+
+.skills li:hover {
+    animation: swing .75s ease;
+}
+
+@keyframes swing {
+    20% { transform: translateX(3px); }
+    40% { transform: translateX(-3px); }
+    60% { transform: translateX(2px); }
+    80% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale( .75 ); }
+    20% { transform: scale( 1 ); }
+    40% { transform: scale( .75 ); }
+    60% { transform: scale( 1 ); }
+    80% { transform: scale( .75 ); }
+    100% { transform: scale( .75 ); }
+}
+
+@keyframes buzzOut {
+    0% { transform: translateX(3px) rotate(2deg); }
+    20% { transform: translateX(-3px) rotate(-2deg); }
+    30% { transform: translateX(3px) rotate(2deg); }
+    40% { transform: translateX(-3px) rotate(-2deg); }
+    50% { transform: translateX(2px) rotate(1deg); }
+    60% { transform: translateX(-2px) rotate(-1deg); }
+    70% { transform: translateX(2px) rotate(1deg); }
+    80% { transform: translateX(-2px) rotate(-1deg); }
+    90% { transform: translateX(1px) rotate(0); }
+    100% { transform: translateX(-1px) rotate(0); }
+}
