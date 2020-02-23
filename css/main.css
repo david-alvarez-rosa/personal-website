@@ -1369,7 +1369,7 @@ blockquote:hover {
     }
 
     header h2 {
-        font-size: .95em;
+        font-size: 1em;
     }
 
     #sites {
@@ -1395,6 +1395,15 @@ blockquote:hover {
     #navBar {
         margin-left: 33%;
         width: calc(100% - 33%);
+    }
+
+    footer  {
+        padding-right: 2.75em;
+        text-align: center;
+    }
+
+    footer ul li {
+        width: 3.5em;
     }
 
     main {
@@ -1486,6 +1495,10 @@ blockquote:hover {
         text-align: center;
         width: 100%;
         animation: 1.5s bounceInFromLeft 1.25s forwards;
+    }
+
+    footer ul li {
+        width: 4.15em;
     }
 
     footer .background {
