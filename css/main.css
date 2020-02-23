@@ -184,6 +184,40 @@ button {
     top: calc(50% - 215px/2);
 }
 
+.triangleBubble {
+    position: fixed;
+    right: 16px;
+    top: 150px;
+    width: 150px;
+    z-index: 10;
+    padding: 15px;
+    background-color: var(--main-color);
+    font-size: 1em;
+    line-height: 1.25em;
+    color: #000000;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 15px 0 rgba(0, 0, 0, 0.29);
+    display: none;
+}
+
+.triangleBubble:after {
+    content: "";
+    width: 0;
+    height: 0;
+	  position: absolute;
+    top: 14%;
+    right: 0;
+    transform: translateX(100%);
+    z-index: -1;
+    margin-left: -25%;
+    border-left: solid 15px var(--main-color);
+    border-top: solid 15px transparent;
+    border-bottom: solid 15px transparent;
+}
+
+#fastControlMsg {
+    text-align: center;
+}
+
 
 /* Heart. */
 #heart {
@@ -1197,6 +1231,15 @@ footer {
     transform: translateX(-400px);
     animation: 1.5s bounceInFromLeft 1.25s;
     animation-fill-mode: forwards;
+}
+
+#fastControlMsg {
+    animation: slideInFromRightAuxAux 1s;
+}
+
+@keyframes slideInFromRightAuxAux {
+    from { transform: translateX(250px); }
+    to { transform: translateX(0); }
 }
 
 /* All elements in hidden class will fade in when appear in screen. */

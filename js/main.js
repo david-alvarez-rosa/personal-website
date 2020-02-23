@@ -328,10 +328,14 @@ function showInfo(id) {
 
 // Controllers for background animation.
 var animationPause = false;
+var fastControlMsg = document.getElementById("fastControlMsg");
 
 function forwardAnimation() {
-    if (animationPause)
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
         return;
+    }
     animationPause = true;
     setTimeout(function() { animationPause = false; }, 1000);
 
@@ -347,8 +351,11 @@ function forwardAnimation() {
 }
 
 function backwardAnimation() {
-    if (animationPause)
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
         return;
+    }
     animationPause = true;
     setTimeout(function() { animationPause = false; }, 1000);
 
@@ -372,8 +379,11 @@ function backwardAnimation() {
 }
 
 function toggleAnimation() {
-    if (animationPause)
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
         return;
+    }
     animationPause = true;
     setTimeout(function() { animationPause = false; }, 1000);
 
