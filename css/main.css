@@ -25,7 +25,7 @@ html {
 
 p {
     color: #737373;
-    /* text-align: justify; */
+    text-align: justify;
 }
 
 a {
@@ -43,9 +43,18 @@ button {
 
 .anchor {
     display: block;
+    position: relative;
     height: 5em;
     margin-top: -5em;
     visibility: hidden;
+}
+
+.anchor i {
+    position: absolute;
+    bottom: -45px;
+    left: -40px;
+    font-size: 35px;
+    color: var(--main-color);
 }
 
 ::-webkit-scrollbar {
@@ -173,6 +182,40 @@ button {
 #infoAddress {
     height: 215px;
     top: calc(50% - 215px/2);
+}
+
+.triangleBubble {
+    position: fixed;
+    right: 16px;
+    top: 150px;
+    width: 150px;
+    z-index: 10;
+    padding: 15px;
+    background-color: var(--main-color);
+    font-size: 1em;
+    line-height: 1.25em;
+    color: #000000;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 15px 0 rgba(0, 0, 0, 0.29);
+    display: none;
+}
+
+.triangleBubble:after {
+    content: "";
+    width: 0;
+    height: 0;
+	  position: absolute;
+    top: 14%;
+    right: 0;
+    transform: translateX(100%);
+    z-index: -1;
+    margin-left: -25%;
+    border-left: solid 15px var(--main-color);
+    border-top: solid 15px transparent;
+    border-bottom: solid 15px transparent;
+}
+
+#fastControlMsg {
+    text-align: center;
 }
 
 
@@ -411,7 +454,7 @@ header .background {
 }
 
 .backgroundImageFirst {
-    left: 0!important;
+    left: 0;
 }
 
 .overlay:hover #controllers, #controllers:hover, header:hover #controllers {
@@ -618,7 +661,7 @@ main h2 a:hover::before {
     padding-top: .85em;
 }
 
-.linkIcon {
+h2 .linkIcon {
     font-size: .55em;
     padding-left: .25em;
     opacity: 0;
@@ -679,7 +722,7 @@ main a:before {
     position: absolute;
     width: 100%;
     height: 2px;
-    bottom: 0;
+    bottom: -3px;
     left: 0;
     visibility: hidden;
     transform: scaleX(0);
@@ -718,7 +761,7 @@ main section h2 {
 
 main section h3 {
     border-bottom: solid 1px #CCCCCC;
-    margin-bottom: .75em;
+    margin-bottom: .9em;
 }
 
 #personalData {
@@ -803,18 +846,23 @@ main .card:hover {
     transform: scale(1.02);
 }
 
-main .dataLeft {
-    float: left;
+.rightLeftFlex {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-right: -50px;
 }
 
-main .dataRight {
-    float: right;
+.rightLeftFlex h4 {
+    margin-right: 50px;
 }
 
 blockquote {
     background-color: #F2F2F2;
     padding: 1em 1em .5em 1em;
-    border-radius: 4px;
+    margin-bottom: 1.5em;
+    border-radius: 0 4px 4px 0;
+    border-left: 6px solid var(--main-color);
 }
 
 blockquote p {
@@ -828,6 +876,7 @@ blockquote p i {
 
 .quoteAuthor {
     float: right;
+    padding-top: .75em;
 }
 
 #skillsList {
@@ -1114,177 +1163,6 @@ label {
 }
 
 
-/* Animations. */
-header {
-    animation: slideInFromLeft 1s;
-}
-
-#sites {
-    animation: 1.5s lightSpeedIn 1.25s both;
-}
-
-@keyframes lightSpeedIn {
-  from { transform: translate3d(100%, 0, 0) skewX(-30deg); opacity: 0; }
-  60% { transform: skewX(20deg); opacity: 1; }
-  80% { transform: skewX(-5deg); }
-  to { transform: translate3d(0, 0, 0); }
-}
-
-#sites a:hover{
-    animation: buzzOut .75s linear;
-}
-
-.imageIn {
-    animation: slideInFromLeftAux 3s forwards;
-}
-
-.imageOut {
-    animation: slideOutToRight 3s;
-}
-
-.imageInReverse {
-    left: 1250px;
-    animation: slideInFromRightAux 3s forwards;
-}
-
-.imageOutReverse {
-    animation: slideOutToLeft 3s forwards;
-}
-
-#heart {
-    animation: heartbeat 1.5s infinite;
-}
-
-#navBar {
-    animation: slideInFromTop 1s;
-}
-
-#navBarExpanded {
-    animation: slideInFromTop 1s;
-}
-
-#navBarButton {
-    animation: slideInFromBottom 1.25s ease;
-}
-
-footer {
-    opacity: 0;
-    transform: translateX(-400px);
-    animation: 1.5s bounceInFromLeft 1.25s;
-    animation-fill-mode: forwards;
-}
-
-/* All elements in hidden class will fade in when appear in screen. */
-.hidden {
-    opacity: 0;
-}
-
-.fadeIn {
-    animation: fadeIn 1.25s;
-}
-
-@keyframes slideInFromTop {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(0); }
-}
-
-@keyframes slideInFromBottom {
-    from { transform: translateY(1000px); }
-    to { transform: translateY(0); }
-}
-
-@keyframes slideInFromLeft {
-    from { transform: translateX(-100%); }
-    to { transform: translateX(0); }
-}
-
-@keyframes slideOutToRight {
-    from { left: 0; }
-    to { left: 1250px; }
-}
-
-@keyframes slideOutToLeft {
-    from { left: 0; }
-    to { left: -1250px; }
-}
-
-@keyframes slideInFromLeftAux {
-    from { left: -1250px; }
-    to { left: 0; }
-}
-
-@keyframes slideInFromRightAux {
-    from { left: 1250px; }
-    to { left: 0; }
-}
-
-@keyframes bounceInFromLeft {
-    0% { opacity: 0; transform: translateX(-400px); }
-    60% { transform: translateX(30px); }
-    80% { transform: translateX(-10px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(.5,.5) }
-    to { opacity: 1; }
-}
-
-.bounceInFromRight {
-    animation: 1.5s bounceInFromRight ease;
-}
-
-@keyframes bounceInFromRight {
-    0% { opacity: 0; transform: translateX(400px); }
-    60% { transform: translateX(-30px); }
-    80% { transform: translateX(10px); }
-    100% { opacity: .9; transform: translateX(0); }
-}
-
-blockquote:hover {
-    animation: rotation3d .75s;
-}
-
-@keyframes rotation3d {
-    50% { transform: rotateX(120deg); }
-    100% { transform: rotateX(0); }
-}
-
-.skills li:hover {
-    animation: swing .75s ease;
-}
-
-@keyframes swing {
-    20% { transform: translateX(3px); }
-    40% { transform: translateX(-3px); }
-    60% { transform: translateX(2px); }
-    80% { transform: translateX(-1px); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes heartbeat {
-    0% { transform: scale( .75 ); }
-    20% { transform: scale( 1 ); }
-    40% { transform: scale( .75 ); }
-    60% { transform: scale( 1 ); }
-    80% { transform: scale( .75 ); }
-    100% { transform: scale( .75 ); }
-}
-
-@keyframes buzzOut {
-    0% { transform: translateX(3px) rotate(2deg); }
-    20% { transform: translateX(-3px) rotate(-2deg); }
-    30% { transform: translateX(3px) rotate(2deg); }
-    40% { transform: translateX(-3px) rotate(-2deg); }
-    50% { transform: translateX(2px) rotate(1deg); }
-    60% { transform: translateX(-2px) rotate(-1deg); }
-    70% { transform: translateX(2px) rotate(1deg); }
-    80% { transform: translateX(-2px) rotate(-1deg); }
-    90% { transform: translateX(1px) rotate(0); }
-    100% { transform: translateX(-1px) rotate(0); }
-}
-
-
 /* Large screen size. */
 @media screen and (max-width: 1280px) {
     #heart {
@@ -1301,7 +1179,7 @@ blockquote:hover {
     }
 
     header h2 {
-        font-size: .95em;
+        font-size: 1em;
     }
 
     #sites {
@@ -1327,6 +1205,15 @@ blockquote:hover {
     #navBar {
         margin-left: 33%;
         width: calc(100% - 33%);
+    }
+
+    footer  {
+        padding-right: 2.75em;
+        text-align: center;
+    }
+
+    footer ul li {
+        width: 3.5em;
     }
 
     main {
@@ -1420,6 +1307,10 @@ blockquote:hover {
         animation: 1.5s bounceInFromLeft 1.25s forwards;
     }
 
+    footer ul li {
+        width: 4.15em;
+    }
+
     footer .background {
         display: block;
     }
@@ -1477,8 +1368,10 @@ blockquote:hover {
         padding: .5em 2.5em 5em 2.5em;
     }
 
-    main p {
-        text-align: left;
+    .anchor i {
+        bottom: -43px;
+        left: -32px;
+        font-size: 28px;
     }
 
     #interestsChart {
@@ -1543,6 +1436,12 @@ blockquote:hover {
         width: 100%;
     }
 
+    .anchor i {
+        bottom: -41px;
+        left: -26px;
+        font-size: 26px;
+    }
+
     #personalData {
         margin: 0 -.5em;
     }
@@ -1551,8 +1450,8 @@ blockquote:hover {
         margin: .5em;
     }
 
-    main .dataRight, main .dataLeft {
-        float: none;
+    main p {
+        text-align: left;
     }
 
     blockquote p i {

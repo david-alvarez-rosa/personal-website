@@ -1,3 +1,33 @@
+/**
+ *
+ * @source: https://david.alvarezrosa.com/js/main.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in this page.
+ *
+ * Copyright (C) 2020  David \'Alvarez Rosa
+ *
+ *
+ * The JavaScript code in this page is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in this page.
+ *
+ */
+
+
 // Add loading spinner animation while page is loading.
 window.addEventListener("load", loadingSpinner);
 function loadingSpinner() {
@@ -55,8 +85,8 @@ function updateBackgroundImage() {
 
     var currentHeaderImage = headerImages[imagesOrder[imageIterator]];
     var currentFooterImage = footerImages[imagesOrder[imageIterator]];
-    currentHeaderImage.classList.remove("imageIn", "imageInReverse");
-    currentFooterImage.classList.remove("imageIn", "imageInReverse");
+    currentHeaderImage.classList.remove("imageIn", "imageInReverse", "backgroundImageFirst");
+    currentFooterImage.classList.remove("imageIn", "imageInReverse", "backgroundImageFirst");
     currentHeaderImage.classList.add("imageOut" + reverse);
     currentFooterImage.classList.add("imageOut" + reverse);
 
@@ -93,11 +123,7 @@ headerFirstImage.classList.add("backgroundImageFirst");
 footerFirstImage.classList.add("backgroundImageFirst");
 document.documentElement.style.setProperty("--main-color",
                                            colors[imagesOrder[imageIterator]]);
-setTimeout(function() {
-    headerFirstImage.classList.remove("backgroundImageFirst");
-    footerFirstImage.classList.remove("backgroundImageFirst");
-    updateBackgroundImage();
-}, animationDuration);
+setTimeout(updateBackgroundImage, animationDuration);
 
 
 // Lazy loading of images.
@@ -301,7 +327,18 @@ function showInfo(id) {
 }
 
 // Controllers for background animation.
+var animationPause = false;
+var fastControlMsg = document.getElementById("fastControlMsg");
+
 function forwardAnimation() {
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
+        return;
+    }
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     if (animationStop) {
         animationStop = false;
         updateBackgroundImage();
@@ -314,6 +351,14 @@ function forwardAnimation() {
 }
 
 function backwardAnimation() {
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
+        return;
+    }
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     reverse = "Reverse";
     imageIteratorNext -= 2;
     if (imageIteratorNext == -1)
@@ -334,6 +379,14 @@ function backwardAnimation() {
 }
 
 function toggleAnimation() {
+    if (animationPause) {
+        fastControlMsg.style.display = "block";
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
+        return;
+    }
+    animationPause = true;
+    setTimeout(function() { animationPause = false; }, 1000);
+
     var toggleIcon = document.getElementById("toggleIcon");
     if (toggleIcon.classList.contains("fa-pause")) {
         toggleIcon.classList.remove("fa-pause");
@@ -367,4 +420,24 @@ function hideHeart() {
     heartAnimation = setTimeout(function () {
         heart.style.visibility = "hidden";
     }, 1100);
+}
+
+
+// Add click event to relative links to show bouncing pointing hand to anchor.
+var links = document.getElementsByTagName("a");
+
+for (var i = 0; i < links.length; ++i) {
+    if (links[i].hash)
+        links[i].addEventListener("click", showBouncingHand);
+}
+
+function showBouncingHand(event) {
+    var linkHref;
+    if (event.target.classList.contains("linkIcon"))
+        linkHref = event.target.offsetParent.hash;
+    else
+        linkHref= event.target.hash;
+    var anchor = document.getElementById(linkHref.substring(1, linkHref.length));
+    anchor.style.visibility = "visible";
+    setTimeout(function () { anchor.style.visibility = "hidden"; }, 2500);
 }

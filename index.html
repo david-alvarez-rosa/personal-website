@@ -17,6 +17,7 @@
     <link rel="icon" type="image/x-ico" href="images/favicon.ico" />
     <link rel="apple-touch-icon" sizes="158x180" href="images/apple-touch-icon.png">
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
     <link rel="stylesheet" href="fontawesome/css/solid.css" />
     <link rel="stylesheet" href="fontawesome/css/brands.css" />
@@ -301,6 +302,10 @@
       </p>
     </div>
 
+    <div class="triangleBubble" id="fastControlMsg">
+        Wow, wow, slow down. <br /> That's too fast!
+    </div>
+
     <div id="blurBackground"></div>
 
 
@@ -380,37 +385,37 @@
     <!-- Navigation bar. -->
     <nav id="navBar">
       <div id="navBarDiv">
-        <a class="current" href="#sec-about" title="Scroll to about me section.">
+        <a class="current" href="#sec:about" title="Scroll to about me section.">
           About
         </a>
-        <a href="#sec-education" title="Scroll to education section.">
+        <a href="#sec:education" title="Scroll to education section.">
           Education
         </a>
-        <a href="#sec-courses" title="Scroll to courses section.">
+        <a href="#sec:courses" title="Scroll to courses section.">
           Courses
         </a>
-        <a href="#sec-projects" title="Scroll to projects section.">
+        <a href="#sec:projects" title="Scroll to projects section.">
           Projects
         </a>
-        <a href="#sec-inspiration" title="Scroll to inspiration section.">
+        <a href="#sec:inspiration" title="Scroll to inspiration section.">
           Inspiration
         </a>
-        <a href="#sec-skills" title="Scroll to skills section.">
+        <a href="#sec:skills" title="Scroll to skills section.">
           Skills
         </a>
-        <a href="#sec-languages" title="Scroll to languages section.">
+        <a href="#sec:languages" title="Scroll to languages section.">
           Languages
         </a>
-        <a href="#sec-awards" title="Scroll to awards section.">
+        <a href="#sec:awards" title="Scroll to awards section.">
           Awards
         </a>
-        <a href="#sec-others" title="Scroll to others section.">
+        <a href="#sec:others" title="Scroll to others section.">
           Others
         </a>
-        <a href="#sec-interests" title="Scroll to interests section.">
+        <a href="#sec:interests" title="Scroll to interests section.">
           Interests
         </a>
-        <a href="#sec-touch" title="Scroll to get in touch section.">
+        <a href="#sec:touch" title="Scroll to get in touch section.">
           Get In Touch
         </a>
       </div>
@@ -434,63 +439,63 @@
           Sections
         </li>
         <li>
-          <a class="current" href="#sec-about" title="Scroll to about me section.">
+          <a class="current" href="#sec:about" title="Scroll to about me section.">
             About <i class="fas fa-address-card"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-education" title="Scroll to education section.">
+          <a href="#sec:education" title="Scroll to education section.">
             Education <i class="fas fa-graduation-cap"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-courses" title="Scroll to courses section.">
+          <a href="#sec:courses" title="Scroll to courses section.">
             Courses <i class="fas fa-book"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-projects" title="Scroll to projects section.">
+          <a href="#sec:projects" title="Scroll to projects section.">
             Projects <i class="fas fa-lightbulb"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-inspiration" title="Scroll to inspiration section.">
+          <a href="#sec:inspiration" title="Scroll to inspiration section.">
             Inspiration <i class="fas fa-quote-right"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-skills" title="Scroll to skills section.">
+          <a href="#sec:skills" title="Scroll to skills section.">
             Skills <i class="fas fa-rocket"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-languages" title="Scroll to languages section.">
+          <a href="#sec:languages" title="Scroll to languages section.">
             Languages <i class="fas fa-language"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-awards" title="Scroll to awards section.">
+          <a href="#sec:awards" title="Scroll to awards section.">
             Awards <i class="fas fa-trophy"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-others" title="Scroll to others section.">
+          <a href="#sec:others" title="Scroll to others section.">
             Others <i class="fas fa-asterisk"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-interests" title="Scroll to interests section.">
+          <a href="#sec:interests" title="Scroll to interests section.">
             Interests <i class="fas fa-search"></i>
           </a>
         </li>
         <li>
-          <a href="#sec-touch" title="Scroll to get in touch section.">
+          <a href="#sec:touch" title="Scroll to get in touch section.">
             Get In Touch <i class="fas fa-fingerprint"></i>
           </a>
         </li>
         <li>
           <p>
-            @David 2020
+            @David &copy; 2020
           </p>
         </li>
       </ul>
@@ -529,10 +534,12 @@
 
 
       <!-- Section about. -->
-      <div class="anchor" id="sec-about"></div>
+      <div class="anchor" id="sec:about">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>About me
-          <a href="#sec-about"
+          <a href="#sec:about"
              title="Go to about section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -662,10 +669,12 @@
       </section>
 
       <!-- Section education. -->
-      <div class="anchor" id="sec-education"></div>
+      <div class="anchor" id="sec:education">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Education
-          <a href="#sec-education"
+          <a href="#sec:education"
              title="Go to education section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -686,44 +695,46 @@
               <i class="titleIcon fas fa-infinity"></i>
             </a>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://fme.upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Faculty of Mathematics and Statistics website.">
-              FME
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 240
-            <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
-               rel="nofollow noopener"
-               target="_blank"
-               title="European Credit Transfer and Accumulation System - Wikipedia.">
-              ECTS <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://fme.upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Faculty of Mathematics and Statistics website.">
+                FME
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 240
+              <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="European Credit Transfer and Accumulation System - Wikipedia.">
+                ECTS <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             A rigorous and proof-oriented course with a robust mathematical base
             and providing a solid knowledge in its applications (algorithms,
@@ -758,43 +769,45 @@
               <i class="titleIcon fas fa-cogs"></i>
             </a>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://etseib.upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Barcelona School of Industrial Engineering website.">
-              ETSEIB <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 240
-            <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
-               rel="nofollow noopener"
-               target="_blank"
-               title="European Credit Transfer and Accumulation System - Wikipedia.">
-              ECTS <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://etseib.upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Barcelona School of Industrial Engineering website.">
+                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 240
+              <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="European Credit Transfer and Accumulation System - Wikipedia.">
+                ECTS <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Multidisciplinary and integrative vision of industrial
             engineering. Acquired knowledge and skills essential for future
@@ -822,29 +835,31 @@
             Scientific and Technological Baccalaureate
             <i class="titleIcon fas fa-school"></i>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://www.irabia-izaga.org/"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Irabia-Izaga school website.">
-              Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 2 years
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; September 2014 &nbsp;&ndash;&nbsp; June 2016
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Burlada, Navarre
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://www.irabia-izaga.org/"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Irabia-Izaga school website.">
+                Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 2 years
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2014 &nbsp;&ndash;&nbsp; June 2016
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Burlada, Navarre
+            </h4>
+          </div>
           <ul class="marginTop">
             <li>Final grade: 9.47/10.</li>
             <li>
@@ -862,37 +877,41 @@
           <h3>Compulsory Secondary Education
             <i class="titleIcon fas fa-school"></i>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://www.irabia-izaga.org/"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Irabia-Izaga school website.">
-              Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 4 years
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; September 2010 &nbsp;&ndash;&nbsp; June 2014
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Burlada, Navarre
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://www.irabia-izaga.org/"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Irabia-Izaga school website.">
+                Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 4 years
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2010 &nbsp;&ndash;&nbsp; June 2014
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Burlada, Navarre
+            </h4>
+          </div>
           <p class="marginTop"></p>
       </section>
 
       <!-- Section courses. -->
-      <div class="anchor" id="sec-courses"></div>
+      <div class="anchor" id="sec:courses">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Courses
-          <a href="#sec-courses"
+          <a href="#sec:courses"
              title="Go to courses section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -903,37 +922,39 @@
         </p>
         <div class="card">
           <h3>Game theory<i class="titleIcon fas fa-dice"></i></h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://cfis.upc.edu"
-               rel="nofollow noopener"
-               target="_blank"
-               title="CFIS official website.">
-              CFIS <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>&nbsp;
-            20 hours
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; April 2019
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://cfis.upc.edu"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="CFIS official website.">
+                CFIS <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>&nbsp;
+              20 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; April 2019
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Game theory is the study of <strong>mathematical models</strong> of
             strategic interaction among <strong>rational</strong>
@@ -952,37 +973,39 @@
               <i class="titleIcon fas fa-database"></i>
             </a>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://cfis.upc.edu"
-               rel="nofollow noopener"
-               target="_blank"
-               title="CFIS official website.">
-              CFIS <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>&nbsp;
-            20 hours
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; January 2019
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://cfis.upc.edu"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="CFIS official website.">
+                CFIS <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>&nbsp;
+              20 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; January 2019
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Machine learning is the scientific study of algorithms and
             statistical models that computer systems use to perform a specific
@@ -1006,10 +1029,12 @@
       </section>
 
       <!-- Section projects. -->
-      <div class="anchor" id="sec-projects"></div>
+      <div class="anchor" id="sec:projects">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Projects
-          <a href="#sec-projects"
+          <a href="#sec:projects"
              title="Go to projects section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1019,44 +1044,46 @@
         <p>
           Here are a few projects I've worked on recently. Do you have any
           questions about them?
-          <a href="#sec-touch" title="Scroll to get in touch section.">
+          <a href="#sec:touch" title="Scroll to get in touch section.">
             Get in touch</a>. These projects have helped me to improve my skills
           in software development and programming, which are a great complement
           to my technical knowledge acquired in the university.
         </p>
         <div class="card">
           <h3>Driverless - Motorsport<i class="titleIcon fas fa-car"></i></h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://etseib.upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Barcelona School of Industrial Engineering website.">
-              ETSEIB <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 20 hours/week
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; September 2019 &nbsp;&ndash;&nbsp; Present
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://etseib.upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Barcelona School of Industrial Engineering website.">
+                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 20 hours/week
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2019 &nbsp;&ndash;&nbsp; Present
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             I’m part of the <strong>Perception</strong> section of Driverless
             UPC team, which is a team formed by undergraduate engineers in
@@ -1072,37 +1099,39 @@
             </a>
           </h3>
           <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://etseib.upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Barcelona School of Industrial Engineering website.">
-              ETSEIB <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 75 hours
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; January 2019 &nbsp;&ndash;&nbsp; June 2019
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://etseib.upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Barcelona School of Industrial Engineering website.">
+                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 75 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; January 2019 &nbsp;&ndash;&nbsp; June 2019
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Creation of virtual animation of a <strong>robotic arm</strong> able
             to play the Tic Tac Toe game and <strong>never lose</strong>. The
@@ -1123,24 +1152,26 @@
         </div>
         <div class="card">
           <h3>Email server<i class="titleIcon fas fa-server"></i></h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            Personal project
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 15 hours
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; August 2018 &nbsp;&ndash;&nbsp; September 2018
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              Personal project
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 15 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; August 2018 &nbsp;&ndash;&nbsp; September 2018
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Email is perhaps the most successful federated, decentralized
             protocol to ever exist. It's a shame we've allowed a centralized,
@@ -1212,37 +1243,39 @@
               Study Schedule <i class="titleIcon fas fa-calendar-alt"></i>
             </a>
           </h3>
-          <h4 class="dataLeft">
-            <i class="fas fa-university"></i> &nbsp;
-            <a href="https://upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Polytechnic University of Catalonia website.">
-              Polytechnic University of Catalonia
-              <i class="hide fas fa-external-link-alt"></i>
-            </a>
-            &nbsp;&ndash;&nbsp;
-            <a href="https://etseib.upc.edu/en"
-               rel="nofollow noopener"
-               target="_blank"
-               title="Barcelona School of Industrial Engineering website.">
-              ETSEIB <i class="hide fas fa-external-link-alt"></i>
-            </a>
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-layer-group"></i>
-            &nbsp; 60 hours
-          </h4>
-          <div class="clear"></div>
-          <h4 class="dataLeft">
-            <i class="fas fa-calendar-alt"></i>
-            &nbsp; January 2018 &nbsp;&ndash;&nbsp; June 2018
-          </h4>
-          <h4 class="dataRight">
-            <i class="fas fa-map-marker-alt"></i>
-            &nbsp; Barcelona, Catalonia
-          </h4>
-          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Polytechnic University of Catalonia website.">
+                Polytechnic University of Catalonia
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://etseib.upc.edu/en"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Barcelona School of Industrial Engineering website.">
+                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 60 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; January 2018 &nbsp;&ndash;&nbsp; June 2018
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
           <p class="marginTop">
             Creation of a customized study schedule generator adapted to
             students, through <strong>data analysis</strong>:
@@ -1273,10 +1306,12 @@
       </section>
 
       <!-- Section inspiration. -->
-      <div class="anchor" id="sec-inspiration"></div>
+      <div class="anchor" id="sec:inspiration">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Inspiration
-          <a href="#sec-inspiration"
+          <a href="#sec:inspiration"
              title="Go to inspiration section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1300,10 +1335,12 @@
       </section>
 
       <!-- Section skills. -->
-      <div class="anchor" id="sec-skills"></div>
+      <div class="anchor" id="sec:skills">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Skills
-          <a href="#sec-skills"
+          <a href="#sec:skills"
              title="Go to skills section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1371,10 +1408,12 @@
       </section>
 
       <!-- Section languages. -->
-      <div class="anchor" id="sec-languages"></div>
+      <div class="anchor" id="sec:languages">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Languages
-          <a href="#sec-languages"
+          <a href="#sec:languages"
              title="Go to languages section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1408,10 +1447,12 @@
       </section>
 
       <!-- Section awards. -->
-      <div class="anchor" id="sec-awards"></div>
+      <div class="anchor" id="sec:awards">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Awards
-          <a href="#sec-awards"
+          <a href="#sec:awards"
              title="Go to awards section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1440,15 +1481,16 @@
                 <i class="titleIcon fas fa-vial"></i>
               </a>
             </h3>
-            <h4 class="dataLeft">
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; April 2016
-            </h4>
-            <h4 class="dataRight">
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Seville, Andalusia
-            </h4>
-            <div class="clear"></div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; April 2016
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Seville, Andalusia
+              </h4>
+            </div>
             <p class="awardText">
               Silver medal in the national phase.
           </div>
@@ -1468,15 +1510,16 @@
                 <i class="titleIcon fas fa-vial"></i>
               </a>
             </h3>
-            <h4 class="dataLeft">
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; March 2016
-            </h4>
-            <h4 class="dataRight">
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarre
-            </h4>
-            <div class="clear"></div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; March 2016
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Pamplona, Navarre
+              </h4>
+            </div>
             <p class="awardText">
               Winner of the local phase.
             </p>
@@ -1497,15 +1540,16 @@
                 <i class="titleIcon fas fa-puzzle-piece"></i>
               </a>
             </h3>
-            <h4 class="dataLeft">
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; January 2016
-            </h4>
-            <h4 class="dataRight">
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarre
-            </h4>
-            <div class="clear"></div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; January 2016
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Pamplona, Navarre
+              </h4>
+            </div>
             <p class="awardText">
               Second position in the local phase.
             </p>
@@ -1514,10 +1558,12 @@
       </section>
 
       <!-- Section others.  -->
-      <div class="anchor" id="sec-others"></div>
+      <div class="anchor" id="sec:others">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Others
-          <a href="#sec-others"
+          <a href="#sec:others"
              title="Go to others section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1532,15 +1578,16 @@
           </div>
           <div class="award">
             <h3>Former violinist <i class="titleIcon fas fa-compact-disc"></i></h3>
-            <h4 class="dataLeft">
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; 2008 &nbsp;&ndash;&nbsp; 2015
-            </h4>
-            <h4 class="dataRight">
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarre
-            </h4>
-            <div class="clear"></div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; 2008 &nbsp;&ndash;&nbsp; 2015
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Pamplona, Navarre
+              </h4>
+            </div>
             <p class="awardText">
               I played the violin in the conservatory in its first courses.
           </div>
@@ -1601,8 +1648,7 @@
               data synchronization between devices,
               <a href="https://david.alvarezrosa.com/"
                  title="David Álvarez Rosa's personal website.">
-                website
-              </a>, email, personal
+                website</a>, email, personal
               <a href="https://en.wikipedia.org/wiki/Git"
                  rel="nofollow noopener"
                  target="_blank"
@@ -1627,15 +1673,16 @@
           </div>
           <div class="award">
             <h3>Driving license <i class="titleIcon fas fa-id-card"></i></h3>
-            <h4 class="dataLeft">
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; October 2017
-            </h4>
-            <h4 class="dataRight">
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarre
-            </h4>
-            <div class="clear"></div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; October 2017
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Pamplona, Navarre
+              </h4>
+            </div>
             <p class="awardText">
               Spanish driving license (B).
           </div>
@@ -1643,10 +1690,12 @@
       </section>
 
       <!-- Section interests. -->
-      <div class="anchor" id="sec-interests"></div>
+      <div class="anchor" id="sec:interests">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Interests
-          <a href="#sec-interests"
+          <a href="#sec:interests"
              title="Go to interests section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
@@ -1662,10 +1711,12 @@
       </section>
 
       <!-- Section get in touch.  -->
-      <div class="anchor" id="sec-touch"></div>
+      <div class="anchor" id="sec:touch">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
       <section class="hidden">
         <h2>Get In Touch
-          <a href="#sec-touch"
+          <a href="#sec:touch"
              title="Go to get in touch section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
