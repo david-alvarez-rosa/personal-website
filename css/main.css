@@ -1050,6 +1050,50 @@ blockquote p i {
 }
 
 
+/* License (Creative Commons). */
+#license {
+    width: calc(100% - 35%);
+    margin-left: 35%;
+    background-color: var(--main-color);
+    padding: 2em 4em 2em 4em;
+    border-top: 2px solid #000000;
+    transition: width .3s linear;
+}
+
+#license p {
+    color: #000000;
+    font-size: .8em;
+}
+
+#copyright, #copyright a {
+    font-weight: bold;
+}
+
+#license a {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+#license img {
+    margin-top: 20px;
+    border-with: 0;
+}
+
+#license hr {
+    display: block;
+    height: 1px;
+    border: none;
+    background-color: #000000;
+    margin: 25px auto 25px auto;
+}
+
+.licenseShrunken {
+    width: calc(100% - 35% - 190px) !important;
+    padding-right: 2.75em !important;
+    padding-left: 2.75em !important;
+}
+
+
 /* Footer. */
 footer {
     text-align: right;
@@ -1207,15 +1251,6 @@ label {
         width: calc(100% - 33%);
     }
 
-    footer  {
-        padding-right: 2.75em;
-        text-align: center;
-    }
-
-    footer ul li {
-        width: 3.5em;
-    }
-
     main {
         margin-left: 33%;
         max-width: none;
@@ -1227,6 +1262,36 @@ label {
     .mainShrunken {
         width: calc(100% - 33% - 180px);
         padding: .75em 2.75em 4em 2.75em;
+    }
+
+    main {
+        margin-left: 33%;
+        max-width: none;
+        padding-left: 3em;
+        padding-right: 3em;
+        width: calc(100% - 33%);
+    }
+
+    #license {
+        margin-left: 33%;
+        padding-left: 3em;
+        padding-right: 3em;
+        width: calc(100% - 33%);
+    }
+
+    .licenseShrunken {
+        width: calc(100% - 33% - 180px) !important;
+        padding-right: 2.75em !important;
+        padding-left: 2.75em !important;
+    }
+
+    footer  {
+        padding-right: 2.75em;
+        text-align: center;
+    }
+
+    footer ul li {
+        width: 3.5em;
     }
 }
 
@@ -1294,6 +1359,20 @@ label {
     .mainShrunken {
         width: calc(100% - 190px);
         padding: .5em 2.75em 5em 2.75em;
+    }
+
+    #license {
+        margin: 0;
+        padding-right: 5em;
+        padding-left: 5em;
+        width: 100%;
+        border-bottom: 2px solid #000000;
+    }
+
+    .licenseShrunken {
+        width: calc(100% - 190px) !important;
+        padding-right: 2.75em !important;
+        padding-left: 2.75em !important;
     }
 
     footer {
@@ -1389,6 +1468,17 @@ label {
         margin-left: -25px;
     }
 
+    #license {
+        padding-right: 2.5em;
+        padding-left: 2.5em;
+    }
+
+    .licenseShrunken {
+        width: calc(100% - 190px) !important;
+        padding-right: 2.5em !important;
+        padding-left: 2.5em !important;
+    }
+
     footer {
         padding-top: 5em;
         padding-bottom: 2.5em;
@@ -1450,7 +1540,7 @@ label {
         margin: .5em;
     }
 
-    main p {
+    p {
         text-align: left;
     }
 
@@ -1480,6 +1570,16 @@ label {
 
     #interestsChart {
         width: 90%;
+    }
+
+    #license {
+        padding-right: 1.5em;
+        padding-left: 1.5em;
+
+    }
+
+    .licenseShrunken {
+        width: 100% !important;
     }
 }
 

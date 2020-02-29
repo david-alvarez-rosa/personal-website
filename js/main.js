@@ -174,17 +174,20 @@ var navBar = document.getElementById("navBar");
 var navBarExpanded = document.getElementById("navBarExpanded");
 navBarExpanded.style.display = "none";
 var mainDiv = document.getElementsByTagName("main")[0];
+var licenseDiv = document.getElementById("license");
 
 function toggleNavBar() {
     if (navBarExpanded.style.display === "none") {
         navBarExpanded.style.display = "block";
         navBar.style.display = "none";
         mainDiv.classList.add("mainShrunken");
+        licenseDiv.classList.add("licenseShrunken");
     }
     else {
         navBarExpanded.style.display = "none";
         navBar.style.display = "block";
         mainDiv.classList.remove("mainShrunken");
+        licenseDiv.classList.remove("licenseShrunken");
     }
 }
 
@@ -302,9 +305,7 @@ window.addEventListener("resize", navBarResize);
 
 // Hide navBar when click outside.
 function hideAll(event) {
-    if (document.getElementById("blurBackground").contains(event.target) ||
-        document.getElementsByTagName("main")[0].contains(event.target) ||
-        navBarExpanded.contains(event.target))
+    if (document.getElementById("blurBackground").contains(event.target))
         closeInformation();
 }
 

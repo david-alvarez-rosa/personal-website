@@ -71,6 +71,7 @@ function closeInformation() {
     navBarExpanded.style.display = "none";
     navBar.style.display = "block";
     mainDiv.classList.remove("mainShrunken");
+    licenseDiv.classList.remove("licenseShrunken");
 
     var infoDivs = document.getElementsByClassName("info");
     for (var i = 0; i < infoDivs.length; ++i)
