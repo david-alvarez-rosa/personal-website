@@ -1,0 +1,103 @@
+/* David \'Alvarez Rosa's blogsite CSS Styles. */
+
+
+blockquote {
+    margin-bottom: 1.5em;
+}
+
+.quoteAuthor {
+    padding-top: .75em;
+}
+
+main figure {
+    margin: 0 auto 1.5em auto;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #DADCE0;
+    padding: 10px;
+}
+
+main figure:hover {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    cursor: pointer;
+}
+
+main figure img {
+    width: 100%;
+}
+
+figcaption {
+    color: #666666;
+    text-align: center;
+    padding-top: .5em;
+}
+
+main h3 a:hover::before {
+    visibility: hidden;
+}
+
+h3 .linkIcon {
+    font-size: .75em;
+    padding-left: .25em;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+h3:hover .linkIcon {
+    opacity: 1;
+}
+
+#zoomImgDiv {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, .85);
+    display: none;
+}
+
+#zoomImgDiv figure {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+    width: 850px;
+    max-width: 100%;
+    max-height: 100%;
+    padding: 10px;
+}
+
+#zoomImg {
+    width: 100%;
+    max-height: 100%;
+}
+
+#zoomImgCaption {
+    color: #FFFFFF;
+}
+
+#zoomImgCaption strong {
+    font-weight: bold;
+}
+
+#zoomImgDiv i {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #FFFFFF;
+}
+
+#zoomImgDiv i:hover, #zoomImgDiv i:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#zoomImg, #zoomImgCaption {
+    animation: zoom .65s;
+}
+
+@keyframes zoom {
+    from { transform: scale(0); }
+    top { transform: scale(1); }
+}
