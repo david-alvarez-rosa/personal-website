@@ -49,12 +49,32 @@ button {
     visibility: hidden;
 }
 
-.anchor i {
+.anchor i, .anchor a {
     position: absolute;
+    color: var(--main-color);
+}
+
+.bouncingHand {
     bottom: -45px;
     left: -40px;
     font-size: 35px;
-    color: var(--main-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: .75s opacity .75s;
+}
+
+.undoAnchor {
+    display: block;
+    bottom: -60px;
+    bottom: -16px;
+    left: -43px;
+    font-size: 25px;
+    visibility: hidden;
+}
+
+.undoAnchor i {
+    opacity: 0;
+    transition: 1.45s opacity .75s;
 }
 
 ::-webkit-scrollbar {
@@ -780,7 +800,7 @@ main section h3 {
     overflow: hidden;
     border-radius: 5px;
     border: 1px solid #DADCE0;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
     transition: .32s transform, .35s border;
 }
@@ -841,7 +861,7 @@ main .card {
 }
 
 main .card:hover {
-    box-shadow: rgba(0,0,0,0.3) 0 0 6px,rgba(0,0,0,0.15) 0 1px 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .rightLeftFlex {

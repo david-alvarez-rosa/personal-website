@@ -20,7 +20,7 @@ header {
     animation: buzzOut .75s linear;
 }
 
-.anchor i {
+.bouncingHand {
     animation: bounceHand 1s linear infinite;
 }
 

@@ -429,6 +429,7 @@ function hideHeart() {
 
 
 // Add click event to relative links to show bouncing pointing hand to anchor.
+// Also add the posibility to go back.
 var links = document.getElementsByTagName("a");
 
 for (var i = 0; i < links.length; ++i) {
@@ -436,13 +437,69 @@ for (var i = 0; i < links.length; ++i) {
         links[i].addEventListener("click", showBouncingHand);
 }
 
+var anchorUndoDistance;
+
+function stopStartedAnchor() {
+    console.log(anchor);
+    if (!anchor)
+        return;
+
+    var bouncingHand = anchor.children[0];
+    var anchorUndo = anchor.children[1];
+
+    bouncingHand.style.visibility = "hidden";
+
+    var anchorUndoIcon = anchorUndo.children[0];
+    anchorUndoIcon.style.opacity = 0;
+    anchor.style.visibility = "hidden";
+}
+
+function anchorToggle() {
+    if (!anchor)
+        return;
+
+    var bouncingHand = anchor.children[0];
+    var anchorUndo = anchor.children[1];
+
+    bouncingHand.style.opacity = 0;
+    anchorUndo.style.visibility = "visible";
+    var anchorUndoIcon = anchorUndo.children[0];
+    anchorUndoIcon.style.opacity = .75;
+}
+
+var anchor;
+var anchorToggleTimeout;
+var anchorCloseTimeout;
+
 function showBouncingHand(event) {
+    anchorToggle();
+    clearTimeout(anchorToggleTimeout);
+    stopStartedAnchor();
+    clearTimeout(anchorCloseTimeout);
+
+    anchorUndoDistance = document.scrollingElement.scrollTop;
+
     var linkHref;
     if (event.target.classList.contains("linkIcon"))
         linkHref = event.target.offsetParent.hash;
     else
         linkHref = event.target.hash;
-    var anchor = document.getElementById(linkHref.substring(1, linkHref.length));
-    setTimeout(function () { anchor.style.visibility = "visible"; }, 750);
-    setTimeout(function () { anchor.style.visibility = "hidden"; }, 3750);
+    anchor = document.getElementById(linkHref.substring(1, linkHref.length));
+    var bouncingHand = anchor.children[0];
+    var anchorUndo = anchor.children[1];
+
+    anchor.style.visibility = "visible";
+    bouncingHand.style.visibility = "visible";
+    bouncingHand.style.opacity = .75;
+
+    anchorToggleTimeout = setTimeout(function () {
+        anchorToggle();
+        anchorCloseTimeout = setTimeout(stopStartedAnchor, 18000);
+    }, 2750);
+}
+
+function takeMeBack() {
+    window.scroll({top: anchorUndoDistance});
+    stopStartedAnchor();
+    clearTimeout(anchorCloseTimeout);
 }

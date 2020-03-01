@@ -367,6 +367,10 @@
       </p>
     </div>
 
+    <div class="triangleBubble" id="fastControlMsg">
+        Wow, wow, slow down. <br /> That's too fast!
+    </div>
+
     <div id="blurBackground"></div>
 
 
@@ -508,7 +512,7 @@
         </li>
         <li>
           <a href="#sec:forward" title="Scroll to feed forward section.">
-            Forward <i class="fas fa-project-diagram"></i>
+            Forward <i class="fas fa-forward"></i>
           </a>
         </li>
         <li>
@@ -518,8 +522,7 @@
         </li>
         <li>
           <a href="#sec:backward" title="Scroll to backward propagation section.">
-            Backward <i class="fas fa-chart-line"></i> <!-- TODO: change icon to -->
-            <!-- backward arrow. -->
+            Backward <i class="fas fa-backward"></i>
           </a>
         </li>
         <li>
@@ -549,7 +552,14 @@
         privacy.
       </p>
 
-      <div class="anchor" id="sec:intro"></div>
+      <div class="anchor" id="sec:intro">
+        <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+      </div>
       <section class="hidden">
         <h2> Introduction
           <a href="#sec:intro"
@@ -596,14 +606,21 @@
           <a href="https://en.wikipedia.org/wiki/Synapse"
              rel="nofollow noopener"
              target="_blank"
-             title="Robert Hecht-Nielsen - Wikipedia">
+             title="Synapse - Wikipedia">
             synapses <i class="fas fa-external-link-alt"></i>
           </a>
           in a biological brain, can transmit a signal to other neurons. An
           artificial neuron that receives a signal then processes it and can
           signal neurons connected to it.
         </p>
-        <div class="anchor" id="subsec:math-perspective"></div>
+        <div class="anchor" id="subsec:math-perspective">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <h3>
           Mathematical perspective
           <a href="#subsec:math-perspective"
@@ -618,14 +635,20 @@
           network to be a function that takes some inputs to some outputs, this
           function is dependent on <strong>parameters</strong>. The idea is to
           adjust this parameters to get a function that works well with some
-          known dataset, and we will rezaremos <!-- TODO: before --> that it
-          will generalize well. If the network is big enough and we carefully
-          adjust the parameters, we will be able to learn and calculate very
-          complex functions.
+          known dataset, and we will trust that it will generalize well. If the
+          network is big enough and we carefully adjust the parameters, we will
+          be able to learn and calculate very complex functions.
         </p>
       </section>
 
-      <div class="anchor" id="sec:topology"></div>
+      <div class="anchor" id="sec:topology">
+        <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+      </div>
       <section class="hidden">
         <h2> Network topology
           <a href="#sec:topology"
@@ -634,17 +657,31 @@
           </a>
           <i class="rightIcon fas fa-project-diagram"></i>
         </h2>
-        <div class="anchor" id="p:intro-toplogy"></div>
+        <div class="anchor" id="p:intro-toplogy">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <p>
-          More concretly, in this blog series <!-- TODO: add link here. --> we
-          will be discussing the <strong>fully-connected</strong> layered ANN,
-          this is a case in which neurons are organized
-          in <strong>layers</strong> and neurons between adjacent layers are
-          required to be connected (and weighted). In the
+          More concretly, in this blog series we will be discussing
+          the <strong>fully-connected</strong> layered ANN, this is a case in
+          which neurons are organized in <strong>layers</strong> and neurons
+          between adjacent layers are required to be connected (and
+          weighted). In the
           <a href="#fig:neural-network">figure 1</a> below, is shown an example
           of a fully connected neural network with two hidden layers.
         </p>
-        <div class="anchor" id="fig:neural-network"></div>
+        <div class="anchor" id="fig:neural-network">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <figure>
           <img src="Neural Network.jpeg"
                alt="Fully connected neural network example with two hidden layers.">
@@ -652,7 +689,14 @@
             <strong>Figure 1</strong>: Fully connected ANN with two hidden layers.
           </figcaption>
         </figure>
-        <div class="anchor" id="subsec:layers"></div>
+        <div class="anchor" id="subsec:layers">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <h3>
           Layers
           <a href="#subsec:layers"
@@ -695,7 +739,14 @@
           a handwritten number 3, then the ouput is one 1 in the position
           corresponding to the number 3 and the rest of zeros.
         </p>
-        <div class="anchor" id="subsec:neurons"></div>
+        <div class="anchor" id="subsec:neurons">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <h3>
           Neurons
           <a href="#subsec:neurons"
@@ -730,7 +781,14 @@
           regularity assummed for this functions is important, since we will be
           optimizing in the future taking derivatives.
         </p>
-        <div class="anchor" id="subsec:connections"></div>
+        <div class="anchor" id="subsec:connections">
+          <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+        </div>
         <h3>
           Connections
           <a href="#subsec:connections"
@@ -754,15 +812,21 @@
         </p>
       </section>
 
-      <div class="anchor" id="sec:forward"></div>
+      <div class="anchor" id="sec:forward">
+        <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+      </div>
       <section class="hidden">
         <h2> Feed forward
           <a href="#sec:forward"
              title="Go to feed forward section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
-          <i class="rightIcon fas fa-project-diagram"></i> <!-- TODO: change
-          icon for a forward arrow. -->
+          <i class="rightIcon fas fa-forward"></i>
         </h2>
         <p>
           From now on let's suppose we are working with a fully-connected neural
@@ -786,7 +850,14 @@
         </p>
       </section>
 
-      <div class="anchor" id="sec:optimize"></div>
+      <div class="anchor" id="sec:optimize">
+        <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take me back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+      </div>
       <section class="hidden">
         <h2> Optimization problem
           <a href="#sec:optimize"
@@ -804,14 +875,21 @@
         </p>
       </section>
 
-      <div class="anchor" id="sec:backward"></div>
+      <div class="anchor" id="sec:backward">
+        <i class="bouncingHand fas fa-hand-point-right"></i>
+        <a onclick="javascript:takeMeBack();"
+           class="undoAnchor"
+           title="Take mbouncingHand e back where I was.">
+          <i class="fas fa-fast-backward"></i>
+        </a>
+      </div>
       <section class="hidden">
         <h2> Backward propagation
           <a href="#sec:backward"
              title="Go to backward propagation section.">
             <i class="linkIcon fas fa-link"></i>
           </a>
-          <i class="rightIcon fas fa-chart-line"></i> <!-- TODO: change icon.  -->
+          <i class="rightIcon fas fa-backward"></i>
         </h2>
         <p>
           First ñaslkdjf asdf kasjdf asd.
@@ -893,14 +971,14 @@ int main() {
            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
            target="_blank"
            title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.." >
-          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
         <i class="fas fa-external-link-alt"></i>.
       </p>
       <hr />
       <p>
         Broken links and other corrections or suggestions can be sent
         to &lt;<a href="javascript:showInfo('welcomeUser');"
-                  title="Web master email.">webmaster@alvarezrosa.com</a>&gt;.
+                  title="Web master email.">admin@alvarezrosa.com</a>&gt;.
       </p>
       <p>
         Last update: February 29, 2020.
@@ -998,21 +1076,15 @@ int main() {
     <script src="js/confetti.js"></script>
     <!-- Include MathJax. -->
     <script id="MathJax-script" data-src="mathjax/tex-svg.js" async></script>
-
-
-
-
-
-
-
-
-
-
+    <!-- Include highlight.js (for syntax highlighting source code). -->
     <script src="highlight/highlight.pack.js"></script>
     <script src="highlight/highlight-line-numbers.min.js"></script>
-
-
-
     <script src="js/blog.js"></script>
+
+
+    <script type="text/javascript">
+      // Warn that this website is under construction.
+      setTimeout( function() { showInfo("welcomeUser"); }, 3500);
+    </script>
   </body>
 </html>

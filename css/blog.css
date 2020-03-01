@@ -14,11 +14,11 @@ main figure {
     width: 80%;
     border-radius: 10px;
     border: 1px solid #DADCE0;
-    padding: 10px;
+    padding: 10px 10px 5px 10px;
 }
 
 main figure:hover {
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 15px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
 }
 
@@ -30,6 +30,7 @@ figcaption {
     color: #666666;
     text-align: center;
     padding-top: .5em;
+    border-top: 1px solid #CCCCCC;
 }
 
 main h3 a:hover::before {
