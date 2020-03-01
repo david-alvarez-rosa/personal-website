@@ -5,7 +5,7 @@
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
  *
- * Copyright (C) 2020  David \'Alvarez Rosa
+ * Copyright (C) 2019-2020  David \'Alvarez Rosa
  *
  *
  * The JavaScript code in this page is free software: you can
@@ -305,6 +305,10 @@ window.addEventListener("resize", navBarResize);
 
 // Hide navBar when click outside.
 function hideAll(event) {
+    if (windowWidth <= 480 &&
+        document.getElementById("navBarExpanded").contains(event.target))
+        closeInformation();
+
     if (document.getElementById("blurBackground").contains(event.target))
         closeInformation();
 }
@@ -437,8 +441,8 @@ function showBouncingHand(event) {
     if (event.target.classList.contains("linkIcon"))
         linkHref = event.target.offsetParent.hash;
     else
-        linkHref= event.target.hash;
+        linkHref = event.target.hash;
     var anchor = document.getElementById(linkHref.substring(1, linkHref.length));
-    anchor.style.visibility = "visible";
-    setTimeout(function () { anchor.style.visibility = "hidden"; }, 2500);
+    setTimeout(function () { anchor.style.visibility = "visible"; }, 750);
+    setTimeout(function () { anchor.style.visibility = "hidden"; }, 3750);
 }

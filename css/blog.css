@@ -47,6 +47,8 @@ h3:hover .linkIcon {
     opacity: 1;
 }
 
+
+/* Zoomed image. */
 #zoomImgDiv {
     width: 100%;
     height: 100%;
@@ -100,4 +102,140 @@ h3:hover .linkIcon {
 @keyframes zoom {
     from { transform: scale(0); }
     top { transform: scale(1); }
+}
+
+
+/* Source code. */
+.sourceCode {
+    position: relative;
+    margin-bottom: 3em;
+}
+
+.sourceCode button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.copy, .copyOkey, .copyError {
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    visibility: hidden;
+    color: #ABB2BF;
+    opacity: 0;
+    transition: opacity .75s;
+}
+
+.copy {
+    visibility: visible;
+    opacity: 1;
+}
+
+.copy:hover {
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+.sourceCode pre code, .sourceCode pre code * {
+    font-family: Inconsolata;
+}
+
+.sourceCode pre code {
+    border: 3px solid var(--main-color);
+    border-radius: 6px;
+    box-shadow: 2px 4px 25px rgba(0,0,0,.15);
+    font-size: .9em;
+    line-height: .9em;
+    padding: 1em !important;
+    padding-top: -4.5em !important;
+    max-height: 500px;
+}
+
+.copyError {
+    color: #FF0000;
+}
+
+.copyOkey {
+    color: var(--main-color);
+}
+
+.hljs-ln-code {
+    padding-left: 10px !important;
+}
+
+.hljs-ln-numbers {
+    color: #CCC;
+    border-right: 1px solid #CCC;
+    vertical-align: top;
+    padding-right: 5px !important;
+}
+
+.sourceCode * ::selection {
+    background-color: #FFFFFF;
+}
+
+
+/* Blog controllers. */
+#blogControllers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.blogButton {
+    background-color: transparent;
+    border-radius: 20px;
+    border: solid 3px #E6E6E6;
+    color: #787878 !important;
+    cursor: pointer;
+    display: inline-block;
+    font-size: .9em;
+    font-weight: 400;
+    height: 3.15em;
+    line-height: 2.75em;
+    min-width: 12em;
+    padding: 0 1.5em;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+}
+
+.blogButton:hover {
+    border-color: var(--main-color);
+    color: var(--main-color) !important;
+}
+
+.blogButton {
+    margin: .5em 4em;
+}
+
+.blogPrevious i {
+    padding-right: .5em;
+}
+
+.blogNext i {
+    padding-left: .5em;
+}
+
+.blogButtonInactive {
+    opacity: .4;
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Small screen size. */
+@media screen and (max-width: 736px) {
+    .blogButton {
+        margin: .5em 2em;
+    }
+}
+
+
+/* XSmall screen size. */
+@media screen and (max-width: 480px) {
+    .blogButton {
+        margin: .5em .5em;
+    }
 }

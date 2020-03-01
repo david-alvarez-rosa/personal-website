@@ -362,7 +362,12 @@
     <!-- Navigation bar. -->
     <nav id="navBar">
       <div id="navBarDiv">
-        <a class="current" href="#sec:posts" title="Scroll to latest blog posts section.">
+        <a class="current"
+           href="#sec:subscribe"
+           title="Scroll to subscribe section.">
+          Subscribe
+        </a>
+        <a href="#sec:posts" title="Scroll to latest blog posts section.">
           Posts
         </a>
       </div>
@@ -378,7 +383,7 @@
     <nav id="navBarExpanded">
       <button id="navBarExpandedButton"
               onclick="toggleNavBar();"
-              title="Expand navigation bar.">
+              title="Hide expanded navigation bar.">
         <i class="fas fa-times fa-2x"></i>
       </button>
       <ul>
@@ -386,7 +391,14 @@
           Sections
         </li>
         <li>
-          <a class="current" href="#sec:posts" title="Scroll to latest blog posts section.">
+          <a class="current"
+             href="#sec:subscribe"
+             title="Scroll to subscribe section.">
+            Subscribe <i class="fas fa-rss-square"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#sec:posts" title="Scroll to latest blog posts section.">
             Posts <i class="fas fa-blog"></i>
           </a>
         </li>
@@ -417,6 +429,42 @@
         privacy.
       </p>
 
+      <div class="anchor" id="sec:subscribe">
+        <i class="fas fa-hand-point-right"></i>
+      </div>
+      <section class="hidden">
+        <h2> Subscribe
+          <a href="#sec:subscribe"
+             title="Go to subscribe section.">
+            <i class="linkIcon fas fa-link"></i>
+          </a>
+          <i class="rightIcon fas fa-rss-square"></i>
+        </h2>
+
+        <p>
+          You can subscribe to this blog by using this
+          <a href="rss.xml"
+             title="RSS subscription file.">
+            RSS file</a>.
+          An RSS
+          I recommend
+          <a href="https://nullprogram.com/blog/2013/09/04/"
+             target="_blank"
+             rel="nofollow noopener"
+             title="Introducing Elfeed, an Emacs Web Feed Reader.">
+            Elfeed <i class="fas fa-external-link-alt"></i>
+          </a>
+          for Emacs (created by
+          <a href="https://nullprogram.com/about/"
+             target="_blank"
+             rel="nofollow noopener"
+             title="Chris Wellons (skeeto) personal website.">
+            Chris Wellons <i class="fas fa-external-link-alt"></i>
+          </a>).
+
+        </p>
+      </section>
+
       <div class="anchor" id="sec:posts">
         <i class="fas fa-hand-point-right"></i>
       </div>
@@ -428,61 +476,76 @@
           </a>
           <i class="rightIcon fas fa-blog"></i>
         </h2>
-        <div class="card">
-          <h3>Hello world!</h3>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-clock"></i> &nbsp;
-              Less than one minute to read.
-            </h4>
-            <h4>
-              <i class="fas fa-user-edit"></i> &nbsp;
-              David Álvarez Rosa
-            </h4>
-          </div>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-tags"></i> &nbsp; Blog - Entry
-            </h4>
-            <h4>
-              <i class="fas fa-calendar-alt"></i> &nbsp;  24 of February of 2020
-            </h4>
-          </div>
-          <p class="marginTop">
-            As when starting anything new in CS, <em>Hello World!</em> I am
-            writing this post the day my personal website goes live. Regardless,
-            hello again. If you happen to be interested, feel free to contact me
-            clicking on the link in the homepage.
-          </p>
-        </div>
 
-        <div class="card">
-          <h3>Implementing a Neural Network from scratch - Part 1</h3>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-clock"></i> &nbsp;
-              10 to 15 minutes to read.
-            </h4>
-            <h4>
-              <i class="fas fa-user-edit"></i> &nbsp;
-              David Álvarez Rosa
-            </h4>
+        <p>
+          Below, you will find the latest blog posts summarized and listed in
+          reverse chronological order.
+        </p>
+
+        <a href="neural-network-part1.html"
+           title="Implementing a Neural Network from scratch - Part 1.">
+          <div class="card">
+            <h3>
+              Implementing a Neural Network from scratch - Part 1
+              <i class="titleIcon fas fa-project-diagram"></i>
+            </h3>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-clock"></i> &nbsp;
+                10 to 15 minutes to read
+              </h4>
+              <h4>
+                <i class="fas fa-user-edit"></i> &nbsp;
+                David Álvarez Rosa
+              </h4>
+            </div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-tags"></i> &nbsp; Neural Network - AI
+              </h4>
+              <h4>
+                <i class="fas fa-calendar-alt"></i> &nbsp;  24 of February of 2020
+              </h4>
+            </div>
+            <p class="marginTop">
+              As when starting anything new in CS, <em>Hello World!</em> I am
+              writing this post the day my personal website goes
+              live. Regardless, hello again. If you happen to be interested,
+              feel free to contact me clicking on the link in the homepage.
+            </p>
           </div>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-tags"></i> &nbsp; Neural Network - AI
-            </h4>
-            <h4>
-              <i class="fas fa-calendar-alt"></i> &nbsp;  24 of February of 2020
-            </h4>
+        </a>
+
+        <a href="hello-world.html"
+           title="Hello World!">
+          <div class="card">
+            <h3>Hello world! <i class="titleIcon fas fa-bullhorn"></i></h3>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-clock"></i> &nbsp;
+                Less than one minute to read
+              </h4>
+              <h4>
+                <i class="fas fa-user-edit"></i> &nbsp;
+                David Álvarez Rosa
+              </h4>
+            </div>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-tags"></i> &nbsp; Blog - Entry
+              </h4>
+              <h4>
+                <i class="fas fa-calendar-alt"></i> &nbsp;  24 of February of 2020
+              </h4>
+            </div>
+            <p class="marginTop">
+              As when starting anything new in CS, <em>Hello World!</em> I am
+              writing this post the day my personal website goes
+              live. Regardless, hello again. If you happen to be interested,
+              feel free to contact me clicking on the link in the homepage.
+            </p>
           </div>
-          <p class="marginTop">
-            As when starting anything new in CS, <em>Hello World!</em> I am
-            writing this post the day my personal website goes live. Regardless,
-            hello again. If you happen to be interested, feel free to contact me
-            clicking on the link in the homepage.
-          </p>
-        </div>
+        </a>
       </section>
     </main>
 
@@ -499,28 +562,28 @@
       <a rel="license noopener"
          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
          target="_blank"
-         title="Creative Commons Attribution-NoDerivatives 4.0 International License.">
+         title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.">
         <img src="/images/license.png"
-             alt="Creative Commons Attribution-NoDerivatives 4.0 International License." />
+             alt="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." />
       </a>
       <br />
       <p>
         This work is licensed under a
-        <a rel="license"
+        <a rel="license noopener"
            href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
            target="_blank"
-           title="Creative Commons Attribution-NoDerivatives 4.0 International License." >
-          Creative Commons Attribution-NoDerivatives 4.0 International License</a>
+           title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." >
+          Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
         <i class="fas fa-external-link-alt"></i>.
       </p>
       <hr />
       <p>
         Broken links and other corrections or suggestions can be sent
         to &lt;<a href="javascript:showInfo('welcomeUser');"
-                  title="Show my personal email.">webmaster@alvarezrosa.com</a>&gt;.
+                  title="Web master email.">webmaster@alvarezrosa.com</a>&gt;.
       </p>
       <p>
-        Last updated: February 29, 2020.
+        Last update: February 29, 2020.
       </p>
     </div>
 
