@@ -1201,7 +1201,9 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 }
 
 label {
-    display: none;
+    visibility: hidden;
+    height: 0;
+    width: 0;
 }
 
 
