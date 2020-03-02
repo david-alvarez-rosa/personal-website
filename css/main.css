@@ -219,7 +219,7 @@ button {
     display: none;
 }
 
-.triangleBubble:after {
+.triangleBubble::after {
     content: "";
     width: 0;
     height: 0;
@@ -506,7 +506,7 @@ header .background {
     display: inline-block;
 }
 
-#sites a:hover{
+#sites a:hover, #sites a:focus {
     color: black;
     background-position: -100% 100%;
     border-color: var(--main-color);
@@ -542,11 +542,11 @@ header .background {
     position: absolute;
 }
 
-#controllers button:hover {
+#controllers button:hover, #controllers button:focus {
     cursor: pointer;
 }
 
-#controllers button:hover i {
+#controllers button:hover i, #controllers button:focus i {
     color: var(--main-color);
     transform: scale(1.2);
     transition: transform .1s linear .1s;
@@ -605,18 +605,18 @@ header strong {
     cursor: pointer;
 }
 
-#selectLanguage:hover {
+#selectLanguage:hover, #selectLanguage:focus {
     border: none;
     box-shadow: none;
     background-color: rgba(51, 51, 51, .85);
     background-color: var(--main-color);
 }
 
-#selectLanguage:hover #dropButton {
+#selectLanguage:hover #dropButton, #selectLanguage:focus #dropButton {
     color: #000000;
 }
 
-#selectLanguage:hover #languages {
+#selectLanguage:hover #languages, #selectLanguage:focus #languages {
     display: block;
 }
 
@@ -626,7 +626,7 @@ header strong {
     font-weight: bold;
 }
 
-#dropButton:hover {
+#dropButton:hover, #dropButton:focus {
     cursor: pointer;
 }
 
@@ -671,7 +671,7 @@ main h2 {
     font-weight: 600;
 }
 
-main h2 a:hover::before {
+main h2 a:hover::before, main h2 a:focus::before {
     visibility: hidden;
 }
 
@@ -688,11 +688,11 @@ h2 .linkIcon {
     transition: opacity .5s;
 }
 
-h2:hover .linkIcon {
+h2:hover .linkIcon, h2:focus .linkIcon {
     opacity: 1;
 }
 
-.linkIcon:hover {
+.linkIcon:hover, .linkIcon:focus {
     color: var(--main-color);
 }
 
@@ -720,7 +720,7 @@ main p a, main ul li a {
     color: var(--main-color);
 }
 
-main a:hover {
+main a:hover, main a:focus {
     color: var(--main-color);
 }
 
@@ -731,13 +731,13 @@ main a:hover {
     transition: margin .5s, .15s opacity .25s;
 }
 
-main a:hover .hide {
+main a:hover .hide, main a:focus .hide {
     margin-left: .15em;
     visibility: visible;
     opacity: 1;
 }
 
-main a:before {
+main a::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -749,11 +749,11 @@ main a:before {
     transition: all 0.3s ease-in-out 0s;
 }
 
-main a:before {
+main a::before {
     background-color: var(--main-color);
 }
 
-main a:hover:before {
+main a:hover::before, main a:focus::before {
     visibility: visible;
     transform: scaleX(1);
 }
@@ -805,7 +805,7 @@ main section h3 {
     transition: .32s transform, .35s border;
 }
 
-.data:hover {
+.data:hover, .data:focus {
     transform: scale(.96);
     border: 2px solid black;
 }
@@ -840,7 +840,7 @@ main section h3 {
     font-weight: bold;
 }
 
-.data:hover .dataUnder {
+.data:hover .dataUnder, .data:focus .dataUnder {
     top: 0;
 }
 
@@ -860,7 +860,7 @@ main .card {
     transition: box-shadow .4s;
 }
 
-main .card:hover {
+main .card:hover, main .card:focus {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -931,11 +931,11 @@ blockquote p i {
     display: none;
 }
 
-.skills li a:hover .hide {
+.skills li a:hover .hide, .skills li a:focus .hide {
     display: inline-block;
 }
 
-.skills li a:hover {
+.skills li a:hover, .skills li a:focus {
     color: var(--main-color)!important;
 }
 

@@ -12,8 +12,8 @@ ErrorDocument 404 /404.html
         Header set Cache-Control "max-age=2592000, public"
     </filesMatch>
 
-    # One week for CSS files.
+    # Two week for CSS files.
     <filesMatch ".(css)$">
-        Header set Cache-Control "max-age=604800, public"
+        Header set Cache-Control "max-age=1209600, public"
     </filesMatch>
 </ifModule>

@@ -17,7 +17,7 @@ main figure {
     padding: 10px 10px 5px 10px;
 }
 
-main figure:hover {
+main figure:hover, main figure:focus {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     cursor: pointer;
 }
@@ -33,7 +33,7 @@ figcaption {
     border-top: 1px solid #CCCCCC;
 }
 
-main h3 a:hover::before {
+main h3 a:hover::before, main h3 a:focus::before {
     visibility: hidden;
 }
 
@@ -44,7 +44,7 @@ h3 .linkIcon {
     transition: opacity .5s;
 }
 
-h3:hover .linkIcon {
+h3:hover .linkIcon, h3:focus .linkIcon {
     opacity: 1;
 }
 
@@ -134,7 +134,7 @@ h3:hover .linkIcon {
     opacity: 1;
 }
 
-.copy:hover {
+.copy:hover, .copy:focus {
     cursor: pointer;
     color: var(--main-color);
 }
@@ -203,7 +203,7 @@ h3:hover .linkIcon {
     transition: background-color .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
 }
 
-.blogButton:hover {
+.blogButton:hover, .blogButton:focus {
     border-color: var(--main-color);
     color: var(--main-color) !important;
 }
