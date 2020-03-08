@@ -22,11 +22,12 @@
     <meta name="msapplication-TileColor" content="#DBDCDC">
     <meta name="msapplication-config" content="img/icons/browserconfig.xml">
     <meta name="theme-color" content="#FFFFFF">
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/animations.css" />
-    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/blog.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="fontawesome/css/brands.css" />
   </head>
 
 
@@ -70,7 +71,10 @@
 
 
     <!-- Information divs. -->
-    <div class="info" id="welcomeUser" style="width: 600px; left: calc(50% - 600px/2);">
+    <div class="info" id="welcomeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This website is under construction. Please, be patient.
       </p>
@@ -78,27 +82,27 @@
          rel="nofollow noopener"
          target="_blank"
          title="HTML website.">
-        <img data-src="/img/html.png"
-             style="float: left; margin-left: 30px;"
-             height="150px"
+        <img data-src="img/html.png"
+             style="float: left;"
+             width="140px"
              alt="HTML logo." />
       </a>
       <a href="https://www.w3.org/Style/CSS/Overview.en.html"
          rel="nofollow noopener"
          target="_blank"
          title="Cascading Style Sheets home page.">
-        <img data-src="/img/css.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+        <img data-src="img/css.png"
+             style="float: right;"
+             width="140px"
              alt="CSS logo." />
       </a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
          rel="nofollow noopener"
          target="_blank"
          title="JavaScript website.">
-        <img data-src="/img/js.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+        <img data-src="img/js.png"
+             style="float: right; margin-right: 15px;"
+             width="140px"
              alt="JavaScript logo." />
       </a>
       <div style="clear: both;"></div>
@@ -108,6 +112,9 @@
     </div>
 
     <div class="info" id="welcomeEmacsUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Emacs user! You are more than welcome. You may be interested in
         checking out my
@@ -122,7 +129,7 @@
          rel="nofollow noopener"
          target="_blank"
          title="GNU Emacs official website.">
-        <img data-src="/img/emacs.png"
+        <img data-src="img/emacs.png"
              style="float: left; margin-left: 30px;"
              height="150px"
              alt="Emacs icon." />
@@ -131,7 +138,7 @@
          rel="nofollow noopener"
          target="_blank"
          title="Richard Stallman's Personal Site.">
-        <img data-src="/img/richard_stallman.png"
+        <img data-src="img/richard_stallman.png"
              style="float: right; margin-right: 30px;"
              height="150px"
              alt="Richard Stallmann with Emacs icon." />
@@ -143,6 +150,9 @@
     </div>
 
     <div class="info" id="welcomeVimUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Vim user! You are more than welcome.
       </p>
@@ -150,7 +160,7 @@
          rel="nofollow noopener"
          target="_blank"
          title="Vim official website.">
-        <img data-src="/img/vim.png"
+        <img data-src="img/vim.png"
              style="margin-left: calc(50% - 175px/2);"
              width="175px"
              alt="Vim icon." />
@@ -161,8 +171,11 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeNoobUser" style="height: 550px; top: calc(50% - 550px/2);">
-      <p>
+    <div class="info" id="welcomeNoobUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
+      <p style="margin-bottom: 1em;">
         Hey visitor! It seems that you like to use the keyboard to
         scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
       </p>
@@ -185,7 +198,7 @@
         <li><strong>G</strong>: go bottom.</li>
       </ul>
       <div class="clear"></div>
-      <ul style="margin-top: 1em; margin-left: 150px;">
+      <ul style="margin-top: 1em; margin-left: 135px;">
         <li style="margin-left: 35px;"><strong>Others</strong></li>
         <li><strong>d</strong>: scroll down.</li>
         <li><strong>u</strong>: scroll up.</li>
@@ -199,7 +212,10 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeChromeUser" style="height: 325px; top: calc(50% - 325px/2);">
+    <div class="info" id="welcomeChromeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey visitor! It seems that you are using Google Chrome. You are more
         than welcome, but your browser is not: read
@@ -215,7 +231,7 @@
          rel="nofollow noopener"
          target="_blank"
          title="Qutebrowser official website.">
-        <img data-src="/img/qutebrowser.png"
+        <img data-src="img/qutebrowser.png"
              style="float: left; margin-left: 30px;"
              height="150px"
              alt="Qutebrowser icon." />
@@ -224,7 +240,7 @@
          rel="nofollow noopener"
          target="_blank"
          title="GNU Operating System official website.">
-        <img data-src="/img/gnu.png"
+        <img data-src="img/gnu.png"
              style="float: right; margin-right: 30px;"
              height="150px"
              alt="GNU Operating System icon." />
@@ -236,13 +252,16 @@
     </div>
 
     <div class="info" id="infoEmail">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my email. For security reasons it has been included as an
         image.
       </p>
-      <a href="/img/email.png"
+      <a href="img/email.png"
          title="Personal email.">
-        <img data-src="/img/email.png"
+        <img data-src="img/email.png"
              style="margin-left: calc(50% - 200px/2);"
              width="200px"
              alt="Personal email." />
@@ -253,13 +272,16 @@
     </div>
 
     <div class="info" id="infoPhone">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my phone number. For security reasons it has been included as an
         image.
       </p>
-      <a href="/img/phone-number.png"
+      <a href="img/phone-number.png"
          title="Personal phone number.">
-        <img data-src="/img/phone-number.png"
+        <img data-src="img/phone-number.png"
              style="margin-left: calc(50% - 175px/2);"
              width="175px"
              alt="Personal phone number." />
@@ -270,13 +292,16 @@
     </div>
 
     <div class="info" id="infoAddress">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my address. For security reasons it has been included as an
         image.
       </p>
-      <a href="/img/address.png"
-         title="Personal phone number.">
-        <img data-src="/img/address.png"
+      <a href="img/address.png"
+         title="Personal address.">
+        <img data-src="img/address.png"
              style="margin-left: calc(50% - 275px/2);"
              width="275px"
              alt="Personal address." />
@@ -301,25 +326,25 @@
     <header>
       <div class="background">
         <img class="backgroundImage"
-             data-src="/img/backgrounds/autumn"
+             data-src="img/backgrounds/autumn"
              alt="Background image: Autumn." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/beach"
+             data-src="img/backgrounds/beach"
              alt="Background image: Beach." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/flower"
+             data-src="img/backgrounds/flower"
              alt="Background image: Flower." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/leaves"
+             data-src="img/backgrounds/leaves"
              alt="Background image: Leaves." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/lighthouse"
+             data-src="img/backgrounds/lighthouse"
              alt="Background image: Lighthouse." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/mountain"
+             data-src="img/backgrounds/mountain"
              alt="Background image: Mountain." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/stars"
+             data-src="img/backgrounds/stars"
              alt="Background image: Stars." />
       </div>
       <div class="overlay"></div>
@@ -341,7 +366,7 @@
            title="David Álvarez Rosa's personal blog.">
           Blog
         </a>
-        <a href="/pdf/curriculum-vitae.pdf#view=Fit"
+        <a href="pdf/curriculum-vitae.pdf#view=Fit"
            title="My personal Curriculum Vitae.">
           CV
         </a>
@@ -580,7 +605,7 @@
          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
          target="_blank"
          title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.">
-        <img src="/img/license.png"
+        <img src="img/license.png"
              alt="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." />
       </a>
       <br />
@@ -609,25 +634,25 @@
     <footer>
       <div class="background">
         <img class="backgroundImage"
-             data-src="/img/backgrounds/autumn"
+             data-src="img/backgrounds/autumn"
              alt="Background image: Autumn." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/beach"
+             data-src="img/backgrounds/beach"
              alt="Background image: Beach." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/flower"
+             data-src="img/backgrounds/flower"
              alt="Background image: Flower." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/leaves"
+             data-src="img/backgrounds/leaves"
              alt="Background image: Leaves." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/lighthouse"
+             data-src="img/backgrounds/lighthouse"
              alt="Background image: Lighthouse." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/mountain"
+             data-src="img/backgrounds/mountain"
              alt="Background image: Mountain." />
         <img class="backgroundImage"
-             data-src="/img/backgrounds/stars"
+             data-src="img/backgrounds/stars"
              alt="Background image: Stars." />
       </div>
       <div class="overlay"></div>
@@ -690,9 +715,9 @@
 
 
     <!-- Javascript files. -->
-    <script src="/js/main.js"></script>
-    <script src="/js/shortcuts.js"></script>
-    <script src="/js/confetti.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/shortcuts.js"></script>
+    <script src="js/confetti.js"></script>
     <script type="text/javascript">
       // Warn that this website is under construction.
       setTimeout( function() { showInfo("welcomeUser"); }, 3500);

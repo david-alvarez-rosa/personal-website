@@ -104,7 +104,10 @@
 
 
     <!-- Information divs. -->
-    <div class="info" id="welcomeUser" style="width: 600px; left: calc(50% - 600px/2);">
+    <div class="info" id="welcomeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This website is under construction. Please, be patient.
       </p>
@@ -113,8 +116,8 @@
          target="_blank"
          title="HTML website.">
         <img data-src="img/html.png"
-             style="float: left; margin-left: 30px;"
-             height="150px"
+             style="float: left;"
+             width="140px"
              alt="HTML logo." />
       </a>
       <a href="https://www.w3.org/Style/CSS/Overview.en.html"
@@ -122,8 +125,8 @@
          target="_blank"
          title="Cascading Style Sheets home page.">
         <img data-src="img/css.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+             style="float: right;"
+             width="140px"
              alt="CSS logo." />
       </a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
@@ -131,8 +134,8 @@
          target="_blank"
          title="JavaScript website.">
         <img data-src="img/js.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+             style="float: right; margin-right: 15px;"
+             width="140px"
              alt="JavaScript logo." />
       </a>
       <div style="clear: both;"></div>
@@ -142,6 +145,9 @@
     </div>
 
     <div class="info" id="welcomeEmacsUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Emacs user! You are more than welcome. You may be interested in
         checking out my
@@ -177,6 +183,9 @@
     </div>
 
     <div class="info" id="welcomeVimUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Vim user! You are more than welcome.
       </p>
@@ -195,61 +204,11 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeNoobUser" style="height: 550px; top: calc(50% - 550px/2 - 18px);">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <i class="fas fa-times fa-lg" -->
-      <!--    style="position: absolute; top: 8px; right: 8px;"></i> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <p>
+    <div class="info" id="welcomeNoobUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
+      <p style="margin-bottom: 1em;">
         Hey visitor! It seems that you like to use the keyboard to
         scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
       </p>
@@ -272,7 +231,7 @@
         <li><strong>G</strong>: go bottom.</li>
       </ul>
       <div class="clear"></div>
-      <ul style="margin-top: 1em; margin-left: 150px;">
+      <ul style="margin-top: 1em; margin-left: 135px;">
         <li style="margin-left: 35px;"><strong>Others</strong></li>
         <li><strong>d</strong>: scroll down.</li>
         <li><strong>u</strong>: scroll up.</li>
@@ -286,7 +245,10 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeChromeUser" style="height: 325px; top: calc(50% - 325px/2);">
+    <div class="info" id="welcomeChromeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey visitor! It seems that you are using Google Chrome. You are more
         than welcome, but your browser is not: read
@@ -323,6 +285,9 @@
     </div>
 
     <div class="info" id="infoEmail">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my email. For security reasons it has been included as an
         image.
@@ -340,6 +305,9 @@
     </div>
 
     <div class="info" id="infoPhone">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my phone number. For security reasons it has been included as an
         image.
@@ -357,12 +325,15 @@
     </div>
 
     <div class="info" id="infoAddress">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my address. For security reasons it has been included as an
         image.
       </p>
       <a href="img/address.png"
-         title="Personal phone number.">
+         title="Personal address.">
         <img data-src="img/address.png"
              style="margin-left: calc(50% - 275px/2);"
              width="275px"

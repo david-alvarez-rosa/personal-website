@@ -91,7 +91,7 @@ h3:hover .linkIcon, h3:focus .linkIcon {
 }
 
 #zoomImgDiv i:hover, #zoomImgDiv i:focus {
-  color: #bbb;
+  color: #BBB;
   text-decoration: none;
   cursor: pointer;
 }

@@ -151,10 +151,10 @@ footer {
 }
 
 @keyframes bounceInFromRight {
-    0% { opacity: 0; transform: translateX(400px); }
-    60% { transform: translateX(-30px); }
-    80% { transform: translateX(10px); }
-    100% { opacity: .9; transform: translateX(0); }
+    0% { opacity: 0; left: calc(50% - 500px/2 + 400px); }
+    60% { left: calc(50% - 500px/2 - 30px); }
+    80% { left: calc(50% - 500px/2 + 10px); }
+    100% { opacity: .9; left: calc(50% - 500px/2); }
 }
 
 blockquote:hover {

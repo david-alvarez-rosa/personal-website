@@ -34,7 +34,7 @@
           "@type": "Person",
           "honorificPrefix": "Mr",
           "name": "David Álvarez Rosa",
-          "image": "img/background.jpeg",
+          "image": "img/icons/icon.png",
           "jobTitle": "Mathematics and Industrial Engineering student",
           "disambiguatingDescription": "Mathematics and Industrial Engineering student",
           "alumniOf": "Polytechnic University of Catalonia",
@@ -93,7 +93,10 @@
 
 
     <!-- Information divs. -->
-    <div class="info" id="welcomeUser" style="width: 600px; left: calc(50% - 600px/2);">
+    <div class="info" id="welcomeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This website is under construction. Please, be patient.
       </p>
@@ -102,8 +105,8 @@
          target="_blank"
          title="HTML website.">
         <img data-src="img/html.png"
-             style="float: left; margin-left: 30px;"
-             height="150px"
+             style="float: left;"
+             width="140px"
              alt="HTML logo." />
       </a>
       <a href="https://www.w3.org/Style/CSS/Overview.en.html"
@@ -111,8 +114,8 @@
          target="_blank"
          title="Cascading Style Sheets home page.">
         <img data-src="img/css.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+             style="float: right;"
+             width="140px"
              alt="CSS logo." />
       </a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
@@ -120,8 +123,8 @@
          target="_blank"
          title="JavaScript website.">
         <img data-src="img/js.png"
-             style="float: right; margin-right: 30px;"
-             height="150px"
+             style="float: right; margin-right: 15px;"
+             width="140px"
              alt="JavaScript logo." />
       </a>
       <div style="clear: both;"></div>
@@ -131,6 +134,9 @@
     </div>
 
     <div class="info" id="welcomeEmacsUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Emacs user! You are more than welcome. You may be interested in
         checking out my
@@ -166,6 +172,9 @@
     </div>
 
     <div class="info" id="welcomeVimUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey Vim user! You are more than welcome.
       </p>
@@ -184,8 +193,11 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeNoobUser" style="height: 550px; top: calc(50% - 550px/2);">
-      <p>
+    <div class="info" id="welcomeNoobUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
+      <p style="margin-bottom: 1em;">
         Hey visitor! It seems that you like to use the keyboard to
         scroll. Please consider <em>upgrading</em> to (probably) better shortcuts.
       </p>
@@ -208,7 +220,7 @@
         <li><strong>G</strong>: go bottom.</li>
       </ul>
       <div class="clear"></div>
-      <ul style="margin-top: 1em; margin-left: 150px;">
+      <ul style="margin-top: 1em; margin-left: 135px;">
         <li style="margin-left: 35px;"><strong>Others</strong></li>
         <li><strong>d</strong>: scroll down.</li>
         <li><strong>u</strong>: scroll up.</li>
@@ -222,7 +234,10 @@
       </p>
     </div>
 
-    <div class="info" id="welcomeChromeUser" style="height: 325px; top: calc(50% - 325px/2);">
+    <div class="info" id="welcomeChromeUser">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         Hey visitor! It seems that you are using Google Chrome. You are more
         than welcome, but your browser is not: read
@@ -259,6 +274,9 @@
     </div>
 
     <div class="info" id="infoEmail">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my email. For security reasons it has been included as an
         image.
@@ -276,6 +294,9 @@
     </div>
 
     <div class="info" id="infoPhone">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my phone number. For security reasons it has been included as an
         image.
@@ -293,6 +314,9 @@
     </div>
 
     <div class="info" id="infoAddress">
+      <a href="javascript:closeInformation();" title="Close information.">
+        <i class="closeInfo fas fa-window-close"></i>
+      </a>
       <p>
         This is my address. For security reasons it has been included as an
         image.
@@ -533,7 +557,7 @@
           </button>
           <div id="languages">
             <a href="." title="David Álvarez Rosa's personal website.">ENG</a>
-            <a href="./es" title="Web personal de David Álvarez Rosa.">ES</a>
+            <a href="./es" title="Página web personal de David Álvarez Rosa.">ES</a>
           </div>
         </div>
         <div class="clear"></div>
@@ -579,7 +603,7 @@
           This site is intended to be a web version of my
           <a href="pdf/curriculum-vitae.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
-            resume
+            curriculum vitae
           </a> and be my corner on the Internet. I designed this website myself
           from scratch, if you're curious, you can take a look at the
           <a rel="external noopener"
@@ -678,6 +702,18 @@
             </div>
           </div>
         </div>
+
+        <p>
+          Next year I will do research on machine learning (with focus on
+          computer vision) as a visiting student at the
+          <a href="https://www.utoronto.ca/"
+             rel="nofollow noopener"
+             target="_blank"
+             title="University of Toronto official website.">
+            University of Toronto <i class="fas fa-external-link-alt"></i>
+          </a>
+          (Canada), where I will do my final degree thesis.
+        </p>
       </section>
 
       <!-- Section education. -->
@@ -1480,8 +1516,8 @@
           <div class="languageLevel languageLevel2"></div>
         </div>
         <p class="languageText">
-          Very good understanding of the language. Basic level in oral and
-          written expression.
+          Very good understanding of the language. Intermediate level in oral
+          and written expression.
         </p>
       </section>
 
@@ -1537,6 +1573,36 @@
             </div>
             <p class="awardText">
               Silver medal in the national phase.
+          </div>
+        </div>
+        <div class="card cardAward">
+          <div class="awardTrophyIcon">
+            <i class="fas fa-medal fa-lg"></i>
+          </div>
+          <div class="award">
+            <h3>
+              <a href="http://www.olimpiadamatematica.es/platea.pntic.mec.es/_csanchez/olimmain.html"
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Spanish Mathematical Olympiad website.">
+                Spanish Mathematical Olympiad
+                <i class="hide fas fa-external-link-alt"></i>
+                <i class="titleIcon fas fa-puzzle-piece"></i>
+              </a>
+            </h3>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; April 2016
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Barcelona, Catalonia
+              </h4>
+            </div>
+            <p class="awardText">
+              Competitor in the national phase.
+            </p>
           </div>
         </div>
         <div class="card cardAward">
@@ -1664,8 +1730,7 @@
                   rel="nofollow noopener"
                   target="_blank"
                   title="Arch Linux official website.">
-                Arch <i class="fas fa-external-link-alt"></i>
-              </a>,
+                Arch <i class="fas fa-external-link-alt"></i></a>,
               <a href="https://www.debian.org/"
                   rel="nofollow noopener"
                   target="_blank"
@@ -1692,8 +1757,8 @@
                  rel="nofollow noopener"
                  target="_blank"
                  title="Virtual private server - Wikipedia.">
-                Virtual Private Server <i class="fas fa-external-link-alt"></i>
-              </a>:
+                Virtual Private Server
+                <i class="fas fa-external-link-alt"></i></a>:
               data synchronization between devices,
               <a href="https://david.alvarezrosa.com/"
                  title="David Álvarez Rosa's personal website.">
