@@ -106,6 +106,127 @@ h3:hover .linkIcon, h3:focus .linkIcon {
 }
 
 
+/* Callout. */
+.callOut span {
+    position: absolute;
+    margin-top: 32px;
+    margin-left: -252px;
+    width: 275px;
+    z-index: 10;
+    padding: 15px 15px 2px 15px;
+    background-color: var(--main-color);
+    color: #000000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: left;
+    border: 1px solid #666666;
+    display: none;
+}
+
+.callOut span::after {
+    content: "";
+    width: 0;
+    height: 0;
+	  position: absolute;
+    top: -1px;
+    right: 20px;
+    transform: translateY(-100%);
+    z-index: -1;
+    margin-left: -25%;
+    border-bottom: solid 10px var(--main-color);
+    border-bottom: solid 10px #666666;
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+}
+
+.callOut a {
+    all: unset;
+    transition: scale .5s;
+}
+
+.callOut a:hover i, .callOut a:focus i {
+    transform: scale(1.2);
+}
+
+.callOut span p {
+    color: #000000;
+    text-align: left;
+    font-size: .9em;
+    margin-bottom: 1em;
+}
+
+.callOut:hover, .callOut:focus {
+    cursor: pointer;
+}
+
+.callOut span:hover, .callOut span:focus {
+    cursor: default;
+}
+
+.callOut:hover span, .callOut:focus span {
+    display: inline-block;
+}
+
+
+/* Enlarged call out. */
+#enlargedCallOutDiv {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, .3);
+    display: none;
+}
+
+#enlargedCallOutContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+}
+
+#enlargedCallOutContainer i {
+    position: absolute;
+    line-height: 10px !important;
+    top: -4px;
+    right: -10px;
+    font-size: 22px;
+    color: #000000;
+    border-radius: 100%;
+    background-color: var(--main-color);
+}
+
+#enlargedCallOutContainer i:hover, #enlargedCallOutContainer i:focus {
+    color: #BBB;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#enlargedCallOut {
+    width: 275px;
+    max-width: 100%;
+    z-index: 10;
+    padding: 15px 15px 2px 15px;
+    background-color: var(--main-color);
+    color: #000000;
+
+    text-align: left;
+    border: 1px solid #666666;
+    animation: zoom .65s;
+}
+
+#enlargedCallOut p {
+    color: #000000;
+    text-align: left;
+    font-size: .9em;
+    margin-bottom: 1em;
+}
+
+#enlargedCallOut p strong {
+    font-weight: bold;
+}
+
+
 /* Source code. */
 .sourceCode {
     position: relative;
@@ -225,6 +346,7 @@ h3:hover .linkIcon, h3:focus .linkIcon {
     cursor: default;
     pointer-events: none;
 }
+
 
 /* Small screen size. */
 @media screen and (max-width: 736px) {

@@ -338,7 +338,7 @@ var fastControlMsg = document.getElementById("fastControlMsg");
 function forwardAnimation() {
     if (animationPause) {
         fastControlMsg.style.display = "block";
-        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3000);
+        setTimeout(function() { fastControlMsg.style.display = "none"; }, 3500);
         return;
     }
     animationPause = true;

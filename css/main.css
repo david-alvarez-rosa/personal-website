@@ -210,16 +210,17 @@ button {
 
 .triangleBubble {
     position: fixed;
-    right: 16px;
+    right: 10px;
     top: 150px;
     width: 150px;
     z-index: 10;
     padding: 15px;
     background-color: var(--main-color);
-    font-size: 1em;
+    font-size: .9em;
     line-height: 1.25em;
     color: #000000;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3), 0 4px 15px 0 rgba(0, 0, 0, 0.29);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #666666;
     display: none;
 }
 
@@ -228,14 +229,14 @@ button {
     width: 0;
     height: 0;
 	  position: absolute;
-    top: 14%;
+    top: 10px;
     right: 0;
     transform: translateX(100%);
     z-index: -1;
     margin-left: -25%;
-    border-left: solid 15px var(--main-color);
-    border-top: solid 15px transparent;
-    border-bottom: solid 15px transparent;
+    border-left: solid 10px #666666;
+    border-top: solid 10px transparent;
+    border-bottom: solid 10px transparent;
 }
 
 #fastControlMsg {

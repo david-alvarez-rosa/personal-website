@@ -63,9 +63,6 @@ function openZoomImg() {
     zoomImgCaption.innerHTML = this.lastElementChild.innerHTML
 }
 
-zoomImg.src = figures[0].firstElementChild.src;
-zoomImgCaption.innerHTML = figures[0].lastElementChild.innerHTML
-
 function closeZoomImg() {
     zoomImgDiv.style.display = "none";
 }
@@ -151,3 +148,40 @@ function copyToClipboard(textId) {
 // Add syntax highlighting for source code.
 hljs.initHighlightingOnLoad();
 hljs.initLineNumbersOnLoad();
+
+
+// Enlarge call out.
+var enlargedCallOutDiv = document.getElementById("enlargedCallOutDiv");
+var enlargedCallOutInfo = document.getElementById("enlargedCallOutInfo");
+
+function enlargeCallOut(callOutId) {
+    enlargedCallOutDiv.style.display = "block";
+    var callOut = document.getElementById(callOutId);
+    var callOutSpan = callOut.lastElementChild;
+    enlargedCallOutInfo.innerHTML = callOutSpan.innerHTML;
+}
+
+function closeEnlargedCallOut() {
+    enlargedCallOutDiv.style.display = "none";
+}
+
+function closeEnlargedCallOutAux(event) {
+    if (enlargedCallOutInfo.contains(event.target))
+        return;
+    enlargedCallOutDiv.style.display = "none";
+}
+
+enlargedCallOutDiv.addEventListener("click", closeEnlargedCallOutAux);
+
+
+
+
+
+
+
+
+
+
+
+
+enlargeCallOut("callOutFunctions");
