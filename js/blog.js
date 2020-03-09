@@ -172,16 +172,3 @@ function closeEnlargedCallOutAux(event) {
 }
 
 enlargedCallOutDiv.addEventListener("click", closeEnlargedCallOutAux);
-
-
-
-
-
-
-
-
-
-
-
-
-enlargeCallOut("callOutFunctions");
