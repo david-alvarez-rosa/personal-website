@@ -1,6 +1,56 @@
 /* David \'Alvarez Rosa's blogsite CSS Styles. */
 
 
+/* Blog entry title and subtitle. */
+main h1 {
+    position: relative;
+    font-weight: bold;
+    color: #666666;
+    width: 650px;
+    max-width: 100%;
+    margin: 1em auto 27px auto;
+    border-top: solid 2px #B3B3B3;
+    border-bottom: solid 2px #B3B3B3;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.subTitle {
+    width: 650px;
+    max-width: 100%;
+    margin: 0 auto 3em auto;
+}
+
+.abstract {
+    text-decoration: underline;
+}
+
+.marginTopAux {
+    margin-top: 17px;
+}
+
+.marginTopAuxAux {
+    margin-top: .75em;
+}
+
+
+/* Basics (for global use). */
+.readMore {
+    margin-top: -1.25em;
+    margin-bottom: .75em;
+    text-align: center;
+}
+
+.readMore:hover {
+    color: var(--main-color);
+    transform: scale(1.075);
+    transition: transform .4s;
+}
+
+.moreTags {
+    padding-left: .25em;
+}
+
 blockquote {
     margin-bottom: 1.5em;
 }
@@ -143,7 +193,7 @@ h3:hover .linkIcon, h3:focus .linkIcon {
     transition: scale .5s;
 }
 
-.callOut a:hover i, .callOut a:focus i {
+.callOut a:hover i, .callOut a:focus i, {
     transform: scale(1.2);
 }
 

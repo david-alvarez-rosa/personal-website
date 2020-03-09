@@ -704,6 +704,7 @@ h2:hover .linkIcon, h2:focus .linkIcon {
 main h3 {
     font-size: 1.25em;
     padding-bottom: -1em;
+    line-height: 1.75em;
 }
 
 .titleIcon {
