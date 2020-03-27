@@ -163,8 +163,7 @@
             curriculum vitae
           </a> and be my corner on the Internet. I designed this website myself
           from scratch, if you're curious, you can take a look at the
-          <a rel="external noopener"
-             href="https://gitlab.com/DavidAlvarez/personal-website"
+          <a href="https://gitlab.com/DavidAlvarez/personal-website"
              target="_blank"
              title="Personal website source code - Gitlab.">
             source code <i class="fas fa-external-link-alt"></i>
@@ -237,8 +236,7 @@
             </div>
           </div>
           </a>
-          <a rel="external noopener"
-             href="https://gitlab.com/DavidAlvarez"
+          <a href="https://gitlab.com/DavidAlvarez"
              target="_blank"
              title="Personal Gitlab page.">
             <div class="data">
@@ -756,8 +754,7 @@
             Creation of virtual animation of a <strong>robotic arm</strong> able
             to play the Tic Tac Toe game and <strong>never lose</strong>. The
             source code of this project can be found in my
-            <a rel="external noopener"
-               href="https://gitlab.com/DavidAlvarez"
+            <a href="https://gitlab.com/DavidAlvarez"
                target="_blank"
                title="Personal Gitlab page.">
               personal Gitlab page <i class="fas fa-external-link-alt"></i></a>.
@@ -911,8 +908,7 @@
             </li>
             <li>
               Here is the
-              <a rel="external noopener"
-                 href="https://gitlab.com/DavidAlvarez/horario"
+              <a href="https://gitlab.com/DavidAlvarez/horario"
                  target="_blank"
                  title="Source code of the project - Gitlab.">
                 source code <i class="fas fa-external-link-alt"></i>

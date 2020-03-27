@@ -170,7 +170,7 @@
         </p>
       </div>
 
-      <div class="anchor" id="sec:intro">
+      <div class="anchor" id="sec:introduction">
         <i class="bouncingHand fas fa-hand-point-right"></i>
         <a onclick="javascript:takeMeBack();"
            class="undoAnchor"
@@ -502,7 +502,7 @@
         </p>
       </section>
 
-      <div class="anchor" id="sec:optimize">
+      <div class="anchor" id="sec:optimization">
         <i class="bouncingHand fas fa-hand-point-right"></i>
         <a onclick="javascript:takeMeBack();"
            class="undoAnchor"
