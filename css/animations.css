@@ -199,3 +199,45 @@ blockquote:hover {
     90% { transform: translateX(1px) rotate(0); }
     100% { transform: translateX(-1px) rotate(0); }
 }
+
+.shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+		background: linear-gradient(to right,
+                                rgba(255,255,255,0)    0%,
+                                rgba(255,255,255,0.03) 1%,
+                                rgba(255,255,255,0.6)  30%,
+                                rgba(255,255,255,0.85) 50%,
+                                rgba(255,255,255,0.85) 70%,
+                                rgba(255,255,255,0.85) 71%,
+                                rgba(255,255,255,0)    100%);
+	  width: 25px;
+		height: 100%;
+    transform: skew(-10deg, 0);
+    animation: moveShine 7s;
+		animation-iteration-count: infinite;
+		animation-delay: 5s;
+}
+
+@keyframes moveShine {
+	  0%  { left: 0; opacity: 0; }
+	  1% { opacity: 0; }
+	  9.6% { opacity: 0.2; }
+	  16% { opacity: 0; }
+	  20%, 100% { left: 100%; }
+}
+
+#smallHeart {
+    animation: heartbeatAux 1.5s infinite;
+}
+
+@keyframes heartbeatAux {
+    0% { transform: scale( .85 ); }
+    20% { transform: scale( 1 ); }
+    40% { transform: scale( .85 ); }
+    60% { transform: scale( 1 ); }
+    80% { transform: scale( .85 ); }
+    100% { transform: scale( .85 ); }
+}

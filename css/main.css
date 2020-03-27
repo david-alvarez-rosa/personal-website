@@ -1165,6 +1165,7 @@ footer .background {
 }
 
 #author {
+    position: relative;
     margin: 1em -.75em 0 0;
     border-radius: 0 6px 6px 0;
     padding: .35em .75em .20em 0;
@@ -1181,6 +1182,12 @@ footer .background {
 
 #author a {
     color: #1A1A1A;
+}
+
+#smallHeart {
+    font-size: 1.5em;
+    line-height: 0.85em;
+    vertical-align: -.1em;
 }
 
 
