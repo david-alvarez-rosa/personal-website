@@ -66,96 +66,12 @@
 
 
   <body class="preload">
-    <!-- Loading spinner. -->
-    <div id="loadingSpinner"></div>
-
-
-    <!-- Information divs. -->
-    <?php include "resources/information.html"; ?>
-
-
-    <!-- Heart. -->
-    <div id="heart"><i class="fas fa-heart"></i></div>
-
-
-    <!-- Enlarged call out. -->
-    <div id="enlargedCallOutDiv">
-      <div id="enlargedCallOutContainer">
-        <div id="enlargedCallOut">
-          <a href="javascript:closeCallOut();" title="Close enlarged information.">
-            <i class="fas fa-times-circle"></i>
-          </a>
-          <div id="enlargedCallOutInfo"></div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Header. -->
-    <?php $currentSite = "blog"; include "resources/header.php"; ?>
-
-
-    <!-- Navigation bar. -->
-    <nav id="navBar">
-      <div id="navBarDiv">
-        <a class="current"
-           href="#sec:subscribe"
-           title="Scroll to subscribe section.">
-          Subscribe
-        </a>
-        <a href="#sec:posts" title="Scroll to latest blog posts section.">
-          Posts
-        </a>
-      </div>
-      <button id="navBarButton"
-              onclick="toggleNavBar();"
-              title="Expand navigation bar.">
-        <i class="fas fa-bars fa-2x"></i>
-      </button>
-    </nav>
-
-
-    <!-- Navigation bar expanded. -->
-    <nav id="navBarExpanded">
-      <button id="navBarExpandedButton"
-              onclick="toggleNavBar();"
-              title="Hide expanded navigation bar.">
-        <i class="fas fa-times fa-2x"></i>
-      </button>
-      <ul>
-        <li class="title">
-          Sections
-        </li>
-        <li>
-          <a class="current"
-             href="#sec:subscribe"
-             title="Scroll to subscribe section.">
-            Subscribe <i class="fas fa-rss-square"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:posts" title="Scroll to latest blog posts section.">
-            Posts <i class="fas fa-blog"></i>
-          </a>
-        </li>
-        <li>
-          <p>
-            @David &copy; 2020
-          </p>
-        </li>
-      </ul>
-    </nav>
-
-
-    <!-- Scroll back to top button. -->
-    <div id="scrollTop"
-         onmouseover="document.getElementById('scrollTopSpan').style.display = 'inline-block';"
-         onmouseout="document.getElementById('scrollTopSpan').style.display = 'none';">
-      <a href="#" title="Scroll back to top.">
-        <span id="scrollTopSpan">Go to top</span>
-        <i class="fas fa-arrow-circle-up fa-2x"></i>
-      </a>
-    </div>
+     <?php
+     $currentSite = 'blog';
+     $sections = array('Subscribe', 'Posts');
+     $icons = array('fas fa-rss-square', 'fas fa-blog');
+     include 'resources/bodyPreMain.php';
+     ?>
 
 
     <!-- Main. -->

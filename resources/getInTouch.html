@@ -1,0 +1,69 @@
+<div class="anchor" id="sec:get-in-touch">
+  <i class="bouncingHand fas fa-hand-point-right"></i>
+  <a onclick="javascript:takeMeBack();"
+     class="undoAnchor"
+     title="Take me back where I was.">
+    <i class="fas fa-fast-backward"></i>
+  </a>
+</div>
+<section class="hidden">
+  <h2>Get In Touch
+    <a href="#sec:touch"
+       title="Go to get in touch section.">
+      <i class="linkIcon fas fa-link"></i>
+    </a>
+    <i class="rightIcon fas fa-fingerprint"></i>
+  </h2>
+  <p>
+    If you want to send me a message, my inbox is always open. Whether for a
+    potential project or just to say hi, I'll try my best to answer your email!
+  </p>
+  <form method="post" action="javascript:showInfo('welcomeUser');">
+    <label for="inputName">Name</label>
+    <label for="inputEmail">Email</label>
+    <label for="inputMessage">Message</label>
+    <div id="getInTouch">
+      <input type="text"
+             id="inputName"
+             placeholder="&#xF007;  Name"
+             style="width: calc(50% - .5em); float: left;" />
+      <input type="email"
+             id="inputEmail"
+             placeholder="&#xF1FA;  Email"
+             style="width: calc(50% - .5em); float: right; margin-right: 0;" />
+      <textarea id="inputMessage"
+                placeholder="&#xF044;  Message"
+                rows="5"
+                style="width: 100%;"></textarea>
+      <input type="submit" value="Send Message" class="primary" />
+      <input type="reset" value="Reset" />
+    </div>
+    <div id="getInTouchRight">
+      <ul>
+        <li>
+          <i class="fas fa-envelope fa-lg"></i>
+          <a href="javascript:showInfo('infoAddress');"
+             title="Show my personal address.">
+            Show address.
+          </a>
+        </li>
+        <li>
+          <i class="fas fa-phone fa-lg"></i>
+          <a href="javascript:showInfo('infoPhone');"
+             title="Show my personal phone number.">
+            Show phone number.
+          </a>
+        </li>
+        <li>
+          <i class="fas fa-at fa-lg"></i>
+          <a href="javascript:showInfo('infoEmail');"
+             title="Show my personal email.">
+            Show email.
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- Give parent size (the above divs are floating). -->
+    <div class="clear"></div>
+  </form>
+</section>

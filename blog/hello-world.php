@@ -14,7 +14,7 @@
                                    Entry, Mathematics, Engineering, Technology" />
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://blog.alvarezrosa.com/hello-world.html" />
+    <link rel="canonical" href="https://blog.alvarezrosa.com/hello-world.php" />
     <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
@@ -36,7 +36,7 @@
 		      "@context":"http://schema.org",
 		      "@type": "BlogPosting",
 		      "image": "https://blog.alvarezrosa.com/neural-network.jpeg",
-		      "url": "https://blog.alvarezrosa.com/neural-networks-part1.html",
+		      "url": "https://blog.alvarezrosa.com/hello-world.php",
 		      "headline": "Neural Networks - Part 1",
 		      "alternativeHeadline": "Neural Networks",
 		      "dateCreated": "2019-02-11T11:11:11",
@@ -99,86 +99,12 @@
 
 
   <body class="preload">
-    <!-- Loading spinner. -->
-    <div id="loadingSpinner"></div>
-
-
-    <!-- Information divs. -->
-    <?php include "resources/information.html"; ?>
-
-
-    <!-- Heart. -->
-    <div id="heart"><i class="fas fa-heart"></i></div>
-
-
-    <!-- Zoomed images.  -->
-    <div id="zoomImgDiv">
-      <a href="javascript:closeZoomImg();" title="Close zoomed figure.">
-        <i class="fas fa-times fa-2x"></i>
-      </a>
-      <figure>
-        <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
-      </figure>
-    </div>
-
-
-    <!-- Header. -->
-    <?php $currentSite = "blog"; include "resources/header.php"; ?>
-
-
-    <!-- Navigation bar. -->
-    <nav id="navBar">
-      <div id="navBarDiv">
-        <a class="current"
-           href="#sec:greeting"
-           title="Scroll to greeting section.">
-          Greeting
-        </a>
-      </div>
-      <button id="navBarButton"
-              onclick="toggleNavBar();"
-              title="Expand navigation bar.">
-        <i class="fas fa-bars fa-2x"></i>
-      </button>
-    </nav>
-
-
-    <!-- Navigation bar expanded. -->
-    <nav id="navBarExpanded">
-      <button id="navBarExpandedButton"
-              onclick="toggleNavBar();"
-              title="Hide expanded navigation bar.">
-        <i class="fas fa-times fa-2x"></i>
-      </button>
-      <ul>
-        <li class="title">
-          Sections
-        </li>
-        <li>
-          <a class="current"
-             href="#sec:greeting"
-             title="Scroll to greeting section.">
-            Greeting <i class="fas fa-bullhorn"></i>
-          </a>
-        </li>
-        <li>
-          <p>
-            @David &copy; 2020
-          </p>
-        </li>
-      </ul>
-    </nav>
-
-
-    <!-- Scroll back to top button. -->
-    <div id="scrollTop"
-         onmouseover="document.getElementById('scrollTopSpan').style.display = 'inline-block';"
-         onmouseout="document.getElementById('scrollTopSpan').style.display = 'none';">
-      <a href="#" title="Scroll back to top.">
-        <span id="scrollTopSpan">Go to top</span>
-        <i class="fas fa-arrow-circle-up fa-2x"></i>
-      </a>
-    </div>
+     <?php
+     $currentSite = 'blog';
+     $sections = array('Greeting');
+     $icons = array('fas fa-bullhorn');
+     include 'resources/bodyPreMain.php';
+     ?>
 
 
     <!-- Main. -->
@@ -251,7 +177,7 @@
           <i class="fas fa-arrow-left"></i> Previous blog entry
         </button>
         <button class="blogButton blogNext"
-                onclick="window.location.href = 'neural-network-part1.html';">
+                onclick="window.location.href = 'neural-network-part1.php';">
           Next blog entry <i class="fas fa-arrow-right"></i>
         </button>
       </div>

@@ -128,7 +128,7 @@ button {
 }
 
 .hideLoadingSpinner {
-    transition: 3s transform 1s linear;
+    transition: 3s transform 1.5s linear;
     transform: translateY(1500px);
 }
 

@@ -33,12 +33,12 @@
    </h2>
    <div id="sites">
       <a href="."
-         <?php if ($currentSite === "home") echo 'class="currentSite"'; ?>
+         <?php if ($currentSite === 'home') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal website.">
          Home
       </a>
       <a href="https://blog.alvarezrosa.com/"
-         <?php if ($currentSite === "blog") echo 'class="currentSite"'; ?>
+         <?php if ($currentSite === 'blog') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal blog.">
          Blog
       </a>

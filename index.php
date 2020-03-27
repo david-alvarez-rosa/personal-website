@@ -88,151 +88,17 @@
 
 
   <body class="preload">
-    <!-- Loading spinner. -->
-    <div id="loadingSpinner"></div>
-
-
-    <!-- Information divs. -->
-    <?php include "resources/information.html"; ?>
-
-
-    <!-- Heart. -->
-    <div id="heart"><i class="fas fa-heart"></i></div>
-
-
-    <!-- Header. -->
-    <?php $currentSite = "home"; include "resources/header.php"; ?>
-
-
-    <!-- Navigation bar. -->
-    <nav id="navBar">
-      <div id="navBarDiv">
-        <a class="current" href="#sec:about" title="Scroll to about me section.">
-          About
-        </a>
-        <a href="#sec:education" title="Scroll to education section.">
-          Education
-        </a>
-        <a href="#sec:courses" title="Scroll to courses section.">
-          Courses
-        </a>
-        <a href="#sec:projects" title="Scroll to projects section.">
-          Projects
-        </a>
-        <a href="#sec:inspiration" title="Scroll to inspiration section.">
-          Inspiration
-        </a>
-        <a href="#sec:skills" title="Scroll to skills section.">
-          Skills
-        </a>
-        <a href="#sec:languages" title="Scroll to languages section.">
-          Languages
-        </a>
-        <a href="#sec:awards" title="Scroll to awards section.">
-          Awards
-        </a>
-        <a href="#sec:others" title="Scroll to others section.">
-          Others
-        </a>
-        <a href="#sec:interests" title="Scroll to interests section.">
-          Interests
-        </a>
-        <a href="#sec:touch" title="Scroll to get in touch section.">
-          Get In Touch
-        </a>
-      </div>
-      <button id="navBarButton"
-              onclick="toggleNavBar();"
-              title="Expand navigation bar.">
-        <i class="fas fa-bars fa-2x"></i>
-      </button>
-    </nav>
-
-
-    <!-- Navigation bar expanded. -->
-    <nav id="navBarExpanded">
-      <button id="navBarExpandedButton"
-              onclick="toggleNavBar();"
-              title="Hide expanded navigation bar.">
-        <i class="fas fa-times fa-2x"></i>
-      </button>
-      <ul>
-        <li class="title">
-          Sections
-        </li>
-        <li>
-          <a class="current" href="#sec:about" title="Scroll to about me section.">
-            About <i class="fas fa-address-card"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:education" title="Scroll to education section.">
-            Education <i class="fas fa-graduation-cap"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:courses" title="Scroll to courses section.">
-            Courses <i class="fas fa-book"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:projects" title="Scroll to projects section.">
-            Projects <i class="fas fa-lightbulb"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:inspiration" title="Scroll to inspiration section.">
-            Inspiration <i class="fas fa-quote-right"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:skills" title="Scroll to skills section.">
-            Skills <i class="fas fa-rocket"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:languages" title="Scroll to languages section.">
-            Languages <i class="fas fa-language"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:awards" title="Scroll to awards section.">
-            Awards <i class="fas fa-trophy"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:others" title="Scroll to others section.">
-            Others <i class="fas fa-asterisk"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:interests" title="Scroll to interests section.">
-            Interests <i class="fas fa-search"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:touch" title="Scroll to get in touch section.">
-            Get In Touch <i class="fas fa-fingerprint"></i>
-          </a>
-        </li>
-        <li>
-          <p>
-            @David &copy; 2020
-          </p>
-        </li>
-      </ul>
-    </nav>
-
-
-    <!-- Scroll back to top button. -->
-    <div id="scrollTop"
-         onmouseover="document.getElementById('scrollTopSpan').style.display = 'inline-block';"
-         onmouseout="document.getElementById('scrollTopSpan').style.display = 'none';">
-      <a href="#" title="Scroll back to top.">
-        <span id="scrollTopSpan">Go to top</span>
-        <i class="fas fa-arrow-circle-up fa-2x"></i>
-      </a>
-    </div>
+     <?php
+     $currentSite = 'home';
+     $sections = array('About', 'Education', 'Courses', 'Projects', 'Inspiration',
+                       'Skills', 'Languages', 'Awards', 'Others', 'Interests',
+                       'Get In Touch');
+     $icons = array('fas fa-address-card', 'fas fa-graduation-cap',
+                    'fas fa-book', 'fas fa-lightbulb', 'fas fa-quote-right',
+                    'fas fa-rocket', 'fas fa-language', 'fas fa-trophy',
+                    'fas fa-asterisk', 'fas fa-search', 'fas fa-fingerprint');
+     include 'resources/bodyPreMain.php';
+     ?>
 
 
     <!-- Main. -->
@@ -1521,85 +1387,16 @@
       </section>
 
       <!-- Section get in touch.  -->
-      <div class="anchor" id="sec:touch">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
-      <section class="hidden">
-        <h2>Get In Touch
-          <a href="#sec:touch"
-             title="Go to get in touch section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-fingerprint"></i>
-        </h2>
-        <p>
-          If you want to send me a message, my inbox is always open. Whether for
-          a potential project or just to say hi, I'll try my best to answer your
-          email!
-        </p>
-        <form method="post" action="javascript:showInfo('welcomeUser');">
-          <label for="inputName">Name</label>
-          <label for="inputEmail">Email</label>
-          <label for="inputMessage">Message</label>
-          <div id="getInTouch">
-            <input type="text"
-                   id="inputName"
-                   placeholder="&#xF007;  Name"
-                   style="width: calc(50% - .5em); float: left;" />
-            <input type="email"
-                   id="inputEmail"
-                   placeholder="&#xF1FA;  Email"
-                   style="width: calc(50% - .5em); float: right; margin-right: 0;" />
-            <textarea id="inputMessage"
-                      placeholder="&#xF044;  Message"
-                      rows="5"
-                      style="width: 100%;"></textarea>
-            <input type="submit" value="Send Message" class="primary" />
-            <input type="reset" value="Reset" />
-          </div>
-          <div id="getInTouchRight">
-            <ul>
-              <li>
-                <i class="fas fa-envelope fa-lg"></i>
-                <a href="javascript:showInfo('infoAddress');"
-                   title="Show my personal address.">
-                  Show address.
-                </a>
-              </li>
-              <li>
-                <i class="fas fa-phone fa-lg"></i>
-                <a href="javascript:showInfo('infoPhone');"
-                   title="Show my personal phone number.">
-                  Show phone number.
-                </a>
-              </li>
-              <li>
-                <i class="fas fa-at fa-lg"></i>
-                <a href="javascript:showInfo('infoEmail');"
-                   title="Show my personal email.">
-                  Show email.
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- Give parent size (the above divs are floating). -->
-          <div class="clear"></div>
-        </form>
-      </section>
+      <?php include 'resources/getInTouch.html'; ?>
     </main>
 
 
     <!-- License (Creative Commons). -->
-    <?php include "resources/license.html"; ?>
+    <?php include 'resources/license.html'; ?>
 
 
     <!-- Footer. -->
-    <?php include "resources/footer.html"; ?>
+    <?php include 'resources/footer.html'; ?>
 
 
     <!-- Javascript files. -->

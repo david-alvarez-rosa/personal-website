@@ -218,7 +218,7 @@ blockquote:hover {
     transform: skew(-10deg, 0);
     animation: moveShine 7s;
 		animation-iteration-count: infinite;
-		animation-delay: 5s;
+		animation-delay: 3s;
 }
 
 @keyframes moveShine {

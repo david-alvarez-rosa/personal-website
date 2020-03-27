@@ -100,137 +100,20 @@
 
 
   <body class="preload">
-    <!-- Loading spinner. -->
-    <div id="loadingSpinner"></div>
+     <?php
+     $currentSite = 'blog';
+     $sections = array('Introduction', 'Topology', 'Forward', 'Optimization',
+                       'Backward');
+     $icons = array('fas fa-percentage', 'fas fa-project-diagram',
+                    'fas fa-forward', 'fas fa-chart-line', 'fas fa-backward');
+     include 'resources/bodyPreMain.php';
+     ?>
 
 
-    <!-- Information divs. -->
-    <?php include "resources/information.html"; ?>
-
-
-    <!-- Heart. -->
-    <div id="heart"><i class="fas fa-heart"></i></div>
-
-
-    <!-- Zoomed images.  -->
-    <div id="zoomImgDiv">
-      <a href="javascript:closeZoomImg();" title="Close zoomed figure.">
-        <i class="fas fa-times fa-2x"></i>
-      </a>
-      <figure>
-        <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
-      </figure>
-    </div>
-
-
-    <!-- Enlarged call out. -->
-    <div id="enlargedCallOutDiv">
-      <div id="enlargedCallOutContainer">
-        <div id="enlargedCallOut">
-          <a href="javascript:closeCallOut();" title="Close enlarged information.">
-            <i class="fas fa-times-circle"></i>
-          </a>
-          <div id="enlargedCallOutInfo"></div>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Header. -->
-    <?php $currentSite = "blog"; include "resources/header.php"; ?>
-
-
-    <!-- Navigation bar. -->
-    <nav id="navBar">
-      <div id="navBarDiv">
-        <a class="current"
-           href="#sec:intro"
-           title="Scroll to introduction section.">
-          Introduction
-        </a>
-        <a href="#sec:topology" title="Scroll to network topology section.">
-          Topology
-        </a>
-        <a href="#sec:forward" title="Scroll to feed forward section.">
-          Forward
-        </a>
-        <a href="#sec:optimize" title="Scroll to optimization problem section.">
-          Optimization
-        </a>
-        <a href="#sec:backward" title="Scroll to backward propagation section.">
-          Backward
-        </a>
-      </div>
-      <button id="navBarButton"
-              onclick="toggleNavBar();"
-              title="Expand navigation bar.">
-        <i class="fas fa-bars fa-2x"></i>
-      </button>
-    </nav>
-
-
-    <!-- Navigation bar expanded. -->
-    <nav id="navBarExpanded">
-      <button id="navBarExpandedButton"
-              onclick="toggleNavBar();"
-              title="Hide expanded navigation bar.">
-        <i class="fas fa-times fa-2x"></i>
-      </button>
-      <ul>
-        <li class="title">
-          Sections
-        </li>
-        <li>
-          <a class="current"
-             href="#sec:intro"
-             title="Scroll to introduction section.">
-            Introduction <i class="fas fa-percentage"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:topology" title="Scroll to network topology section.">
-            Topology <i class="fas fa-project-diagram"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:forward" title="Scroll to feed forward section.">
-            Forward <i class="fas fa-forward"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:optimize" title="Scroll to optimization problem section.">
-            Optimization <i class="fas fa-chart-line"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#sec:backward" title="Scroll to backward propagation section.">
-            Backward <i class="fas fa-backward"></i>
-          </a>
-        </li>
-        <li>
-          <p>
-            @David &copy; 2020
-          </p>
-        </li>
-      </ul>
-    </nav>
-
-
-    <!-- Scroll back to top button. -->
-    <div id="scrollTop"
-         onmouseover="document.getElementById('scrollTopSpan').style.display = 'inline-block';"
-         onmouseout="document.getElementById('scrollTopSpan').style.display = 'none';">
-      <a href="#" title="Scroll back to top.">
-        <span id="scrollTopSpan">Go to top</span>
-        <i class="fas fa-arrow-circle-up fa-2x"></i>
-      </a>
-    </div>
-
-
-    <!-- Main. -->
-    <main>
-      <p class="fadeIn" style="margin-top: 2.5em;">
-        This website does not (and won't ever) use cookies. I value your
+     <!-- Main. -->
+     <main>
+        <p class="fadeIn" style="margin-top: 2.5em;">
+           This website does not (and won't ever) use cookies. I value your
         privacy.
       </p>
 
@@ -798,7 +681,7 @@ int main() {
 
       <div id="blogControllers" class="fadeIn">
         <button class="blogButton blogPrevious"
-                onclick="window.location.href = 'hello-world.html';">
+                onclick="window.location.href = 'hello-world.php';">
           <i class="fas fa-arrow-left"></i> Previous blog entry
         </button>
         <button class="blogButton blogNext blogButtonInactive">
