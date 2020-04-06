@@ -47,7 +47,7 @@ var header = document.getElementsByTagName("header")[0];
 var headerImages = header.getElementsByClassName("backgroundImage");
 var footer = document.getElementsByTagName("footer")[0];
 var footerImages = footer.getElementsByClassName("backgroundImage");
-var colors = ["#D45B12", "#006579", "#C98E03", "#3A6F1F", "#DF7E3A", "#56737B", "#405172"];
+
 
 function randomShuffle(array) {
     var tmp, current, top = array.length;
@@ -60,10 +60,10 @@ function randomShuffle(array) {
     return array;
 }
 
-var imagesOrder = [0, 1, 2, 3, 4, 5, 6];
+var imagesOrder = [];
+for (var i = 0; i < headerImages.length; ++i)
+    imagesOrder.push(i);
 imagesOrder = randomShuffle(imagesOrder);
-var headerBackground = header.getElementsByClassName("background")[0];
-var footerBackground = footer.getElementsByClassName("background")[0];
 var animationDuration = 18000; // In miliseconds.
 var reverse = "";
 var animationStop = false;
@@ -104,11 +104,9 @@ function updateBackgroundImage() {
 
     setTimeout(function() {
         document.documentElement.style.setProperty("--main-color",
-                                                   colors[imagesOrder[imageIteratorNext]]);
+                                                   nextHeaderImage.dataset.color);
         updateBackgroundIterators();
     }, 500);
-    headerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
-    footerBackground.style.backgroundColor = colors[imagesOrder[imageIteratorNext]]
 
     animationTimeoutAux = setTimeout( function() {
         updateBackgroundImage();
@@ -122,7 +120,7 @@ footerFirstImage.src = headerFirstImage.dataset.src + "_low.jpg";
 headerFirstImage.classList.add("backgroundImageFirst");
 footerFirstImage.classList.add("backgroundImageFirst");
 document.documentElement.style.setProperty("--main-color",
-                                           colors[imagesOrder[imageIterator]]);
+                                           headerFirstImage.dataset.color);
 setTimeout(updateBackgroundImage, animationDuration);
 
 

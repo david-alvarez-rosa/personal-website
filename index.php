@@ -1392,7 +1392,7 @@
 
 
     <!-- Footer. -->
-    <?php include 'resources/footer.html'; ?>
+    <?php include 'resources/footer.php'; ?>
 
 
     <!-- Javascript files. -->
