@@ -294,7 +294,7 @@
                </a>
             </div>
             <figure>
-               <img src="Neural Network.jpeg"
+               <img src="img/blog/Neural Network.jpeg"
                     alt="Fully connected neural network example with two hidden layers.">
                <figcaption>
                   <strong>Figure 1</strong>: Fully connected ANN with two hidden layers.

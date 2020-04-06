@@ -25,16 +25,16 @@
 
 <html lang="en">
   <head>
-    <title>Neural Networks | David Álvarez Rosa | Personal Blog</title>
+    <title>Hello World! | David Álvarez Rosa | Personal Blog</title>
     <meta charset="UTF-8" />
-    <meta name="description" content="Implementing a Neural Network from scratch
-                                      in C++ - Part 1 - The theory | David
-                                      Álvarez Rosa | Personal Blog" />
-    <meta name="keywords" content="Neural Network, C++, Scratch, Fully
-                                   Connected, Artificial Intelligence, Deep
-                                   Learning, Implementing, David Álvarez Rosa,
-                                   David Álvarez, David, Personal Blog, Blog,
-                                   Entry, Mathematics, Engineering, Technology" />
+    <meta name="description" content="As when starting anything new in CS, Hello
+                                      World! This blog is dated the day my
+                                      personal website went live. Either way,
+                                      hello again." />
+    <meta name="keywords" content="Hello World, Welcome, Greeting, Implementing,
+                                   David Álvarez Rosa, David Álvarez, David,
+                                   Personal Blog, Blog, Entry, Mathematics,
+                                   Engineering, Technology" />
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://blog.alvarezrosa.com/hello-world.php" />
@@ -58,10 +58,9 @@
 	   {
 		     "@context":"http://schema.org",
 		     "@type": "BlogPosting",
-		     "image": "https://blog.alvarezrosa.com/neural-network.jpeg",
+		     "image": "https://blog.alvarezrosa.com/img/blog/Writting.jpeg",
 		     "url": "https://blog.alvarezrosa.com/hello-world.php",
-		     "headline": "Neural Networks - Part 1",
-		     "alternativeHeadline": "Neural Networks",
+		     "headline": "Hello World!",
 		     "dateCreated": "2019-02-11T11:11:11",
 		     "datePublished": "2019-02-11T11:11:11",
 		     "dateModified": "2019-02-11T11:11:11",
@@ -156,12 +155,19 @@
           <i class="rightIcon fas fa-bullhorn"></i>
         </h2>
         <p>
-          As when starting anything new in CS, <em>Hello World!</em> This blog
-          post is dated the day my personal website <strong>went
-          live</strong>. Either way, hello again. If you happen to be
-          interested, feel free to <strong>subscribe</strong> using the above
-          RSS file or to get in touch by clicking on the link in the homepage.
+           As when starting anything new in CS, <em>Hello World!</em> This blog
+           post is dated the day my personal website <strong>went
+           live</strong>. Either way, hello again. If you happen to be
+           interested, feel free to <strong>subscribe</strong> using the above
+           RSS file or to get in touch by clicking on the link in the homepage.
         </p>
+        <figure>
+           <img src="img/blog/Writting.jpeg"
+                alt="Towards the perfect blog post.">
+           <figcaption>
+              <strong>Figure 1</strong>: Towards the perfect blog post.
+           </figcaption>
+        </figure>
       </section>
 
       <div id="blogControllers" class="fadeIn">
