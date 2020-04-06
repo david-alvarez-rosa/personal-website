@@ -1,62 +1,54 @@
+<?php
+/**
+ *
+ * David \'Alvarez Rosa's personal website 404 error PHP file.
+ * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ **/
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
-    <title>404 Error | David Álvarez Rosa | Personal Website</title>
-    <meta charset="UTF-8" />
-    <meta name="author" content="David Álvarez Rosa" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://david.alvarezrosa.com/404.php" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#816363">
-    <link rel="shortcut icon" href="/img/icons/favicon.ico">
-    <meta name="msapplication-TileColor" content="#DBDCDC">
-    <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
-    <meta name="theme-color" content="#FFFFFF">
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/animations.css" />
-    <link rel="stylesheet" href="/css/404.css" />
-    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+     <title>404 Error | David Álvarez Rosa | Personal Website</title>
+     <meta charset="UTF-8" />
+     <meta name="author" content="David Álvarez Rosa" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="canonical" href="https://david.alvarezrosa.com/404.php" />
+     <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+     <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+     <link rel="manifest" href="site.webmanifest">
+     <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#816363">
+     <link rel="shortcut icon" href="/img/icons/favicon.ico">
+     <meta name="msapplication-TileColor" content="#DBDCDC">
+     <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
+     <meta name="theme-color" content="#FFFFFF">
+     <link rel="stylesheet" href="/css/main.css" />
+     <link rel="stylesheet" href="/css/animations.css" />
+     <link rel="stylesheet" href="/css/404.css" />
+     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+     <link rel="stylesheet" href="/fontawesome/css/solid.css" />
+     <link rel="stylesheet" href="/fontawesome/css/brands.css" />
   </head>
 
 
-  <!--
-	    Alright, you can look at this code - but only if you solve this maze within
-	    10 seconds. David.
-
-	    Start.
-
-	    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   a
-	    8   8               8               8           8                   8   8
-	    8   8   aaaaaaaaa   8   aaaaa   aaaa8aaaa   aaaa8   aaaaa   aaaaa   8   8
-	    8               8       8   8           8           8   8   8       8   8
-	    8aaaaaaaa   a   8aaaaaaa8   8aaaaaaaa   8aaaa   a   8   8   8aaaaaaa8   8
-	    8       8   8               8           8   8   8   8   8           8   8
-	    8   a   8aaa8aaaaaaaa   a   8   aaaaaaaa8   8aaa8   8   8aaaaaaaa   8   8
-	    8   8               8   8   8       8           8           8       8   8
-	    8   8aaaaaaaaaaaaaaa8aaa8   8aaaa   8   aaaaa   8aaaaaaaa   8   aaaa8   8
-	    8           8       8   8       8   8       8           8   8           8
-	    8   aaaaa   8aaaa   8   8aaaa   8   8aaaaaaa8   a   a   8   8aaaaaaaaaaa8
-	    8       8       8   8   8       8       8       8   8   8       8       8
-	    8aaaaaaa8aaaa   8   8   8   aaaa8aaaa   8   aaaa8   8   8aaaa   8aaaa   8
-	    8           8   8           8       8   8       8   8       8           8
-	    8   aaaaa   8   8aaaaaaaa   8aaaa   8   8aaaa   8aaa8   aaaa8aaaaaaaa   8
-	    8   8       8           8           8       8   8   8               8   8
-	    8   8   aaaa8aaaa   a   8aaaa   aaaa8aaaa   8   8   8aaaaaaaaaaaa   8   8
-	    8   8           8   8   8   8   8           8               8   8       8
-	    8   8aaaaaaaa   8   8   8   8aaa8   8aaaaaaa8   aaaaaaaaa   8   8aaaaaaa8
-	    8   8       8   8   8           8           8   8       8               8
-	    8   8   aaaa8   8aaa8   aaaaa   8aaaaaaaa   8aaa8   a   8aaaaaaaa   a   8
-	    8   8                   8           8               8               8   8
-	    8   8aaaaaaaaaaaaaaaaaaa8aaaaaaaaaaa8aaaaaaaaaaaaaaa8aaaaaaaaaaaaaaa8aaa8
-
-	    End.
-	  -->
+  <?php include "resources/comment.html" ?>
 
 
   <body class="preload">
@@ -146,7 +138,7 @@
 
 
     <!-- Footer. -->
-    <?php include "resources/footer.html"; ?>
+    <?php include "resources/footer.php"; ?>
 
 
     <!-- Javascript files. -->

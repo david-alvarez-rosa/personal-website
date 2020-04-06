@@ -1,3 +1,26 @@
+<?php
+/**
+ *
+ * David \'Alvarez Rosa's personal blogsite entry PHP file.
+ * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ **/
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -32,70 +55,39 @@
     <link rel="stylesheet" href="fontawesome/css/brands.css" />
     <link rel="stylesheet" href="highlight/styles/atom-one-dark.css" />
     <script type="application/ld+json">
-	    {
-		      "@context":"http://schema.org",
-		      "@type": "BlogPosting",
-		      "image": "https://blog.alvarezrosa.com/neural-network.jpeg",
-		      "url": "https://blog.alvarezrosa.com/hello-world.php",
-		      "headline": "Neural Networks - Part 1",
-		      "alternativeHeadline": "Neural Networks",
-		      "dateCreated": "2019-02-11T11:11:11",
-		      "datePublished": "2019-02-11T11:11:11",
-		      "dateModified": "2019-02-11T11:11:11",
-		      "inLanguage": "en-US",
-		      "isFamilyFriendly": "true",
-		      "copyrightYear": "2020",
-		      "copyrightHolder": "",
-		      "author": {
-			        "@type": "Person",
-			        "name": "David Álvarez Rosa",
-			        "url": "https://david.alvarezrosa.com"
-		      },
-		      "creator": {
-			        "@type": "Person",
-			        "name": "David Álvarez Rosa",
-			        "url": "https://david.alvarezrosa.com/"
-		      },
-		      "genre":["SEO","JSON-LD"],
-		      "articleSection": "Uncategorized posts",
-		      "articleBody": "Paste the body of your content in here in plaintext"
-	    }
+	   {
+		     "@context":"http://schema.org",
+		     "@type": "BlogPosting",
+		     "image": "https://blog.alvarezrosa.com/neural-network.jpeg",
+		     "url": "https://blog.alvarezrosa.com/hello-world.php",
+		     "headline": "Neural Networks - Part 1",
+		     "alternativeHeadline": "Neural Networks",
+		     "dateCreated": "2019-02-11T11:11:11",
+		     "datePublished": "2019-02-11T11:11:11",
+		     "dateModified": "2019-02-11T11:11:11",
+		     "inLanguage": "en-US",
+		     "isFamilyFriendly": "true",
+		     "copyrightYear": "2020",
+		     "copyrightHolder": "",
+		     "author": {
+			       "@type": "Person",
+			       "name": "David Álvarez Rosa",
+			       "url": "https://david.alvarezrosa.com"
+		     },
+		     "creator": {
+			       "@type": "Person",
+			       "name": "David Álvarez Rosa",
+			       "url": "https://david.alvarezrosa.com/"
+		     },
+		     "genre":["SEO","JSON-LD"],
+		     "articleSection": "Uncategorized posts",
+		     "articleBody": "Paste the body of your content in here in plaintext"
+	   }
     </script>
   </head>
 
 
-  <!--
-	Alright, you can look at this code - but only if you solve this maze within
-	10 seconds. David.
-
-	Start.
-
-	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   a
-	8   8               8               8           8                   8   8
-	8   8   aaaaaaaaa   8   aaaaa   aaaa8aaaa   aaaa8   aaaaa   aaaaa   8   8
-	8               8       8   8           8           8   8   8       8   8
-	8aaaaaaaa   a   8aaaaaaa8   8aaaaaaaa   8aaaa   a   8   8   8aaaaaaa8   8
-	8       8   8               8           8   8   8   8   8           8   8
-	8   a   8aaa8aaaaaaaa   a   8   aaaaaaaa8   8aaa8   8   8aaaaaaaa   8   8
-	8   8               8   8   8       8           8           8       8   8
-	8   8aaaaaaaaaaaaaaa8aaa8   8aaaa   8   aaaaa   8aaaaaaaa   8   aaaa8   8
-	8           8       8   8       8   8       8           8   8           8
-	8   aaaaa   8aaaa   8   8aaaa   8   8aaaaaaa8   a   a   8   8aaaaaaaaaaa8
-	8       8       8   8   8       8       8       8   8   8       8       8
-	8aaaaaaa8aaaa   8   8   8   aaaa8aaaa   8   aaaa8   8   8aaaa   8aaaa   8
-	8           8   8           8       8   8       8   8       8           8
-	8   aaaaa   8   8aaaaaaaa   8aaaa   8   8aaaa   8aaa8   aaaa8aaaaaaaa   8
-	8   8       8           8           8       8   8   8               8   8
-	8   8   aaaa8aaaa   a   8aaaa   aaaa8aaaa   8   8   8aaaaaaaaaaaa   8   8
-	8   8           8   8   8   8   8           8               8   8       8
-	8   8aaaaaaaa   8   8   8   8aaa8   8aaaaaaa8   aaaaaaaaa   8   8aaaaaaa8
-	8   8       8   8   8           8           8   8       8               8
-	8   8   aaaa8   8aaa8   aaaaa   8aaaaaaaa   8aaa8   a   8aaaaaaaa   a   8
-	8   8                   8           8               8               8   8
-	8   8aaaaaaaaaaaaaaaaaaa8aaaaaaaaaaa8aaaaaaaaaaaaaaa8aaaaaaaaaaaaaaa8aaa8
-
-	End.
-	-->
+  <?php include "resources/comment.html" ?>
 
 
   <body class="preload">
@@ -189,7 +181,7 @@
 
 
     <!-- Footer. -->
-    <?php include "resources/footer.html"; ?>
+    <?php include "resources/footer.php"; ?>
 
 
     <!-- Javascript files. -->
