@@ -1631,7 +1631,7 @@ label {
 
 
 /* Screen of small height. */
-@media screen and (max-height: 550px) {
+@media screen and (max-height: 550px) and (min-width: 980px) {
     #controllers {
         top: 30px;
     }
@@ -1639,7 +1639,7 @@ label {
 
 
 /* Screen of XSmall height. */
-@media screen and (max-height: 450px) {
+@media screen and (max-height: 450px) and (min-width: 980px) {
     footer {
         display: none;
     }
