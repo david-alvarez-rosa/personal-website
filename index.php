@@ -526,7 +526,7 @@
           I have attended the following extracurricular courses.
         </p>
         <div class="card">
-          <h3>Mathematical Game theory<i class="titleIcon fas fa-dice"></i></h3>
+          <h3>Mathematical Game Theory<i class="titleIcon fas fa-dice"></i></h3>
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-university"></i> &nbsp;
@@ -657,7 +657,7 @@
           <a href="#sec:touch" title="Scroll to get in touch section.">
             Get in touch</a>. These projects have helped me to improve my skills
           in software development and programming, which are a great complement
-          to my technical knowledge acquired in the university.
+          to my technical knowledge acquired at university.
         </p>
         <div class="card">
           <h3>Driverless - Motorsport<i class="titleIcon fas fa-car"></i></h3>
@@ -1089,7 +1089,7 @@
           specifically I participated in Physics and Mathematics. These Olympics
           are competitions among young students, whose primary objective is to
           stimulate the study of Science (Mathematics, Biology, Chemistry,
-          Physics, ...) and the development of young talents in these sciences.
+          Physics) and the development of young talents in these sciences.
         </p>
         <div class="card cardAward">
           <div class="awardTrophyIcon">
