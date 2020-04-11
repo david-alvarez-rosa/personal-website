@@ -526,7 +526,7 @@
           I have attended the following extracurricular courses.
         </p>
         <div class="card">
-          <h3>Game theory<i class="titleIcon fas fa-dice"></i></h3>
+          <h3>Mathematical Game theory<i class="titleIcon fas fa-dice"></i></h3>
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-university"></i> &nbsp;
@@ -573,7 +573,7 @@
                rel="nofollow noopener"
                target="_blank"
                title="Machine Learning & Deep Learning CFIS website.">
-              Introduction to Machine Learning & Deep Learning
+              Machine Learning & Deep Learning
               <i class="hide fas fa-external-link-alt"></i>
               <i class="titleIcon fas fa-database"></i>
             </a>
