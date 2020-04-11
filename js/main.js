@@ -228,6 +228,14 @@ var navBarDiv = document.getElementById("navBarDiv");
 var navBarLinks = navBar.getElementsByTagName("a");
 var navBarExpanded = document.getElementById("navBarExpanded");
 var navBarExpandedLinks = navBarExpanded.getElementsByTagName("a");
+var scrollNavBarTimeout;
+var scrollNavBarTime = 0;
+var links = document.getElementsByTagName("a");
+for (var i = 0; i < links.length; ++i) {
+    var link = links[i];
+    if (link.href.includes("#"))
+        link.onclick = function() { scrollNavBarTime = 1525; };
+}
 
 function scrollNavBarToView() {
     // Scroll navigation bar to show current section.
@@ -266,7 +274,9 @@ function setNavBarSection() {
             elementCurrentExpanded = navBarExpandedLinks[i];
             elementCurrentExpanded.classList.add("current");
 
-            scrollNavBarToView();
+            scrollNavBarTimeout = setTimeout(scrollNavBarToView,
+                                             scrollNavBarTime);
+            scrollnavBarTime = 0;
             break;
         }
     }
