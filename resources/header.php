@@ -23,7 +23,7 @@
 
 <header>
    <?php include "backgroundImage.html" ?>
-   <a href="."
+   <a href="https://david.alvarezrosa.com"
       title="David Álvarez Rosa's personal website.">
       <h1>David Álvarez Rosa</h1>
    </a>
@@ -35,16 +35,16 @@
       <a href="."
          <?php if ($currentSite === 'home') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal website.">
-         Home
+         Home <i class="shine shineHeader1"></i>
       </a>
       <a href="https://blog.alvarezrosa.com/"
          <?php if ($currentSite === 'blog') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal blog.">
-         Blog
+         Blog <i class="shine shineHeader2"></i>
       </a>
       <a href="pdf/curriculum-vitae.pdf#view=Fit"
          title="My personal Curriculum Vitae.">
-         CV
+         CV <i class="shine shineHeader3"></i>
       </a>
    </div>
    <div id="controllers">

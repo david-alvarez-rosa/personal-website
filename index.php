@@ -191,7 +191,7 @@
              title="My personal Curriculum Vitae.">
             <div class="data">
               <i class="fas fa-file-alt"></i>
-              <p>Curriculum Vitae</p>
+              <p>CV</p>
               <div class="dataUnder">
                 <i class="fas fa-file-alt"></i>
                 <p>Show CV</p>

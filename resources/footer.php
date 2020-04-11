@@ -70,11 +70,11 @@
    </ul>
    <p id="author" onmouseover="beatHeart();" onmouseout="hideHeart();">
       Designed with <i id="smallHeart" class="fas fa-heart"></i> by
-      <a href="."
+      <a href="https://david.alvarezrosa.com"
          rel="author"
          title="David Álvarez Rosa's personal website.">
          @David.
       </a>
-      <i class="shine"></i>
+      <i class="shine shineFooter"></i>
    </p>
 </footer>
