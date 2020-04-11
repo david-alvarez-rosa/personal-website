@@ -19,17 +19,50 @@
       <title>Icon for David Álvarez Rosa Personal Website.</title>
       <link>https://blog.alvarezrosa.com/</link>
     </image>
-    <webMaster>admin@alvarezrosa.com (David Álvarez Rosa)</webMaster>
+    <webMaster>webmaster@alvarezrosa.com (David Álvarez Rosa)</webMaster>
 
     <item>
-      <title>First item</title>
-      <guid>https://blog.alvarezrosa.com/firs-item.html</guid>
-      <link>https://blog.alvarezrosa.com/firs-item.html</link>
-      <author>admin@alvarezrosa.com (David Álvarez Rosa)</author>
-      <pubDate>Sat, 01 Feb 2020 16:53:04 -0500</pubDate>
-      <category>technology</category>
-      <category>blog</category>
-      <description><![CDATA[ description if with tags.  ]]></description>
+      <title>Hello World!</title>
+      <guid>https://blog.alvarezrosa.com/hello-world.php</guid>
+      <link>https://blog.alvarezrosa.com/hello-world.php</link>
+      <author>webmaster@alvarezrosa.com (David Álvarez Rosa)</author>
+      <pubDate>Thu, 07 Nov 2019 16:53:04 -0500</pubDate>
+      <category>Blog</category>
+      <category>Entry</category>
+      <category>Greeting</category>
+      <description><![CDATA[ As when starting anything new in CS, <em>Hello
+      World!</em> This blog post is dated the day my personal website
+      <strong>went live</strong>. Either way, hello again. If you happen to be
+      interested, feel free to <strong>subscribe</strong> using the above RSS
+      file or to get in touch by clicking on the link in the homepage.
+      ]]></description>
+    </item>
+
+    <item>
+      <title>Implementing a Neural Network from scratch - Part 1</title>
+      <guid>https://blog.alvarezrosa.com/neural-network-part1.php</guid>
+      <link>https://blog.alvarezrosa.com/neural-network-part1.php</link>
+      <author>webmaster@alvarezrosa.com (David Álvarez Rosa)</author>
+      <pubDate>Sat, 11 Apr 2020 16:53:04 -0500</pubDate>
+      <category>Neural Network</category>
+      <category>AI</category>
+      <category>Deep Learning</category>
+      <category>Machine Learning</category>
+      <category>C++</category>
+      <category>Implementation</category>
+      <category>Scratch</category>
+      <description><![CDATA[ <strong class="abstract">Abstract</strong>. The
+      first entry of this blog series of implementing a Neural Network in C++
+      will be covering the <strong>mathematical theory</strong> behind the fully
+      connected layered artificial neural networks. We will start by defining
+      its <a href="#sec:topology" title="Scroll to network topology section.">
+      topology</a> and its core <strong>components</strong>. Then we will dicuss
+      how a neural network works (namely <a href="#sec:forward" title="Scroll to
+      feed forward section."> forward propagation</a>) This blog entry will
+      finish by <strong>reformulating</strong> the learning problem from a
+      mathematical optimization point of view and deriving the
+      <em>well-known</em> <a href="#sec:backward" title="Scroll to backward
+      propagation section"> backward propagation</a> formula.  ]]></description>
     </item>
   </channel>
 </rss>

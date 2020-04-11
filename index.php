@@ -503,6 +503,7 @@
             </h4>
           </div>
           <p class="marginTop"></p>
+        </div>
       </section>
 
       <!-- Section courses. -->
