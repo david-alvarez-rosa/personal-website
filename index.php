@@ -150,7 +150,7 @@
         </p>
         <p>
           This site is intended to be a web version of my
-          <a href="pdf/curriculum-vitae.pdf#view=Fit"
+          <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
             curriculum vitae
           </a> and be my corner on the Internet. I designed this website myself
@@ -187,7 +187,7 @@
               </div>
             </div>
           </a>
-          <a href="pdf/curriculum-vitae.pdf#view=Fit"
+          <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
             <div class="data">
               <i class="fas fa-file-alt"></i>

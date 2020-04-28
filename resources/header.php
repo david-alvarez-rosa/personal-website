@@ -42,7 +42,7 @@
          title="David Álvarez Rosa's personal blog.">
          Blog <i class="shine shineHeader2"></i>
       </a>
-      <a href="pdf/curriculum-vitae.pdf#view=Fit"
+      <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
          title="My personal Curriculum Vitae.">
          CV <i class="shine shineHeader3"></i>
       </a>
