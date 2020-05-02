@@ -2,18 +2,18 @@ ErrorDocument 404 /404.php
 
 # Browser caching using cache-control headers.
 <ifModule mod_headers.c>
-    # One year for image and video files.
-    <filesMatch ".(flv|gif|ico|jpg|jpeg|mp4|mpeg|png|svg|swf|webp)$">
+    # One year for media and font files.
+    <filesMatch ".(flv|gif|ico|jpg|jpeg|mp4|mpeg|png|svg|swf|webp|woff2)$">
         Header set Cache-Control "max-age=31536000, public"
     </filesMatch>
 
-    # One month for JavaScript and PDF files.
+    # Three months for JavaScript and PDF files.
     <filesMatch ".(js|pdf)$">
-        Header set Cache-Control "max-age=2592000, public"
+        Header set Cache-Control "max-age=7776000, public"
     </filesMatch>
 
-    # Two week for CSS files.
+    # Two months for CSS files.
     <filesMatch ".(css)$">
-        Header set Cache-Control "max-age=1209600, public"
+        Header set Cache-Control "max-age=5184000, public"
     </filesMatch>
 </ifModule>
