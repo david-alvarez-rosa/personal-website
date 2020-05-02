@@ -33,15 +33,21 @@
       </li>
       <?php
       for ($i = 0, $size = count($sections); $i < $size; ++$i) {
-          $section = $sections[$i]; $icon = $icons[$i];
+          $section = $sections[$i];
+          $shortName = $section['name'];
+          if (isset($section['shortName']))
+              $shortName = $section['shortName'];
           $class = '';
           if ($i === 0)
               $class = 'class = "current" ';
-          $href = '#sec:' . strtolower(str_replace(' ', '-', $section));
-          $title = 'Scroll to ' . strtolower($section) . ' section.';
+          $href = '#sec:' . strtolower(str_replace(' ', '-', $shortName));
+          $title = 'Scroll to ' . strtolower($shortName) . ' section.';
           echo '<li>';
           echo '<a ' . $class . 'href="' . $href . '" title="' . $title . '">';
-          echo $section . ' <i class="' . $icon . '"></i>';
+          echo $shortName . ' <i class="' . $section['icon'] . '"';
+          if (isset($section['iconStyleNav']))
+              echo ' style="' . $section['iconStyleNav'] . '"';
+          echo '></i>';
           echo '</a>';
           echo '</li>';
       }

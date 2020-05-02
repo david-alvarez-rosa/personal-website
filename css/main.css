@@ -479,7 +479,6 @@ header {
     height: 100%;
     padding: 8% 4em;
     text-align: right;
-    background-color: #1F1815;
 }
 
 .background, .overlay {
@@ -719,7 +718,7 @@ main h2 a:hover::before, main h2 a:focus::before {
 
 h2 .linkIcon {
     font-size: .55em;
-    padding-left: .25em;
+    margin-left: 1em;
     opacity: 0;
     transition: opacity .5s;
 }
@@ -1432,7 +1431,6 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     }
 
     footer {
-        background-color: #1F1815;
         padding: 7em 4em 5em 4em;
         position: relative;
         bottom: 0;

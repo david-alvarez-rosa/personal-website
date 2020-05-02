@@ -82,14 +82,22 @@
   <body class="preload">
      <?php
      $currentSite = 'home';
-     $sections = array('About', 'Education', 'Courses', 'Projects', 'Inspiration',
-                       'Skills', 'Languages', 'Awards', 'Others', 'Interests',
-                       'Get In Touch');
-     $icons = array('fas fa-address-card', 'fas fa-graduation-cap',
-                    'fas fa-book', 'fas fa-lightbulb', 'fas fa-quote-right',
-                    'fas fa-rocket', 'fas fa-language', 'fas fa-trophy',
-                    'fas fa-asterisk', 'fas fa-search', 'fas fa-fingerprint');
+     $sections = [
+         ['name' => 'About me', 'shortName' => 'About', 'icon' => 'fas fa-address-card'],
+         ['name' => 'Education', 'icon' => 'fas fa-graduation-cap'],
+         ['name' => 'Courses', 'icon' => 'fas fa-book'],
+         ['name' => 'Projects', 'icon' => 'fas fa-lightbulb'],
+         ['name' => 'Inspiration', 'icon' => 'fas fa-quote-right'],
+         ['name' => 'Skills', 'icon' => 'fas fa-rocket'],
+         ['name' => 'Languages', 'icon' => 'fas fa-language', 'iconStyle' =>
+     'font-size: 1.1em; padding-top: .525em;', 'iconStyleNav' => 'font-size: 1.2em;'],
+         ['name' => 'Awards', 'icon' => 'fas fa-trophy'],
+         ['name' => 'Others', 'icon' => 'fas fa-asterisk'],
+         ['name' => 'Interests', 'icon' => 'fas fa-search'],
+         ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint']
+     ];
      include 'resources/bodyPreMain.php';
+     include 'resources/functions.php';
      ?>
 
 
@@ -123,13 +131,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>About me
-          <a href="#sec:about"
-             title="Go to about section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-address-card"></i>
-        </h2>
+        <?php sectionHeader(0); ?>
         <p>
           I'm an undergraduate student in my final year towards a double degree
           in Mathematics and Industrial Technology Engineering, under the
@@ -275,13 +277,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Education
-          <a href="#sec:education"
-             title="Go to education section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-graduation-cap"></i>
-        </h2>
+        <?php sectionHeader(1); ?>
         <p>
           Below, you will find the details of my education summarized and listed
           in reverse chronological order.
@@ -518,13 +514,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Courses
-          <a href="#sec:courses"
-             title="Go to courses section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-book"></i>
-        </h2>
+        <?php sectionHeader(2); ?>
         <p>
           I have attended the following extracurricular courses.
         </p>
@@ -646,14 +636,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Projects
-          <a href="#sec:projects"
-             title="Go to projects section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-lightbulb"></i>
-        </h2>
-        <div class="clear"></div>
+        <?php sectionHeader(3); ?>
         <p>
           Here are a few projects I've worked on recently. Do you have any
           questions about them?
@@ -925,13 +908,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Inspiration
-          <a href="#sec:inspiration"
-             title="Go to inspiration section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-quote-right"></i>
-        </h2>
+        <?php sectionHeader(4); ?>
         <blockquote>
           <p>
             <i class="fas fa-pencil-alt fa-lg"></i>
@@ -959,14 +936,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Skills
-          <a href="#sec:skills"
-             title="Go to skills section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-rocket"></i>
-        </h2>
-        <div class="clear"></div>
+        <?php sectionHeader(5); ?>
         <p>
           In recent years I have learned various programming languages and have
           worked in different computer environments both in university and as a
@@ -1037,13 +1007,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Languages
-          <a href="#sec:languages"
-             title="Go to languages section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-language" style="font-size: 1em;"></i>
-        </h2>
+        <?php sectionHeader(6); ?>
         <p>
           These are the languages I know.
         </p>
@@ -1081,14 +1045,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Awards
-          <a href="#sec:awards"
-             title="Go to awards section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-trophy"></i>
-        </h2>
-        <div class="clear"></div>
+        <?php sectionHeader(7); ?>
         <p>
           I participated in some of the Spanish knowledge Olympics. More
           specifically I participated in Physics and Mathematics. These Olympics
@@ -1227,13 +1184,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Others
-          <a href="#sec:others"
-             title="Go to others section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-asterisk"></i>
-        </h2>
+        <?php sectionHeader(8); ?>
         <p>
           Here is some more extra information about me.
         </p>
@@ -1363,14 +1314,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Interests
-          <a href="#sec:interests"
-             title="Go to interests section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-search"></i>
-        </h2>
-        <div class="clear"></div>
+        <?php sectionHeader(9); ?>
         <p>
           This is a list of my current interests.
         </p>
