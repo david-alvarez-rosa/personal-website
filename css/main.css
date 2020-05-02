@@ -114,6 +114,18 @@ button {
     clear: both;
 }
 
+.screenReader {
+   border:0;
+   clip: rect(1px, 1px, 1px, 1px);
+   clip-path: inset(50%);
+   height: 1px;
+   margin: -1px;
+   width: 1px;
+   overflow: hidden;
+   position: absolute !important;
+   word-wrap:normal !important;
+}
+
 
 /* Loading spinner. */
 .preload * {
@@ -1248,12 +1260,6 @@ input[type="text"], input[type="email"], textarea {
 
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     border-color: var(--main-color);
-}
-
-label {
-    visibility: hidden;
-    height: 0;
-    width: 0;
 }
 
 
