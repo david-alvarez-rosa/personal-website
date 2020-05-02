@@ -30,6 +30,7 @@
             rel="noopener"
             target="_blank"
             title="Personal Gitlab page.">
+           <span class="screenReader">Personal Gitlab page.</span>
          </a>
          <br />
          Gitlab
@@ -41,6 +42,7 @@
             rel="noopener"
             target="_blank"
             title="Personal LinkedIn page.">
+           <span class="screenReader">Personal LinkedIn page.</span>
          </a>
          <br />
          LinkedIn
@@ -49,6 +51,7 @@
          <a class="fas fa-at fa-2x"
             href="javascript:showInfo('infoEmail');"
             title="Show my personal email.">
+           <span class="screenReader">Show my personal email.</span>
          </a>
          <br />
          Email
@@ -57,6 +60,7 @@
          <a class="fas fa-phone fa-2x"
             href="javascript:showInfo('infoPhone');"
             title="Show my personal phone number.">
+           <span class="screenReader">Show my personal phone number.</span>
          </a>
          <br />
          Phone
@@ -65,6 +69,7 @@
          <a class="fas fa-envelope fa-2x"
             href="javascript:showInfo('infoAddress');"
             title="Show my personal address.">
+           <span class="screenReader">Show my personal address.</span>
          </a>
          <br />
          Address
