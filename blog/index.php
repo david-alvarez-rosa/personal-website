@@ -48,9 +48,9 @@
      <link rel="stylesheet" href="css/main.css" />
      <link rel="stylesheet" href="css/blog.css" />
      <link rel="stylesheet" href="css/animations.css" />
-     <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
-     <link rel="stylesheet" href="fontawesome/css/solid.css" />
-     <link rel="stylesheet" href="fontawesome/css/brands.css" />
+     <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
+     <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
+     <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
   </head>
 
 
@@ -60,8 +60,11 @@
   <body class="preload">
      <?php
      $currentSite = 'blog';
-     $sections = array('Subscribe', 'Posts');
-     $icons = array('fas fa-rss-square', 'fas fa-blog');
+     $sections = [
+         ['name' => 'Subscribe', 'icon' => 'fas fa-rss-square'],
+         ['name' => 'Posts', 'icon' => 'fas fa-blog'],
+     ];
+     include 'resources/functions.php';
      include 'resources/bodyPreMain.php';
      ?>
 
@@ -82,14 +85,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2> Subscribe
-          <a href="#sec:subscribe"
-             title="Go to subscribe section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-rss-square"></i>
-        </h2>
-
+        <?php sectionHeader(0); ?>
         <p>
           You can <strong>subscribe</strong> to this blog by using this
           <a href="rss.xml"
@@ -145,14 +141,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2> Latest Blog Posts
-          <a href="#sec:posts"
-             title="Go to latest blog posts section.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-blog"></i>
-        </h2>
-
+        <?php sectionHeader(1); ?>
         <p>
           Below, you will find the latest blog posts summarized and listed in
           reverse chronological order.

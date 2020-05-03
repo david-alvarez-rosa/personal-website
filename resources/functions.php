@@ -1,7 +1,9 @@
 <?php
-function sectionHeader($sectionNumber) {
-    global $sections;
-    $section = $sections[$sectionNumber];
+$sectionCounter = 0;
+
+function sectionHeader() {
+    global $sections, $sectionCounter;
+    $section = $sections[$sectionCounter];
     $shortName = $section['name'];
     if (isset($section['shortName']))
         $shortName = $section['shortName'];
@@ -18,5 +20,7 @@ function sectionHeader($sectionNumber) {
         echo ' style="' . $section['iconStyle'] . '"';
     echo '></i>';
     echo '</h2>';
+
+    ++$sectionCounter;
 }
 ?>

@@ -1,0 +1,1 @@
+../resources/blog/generator.php

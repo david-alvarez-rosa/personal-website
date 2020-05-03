@@ -131,7 +131,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(0); ?>
+        <?php sectionHeader(); ?>
         <p>
           I'm an undergraduate student in my final year towards a double degree
           in Mathematics and Industrial Technology Engineering, under the
@@ -277,7 +277,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(1); ?>
+        <?php sectionHeader(); ?>
         <p>
           Below, you will find the details of my education summarized and listed
           in reverse chronological order.
@@ -514,7 +514,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(2); ?>
+        <?php sectionHeader(); ?>
         <p>
           I have attended the following extracurricular courses.
         </p>
@@ -636,7 +636,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(3); ?>
+        <?php sectionHeader(); ?>
         <p>
           Here are a few projects I've worked on recently. Do you have any
           questions about them?
@@ -908,7 +908,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(4); ?>
+        <?php sectionHeader(); ?>
         <blockquote>
           <p>
             <i class="fas fa-pencil-alt fa-lg"></i>
@@ -936,7 +936,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(5); ?>
+        <?php sectionHeader(); ?>
         <p>
           In recent years I have learned various programming languages and have
           worked in different computer environments both in university and as a
@@ -1007,7 +1007,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(6); ?>
+        <?php sectionHeader(); ?>
         <p>
           These are the languages I know.
         </p>
@@ -1045,7 +1045,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(7); ?>
+        <?php sectionHeader(); ?>
         <p>
           I participated in some of the Spanish knowledge Olympics. More
           specifically I participated in Physics and Mathematics. These Olympics
@@ -1184,7 +1184,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(8); ?>
+        <?php sectionHeader(); ?>
         <p>
           Here is some more extra information about me.
         </p>
@@ -1314,7 +1314,7 @@
         </a>
       </div>
       <section class="hidden">
-        <?php sectionHeader(9); ?>
+        <?php sectionHeader(); ?>
         <p>
           This is a list of my current interests.
         </p>

@@ -33,7 +33,7 @@
      <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
      <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
      <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-     <link rel="manifest" href="site.webmanifest">
+     <link rel="manifest" href="/site.webmanifest">
      <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#816363">
      <link rel="shortcut icon" href="/img/icons/favicon.ico">
      <meta name="msapplication-TileColor" content="#DBDCDC">
@@ -54,8 +54,15 @@
   <body class="preload">
      <?php
      $currentSite = '';
-     $sections = array('Not found', 'Get In Touch');
-     $icons = array('fas fa-bomb', 'fas fa-fingerprint');
+     $sections = [
+         [
+             'name' => 'Oops! That page couldn\'t be found',
+             'shortName' => 'Not found',
+             'icon' => 'fas fa-bomb'
+         ],
+         ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint'],
+     ];
+     include 'resources/functions.php';
      include 'resources/bodyPreMain.php';
      ?>
 
@@ -89,13 +96,7 @@
         </a>
       </div>
       <section class="hidden">
-        <h2>Oops! That page couldn't be found
-          <a href="#sec:404"
-             title="Go to 404 error message.">
-            <i class="linkIcon fas fa-link"></i>
-          </a>
-          <i class="rightIcon fas fa-bomb"></i>
-        </h2>
+        <?php sectionHeader(0); ?>
         <p>
           Not to worry. You can either head back to the
           <a href="/" title="David ÁlvarezRosa's personal website.">home page</a>,
