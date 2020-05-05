@@ -48,9 +48,9 @@
     <meta name="theme-color" content="#FFFFFF">
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
     <script type="application/ld+json">
       {
           "@context": "https://schema.org/",
