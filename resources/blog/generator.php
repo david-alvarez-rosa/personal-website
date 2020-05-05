@@ -70,11 +70,11 @@ $content = ob_get_clean();
       <!-- Javascript files. -->
       <script src="/js/main.js"></script>
       <script src="/js/shortcuts.js"></script>
-      <script src="/js/blog.js"></script>
       <script defer src="/js/confetti.js"></script>
       <?php
       for ($i = 0; $i < sizeof($jsExtra); ++$i)
           echo $jsExtra[$i];
       ?>
+      <script src="/js/blog.js"></script>
    </body>
 </html>

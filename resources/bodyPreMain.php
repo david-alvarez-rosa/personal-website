@@ -26,7 +26,7 @@
 
 
 <!-- Information divs. -->
-<?php include "information.html"; ?>
+<?php include 'information.html'; ?>
 
 
 <!-- Heart. -->
@@ -34,7 +34,7 @@
 
 
 <?php
-if ($currentSite === "blog") {
+if ($currentSite === 'blog') {
     echo '
     <!-- Zoomed images.  -->
     <div id="zoomImgDiv">
@@ -63,15 +63,15 @@ if ($currentSite === "blog") {
 
 
 <!-- Header. -->
-<?php include "header.php"; ?>
+<?php include 'header.php'; ?>
 
 
 <!-- Navigation bar. -->
-<?php include "navBar.php"; ?>
+<?php include 'navBar.php'; ?>
 
 
 <!-- Navigation bar expanded. -->
-<?php include "navBarExpanded.php"; ?>
+<?php include 'navBarExpanded.php'; ?>
 
 
 <!-- Scroll back to top button. -->

@@ -45,8 +45,8 @@ $cssExtra = [
 
 $jsExtra = [
     '<script id="MathJax-script" data-src="../external/mathjax/tex-svg.js" async></script>',
-    '<script defer src="../external/highlight/highlight.pack.js"></script>',
-    '<script defer src="../external/highlight/highlight-line-numbers.min.js"></script>',
+    '<script src="../external/highlight/highlight.pack.js"></script>',
+    '<script src="../external/highlight/highlight-line-numbers.min.js"></script>',
     '<script type="text/javascript">
       // Warn that this website is under construction.
       setTimeout( function() { showInfo("welcomeUser"); }, 3500);
