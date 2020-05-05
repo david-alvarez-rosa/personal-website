@@ -32,17 +32,17 @@
       <strong>Industrial Engineering</strong> student.
    </h2>
    <div id="sites">
-      <a href="."
+      <a href="https://david.alvarezrosa.com"
          <?php if ($currentSite === 'home') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal website.">
          Home <i class="shine shineHeader1"></i>
       </a>
-      <a href="https://blog.alvarezrosa.com/"
+      <a href="https://blog.alvarezrosa.com"
          <?php if ($currentSite === 'blog') echo 'class="currentSite"'; ?>
          title="David Álvarez Rosa's personal blog.">
          Blog <i class="shine shineHeader2"></i>
       </a>
-      <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
+      <a href="/pdf/cv-david-alvarez-rosa.pdf#view=Fit"
          title="My personal Curriculum Vitae.">
          CV <i class="shine shineHeader3"></i>
       </a>
