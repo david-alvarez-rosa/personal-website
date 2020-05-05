@@ -24,226 +24,202 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-     <title>David Álvarez Rosa | Personal Blog</title>
-     <meta charset="UTF-8" />
-     <meta name="description" content="My personal blog site. Stuff I've written,
-                 mainly about Technology and
-                 Mathematics. By David Álvarez Rosa." />
-     <meta name="keywords" content="David Álvarez Rosa, David Álvarez, David,
-                 Blog, Mathematics, Engineering, Technology,
-                 Blogsite, Entry, Entries" />
-     <meta name="author" content="David Álvarez Rosa" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link rel="canonical" href="https://blog.alvarezrosa.com" />
-     <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
-     <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
-     <link rel="manifest" href="site.webmanifest">
-     <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#816363">
-     <link rel="shortcut icon" href="img/icons/favicon.ico">
-     <meta name="msapplication-TileColor" content="#DBDCDC">
-     <meta name="msapplication-config" content="img/icons/browserconfig.xml">
-     <meta name="theme-color" content="#FFFFFF">
-     <link rel="stylesheet" href="css/main.css" />
-     <link rel="stylesheet" href="css/blog.css" />
-     <link rel="stylesheet" href="css/animations.css" />
-     <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
-     <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
-     <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
-  </head>
+   <head>
+      <title>David Álvarez Rosa | Personal Blog</title>
+      <meta charset="UTF-8" />
+      <meta name="description" content="My personal blog site. Stuff I've written,
+                  mainly about Technology and
+                  Mathematics. By David Álvarez Rosa." />
+      <meta name="keywords" content="David Álvarez Rosa, David Álvarez, David,
+                  Blog, Mathematics, Engineering, Technology,
+                  Blogsite, Entry, Entries" />
+      <meta name="author" content="David Álvarez Rosa" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="canonical" href="https://blog.alvarezrosa.com" />
+      <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
+      <link rel="manifest" href="site.webmanifest">
+      <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#816363">
+      <link rel="shortcut icon" href="img/icons/favicon.ico">
+      <meta name="msapplication-TileColor" content="#DBDCDC">
+      <meta name="msapplication-config" content="img/icons/browserconfig.xml">
+      <meta name="theme-color" content="#FFFFFF">
+      <link rel="stylesheet" href="css/main.css" />
+      <link rel="stylesheet" href="css/blog.css" />
+      <link rel="stylesheet" href="css/animations.css" />
+      <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
+      <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
+      <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
+   </head>
 
 
-  <?php include "resources/comment.html" ?>
+   <?php include 'resources/comment.html' ?>
 
 
-  <body class="preload">
-     <?php
-     $currentSite = 'blog';
-     $sections = [
-         ['name' => 'Subscribe', 'icon' => 'fas fa-rss-square'],
-         ['name' => 'Posts', 'icon' => 'fas fa-blog'],
-     ];
-     include 'resources/functions.php';
-     include 'resources/bodyPreMain.php';
-     ?>
+   <body class="preload">
+      <?php
+      $currentSite = 'blog';
+      $sections = [
+          ['name' => 'Subscribe', 'icon' => 'fas fa-rss-square'],
+          ['name' => 'Posts', 'icon' => 'fas fa-blog'],
+      ];
+      include 'resources/functions.php';
+      include 'resources/bodyPreMain.php';
+      ?>
 
 
-    <!-- Main. -->
-    <main>
-      <p class="fadeIn" style="margin-top: 2.5em;">
-        This website does not (and won't ever) use cookies. I value your
-        privacy.
-      </p>
+      <!-- Main. -->
+      <main>
+         <p class="fadeIn" style="margin-top: 2.5em;">
+            This website does not (and won't ever) use cookies. I value your
+            privacy.
+         </p>
 
-      <div class="anchor" id="sec:subscribe">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
-      <section class="hidden">
-        <?php sectionHeader(0); ?>
-        <p>
-          You can <strong>subscribe</strong> to this blog by using this
-          <a href="rss.xml"
-             title="RSS subscription file.">
-            RSS file <i class="fas fa-rss-square"></i></a>.
-        </p>
-        <p>
-          <a href="http://www.whatisrss.com/"
-             rel="nofollow noopener"
-             target="_blank"
-             title="What Is RSS? RSS Explained.">
-            RSS <i class="fas fa-external-link-alt"></i>
-          </a>
-          (Rich Site Summary) is a format for <strong>delivering</strong>
-          regularly changing <strong>web content</strong>. It allows you to
-          easily stay informed by retrieving the latest content from the sites
-          you are interested in and allows you to ensure
-          your <strong>privacy</strong>, by not needing to join each site's
-          email newsletter.
-        </p>
-        <p>
-          If you are not familiar with RSS readers and you are an
-          <a href="https://www.gnu.org/software/emacs/"
-             rel="nofollow noopener"
-             target="_blank"
-             title="GNU Emacs official website.">
-            Emacs <i class="fas fa-external-link-alt"></i>
-          </a>
-          user, I recommend you
-          <a href="https://nullprogram.com/blog/2013/09/04/"
-             target="_blank"
-             rel="nofollow noopener"
-             title="Introducing Elfeed, an Emacs Web Feed Reader.">
-            Elfeed <i class="fas fa-external-link-alt"></i>
-          </a>
-          (created by
-          <a href="https://nullprogram.com/about/"
-             target="_blank"
-             rel="nofollow noopener"
-             title="Chris Wellons (skeeto) personal website.">
-            Chris Wellons <i class="fas fa-external-link-alt"></i>
-          </a>).
+         <div class="anchor" id="sec:subscribe">
+            <i class="bouncingHand fas fa-hand-point-right"></i>
+            <a onclick="javascript:takeMeBack();"
+               class="undoAnchor"
+               title="Take me back where I was.">
+               <i class="fas fa-fast-backward"></i>
+            </a>
+         </div>
+         <section class="hidden">
+            <?php sectionHeader(0); ?>
+            <p>
+               You can <strong>subscribe</strong> to this blog by using this
+               <a href="rss.xml"
+                  title="RSS subscription file.">
+                  RSS file <i class="fas fa-rss-square"></i></a>.
+            </p>
+            <p>
+               <a href="http://www.whatisrss.com/"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  title="What Is RSS? RSS Explained.">
+                  RSS <i class="fas fa-external-link-alt"></i>
+               </a>
+               (Rich Site Summary) is a format for <strong>delivering</strong>
+               regularly changing <strong>web content</strong>. It allows you to
+               easily stay informed by retrieving the latest content from the sites
+               you are interested in and allows you to ensure
+               your <strong>privacy</strong>, by not needing to join each site's
+               email newsletter.
+            </p>
+            <p>
+               If you are not familiar with RSS readers and you are an
+               <a href="https://www.gnu.org/software/emacs/"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  title="GNU Emacs official website.">
+                  Emacs <i class="fas fa-external-link-alt"></i>
+               </a>
+               user, I recommend you
+               <a href="https://nullprogram.com/blog/2013/09/04/"
+                  target="_blank"
+                  rel="nofollow noopener"
+                  title="Introducing Elfeed, an Emacs Web Feed Reader.">
+                  Elfeed <i class="fas fa-external-link-alt"></i>
+               </a>
+               (created by
+               <a href="https://nullprogram.com/about/"
+                  target="_blank"
+                  rel="nofollow noopener"
+                  title="Chris Wellons (skeeto) personal website.">
+                  Chris Wellons <i class="fas fa-external-link-alt"></i>
+               </a>).
 
-        </p>
-      </section>
+            </p>
+         </section>
 
-      <div class="anchor" id="sec:posts">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
-      <section class="hidden">
-        <?php sectionHeader(1); ?>
-        <p>
-          Below, you will find the latest blog posts summarized and listed in
-          reverse chronological order.
-        </p>
+         <div class="anchor" id="sec:posts">
+            <i class="bouncingHand fas fa-hand-point-right"></i>
+            <a onclick="javascript:takeMeBack();"
+               class="undoAnchor"
+               title="Take me back where I was.">
+               <i class="fas fa-fast-backward"></i>
+            </a>
+         </div>
+         <section class="hidden">
+            <?php sectionHeader(1); ?>
+            <p>
+               Below, you will find the latest blog posts summarized and listed in
+               reverse chronological order.
+            </p>
 
-        <a href="neural-network-part1.php"
-           title="Read more: Implementing a Neural Network from scratch - Part 1.">
+            <?php
+            include 'resources/blog/data.php';
+
+            $entry = end($entries);
+            do {
+                echo '
+                    <a href="' . key($entries) . '"
+           title="Read more: ' . $entry['title'] .  '.">
           <div class="card">
-            <h3>
-              Implementing a Neural Network from scratch &ndash; Part 1
-              <i class="titleIcon fas fa-project-diagram"></i>
+            <h3>' .
+                     $entry['title'] .
+                     '<i class="titleIcon ' . $entry['icon'] . '"></i>
             </h3>
             <div class="rightLeftFlex">
               <h4>
-                <i class="fas fa-clock"></i> &nbsp;
-                10 to 15 minutes to read
-              </h4>
+                <i class="fas fa-clock"></i> &nbsp; ' .
+                     $entry['time'] .
+                     '</h4>
               <h4>
-                <i class="fas fa-user-edit"></i> &nbsp;
-                David Álvarez Rosa
-              </h4>
+                <i class="fas fa-user-edit"></i> &nbsp; ' .
+                     $authors[$entry['author']]['name'] .
+                     '</h4>
             </div>
             <div class="rightLeftFlex">
               <h4>
-                <i class="fas fa-tags"></i> &nbsp;
-                Neural Network - AI - Deep Learning
-                <i class="moreTags fas fa-plus"></i>
+                <i class="fas fa-tags"></i> &nbsp; ';
+                $tags = $entry['tags'];
+                $tagsLength = -3;
+                for ($i = 0; $i < sizeof($tags); ++$i) {
+                    $tagsLength += strlen($tags[$i]) + 3;
+                    if ($tagsLength >= $tagsLengthMax)
+                        break;
+                    if ($i != 0)
+                        echo ' - ';
+                    echo $tags[$i];
+                }
+                if ($tagsLength >= $tagsLengthMax)
+                    echo ' <i class="moreTags fas fa-plus"></i>';
+                echo '
               </h4>
               <h4>
-                <i class="fas fa-calendar-alt"></i> &nbsp;  March 9, 2020
-              </h4>
+                <i class="fas fa-calendar-alt"></i> &nbsp;  ' . $entry['date'] .
+                     '</h4>
             </div>
-            <p class="marginTopAuxAux">
-              <strong class="abstract">Abstract</strong>. The first entry of
-              this blog series of implementing a Neural Network in C++ will be
-              covering the <strong>mathematical theory</strong> behind the fully
-              connected layered artificial neural networks. We will start by
-              defining its topology and its
-              core <strong>components</strong>. Then we will dicuss how a neural
-              network works (namely forward propagation) This blog entry will
-              finish by
-              <strong>reformulating</strong> the learning problem from a
-              mathematical optimization point of view and deriving
-              the <em>well-known</em> <strong>backward propagation</strong>
-              formula...
-            </p>
-            <p class="readMore">
-              <i class="fas fa-book-reader fa-lg"></i>
-            </p>
-          </div>
-        </a>
-
-        <a href="hello-world.php"
-           title="Read more: Hello World!">
-          <div class="card">
-            <h3>Hello world! <i class="titleIcon fas fa-bullhorn"></i></h3>
-            <div class="rightLeftFlex">
-              <h4>
-                <i class="fas fa-clock"></i> &nbsp;
-                Less than one minute to read
-              </h4>
-              <h4>
-                <i class="fas fa-user-edit"></i> &nbsp;
-                David Álvarez Rosa
-              </h4>
-            </div>
-            <div class="rightLeftFlex">
-              <h4>
-                <i class="fas fa-tags"></i> &nbsp; Blog - Entry
-              </h4>
-              <h4>
-                <i class="fas fa-calendar-alt"></i> &nbsp;  November 7, 2019
-              </h4>
-            </div>
-            <p class="marginTopAuxAux">
-              As when starting anything new in CS, <em>Hello World!</em> This
-              blog post is dated the day my personal website <strong>went
-              live</strong>. Either way, hello again. If you happen to be
-              interested, feel free to <strong>subscribe</strong> using the
-              above RSS file or to get in touch by clicking on the link in the
-              homepage.
-            </p>
+            <p class="marginTopAuxAux">';
+                ob_start();
+                include key($entries) . '/abstract.html';
+                $abstract = ob_get_clean();
+                $abstract = preg_replace('/<\\/?a(.|\\s)*?>/', '', $abstract);
+            echo $abstract;
+            echo '</p>
             <p class="readMore">
                <i class="fas fa-book-reader fa-lg"></i>
             </p>
-          </div>
-        </a>
-      </section>
-    </main>
+         </div>
+            </a>';
+            } while ($entry = prev($entries))
+            ?>
+         </section>
+      </main>
 
 
-    <!-- License (Creative Commons). -->
-    <?php include "resources/license.html"; ?>
+      <!-- License (Creative Commons). -->
+      <?php include 'resources/license.html'; ?>
 
 
-    <!-- Footer. -->
-    <?php include "resources/footer.php"; ?>
+      <!-- Footer. -->
+      <?php include 'resources/footer.php'; ?>
 
 
-    <!-- Javascript files. -->
-    <script src="js/main.js"></script>
-    <script src="js/shortcuts.js"></script>
-    <script src="js/confetti.js"></script>
-  </body>
+      <!-- Javascript files. -->
+      <script src="js/main.js"></script>
+      <script src="js/shortcuts.js"></script>
+      <script src="js/confetti.js"></script>
+   </body>
 </html>

@@ -20,7 +20,7 @@
  **/
 
 
-$tagsLengthMax = 25;
+$tagsLengthMax = 36;
 
 $basicKeywords = [
     'David Álvarez Rosa',
@@ -47,6 +47,7 @@ $authors = [
 $entries = [
     'hello-world' => [
         'title' => 'Hello World!',
+        'icon' => 'fas fa-bullhorn',
         'time' => 'Less than one minute to read',
         'author' => 'me',
         'date' => 'November 7, 2019',
@@ -59,6 +60,7 @@ $entries = [
     ],
     'neural-network-part1' => [
         'title' => 'Implementing a Neural Network from scratch &ndash; Part 1',
+        'icon' => 'fas fa-project-diagram',
         'time' => '8 to 12 minutes to read',
         'author' => 'me',
         'date' => 'May 3, 2020',
