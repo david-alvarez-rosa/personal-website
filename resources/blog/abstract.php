@@ -46,14 +46,31 @@
          <i class="fas fa-tags"></i> &nbsp;
          <?php
          $tags = $entry['tags'];
-         $tagsLength = -2;
+         $tagsLength = -3;
+         $last = 0;
          for ($i = 0; $i < sizeof($tags); ++$i) {
-             $tagsLength += strlen($tags[$i]) + 2;
-             if ($tagsLength >= $tagsLengthMax)
+             $tagsLength += strlen($tags[$i]) + 3;
+             if ($tagsLength >= $tagsLengthMax) {
+                 $last = $i;
                  break;
+             }
              if ($i != 0)
-                 echo ', ';
+                 echo ' - ';
              echo $tags[$i];
+         }
+         if ($tagsLength >= $tagsLengthMax) {
+             echo '<span id="callOutTags1" class="callOut">
+             <a href="javascript:enlargeCallOut(\'callOutTags1\');"
+             title="Click to see this information bigger.">
+             <i class="moreTags fas fa-plus"></i>
+             </a>
+             <span><p>';
+             for ($i = $last; $i < sizeof($tags); ++$i) {
+                 if ($i != $last)
+                     echo ', ';
+                 echo $tags[$i];
+             }
+             echo '</p></span></span>';
          }
          ?>
       </h4>
