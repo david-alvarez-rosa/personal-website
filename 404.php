@@ -25,26 +25,26 @@
 
 <html lang="en">
   <head>
-     <title>404 Error | David Álvarez Rosa | Personal Website</title>
-     <meta charset="UTF-8" />
-     <meta name="author" content="David Álvarez Rosa" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <link rel="canonical" href="https://david.alvarezrosa.com/404.php" />
-     <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
-     <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-     <link rel="manifest" href="/site.webmanifest">
-     <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#816363">
-     <link rel="shortcut icon" href="/img/icons/favicon.ico">
-     <meta name="msapplication-TileColor" content="#DBDCDC">
-     <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
-     <meta name="theme-color" content="#FFFFFF">
-     <link rel="stylesheet" href="/css/main.css" />
-     <link rel="stylesheet" href="/css/animations.css" />
-     <link rel="stylesheet" href="/css/404.css" />
-     <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-     <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-     <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <title>404 Error | David Álvarez Rosa | Personal Website</title>
+    <meta charset="UTF-8" />
+    <meta name="author" content="David Álvarez Rosa" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="canonical" href="https://david.alvarezrosa.com/404.php" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/img/icons/safari-pinned-tab.svg" color="#816363">
+    <link rel="shortcut icon" href="/img/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#DBDCDC">
+    <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
+    <meta name="theme-color" content="#FFFFFF">
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/404.css" />
+    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
+    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
   </head>
 
 
@@ -52,19 +52,19 @@
 
 
   <body class="preload">
-     <?php
-     $currentSite = '';
-     $sections = [
-         [
-             'name' => 'Oops! That page couldn\'t be found',
-             'shortName' => 'Not found',
-             'icon' => 'fas fa-bomb'
-         ],
-         ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint'],
-     ];
-     include 'resources/functions.php';
-     include 'resources/bodyPreMain.php';
-     ?>
+    <?php
+    $currentSite = '';
+    $sections = [
+        [
+            'name' => 'Oops! That page couldn\'t be found',
+            'shortName' => 'Not found',
+            'icon' => 'fas fa-bomb'
+        ],
+        ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint'],
+    ];
+    include 'resources/functions.php';
+    include 'resources/bodyPreMain.php';
+    ?>
 
 
     <!-- Main. -->
@@ -122,8 +122,8 @@
           </div>
         </div>
         <!-- <p style="text-align: center;"> -->
-          <!--   <i class="fas fa-people-carry fa-7x"></i> -->
-          <!-- </p> -->
+        <!--   <i class="fas fa-people-carry fa-7x"></i> -->
+        <!-- </p> -->
         <p>
           Error code: 404.
         </p>

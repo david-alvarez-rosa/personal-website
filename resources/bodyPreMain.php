@@ -33,33 +33,31 @@
 <div id="heart"><i class="fas fa-heart"></i></div>
 
 
-<?php
-if ($currentSite === 'blog') {
-    echo '
-    <!-- Zoomed images.  -->
-    <div id="zoomImgDiv">
-    <a href="javascript:closeZoomImg();" title="Close zoomed figure.">
-    <i class="fas fa-times fa-2x"></i>
-    </a>
-    <figure>
-    <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
-    </figure>
-    </div>
+<?php if ($currentSite === 'blog') { ?>
+   <!-- Zoomed images.  -->
+   <div id="zoomImgDiv">
+      <a href="javascript:closeZoomImg();" title="Close zoomed figure.">
+         <i class="fas fa-times fa-2x"></i>
+      </a>
+      <figure>
+         <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
+      </figure>
+   </div>
 
 
-    <!-- Enlarged call out. -->
-    <div id="enlargedCallOutDiv">
-    <div id="enlargedCallOutContainer">
-    <div id="enlargedCallOut">
-    <a href="javascript:closeCallOut();" title="Close enlarged information.">
-    <i class="fas fa-times-circle"></i>
-    </a>
-    <div id="enlargedCallOutInfo"></div>
-    </div>
-    </div>
-    </div>';
-}
-?>
+   <!-- Enlarged call out. -->
+   <div id="enlargedCallOutDiv">
+      <div id="enlargedCallOutContainer">
+         <div id="enlargedCallOut">
+            <a href="javascript:closeCallOut();" title="Close enlarged information.">
+               <i class="fas fa-times-circle"></i>
+            </a>
+            <div id="enlargedCallOutInfo"></div>
+         </div>
+      </div>
+   </div>
+<?php } ?>
+
 
 
 <!-- Header. -->

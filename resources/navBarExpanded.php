@@ -22,40 +22,45 @@
 
 
 <nav id="navBarExpanded">
-   <button id="navBarExpandedButton"
-           onclick="toggleNavBar();"
-           title="Hide expanded navigation bar.">
-      <i class="fas fa-times fa-2x"></i>
-   </button>
-   <ul>
-      <li class="title">
-         Sections
-      </li>
-      <?php
-      for ($i = 0, $size = count($sections); $i < $size; ++$i) {
-          $section = $sections[$i];
-          $shortName = $section['name'];
-          if (isset($section['shortName']))
-              $shortName = $section['shortName'];
-          $class = '';
-          if ($i === 0)
-              $class = 'class = "current" ';
-          $href = '#sec:' . strtolower(str_replace(' ', '-', $shortName));
-          $title = 'Scroll to ' . strtolower($shortName) . ' section.';
-          echo '<li>';
-          echo '<a ' . $class . 'href="' . $href . '" title="' . $title . '">';
-          echo $shortName . ' <i class="' . $section['icon'] . '"';
-          if (isset($section['iconStyleNav']))
-              echo ' style="' . $section['iconStyleNav'] . '"';
-          echo '></i>';
-          echo '</a>';
-          echo '</li>';
-      }
-      ?>
+  <button id="navBarExpandedButton"
+          onclick="toggleNavBar();"
+          title="Hide expanded navigation bar.">
+    <i class="fas fa-times fa-2x"></i>
+  </button>
+  <ul>
+    <li class="title">
+      Sections
+    </li>
+    <?php foreach ($sections as $sectionNumber => $section) { ?>
       <li>
-         <p>
-            @David &copy; 2020
-         </p>
+        <?php
+        $shortName = $section['name'];
+        if (isset($section['shortName']))
+            $shortName = $section['shortName'];
+        $class = '';
+        if ($sectionNumber === 0)
+            $class = 'current';
+        $href = '#sec:' . strtolower(str_replace(' ', '-', $shortName));
+        $title = 'Scroll to ' . strtolower($shortName) . ' section.';
+        ?>
+        <a class="<?php echo $class; ?>"
+           href="<?php echo $href; ?>"
+           title="<?php echo $title; ?>">
+          <?php echo $shortName ?>
+          <i class="<?php echo $section['icon']; ?>"
+             <?php
+             if (isset($section['iconStyleNav']))
+                 echo ' style="' . $section['iconStyleNav'] . '"';
+             ?>
+          ></i>
+        </a>
       </li>
-   </ul>
+    <?php } ?>
+
+    <li>
+      <p>
+        @David &copy; 2020
+      </p>
+    </li>
+  </ul>
 </nav>

@@ -23,22 +23,25 @@
 
 <nav id="navBar">
    <div id="navBarDiv">
-      <?php
-      for ($i = 0, $size = count($sections); $i < $size; ++$i) {
-          $section = $sections[$i];
-          $shortName = $section['name'];
-          if (isset($section['shortName']))
-              $shortName = $section['shortName'];
-          $class = '';
-          if ($i === 0)
-              $class = 'class = "current" ';
-          $href = '#sec:' . strtolower(str_replace(' ', '-', $shortName));
-          $title = 'Scroll to ' . strtolower($shortName) . ' section.';
-          echo '<a ' . $class . 'href="' . $href . '" title="' . $title . '">';
-          echo $shortName;
-          echo '</a>';
-      }
-      ?>
+      <?php foreach ($sections as $sectionNumber => $section) { ?>
+         <?php
+         $shortName = $section['name'];
+         if (isset($section['shortName']))
+             $shortName = $section['shortName'];
+         $class = '';
+         if ($sectionNumber === 0)
+             $class = 'current';
+         $href = '#sec:' . strtolower(str_replace(' ', '-', $shortName));
+         $title = 'Scroll to ' . strtolower($shortName) . ' section.';
+         ?>
+
+         <a class="<?php echo $class; ?>"
+            href="<?php echo $href; ?>"
+            title="<?php echo $title; ?>">
+            <?php echo $shortName ?>
+         </a>
+
+      <?php } ?>
    </div>
    <button id="navBarButton"
            onclick="toggleNavBar();"

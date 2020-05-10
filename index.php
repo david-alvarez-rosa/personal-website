@@ -28,12 +28,12 @@
     <title>David Álvarez Rosa | Personal Website | Math &amp; Engineering</title>
     <meta charset="UTF-8" />
     <meta name="description" content="I'm an undergraduate student in my final
-                                      year towards a double degree in
-                                      Mathematics and Industrial Technology
-                                      Engineering, under the CFIS program of the
-                                      Polytechnic University of Catalonia." />
+                year towards a double degree in
+                Mathematics and Industrial Technology
+                Engineering, under the CFIS program of the
+                Polytechnic University of Catalonia." />
     <meta name="keywords" content="David Álvarez Rosa, David Álvarez, David,
-                                   Curriculum Vitae, Mathematics, Engineering" />
+                Curriculum Vitae, Mathematics, Engineering" />
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://david.alvarezrosa.com/" />
@@ -52,53 +52,53 @@
     <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
     <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
     <script type="application/ld+json">
-      {
-          "@context": "https://schema.org/",
-          "@type": "Person",
-          "honorificPrefix": "Mr",
-          "name": "David Álvarez Rosa",
-          "image": "img/icons/icon.png",
-          "jobTitle": "Mathematics and Industrial Engineering student",
-          "disambiguatingDescription": "Mathematics and Industrial Engineering student",
-          "alumniOf": "Polytechnic University of Catalonia",
-          "affiliation": "Polytechnic University of Catalonia",
-          "birthPlace": "Navarre, Spain",
-          "birthDate": "1998-10-10",
-          "gender": "male",
-          "memberOf": "Driverless UPC - ETSEIB Motorsport",
-          "nationality": "Spanish",
-          "url": "https://david.alvarezrosa.com/",
-          "award": "",
-          "knowsAbout": "",
-          "knowsLanguage": ["es", "en", "cat"]
-      }
+     {
+         "@context": "https://schema.org/",
+         "@type": "Person",
+         "honorificPrefix": "Mr",
+         "name": "David Álvarez Rosa",
+         "image": "img/icons/icon.png",
+         "jobTitle": "Mathematics and Industrial Engineering student",
+         "disambiguatingDescription": "Mathematics and Industrial Engineering student",
+         "alumniOf": "Polytechnic University of Catalonia",
+         "affiliation": "Polytechnic University of Catalonia",
+         "birthPlace": "Navarre, Spain",
+         "birthDate": "1998-10-10",
+         "gender": "male",
+         "memberOf": "Driverless UPC - ETSEIB Motorsport",
+         "nationality": "Spanish",
+         "url": "https://david.alvarezrosa.com/",
+         "award": "",
+         "knowsAbout": "",
+         "knowsLanguage": ["es", "en", "cat"]
+     }
     </script>
   </head>
 
 
-  <?php include "resources/comment.html" ?>
+  <?php include 'resources/comment.html'; ?>
 
 
   <body class="preload">
-     <?php
-     $currentSite = 'home';
-     $sections = [
-         ['name' => 'About me', 'shortName' => 'About', 'icon' => 'fas fa-address-card'],
-         ['name' => 'Education', 'icon' => 'fas fa-graduation-cap'],
-         ['name' => 'Courses', 'icon' => 'fas fa-book'],
-         ['name' => 'Projects', 'icon' => 'fas fa-lightbulb'],
-         ['name' => 'Inspiration', 'icon' => 'fas fa-quote-right'],
-         ['name' => 'Skills', 'icon' => 'fas fa-rocket'],
-         ['name' => 'Languages', 'icon' => 'fas fa-language', 'iconStyle' =>
-     'font-size: 1.1em; padding-top: .525em;', 'iconStyleNav' => 'font-size: 1.2em;'],
-         ['name' => 'Awards', 'icon' => 'fas fa-trophy'],
-         ['name' => 'Others', 'icon' => 'fas fa-asterisk'],
-         ['name' => 'Interests', 'icon' => 'fas fa-search'],
-         ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint']
-     ];
-     include 'resources/bodyPreMain.php';
-     include 'resources/functions.php';
-     ?>
+    <?php
+    $currentSite = 'home';
+    $sections = [
+        ['name' => 'About me', 'shortName' => 'About', 'icon' => 'fas fa-address-card'],
+        ['name' => 'Education', 'icon' => 'fas fa-graduation-cap'],
+        ['name' => 'Courses', 'icon' => 'fas fa-book'],
+        ['name' => 'Projects', 'icon' => 'fas fa-lightbulb'],
+        ['name' => 'Inspiration', 'icon' => 'fas fa-quote-right'],
+        ['name' => 'Skills', 'icon' => 'fas fa-rocket'],
+        ['name' => 'Languages', 'icon' => 'fas fa-language', 'iconStyle' =>
+            'font-size: 1.1em; padding-top: .525em;', 'iconStyleNav' => 'font-size: 1.2em;'],
+        ['name' => 'Awards', 'icon' => 'fas fa-trophy'],
+        ['name' => 'Others', 'icon' => 'fas fa-asterisk'],
+        ['name' => 'Interests', 'icon' => 'fas fa-search'],
+        ['name' => 'Get In Touch', 'icon' => 'fas fa-fingerprint']
+    ];
+    include 'resources/bodyPreMain.php';
+    include 'resources/functions.php';
+    ?>
 
 
     <!-- Main. -->
@@ -158,7 +158,7 @@
           </a> and be my corner on the Internet. I designed this website myself
           from scratch, if you're curious, you can take a look at the
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
-              rel="noopener"
+             rel="noopener"
              target="_blank"
              title="Personal website source code - Gitlab.">
             source code <i class="fas fa-external-link-alt"></i>
@@ -222,17 +222,17 @@
           </div>
           <a href="."
              title="David Álvarez Rosa's personal website.">
-          <div class="data">
-            <i class="fas fa-link"></i>
-            <p>Website</p>
-            <div class="dataUnder">
+            <div class="data">
               <i class="fas fa-link"></i>
-              <p>Personal web</p>
+              <p>Website</p>
+              <div class="dataUnder">
+                <i class="fas fa-link"></i>
+                <p>Personal web</p>
+              </div>
             </div>
-          </div>
           </a>
           <a href="https://gitlab.com/david-alvarez-rosa"
-              rel="noopener"
+             rel="noopener"
              target="_blank"
              title="Personal Gitlab page.">
             <div class="data">
@@ -461,11 +461,11 @@
           <ul class="marginTop">
             <li>Final grade: 9.47/10.</li>
             <li>
-              University access exam grade (<!--
-              --><a href="https://en.wikipedia.org/wiki/Selectividad"
-                 rel="nofollow noopener"
-                 target="_blank"
-                 title="Search Selectividad in Wikipedia."><em>Selectividad <i class="fas fa-external-link-alt"></i></em>
+              University access exam grade
+              (<a href="https://en.wikipedia.org/wiki/Selectividad"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  title="Search Selectividad in Wikipedia."><em>Selectividad <i class="fas fa-external-link-alt"></i></em>
               </a>)
               : 12.76/14.
             </li>
@@ -683,8 +683,8 @@
           <p class="marginTop">
             I have been part of the <strong>Perception</strong> section of
             Driverless UPC team, which is a team formed by undergraduate
-            engineers in charge of the designing, manufacturing and testing of
-            a <strong>fully autonomous</strong> car that will participate in
+            engineers in charge of the designing, manufacturing and testing of a
+            <strong>fully autonomous</strong> car that will participate in
             national and international competitions between universities.
           </p>
         </div>
@@ -769,18 +769,18 @@
             Email is perhaps the most successful federated, decentralized
             protocol to ever exist. It's a shame we've allowed a centralized,
             monolithic advertising company to obtain a near monopoly on such a
-            great technology. That's the reason why I decided to run
-            my <strong>own email server</strong>. After all, that is how email
-            is <em>designed to work</em>.
+            great technology. That's the reason why I decided to run my
+            <strong>own email server</strong>. After all, that is how email is
+            <em>designed to work</em>.
           </p>
           <ul>
             <li>
               Configuration of a modern, secure personal email server based on
-              free software (<!--
-              --><a href="http://www.postfix.org/"
-                 rel="nofollow noopener"
-                 target="_blank"
-                 title="The Postfix Home Page.">Postfix <i class="fas fa-external-link-alt"></i>
+              free software
+              (<a href="http://www.postfix.org/"
+                  rel="nofollow noopener"
+                  target="_blank"
+                  title="The Postfix Home Page.">Postfix <i class="fas fa-external-link-alt"></i>
               </a>
               and
               <a href="https://www.dovecot.org/"
@@ -805,7 +805,7 @@
                  title="Internet Message Access Protocol - Wikipedia.">
                 IMAP <i class="fas fa-external-link-alt"></i>
               </a>
-               access.
+              access.
             </li>
             <li>
               <a href="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail"
@@ -874,8 +874,8 @@
             students, through <strong>data analysis</strong>:
             clustering/k-nearest-neighbours. In particular, based on past
             grades, desired performance and schedule restrictions we were able
-            to create the best study schedule possible
-            to <strong>maximize</strong> user <strong>performance</strong>.
+            to create the best study schedule possible to
+            <strong>maximize</strong> user <strong>performance</strong>.
           </p>
           <ul>
             <li>
@@ -1231,17 +1231,17 @@
                   rel="nofollow noopener"
                   target="_blank"
                   title="Arch Linux official website.">
-                Arch <i class="fas fa-external-link-alt"></i></a>,
+              Arch <i class="fas fa-external-link-alt"></i></a>,
               <a href="https://www.debian.org/"
-                  rel="nofollow noopener"
-                  target="_blank"
-                  title="Debian official website.">
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Debian official website.">
                 Debian <i class="fas fa-external-link-alt"></i>
               </a> and
               <a href="https://ubuntu.com/"
-                  rel="nofollow noopener"
-                  target="_blank"
-                  title="Ubuntu official website.">
+                 rel="nofollow noopener"
+                 target="_blank"
+                 title="Ubuntu official website.">
                 Ubuntu <i class="fas fa-external-link-alt"></i>
               </a>).
           </div>

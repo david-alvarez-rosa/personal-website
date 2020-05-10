@@ -36,45 +36,45 @@ $content = ob_get_clean();
 <!DOCTYPE html>
 
 <html lang="en">
-   <head>
-      <?php include '../resources/blog/head.php'; ?>
-   </head>
+  <head>
+    <?php include '../resources/blog/head.php'; ?>
+  </head>
 
 
-   <!-- Welcome comment. -->
-   <?php include '../resources/comment.html'; ?>
+  <!-- Welcome comment. -->
+  <?php include '../resources/comment.html'; ?>
 
 
-   <body class="preload">
-      <?php include '../resources/bodyPreMain.php'; ?>
+  <body class="preload">
+    <?php include '../resources/bodyPreMain.php'; ?>
 
 
-      <!-- Main. -->
-      <main>
-         <?php
-         include '../resources/blog/abstract.php';
-         echo $content;
-         include '../resources/blog/controllers.php';
-         ?>
-      </main>
-
-
-      <!-- License (Creative Commons). -->
-      <?php include '../resources/license.html'; ?>
-
-
-      <!-- Footer. -->
-      <?php include '../resources/footer.php'; ?>
-
-
-      <!-- Javascript files. -->
-      <script src="/js/main.js"></script>
-      <script src="/js/shortcuts.js"></script>
-      <script defer src="/js/confetti.js"></script>
+    <!-- Main. -->
+    <main>
       <?php
-      for ($i = 0; $i < sizeof($jsExtra); ++$i)
-          echo $jsExtra[$i];
+      include '../resources/blog/abstract.php';
+      echo $content;
+      include '../resources/blog/controllers.php';
       ?>
-      <script src="/js/blog.js"></script>
-   </body>
+    </main>
+
+
+    <!-- License (Creative Commons). -->
+    <?php include '../resources/license.html'; ?>
+
+
+    <!-- Footer. -->
+    <?php include '../resources/footer.php'; ?>
+
+
+    <!-- Javascript files. -->
+    <script src="/js/main.js"></script>
+    <script src="/js/shortcuts.js"></script>
+    <script defer src="/js/confetti.js"></script>
+    <?php
+    for ($i = 0; $i < sizeof($jsExtra); ++$i)
+        echo $jsExtra[$i];
+    ?>
+    <script src="/js/blog.js"></script>
+  </body>
 </html>
