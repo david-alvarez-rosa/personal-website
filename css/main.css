@@ -713,7 +713,7 @@ main h2 a:hover::before, main h2 a:focus::before {
 .rightIcon {
     float: right;
     font-size: .75em;
-    padding-top: .85em;
+    padding-top: .65em;
 }
 
 h2 .linkIcon {
