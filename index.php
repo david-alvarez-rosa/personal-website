@@ -36,7 +36,7 @@
                 Curriculum Vitae, Mathematics, Engineering" />
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://david.alvarezrosa.com/" />
+    <link rel="canonical" href="https://david.alvarezrosa.com" />
     <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
@@ -46,11 +46,19 @@
     <meta name="msapplication-TileColor" content="#DBDCDC">
     <meta name="msapplication-config" content="img/icons/browserconfig.xml">
     <meta name="theme-color" content="#FFFFFF">
+
+    <!-- CSS files. -->
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="external/fontawesome/css/all.min.css" />
+
+    <!-- Javascript files. -->
+    <script defer src="js/chart.min.js"></script>
+    <script defer src="js/main.js"></script>
+    <script defer src="js/home.js"></script>
+    <script defer src="js/shortcuts.js"></script>
+    <script defer src="js/confetti.js"></script>
+
     <script type="application/ld+json">
      {
          "@context": "https://schema.org/",
@@ -1334,13 +1342,5 @@
 
     <!-- Footer. -->
     <?php include 'resources/footer.php'; ?>
-
-
-    <!-- Javascript files. -->
-    <script src="js/chart.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/home.js"></script>
-    <script src="js/shortcuts.js"></script>
-    <script src="js/confetti.js"></script>
   </body>
 </html>

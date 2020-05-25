@@ -1,6 +1,6 @@
 /**
  *
- * @source: https://david.alvarezrosa.com/js/home.js
+ * @source: https://blog.alvarezrosa.com/js/home.js
  *
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
@@ -26,25 +26,6 @@
  * for the JavaScript code in this page.
  *
  */
-
-
-window.addEventListener("load", function() {
-    setTimeout(loadMathJax, 3000);
-})
-
-function loadMathJax() {
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        svg: {
-            fontCache: 'global'
-        }
-    };
-
-    var mathJaxScript = document.getElementById("MathJax-script");
-    mathJaxScript.src = mathJaxScript.dataset.src;
-}
 
 
 // Add ability to show zoomed images on click.
@@ -143,11 +124,6 @@ function copyToClipboard(textId) {
         }, 2500);
     }
 }
-
-
-// Add syntax highlighting for source code.
-hljs.initHighlightingOnLoad();
-hljs.initLineNumbersOnLoad();
 
 
 // Enlarge call out.

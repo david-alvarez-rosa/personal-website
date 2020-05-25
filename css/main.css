@@ -718,7 +718,7 @@ main h2 a:hover::before, main h2 a:focus::before {
 
 h2 .linkIcon {
     font-size: .55em;
-    margin-left: 1em;
+    margin: 0 0 .15em .75em;
     opacity: 0;
     transition: opacity .5s;
 }
