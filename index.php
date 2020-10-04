@@ -43,6 +43,7 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#816363">
     <link rel="shortcut icon" href="img/icons/favicon.ico">
+    <meta property="og:image" content="img/backgrounds/mountain.jpg">
     <meta name="msapplication-TileColor" content="#DBDCDC">
     <meta name="msapplication-config" content="img/icons/browserconfig.xml">
     <meta name="theme-color" content="#FFFFFF">
