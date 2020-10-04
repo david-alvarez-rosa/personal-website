@@ -47,7 +47,7 @@
     <!-- Meta tags for social media. -->
     <meta property="og:title" content="David Álvarez Rosa | Personal Website">
     <meta property="og:description" content="Personal Website. ">
-    <meta property="og:image" content="img/backgrounds/mountain.jpg">
+    <meta property="og:image" content="img/backgrounds/mountain_low.jpg">
     <meta property="og:url" content="https://david.alvarezrosa.com/">
     <meta name="twitter:card" content="summary_large_image">
 
