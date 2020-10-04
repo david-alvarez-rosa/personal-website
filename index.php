@@ -43,7 +43,14 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#816363">
     <link rel="shortcut icon" href="img/icons/favicon.ico">
+
+    <!-- Meta tags for social media. -->
+    <meta property="og:title" content="David Álvarez Rosa | Personal Website">
+    <meta property="og:description" content="Personal Website. ">
     <meta property="og:image" content="img/backgrounds/mountain.jpg">
+    <meta property="og:url" content="https://david.alvarezrosa.com/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <meta name="msapplication-TileColor" content="#DBDCDC">
     <meta name="msapplication-config" content="img/icons/browserconfig.xml">
     <meta name="theme-color" content="#FFFFFF">
