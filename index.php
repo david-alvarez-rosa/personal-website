@@ -37,23 +37,29 @@
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://david.alvarezrosa.com" />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg" color="#816363">
-    <link rel="shortcut icon" href="img/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="img/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32"
+          href="img/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16"
+          href="img/icons/favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="mask-icon" href="img/icons/safari-pinned-tab.svg"
+          color="#816363" />
+    <link rel="shortcut icon" href="img/icons/favicon.ico" />
 
     <!-- Meta tags for social media. -->
-    <meta property="og:title" content="David Álvarez Rosa | Personal Website">
-    <meta property="og:description" content="Personal Website. ">
-    <meta property="og:image" content="img/backgrounds/mountain_low.jpg">
-    <meta property="og:url" content="https://david.alvarezrosa.com/">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="David Álvarez Rosa | Personal Website" />
+    <meta property="og:description" content="Personal Website." />
+    <meta property="og:image"
+          content="https://david.alvarezrosa.com/img/backgrounds/mountain.jpg" />
+    <meta property="og:url" content="https://david.alvarezrosa.com/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <meta name="msapplication-TileColor" content="#DBDCDC">
-    <meta name="msapplication-config" content="img/icons/browserconfig.xml">
-    <meta name="theme-color" content="#FFFFFF">
+    <meta name="msapplication-TileColor" content="#DBDCDC" />
+    <meta name="msapplication-config" content="img/icons/browserconfig.xml" />
+    <meta name="theme-color" content="#FFFFFF" />
 
     <!-- CSS files. -->
     <link rel="stylesheet" href="css/main.css" />
