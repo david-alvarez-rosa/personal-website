@@ -1568,8 +1568,9 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     }
 
     main {
-        padding-left: 1.5em;
-        padding-right: 1.5em;
+        font-size: .96em;
+        padding-left: .85em;
+        padding-right: .85em;
     }
 
     .mainShrunken {
@@ -1583,7 +1584,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
     }
 
     #personalData {
-        margin: 0 -.5em 1.75em -.5em;
+        margin: 0 -.5em 1.75em -1em;
     }
 
     .data {
@@ -1600,6 +1601,15 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
     .skills {
         margin-left: -5em;
+    }
+
+    main .card {
+        padding-left: .85em;
+        padding-right: .85em;
+    }
+
+    main .card ul {
+        padding-left: 1.25em;
     }
 
     .cardAward {
