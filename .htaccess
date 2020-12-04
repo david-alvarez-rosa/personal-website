@@ -1,5 +1,6 @@
 ErrorDocument 404 /404.php
 
+
 # Browser caching using cache-control headers.
 <ifModule mod_headers.c>
     # One year for media and font files.
