@@ -67,7 +67,7 @@
     <link rel="stylesheet" href="external/fontawesome/css/all.min.css" />
 
     <!-- Javascript files. -->
-    <script defer src="js/chart.min.js"></script>
+    <script defer src="external/chart.min.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/home.js"></script>
     <script defer src="js/shortcuts.js"></script>
