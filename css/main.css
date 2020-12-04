@@ -770,7 +770,7 @@ main p a, main ul a {
     border-radius: 2px;
 }
 
-main a:hover .titleIcon, main a:focus .titleIcon {
+main a:hover, main a:focus {
     color: var(--main-color);
 }
 
