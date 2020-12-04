@@ -20,14 +20,6 @@
  **/
 ?>
 
-<div class="anchor" id="sec:greeting">
-   <i class="bouncingHand fas fa-hand-point-right"></i>
-   <a onclick="javascript:takeMeBack();"
-      class="undoAnchor"
-      title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-   </a>
-</div>
 <section class="hidden">
    <?php sectionHeader(); ?>
    <p>

@@ -20,22 +20,8 @@
  **/
 ?>
 
-<div class="anchor" id="sec:introduction">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <h2> Introduction
-    <a href="#sec:intro"
-       title="Go to introduction section.">
-      <i class="linkIcon fas fa-link"></i>
-    </a>
-    <i class="rightIcon fas fa-percentage"></i>
-  </h2>
+  <?php sectionHeader(); ?>
   <p>
     A <strong>neural network</strong>, more properly referred to as
     an <em>artificial</em> neural network (ANN) are computing systems
@@ -45,8 +31,7 @@
        rel="nofollow noopener"
        target="_blank"
        title="Robert Hecht-Nielsen - Wikipedia">
-      Robert Hecht-Nielsen <i class="fas fa-external-link-alt"></i>
-    </a>
+      Robert Hecht-Nielsen <i class="fas fa-external-link-alt"></i></a>
     (inventor of one of the first neurocomputers) defines a neural network
     as:
   </p>
@@ -75,27 +60,12 @@
        rel="nofollow noopener"
        target="_blank"
        title="Synapse - Wikipedia">
-      synapses <i class="fas fa-external-link-alt"></i>
-    </a>
+      synapses <i class="fas fa-external-link-alt"></i></a>
     in a biological brain, can transmit a signal to other neurons. An
     artificial neuron that receives a signal then processes it and can signal
     neurons connected to it.
   </p>
-  <div class="anchor" id="subsec:math-perspective">
-    <i class="bouncingHand fas fa-hand-point-right"></i>
-    <a onclick="javascript:takeMeBack();"
-       class="undoAnchor"
-       title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-    </a>
-  </div>
-  <h3>
-    Mathematical perspective
-    <a href="#subsec:math-perspective"
-       title="Go to mathematical perspective subsection.">
-      <i class="linkIcon fas fa-hashtag"></i>
-    </a>
-  </h3>
+  <?php subsectionHeader(); ?>
   <p>
     Altough the analogy made above of an ANN with a biological brain, there is
     no need for this, we can just think of a neural network as a mathematical
@@ -109,22 +79,8 @@
   </p>
 </section>
 
-<div class="anchor" id="sec:topology">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <h2> Network topology
-    <a href="#sec:topology"
-       title="Go to network topology section.">
-      <i class="linkIcon fas fa-link"></i>
-    </a>
-    <i class="rightIcon fas fa-project-diagram"></i>
-  </h2>
+  <?php sectionHeader(); ?>
   <div class="anchor" id="p:intro-toplogy">
     <i class="bouncingHand fas fa-hand-point-right"></i>
     <a onclick="javascript:takeMeBack();"
@@ -166,21 +122,7 @@
     <a href="#subsec:connections" title="To to connections subsection">
       connections</a>.
   </p>
-  <div class="anchor" id="subsec:layers">
-    <i class="bouncingHand fas fa-hand-point-right"></i>
-    <a onclick="javascript:takeMeBack();"
-       class="undoAnchor"
-       title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-    </a>
-  </div>
-  <h3>
-    Layers
-    <a href="#subsec:layers"
-       title="Go to layers subsection.">
-      <i class="linkIcon fas fa-hashtag"></i>
-    </a>
-  </h3>
+  <?php subsectionHeader(); ?>
   <p>
     The <strong>layers</strong> are just a collection of neurons, we will
     distinguish between three types depending on its position in the network.
@@ -199,8 +141,8 @@
     </li>
   </ul>
   <p>
-    We will denote with $L$ the number of layers and with $n_l$ the size of
-    the $l$-th layer.
+    We will denote with \(L\) the number of layers and with \(n_l\) the size of
+    the \(l\)-th layer.
   </p>
   <p>
     To gain some intuition on how this work, let's think about the handwritten
@@ -214,21 +156,7 @@
     with an image holding a handwritten number 3, then the ouput is one 1 in the
     position corresponding to the number 3 and the rest of zeros.
   </p>
-  <div class="anchor" id="subsec:neurons">
-    <i class="bouncingHand fas fa-hand-point-right"></i>
-    <a onclick="javascript:takeMeBack();"
-       class="undoAnchor"
-       title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-    </a>
-  </div>
-  <h3>
-    Neurons
-    <a href="#subsec:neurons"
-       title="Go to optimization problem subsection.">
-      <i class="linkIcon fas fa-hashtag"></i>
-    </a>
-  </h3>
+  <?php subsectionHeader(); ?>
   <p>
     Neurons are the core component of any neural network. Basically there are
     three subparts that form a neuron.
@@ -236,24 +164,24 @@
   <ul>
     <li>
       <strong>Value</strong>: each neuron holds a value, it will be denoted by
-      $x_i^l \in \mathbb{R}$ for the $i$-th neuron in the $l$-th layer. Of
-      course, it should be satisfied $1 \leq i \leq n_l$. We will use use the
-      notation $\mathbf{x}^l$ for the <strong>vector</strong> of all the values
-      in the $l$-th level.  When we speak of the input vector, we may ommit the
-      superindex, i.e. we will use $\mathbf{x}$ to denote
-      $\mathbf{x}^0$. Similarly, for the output layer, we will use
-      $\mathbf{\hat{y}}$ to refer to $\mathbf{x}^L$.
+      \(x_i^l \in \mathbb{R}\) for the \(i\)-th neuron in the \(l\)-th layer. Of
+      course, it should be satisfied \(1 \leq i \leq n_l\). We will use use the
+      notation \(\mathbf{x}^l\) for the <strong>vector</strong> of all the values
+      in the \(l\)-th level.  When we speak of the input vector, we may ommit the
+      superindex, i.e. we will use \(\mathbf{x}\) to denote
+      \(\mathbf{x}^0\). Similarly, for the output layer, we will use
+      \(\mathbf{\hat{y}}\) to refer to \(\mathbf{x}^L\).
     </li>
     <li>
-      <strong>Bias</strong>: also each neuron has a bias, denoted as $b_i^l$ for
-      the $i$-th neuron in the $l$-th layer. Is then true that $1 \leq i \leq
-      n_l$. The vector of all biases in the $l$-th layer will be denoted by
-      $\mathbf{b}^l$.
+      <strong>Bias</strong>: also each neuron has a bias, denoted as \(b_i^l\) for
+      the \(i\)-th neuron in the \(l\)-th layer. Is then true that \(1 \leq i \leq
+      n_l\). The vector of all biases in the \(l\)-th layer will be denoted by
+      \(\mathbf{b}^l\).
     </li>
     <li>
       <strong>Activation function:</strong> all neurons have an activation
-      function $f_i^l \in \mathcal{C}^1(\mathbb{R}, \mathbb{R})$ for the $i$-th
-      neuron in the $l$-th layer. Of course, it is needed $1 \leq i \leq n_l$.
+      function \(f_i^l \in \mathcal{C}^1(\mathbb{R}, \mathbb{R})\) for the \(i\)-th
+      neuron in the \(l\)-th layer. Of course, it is needed \(1 \leq i \leq n_l\).
       <span id="callOutFunctions" class="callOut">
         <a href="javascript:enlargeCallOut('callOutFunctions');"
            title="Click to see this information bigger.">
@@ -262,8 +190,8 @@
         <span>
           <p>
             Usually all the activation functions are
-            <strong>neuron-independent</strong> (i.e. $f_i^l$ does not really
-            depend on $i$ or $l$).
+            <strong>neuron-independent</strong> (i.e. \(f_i^l\) does not really
+            depend on \(i\) or \(l\)).
           </p>
           <p>
             The <strong>regularity</strong> assummed for this functions is
@@ -274,57 +202,29 @@
       </span>
     </li>
   </ul>
-  <div class="anchor" id="subsec:connections">
-    <i class="bouncingHand fas fa-hand-point-right"></i>
-    <a onclick="javascript:takeMeBack();"
-       class="undoAnchor"
-       title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-    </a>
-  </div>
-  <h3>
-    Connections
-    <a href="#subsec:connections"
-       title="Go to connections subsection.">
-      <i class="linkIcon fas fa-hashtag"></i>
-    </a>
-  </h3>
+  <?php subsectionHeader(); ?>
   <p>
     As we discussed
     <a href="#p:intro-toplogy" title="Scroll to above discussion."> above</a>,
     all neurons between adjacent layers are required to be connected, this are
     the connections, that should have associated a <strong>weight</strong>. For
-    the connection between the $i$-th neuron in the $l$-th layer and the $j$-th
-    neuron in the $l+1$-th layer, we will denote this weight by $w_{ij}^l \in
-    \mathbb{R} $. The set of all this weights is as follows, \[ \{w_{ij}^l \mid
+    the connection between the \(i\)-th neuron in the \(l\)-th layer and the \(j\)-th
+    neuron in the \(l+1\)-th layer, we will denote this weight by \(w_{ij}^l \in
+    \mathbb{R} \). The set of all this weights is as follows, \[ \{w_{ij}^l \mid
     1 \leq i \leq n_{l}, \, 1 \leq j \leq n_{l+1}, \, 1 \leq l < L \} \subset
     \mathbb{R}. \]
   </p>
   <p>
-    The <strong>matrix</strong> of all weights in the $l$-th layer will be
-    denoted by $\mathbf{W}^l$. This is, $(\mathbf{W}^l)_{ij} = w_{ij}^l$.
+    The <strong>matrix</strong> of all weights in the \(l\)-th layer will be
+    denoted by \(\mathbf{W}^l\). This is, \((\mathbf{W}^l)_{ij} = w_{ij}^l\).
   </p>
 </section>
 
-<div class="anchor" id="sec:forward">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <h2> Feed forward
-    <a href="#sec:forward"
-       title="Go to feed forward section.">
-      <i class="linkIcon fas fa-link"></i>
-    </a>
-    <i class="rightIcon fas fa-forward"></i>
-  </h2>
+  <?php sectionHeader(); ?>
   <p>
     From now on let's suppose we are working with a fully-connected neural
-    network, with $L$ different layers and we will be using the same notation
+    network, with \(L\) different layers and we will be using the same notation
     used before.' The values of the neurons can be computed as follows:
     \[
     x_i^l = f_i^l \left( \sum_{k=1}^{n_{l-1}} w_{ik}^{l-1} x_{k}^{l-1} +
@@ -342,22 +242,8 @@
   </p>
 </section>
 
-<div class="anchor" id="sec:optimization">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <h2> Optimization problem
-    <a href="#sec:optimize"
-       title="Go to optimization problem section.">
-      <i class="linkIcon fas fa-link"></i>
-    </a>
-    <i class="rightIcon fas fa-chart-line"></i>
-  </h2>
+  <?php sectionHeader(); ?>
   <p>
     In order to being able to <strong>train</strong> our neural network, is
     mandatory to define an <strong>error function</strong> (also known as loss
@@ -369,35 +255,35 @@
   </p>
   <ul>
     <li>
-      <strong>Dataset</strong>: will be denoted by $\Omega$ and consists in
-      input-output pairs $(\mathbf{x}, \mathbf{y})$, where $\mathbf{x}$
-      represents the input and $\mathbf{y}$ the desired output. We shall denote
-      the size (cardinal) of the <strong>dataset</strong> by $N$. Of course, in
-      terms of our ANN $\mathbf{x}$ corresponds to the values of the first (or
-      input) layer and $\mathbf{y}$ to the output (or last) layer.
+      <strong>Dataset</strong>: will be denoted by \(\Omega\) and consists in
+      input-output pairs \((\mathbf{x}, \mathbf{y})\), where \(\mathbf{x}\)
+      represents the input and \(\mathbf{y}\) the desired output. We shall denote
+      the size (cardinal) of the <strong>dataset</strong> by \(N\). Of course, in
+      terms of our ANN \(\mathbf{x}\) corresponds to the values of the first (or
+      input) layer and \(\mathbf{y}\) to the output (or last) layer.
     </li>
     <li>
       <strong>Parameters</strong>: the parameters of our ANN are both the
-      connection weights $w_{ij}^l$ and the biases $b_i^l$, we will denote the
-      set of all parameters by $\theta$. Keep in mind that $\theta$ is just a
-      set of real vectors of $\mathbb{R}^D$ where $D$ denotes the number of
+      connection weights \(w_{ij}^l\) and the biases \(b_i^l\), we will denote the
+      set of all parameters by \(\theta\). Keep in mind that \(\theta\) is just a
+      set of real vectors of \(\mathbb{R}^D\) where \(D\) denotes the number of
       weigths and biases.
     </li>
   </ul>
   <p>
     The error function quantifies how different is the desired output
-    $\mathbf{y}$ and the calculated (<em>predicted</em>) output
-    $\mathbf{\hat{y}}$ of the neural network on input $\mathbf{x}$ for a set of
-    input-output pairs $(\mathbf{x}, \mathbf{y}) \in \Omega$ and a particular
-    value of the parameters $\mathbf{\theta}$. We will denote the error funcion
-    by $E(\Omega, \theta)$ and we will assume that is continuosly differentiable
-    (i.e. $\mathcal{C}^1$).
+    \(\mathbf{y}\) and the calculated (<em>predicted</em>) output
+    \(\mathbf{\hat{y}}\) of the neural network on input \(\mathbf{x}\) for a set of
+    input-output pairs \((\mathbf{x}, \mathbf{y}) \in \Omega\) and a particular
+    value of the parameters \(\mathbf{\theta}\). We will denote the error funcion
+    by \(E(\Omega, \theta)\) and we will assume that is continuosly differentiable
+    (i.e. \(\mathcal{C}^1\)).
   </p>
   <p>
     It's' common (and we will assume it that way) that the error funcion is a
-    mean of the errors of a particular pair $(\mathbf{x}, \mathbf{y}) \in
-    \Omega$. This is, there exists a continuosly differentiable function
-    $e(\mathbf{x}, \mathbf{y}, \theta)$ such that:
+    mean of the errors of a particular pair \((\mathbf{x}, \mathbf{y}) \in
+    \Omega\). This is, there exists a continuosly differentiable function
+    \(e(\mathbf{x}, \mathbf{y}, \theta)\) such that:
     \[
     E(\Omega, \theta) =
     \frac{1}{N} \sum_{(\mathbf{x}, \mathbf{y}) \in \Omega}
@@ -406,28 +292,14 @@
   </p>
   <p>
     Now, what we will want to do is to optimize (minimize) this error function
-    in $\theta$. This is, given a dataset $\Omega$ we will want to approximate
+    in \(\theta\). This is, given a dataset \(\Omega\) we will want to approximate
     \[
     \DeclareMathOperator*{\argmin}{arg\,min}
     \hat{\theta} = \argmin_{\theta} E(\Omega, \theta),
     \]
     given that the above exists.
   </p>
-  <div class="anchor" id="subsec:errorFuncs">
-    <i class="bouncingHand fas fa-hand-point-right"></i>
-    <a onclick="javascript:takeMeBack();"
-       class="undoAnchor"
-       title="Take me back where I was.">
-      <i class="fas fa-fast-backward"></i>
-    </a>
-  </div>
-  <h3>
-    Error functions
-    <a href="#subsec:errorFuncs"
-       title="Go to error functions subsection.">
-      <i class="linkIcon fas fa-hashtag"></i>
-    </a>
-  </h3>
+  <?php subsectionHeader(); ?>
   <p>
     To get a more practical idea of what the error functions are, we show some
     examples below.
@@ -436,8 +308,8 @@
     <li>
       <strong>Euclidian norm</strong>: the error function of a particular
       element of the dataset is given by the euclidian distance between the
-      <em>predicted</em> value $\mathbf{\hat{y}}$ and the expected output
-      $\mathbf{y}$,
+      <em>predicted</em> value \(\mathbf{\hat{y}}\) and the expected output
+      \(\mathbf{y}\),
       \[
       e(\mathbf{x}, \mathbf{y}, \theta) =
       ||\mathbf{y} - \mathbf{\hat{y}(\mathbf{x}, \theta)}||_2.
@@ -456,22 +328,8 @@
   </ul>
 </section>
 
-<div class="anchor" id="sec:backward">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <h2> Backward propagation
-    <a href="#sec:backward"
-       title="Go to backward propagation section.">
-      <i class="linkIcon fas fa-link"></i>
-    </a>
-    <i class="rightIcon fas fa-backward"></i>
-  </h2>
+  <?php sectionHeader(); ?>
   <p>
     First ñaslkdjf asdf kasjdf asd.
   </p>

@@ -30,6 +30,13 @@ include '../resources/functions.php';
 ob_start();
 include 'content.php';
 $content = ob_get_clean();
+$words = str_word_count(strip_tags($content));
+$timeLow = (int)($words/250);
+$timeHigh = (int)($words/175);
+$timeHigh = max($timeHigh, $timeLow + 2);
+$entry['time'] = $timeLow . ' to ' . $timeHigh . ' minutes to read';
+if ($timeLow == 0)
+    $entry['time'] = 'Less than one minute to read';
 ?>
 
 
@@ -65,16 +72,5 @@ $content = ob_get_clean();
 
     <!-- Footer. -->
     <?php include '../resources/footer.php'; ?>
-
-
-    <!-- Javascript files. -->
-    <script src="/js/main.js"></script>
-    <script src="/js/shortcuts.js"></script>
-    <script defer src="/js/confetti.js"></script>
-    <?php
-    for ($i = 0; $i < sizeof($jsExtra); ++$i)
-        echo $jsExtra[$i];
-    ?>
-    <script src="/js/blog.js"></script>
   </body>
 </html>

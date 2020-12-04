@@ -30,7 +30,7 @@ $keywords = [
     'Greeting',
 ];
 
-$image = 'img/towards-perfect-blog-post.jpeg';
+$image = 'towards-perfect-blog-post.jpeg';
 
 $cssExtra = [];
 

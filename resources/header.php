@@ -32,10 +32,10 @@
       <strong>Industrial Engineering</strong> student.
    </h2>
    <div id="sites">
-      <a href="https://david.alvarezrosa.com"
-         <?php if ($currentSite === 'home') echo 'class="currentSite"'; ?>
-         title="David Álvarez Rosa's personal website.">
-         Home <i class="shine shineHeader1"></i>
+      <a href="https://david.alvarezrosa.com/about"
+         <?php if ($currentSite === 'about') echo 'class="currentSite"'; ?>
+         title="About page of David Álvarez Rosa's personal website.">
+         About <i class="shine shineHeader1"></i>
       </a>
       <a href="https://blog.alvarezrosa.com"
          <?php if ($currentSite === 'blog') echo 'class="currentSite"'; ?>

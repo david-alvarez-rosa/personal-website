@@ -40,7 +40,9 @@
          <i class="fas fa-times fa-2x"></i>
       </a>
       <figure>
-         <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
+        <a id="zoomImgLink" title="Download image.">
+          <img id="zoomImg" /><figcaption id="zoomImgCaption"></figcaption>
+        </a>
       </figure>
    </div>
 

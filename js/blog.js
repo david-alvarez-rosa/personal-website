@@ -32,6 +32,7 @@
 var main = document.getElementsByTagName("main")[0];
 var figures = main.getElementsByTagName("figure");
 var zoomImgDiv = document.getElementById("zoomImgDiv");
+var zoomImgLink = document.getElementById("zoomImgLink");
 var zoomImg = document.getElementById("zoomImg");
 var zoomImgCaption = document.getElementById("zoomImgCaption");
 
@@ -40,6 +41,7 @@ for (var i = 0; i < figures.length; ++i)
 
 function openZoomImg() {
     zoomImgDiv.style.display = "block";
+    zoomImgLink.href = this.firstElementChild.src;
     zoomImg.src = this.firstElementChild.src;
     zoomImgCaption.innerHTML = this.lastElementChild.innerHTML
 }

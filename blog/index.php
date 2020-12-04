@@ -76,16 +76,8 @@
         privacy.
       </p>
 
-      <div class="anchor" id="sec:subscribe">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
       <section class="hidden">
-        <?php sectionHeader(0); ?>
+        <?php sectionHeader(); ?>
         <p>
           You can <strong>subscribe</strong> to this blog by using this
           <a href="rss.xml"
@@ -97,8 +89,7 @@
              rel="nofollow noopener"
              target="_blank"
              title="What Is RSS? RSS Explained.">
-            RSS <i class="fas fa-external-link-alt"></i>
-          </a>
+            RSS <i class="fas fa-external-link-alt"></i></a>
           (Rich Site Summary) is a format for <strong>delivering</strong>
           regularly changing <strong>web content</strong>. It allows you to
           easily stay informed by retrieving the latest content from the sites
@@ -112,36 +103,25 @@
              rel="nofollow noopener"
              target="_blank"
              title="GNU Emacs official website.">
-            Emacs <i class="fas fa-external-link-alt"></i>
-          </a>
+            Emacs <i class="fas fa-external-link-alt"></i></a>
           user, I recommend you
           <a href="https://nullprogram.com/blog/2013/09/04/"
              target="_blank"
              rel="nofollow noopener"
              title="Introducing Elfeed, an Emacs Web Feed Reader.">
-            Elfeed <i class="fas fa-external-link-alt"></i>
-          </a>
+            Elfeed <i class="fas fa-external-link-alt"></i></a>
           (created by
           <a href="https://nullprogram.com/about/"
              target="_blank"
              rel="nofollow noopener"
              title="Chris Wellons (skeeto) personal website.">
-            Chris Wellons <i class="fas fa-external-link-alt"></i>
-          </a>).
+            Chris Wellons <i class="fas fa-external-link-alt"></i></a>).
 
         </p>
       </section>
 
-      <div class="anchor" id="sec:posts">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
       <section class="hidden">
-        <?php sectionHeader(1); ?>
+        <?php sectionHeader(); ?>
         <p>
           Below, you will find the latest blog posts summarized and listed in
           reverse chronological order.

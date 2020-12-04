@@ -48,6 +48,22 @@
 <meta name="msapplication-TileColor" content="#DBDCDC">
 <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
 <meta name="theme-color" content="#FFFFFF">
+<meta name="msapplication-TileColor" content="#DBDCDC" />
+<meta name="msapplication-config" content="img/icons/browserconfig.xml" />
+<meta name="theme-color" content="#FFFFFF" />
+
+<!-- Meta tags for social media. -->
+<meta property="og:title"
+      content="<?php echo $entry['title']; ?> | David Álvarez Rosa | Personal Blog" />
+<meta property="og:description" content="<?php echo strip_tags($abstract); ?>" />
+<meta property="og:image"
+      content="https://blog.alvarezrosa.com/<?php echo $entryId; ?>/img/<?php echo $image; ?>" />
+<meta property="og:url"
+      content="https://blog.alvarezrosa.com/<?php echo $entryId; ?>" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- CSS files. -->
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/blog.css" />
 <link rel="stylesheet" href="/css/animations.css" />
@@ -58,20 +74,29 @@
 for ($i = 0; $i < sizeof($cssExtra); ++$i)
     echo '<link rel="stylesheet" href="' . $cssExtra[$i] . '" />';
 ?>
+
+<!-- Javascript files. -->
+<script defer src="/js/main.js"></script>
+<script defer src="/js/shortcuts.js"></script>
+<script defer src="/js/confetti.js"></script>
+<?php
+for ($i = 0; $i < sizeof($jsExtra); ++$i)
+    echo $jsExtra[$i];
+?>
+<script defer src="/js/blog.js"></script>
+
 <script type="application/ld+json">
  {
 		 "@context":"http://schema.org",
 		 "@type": "BlogPosting",
-		 "image": "https://blog.alvarezrosa.com/img/blog/<?php echo $entryId . '/' . $image; ?>"
-		 "url": "https://blog.alvarezrosa.com/hello-world.php",
+		 "image": "https://blog.alvarezrosa.com/<?php echo $entryId . '/img/' . $image; ?>"
+		 "url": "https://blog.alvarezrosa.com/<?php echo $entryId ?>",
 		 "headline": "<?php echo $entry['title']; ?>",
-		 "dateCreated": "2019-02-11T11:11:11",
-		 "datePublished": "2019-02-11T11:11:11",
-		 "dateModified": "2019-02-11T11:11:11",
+		 "dateCreated": "<?php echo $entry['date']; ?>",
 		 "inLanguage": "en-US",
 		 "isFamilyFriendly": "true",
-		 "copyrightYear": "2020",
-		 "copyrightHolder": "",
+		 "copyrightYear": "<?php echo date("Y"); ?>",
+		 "copyrightHolder": "<?php echo $authors[$entry['author']]['name']; ?>",
 		 "author": {
 			   "@type": "Person",
 			   "name": "<?php echo $authors[$entry['author']]['name']; ?>",
@@ -82,9 +107,16 @@ for ($i = 0; $i < sizeof($cssExtra); ++$i)
 			   "name": "<?php echo $authors[$entry['author']]['name']; ?>",
 			   "url": "<?php echo $authors[$entry['author']]['webUrl']; ?>"
 		 },
-		 "genre": ["SEO", "JSON-LD"],
-		 "articleSection": "Uncategorized posts",
-
+		 "genre": [
+         <?php
+         $tags = $entry['tags'];
+         for ($i = 0; $i < sizeof($tags); ++$i) {
+             if ($i != 0)
+                 echo ', ';
+             echo '"' . $tags[$i] . '"';
+         }
+         ?>
+     ],
 		 "articleBody": "<?php echo preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", strip_tags($content)); ?>"
  }
 </script>

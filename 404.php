@@ -39,16 +39,21 @@
     <meta name="msapplication-TileColor" content="#DBDCDC">
     <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
     <meta name="theme-color" content="#FFFFFF">
+
+    <!-- CSS files. -->
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/animations.css" />
     <link rel="stylesheet" href="/css/404.css" />
-    <link rel="stylesheet" href="/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="/fontawesome/css/brands.css" />
+    <link rel="stylesheet" href="/external/fontawesome/css/all.min.css" />
+
+    <!-- Javascript files. -->
+    <script defer src="/js/main.js"></script>
+    <script defer src="/js/shortcuts.js"></script>
+    <script defer src="/js/confetti.js"></script>
   </head>
 
 
-  <?php include "resources/comment.html" ?>
+  <?php include 'resources/comment.html' ?>
 
 
   <body class="preload">
@@ -87,14 +92,6 @@
       </div>
 
       <!-- Section 404 error. -->
-      <div class="anchor" id="sec:not-found">
-        <i class="bouncingHand fas fa-hand-point-right"></i>
-        <a onclick="javascript:takeMeBack();"
-           class="undoAnchor"
-           title="Take me back where I was.">
-          <i class="fas fa-fast-backward"></i>
-        </a>
-      </div>
       <section class="hidden">
         <?php sectionHeader(0); ?>
         <p>
@@ -140,11 +137,5 @@
 
     <!-- Footer. -->
     <?php include "resources/footer.php"; ?>
-
-
-    <!-- Javascript files. -->
-    <script src="/js/main.js"></script>
-    <script src="/js/shortcuts.js"></script>
-    <script src="/js/confetti.js"></script>
   </body>
 </html>

@@ -27,6 +27,14 @@ $sections = [
     ['name' => 'Backward', 'icon' => 'fas fa-backward'],
 ];
 
+$subsections = [
+    ['name' => 'Mathematical perspective'],
+    ['name' => 'Layers'],
+    ['name' => 'Neurons'],
+    ['name' => 'Connections'],
+    ['name' => 'Error functions'],
+];
+
 $keywords = [
     'Neural Network',
     'C++',
@@ -45,11 +53,11 @@ $cssExtra = [
 
 $jsExtra = [
     '<script id="MathJax-script" data-src="../external/mathjax/tex-svg.js" async></script>',
-    '<script src="../external/highlight/highlight.pack.js"></script>',
-    '<script src="../external/highlight/highlight-line-numbers.min.js"></script>',
-    '<script src="../js/highlight.js"></script>',
-    '<script src="../js/mathjax.js"></script>',
-    '<script type="text/javascript">
+    '<script defer src="../external/highlight/highlight.pack.js"></script>',
+    '<script defer src="../external/highlight/highlight-line-numbers.min.js"></script>',
+    '<script defer src="../js/highlight.js"></script>',
+    '<script defer src="../js/mathjax.js"></script>',
+    '<script defer type="text/javascript">
       // Warn that this website is under construction.
       setTimeout( function() { showInfo("welcomeUser"); }, 3500);
     </script>'

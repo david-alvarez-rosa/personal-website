@@ -1,13 +1,5 @@
-<div class="anchor" id="sec:get-in-touch">
-  <i class="bouncingHand fas fa-hand-point-right"></i>
-  <a onclick="javascript:takeMeBack();"
-     class="undoAnchor"
-     title="Take me back where I was.">
-    <i class="fas fa-fast-backward"></i>
-  </a>
-</div>
 <section class="hidden">
-  <?php sectionHeader(sizeof($sections) - 1); ?>
+  <?php sectionHeader(); ?>
   <p>
     If you want to send me a message, my inbox is always open. Whether for a
     potential project or just to say hi, I'll try my best to answer your email!
@@ -23,7 +15,7 @@
              style="width: calc(50% - .5em); float: left;" />
       <input type="email"
              id="inputEmail"
-             placeholder="&#xF1FA;  Email"
+             placeholder="&#xf0e0;  Email"
              style="width: calc(50% - .5em); float: right; margin-right: 0;" />
       <textarea id="inputMessage"
                 placeholder="&#xF044;  Message"
@@ -38,22 +30,19 @@
           <i class="fas fa-envelope fa-lg"></i>
           <a href="javascript:showInfo('infoAddress');"
              title="Show my personal address.">
-            Show address.
-          </a>
+            Show address</a>.
         </li>
         <li>
           <i class="fas fa-phone fa-lg"></i>
           <a href="javascript:showInfo('infoPhone');"
              title="Show my personal phone number.">
-            Show phone number.
-          </a>
+            Show phone number</a>.
         </li>
         <li>
           <i class="fas fa-at fa-lg"></i>
           <a href="javascript:showInfo('infoEmail');"
              title="Show my personal email.">
-            Show email.
-          </a>
+            Show email</a>.
         </li>
       </ul>
     </div>
