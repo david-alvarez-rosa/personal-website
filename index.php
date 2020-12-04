@@ -268,7 +268,7 @@
           <a href="sitemap.xml"
              title="Sitemap of this website.">
             sitemap</a>
-          of the website. Currently main pages are the following:
+          of the website. Main pages are:
         </p>
         <ul>
           <li>
@@ -316,12 +316,11 @@
         </p>
         <p>
           Except where otherwise noted, content on this website is licensed under a
-          <a rel="license noopener"
-             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-             target="_blank"
+          <a rel="license"
+             href="/LICENSE"
              title="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License." >
-            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
-            <i class="fas fa-external-link-alt"></i></a> license, which means that you are <strong>free too</strong>:
+            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>
+          license, which means that you are <strong>free too</strong>:
         </p>
         <ul style="margin-bottom: .25em; margin-top: -1.25em; text-align: justify;">
           <li>
