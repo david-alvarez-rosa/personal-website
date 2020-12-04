@@ -302,17 +302,17 @@
         <p>
           This site is powered by free software and does not contain any
           tracking <em>malware</em>. I designed this website myself from
-          scratch. If you are curious, feel free to take a look at the
+          scratch. The
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
              rel="noopener"
              target="_blank"
              title="Personal website source code - Gitlab.">
             source code <i class="fas fa-external-link-alt"></i></a>
-          (licensed under the
+          is licensed under the
           <a rel="license"
              href="/COPYING"
              title="GNU General Public License version 3.">
-            GNU General Public License</a>).
+            GNU General Public License</a>.
         </p>
         <p>
           Web content should conform with the

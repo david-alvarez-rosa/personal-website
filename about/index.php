@@ -147,6 +147,12 @@
       <!-- Section about. -->
       <section class="hidden">
         <?php sectionHeader(); ?>
+
+        <a href="img/portrait.png"
+           title="David Álvarez Rosa headshot portrait.">
+          <img id="portrait" src="img/portrait.png"
+               alt="David Álvarez Rosa headshot portrait." />
+        </a>
         <p>
           Passionate about Maths, Artificial Intelligence and Engineering. I am
           an outgoing person, with a highly analytical mindset, who likes to
