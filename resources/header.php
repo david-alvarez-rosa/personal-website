@@ -22,7 +22,7 @@
 
 
 <header>
-   <?php include "backgroundImage.html" ?>
+   <?php include "backgroundImage.php" ?>
    <a href="https://david.alvarezrosa.com"
       title="David Álvarez Rosa's personal website.">
       <h1>David Álvarez Rosa</h1>

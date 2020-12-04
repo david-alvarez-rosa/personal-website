@@ -610,7 +610,8 @@
                rel="nofollow noopener"
                target="_blank"
                title="Deep Learning Specialization website.">
-               Deep Learning Specialization
+              Deep Learning Specialization
+              <i class="hide fas fa-external-link-alt"></i>
               <i class="titleIcon fas fa-project-diagram"></i></a>
           </h3>
           <div class="rightLeftFlex">

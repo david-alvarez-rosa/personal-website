@@ -22,7 +22,7 @@
 
 
 <footer>
-   <?php include 'backgroundImage.html'; ?>
+   <?php include 'backgroundImage.php'; ?>
    <ul>
       <li>
          <a class="fab fa-gitlab fa-2x"
