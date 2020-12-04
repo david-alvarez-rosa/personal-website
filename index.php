@@ -285,7 +285,7 @@
             <a href="https://blog.alvarezrosa.com"
                title="David Álvarez Rosa's blog page.">
               Blog page</a>:
-            my personal blog site:
+            my personal blog site.
           </li>
           <li>
             <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
@@ -313,6 +313,19 @@
              href="/COPYING"
              title="GNU General Public License version 3.">
             GNU General Public License</a>).
+        </p>
+        <p>
+          Web content should conform with the
+          <a href="https://www.w3.org/TR/WCAG20/"
+             rel="nofollow noopener"
+             target="_blank"
+             title="World Wide Web Consortium Web Content Accessibility
+                   Guidelines (WCAG) 2.0 website">
+            World Wide Web Consortium Web Content Accessibility Guidelines
+            (WCAG) 2.0 <i class="fas fa-external-link-alt"></i></a>
+          initially at Level A and increasing to Level AA. However, note that I
+          am <strong>not</strong> a professional web developer and I have
+          created this website in my spare time, so there may be errors.
         </p>
         <p>
           Except where otherwise noted, content on this website is licensed under a

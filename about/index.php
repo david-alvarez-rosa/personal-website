@@ -506,7 +506,8 @@
       <section class="hidden">
         <?php sectionHeader(); ?>
         <p>
-          Hey
+          Below, you will find details of my experience summarized and listed in
+          reverse chronological order.
         </p>
         <div class="card">
           <h3>Visiting Researcher<i class="titleIcon fas fa-car"></i></h3>
