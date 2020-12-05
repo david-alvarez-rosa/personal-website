@@ -30,13 +30,7 @@ include '../resources/functions.php';
 ob_start();
 include 'content.php';
 $content = ob_get_clean();
-$words = str_word_count(strip_tags($content));
-$timeLow = (int)($words/250);
-$timeHigh = (int)($words/175);
-$timeHigh = max($timeHigh, $timeLow + 2);
-$entry['time'] = $timeLow . ' to ' . $timeHigh . ' minutes to read';
-if ($timeLow == 0)
-    $entry['time'] = 'Less than one minute to read';
+$entry['time'] = estimateReadingTime($content);
 ?>
 
 

@@ -23,7 +23,12 @@
 include 'data.php';
 
 $entry = end($entries);
-do { ?>
+do {
+    ob_start();
+    include key($entries) . '/content.php';
+    $content = ob_get_clean();
+    $entry['time'] = estimateReadingTime($content);
+?>
   <a href="<?php echo key($entries); ?>"
      title="Read more: <?php echo $entry['title']; ?>">
     <div class="card">
