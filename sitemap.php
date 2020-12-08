@@ -20,6 +20,8 @@
  **/
 
 
+include 'resources/cacheStart.php';
+
 header('Content-type: application/xml; charset=utf-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -119,3 +121,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <loc>https://david.alvarezrosa.com/pasatiempos-dn/código/</loc>
   </url>
 </urlset>
+
+
+<?php include 'resources/cacheEnd.php'; ?>

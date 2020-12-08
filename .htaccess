@@ -1,5 +1,10 @@
 ErrorDocument 404 /404.php
 
+RewriteEngine On
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^sitemap$ sitemap.php [L]
+
 
 # Browser caching using cache-control headers.
 <ifModule mod_headers.c>
