@@ -18,12 +18,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  **/
+
+
+include 'resources/cacheStart.php';
 ?>
 
 
 <!DOCTYPE html>
 
+
 <html lang="en">
+  <?php
+  include 'resources/comment.html';
+  include 'resources/minify.php';
+  ?>
+
   <head>
     <title>David Álvarez Rosa | Personal Website | Math &amp; Engineering</title>
     <meta charset="UTF-8" />
@@ -63,11 +72,11 @@
     <!-- CSS files. -->
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" id="fontawesome"
+          data-href="external/fontawesome/css/all.min.css" />
 
     <!-- Javascript files. -->
     <script defer src="js/main.js"></script>
-    <script defer src="js/home.js"></script>
     <script defer src="js/shortcuts.js"></script>
     <script defer src="js/confetti.js"></script>
 
@@ -94,9 +103,6 @@
      }
     </script>
   </head>
-
-
-  <?php include 'resources/comment.html'; ?>
 
 
   <body class="preload">
@@ -138,7 +144,7 @@
 
         <a href="img/portrait.png"
            title="David Álvarez Rosa headshot portrait.">
-          <img id="portrait" src="img/portrait.png"
+          <img id="portrait" src="img/portrait_low.png"
                alt="David Álvarez Rosa headshot portrait." />
         </a>
         <p>
@@ -299,9 +305,9 @@
       <section class="hidden">
         <?php sectionHeader(); ?>
         <p>
-          This site is powered by free software and does not contain any
-          tracking <em>malware</em>. I designed this website myself from
-          scratch. The
+          This site is powered by free (as in <em>freedom</em>) software and
+          does not contain any tracking <em>malware</em>. I designed this
+          website myself from scratch. The
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
              rel="noopener"
              target="_blank"
@@ -334,7 +340,7 @@
             Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a>
           license, which means that you are <strong>free too</strong>:
         </p>
-        <ul style="margin-bottom: .25em; margin-top: -1.25em; text-align: justify;">
+        <ul style="margin-bottom: .25em; margin-top: -1.25em;">
           <li>
             <strong>Share</strong> &mdash; copy and redistribute the material in
             any medium or format </li>
@@ -345,7 +351,7 @@
         <p>
           under the <strong>following terms</strong>:
         </p>
-        <ul style="margin-top: -1.25em; text-align: justify;">
+        <ul style="margin-top: -1.25em;">
           <li>
             <strong>Attribution</strong> &mdash; You must give appropriate
             credit, provide a link to the license, and indicate if changes were
@@ -386,3 +392,9 @@
     <?php include 'resources/footer.php'; ?>
   </body>
 </html>
+
+
+<?php
+ob_end_flush();
+include 'resources/cacheEnd.php';
+?>

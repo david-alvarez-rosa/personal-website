@@ -41,7 +41,7 @@ html {
     scroll-behavior: smooth;
 }
 
-p {
+p, main ul li {
     color: #737373;
     text-align: justify;
 }
@@ -766,7 +766,7 @@ main p a, main ul a {
     background-size: 3px 0px;
     transition: background-size .5s;
     padding: 3px;
-    margin: -1px;
+    padding-top: 4px;
     border-radius: 2px;
 }
 
@@ -891,7 +891,6 @@ main ul {
     margin-top: -.75em;
     margin-bottom: 1.5em;
     padding-left: 2.5em;
-    color: #737373;
 }
 
 main .card {
@@ -911,11 +910,11 @@ main .card:hover, main .card:focus {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    margin-right: -50px;
 }
 
-.rightLeftFlex h4 {
-    margin-right: 50px;
+.rightLeftFlex h4:first-child {
+    min-width: 275px;
+    max-width: 100%;
 }
 
 blockquote {
@@ -931,13 +930,15 @@ blockquote p {
     margin: 0;
 }
 
-blockquote p i {
-    margin-right: 1em;
-}
-
 .quoteAuthor {
     float: right;
     padding-top: .75em;
+    text-align: left;
+    margin-right: 1em;
+}
+
+.quoteAuthor a {
+    margin: 0;
 }
 
 #skillsList {
@@ -1524,10 +1525,23 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         float: none;
     }
 
+    input[type="submit"], input[type="reset"] {
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
     #getInTouchRight {
         width: 100%;
+        margin: auto;
+        margin-top: -3.5em;
+    }
+
+    #getInTouchRight ul {
+        padding-left: 0;
+    }
+
+    #getInTouchRight ul li {
         text-align: center;
-        margin-left: -25px;
     }
 
     #license {
@@ -1599,7 +1613,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         margin: .5em;
     }
 
-    p {
+    p, main ul li {
         text-align: left;
     }
 
@@ -1725,4 +1739,27 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         margin: 0em auto 1em auto;
         display: block;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fa::before, .fas::before, .fab::before {
+    content: "*";
 }

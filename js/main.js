@@ -35,6 +35,12 @@ function loadingSpinner() {
     document.getElementsByTagName("body")[0].classList.remove("preload");
     setTimeout(setNavBarSection, 1000); // Ensure navBar secion updates.
 
+    // Load font awesome.
+    setTimeout(function () {
+        var fontawesome = document.getElementById("fontawesome");
+        fontawesome.href = fontawesome.dataset.href;
+    }, 2550);
+
     // // Warn that this website is under construction.
     // setTimeout( function() { showInfo("welcomeUser"); }, 3500);
 }
@@ -115,8 +121,6 @@ function updateBackgroundImage() {
 
 var headerFirstImage = headerImages[imagesOrder[imageIterator]];
 var footerFirstImage = footerImages[imagesOrder[imageIterator]];
-headerFirstImage.src = headerFirstImage.dataset.src + "_low.jpg";
-footerFirstImage.src = headerFirstImage.dataset.src + "_low.jpg";
 headerFirstImage.classList.add("backgroundImageFirst");
 footerFirstImage.classList.add("backgroundImageFirst");
 document.documentElement.style.setProperty("--main-color",
@@ -138,9 +142,9 @@ function lazyLoadImages() {
     // Load background images.
     for (var i = 0; i < headerImages.length; ++i) {
         var image = headerImages[imagesOrder[i]];
-        image.src = image.dataset.src + ".jpg";
+        image.src = image.dataset.src;
         image = footerImages[imagesOrder[i]];
-        image.src = image.dataset.src + ".jpg";
+        image.src = image.dataset.src;
     }
 }
 
@@ -448,7 +452,6 @@ for (var i = 0; i < links.length; ++i) {
 var anchorUndoDistance;
 
 function stopStartedAnchor() {
-    console.log(anchor);
     if (!anchor)
         return;
 

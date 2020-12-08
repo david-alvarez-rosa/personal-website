@@ -18,12 +18,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  **/
+
+
+include 'resources/cacheStart.php';
 ?>
 
 
 <!DOCTYPE html>
 
 <html lang="en">
+  <?php
+  include 'resources/comment.html';
+  include 'resources/minify.php';
+  ?>
+
   <head>
     <title>David Álvarez Rosa | Personal Website | Math &amp; Engineering</title>
     <meta charset="UTF-8" />
@@ -64,7 +72,8 @@
     <!-- CSS files. -->
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" id="fontawesome"
+          data-href="external/fontawesome/css/all.min.css" />
 
     <!-- Javascript files. -->
     <script defer src="external/chart.min.js"></script>
@@ -96,9 +105,6 @@
      }
     </script>
   </head>
-
-
-  <?php include 'resources/comment.html'; ?>
 
 
   <body class="preload">
@@ -150,7 +156,7 @@
 
         <a href="img/portrait.png"
            title="David Álvarez Rosa headshot portrait.">
-          <img id="portrait" src="img/portrait.png"
+          <img id="portrait" src="img/portrait_low.png"
                alt="David Álvarez Rosa headshot portrait." />
         </a>
         <p>
@@ -516,7 +522,7 @@
           reverse chronological order.
         </p>
         <div class="card">
-          <h3>Visiting Researcher<i class="titleIcon fas fa-car"></i></h3>
+          <h3>Visiting Researcher<i class="titleIcon fas fa-eye"></i></h3>
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-university"></i> &nbsp;
@@ -1108,8 +1114,7 @@
                rel="nofollow noopener"
                target="_blank"
                title="Edward Teller - Wikipedia.">
-              ~Edward Teller <i class="fas fa-external-link-alt"></i>
-            </a>
+              ~Edward Teller <i class="fas fa-external-link-alt"></i></a>
           </p>
           <div class="clear"></div>
         </blockquote>
@@ -1483,3 +1488,9 @@
     <?php include 'resources/footer.php'; ?>
   </body>
 </html>
+
+
+<?php
+ob_end_flush();
+include 'resources/cacheEnd.php';
+?>

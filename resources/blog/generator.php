@@ -20,6 +20,8 @@
  **/
 
 
+include '../resources/cacheStart.php';
+
 $currentSite = 'blog';
 include '../resources/blog/data.php';
 $entryId = basename(getcwd());
@@ -37,13 +39,14 @@ $entry['time'] = estimateReadingTime($content);
 <!DOCTYPE html>
 
 <html lang="en">
+  <?php
+  include '../resources/comment.html';
+  include '../resources/minify.php';
+  ?>
+
   <head>
     <?php include '../resources/blog/head.php'; ?>
   </head>
-
-
-  <!-- Welcome comment. -->
-  <?php include '../resources/comment.html'; ?>
 
 
   <body class="preload">
@@ -68,3 +71,9 @@ $entry['time'] = estimateReadingTime($content);
     <?php include '../resources/footer.php'; ?>
   </body>
 </html>
+
+
+<?php
+ob_end_flush();
+include '../resources/cacheEnd.php';
+?>

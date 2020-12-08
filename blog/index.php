@@ -18,12 +18,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  **/
+
+
+include 'resources/cacheStart.php';
 ?>
 
 
 <!DOCTYPE html>
 
 <html lang="en">
+  <?php
+  include 'resources/comment.html';
+  include 'resources/minify.php';
+  ?>
+
   <head>
     <title>David Álvarez Rosa | Personal Blog</title>
     <meta charset="UTF-8" />
@@ -48,13 +56,9 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/blog.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/fontawesome.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/solid.css" />
-    <link rel="stylesheet" href="external/fontawesome/css/brands.css" />
+    <link rel="stylesheet" id="fontawesome"
+          data-href="external/fontawesome/css/all.min.css" />
   </head>
-
-
-  <?php include 'resources/comment.html' ?>
 
 
   <body class="preload">
@@ -147,3 +151,9 @@
     <script src="js/confetti.js"></script>
   </body>
 </html>
+
+
+<?php
+ob_end_flush();
+include 'resources/cacheEnd.php';
+?>

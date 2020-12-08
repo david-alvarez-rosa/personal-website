@@ -199,10 +199,10 @@ function keyboardShortcuts(event) {
         toggleAnimation();
         break;
     case "ArrowLeft":
-        forwardAnimation();
+        backwardAnimation();
         break;
     case "ArrowRight":
-        backwardAnimation();
+        forwardAnimation();
         break;
     }
 

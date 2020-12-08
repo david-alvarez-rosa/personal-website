@@ -18,12 +18,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  **/
+
+
+include 'resources/cacheStart.php';
 ?>
 
 
 <!DOCTYPE html>
 
 <html lang="en">
+  <?php
+  include 'resources/comment.html';
+  include 'resources/minify.php';
+  ?>
+
   <head>
     <title>404 Error | David Álvarez Rosa | Personal Website</title>
     <meta charset="UTF-8" />
@@ -44,16 +52,14 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/animations.css" />
     <link rel="stylesheet" href="/css/404.css" />
-    <link rel="stylesheet" href="/external/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" id="fontawesome"
+          data-href="/external/fontawesome/css/all.min.css" />
 
     <!-- Javascript files. -->
     <script defer src="/js/main.js"></script>
     <script defer src="/js/shortcuts.js"></script>
     <script defer src="/js/confetti.js"></script>
   </head>
-
-
-  <?php include 'resources/comment.html' ?>
 
 
   <body class="preload">
@@ -139,3 +145,9 @@
     <?php include "resources/footer.php"; ?>
   </body>
 </html>
+
+
+<?php
+ob_end_flush();
+include 'resources/cacheEnd.php';
+?>

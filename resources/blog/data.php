@@ -74,4 +74,14 @@ $entries = [
         'previous' => 'hello-world'
     ]
 ];
+
+function estimateReadingTime($content) {
+    $words = str_word_count(strip_tags($content));
+    $timeLow = (int)($words/250);
+    $timeHigh = (int)($words/175);
+    $timeHigh = max($timeHigh, $timeLow + 2);
+    if ($timeLow == 0)
+        return 'Less than one minute to read';
+    return $timeLow . ' to ' . $timeHigh . ' minutes to read';
+}
 ?>

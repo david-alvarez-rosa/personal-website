@@ -80,11 +80,7 @@ header {
     animation: heartbeat 1.5s infinite;
 }
 
-#navBar {
-    animation: slideInFromTop 1s;
-}
-
-#navBarExpanded {
+#navBar, #navBarExpanded {
     animation: slideInFromTop 1s;
 }
 
@@ -283,4 +279,12 @@ blockquote:hover {
     60% { transform: scale( 1 ); }
     80% { transform: scale( .85 ); }
     100% { transform: scale( .85 ); }
+}
+
+
+/* Medium screen size. */
+@media screen and (max-width: 980px) {
+    #navBar, #navBarExpanded {
+        animation: slideInFromLeft 1s;
+    }
 }

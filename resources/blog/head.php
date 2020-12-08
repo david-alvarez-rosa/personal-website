@@ -67,9 +67,8 @@
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/blog.css" />
 <link rel="stylesheet" href="/css/animations.css" />
-<link rel="stylesheet" href="/external/fontawesome/css/fontawesome.min.css" />
-<link rel="stylesheet" href="/external/fontawesome/css/solid.min.css" />
-<link rel="stylesheet" href="/external/fontawesome/css/brands.min.css" />
+<link rel="stylesheet" id="fontawesome"
+      data-href="/external/fontawesome/css/all.min.css" />
 <?php
 for ($i = 0; $i < sizeof($cssExtra); ++$i)
     echo '<link rel="stylesheet" href="' . $cssExtra[$i] . '" />';
@@ -89,7 +88,7 @@ for ($i = 0; $i < sizeof($jsExtra); ++$i)
  {
 		 "@context":"http://schema.org",
 		 "@type": "BlogPosting",
-		 "image": "https://blog.alvarezrosa.com/<?php echo $entryId . '/img/' . $image; ?>"
+		 "image": "https://blog.alvarezrosa.com/<?php echo $entryId . '/img/' . $image; ?>",
 		 "url": "https://blog.alvarezrosa.com/<?php echo $entryId ?>",
 		 "headline": "<?php echo $entry['title']; ?>",
 		 "dateCreated": "<?php echo $entry['date']; ?>",
