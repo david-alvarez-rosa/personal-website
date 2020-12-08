@@ -5,6 +5,13 @@ RewriteEngine On
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
 RewriteRule ^sitemap$ sitemap.php [L]
 
+RewriteRule ^feed.xml$ atom.xml [L]
+RewriteRule ^feed.rss$ atom.xml [L]
+RewriteRule ^feed$ atom.xml [L]
+RewriteRule ^index.xml$ atom.xml [L]
+RewriteRule ^rss.xml$ atom.xml [L]
+RewriteRule ^rss$ atom.xml [L]
+RewriteRule ^atom$ atom.xml [L]
 
 # Browser caching using cache-control headers.
 <ifModule mod_headers.c>
