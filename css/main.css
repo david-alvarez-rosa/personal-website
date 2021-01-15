@@ -1361,7 +1361,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 
 /* Medium screen size. */
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 980px), print {
     #heart {
         left: calc(50% - 150px);
     }
@@ -1479,7 +1479,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 
 /* Small screen size. */
-@media screen and (max-width: 736px) {
+@media screen and (max-width: 736px), print {
     header {
         padding: 8em 1.5em;
     }
@@ -1740,6 +1740,30 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         display: block;
     }
 }
+
+
+/* Printing settings. */
+@media print {
+    * {
+        animation: none!important;
+    }
+    #loadingSpinner {
+        display: none;
+    }
+    .hidden {
+        visibility: visible!important;
+        opacity: 1!important;
+    }
+    #sites {
+        justify-content: space-evenly;
+    }
+}
+
+
+
+
+
+
 
 
 

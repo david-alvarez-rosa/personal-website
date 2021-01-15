@@ -514,3 +514,7 @@ function takeMeBack() {
     stopStartedAnchor();
     clearTimeout(anchorCloseTimeout);
 }
+
+
+// For @media print settings.
+window.addEventListener("beforeprint", loadingSpinner);

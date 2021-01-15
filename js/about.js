@@ -1,6 +1,6 @@
 /**
  *
- * @source: https://david.alvarezrosa.com/js/home.js
+ * @source: https://david.alvarezrosa.com/js/about.js
  *
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
@@ -114,3 +114,13 @@ function chartAnimation() {
 chartAnimation();
 window.addEventListener("scroll", chartAnimation);
 window.addEventListener("resize", chartAnimation);
+
+
+// For @media print settings.
+window.addEventListener("beforeprint", function() {
+    for (var i = 0; i < languagesLevels.length; ++i) {
+        languagesLevels[i].classList.remove("languageLevelQuick");
+        languagesLevels[i].classList.add("languageLevelAnimate" + i);
+    }
+    interestsChartPie = new Chart(context, config);
+});

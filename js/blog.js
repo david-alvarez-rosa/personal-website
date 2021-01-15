@@ -1,6 +1,6 @@
 /**
  *
- * @source: https://blog.alvarezrosa.com/js/home.js
+ * @source: https://blog.alvarezrosa.com/js/blog.js
  *
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in this page.
