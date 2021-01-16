@@ -2,7 +2,7 @@
 /**
  *
  * David \'Alvarez Rosa's personal blogsite index PHP file.
- * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ * Copyright (C) 2019-2021 David \'Alvarez Rosa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -138,7 +138,7 @@ include 'resources/cacheStart.php';
 
 
     <!-- License (Creative Commons). -->
-    <?php include 'resources/license.html'; ?>
+    <?php include 'resources/license.php'; ?>
 
 
     <!-- Footer. -->

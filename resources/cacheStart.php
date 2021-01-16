@@ -1,8 +1,8 @@
- <?php
+<?php
 /**
  *
  * David \'Alvarez Rosa's personal website cache start PHP file.
- * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ * Copyright (C) 2019-2021 David \'Alvarez Rosa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ $cacheTime = 3600;
 
 if (file_exists($cacheFile) &&
     time() - $cacheTime <= filemtime($cacheFile)) {
+    ob_clean();
     readfile($cacheFile);
     exit;
 }

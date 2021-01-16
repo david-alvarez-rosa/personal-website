@@ -1,6 +1,6 @@
 <div id="license" class="fadeIn">
   <p id="copyright">
-    Copyright &copy; 2019-2020
+    Copyright &copy; 2019-<?php echo date("Y"); ?>
     <a href="/"
        title="David Álvarez Rosa's personal website.">
       David Álvarez Rosa
@@ -41,6 +41,6 @@
               title="Web master email.">webmaster@alvarezrosa.com</a>&gt;.
   </p>
   <p>
-    Last update: April 11, 2020
+    Last update: January 16, 2021
   </p>
 </div>

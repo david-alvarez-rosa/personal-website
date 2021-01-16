@@ -2,7 +2,7 @@
 /**
  *
  * David \'Alvarez Rosa's personal website sitemap PHP file.
- * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ * Copyright (C) 2019-2021 David \'Alvarez Rosa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +20,10 @@
  **/
 
 
+header('Content-type: application/xml; charset=utf-8');
+
 include 'resources/cacheStart.php';
 
-header('Content-type: application/xml; charset=utf-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
 
@@ -30,6 +31,9 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://david.alvarezrosa.com/</loc>
+  </url>
+  <url>
+    <loc>https://david.alvarezrosa.com/about/</loc>
   </url>
   <url>
     <loc>https://david.alvarezrosa.com/pdf/cv-david-alvarez-rosa.pdf</loc>

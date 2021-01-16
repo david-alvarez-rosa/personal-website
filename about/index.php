@@ -2,7 +2,7 @@
 /**
  *
  * David \'Alvarez Rosa's personal website index PHP file.
- * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ * Copyright (C) 2019-2021 David \'Alvarez Rosa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@ include 'resources/cacheStart.php';
                 Curriculum Vitae, Mathematics, Engineering" />
     <meta name="author" content="David Álvarez Rosa" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://david.alvarezrosa.com" />
+    <link rel="canonical" href="https://david.alvarezrosa.com/about" />
     <link rel="apple-touch-icon" sizes="180x180"
           href="img/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32"
@@ -78,7 +78,7 @@ include 'resources/cacheStart.php';
     <!-- Javascript files. -->
     <script defer src="external/chart.min.js"></script>
     <script defer src="js/main.js"></script>
-    <script defer src="js/home.js"></script>
+    <script defer src="js/about.js"></script>
     <script defer src="js/shortcuts.js"></script>
     <script defer src="js/confetti.js"></script>
 
@@ -1481,7 +1481,7 @@ include 'resources/cacheStart.php';
 
 
     <!-- License (Creative Commons). -->
-    <?php include 'resources/license.html'; ?>
+    <?php include 'resources/license.php'; ?>
 
 
     <!-- Footer. -->

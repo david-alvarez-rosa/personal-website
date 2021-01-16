@@ -2,7 +2,7 @@
 /**
  *
  * David \'Alvarez Rosa's personal website minify PHP file.
- * Copyright (C) 2019-2020 David \'Alvarez Rosa
+ * Copyright (C) 2019-2021 David \'Alvarez Rosa
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  **/
 
 
-function sanitizeOutput($buffer) {
+function minifyOutput($buffer) {
     $search = array(
         '/\>[^\S ]+/s',     // strip whitespaces after tags, except space
         '/[^\S ]+\</s',     // strip whitespaces before tags, except space
@@ -29,8 +29,8 @@ function sanitizeOutput($buffer) {
     );
 
     $replace = array(
-        '>',
-        '<',
+        '> ',
+        ' <',
         '\\1',
         ''
     );
@@ -40,5 +40,5 @@ function sanitizeOutput($buffer) {
     return $buffer;
 }
 
-ob_start("sanitizeOutput");
+ob_start("minifyOutput");
 ?>
