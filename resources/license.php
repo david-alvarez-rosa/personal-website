@@ -24,8 +24,6 @@
   <p style="padding-top: 1.5em;">
     The
     <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
-       rel="noopener"
-       target="_blank"
        title="Personal website source code - Gitlab.">
       source code</a> <i class="fas fa-external-link-alt"></i>
     of this website is licensed under the

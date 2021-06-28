@@ -27,8 +27,6 @@
       <li>
          <a class="fab fa-gitlab fa-2x"
             href="https://gitlab.com/david-alvarez-rosa"
-            rel="noopener"
-            target="_blank"
             title="Personal Gitlab page.">
            <span class="screenReader">Personal Gitlab page.</span>
          </a>
@@ -39,8 +37,6 @@
          <a class="fab fa-linkedin fa-2x"
             style="padding-left: 5px;"
             href="https://www.linkedin.com/in/david-alvarez-rosa"
-            rel="noopener"
-            target="_blank"
             title="Personal LinkedIn page.">
            <span class="screenReader">Personal LinkedIn page.</span>
          </a>

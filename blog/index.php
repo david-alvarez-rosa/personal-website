@@ -90,8 +90,6 @@ include 'resources/cacheStart.php';
         </p>
         <p>
           <a href="http://www.whatisrss.com/"
-             rel="nofollow noopener"
-             target="_blank"
              title="What Is RSS? RSS Explained.">
             RSS <i class="fas fa-external-link-alt"></i></a>
           (Rich Site Summary) is a format for <strong>delivering</strong>
@@ -104,20 +102,14 @@ include 'resources/cacheStart.php';
         <p>
           If you are not familiar with RSS readers and you are an
           <a href="https://www.gnu.org/software/emacs/"
-             rel="nofollow noopener"
-             target="_blank"
              title="GNU Emacs official website.">
             Emacs <i class="fas fa-external-link-alt"></i></a>
           user, I recommend you
           <a href="https://nullprogram.com/blog/2013/09/04/"
-             target="_blank"
-             rel="nofollow noopener"
              title="Introducing Elfeed, an Emacs Web Feed Reader.">
             Elfeed <i class="fas fa-external-link-alt"></i></a>
           (created by
           <a href="https://nullprogram.com/about/"
-             target="_blank"
-             rel="nofollow noopener"
              title="Chris Wellons (skeeto) personal website.">
             Chris Wellons <i class="fas fa-external-link-alt"></i></a>).
 

@@ -170,20 +170,14 @@ include 'resources/cacheStart.php';
           I am currently conducting research on Artificial Intelligence for my
           senior Bachelor's Thesis at the Computer Science department of the
           <a href="https://www.utoronto.ca/"
-             rel="nofollow noopener"
-             target="_blank"
              title="University of Toronto official website.">
             University of Toronto <i class="fas fa-external-link-alt"></i></a>
           under the supervision of Prof.
           <a href="https://www.cs.utoronto.ca/~fidler/"
-             rel="nofollow noopener"
-             target="_blank"
              title="Sanja Fidler personal website.">
             Sanja Fidler <i class="fas fa-external-link-alt"></i></a>
           (UofT & NVIDIA) and Prof.
           <a href="https://imatge.upc.edu/web/people/xavier-giro"
-             rel="nofollow noopener"
-             target="_blank"
              title="Xavier Giró-i-Nieto personal website.">
             Xavier Giró-i-Nieto <i class="fas fa-external-link-alt"></i></a>
            (UPC & BSC), world
@@ -257,8 +251,6 @@ include 'resources/cacheStart.php';
             </div>
           </a>
           <a href="https://gitlab.com/david-alvarez-rosa"
-             rel="noopener"
-             target="_blank"
              title="Personal Gitlab page.">
             <div class="data">
               <i class="fab fa-gitlab"></i>
@@ -296,8 +288,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="https://www.upc.edu/en/bachelors/mathematics-barcelona-fme"
-               rel="nofollow noopener"
-               target="_blank"
                title="Degree in Mathematics website.">
               Degree in Mathematics
               <i class="hide fas fa-external-link-alt"></i>
@@ -308,15 +298,11 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i></a>
               &nbsp;&ndash;&nbsp;
               <a href="https://fme.upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Faculty of Mathematics and Statistics website.">
                 FME
                 <i class="hide fas fa-external-link-alt"></i>
@@ -326,8 +312,6 @@ include 'resources/cacheStart.php';
               <i class="fas fa-layer-group"></i>
               &nbsp; 240
               <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="European Credit Transfer and Accumulation System - Wikipedia.">
                 ECTS <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -369,8 +353,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="https://www.upc.edu/en/bachelors/industrial-technology-engineering-barcelona-etseib"
-               rel="nofollow noopener"
-               target="_blank"
                title="Degree in Industrial Technology Engineering website.">
               Degree in Industrial Technology Engineering
               <i class="hide fas fa-external-link-alt"></i>
@@ -381,16 +363,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Barcelona School of Industrial Engineering website.">
                 ETSEIB <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -399,8 +377,6 @@ include 'resources/cacheStart.php';
               <i class="fas fa-layer-group"></i>
               &nbsp; 240
               <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="European Credit Transfer and Accumulation System - Wikipedia.">
                 ECTS <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -447,8 +423,6 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://www.irabia-izaga.org/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Irabia-Izaga school website.">
                 Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -473,8 +447,6 @@ include 'resources/cacheStart.php';
             <li>
               University access exam grade
               (<a href="https://en.wikipedia.org/wiki/Selectividad"
-                  rel="nofollow noopener"
-                  target="_blank"
                   title="Search Selectividad in Wikipedia."><em>Selectividad <i class="fas fa-external-link-alt"></i></em></a>)
               : 12.76/14.
             </li>
@@ -488,8 +460,6 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://www.irabia-izaga.org/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Irabia-Izaga school website.">
                 Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -527,8 +497,6 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="University of Toronto official website.">
                 University of Toronto
                 <i class="hide fas fa-external-link-alt"></i>
@@ -564,16 +532,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Barcelona School of Industrial Engineering website.">
                 ETSEIB <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -613,8 +577,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="https://www.deeplearning.ai/deep-learning-specialization/"
-               rel="nofollow noopener"
-               target="_blank"
                title="Deep Learning Specialization website.">
               Deep Learning Specialization
               <i class="hide fas fa-external-link-alt"></i>
@@ -624,8 +586,6 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://deeplearning.ai"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="deeplearning.ai website.">
                 deeplearning.ai
                 <i class="hide fas fa-external-link-alt"></i>
@@ -653,8 +613,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="http://cs231n.stanford.edu/"
-               rel="nofollow noopener"
-               target="_blank"
                title="CNNs for Visual Recognition website.">
               CNNs for Visual Recognition
               <i class="hide fas fa-external-link-alt"></i>
@@ -664,8 +622,6 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://www.stanford.edu/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Stanford University website.">
                 Stanford University
                 <i class="hide fas fa-external-link-alt"></i>
@@ -693,8 +649,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="https://www.coursera.org/account/accomplishments/certificate/CV6ND58V5Q4A"
-               rel="nofollow noopener"
-               target="_blank"
                title="Machine Learning course certificate.">
               Machine Learning
               <i class="hide fas fa-external-link-alt"></i>
@@ -704,16 +658,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://www.stanford.edu/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Stanford University website.">
                 Stanford University
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://coursera.org"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Coursera website.">
                 Coursera
                 <i class="hide fas fa-external-link-alt"></i>
@@ -737,8 +687,6 @@ include 'resources/cacheStart.php';
           <p class="marginTop">
             Here it is the
             <a href="https://www.coursera.org/account/accomplishments/certificate/CV6ND58V5Q4A"
-               rel="nofollow noopener"
-               target="_blank"
                title="Machine Learning course certificate.">
               certificate
               <i class="fas fa-external-link-alt"></i></a>.
@@ -750,16 +698,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://cfis.upc.edu"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="CFIS official website.">
                 CFIS <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -789,8 +733,6 @@ include 'resources/cacheStart.php';
         <div class="card">
           <h3>
             <a href="https://sites.google.com/view/dlcfis2019/home"
-               rel="nofollow noopener"
-               target="_blank"
                title="Machine Learning & Deep Learning CFIS website.">
               Machine Learning & Deep Learning
               <i class="hide fas fa-external-link-alt"></i>
@@ -801,16 +743,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://cfis.upc.edu"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="CFIS official website.">
                 CFIS <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -911,16 +849,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Barcelona School of Industrial Engineering website.">
                 ETSEIB <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -945,8 +879,6 @@ include 'resources/cacheStart.php';
             to play the Tic Tac Toe game and <strong>never lose</strong>. The
             source code of this project can be found in my
             <a href="https://gitlab.com/david-alvarez-rosa"
-               rel="noopener"
-               target="_blank"
                title="Personal Gitlab page.">
               personal Gitlab page <i class="fas fa-external-link-alt"></i></a>.
             You may want to check out the
@@ -990,45 +922,31 @@ include 'resources/cacheStart.php';
               Configuration of a modern, secure personal email server based on
               free software
               (<a href="http://www.postfix.org/"
-                  rel="nofollow noopener"
-                  target="_blank"
                   title="The Postfix Home Page.">Postfix <i class="fas fa-external-link-alt"></i>
               </a>and
               <a href="https://www.dovecot.org/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Dovecot, The Secure IMAP server.">
                 Dovecot <i class="fas fa-external-link-alt"></i></a>).
             </li>
             <li>
               Supports opportunistic
               <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Transport Layer Security - Wikipedia.">
                 TLS <i class="fas fa-external-link-alt"></i></a>
               and
               <a href="https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Internet Message Access Protocol - Wikipedia.">
                 IMAP <i class="fas fa-external-link-alt"></i></a>
               access.
             </li>
             <li>
               <a href="https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="DomainKeys Identified Mail - Wikipedia.">
                 DKIM <i class="fas fa-external-link-alt"></i></a>,
               <a href="https://en.wikipedia.org/wiki/Sender_Policy_Framework"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Sender Policy Framework - Wikipedia.">
                 SPF <i class="fas fa-external-link-alt"></i></a>, and
               <a href="https://en.wikipedia.org/wiki/DMARC"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Domain-based Message Authentication, Reporting and Conformance - Wikipedia.">
                 DMARC <i class="fas fa-external-link-alt"></i></a>
               records to ensure outgoing mail is not spam-filtered.
@@ -1045,16 +963,12 @@ include 'resources/cacheStart.php';
             <h4>
               <i class="fas fa-university"></i> &nbsp;
               <a href="https://upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Polytechnic University of Catalonia website.">
                 Polytechnic University of Catalonia
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Barcelona School of Industrial Engineering website.">
                 ETSEIB <i class="hide fas fa-external-link-alt"></i>
               </a>
@@ -1092,8 +1006,6 @@ include 'resources/cacheStart.php';
             <li>
               Here is the
               <a href="https://gitlab.com/david-alvarez-rosa/horario"
-                 rel="noopener"
-                 target="_blank"
                  title="Source code of the project - Gitlab.">
                 source code <i class="fas fa-external-link-alt"></i></a>.
             </li>
@@ -1111,8 +1023,6 @@ include 'resources/cacheStart.php';
           </p>
           <p class="quoteAuthor">
             <a href="https://en.wikipedia.org/wiki/Edward_Teller"
-               rel="nofollow noopener"
-               target="_blank"
                title="Edward Teller - Wikipedia.">
               ~Edward Teller <i class="fas fa-external-link-alt"></i></a>
           </p>
@@ -1144,8 +1054,6 @@ include 'resources/cacheStart.php';
                 <ul class="skills">
                   <li>
                     <a href="https://en.wikipedia.org/wiki/AMPL"
-                       rel="nofollow noopener"
-                       target="_blank"
                        title="A Mathematical Programming Language - Wikipedia.">
                       AMPL <i class="fas fa-code"></i>
                       <i class="hide fas fa-external-link-alt"></i>
@@ -1170,8 +1078,6 @@ include 'resources/cacheStart.php';
               <li>Git <i class="fab fa-git-alt"></i></li>
               <li>
                 <a href="https://www.ros.org/"
-                   rel="nofollow noopener"
-                   target="_blank"
                    title="Robot Operating System website.">
                   ROS <i class="fas fa-robot"></i>
                   <i class="hide fas fa-external-link-alt"></i>
@@ -1230,8 +1136,6 @@ include 'resources/cacheStart.php';
           <div class="award">
             <h3>
               <a href="https://rsef.es/olimpiada-espanola-de-fisica"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Spanish Physics Olympiad website.">
                 Spanish Physics Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
@@ -1259,8 +1163,6 @@ include 'resources/cacheStart.php';
           <div class="award">
             <h3>
               <a href="http://www.olimpiadamatematica.es/platea.pntic.mec.es/_csanchez/olimmain.html"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Spanish Mathematical Olympiad website.">
                 Spanish Mathematical Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
@@ -1289,8 +1191,6 @@ include 'resources/cacheStart.php';
           <div class="award">
             <h3>
               <a href="https://rsef.es/olimpiada-espanola-de-fisica"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Spanish Physics Olympiad website.">
                 Spanish Physics Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
@@ -1319,8 +1219,6 @@ include 'resources/cacheStart.php';
           <div class="award">
             <h3>
               <a href="http://www.olimpiadamatematica.es/platea.pntic.mec.es/_csanchez/olimmain.html"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Spanish Mathematical Olympiad website.">
                 Spanish Mathematical Olympiad
                 <i class="hide fas fa-external-link-alt"></i>
@@ -1390,18 +1288,12 @@ include 'resources/cacheStart.php';
             <p class="awardText">
               Years of use of Linux distributions
               (<a href="https://www.archlinux.org/"
-                  rel="nofollow noopener"
-                  target="_blank"
                   title="Arch Linux official website.">Arch <i class="fas fa-external-link-alt"></i></a>,
               <a href="https://www.debian.org/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Debian official website.">
                 Debian <i class="fas fa-external-link-alt"></i></a>
               and
               <a href="https://ubuntu.com/"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Ubuntu official website.">
                 Ubuntu <i class="fas fa-external-link-alt"></i></a>).
           </div>
@@ -1415,8 +1307,6 @@ include 'resources/cacheStart.php';
             <p class="awardText">
               Administrator of a personal
               <a href="https://en.wikipedia.org/wiki/Virtual_private_server"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Virtual private server - Wikipedia.">
                 Virtual Private Server
                 <i class="fas fa-external-link-alt"></i></a>:
@@ -1425,8 +1315,6 @@ include 'resources/cacheStart.php';
                  title="David Álvarez Rosa's personal website.">
                 website</a>, email, personal
               <a href="https://en.wikipedia.org/wiki/Git"
-                 rel="nofollow noopener"
-                 target="_blank"
                  title="Git - Wikipedia.">
                 Git <i class="fas fa-external-link-alt"></i></a>
               server.

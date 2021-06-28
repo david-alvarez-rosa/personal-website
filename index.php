@@ -34,7 +34,7 @@ include 'resources/cacheStart.php';
   ?>
 
   <head>
-    <title>David Álvarez Rosa | Personal Website | Math &amp; Engineering</title>
+    <title>David Álvarez Rosa | Personal Website</title>
     <meta charset="UTF-8" />
     <meta name="description" content="I'm an undergraduate student in my final
                 year towards a double degree in
@@ -155,14 +155,10 @@ include 'resources/cacheStart.php';
           student in my final year towards a dual Bachelor's degree in
           Mathematics and Industrial Technology Engineering, under the
           <a href="https://cfis.upc.edu"
-             rel="nofollow noopener"
-             target="_blank"
              title="CFIS official website.">
             CFIS <i class="fas fa-external-link-alt"></i></a>
           program of the
           <a href="https://upc.edu/en"
-             rel="nofollow noopener"
-             target="_blank"
              title="Polytechnic University of Catalonia website.">
             Polytechnic University of Catalonia
             <i class="fas fa-external-link-alt"></i></a>
@@ -176,8 +172,6 @@ include 'resources/cacheStart.php';
           and be my corner on the Internet. I have designed this website myself
           from scratch, if you're curious, you can take a look at the
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
-             rel="noopener"
-             target="_blank"
              title="Personal website source code - Gitlab.">
             source code <i class="fas fa-external-link-alt"></i></a>.
         </p>
@@ -249,8 +243,6 @@ include 'resources/cacheStart.php';
             </div>
           </a>
           <a href="https://gitlab.com/david-alvarez-rosa"
-             rel="noopener"
-             target="_blank"
              title="Personal Gitlab page.">
             <div class="data">
               <i class="fab fa-gitlab"></i>
@@ -312,8 +304,6 @@ include 'resources/cacheStart.php';
           does not contain any tracking <em>malware</em>. I have designed this
           website myself from scratch. The
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
-             rel="noopener"
-             target="_blank"
              title="Personal website source code - Gitlab.">
             source code <i class="fas fa-external-link-alt"></i></a>
           is licensed under the
@@ -325,8 +315,6 @@ include 'resources/cacheStart.php';
         <p>
           Web content should conform with the
           <a href="https://www.w3.org/TR/WCAG20/"
-             rel="nofollow noopener"
-             target="_blank"
              title="World Wide Web Consortium Web Content Accessibility
                    Guidelines (WCAG) 2.0 website">
             World Wide Web Consortium Web Content Accessibility Guidelines

@@ -28,8 +28,6 @@
     vaguely inspired by the biological neural networks that constitute
     animal brains. Dr.
     <a href="https://en.wikipedia.org/wiki/Robert_Hecht-Nielsen"
-       rel="nofollow noopener"
-       target="_blank"
        title="Robert Hecht-Nielsen - Wikipedia">
       Robert Hecht-Nielsen <i class="fas fa-external-link-alt"></i></a>
     (inventor of one of the first neurocomputers) defines a neural network
@@ -44,8 +42,6 @@
     </p>
     <p class="quoteAuthor">
       <a href="https://en.wikipedia.org/wiki/Robert_Hecht-Nielsen"
-         rel="nofollow noopener"
-         target="_blank"
          title="Robert Hecht-Nielsen - Wikipedia">
         ~Robert Hecht-Nielsen <i class="fas fa-external-link-alt"></i>
       </a>
@@ -57,8 +53,6 @@
     <em>artificial</em> <strong>neurons</strong>, which loosely model the
     neurons in a biological brain. Each connection, like the
     <a href="https://en.wikipedia.org/wiki/Synapse"
-       rel="nofollow noopener"
-       target="_blank"
        title="Synapse - Wikipedia">
       synapses <i class="fas fa-external-link-alt"></i></a>
     in a biological brain, can transmit a signal to other neurons. An
