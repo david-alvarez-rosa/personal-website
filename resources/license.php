@@ -41,6 +41,6 @@
               title="Web master email.">webmaster@alvarezrosa.com</a>&gt;.
   </p>
   <p>
-    Last update: January 16, 2021
+    Last update: June 24, 2021
   </p>
 </div>

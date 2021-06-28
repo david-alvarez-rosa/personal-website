@@ -86,7 +86,7 @@ include 'resources/cacheStart.php';
          "@type": "Person",
          "honorificPrefix": "Mr",
          "name": "David Álvarez Rosa",
-         "image": "img/icons/icon.png",
+         "image": "https://david.alvarezrosa.com/img/portrait.png",
          "jobTitle": "Mathematics and Industrial Engineering student",
          "disambiguatingDescription": "Mathematics and Industrial Engineering student",
          "alumniOf": "Polytechnic University of Catalonia",
@@ -97,9 +97,12 @@ include 'resources/cacheStart.php';
          "memberOf": "Driverless UPC - ETSEIB Motorsport",
          "nationality": "Spanish",
          "url": "https://david.alvarezrosa.com/",
-         "award": "",
-         "knowsAbout": "",
-         "knowsLanguage": ["es", "en", "cat"]
+         "knowsLanguage": ["es", "en", "cat"],
+         "sameAs": [
+             "https://www.linkedin.com/in/david-alvarez-rosa",
+             "https://gitlab.com/david-alvarez-rosa",
+             "https://github.com/david-alvarez-rosa"
+         ]
      }
     </script>
   </head>
@@ -149,8 +152,8 @@ include 'resources/cacheStart.php';
         </a>
         <p>
           Welcome to my website! My name is David and I'm an undergraduate
-          student in my final year towards a double degree in Mathematics and
-          Industrial Technology Engineering, under the
+          student in my final year towards a dual Bachelor's degree in
+          Mathematics and Industrial Technology Engineering, under the
           <a href="https://cfis.upc.edu"
              rel="nofollow noopener"
              target="_blank"
@@ -170,8 +173,8 @@ include 'resources/cacheStart.php';
           <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
              title="My personal Curriculum Vitae.">
             curriculum vitae</a>
-          and be my corner on the Internet. I designed this website myself from
-          scratch, if you're curious, you can take a look at the
+          and be my corner on the Internet. I have designed this website myself
+          from scratch, if you're curious, you can take a look at the
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
              rel="noopener"
              target="_blank"
@@ -306,7 +309,7 @@ include 'resources/cacheStart.php';
         <?php sectionHeader(); ?>
         <p>
           This site is powered by free (as in <em>freedom</em>) software and
-          does not contain any tracking <em>malware</em>. I designed this
+          does not contain any tracking <em>malware</em>. I have designed this
           website myself from scratch. The
           <a href="https://gitlab.com/david-alvarez-rosa/personal-website"
              rel="noopener"
