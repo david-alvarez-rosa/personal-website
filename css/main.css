@@ -765,8 +765,8 @@ main p a, main ul a {
     background-repeat: repeat-x;
     background-size: 3px 0px;
     transition: background-size .5s;
-    padding: 3px;
-    padding-top: 4px;
+    padding: 4px 2px 3px 2px;
+    margin: 0 -2px 0 -2px;
     border-radius: 2px;
 }
 

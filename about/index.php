@@ -385,6 +385,130 @@ include 'resources/cacheStart.php';
 
         <div class="card">
           <h3>
+            <a href="http://portal.uned.es/portal/page?_pageid=93,71396234&_dad=portal&_schema=PORTAL&idTitulacion=215201"
+               title="MSc in Advanced Mathematics website.">
+              MSc in Advanced Mathematics
+              <i class="hide fas fa-external-link-alt"></i>
+              <i class="titleIcon fas fa-shapes"></i>
+            </a>
+          </h3>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://www.uned.es/universidad/inicio.html"
+                 title="National University of Distance Education website.">
+                National University of Distance Education
+                <i class="hide fas fa-external-link-alt"></i></a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://www.uned.es/universidad/facultades/ciencias.html"
+                 title="Faculty of Sciences website.">
+                Faculty of Sciences
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 60
+              <a href="https://en.wikipedia.org/wiki/European_Credit_Transfer_and_Accumulation_System"
+                 title="European Credit Transfer and Accumulation System - Wikipedia.">
+                ECTS <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2021 &nbsp;&ndash;&nbsp; June 2023
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Madrid, Madrid
+            </h4>
+          </div>
+          <p class="marginTop">
+            Math-lover part-time student. Official study program focused on
+            research and enabling PhD.
+          </p>
+          <ul>
+            <li>
+              Real and Complex Analysis, Measure Theory and Integration,
+              Functional Analysis, Operators in Banach Spaces, Riemann
+              Surfaces.
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
+            <a href="https://recomprehension.com"
+               title="Exploring and Visualizing Referring Expression Comprehension.">
+              Bachelor's Thesis
+              <i class="hide fas fa-external-link-alt"></i>
+              <i class="titleIcon fas fa-brain"></i>
+            </a>
+          </h3>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://utoronto.ca"
+                 title="University of Toronto website.">
+                University of Toronto
+                <i class="hide fas fa-external-link-alt"></i></a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://web.cs.toronto.edu/"
+                 title="Dept. of Computer Science website.">
+                Dept. of Computer Science
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 10 months
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2020 &nbsp;&ndash;&nbsp; June 2021
+            </h4>
+            <h4>
+              <i class="fas fa-laptop"></i>
+              &nbsp; Toronto, Ontario
+            </h4>
+          </div>
+          <p class="marginTop">
+            Conducted research on Artificial Intelligence for my senior
+            <a href="https://recomprehension.com"
+               title="Exploring and Visualizing Referring Expression Comprehension">
+              Bachelor's Thesis <i class="fas fa-external-link-alt"></i></a>
+            at the Computer Science department of the
+            <a href="https://www.utoronto.ca/"
+               title="University of Toronto official website.">
+              University of Toronto <i class="fas fa-external-link-alt"></i></a>
+            under the supervision of Prof.
+            <a href="https://www.cs.utoronto.ca/~fidler/"
+               title="Sanja Fidler personal website.">
+              Sanja Fidler <i class="fas fa-external-link-alt"></i></a>
+            (UofT & NVIDIA) and Prof.
+            <a href="https://imatge.upc.edu/web/people/xavier-giro"
+               title="Xavier Giró-i-Nieto personal website.">
+              Xavier Giró-i-Nieto <i class="fas fa-external-link-alt"></i></a>
+            (UPC & BSC), world leading experts in the field of Computer Vision.
+          </p>
+          <ul>
+            <li>
+              Artificial Intelligence &bullet; Machine Learning &bullet; Deep
+              Learning &bullet; Computer Vision &bullet; Natural Language
+              Processing &bullet; Multimodal Learning.
+            </li>
+            <li>
+              GPA 10/10 (A+).
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>
             <a href="https://www.upc.edu/en/bachelors/mathematics-barcelona-fme"
                title="Degree in Mathematics website.">
               BSc in Mathematics
@@ -431,10 +555,10 @@ include 'resources/cacheStart.php';
             computing).
           </p>
           <ul>
-            <li>Relevant <strong>subjects</strong>: Linear Algebra, Calculus,
-              Mathematical Programming, Algorithmics, Abstract Algebra,
-              Geometry, Analysis, Differential Equations, Probability and
-              Statistics.
+            <li>
+              Relevant coursework: Linear Algebra, Calculus, Mathematical
+              Programming, Algorithmics, Abstract Algebra, Geometry, Analysis,
+              Differential Equations, Probability and Statistics.
             </li>
             <li>
               GPA 8.12/10.
@@ -493,9 +617,9 @@ include 'resources/cacheStart.php';
             technological development.
           </p>
           <ul>
-            <li>Relevant <strong>subjects</strong>: Mechanics, Thermodynamics,
-              Electromagnetism, Electrotechnics, Fluid Mechanics, Materials and
-              Electronics.
+            <li>
+              Relevant coursework: Mechanics, Thermodynamics, Electromagnetism,
+              Electrotechnics, Fluid Mechanics, Materials and Electronics.
             </li>
             <li>
               GPA 8.03/10.
@@ -574,7 +698,7 @@ include 'resources/cacheStart.php';
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; October 2020 &nbsp;&ndash;&nbsp; Present
+              &nbsp; June 2021 &nbsp;&ndash;&nbsp; Present
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>

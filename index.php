@@ -291,7 +291,7 @@ include 'resources/cacheStart.php';
             <a href="pdf/cv-david-alvarez-rosa.pdf#view=Fit"
                title="David Álvarez Rosa's curriculum vitae.">
               CV</a>:
-              my personal cuurriculum vitae (.pdf).
+              my personal curriculum vitae (.pdf).
           </li>
         </ul>
       </section>
