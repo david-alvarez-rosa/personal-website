@@ -29,7 +29,7 @@
    </a>
    <h2>
       <strong>Mathematics</strong> and <br />
-      <strong>Industrial Engineering</strong> student.
+      <strong>Industrial Engineering</strong> graduate.
    </h2>
    <div id="sites">
       <a href="https://david.alvarezrosa.com/about"

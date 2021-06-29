@@ -104,7 +104,7 @@ include 'resources/cacheStart.php';
           Not to worry. You can either head back to the
           <a href="/" title="David ÁlvarezRosa's personal website.">home page</a>,
           or
-          <a href="#sec:touch" title="Scroll to get in touch section.">get in touch</a>
+          <a href="#sec:get-in-touch" title="Scroll to get in touch section.">get in touch</a>
           if this is an error.
         </p>
         <div class="error404page">

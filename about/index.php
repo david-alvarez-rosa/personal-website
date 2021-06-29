@@ -33,7 +33,7 @@ include 'resources/cacheStart.php';
   ?>
 
   <head>
-    <title>David Álvarez Rosa | Personal Website | Math &amp; Engineering</title>
+    <title>About | David Álvarez Rosa | Personal Website</title>
     <meta charset="UTF-8" />
     <meta name="description" content="I'm an undergraduate student in my final
                 year towards a double degree in
@@ -89,14 +89,14 @@ include 'resources/cacheStart.php';
          "honorificPrefix": "Mr",
          "name": "David Álvarez Rosa",
          "image": "img/icons/icon.png",
-         "jobTitle": "Mathematics and Industrial Engineering student",
-         "disambiguatingDescription": "Mathematics and Industrial Engineering student",
+         "jobTitle": "Mathematics and Industrial Engineering graduate",
+         "disambiguatingDescription": "Mathematics and Industrial Engineering graduate",
          "alumniOf": "Polytechnic University of Catalonia",
          "affiliation": "Polytechnic University of Catalonia",
          "birthPlace": "Navarre, Spain",
          "birthDate": "1998-10-10",
          "gender": "male",
-         "memberOf": "Driverless UPC - ETSEIB Motorsport",
+         "memberOf": "Driverless UPC - School of Engineering Motorsport",
          "nationality": "Spanish",
          "url": "https://david.alvarezrosa.com/",
          "award": "",
@@ -112,8 +112,8 @@ include 'resources/cacheStart.php';
     $currentSite = 'about';
     $sections = [
         ['name' => 'About me', 'shortName' => 'About', 'icon' => 'fas fa-address-card'],
-        ['name' => 'Education', 'icon' => 'fas fa-graduation-cap'],
         ['name' => 'Experience', 'icon' => 'fas fa-briefcase'],
+        ['name' => 'Education', 'icon' => 'fas fa-graduation-cap'],
         ['name' => 'Courses', 'icon' => 'fas fa-book'],
         ['name' => 'Projects', 'icon' => 'fas fa-lightbulb'],
         ['name' => 'Inspiration', 'icon' => 'fas fa-quote-right'],
@@ -167,8 +167,11 @@ include 'resources/cacheStart.php';
           problems, with a goal-oriented approach.
         </p>
         <p>
-          I am currently conducting research on Artificial Intelligence for my
-          senior Bachelor's Thesis at the Computer Science department of the
+          Conducted research on Artificial Intelligence for my senior
+          <a href="https://recomprehension.com"
+             title="Exploring and Visualizing Referring Expression Comprehension">
+            Bachelor's Thesis <i class="fas fa-external-link-alt"></i></a>
+          at the Computer Science department of the
           <a href="https://www.utoronto.ca/"
              title="University of Toronto official website.">
             University of Toronto <i class="fas fa-external-link-alt"></i></a>
@@ -184,7 +187,20 @@ include 'resources/cacheStart.php';
           leading experts in the field of Computer Vision.
         </p>
         <p>
-          Below is some basic information about me.
+          Graduate in Mathematics and Industrial Technology Engineering actively seeking
+          for job opportunities at a leading company in order to get real-world
+          experience and grow as a professional. For any further information feel free to
+          check out my
+          <a href="https://david.alvarezrosa.com"
+             title="David Álvarez Rosa's personal website.">
+            personal website</a>
+          or contact me via
+          <a href="https://www.linkedin.com/in/david-alvarez-rosa"
+             title="Personal LinkedIn page.">
+            LinkedIn <i class="fas fa-external-link-alt"></i></a> or
+          <a href="javascript:showInfo('infoEmail');"
+             title="Show my personal email.">
+            email</a>. Below is some basic information about me.
         </p>
         <div id="personalData">
           <a href="javascript:showInfo('infoEmail');"
@@ -270,13 +286,94 @@ include 'resources/cacheStart.php';
             </div>
           </div>
         </div>
-        <p>
-          I will graduate in Mathematics and Industrial Technology Engineering
-          in March 2021 and I am looking for job opportunities at a leading
-          company in order to get real-world experience and grow as a
-          professional.
-        </p>
       </section>
+
+
+      <!-- Section experience. -->
+      <section class="hidden">
+        <?php sectionHeader(); ?>
+        <p>
+          Below, you will find details of my experience summarized and listed in
+          reverse chronological order.
+        </p>
+        <div class="card">
+          <h3>Visiting Researcher<i class="titleIcon fas fa-eye"></i></h3>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https:vectorinstitute.ai"
+                 title="Vector Institute official website.">
+                Vector Institute
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; Full Time &nbsp;&ndash;&nbsp; 10 months
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2020 &nbsp;&ndash;&nbsp; June 2021
+            </h4>
+            <h4>
+              <i class="fas fa-laptop"></i>
+              &nbsp; Toronto, Canada
+            </h4>
+          </div>
+          <p class="marginTop">
+            During my research thesis at the University of Toronto, I was
+            admitted in Vector Institute, which allowed me to experience the
+            world of research ﬁrst-hand using their exceptional
+            high-performance computing resources with the technical assistance
+            of the development team.
+          </p>
+        </div>
+        <div class="card">
+          <h3>
+            <a href="https://gitlab.com/david-alvarez-rosa/lidar-compensation"
+               title="LiDAR Compensation - Gitlab">
+              Perception Engineer (LiDAR)
+              <i class="hide fas fa-external-link-alt"></i>
+              <i class="titleIcon fas fa-car"></i>
+            </a>
+          </h3>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://driverless.upc.edu/"
+                 title="Driverless UPC website.">
+                Driverless UPC
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 20 hours/week &nbsp;&ndash;&nbsp; 6 months
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2019 &nbsp;&ndash;&nbsp; February 2020
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Barcelona, Catalonia
+            </h4>
+          </div>
+          <p class="marginTop">
+            I have been part of the <strong>Perception</strong> section of
+            Driverless UPC team, which is a team formed by undergraduate
+            engineers in charge of the designing, manufacturing and testing of a
+            <strong>fully autonomous</strong> car that will participate in
+            national and international competitions between universities. LiDAR
+            responsible and computer vision collaborator.
+          </p>
+        </div>
+      </section>
+
 
       <!-- Section education. -->
       <section class="hidden">
@@ -285,11 +382,12 @@ include 'resources/cacheStart.php';
           Below, you will find the details of my education summarized and listed
           in reverse chronological order.
         </p>
+
         <div class="card">
           <h3>
             <a href="https://www.upc.edu/en/bachelors/mathematics-barcelona-fme"
                title="Degree in Mathematics website.">
-              Degree in Mathematics
+              BSc in Mathematics
               <i class="hide fas fa-external-link-alt"></i>
               <i class="titleIcon fas fa-infinity"></i>
             </a>
@@ -304,7 +402,7 @@ include 'resources/cacheStart.php';
               &nbsp;&ndash;&nbsp;
               <a href="https://fme.upc.edu/en"
                  title="Faculty of Mathematics and Statistics website.">
-                FME
+                Faculty of Mathematics
                 <i class="hide fas fa-external-link-alt"></i>
               </a>
             </h4>
@@ -320,7 +418,7 @@ include 'resources/cacheStart.php';
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
+              &nbsp; September 2016 &nbsp;&ndash;&nbsp; June 2021
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
@@ -339,22 +437,19 @@ include 'resources/cacheStart.php';
               Statistics.
             </li>
             <li>
-              Current <strong>grade</strong>: 8.04/10.
+              GPA 8.12/10.
             </li>
             <li>
-              <strong>Honors</strong> or excellence in 7 subjects.
-            </li>
-            <li>
-              Expected date to <strong>finish</strong> the degree: March
-              2021.
+              <strong>Honors</strong> or excellence in 9 subjects.
             </li>
           </ul>
         </div>
+
         <div class="card">
           <h3>
             <a href="https://www.upc.edu/en/bachelors/industrial-technology-engineering-barcelona-etseib"
                title="Degree in Industrial Technology Engineering website.">
-              Degree in Industrial Technology Engineering
+              BEng in Industrial Technologies
               <i class="hide fas fa-external-link-alt"></i>
               <i class="titleIcon fas fa-cogs"></i>
             </a>
@@ -370,7 +465,7 @@ include 'resources/cacheStart.php';
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
                  title="Barcelona School of Industrial Engineering website.">
-                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+                School of Engineering <i class="hide fas fa-external-link-alt"></i>
               </a>
             </h4>
             <h4>
@@ -385,7 +480,7 @@ include 'resources/cacheStart.php';
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2016 &nbsp;&ndash;&nbsp; Present
+              &nbsp; September 2016 &nbsp;&ndash;&nbsp; June 2021
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
@@ -403,17 +498,14 @@ include 'resources/cacheStart.php';
               Electronics.
             </li>
             <li>
-              Current <strong>grade</strong>: 8.05/10.
+              GPA 8.03/10.
             </li>
             <li>
-              <strong>Honors</strong> or excellence in 12 subjects.
-            </li>
-            <li>
-              Expected date to <strong>finish</strong> the degree: March
-              2021.
+              <strong>Honors</strong> or excellence in 14 subjects.
             </li>
           </ul>
         </div>
+
         <div class="card">
           <h3>
             Scientific and Technological Baccalaureate
@@ -442,127 +534,10 @@ include 'resources/cacheStart.php';
               &nbsp; Burlada, Navarre
             </h4>
           </div>
-          <ul class="marginTop">
-            <li>Final grade: 9.47/10.</li>
-            <li>
-              University access exam grade
-              (<a href="https://en.wikipedia.org/wiki/Selectividad"
-                  title="Search Selectividad in Wikipedia."><em>Selectividad <i class="fas fa-external-link-alt"></i></em></a>)
-              : 12.76/14.
-            </li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Compulsory Secondary Education
-            <i class="titleIcon fas fa-school"></i>
-          </h3>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-university"></i> &nbsp;
-              <a href="https://www.irabia-izaga.org/"
-                 title="Irabia-Izaga school website.">
-                Irabia-Izaga school <i class="hide fas fa-external-link-alt"></i>
-              </a>
-            </h4>
-            <h4>
-              <i class="fas fa-layer-group"></i>
-              &nbsp; 4 years
-            </h4>
-          </div>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2010 &nbsp;&ndash;&nbsp; June 2014
-            </h4>
-            <h4>
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Burlada, Navarre
-            </h4>
-          </div>
-          <p class="marginTop"></p>
-        </div>
-      </section>
-
-
-      <!-- Section experience. -->
-      <section class="hidden">
-        <?php sectionHeader(); ?>
-        <p>
-          Below, you will find details of my experience summarized and listed in
-          reverse chronological order.
-        </p>
-        <div class="card">
-          <h3>Visiting Researcher<i class="titleIcon fas fa-eye"></i></h3>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-university"></i> &nbsp;
-              <a href="https://upc.edu/en"
-                 title="University of Toronto official website.">
-                University of Toronto
-                <i class="hide fas fa-external-link-alt"></i>
-              </a>
-            </h4>
-            <h4>
-              <i class="fas fa-layer-group"></i>
-              &nbsp; Full Time
-            </h4>
-          </div>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2020 &nbsp;&ndash;&nbsp; Present
-            </h4>
-            <h4>
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Toronto, Canada (Remote)
-            </h4>
-          </div>
           <p class="marginTop">
-            I'll be conducting research on <strong>Artificial
-            Intelligence</strong> for my senior Bachelor's Thesis at the
-            Computer Science department of the University of Toronto under the
-            supervision of Prof. Sanja Fidler (UofT & NVIDIA) and Prof. Xavier
-            Giró-i-Nieto (UPC & BSC), world leading experts in the field of
-            <strong>Computer Vision</strong>.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Driverless - Motorsport<i class="titleIcon fas fa-car"></i></h3>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-university"></i> &nbsp;
-              <a href="https://upc.edu/en"
-                 title="Polytechnic University of Catalonia website.">
-                Polytechnic University of Catalonia
-                <i class="hide fas fa-external-link-alt"></i>
-              </a>
-              &nbsp;&ndash;&nbsp;
-              <a href="https://etseib.upc.edu/en"
-                 title="Barcelona School of Industrial Engineering website.">
-                ETSEIB <i class="hide fas fa-external-link-alt"></i>
-              </a>
-            </h4>
-            <h4>
-              <i class="fas fa-layer-group"></i>
-              &nbsp; 20 hours/week &nbsp;&ndash;&nbsp; 6 months
-            </h4>
-          </div>
-          <div class="rightLeftFlex">
-            <h4>
-              <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2019 &nbsp;&ndash;&nbsp; February 2020
-            </h4>
-            <h4>
-              <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Barcelona, Catalonia
-            </h4>
-          </div>
-          <p class="marginTop">
-            I have been part of the <strong>Perception</strong> section of
-            Driverless UPC team, which is a team formed by undergraduate
-            engineers in charge of the designing, manufacturing and testing of a
-            <strong>fully autonomous</strong> car that will participate in
-            national and international competitions between universities.
+            Finished with honors obtaining 12.76/14 on University Access Exam
+            (<a href="https://en.wikipedia.org/wiki/Selectividad"
+                title="Search Selectividad in Wikipedia."><em>Selectividad <i class="fas fa-external-link-alt"></i></em></a>).
           </p>
         </div>
       </section>
@@ -856,7 +831,7 @@ include 'resources/cacheStart.php';
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
                  title="Barcelona School of Industrial Engineering website.">
-                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+                School of Engineering <i class="hide fas fa-external-link-alt"></i>
               </a>
             </h4>
             <h4>
@@ -888,7 +863,7 @@ include 'resources/cacheStart.php';
           </p>
         </div>
         <div class="card">
-          <h3>Email server<i class="titleIcon fas fa-server"></i></h3>
+          <h3>Private Email Server<i class="titleIcon fas fa-server"></i></h3>
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-university"></i> &nbsp;
@@ -970,7 +945,7 @@ include 'resources/cacheStart.php';
               &nbsp;&ndash;&nbsp;
               <a href="https://etseib.upc.edu/en"
                  title="Barcelona School of Industrial Engineering website.">
-                ETSEIB <i class="hide fas fa-external-link-alt"></i>
+                School of Engineering <i class="hide fas fa-external-link-alt"></i>
               </a>
             </h4>
             <h4>
