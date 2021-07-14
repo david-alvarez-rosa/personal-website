@@ -71,4 +71,12 @@
        <i class="fas fa-download"></i>
      </button>
    </div>
+   <div id="themeContainer" class="controllers">
+     <button id="theme"
+             title="Do you think this website is too complex and you prefer
+                 minimalism? Change to a theme that suck less."
+             onclick="toggleTheme()";>
+       <i class="fas fa-brush"></i>
+     </button>
+   </div>
 </header>

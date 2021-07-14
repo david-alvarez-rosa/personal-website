@@ -433,6 +433,12 @@ function downloadBackground() {
 }
 
 
+// Controller button for theme toggle.
+function toggleTheme() {
+    location.href += "?theme=suckless";
+}
+
+
 // Functions for the heartbeat.
 var heartAnimation;
 

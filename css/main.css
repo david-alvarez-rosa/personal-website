@@ -580,7 +580,10 @@ header .background {
     transition: opacity 1s;
 }
 
-#controllers button i {
+#mediaControl {
+    bottom: 200px;
+}
+
 #downloadContainer, #themeContainer {
     top: 10px;
 }
@@ -618,6 +621,10 @@ header .background {
 
 #download {
     left: 15px;
+}
+
+#theme {
+    right: 15px;
 }
 
 header h1, h2 {
@@ -1128,6 +1135,7 @@ blockquote p {
 /* License (Creative Commons). */
 #license {
     width: calc(100% - 35%);
+    max-width: 54em;
     margin-left: 35%;
     background-color: var(--main-color);
     padding: 2em 4em 2.5em 4em;
@@ -1413,6 +1421,10 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         z-index: 10000;
     }
 
+    #mediaControl {
+        bottom: 0;
+    }
+
     #navBar {
         position: sticky;
         top: 0;
@@ -1678,7 +1690,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
 
 /* Screen of small height. */
 @media screen and (max-height: 550px) and (min-width: 980px) {
-    #controllers {
+    #mediaControl {
         top: 30px;
     }
 }
