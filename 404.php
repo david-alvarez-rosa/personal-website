@@ -54,6 +54,11 @@ include 'resources/cacheStart.php';
     <link rel="stylesheet" href="/css/404.css" />
     <link rel="stylesheet" id="fontawesome"
           data-href="/external/fontawesome/css/all.min.css" />
+    <?php
+    if (str_contains(parse_url($_SERVER['REQUEST_URI'])['query'], 'theme=suckless')) {
+    ?>
+      <link rel="stylesheet" href="/css/suckless.css" />
+    <?php } ?>
 
     <!-- Javascript files. -->
     <script defer src="/js/main.js"></script>
