@@ -529,6 +529,53 @@ header .background {
     opacity: 1;
 }
 
+#pronounsContainer {
+    position: relative;
+    height: 0;
+}
+
+#pronounsContainerAux {
+    position: absolute;
+    bottom: -17px;
+    right: 0;
+}
+
+#pronouns {
+    color: rgba(255, 255, 255, .75);
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.overlay:hover #pronouns, #pronouns:hover, header:hover #pronouns {
+    opacity: 1;
+}
+
+#pronounsContainer:hover #prideFlag, #pronounsContainer:focus #prideFlag {
+    opacity: 1;
+}
+
+#prideFlag {
+    width: 75px;
+    height: 50px;  /* 2:3 ratio */
+	  background: linear-gradient(
+		    to bottom,
+		    #e40303,
+		    #e40303 16.67%,
+		    #ff8c00 16.67%,
+		    #ff8c00 33.33%,
+		    #ffed00 33.33%,
+		    #ffed00 50%,
+		    #008026 50%,
+		    #008026 66.67%,
+		    #004dff 66.67%,
+		    #004dff 83.33%,
+		    #750787 83.33%,
+		    #750787
+		);
+    opacity: 0;
+    transition: opacity 1s;
+}
+
 #sites {
     margin-top: 75px;
     display: flex;
