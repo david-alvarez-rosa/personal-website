@@ -74,7 +74,7 @@ for ($i = 0; $i < sizeof($cssExtra); ++$i)
     echo '<link rel="stylesheet" href="' . $cssExtra[$i] . '" />';
 ?>
 <?php
-if (isset($_GET["theme"]) and $_GET["theme"] == "suckless") { ?>
+if (isset($_GET['theme']) and $_GET['theme'] == 'suckless') { ?>
   <link rel="stylesheet" href="/css/suckless.css" />
 <?php } ?>
 

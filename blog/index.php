@@ -59,7 +59,7 @@ include 'resources/cacheStart.php';
     <link rel="stylesheet" id="fontawesome"
           data-href="external/fontawesome/css/all.min.css" />
     <?php
-    if (isset($_GET["theme"]) and $_GET["theme"] == "suckless") { ?>
+    if (isset($_GET['theme']) and $_GET['theme'] == 'suckless') { ?>
       <link rel="stylesheet" href="css/suckless.css" />
     <?php } ?>
   </head>

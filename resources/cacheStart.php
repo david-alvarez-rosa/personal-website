@@ -24,9 +24,12 @@ $isMobile = is_numeric(stripos($_SERVER['HTTP_USER_AGENT'], 'mobile'));
 $device = 'computer';
 if ($isMobile)
     $device = 'mobile';
+$theme = 'normal';
+if ((isset($_GET['theme']) and $_GET['theme'] == 'suckless') or strpos(parse_url($_SERVER['REQUEST_URI'])['query'], 'theme=suckless') !== false)
+    $theme =  'suckless';
 $cacheFile = $_SERVER['DOCUMENT_ROOT'] . '/.cache/' . $_SERVER['HTTP_HOST'] .
              '-'. str_replace('/', '-', substr($_SERVER['PHP_SELF'], 1)) .
-             '-' . $device;
+             '-' . $device . '-' . $theme;
 $cacheTime = 3600;
 
 if (file_exists($cacheFile) &&

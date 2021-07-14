@@ -55,7 +55,7 @@ include 'resources/cacheStart.php';
     <link rel="stylesheet" id="fontawesome"
           data-href="/external/fontawesome/css/all.min.css" />
     <?php
-    if (str_contains(parse_url($_SERVER['REQUEST_URI'])['query'], 'theme=suckless')) {
+    if (strpos(parse_url($_SERVER['REQUEST_URI'])['query'], 'theme=suckless') !== false) {
     ?>
       <link rel="stylesheet" href="/css/suckless.css" />
     <?php } ?>
