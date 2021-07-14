@@ -38,6 +38,10 @@ main, #license {
     margin: auto;
 }
 
+#license {
+    max-width: 54em;
+}
+
 * {
     animation: none!important;
 }
