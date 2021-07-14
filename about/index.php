@@ -35,11 +35,9 @@ include 'resources/cacheStart.php';
   <head>
     <title>About | David Álvarez Rosa | Personal Website</title>
     <meta charset="UTF-8" />
-    <meta name="description" content="I'm an undergraduate student in my final
-                year towards a double degree in
-                Mathematics and Industrial Technology
-                Engineering, under the CFIS program of the
-                Polytechnic University of Catalonia." />
+    <meta name="description" content="Graduate in Mathematics and Industrial
+                Technology Engineering from UPC (BarcelonaTech), currently
+                studying the M.Sc. in Advanced Mathematics from UNED." />
     <meta name="keywords" content="David Álvarez Rosa, David Álvarez, David,
                 Curriculum Vitae, Mathematics, Engineering" />
     <meta name="author" content="David Álvarez Rosa" />
@@ -171,11 +169,8 @@ include 'resources/cacheStart.php';
           <a href="https://recomprehension.com"
              title="Exploring and Visualizing Referring Expression Comprehension">
             Bachelor's Thesis <i class="fas fa-external-link-alt"></i></a>
-          at the Computer Science department of the
-          <a href="https://www.utoronto.ca/"
-             title="University of Toronto official website.">
-            University of Toronto <i class="fas fa-external-link-alt"></i></a>
-          under the supervision of Prof.
+          at the Computer Science department of the University of Toronto under
+            the supervision of Prof.
           <a href="https://www.cs.utoronto.ca/~fidler/"
              title="Sanja Fidler personal website.">
             Sanja Fidler <i class="fas fa-external-link-alt"></i></a>
@@ -187,10 +182,11 @@ include 'resources/cacheStart.php';
           leading experts in the field of Computer Vision.
         </p>
         <p>
-          Graduate in Mathematics and Industrial Technology Engineering actively seeking
-          for job opportunities at a leading company in order to get real-world
-          experience and grow as a professional. For any further information feel free to
-          check out my
+          Graduate in Mathematics and Industrial Technology Engineering from
+          UPC (BarcelonaTech), currently studying the M.Sc. in Advanced
+          Mathematics from UNED, and actively seeking for job opportunities at
+          a leading company in order to get real-world experience and grow as a
+          professional. For any further information feel free to check out my
           <a href="https://david.alvarezrosa.com"
              title="David Álvarez Rosa's personal website.">
             personal website</a>
@@ -675,6 +671,43 @@ include 'resources/cacheStart.php';
         </p>
         <div class="card">
           <h3>
+            <a href="https://www.edx.org/course/blockchain-and-fintech-basics-applications-and-lim"
+               title="Blockchain & Financial Technology website.">
+              Blockchain & Financial Technology
+              <i class="hide fas fa-external-link-alt"></i>
+              <i class="titleIcon fas fa-wallet"></i></a>
+          </h3>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://hku.hk/"
+                 title="The University of Hong Kong website.">
+                The University of Hong Kong
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>&nbsp;
+              24 hours
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; June 2021 &nbsp;&ndash;&nbsp; Present
+            </h4>
+            <h4>
+              <i class="fas fa-map-marker-alt"></i>
+              &nbsp; Pamplona, Navarre
+            </h4>
+          </div>
+          <p class="marginTop">
+            Currently enrolled in this online course.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
             <a href="https://www.deeplearning.ai/deep-learning-specialization/"
                title="Deep Learning Specialization website.">
               Deep Learning Specialization
@@ -702,13 +735,14 @@ include 'resources/cacheStart.php';
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarra
+              &nbsp; Pamplona, Navarre
             </h4>
           </div>
           <p class="marginTop">
             Currently enrolled in this online course.
           </p>
         </div>
+
         <div class="card">
           <h3>
             <a href="http://cs231n.stanford.edu/"
@@ -738,13 +772,14 @@ include 'resources/cacheStart.php';
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarra
+              &nbsp; Pamplona, Navarre
             </h4>
           </div>
           <p class="marginTop">
             Completed all coursework.
           </p>
         </div>
+
         <div class="card">
           <h3>
             <a href="https://www.coursera.org/account/accomplishments/certificate/CV6ND58V5Q4A"
@@ -780,7 +815,7 @@ include 'resources/cacheStart.php';
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarra
+              &nbsp; Pamplona, Navarre
             </h4>
           </div>
           <p class="marginTop">
@@ -791,6 +826,7 @@ include 'resources/cacheStart.php';
               <i class="fas fa-external-link-alt"></i></a>.
           </p>
         </div>
+
         <div class="card">
           <h3>Mathematical Game Theory<i class="titleIcon fas fa-dice"></i></h3>
           <div class="rightLeftFlex">
@@ -829,6 +865,7 @@ include 'resources/cacheStart.php';
             logic and computer science.
           </p>
         </div>
+
         <div class="card">
           <h3>
             <a href="https://sites.google.com/view/dlcfis2019/home"
@@ -900,11 +937,62 @@ include 'resources/cacheStart.php';
           in software development and programming, which are a great complement
           to my technical knowledge acquired at university.
         </p>
+
+        <div class="card">
+          <h3>
+            <a href="https://recomprehension.com"
+               title="Go to the project website.">
+              Exploring and Visualizing Referring Expression Comprehension
+              <i class="titleIcon fas fa-eye"></i>
+            </a>
+          </h3>
+          <div class="clear"></div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-university"></i> &nbsp;
+              <a href="https://utoronto.ca"
+                 title="University of Toronto website.">
+                University of Toronto
+                <i class="hide fas fa-external-link-alt"></i></a>
+              &nbsp;&ndash;&nbsp;
+              <a href="https://web.cs.toronto.edu/"
+                 title="Dept. of Computer Science website.">
+                Dept. of Computer Science
+                <i class="hide fas fa-external-link-alt"></i>
+              </a>
+            </h4>
+            <h4>
+              <i class="fas fa-layer-group"></i>
+              &nbsp; 10 months
+            </h4>
+          </div>
+          <div class="rightLeftFlex">
+            <h4>
+              <i class="fas fa-calendar-alt"></i>
+              &nbsp; September 2020 &nbsp;&ndash;&nbsp; June 2021
+            </h4>
+            <h4>
+              <i class="fas fa-laptop"></i>
+              &nbsp; Toronto, Ontario
+            </h4>
+          </div>
+          <p class="marginTop">
+            Human-machine interaction is one of the main objectives currently
+            in the field of Artificial Intelligence. This work will contribute
+            to enhance this interaction by exploring the new task of Referring
+            Expression Comprehension (REC), consisting of: given a referring
+            expression&mdash;which can be a linguistic phrase or human
+            speech&mdash;and an image, detect the object to which the
+            expression refers (i.e., achieve a binary segmentation of the
+            referred object).
+          </p>
+        </div>
+
         <div class="card">
           <h3>
             <a href="https://gitlab.com/david-alvarez-rosa/neural-network"
                title="Go to the project website (with source code).">
-              Neural Network <i class="titleIcon fas fa-project-diagram"></i>
+              Neural Network Implementation <i class="titleIcon fas fa-project-diagram"></i>
             </a>
           </h3>
           <div class="clear"></div>
@@ -921,22 +1009,29 @@ include 'resources/cacheStart.php';
           <div class="rightLeftFlex">
             <h4>
               <i class="fas fa-calendar-alt"></i>
-              &nbsp; September 2019 &nbsp;&ndash;&nbsp; Present
+              &nbsp; September 2019 &nbsp;&ndash;&nbsp; October 2020
             </h4>
             <h4>
               <i class="fas fa-map-marker-alt"></i>
-              &nbsp; Pamplona, Navarra
+              &nbsp; Pamplona, Navarre
             </h4>
           </div>
           <p class="marginTop">
-            Implemented a (fully connected) artificial Neural Network from
-            scratch in C++. Currently refactoring code for a more modular
-            approach. The source code of this project can be found in my
+            Implementation of a feedforward (fully connected) Neural Network
+            from scratch in C++, based on the object-oriented programming
+            paradigm. Accordingly, classes have been created in increasing
+            order of abstraction to define the topology of this neural model:
+            Neuron, Layer and NeuralNetwork. Keeping in mind the ease of use
+            for the user and allowing the greatest possible flexibility,
+            classes are also designed for reading data (Data) and for
+            configuring the network (Custom). The source code of this project
+            can be found in my
             <a href="https://gitlab.com/david-alvarez-rosa/neural-network"
                title="Go to the project website (with source code).">
               personal Gitlab page</a>.
           </p>
         </div>
+
         <div class="card">
           <h3>
             <a href="tres-en-raya" title="Go to the project website.">
@@ -1052,10 +1147,11 @@ include 'resources/cacheStart.php';
             </li>
           </ul>
         </div>
+
         <div class="card">
           <h3>
             <a href="http://david.alvarezrosa.com:5000" title="Go to the project website.">
-              Study Schedule <i class="titleIcon fas fa-calendar-alt"></i>
+              Study Schedule Generator <i class="titleIcon fas fa-calendar-alt"></i>
             </a>
           </h3>
           <div class="rightLeftFlex">
@@ -1149,8 +1245,11 @@ include 'resources/cacheStart.php';
                   <li>Octave/Matlab <i class="fas fa-chart-area"></i></li>
                 </ul>
               </li>
-              <li>Notions of:
+              <li>Worked with:
                 <ul class="skills">
+                  <li>Bash <i class="fas fa-terminal"></i></li>
+                  <li>R <i class="fas fa-chart-bar"></i></li>
+                  <li>PyTorch <i class="fas fa-network-wired"></i></li>
                   <li>
                     <a href="https://en.wikipedia.org/wiki/AMPL"
                        title="A Mathematical Programming Language - Wikipedia.">
@@ -1158,7 +1257,6 @@ include 'resources/cacheStart.php';
                       <i class="hide fas fa-external-link-alt"></i>
                     </a>
                   </li>
-                  <li>Bash <i class="fas fa-terminal"></i></li>
                 </ul>
               </li>
             </ul>
@@ -1222,9 +1320,9 @@ include 'resources/cacheStart.php';
       <section class="hidden">
         <?php sectionHeader(); ?>
         <p>
-          I participated in some of the Spanish knowledge Olympics. More
-          specifically I participated in Physics and Mathematics. These Olympics
-          are competitions among young students, whose primary objective is to
+          I participated in some of the Spanish knowledge Olympiads, more
+          specifically in Physics and Mathematics. These Olympiads are
+          competitions among young students, whose primary objective is to
           stimulate the study of Science (Mathematics, Biology, Chemistry,
           Physics) and the development of young talents in these sciences.
         </p>
@@ -1372,10 +1470,30 @@ include 'resources/cacheStart.php';
             <i class="fas fa-users fa-lg"></i>
           </div>
           <div class="award">
-            <h3>Tutor <i class="titleIcon fas fa-chalkboard-teacher"></i></h3>
+            <h3>Mathematics Tutor <i class="titleIcon fas fa-chalkboard-teacher"></i></h3>
             <p class="awardText">
               Academic classes of support and preparation for the Mathematical
               Olympiad.
+          </div>
+        </div>
+        <div class="card cardAward">
+          <div class="awardTrophyIcon">
+            <i class="fas fa-shopping-basket fa-lg"></i>
+          </div>
+          <div class="award">
+            <h3>Food Gatherer <i class="titleIcon fas fa-utensils"></i></h3>
+            <div class="rightLeftFlex">
+              <h4>
+                <i class="fas fa-calendar-alt"></i>
+                &nbsp; 2014 &nbsp;&ndash;&nbsp; 2016
+              </h4>
+              <h4>
+                <i class="fas fa-map-marker-alt"></i>
+                &nbsp; Pamplona, Navarre
+              </h4>
+            </div>
+            <p class="awardText">
+              Food collection for the needy (volunteer).
           </div>
         </div>
         <div class="card cardAward">
@@ -1455,7 +1573,8 @@ include 'resources/cacheStart.php';
       <section class="hidden">
         <?php sectionHeader(); ?>
         <p>
-          This is a list of my current interests.
+          Interested in areas of knowledge that involve my two ﬁelds of studies in
+          conjunction, such as Artiﬁcial Intelligence, Robotics and Data Analysis.
         </p>
 	      <div id="interestsChart">
 		      <canvas id="interestsChartArea"></canvas>

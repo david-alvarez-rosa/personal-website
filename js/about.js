@@ -68,7 +68,7 @@ var config = {
     type: "pie",
     data: {
         datasets: [{
-            data: [20, 20, 10, 25, 35],
+            data: [10, 25, 20, 10, 35],
             backgroundColor: [
                 window.chartColors.red,
                 window.chartColors.orange,
@@ -78,11 +78,11 @@ var config = {
             ]
         }],
         labels: [
-            "Automation",
             "Robotics",
-            "Sport",
+            "Family and friends",
             "Data analysis",
-            "Family and friends"
+            "Sport",
+            "Artificial intelligence"
         ]
     },
     options: {

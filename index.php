@@ -36,11 +36,9 @@ include 'resources/cacheStart.php';
   <head>
     <title>David Álvarez Rosa | Personal Website</title>
     <meta charset="UTF-8" />
-    <meta name="description" content="I'm an undergraduate student in my final
-                year towards a double degree in
-                Mathematics and Industrial Technology
-                Engineering, under the CFIS program of the
-                Polytechnic University of Catalonia." />
+    <meta name="description" content="Hi visitor, I am David, welcome to my
+                persona website! This site is intended to be a web version of
+                my curriculum vitae and be my corner on the Internet."/>
     <meta name="keywords" content="David Álvarez Rosa, David Álvarez, David,
                 Curriculum Vitae, Mathematics, Engineering" />
     <meta name="author" content="David Álvarez Rosa" />
@@ -151,18 +149,9 @@ include 'resources/cacheStart.php';
                alt="David Álvarez Rosa headshot portrait." />
         </a>
         <p>
-          Welcome to my website! My name is David and I'm an undergraduate
-          student in my final year towards a dual Bachelor's degree in
-          Mathematics and Industrial Technology Engineering, under the
-          <a href="https://cfis.upc.edu"
-             title="CFIS official website.">
-            CFIS <i class="fas fa-external-link-alt"></i></a>
-          program of the
-          <a href="https://upc.edu/en"
-             title="Polytechnic University of Catalonia website.">
-            Polytechnic University of Catalonia
-            <i class="fas fa-external-link-alt"></i></a>
-          in Barcelona (Spain).
+          Welcome to my website! My name is David and I am a Mathematics and
+          Industrial Technology Engineering graduate from UPC (BarcelonaTech),
+          currently studying the M.Sc. in Advanced Mathematics from UNED.
         </p>
         <p>
           This site is intended to be a web version of my
