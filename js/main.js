@@ -420,6 +420,19 @@ function toggleAnimation() {
 }
 
 
+// Controller button for downloading background image.
+function getFileName(str) {
+    return str.substring(str.lastIndexOf('/') + 1)
+}
+
+function downloadBackground() {
+    var currentImage = headerImages[imagesOrder[imageIterator]];
+    var imagePath = currentImage.getAttribute("src");
+    var fileName = getFileName(imagePath);
+    location.href = "/img/backgrounds/" + fileName;
+}
+
+
 // Functions for the heartbeat.
 var heartAnimation;
 

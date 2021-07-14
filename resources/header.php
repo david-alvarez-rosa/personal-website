@@ -47,7 +47,7 @@
          CV <i class="shine shineHeader3"></i>
       </a>
    </div>
-   <div id="controllers">
+   <div id="mediaControl" class="controllers">
       <button id="backward"
               title="Show previous image."
               onclick="backwardAnimation();">
@@ -61,7 +61,14 @@
       <button id="forward"
               title="Show next image."
               onclick="forwardAnimation();">
-         <i class="fas fa-step-forward"></i>
+        <i class="fas fa-step-forward"></i>
       </button>
+   </div>
+   <div id="downloadContainer" class="controllers">
+     <button id="download"
+             title="Download full size background image."
+             onclick="downloadBackground();">
+       <i class="fas fa-download"></i>
+     </button>
    </div>
 </header>

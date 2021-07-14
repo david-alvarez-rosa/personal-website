@@ -525,7 +525,7 @@ header .background {
     left: 0;
 }
 
-.overlay:hover #controllers, #controllers:hover, header:hover #controllers {
+.overlay:hover .controllers, .controllers:hover, header:hover .controllers {
     opacity: 1;
 }
 
@@ -572,9 +572,8 @@ header .background {
     z-index: -1;
 }
 
-#controllers {
+.controllers {
     position: absolute;
-    bottom: 200px;
     left: 0;
     width: 100%;
     opacity: 0;
@@ -582,19 +581,24 @@ header .background {
 }
 
 #controllers button i {
+#downloadContainer, #themeContainer {
+    top: 10px;
+}
+
+.controllers button i {
     color: rgba(255, 255, 255, .75);
     font-size: 22px;
 }
 
-#controllers button {
+.controllers button {
     position: absolute;
 }
 
-#controllers button:hover, #controllers button:focus {
+.controllers button:hover, .controllers button:focus {
     cursor: pointer;
 }
 
-#controllers button:hover i, #controllers button:focus i {
+.controllers button:hover i, .controllers button:focus i {
     color: var(--main-color);
     transform: scale(1.2);
     transition: transform .1s linear .1s;
@@ -610,6 +614,10 @@ header .background {
 
 #forward {
     right: 75px;
+}
+
+#download {
+    left: 15px;
 }
 
 header h1, h2 {
@@ -1400,8 +1408,7 @@ input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
         font-size: 1em;
     }
 
-    #controllers {
-        bottom: 0;
+    .controllers {
         height: 50px;
         z-index: 10000;
     }
