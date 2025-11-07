@@ -1,0 +1,120 @@
+* My first post                                             :tag1:@category1:
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-first-post
+:END:
+This is my post body and more asdf
+
+* New post
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-second-post
+:END:
+Another post and more
+
+This post is for **testing Hugo themes** with ox-hugo. It demonstrates many Org/ox-hugo features.
+
+** This is a Level 2 Heading
+
+Here is some **bold text**, //italic text//, ==highlighted text==, and ~code~ inline.
+
+** Unordered List
+
+- Apples
+- Bananas
+  - Ripe
+  - Unripe
+- Oranges
+
+** Ordered List
+
+1. Install Emacs
+2. Install ox-hugo
+3. Write posts in Org-mode
+
+** Definition List
+
+Term 1 :: Definition of term 1.
+Term 2 :: Another definition, with
+           multiple lines.
+
+** Source Code (C++)
+
+/* C++ Example */
+#+begin_src cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello, ox-hugo test!" << std::endl;
+    return 0;
+}
+#+end_src
+
+** Block Quotes
+
+#+begin_quote
+This is a block quote. Great for citing authors or referencing external thoughts.
+#+end_quote
+
+** Table
+
+| Name   | Role       | Score |
+|--------+------------+-------|
+| Jane   | Reviewer   | 10    |
+| John   | Developer  | 8     |
+| Alice  | Designer   | 9     |
+
+** Footnotes
+
+Org/ox-hugo supports footnotes.[fn:1] They appear at the bottom.
+
+[fn:1] This is a sample footnote. Isn't that neat?
+
+** Hyperlinks
+
+Visit the [[https://ox-hugo.scripter.co/][ox-hugo documentation]] for details.
+
+** Images
+
+[[file:./images/hugo-logo.png][Hugo Logo]]
+[[https://gohugo.io/images/hugo-logo-wide.svg][External Hugo SVG]]
+
+** TODO List (Task List)
+
+- [ ] Try this post in your Hugo theme
+- [X] Install ox-hugo
+- [ ] Refine your CSS
+
+** Table of Contents
+
+#+TOC: headlines 2
+
+** Math
+
+Here is an inline formula: \( E = mc^2 \)
+
+Display math:
+
+\[
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]
+
+** Horizontal Rule
+
+-----
+
+** Custom Hugo Shortcodes
+
+Callout block:
+
+{{% alert note %}}
+This is a callout using Hugo's built-in shortcodes.
+{{% /alert %}}
+
+** Emoji
+
+:smile: :rocket: :tada:
+
+** Syntax Highlighting
+
+See the C++ source code block above.
+
+*End of the post!* 🎉
