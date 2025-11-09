@@ -6,6 +6,6 @@
   <section>
     {{ .Content }}
   </section>
-  <p class="subtitle">{{ index .Params.Author 0 }}</p>
+  <sig>&mdash;{{ index .Params.Author 0 }}</sig>
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 {{ end }}

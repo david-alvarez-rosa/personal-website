@@ -105,6 +105,14 @@ time.subtitle {
     line-height: 1;
 }
 
+sig {
+    display: block;
+    text-align: right;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
 .numeral {
     font-family: et-book-roman-old-style;
 }
@@ -129,7 +137,8 @@ section {
 p,
 dl,
 ol,
-ul {
+ul,
+sig {
     font-size: 1.4rem;
     line-height: 2rem;
 }
@@ -183,7 +192,8 @@ blockquote footer {
 
 section > p,
 section > footer,
-section > table {
+section > table,
+sig {
     width: 55%;
 }
 
@@ -231,6 +241,7 @@ figure.fullwidth figcaption {
 a {
     color: inherit;
     text-decoration: none;
+    text-transform: lowercase;
     font-variant: small-caps;
 }
 
@@ -405,7 +416,8 @@ label.margin-toggle:not(.sidenote-number) {
     hr,
     section > p,
     section > footer,
-    section > table {
+    section > table,
+    sig {
         width: 100%;
     }
 
