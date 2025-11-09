@@ -353,6 +353,10 @@ input.margin-toggle {
 label.sidenote-number {
     display: inline-block;
     max-height: 2rem; /* should be less than or equal to paragraph line-height */
+label.sidenote-number::before {  /* tap target 48px bigger all around */
+    content: "";
+    position: absolute;
+    top: -24px; bottom: -24px; left: -24px; right: -24px;
 }
 
 label.margin-toggle:not(.sidenote-number) {
