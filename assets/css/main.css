@@ -332,15 +332,13 @@ pre > code {
 }
 
 .chroma {
-    color: inherit;
-    background-color: inherit;
+    background: #f2f2f2;
     margin: 0;
     padding: 0.3rem 0;
 }
 
 .highlight {
-    margin-left: 2.5%;
-    width: 52.5%;
+    width: 55%;
 }
 
 pre.fullwidth > code {
