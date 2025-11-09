@@ -338,6 +338,11 @@ pre > code {
     padding: 0.3rem 0;
 }
 
+.highlight {
+    margin-left: 2.5%;
+    width: 52.5%;
+}
+
 pre.fullwidth > code {
     width: 90%;
 }
