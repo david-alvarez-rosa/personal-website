@@ -224,11 +224,17 @@ figure.fullwidth figcaption {
     margin-right: 24%;
 }
 
-a:link,
-a:visited {
+a {
     color: inherit;
-    text-underline-offset: 0.1em;
-    text-decoration-thickness: 0.05em;
+    text-decoration: none;
+    font-variant: small-caps;
+}
+
+a:hover {
+    background: #faf0f0;
+    transition-property: background;
+    transition-duration: 0.2s;
+    border-radius: 4px;
 }
 
 /* Sidenotes, margin notes, figures, captions */
