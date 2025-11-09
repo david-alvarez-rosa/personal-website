@@ -113,6 +113,10 @@ time.subtitle {
     color: red;
 }
 
+.figure-number {
+    display: none;
+}
+
 article {
     padding: 5rem 0rem;
 }
