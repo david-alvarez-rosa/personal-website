@@ -265,6 +265,7 @@ img {
     font-family: et-book-roman-old-style;
     position: relative;
     vertical-align: baseline;
+    color: #660000;
 }
 
 .sidenote-number:after {
@@ -297,16 +298,15 @@ div.table-wrapper {
     font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
 }
 
-.sans {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-    letter-spacing: .03em;
-}
-
 code, pre > code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-size: 1.0rem;
     line-height: 1.42;
     -webkit-text-size-adjust: 100%;
+    color: #660000;
+    background: #f2f2f2;
+    padding: 4px 2px 2px 2px;
+    border-radius: 4px;
 }
 
 .sans > code {
@@ -353,6 +353,10 @@ input.margin-toggle {
 label.sidenote-number {
     display: inline-block;
     max-height: 2rem; /* should be less than or equal to paragraph line-height */
+    position: relative;
+    color: #660000;
+}
+
 label.sidenote-number::before {  /* tap target 48px bigger all around */
     content: "";
     position: absolute;
