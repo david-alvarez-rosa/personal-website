@@ -1,0 +1,61 @@
+{{ $alt := .Get "alt" | default "Image" }}
+{{ $type := .Get "type" | default "normal" }}
+{{- $ind := .Get "ind" | default .Site.Params.marginNoteInd -}}
+
+<!-- get a default label just in case -->
+{{- $label := printf "%#v" (add .Ordinal 1) | printf "%s%s" "marginfig-" | printf "%s" -}}
+{{- if .Get "label" -}}
+{{- $label = .Get "label" -}}
+{{- end -}}
+
+<!-- begin figure tag -->
+{{- if not (eq $type "margin") -}}
+  {{ if eq $type "full" }}<!-- full -->
+    <figure class="fullwidth">
+  {{ else }}<!-- normal -->
+    <figure {{ with .Get "class" }}class="{{ . }}"{{ end }}>
+  {{ end }}
+{{- end -}}
+
+<!-- begin child elements -->
+{{- if eq $type "full" -}}<!-- child for full -->
+  {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
+  <img src="{{ .Get "src" }}" alt="{{ $alt }}">
+  {{ if .Get "link" }}</a>{{ end }}
+  <figcaption>
+{{- else -}}<!--  child for margin or normal (begin) -->
+
+  {{- if or (or (.Get "caption") (.Get "attr")) (eq $type "margin") -}}<!-- begin marginnote -->
+    <label for="{{ $label }}" class="margin-toggle marginnote-ind">{{ $ind }}</label>
+    <input type="checkbox" id="{{ $label }}" class="margin-toggle"/>
+    <span class="marginnote">
+  {{- end -}}
+
+  {{- if eq $type "margin" -}}<!-- margin image inside marginnote -->
+    {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
+    <img src="{{ .Get "src" }}" alt="{{ $alt }}">
+    {{ if .Get "link" }}</a>{{ end }}
+  {{- end -}}
+
+{{- end -}}<!--  child for margin or normal (end) -->
+
+{{ with .Get "title"}}<strong>{{ . | markdownify }}. </strong>{{ end}}
+{{ with .Get "caption"}}{{ . | markdownify }}{{ end }}
+
+<!-- end child elements -->
+{{ if eq $type "full" }}<!-- end full -->
+  </figcaption>
+{{ else }}<!--  end margin or normal -->
+  {{- if or (or (.Get "caption") (.Get "attr")) (eq $type "margin") -}}</span>{{- end -}}<!-- end marginnote -->
+{{ end }}
+
+{{ if (eq $type "normal") }}
+  {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
+  <img src="{{ .Get "src" }}" alt="{{ $alt }}">
+  {{ if .Get "link" }}</a>{{ end }}
+{{ end }}
+
+<!-- end figure tag -->
+{{ if not (eq $type "margin") }}
+</figure>
+{{ end }}
