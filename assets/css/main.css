@@ -71,8 +71,8 @@ h1 {
 h2 {
     font-style: italic;
     font-weight: 400;
-    margin-top: 2.1rem;
-    margin-bottom: 1.4rem;
+    margin-top: 3.1rem;
+    margin-bottom: 2.4rem;
     font-size: 2.2rem;
     line-height: 1;
 }
@@ -117,21 +117,8 @@ sig {
     font-family: et-book-roman-old-style;
 }
 
-.danger {
-    color: red;
-}
-
 .figure-number {
     display: none;
-}
-
-article {
-    padding: 5rem 0rem;
-}
-
-section {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 
 p,
@@ -190,17 +177,17 @@ blockquote footer {
     text-align: right;
 }
 
-section > p,
-section > footer,
-section > table,
+p,
+footer,
+table,
 sig {
     width: 55%;
 }
 
 /* 50 + 5 == 55, to be the same width as paragraph */
-section > dl,
-section > ol,
-section > ul {
+dl,
+ol,
+ul {
     width: 50%;
     -webkit-padding-start: 5%;
 }
@@ -414,9 +401,9 @@ label.margin-toggle:not(.sidenote-number) {
     }
 
     hr,
-    section > p,
-    section > footer,
-    section > table,
+    p,
+    footer,
+    table,
     sig {
         width: 100%;
     }
@@ -425,9 +412,9 @@ label.margin-toggle:not(.sidenote-number) {
         width: 97%;
     }
 
-    section > dl,
-    section > ol,
-    section > ul {
+    dl,
+    ol,
+    ul {
         width: 90%;
     }
 
