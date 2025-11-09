@@ -1,10 +1,11 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-
-  {{ .Content }}
+  <time class="subtitle" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <section>
+    {{ .Content }}
+  </section>
+  <p class="subtitle">{{ index .Params.Author 0 }}</p>
   {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 {{ end }}
