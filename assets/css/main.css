@@ -298,7 +298,7 @@ div.table-wrapper {
     font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
 }
 
-code, pre > code {
+code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
     font-size: 1.0rem;
     line-height: 1.42;
@@ -307,10 +307,6 @@ code, pre > code {
     background: #f2f2f2;
     padding: 4px 2px 2px 2px;
     border-radius: 4px;
-}
-
-.sans > code {
-    font-size: 1.2rem;
 }
 
 h1 > code,
@@ -326,10 +322,20 @@ h3 > code {
 
 pre > code {
     font-size: 0.9rem;
-    width: 52.5%;
-    margin-left: 2.5%;
+    line-height: unset;
+    color: unset;
+    background: none;
+    border-radius: unset;
+    padding: unset;
     overflow-x: auto;
     display: block;
+}
+
+.chroma {
+    color: inherit;
+    background-color: inherit;
+    margin: 0;
+    padding: 0.3rem 0;
 }
 
 pre.fullwidth > code {
