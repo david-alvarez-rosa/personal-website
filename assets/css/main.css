@@ -320,8 +320,20 @@ pre > code {
 
 .chroma {
     background: #f2f2f2;
+    padding: 0.6rem 0;
+}
+
+.lntable .chroma {
+    padding: 0;
     margin: 0;
-    padding: 0.3rem 0;
+}
+
+.chroma .cl {
+    margin: 0 -0.6rem 0 0.6rem;
+}
+
+.chroma .lnt, .chroma .ln {
+    margin: 0;
 }
 
 .highlight {
