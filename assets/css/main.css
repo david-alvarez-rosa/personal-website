@@ -106,6 +106,7 @@ time.subtitle {
 }
 
 sig {
+    margin-top: 2.4rem;
     display: block;
     text-align: right;
     text-transform: lowercase;
@@ -138,29 +139,9 @@ p {
     hyphens: auto;
 }
 
-/* Chapter Epigraphs */
-div.epigraph {
-    margin: 5em 0;
+p:first-of-type {
+  margin-top: 3.4rem;
 }
-
-div.epigraph > blockquote {
-    margin-top: 3em;
-    margin-bottom: 3em;
-}
-
-div.epigraph > blockquote,
-div.epigraph > blockquote > p {
-    font-style: italic;
-}
-
-div.epigraph > blockquote > footer {
-    font-style: normal;
-}
-
-div.epigraph > blockquote > footer > cite {
-    font-style: italic;
-}
-/* end chapter epigraphs styles */
 
 blockquote {
     font-size: 1.4rem;
