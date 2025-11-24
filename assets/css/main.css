@@ -152,7 +152,7 @@ blockquote p {
     margin-right: 40px;
 }
 
-blockquote footer {
+blockquote p:last-of-type {
     width: 55%;
     font-size: 1.1rem;
     text-align: right;
