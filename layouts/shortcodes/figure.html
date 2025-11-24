@@ -1,5 +1,5 @@
 {{ $alt := .Get "alt" | default "Image" }}
-{{ $type := .Get "type" | default "normal" }}
+{{ $width := .Get "width" | default "normal" }}
 {{- $ind := .Get "ind" | default .Site.Params.marginNoteInd -}}
 
 <!-- get a default label just in case -->
@@ -9,8 +9,8 @@
 {{- end -}}
 
 <!-- begin figure tag -->
-{{- if not (eq $type "margin") -}}
-  {{ if eq $type "full" }}<!-- full -->
+{{- if not (eq $width "margin") -}}
+  {{ if eq $width "full" }}<!-- full -->
     <figure class="fullwidth">
   {{ else }}<!-- normal -->
     <figure {{ with .Get "class" }}class="{{ . }}"{{ end }}>
@@ -18,20 +18,20 @@
 {{- end -}}
 
 <!-- begin child elements -->
-{{- if eq $type "full" -}}<!-- child for full -->
+{{- if eq $width "full" -}}<!-- child for full -->
   {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
   <img src="{{ .Get "src" }}" alt="{{ $alt }}">
   {{ if .Get "link" }}</a>{{ end }}
   <figcaption>
 {{- else -}}<!--  child for margin or normal (begin) -->
 
-  {{- if or (or (.Get "caption") (.Get "attr")) (eq $type "margin") -}}<!-- begin marginnote -->
+  {{- if or (or (.Get "caption") (.Get "attr")) (eq $width "margin") -}}<!-- begin marginnote -->
     <label for="{{ $label }}" class="margin-toggle marginnote-ind">{{ $ind }}</label>
     <input type="checkbox" id="{{ $label }}" class="margin-toggle"/>
     <span class="marginnote">
   {{- end -}}
 
-  {{- if eq $type "margin" -}}<!-- margin image inside marginnote -->
+  {{- if eq $width "margin" -}}<!-- margin image inside marginnote -->
     {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
     <img src="{{ .Get "src" }}" alt="{{ $alt }}">
     {{ if .Get "link" }}</a>{{ end }}
@@ -43,19 +43,19 @@
 {{ with .Get "caption"}}{{ . | markdownify }}{{ end }}
 
 <!-- end child elements -->
-{{ if eq $type "full" }}<!-- end full -->
+{{ if eq $width "full" }}<!-- end full -->
   </figcaption>
 {{ else }}<!--  end margin or normal -->
-  {{- if or (or (.Get "caption") (.Get "attr")) (eq $type "margin") -}}</span>{{- end -}}<!-- end marginnote -->
+  {{- if or (or (.Get "caption") (.Get "attr")) (eq $width "margin") -}}</span>{{- end -}}<!-- end marginnote -->
 {{ end }}
 
-{{ if (eq $type "normal") }}
+{{ if (eq $width "normal") }}
   {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
   <img src="{{ .Get "src" }}" alt="{{ $alt }}">
   {{ if .Get "link" }}</a>{{ end }}
 {{ end }}
 
 <!-- end figure tag -->
-{{ if not (eq $type "margin") }}
+{{ if not (eq $width "margin") }}
 </figure>
 {{ end }}
