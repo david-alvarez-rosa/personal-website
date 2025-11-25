@@ -110,7 +110,7 @@ sig {
     display: block;
     text-align: right;
     text-transform: lowercase;
-    font-variant: small-caps;
+    font-variant-caps: small-caps;
     font-weight: bold;
 }
 
@@ -348,7 +348,7 @@ pre.fullwidth > code {
 }
 
 span.newthought {
-    font-variant: small-caps;
+    font-variant-caps: small-caps;
     font-size: 1.2em;
     text-transform: lowercase;
 }
