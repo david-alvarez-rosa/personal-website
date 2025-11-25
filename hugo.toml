@@ -1,6 +1,5 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://david.alvarezrosa.com/'
+title = 'David Álvarez Rosa | Personal Website'
 
 [menus]
   [[menus.main]]
