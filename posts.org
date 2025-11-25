@@ -2,22 +2,102 @@
 #+macro: marginnote @@hugo:{{< marginnote >}}$1{{< /marginnote >}}@@
 #+macro: sidenote @@hugo:{{< sidenote >}}$1{{< /sidenote >}}@@
 #+macro: marginfig @@hugo:{{< figure src="/ox-hugo/$1" width="margin" caption="$2" >}}@@
+#+macro: newthought @@hugo:{{< newthought >}}$1{{< /newthought >}}@@
 
-* DONE Welcome!                                             :tag1:@category1:
+* DONE Welcome!
+CLOSED: [2025-11-25 Tue 12:58]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_SECTION: .
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-11-25 Tue 12:58]
+- State "TODO"       from "DONE"       [2025-11-25 Tue 12:58]
+- State "DONE"       from "TODO"       [2025-11-25 Tue 12:57]
+- State "TODO"       from              [2025-11-25 Tue 12:57]
+:END:
+
+{{{marginfig(portrait.png, **That's me!** March 2022.)}}}
+{{{newthought(Greetings. This is David.)}}} I'm a software engineer.
+Software engineer with experience in low-latency systems, electronic
+trading, and HFT infrastructure. Currently at Susquehanna. Strong
+advocate of free (as in freedom) software and devoted Emacs user.
+
+Software engineer with experience in low-latency systems, electronic
+trading, and HFT infrastructure. Currently at Susquehanna. Strong
+advocate of free (as in freedom) software and devoted Emacs user.
+
+This website is about blablabas
+
+* DONE Rethinking Performance: A Developer’s Guide to CPU Cache Lines                                         :tag1:@category1:
 CLOSED: [2025-11-25 Tue 09:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-first-post
 :END:
-Welcome to this website!
+Modern CPUs can execute billions of instructions per second, yet your code can still be bottlenecked by something as mundane as how an array is laid out in memory. The reason is simple: CPUs are /much/ faster than main memory, so almost every performance-critical program ends up being constrained not by computation, but by data movement. At the center of this tension is a deceptively small unit: the CPU cache line.
+
+Cache lines are how data travels between your code and the CPU’s caches. They determine what gets fetched, what gets evicted, and how different cores interfere with each other’s data. Whether you’re chasing nanoseconds in a trading system, optimizing a game engine, or just trying to make a tight loop scale across cores, understanding cache lines is often the key to unlocking the “mystery” of why some code is fast and other code isn’t.
+
+* DONE From Threads to Tasks: Rethinking Concurrency in Modern C++
+CLOSED: [2025-11-25 Tue 09:31]
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-first-postiuiui
+:END:
+For years, writing concurrent C++ meant thinking in terms of threads,
+mutexes, and condition variables. You’d spin up a few =std::thread= s, protect shared data with locks, and hope you got the ordering and lifetime rules right. As codebases and core counts grew, this model started to creak: too many threads, too much blocking, and too much complexity to reason about correctness and performance.
+
+Modern C++ is steadily moving away from “managing threads” toward “expressing tasks.” Instead of deciding which thread runs what, you describe /what/ needs to happen, /when/ it can happen, and let an executor or scheduler worry about mapping that work onto hardware. This shift—from threads to tasks—enables better scalability, clearer structure, and often fewer bugs.
+
+
+
+* DONE Beyond Big-O: Why Constant Factors Still Matter
+CLOSED: [2025-11-25 Tue 09:31]
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-first-postsd
+:END:
+When we talk about algorithmic efficiency, the conversation almost always revolves around Big-O notation. We proudly say our algorithm is O(n log n) instead of O(n²) and call it a day. But in real-world systems, the story doesn’t end there. Two algorithms with the /same/ asymptotic complexity can differ by an order of magnitude in performance—and those “pesky constant factors” we hand-wave away in theory suddenly matter a lot.
+
+In production code, constants show up everywhere: cache misses, branch mispredictions, allocations, lock contention, system calls, network round trips, and more. Each one adds a fixed cost that doesn’t change your Big-O, but absolutely changes your latency and throughput. An O(n) solution that touches memory in the wrong pattern can be slower than an O(n log n) one that plays nicely with hardware. Likewise, a “clean” but allocation-heavy design might fall apart under load compared to a more careful implementation with the same complexity on paper.
+
+* DONE Exploring CPU Cache Lines                            :tag1:@category1:
+CLOSED: [2025-11-25 Tue 09:31]
+:PROPERTIES:
+:EXPORT_FILE_NAME: second-post
+:END:
+Modern CPUs are astonishingly fast on paper, yet in real-world code they
+often spend a surprising amount of time waiting for data. The gap
+between how fast a processor can execute instructions and how fast it
+can fetch data from main memory is enormous. To bridge that gap,
+hardware designers introduced a hierarchy of caches, with the CPU cache
+line sitting at the center of how data actually moves.
+
+* DONE Implementing a Single Producer Single Consumer Queue :tag1:@category1:
+CLOSED: [2025-11-25 Tue 09:31]
+:PROPERTIES:
+:EXPORT_FILE_NAME: third-post
+:END:
+Lock-free queues are a staple of high-performance systems, but their
+implementations often look like black magic. In this post we’ll build a
+simple *single-producer single-consumer (SPSC)* queue from scratch in
+C++, explain the core ideas, and discuss correctness and performance.
+
+The constraints:
+
+- Only *one producer thread* calls =push=.
+- Only *one consumer thread* calls =pop=.
+- No locks (=std::mutex=) in the data path.
+- Bounded capacity (fixed-size ring buffer).
 
 * DONE David Álvarez Rosa
+CLOSED: [2025-11-25 Tue 09:48]
 :PROPERTIES:
-:EXPORT_FILE_NAME: about
-:EXPORT_HUGO_LAYOUT: about
+:EXPORT_FILE_NAME: cv
+:EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_LAYOUT: cv
 :END:
 :LOGBOOK:
-- State "DONE"       from "TODO"       [2025-11-25 Tue 09:27]
-- State "TODO"       from              [2025-11-25 Tue 09:27]
+- State "DONE"       from "TODO"       [2025-11-25 Tue 09:48]
+- State "TODO"       from              [2025-11-25 Tue 09:48]
 :END:
 
 {{{marginfig(portrait.png, **That's me!** March 2022.)}}}
@@ -41,9 +121,9 @@ trading signals.  Mentor and interviewer.
 
 *Software Engineer II* --- Amazon
 {{{marginnote(Mar 2022--Aug 2024<br/>Madrid\, Spain)}}}\\
-Won org hackathon. Contributed to 100+ internal repos.  Designed systems
-for 10M+ monthly active customers.  Promoted in 18 months (top 5%).
-Mentored 3.  On-call.  Interviewer.
+Contributed to 100+ internal repos.  Won org hackathon.  Designed
+systems for 10M+ monthly active customers.  Promoted in 18 months (top
+5%).  Mentored 3.  On-call.  Interviewer.
 
 *Machine Learning Engineer* --- Sopra Steria
 {{{marginnote(Apr 2024--Jul 2024<br/>Remote)}}}\\
@@ -98,21 +178,21 @@ Academic training for the Mathematical Olympiads.
 Food collection for people in need.
 
 ** Honors & awards
-*General Scholarship* --- Government of Spain\\
-Full university tuition plus an annual stipend (€11k).
+*Mathematical Olympiad*\\
+Silver in local (Pamplona), honors in national (Barcelona).
+
+*Physics Olympiad*\\
+Gold in local (Pamplona), silver in national (Seville).
 
 *Mobility Scholarship* --- Cellex (CFIS)
 {{{marginnote(Canceled due to Covid-19)}}}\\
 Scholarship to carry out my research thesis at Toronto (€6k).
 
-*Spanish Mathematical Olympiad*\\
-Silver in local (Pamplona), honors in national (Barcelona).
-
-*Spanish Physics Olympiad*\\
-Gold in local (Pamplona), silver in national (Seville).
-
 *Tuition and Housing Scholarship*  --- Cellex (CFIS)\\
 University tuition and housing (€19k).
+
+*General Scholarship* --- Government of Spain\\
+Full university tuition plus an annual stipend (€11k).
 
 ** Languages
 *English* --- Proficient\\
