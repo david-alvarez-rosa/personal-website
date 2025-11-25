@@ -2,6 +2,7 @@
 title = "Beyond Big-O: Why Constant Factors Still Matter"
 author = ["David Álvarez Rosa"]
 date = 2025-11-25T09:31:00+00:00
+tags = ["software"]
 draft = false
 +++
 

@@ -17,8 +17,9 @@ CLOSED: [2025-11-25 Tue 12:58]
 - State "TODO"       from              [2025-11-25 Tue 12:57]
 :END:
 
-{{{marginfig(portrait.png, **That's me!** March 2022.)}}}
-{{{newthought(Greetings. This is David.)}}} I'm a software engineer.
+# {{{newthought(Greetings. This is David.)}}}
+# {{{marginfig(portrait.png, **That's me!** March 2022.)}}}
+Greetings. This is David. I'm a software engineer.
 Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna. Strong
 advocate of free (as in freedom) software and devoted Emacs user.
@@ -29,8 +30,8 @@ advocate of free (as in freedom) software and devoted Emacs user.
 
 This website is about blablabas
 
-* DONE Rethinking Performance: A Developer’s Guide to CPU Cache Lines                                         :tag1:@category1:
-CLOSED: [2025-11-25 Tue 09:31]
+* DONE Rethinking Performance: A Developer’s Guide to CPU Cache Lines :software:
+CLOSED: [2024-10-12 Tue 09:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-first-post
 :END:
@@ -48,9 +49,7 @@ mutexes, and condition variables. You’d spin up a few =std::thread= s, protect
 
 Modern C++ is steadily moving away from “managing threads” toward “expressing tasks.” Instead of deciding which thread runs what, you describe /what/ needs to happen, /when/ it can happen, and let an executor or scheduler worry about mapping that work onto hardware. This shift—from threads to tasks—enables better scalability, clearer structure, and often fewer bugs.
 
-
-
-* DONE Beyond Big-O: Why Constant Factors Still Matter
+* DONE Beyond Big-O: Why Constant Factors Still Matter             :software:
 CLOSED: [2025-11-25 Tue 09:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-first-postsd
