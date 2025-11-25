@@ -143,6 +143,14 @@ p:first-of-type {
   margin-top: 3.4rem;
 }
 
+main > p:first-of-type:not(:has(a)):first-letter {
+  color: #660000;
+  float: left;
+  font-size: 4.4rem;
+  margin: 0.55rem 0.25rem 0 0.1rem;
+  font-weight: bold;
+}
+
 blockquote {
     font-size: 1.4rem;
 }
