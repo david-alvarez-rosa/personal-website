@@ -14,8 +14,8 @@ title = 'My New Hugo Site'
     weight = 20
 
   [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
+    name = 'CV'
+    pageRef = '/cv'
     weight = 30
 
 [markup.goldmark.renderer]
