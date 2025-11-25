@@ -211,14 +211,12 @@ figure.fullwidth figcaption {
 }
 
 a {
-    color: inherit;
+    color: #003366;
     text-decoration: none;
-    text-transform: lowercase;
-    font-variant: small-caps;
 }
 
 a:hover {
-    background: #faf0f0;
+    background: #f0f7ff;
     transition-property: background;
     transition-duration: 0.2s;
     border-radius: 4px;
@@ -347,6 +345,12 @@ pre.fullwidth > code {
 .fullwidth {
     max-width: 90%;
     clear:both;
+}
+
+span.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+    text-transform: lowercase;
 }
 
 input.margin-toggle {
