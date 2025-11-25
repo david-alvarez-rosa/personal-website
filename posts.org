@@ -1,120 +1,120 @@
-* My first post                                             :tag1:@category1:
+#+startup: logdone
+#+macro: marginnote @@hugo:{{< marginnote >}}$1{{< /marginnote >}}@@
+#+macro: sidenote @@hugo:{{< sidenote >}}$1{{< /sidenote >}}@@
+#+macro: marginfig @@hugo:{{< figure src="/ox-hugo/$1" width="margin" caption="$2" >}}@@
+
+* DONE Welcome!                                             :tag1:@category1:
+CLOSED: [2025-11-25 Tue 09:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-first-post
 :END:
-This is my post body and more asdf
+Welcome to this website!
 
-* New post
+* DONE David Álvarez Rosa
 :PROPERTIES:
-:EXPORT_FILE_NAME: my-second-post
+:EXPORT_FILE_NAME: about
+:EXPORT_HUGO_LAYOUT: about
 :END:
-Another post and more
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-11-25 Tue 09:27]
+- State "TODO"       from              [2025-11-25 Tue 09:27]
+:END:
 
-This post is for **testing Hugo themes** with ox-hugo. It demonstrates many Org/ox-hugo features.
+{{{marginfig(portrait.png, **That's me!** March 2022.)}}}
+Software engineer with experience in low-latency systems, electronic
+trading, and HFT infrastructure. Currently at Susquehanna.  Strong
+advocate of free (as in /freedom/) software and devoted Emacs user.
 
-** This is a Level 2 Heading
+Previously designed and implemented embedded systems at Amazon impacting
+10M+ monthly active customers, developed semantic caching for LLMs at
+Sopra Steria, and conducted quantitative analysis of cybersecurity risks
+at Deloitte.
 
-Here is some **bold text**, //italic text//, ==highlighted text==, and ~code~ inline.
+Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
+in Artificial Intelligence.
 
-** Unordered List
+** Experience
+*Software Engineer* --- Susquehanna
+{{{marginnote(Jul 2024--Present<br/>Dublin\, Ireland)}}}\\
+High-frequency options trading.  Low-latency market data and
+trading signals.  Mentor and interviewer.
 
-- Apples
-- Bananas
-  - Ripe
-  - Unripe
-- Oranges
+*Software Engineer II* --- Amazon
+{{{marginnote(Mar 2022--Aug 2024<br/>Madrid\, Spain)}}}\\
+Won org hackathon. Contributed to 100+ internal repos.  Designed systems
+for 10M+ monthly active customers.  Promoted in 18 months (top 5%).
+Mentored 3.  On-call.  Interviewer.
 
-** Ordered List
+*Machine Learning Engineer* --- Sopra Steria
+{{{marginnote(Apr 2024--Jul 2024<br/>Remote)}}}\\
+Researched, designed, and built a semantic cache for LLMs.
 
-1. Install Emacs
-2. Install ox-hugo
-3. Write posts in Org-mode
+*Risk Analyst* --- Deloitte
+{{{marginnote(Sep 2021--Mar 2022<br/>Madrid\, Spain)}}}\\
+Quantitative analysis of technological and cybersecurity risks for
+top-tier banking companies.
 
-** Definition List
+*Visiting Researcher* --- Vector Institute
+{{{marginnote(Sep 2020--Jun 2021<br/>Toronto\, Canada)}}}\\
+Research thesis on multimodal learning (recomprehension.com).
 
-Term 1 :: Definition of term 1.
-Term 2 :: Another definition, with
-           multiple lines.
+*Machine Learning Engineer* --- BCN eMotorsport
+{{{marginnote(Sep 2019--Feb 2020<br/>Barcelona\, Spain)}}}\\
+Perception at Driverless UPC.  I served as LiDAR lead and collaborated
+on computer vision for a fully autonomous car.
 
-** Source Code (C++)
+** Education
+*MSc in Artificial Intelligence* --- UNIR
+{{{marginnote(GPA 9.00/10)}}}\\
+Official study program focused on AI research and enabling PhD.
 
-/* C++ Example */
-#+begin_src cpp
-#include <iostream>
+*MSc in Mathematics* --- UNED\\
+Math-lover part-time student. Dropout (joined Amazon).
 
-int main() {
-    std::cout << "Hello, ox-hugo test!" << std::endl;
-    return 0;
-}
-#+end_src
+*Research Thesis* --- UofT
+{{{marginnote(GPA 10/10 (A+))}}}\\
+Research thesis on multimodal learning (recomprehension.com).
 
-** Block Quotes
+*BSc in Mathematics* --- UPC
+{{{marginnote(GPA 8.12/10 (top 10%)<br/>Honors in 9 subjects)}}}\\
+Rigorous and proof-oriented degree with a robust mathematical base.
 
-#+begin_quote
-This is a block quote. Great for citing authors or referencing external thoughts.
-#+end_quote
+*BEng in Industrial Engineering* --- UPC
+{{{marginnote(GPA 8.03/10 (top 2%)<br/>Honors in 14 subjects)}}}\\
+Multidisciplinary and integrative vision of industrial engineering.
 
-** Table
+** Licenses & certifications
+*Certificate in Advanced English (C1)* --- Cambridge University\\
+*Machine Learning* --- Stanford University\\
+*Deep Learning* --- deeplearning.ai\\
+*Blockchain & Financial Technology* --- Hong Kong University\\
+*Nova Talent Member* --- Nova
 
-| Name   | Role       | Score |
-|--------+------------+-------|
-| Jane   | Reviewer   | 10    |
-| John   | Developer  | 8     |
-| Alice  | Designer   | 9     |
+** Volunteering
+*Mathematics Tutor*\\
+Academic training for the Mathematical Olympiads.
 
-** Footnotes
+*Volunteer* --- Banco de Alimentos\\
+Food collection for people in need.
 
-Org/ox-hugo supports footnotes.[fn:1] They appear at the bottom.
+** Honors & awards
+*General Scholarship* --- Government of Spain\\
+Full university tuition plus an annual stipend (€11k).
 
-[fn:1] This is a sample footnote. Isn't that neat?
+*Mobility Scholarship* --- Cellex (CFIS)
+{{{marginnote(Canceled due to Covid-19)}}}\\
+Scholarship to carry out my research thesis at Toronto (€6k).
 
-** Hyperlinks
+*Spanish Mathematical Olympiad*\\
+Silver in local (Pamplona), honors in national (Barcelona).
 
-Visit the [[https://ox-hugo.scripter.co/][ox-hugo documentation]] for details.
+*Spanish Physics Olympiad*\\
+Gold in local (Pamplona), silver in national (Seville).
 
-** Images
+*Tuition and Housing Scholarship*  --- Cellex (CFIS)\\
+University tuition and housing (€19k).
 
-[[file:./images/hugo-logo.png][Hugo Logo]]
-[[https://gohugo.io/images/hugo-logo-wide.svg][External Hugo SVG]]
-
-** TODO List (Task List)
-
-- [ ] Try this post in your Hugo theme
-- [X] Install ox-hugo
-- [ ] Refine your CSS
-
-** Table of Contents
-
-#+TOC: headlines 2
-
-** Math
-
-Here is an inline formula: \( E = mc^2 \)
-
-Display math:
-
-\[
-\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
-\]
-
-** Horizontal Rule
-
------
-
-** Custom Hugo Shortcodes
-
-Callout block:
-
-{{% alert note %}}
-This is a callout using Hugo's built-in shortcodes.
-{{% /alert %}}
-
-** Emoji
-
-:smile: :rocket: :tada:
-
-** Syntax Highlighting
-
-See the C++ source code block above.
-
-*End of the post!* 🎉
+** Languages
+*English* --- Proficient\\
+*Spanish* --- Native\\
+*Catalan* --- Intermediate
