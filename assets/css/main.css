@@ -96,7 +96,7 @@ hr {
     padding: 0;
 }
 
-time.subtitle {
+.subtitle {
     font-style: italic;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -386,10 +386,14 @@ label.margin-toggle:not(.sidenote-number) {
 }
 
 @media (max-width: 760px) {
+    html {
+        font-size: 15px;
+    }
+
     body {
-        width: 84%;
-        padding-left: 8%;
-        padding-right: 8%;
+        width: 88%;
+        padding-left: 6%;
+        padding-right: 6%;
     }
 
     hr,
