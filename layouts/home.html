@@ -1,8 +1,9 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
+  <h2 class="subtitle">David Álvarez Rosa</h2>
   {{ .Content }}
 
-  <h2>Blog Entries</h2>
+  <h2>Recent Entries</h2>
   {{ range first 5 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
@@ -15,4 +16,11 @@
       {{ .Summary | plainify | truncate 140 }}
     </p>
   {{ end }}
+
+  <h2>Subscribe</h2>
+  <p>
+    My mailing list is free, occa­sional, and covers a variety of topics
+   (typog­raphy, law, program­ming, and writing among them). I will
+   never sell or share your email address.
+  </p>
 {{ end }}
