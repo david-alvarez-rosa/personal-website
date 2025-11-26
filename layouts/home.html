@@ -1,17 +1,21 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <h2 class="subtitle">David Álvarez Rosa</h2>
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
+  <hr/>
   {{ .Content }}
 
   <h2>Recent Entries</h2>
-  {{ range first 5 (where site.RegularPages "Section" "posts") }}
+  {{ range first 3 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := .Date | time.Format ":date_long" }}
-      <span class="marginnote">
-        <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-      </span>
       <br/>
       {{ .Summary | plainify | truncate 140 }}
     </p>
