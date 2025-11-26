@@ -1,6 +1,15 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  <h2 class="subtitle">David Álvarez Rosa</h2>
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
+  <hr/>
   {{ range first 5 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>

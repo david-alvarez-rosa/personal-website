@@ -5,5 +5,13 @@
   <time class="subtitle" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
   {{ .Content }}
   <sig>&mdash;{{ index .Params.Author 0 }}</sig>
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
 {{ end }}
