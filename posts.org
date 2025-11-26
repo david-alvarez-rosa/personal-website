@@ -17,18 +17,14 @@ CLOSED: [2025-11-25 Tue 12:58]
 - State "TODO"       from              [2025-11-25 Tue 12:57]
 :END:
 
-# {{{newthought(Greetings. This is David.)}}}
-# {{{marginfig(portrait.png, **That's me!** March 2022.)}}}
 Greetings. This is David. I'm a software engineer.
 Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna. Strong
 advocate of free (as in freedom) software and devoted Emacs user.
 
-Software engineer with experience in low-latency systems, electronic
-trading, and HFT infrastructure. Currently at Susquehanna. Strong
-advocate of free (as in freedom) software and devoted Emacs user.
-
-This website is about blablabas
+Modern CPUs can execute billions of instructions per second, yet your
+code can still be bottlenecked by something as mundane as how an array
+is laid out in memory.
 
 * DONE Rethinking Performance: A Developer’s Guide to CPU Cache Lines :software:
 CLOSED: [2024-10-12 Tue 09:31]
@@ -90,9 +86,9 @@ The constraints:
 * DONE David Álvarez Rosa
 CLOSED: [2025-11-25 Tue 09:48]
 :PROPERTIES:
-:EXPORT_FILE_NAME: cv
+:EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_LAYOUT: cv
+:EXPORT_HUGO_LAYOUT: about
 :END:
 :LOGBOOK:
 - State "DONE"       from "TODO"       [2025-11-25 Tue 09:48]

@@ -8,14 +8,19 @@ title = 'David Álvarez Rosa | Personal Website'
     weight = 10
 
   [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
+    name = 'About'
+    pageRef = '/about'
     weight = 20
 
   [[menus.main]]
-    name = 'CV'
-    pageRef = '/cv'
+    name = 'Posts'
+    pageRef = '/posts'
     weight = 30
+
+  [[menus.main]]
+    name = 'RSS'
+    url = '/index.xml'
+    weight = 40
 
 [markup.goldmark.renderer]
   unsafe = true
