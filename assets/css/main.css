@@ -143,11 +143,47 @@ p:first-of-type {
 }
 
 main > p:first-of-type:not(:has(a)):first-letter {
-  color: #660000;
+  color: #750000;
   float: left;
   font-size: 4.4rem;
   margin: 0.55rem 0.25rem 0 0.1rem;
   font-weight: bold;
+}
+
+nav {
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+nav li {
+    margin: 0!important;
+    padding: 0;
+    font-variant-caps: small-caps;
+    text-transform: lowercase;
+}
+
+nav li a {
+    color: #111;
+}
+
+footer p {
+    width: 100%;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0.6rem 0!important;
+}
+
+footer {
+    margin-bottom: 5rem;
 }
 
 blockquote {
@@ -183,10 +219,6 @@ ul {
 dt:not(:first-child),
 li:not(:first-child) {
     margin-top: 0.25rem;
-}
-
-footer {
-    margin-top: 20rem;
 }
 
 figure {
