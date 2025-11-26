@@ -355,12 +355,6 @@ pre.fullwidth > code {
     clear:both;
 }
 
-span.newthought {
-    font-variant-caps: small-caps;
-    font-size: 1.2em;
-    text-transform: lowercase;
-}
-
 input.margin-toggle {
     display: none;
 }
