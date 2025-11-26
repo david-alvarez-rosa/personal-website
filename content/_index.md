@@ -10,8 +10,6 @@ Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna. Strong
 advocate of free (as in freedom) software and devoted Emacs user.
 
-Software engineer with experience in low-latency systems, electronic
-trading, and HFT infrastructure. Currently at Susquehanna. Strong
-advocate of free (as in freedom) software and devoted Emacs user.
-
-This website is about blablabas
+Modern CPUs can execute billions of instructions per second, yet your
+code can still be bottlenecked by something as mundane as how an array
+is laid out in memory.
