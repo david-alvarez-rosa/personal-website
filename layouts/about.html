@@ -2,4 +2,13 @@
   <h1>{{ .Title }}</h1>
   <h2 class="subtitle">Curriculum Vitae</h2>
   {{ .Content }}
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
 {{ end }}
