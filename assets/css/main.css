@@ -203,16 +203,12 @@ blockquote p:last-of-type {
 p,
 footer,
 table,
-sig {
-    width: 55%;
-}
-
-/* 50 + 5 == 55, to be the same width as paragraph */
+sig,
 dl,
 ol,
-ul {
-    width: 50%;
-    -webkit-padding-start: 5%;
+ul,
+.highlight {
+    width: 55%;
 }
 
 dt:not(:first-child),
@@ -323,6 +319,10 @@ div.table-wrapper {
 
 code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+p code,
+dl code {
     font-size: 1.0rem;
     line-height: 1.42;
     -webkit-text-size-adjust: 100%;
@@ -343,37 +343,11 @@ h3 > code {
     font-size: 1rem;
 }
 
-pre > code {
-    font-size: 0.9rem;
-    line-height: unset;
-    color: unset;
-    background: none;
-    border-radius: unset;
-    padding: unset;
-    overflow-x: auto;
-    display: block;
-}
-
 .chroma {
-    background: #f2f2f2;
-    padding: 0.6rem 0;
-}
-
-.lntable .chroma {
-    padding: 0;
-    margin: 0;
-}
-
-.chroma .cl {
-    margin: 0 -0.6rem 0 0.6rem;
-}
-
-.chroma .lnt, .chroma .ln {
-    margin: 0;
-}
-
-.highlight {
-    width: 55%;
+    font-size: 0.9rem;
+    padding: 1em;
+    overflow-x: auto;
+    border-radius: 8px;
 }
 
 pre.fullwidth > code {
@@ -436,22 +410,16 @@ label.margin-toggle:not(.sidenote-number) {
     p,
     footer,
     table,
-    sig {
+    sig,
+    dl,
+    ol,
+    ul,
+    .highlight {
         width: 100%;
     }
 
-    pre > code {
-        width: 97%;
-    }
-
-    dl,
-    ol,
-    ul {
-        width: 90%;
-    }
-
     figure {
-        max-width: 90%;
+        max-width: 100%;
     }
 
     figcaption,
