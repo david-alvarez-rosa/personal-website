@@ -99,41 +99,49 @@ The constraints:
 - No locks (=std::mutex=) in the data path.
 - Bounded capacity (fixed-size ring buffer).
 
-* DONE Devirtualisation and Static Polymorphism
-CLOSED: [2025-12-01 Mon 18:52]
+* DONE Devirtualization and Static Polymorphism
+CLOSED: [2025-12-02 Tue 15:57]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-draft
 :END:
 :LOGBOOK:
+- State "DONE"       from "WAIT"       [2025-12-02 Tue 15:57]
+- State "WAIT"       from "TODO"       [2025-12-02 Tue 15:57]
+- State "TODO"       from "DONE"       [2025-12-02 Tue 15:57]
 - State "DONE"       from "TODO"       [2025-12-01 Mon 18:52]
 - State "TODO"       from "DONE"       [2025-12-01 Mon 18:52]
 - State "DONE"       from "TODO"       [2025-12-01 Mon 18:49]
 - State "TODO"       from              [2025-12-01 Mon 18:49]
 :END:
 
-Summary.
+Virtual dispatch is the basis of C++ runtime polymorphism, but it comes
+with hidden overhead: pointer indirection, larger object layouts, and
+lost inlining opportunities.  /Devirtualization/ lets the compiler
+recover some of this by turning virtual calls into direct calls when it
+can prove the dynamic type.
 
-** Virtual functions
+Unfortunately, that's rarely the case.
 
-Virtual functions are the standard C++ tool for runtime polymorphism.  A
-base interface exposes virtual methods that derived classes can
-override.  Calls made through ~Base&~ are dispatched to the appropriate
-override dynamically.  Under the hood, a virtual table
-(~vtable~) of function pointers and a ~vptr~ pointing at that table is
-used{{{sidenote(The `vptr` increases object size and can hurt cache
-locality.  The `vtable` makes indirect calls harder to predict\, so they
-can result in branch mispredictions and the reduced compiled-time
-knowledge prevents inlining and other optimizations.)}}}. A virtual call
-loads the ~vptr~, looks up the right entry in the ~vtable~, and performs
-an indirect call.
+For latency-sensitive paths, it's beneficial to manually replace dynamic
+dispatch with /static polymorphism/, so calls are resolved at compile
+time and the abstraction has effectively zero runtime cost.
 
-#+begin_src plantuml :file vtable.png :results file
+** Virtual dispatch
+
+Runtime polymorphism is achieved when a base interface exposes virtual
+methods that derived classes can override.  Calls made through ~Base&~
+are dispatched to the appropriate override dynamically.  Under the hood,
+a virtual table (~vtable~) of function pointers and a ~vptr~ pointing at
+that table is used. A virtual call loads the ~vptr~, looks up the right
+entry in the ~vtable~, and performs an indirect call.
+
+#+begin_src plantuml :file diagram.png
   @startuml
 
   hide empty members
 
   interface Base {
-    + virtual auto foo() = 0
+    + virtual auto foo()
   }
 
   class Derived {
@@ -146,23 +154,23 @@ an indirect call.
     + &Base::foo
   }
 
-  class DerivedVT <<vtable>> {
+  object DerivedVT <<vtable>> {
     + &Derived::foo
   }
 
   object BaseObject {
-    - ...members...
     - vptr : *vtable
+    - ...members...
   }
 
   object DerivedObject {
-    - ...members...
     - vptr : *vtable
+    - ...members...
   }
 
   object DerivedObject2 {
-    - ...members...
     - vptr : *vtable
+    - ...members...
   }
 
   BaseObject --> BaseVT : vptr
@@ -172,73 +180,68 @@ an indirect call.
   @enduml
 #+end_src
 
-#+RESULTS:
-[[file:vtable.png]]
+#+caption: asdf.  Diagram created by the author.
+#+results:
+[[file:diagram.png]]
 
-/Devirtualization/ is the process by which the compiler recovers some of
-that lost information. When it can prove at compile time which override
-will be called, it can skip the ~vtable~ lookup and emit a direct call
-instead.  This post explores when devirtualisation is possible, what
-the potential gains are, and how to write code for the compiler to
-optimise this way.
+The ~vptr~ increases object size and can hurt cache locality.  The
+~vtable~ makes indirect calls harder to predict, so they can result in
+branch mispredictions and the reduced compiled-time knowledge prevents
+inlining and other optimizations.
 
-*** Inspecting generated assembly
+*** Inspecting assembly
 
 To understand why virtual calls can hurt performance, it helps to look at what
-the compiler actually emits.
-
-A plain, non‑virtual member function:
-#+begin_src cpp -n
-  struct Base {
+the compiler actually emits for a simple example.
+#+begin_src cpp
+  class Base {
+  public:
     auto foo() -> int;
   };
 
-  auto bar(Base* base) -> int { return base->foo() + 777; }
+  auto bar(Base* base) -> int {
+    return base->foo() + 77;
+  }
 #+end_src
 
-On x86-64 with GCC and ~-O3~ optimization level, ~bar~ looks like:
+For a plain, non-virtual member function, ~bar~ has a direct
+call{{{sidenote(Assembly generated on x86-64 system with `gcc` and `-O3`
+optimization level.  Similar results were found using `clang` in that
+same platform.)}}} as the target is known at compile
+time, so the compiler can inline it, propagate constants, and optimize
+across the call boundary.
 #+begin_src asm
   bar(Base*):
           sub     rsp, 8
-          call    Base::foo()
+          call    Base::foo()  // Direct call
           add     rsp, 8
-          add     eax, 777
+          add     eax, 77
           ret
 #+end_src
-This is a direct call: the target is known at compile time, so the
-compiler can inline it, propagate constants, and generally optimize
-across the call boundary.
 
-Now, make ~foo~ virtual:
-#+begin_src cpp -n :hl_lines 3
-  struct Base {
-    virtual auto foo() -> int = 0;
-  };
-
-  auto bar(Base* base) -> int { return base->foo() + 777; }
-#+end_src
-
-The body of ~bar~ becomes:
+Now, marking ~foo~ as virtual changes ~bar~ from a direct call to an indirect,
+vtable-based call.
 #+begin_src asm
   bar(Base*):
           sub     rsp, 8
           mov     rax, QWORD PTR [rdi]
-          call    [QWORD PTR [rax]]
+          call    [QWORD PTR [rax]]  // Virtual call
           add     rsp, 8
-          add     eax, 777
+          add     eax, 77
           ret
 #+end_src
 
-Here =rdi= holds the argument =b=. The compiler has to:
-
-/////// Explain step by step what happens /////
-
 Those extra loads are potential cache misses; the indirect branch is
-harder for the CPU to predict. More importantly, because the target is
-not known statically, the compiler generally cannot inline =foo= or
+harder for the CPU to predict.  More importantly, because the target is
+not known statically, the compiler generally cannot inline ~foo~ or
 propagate constants from its caller into its body.
 
 ** Compiler devirtualization
+
+/Devirtualization/ is the process by which the compiler recovers some of
+that lost information. When it can prove at compile time which override
+will be called, it can skip the ~vtable~ lookup and emit a direct call
+instead.
 
 Once the cost of virtual calls is clear, the next question is when the
 compiler can get rid of them.  Modern C++ compilers will devirtualize a
@@ -272,36 +275,38 @@ anything else.
 With compilers, a translation unit consists of a single ~.cpp~ file that
 is compiled, optimized in isolation, and only then turned into object
 code.  The linker just combines the resulting objects, so cross-TU
-optimizations are limited.  This is where =-fwhole-program= and =-flto=
+optimizations are limited.  This is where ~-fwhole-program~ and ~-flto~
 come in.
 
 - ~-fwhole-program~ :: tells the compiler "this translation unit is the
-  whole program".  If no class derives from =Base= in this TU, the
+  whole program".  If no class derives from ~Base~ in this TU, the
   compiler is free to assume nothing ever does, and it can devirtualize
-  calls on =Base=.
+  calls on ~Base~.
 - ~-flto~ :: (link‑time optimization) keeps intermediate representation
   in the object files and runs optimization at link time over all of
   them together.  Multiple source files are effectively treated as one
   big unit, which enables more devirtualization, inlining, and constant
   propagation across file boundaries.
 
-On the language side, =final= is a lightweight way to give the compiler
+On the language side, ~final~ is a lightweight way to give the compiler
 similar certainty for individual methods:
 
 #+begin_src cpp
   class Base {
-   public:
+  public:
     virtual auto foo() -> int;
     virtual auto bar() -> int;
   };
 
   class Derived : public Base {
-   public:
+  public:
     auto foo() -> int override;
     auto bar() -> int final;
   };
 
-  auto test(Derived* derived) -> int { return derived->foo() + derived->bar(); }
+  auto test(Derived* derived) -> int {
+    return derived->foo() + derived->bar();
+  }
 #+end_src
 
 Here, ~foo()~ can still be overridden by a class derived from
@@ -316,10 +321,10 @@ declared ~virtual~ in the base.
           sub     rsp, 16
           mov     rax, QWORD PTR [rdi]
           mov     QWORD PTR [rsp+8], rdi
-          call    [QWORD PTR [rax]]
+          call    [QWORD PTR [rax]]       // Virtual call
           mov     rdi, QWORD PTR [rsp+8]
           mov     ebx, eax
-          call    Derived::bar()
+          call    Derived::bar()          // Direct call
           add     rsp, 16
           add     eax, ebx
           pop     rbx
@@ -331,18 +336,22 @@ declared ~virtual~ in the base.
 
 When the compiler can’t devirtualize on its own, one option is to stop using dynamic dispatch on the hot path and switch to static polymorphism. The classic way to do that in C++ is the Curiously Recurring Template Pattern (CRTP).
 
-With CRTP, the base class is templated on the derived class, and instead of calling virtual methods, it calls into the derived type via =static_cast=:
+With CRTP, the base class is templated on the derived class, and instead of calling virtual methods, it calls into the derived type via ~static_cast~:
 
 #+begin_src cpp
   template <typename Derived>
   class Base {
-   public:
-    auto foo() -> int { return 777 + static_cast<Derived*>(this)->bar(); }
+  public:
+    auto foo() -> int {
+      return 77 + static_cast<Derived*>(this)->bar();
+    }
   };
 
   class Derived : public Base<Derived> {
-   public:
-    auto bar() -> int { return 888; }
+  public:
+    auto bar() -> int {
+      return 88;
+    }
   };
 
   auto test() -> int {
@@ -351,35 +360,37 @@ With CRTP, the base class is templated on the derived class, and instead of call
   }
 #+end_src
 
-With =-O3=, =test= is compiled down to:
+With ~-O3~, ~test~ is compiled down to:
 
 #+begin_src asm
   test():
-          mov     eax, 1665
+          mov     eax, 165  // 77 + 88
           ret
 #+end_src
 
-The compiler inlines =foo= and =bar= and constant-folds the result;
+The compiler inlines ~foo~ and ~bar~ and constant-folds the result;
 there are no vtables and no virtual calls. The trade‑off is that each
-=Base<Derived>= instantiation is its own unrelated type, so there’s no
+~Base<Derived>~ instantiation is its own unrelated type, so there’s no
 single runtime base you can upcast to. Shared functionality that works
 across different derived types has to be templated as well.
 
+*** Deducing this
+
 C++23’s /deducing this/ feature keeps the same static‑dispatch idea but
 makes it easier to write and understand. Instead of templating the whole
-class (and spelling =Base<Derived>= everywhere), you template just the
+class (and spelling ~Base<Derived>~ everywhere), you template just the
 member function that needs to see the derived type, and let the compiler
-deduce =Self= from =*this=:
+deduce ~self~ from ~*this~:
 
 #+begin_src cpp
   class Base {
    public:
-    auto foo(this auto&& self) -> int { return 777 + self.bar(); }
+    auto foo(this auto&& self) -> int { return 77 + self.bar(); }
   };
 
   class Derived : public Base {
    public:
-    auto bar() -> int { return 888; }
+    auto bar() -> int { return 88; }
   };
 
   auto test() -> int {
@@ -388,17 +399,32 @@ deduce =Self= from =*this=:
   }
 #+end_src
 
-This generates essentially the same optimized code as the CRTP version: =foo= is instantiated as if it were a =foo<Derived>= and the call to =bar= is statically resolved and inlined. The key difference is syntactic and structural:
+This generates essentially the same optimized code as the CRTP version:
+~foo~ is instantiated as if it were a ~foo<Derived>~ and the call to
+~bar~ is statically resolved and inlined. The key difference is
+syntactic and structural:
 
 - you still get static polymorphism (no vtables, fully optimizable calls),
-- but you also keep a real =Base= type that all derived classes share.
+- but you also keep a real ~Base~ type that all derived classes share.
 
-It’s still not dynamic dispatch: a call routed through a =Base*= only
-sees what =Base= defines unless you also use =virtual=. But for
+It’s still not dynamic dispatch: a call routed through a ~Base*~ only
+sees what ~Base~ defines unless you also use ~virtual~. But for
 performance‑critical paths where the concrete type is known, CRTP and
 C++23’s deducing‑this style give the compiler exactly what it needs to
 generate non‑virtual, highly optimized code.
 
+
+* DONE Type Erasure
+CLOSED: [2025-12-02 Tue 16:05]
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-draft-other
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-02 Tue 16:05]
+- State "TODO"       from              [2025-12-02 Tue 16:05]
+:END:
+
+Hello.
 
 * DONE David Álvarez Rosa
 CLOSED: [2025-11-25 Tue 09:48]
