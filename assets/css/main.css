@@ -212,6 +212,11 @@ ul,
     width: 55%;
 }
 
+ul p {
+    width: 100%;
+    margin: 0!important;
+}
+
 dt:not(:first-child),
 li:not(:first-child) {
     margin-top: 0.25rem;
@@ -325,7 +330,8 @@ code {
 p code,
 dl code,
 ul code,
-ol code {
+ol code,
+span code {
     font-size: 1.0rem;
     line-height: 1.42;
     -webkit-text-size-adjust: 100%;
