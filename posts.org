@@ -17,7 +17,7 @@ CLOSED: [2025-11-25 Tue 12:58]
 - State "TODO"       from              [2025-11-25 Tue 12:57]
 :END:
 
-Greetings. This is David. I'm a software engineer.
+Hello! This is David, a software engineer.
 Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna. Strong
 advocate of free (as in freedom) software and devoted Emacs user.
@@ -46,11 +46,27 @@ mutexes, and condition variables. You’d spin up a few =std::thread= s, protect
 Modern C++ is steadily moving away from “managing threads” toward “expressing tasks.” Instead of deciding which thread runs what, you describe /what/ needs to happen, /when/ it can happen, and let an executor or scheduler worry about mapping that work onto hardware. This shift—from threads to tasks—enables better scalability, clearer structure, and often fewer bugs.
 
 * DONE Beyond Big-O: Why Constant Factors Still Matter             :software:
-CLOSED: [2025-11-25 Tue 09:31]
+CLOSED: [2025-12-01 Mon 18:52]
 :PROPERTIES:
 :EXPORT_FILE_NAME: my-first-postsd
 :END:
-When we talk about algorithmic efficiency, the conversation almost always revolves around Big-O notation. We proudly say our algorithm is O(n log n) instead of O(n²) and call it a day. But in real-world systems, the story doesn’t end there. Two algorithms with the /same/ asymptotic complexity can differ by an order of magnitude in performance—and those “pesky constant factors” we hand-wave away in theory suddenly matter a lot.
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-01 Mon 18:52]
+- State "TODO"       from "DONE"       [2025-12-01 Mon 18:52]
+:END:
+When we talk about algorithmic efficiency, the conversation almost
+always revolves around Big-O notation. We proudly say our algorithm is
+O(n log n) instead of O(n²) and call it a day. But in real-world
+systems, the story doesn’t end there. Two algorithms with the /same/
+asymptotic complexity can differ by an order of magnitude in
+performance—and those “pesky constant factors” we hand-wave away in
+theory suddenly matter a lot.
+
+#+begin_src cpp
+  auto main() -> int {
+    return 0;
+  }
+#+end_src
 
 In production code, constants show up everywhere: cache misses, branch mispredictions, allocations, lock contention, system calls, network round trips, and more. Each one adds a fixed cost that doesn’t change your Big-O, but absolutely changes your latency and throughput. An O(n) solution that touches memory in the wrong pattern can be slower than an O(n log n) one that plays nicely with hardware. Likewise, a “clean” but allocation-heavy design might fall apart under load compared to a more careful implementation with the same complexity on paper.
 
@@ -82,6 +98,307 @@ The constraints:
 - Only *one consumer thread* calls =pop=.
 - No locks (=std::mutex=) in the data path.
 - Bounded capacity (fixed-size ring buffer).
+
+* DONE Devirtualisation and Static Polymorphism
+CLOSED: [2025-12-01 Mon 18:52]
+:PROPERTIES:
+:EXPORT_FILE_NAME: my-draft
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-01 Mon 18:52]
+- State "TODO"       from "DONE"       [2025-12-01 Mon 18:52]
+- State "DONE"       from "TODO"       [2025-12-01 Mon 18:49]
+- State "TODO"       from              [2025-12-01 Mon 18:49]
+:END:
+
+Summary.
+
+** Virtual functions
+
+Virtual functions are the standard C++ tool for runtime polymorphism.  A
+base interface exposes virtual methods that derived classes can
+override.  Calls made through ~Base&~ are dispatched to the appropriate
+override dynamically.  Under the hood, a virtual table
+(~vtable~) of function pointers and a ~vptr~ pointing at that table is
+used{{{sidenote(The `vptr` increases object size and can hurt cache
+locality.  The `vtable` makes indirect calls harder to predict\, so they
+can result in branch mispredictions and the reduced compiled-time
+knowledge prevents inlining and other optimizations.)}}}. A virtual call
+loads the ~vptr~, looks up the right entry in the ~vtable~, and performs
+an indirect call.
+
+#+begin_src plantuml :file vtable.png :results file
+  @startuml
+
+  hide empty members
+
+  interface Base {
+    + virtual auto foo() = 0
+  }
+
+  class Derived {
+    + auto foo() override
+  }
+
+  Base <|-- Derived
+
+  object BaseVT <<vtable>> {
+    + &Base::foo
+  }
+
+  class DerivedVT <<vtable>> {
+    + &Derived::foo
+  }
+
+  object BaseObject {
+    - ...members...
+    - vptr : *vtable
+  }
+
+  object DerivedObject {
+    - ...members...
+    - vptr : *vtable
+  }
+
+  object DerivedObject2 {
+    - ...members...
+    - vptr : *vtable
+  }
+
+  BaseObject --> BaseVT : vptr
+  DerivedObject --> DerivedVT : vptr
+  DerivedObject2 --> DerivedVT : vptr
+
+  @enduml
+#+end_src
+
+#+RESULTS:
+[[file:vtable.png]]
+
+/Devirtualization/ is the process by which the compiler recovers some of
+that lost information. When it can prove at compile time which override
+will be called, it can skip the ~vtable~ lookup and emit a direct call
+instead.  This post explores when devirtualisation is possible, what
+the potential gains are, and how to write code for the compiler to
+optimise this way.
+
+*** Inspecting generated assembly
+
+To understand why virtual calls can hurt performance, it helps to look at what
+the compiler actually emits.
+
+A plain, non‑virtual member function:
+#+begin_src cpp -n
+  struct Base {
+    auto foo() -> int;
+  };
+
+  auto bar(Base* base) -> int { return base->foo() + 777; }
+#+end_src
+
+On x86-64 with GCC and ~-O3~ optimization level, ~bar~ looks like:
+#+begin_src asm
+  bar(Base*):
+          sub     rsp, 8
+          call    Base::foo()
+          add     rsp, 8
+          add     eax, 777
+          ret
+#+end_src
+This is a direct call: the target is known at compile time, so the
+compiler can inline it, propagate constants, and generally optimize
+across the call boundary.
+
+Now, make ~foo~ virtual:
+#+begin_src cpp -n :hl_lines 3
+  struct Base {
+    virtual auto foo() -> int = 0;
+  };
+
+  auto bar(Base* base) -> int { return base->foo() + 777; }
+#+end_src
+
+The body of ~bar~ becomes:
+#+begin_src asm
+  bar(Base*):
+          sub     rsp, 8
+          mov     rax, QWORD PTR [rdi]
+          call    [QWORD PTR [rax]]
+          add     rsp, 8
+          add     eax, 777
+          ret
+#+end_src
+
+Here =rdi= holds the argument =b=. The compiler has to:
+
+/////// Explain step by step what happens /////
+
+Those extra loads are potential cache misses; the indirect branch is
+harder for the CPU to predict. More importantly, because the target is
+not known statically, the compiler generally cannot inline =foo= or
+propagate constants from its caller into its body.
+
+** Compiler devirtualization
+
+Once the cost of virtual calls is clear, the next question is when the
+compiler can get rid of them.  Modern C++ compilers will devirtualize a
+call whenever they can prove the dynamic type of the object.
+
+That's easy when the type is obviously fixed:
+
+#+begin_src cpp
+  struct Base {
+    virtual auto foo() -> int = 0;
+  };
+
+  struct Derived : Base {
+    auto foo() -> int override { return 77; }
+  };
+
+  auto bar() -> int{
+    Derived derived;
+    return derived.foo();  // compiler knows this is Derived::foo
+  }
+#+end_src
+
+Here, the compiler{{{sidenote(It can even devirtualize through a base
+pointer\, as long as it can track the allocation and see there's only
+one possible concrete type.  The problem is that with traditional
+separate compilation\, objects are often created in one translation unit
+and used in another\, so that global view is missing.)}}} can emit a
+direct call to ~Derived::foo~ (or inline it) because ~derived~ can't be
+anything else.
+
+With compilers, a translation unit consists of a single ~.cpp~ file that
+is compiled, optimized in isolation, and only then turned into object
+code.  The linker just combines the resulting objects, so cross-TU
+optimizations are limited.  This is where =-fwhole-program= and =-flto=
+come in.
+
+- ~-fwhole-program~ :: tells the compiler "this translation unit is the
+  whole program".  If no class derives from =Base= in this TU, the
+  compiler is free to assume nothing ever does, and it can devirtualize
+  calls on =Base=.
+- ~-flto~ :: (link‑time optimization) keeps intermediate representation
+  in the object files and runs optimization at link time over all of
+  them together.  Multiple source files are effectively treated as one
+  big unit, which enables more devirtualization, inlining, and constant
+  propagation across file boundaries.
+
+On the language side, =final= is a lightweight way to give the compiler
+similar certainty for individual methods:
+
+#+begin_src cpp
+  class Base {
+   public:
+    virtual auto foo() -> int;
+    virtual auto bar() -> int;
+  };
+
+  class Derived : public Base {
+   public:
+    auto foo() -> int override;
+    auto bar() -> int final;
+  };
+
+  auto test(Derived* derived) -> int { return derived->foo() + derived->bar(); }
+#+end_src
+
+Here, ~foo()~ can still be overridden by a class derived from
+~Derived~, so ~derived->foo()~ is compiled as a virtual call. ~bar()~ is
+marked ~final~, so the compiler knows no further overrides exist and can
+emit a direct call to ~Derived::bar~ (and inline it) even though it’s
+declared ~virtual~ in the base.
+
+#+begin_src asm
+  test(Derived*):
+          push    rbx
+          sub     rsp, 16
+          mov     rax, QWORD PTR [rdi]
+          mov     QWORD PTR [rsp+8], rdi
+          call    [QWORD PTR [rax]]
+          mov     rdi, QWORD PTR [rsp+8]
+          mov     ebx, eax
+          call    Derived::bar()
+          add     rsp, 16
+          add     eax, ebx
+          pop     rbx
+          ret
+#+end_src
+
+
+** Static polymorphism
+
+When the compiler can’t devirtualize on its own, one option is to stop using dynamic dispatch on the hot path and switch to static polymorphism. The classic way to do that in C++ is the Curiously Recurring Template Pattern (CRTP).
+
+With CRTP, the base class is templated on the derived class, and instead of calling virtual methods, it calls into the derived type via =static_cast=:
+
+#+begin_src cpp
+  template <typename Derived>
+  class Base {
+   public:
+    auto foo() -> int { return 777 + static_cast<Derived*>(this)->bar(); }
+  };
+
+  class Derived : public Base<Derived> {
+   public:
+    auto bar() -> int { return 888; }
+  };
+
+  auto test() -> int {
+    Derived derived;
+    return derived.foo();
+  }
+#+end_src
+
+With =-O3=, =test= is compiled down to:
+
+#+begin_src asm
+  test():
+          mov     eax, 1665
+          ret
+#+end_src
+
+The compiler inlines =foo= and =bar= and constant-folds the result;
+there are no vtables and no virtual calls. The trade‑off is that each
+=Base<Derived>= instantiation is its own unrelated type, so there’s no
+single runtime base you can upcast to. Shared functionality that works
+across different derived types has to be templated as well.
+
+C++23’s /deducing this/ feature keeps the same static‑dispatch idea but
+makes it easier to write and understand. Instead of templating the whole
+class (and spelling =Base<Derived>= everywhere), you template just the
+member function that needs to see the derived type, and let the compiler
+deduce =Self= from =*this=:
+
+#+begin_src cpp
+  class Base {
+   public:
+    auto foo(this auto&& self) -> int { return 777 + self.bar(); }
+  };
+
+  class Derived : public Base {
+   public:
+    auto bar() -> int { return 888; }
+  };
+
+  auto test() -> int {
+    Derived derived;
+    return derived.foo();
+  }
+#+end_src
+
+This generates essentially the same optimized code as the CRTP version: =foo= is instantiated as if it were a =foo<Derived>= and the call to =bar= is statically resolved and inlined. The key difference is syntactic and structural:
+
+- you still get static polymorphism (no vtables, fully optimizable calls),
+- but you also keep a real =Base= type that all derived classes share.
+
+It’s still not dynamic dispatch: a call routed through a =Base*= only
+sees what =Base= defines unless you also use =virtual=. But for
+performance‑critical paths where the concrete type is known, CRTP and
+C++23’s deducing‑this style give the compiler exactly what it needs to
+generate non‑virtual, highly optimized code.
+
 
 * DONE David Álvarez Rosa
 CLOSED: [2025-11-25 Tue 09:48]
