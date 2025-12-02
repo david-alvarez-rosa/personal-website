@@ -145,9 +145,8 @@ p:first-of-type {
 main > p:first-of-type:not(:has(a)):first-letter {
   color: #750000;
   float: left;
-  font-size: 4.4rem;
-  margin: 0.55rem 0.25rem 0 0.1rem;
-  font-weight: bold;
+  font-size: 4.5rem;
+  margin: 0.5rem 0.25rem 0 0;
 }
 
 nav {
