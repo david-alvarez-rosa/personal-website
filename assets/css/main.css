@@ -71,7 +71,7 @@ h1 {
 h2 {
     font-style: italic;
     font-weight: 400;
-    margin-top: 5rem;
+    margin-top: 4rem;
     margin-bottom: 1.4rem;
     font-size: 2.2rem;
     line-height: 1;
@@ -106,6 +106,7 @@ hr {
 
 sig {
     margin-top: 2.4rem;
+    margin-bottom: 12rem;
     display: block;
     text-align: right;
     text-transform: lowercase;
@@ -139,14 +140,14 @@ p {
 }
 
 p:first-of-type {
-  margin-top: 3.4rem;
+    margin-top: 3.4rem;
 }
 
 main > p:first-of-type:not(:has(a)):first-letter {
-  color: #750000;
-  float: left;
-  font-size: 4.5rem;
-  margin: 0.5rem 0.25rem 0 0;
+    color: #750000;
+    float: left;
+    font-size: 4.5rem;
+    margin: 0.5rem 0.25rem 0 0;
 }
 
 nav {
@@ -155,8 +156,8 @@ nav {
 
 nav ul {
     list-style: none;
-    margin: 0;
     padding: 0;
+    margin: -0.5rem 0;
     gap: 1.5rem;
     display: flex;
     align-items: center;
@@ -182,7 +183,7 @@ footer p {
 }
 
 footer {
-    margin-bottom: 5rem;
+    margin-bottom: 6rem;
 }
 
 blockquote {
@@ -322,7 +323,9 @@ code {
 }
 
 p code,
-dl code {
+dl code,
+ul code,
+ol code {
     font-size: 1.0rem;
     line-height: 1.42;
     -webkit-text-size-adjust: 100%;
@@ -344,7 +347,7 @@ h3 > code {
 }
 
 .chroma {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 1em;
     overflow-x: auto;
     border-radius: 8px;
@@ -395,15 +398,13 @@ label.margin-toggle:not(.sidenote-number) {
     height: 100%;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     html {
         font-size: 15px;
     }
 
     body {
-        width: 88%;
-        padding-left: 6%;
-        padding-right: 6%;
+        padding: 0;
     }
 
     hr,
@@ -466,9 +467,5 @@ label.margin-toggle:not(.sidenote-number) {
     div.table-wrapper,
     table {
         width: 85%;
-    }
-
-    img {
-        width: 100%;
     }
 }
