@@ -4,105 +4,46 @@
 #+macro: marginfig @@hugo:{{< figure src="/ox-hugo/$1" width="margin" caption="$2" >}}@@
 #+macro: newthought @@hugo:{{< newthought >}}$1{{< /newthought >}}@@
 
-* DONE Welcome!
-CLOSED: [2025-11-25 Tue 12:58]
+* TODO Exploring CPU Caches
 :PROPERTIES:
-:EXPORT_FILE_NAME: _index
-:EXPORT_HUGO_SECTION: .
+:EXPORT_FILE_NAME: exploring-cpu-caches
 :END:
 :LOGBOOK:
-- State "DONE"       from "TODO"       [2025-11-25 Tue 12:58]
-- State "TODO"       from "DONE"       [2025-11-25 Tue 12:58]
-- State "DONE"       from "TODO"       [2025-11-25 Tue 12:57]
-- State "TODO"       from              [2025-11-25 Tue 12:57]
+- State "TODO"       from "DONE"       [2025-12-02 Tue 19:55]
 :END:
 
-Hello! This is David, a software engineer.
-Software engineer with experience in low-latency systems, electronic
-trading, and HFT infrastructure. Currently at Susquehanna. Strong
-advocate of free (as in freedom) software and devoted Emacs user.
+Pending.
 
-Modern CPUs can execute billions of instructions per second, yet your
-code can still be bottlenecked by something as mundane as how an array
-is laid out in memory.
-
-* DONE Rethinking Performance: A Developer’s Guide to CPU Cache Lines :software:
-CLOSED: [2024-10-12 Tue 09:31]
+* TODO Single Producer Single Consumer Queue
 :PROPERTIES:
-:EXPORT_FILE_NAME: my-first-post
-:END:
-Modern CPUs can execute billions of instructions per second, yet your code can still be bottlenecked by something as mundane as how an array is laid out in memory. The reason is simple: CPUs are /much/ faster than main memory, so almost every performance-critical program ends up being constrained not by computation, but by data movement. At the center of this tension is a deceptively small unit: the CPU cache line.
-
-Cache lines are how data travels between your code and the CPU’s caches. They determine what gets fetched, what gets evicted, and how different cores interfere with each other’s data. Whether you’re chasing nanoseconds in a trading system, optimizing a game engine, or just trying to make a tight loop scale across cores, understanding cache lines is often the key to unlocking the “mystery” of why some code is fast and other code isn’t.
-
-* DONE From Threads to Tasks: Rethinking Concurrency in Modern C++
-CLOSED: [2025-11-25 Tue 09:31]
-:PROPERTIES:
-:EXPORT_FILE_NAME: my-first-postiuiui
-:END:
-For years, writing concurrent C++ meant thinking in terms of threads,
-mutexes, and condition variables. You’d spin up a few =std::thread= s, protect shared data with locks, and hope you got the ordering and lifetime rules right. As codebases and core counts grew, this model started to creak: too many threads, too much blocking, and too much complexity to reason about correctness and performance.
-
-Modern C++ is steadily moving away from “managing threads” toward “expressing tasks.” Instead of deciding which thread runs what, you describe /what/ needs to happen, /when/ it can happen, and let an executor or scheduler worry about mapping that work onto hardware. This shift—from threads to tasks—enables better scalability, clearer structure, and often fewer bugs.
-
-* DONE Beyond Big-O: Why Constant Factors Still Matter             :software:
-CLOSED: [2025-12-01 Mon 18:52]
-:PROPERTIES:
-:EXPORT_FILE_NAME: my-first-postsd
+:EXPORT_FILE_NAME: single-producer-single-consumer-queue
 :END:
 :LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-01 Mon 18:52]
-- State "TODO"       from "DONE"       [2025-12-01 Mon 18:52]
+- State "TODO"       from "DONE"       [2025-12-02 Tue 19:54]
 :END:
-When we talk about algorithmic efficiency, the conversation almost
-always revolves around Big-O notation. We proudly say our algorithm is
-O(n log n) instead of O(n²) and call it a day. But in real-world
-systems, the story doesn’t end there. Two algorithms with the /same/
-asymptotic complexity can differ by an order of magnitude in
-performance—and those “pesky constant factors” we hand-wave away in
-theory suddenly matter a lot.
 
-#+begin_src cpp
-  auto main() -> int {
-    return 0;
-  }
-#+end_src
+Pending.
 
-In production code, constants show up everywhere: cache misses, branch mispredictions, allocations, lock contention, system calls, network round trips, and more. Each one adds a fixed cost that doesn’t change your Big-O, but absolutely changes your latency and throughput. An O(n) solution that touches memory in the wrong pattern can be slower than an O(n log n) one that plays nicely with hardware. Likewise, a “clean” but allocation-heavy design might fall apart under load compared to a more careful implementation with the same complexity on paper.
-
-* DONE Exploring CPU Cache Lines                            :tag1:@category1:
-CLOSED: [2025-11-25 Tue 09:31]
+* TODO Type Erasure
 :PROPERTIES:
-:EXPORT_FILE_NAME: second-post
+:EXPORT_FILE_NAME: type-erasure
 :END:
-Modern CPUs are astonishingly fast on paper, yet in real-world code they
-often spend a surprising amount of time waiting for data. The gap
-between how fast a processor can execute instructions and how fast it
-can fetch data from main memory is enormous. To bridge that gap,
-hardware designers introduced a hierarchy of caches, with the CPU cache
-line sitting at the center of how data actually moves.
-
-* DONE Implementing a Single Producer Single Consumer Queue :tag1:@category1:
-CLOSED: [2025-11-25 Tue 09:31]
-:PROPERTIES:
-:EXPORT_FILE_NAME: third-post
+:LOGBOOK:
+- State "TODO"       from "DONE"       [2025-12-03 Wed 14:40]
+- State "DONE"       from "TODO"       [2025-12-02 Tue 16:05]
+- State "TODO"       from              [2025-12-02 Tue 16:05]
 :END:
-Lock-free queues are a staple of high-performance systems, but their
-implementations often look like black magic. In this post we’ll build a
-simple *single-producer single-consumer (SPSC)* queue from scratch in
-C++, explain the core ideas, and discuss correctness and performance.
 
-The constraints:
+Pending.
 
-- Only *one producer thread* calls =push=.
-- Only *one consumer thread* calls =pop=.
-- No locks (=std::mutex=) in the data path.
-- Bounded capacity (fixed-size ring buffer).
+On latency-sensitive paths, it's beneficial to manually replace dynamic
+dispatch with /static polymorphism/, so calls are resolved at compile
+time and the abstraction has effectively zero runtime cost.
 
 * DONE Devirtualization and Static Polymorphism
 CLOSED: [2025-12-02 Tue 15:57]
 :PROPERTIES:
-:EXPORT_FILE_NAME: my-draft
+:EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
 :LOGBOOK:
 - State "DONE"       from "WAIT"       [2025-12-02 Tue 15:57]
@@ -238,7 +179,7 @@ direct call into an indirect, vtable-based call.
 #+begin_src asm
   bar(Base*):
           sub     rsp, 8
-          mov     rax, QWORD PTR [rdi]
+          mov     rax, QWORD PTR [rdi]  // vptr (pointer to vtable)
           call    [QWORD PTR [rax]]  // Virtual call
           add     rsp, 8
           add     eax, 77
@@ -276,10 +217,10 @@ is clearly fixed:
 #+end_src
 
 Here, the compiler{{{sidenote(It can even devirtualize through a base
-pointer, as long as it can track the allocation and prove there is only
+pointer\, as long as it can track the allocation and prove there is only
 one possible concrete type.  The problem is that with traditional
-separate compilation, objects are often created in one translation unit
-and used in another, so that global view is missing.)}}} can emit a
+separate compilation\, objects are often created in one translation unit
+and used in another\, so that global view is missing.)}}} can emit a
 direct call to ~Derived::foo~ (or inline it), because ~derived~ cannot
 have any other dynamic type.
 
@@ -438,19 +379,6 @@ performance-critical paths where the concrete type is known, both CRTP
 and C++23's deducing-this approach give the compiler exactly what it
 needs to emit non-virtual, highly optimized code.
 
-
-* DONE Type Erasure
-CLOSED: [2025-12-02 Tue 16:05]
-:PROPERTIES:
-:EXPORT_FILE_NAME: my-draft-other
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-02 Tue 16:05]
-- State "TODO"       from              [2025-12-02 Tue 16:05]
-:END:
-
-Hello.
-
 * DONE David Álvarez Rosa
 CLOSED: [2025-11-25 Tue 09:48]
 :PROPERTIES:
@@ -561,3 +489,22 @@ Full university tuition plus an annual stipend (€11k).
 *English* --- Proficient\\
 *Spanish* --- Native\\
 *Catalan* --- Intermediate
+
+* DONE Welcome!
+CLOSED: [2025-12-02 Tue 19:58]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_SECTION: .
+:END:
+:LOGBOOK:
+- State "DONE"       from              [2025-12-02 Tue 19:58]
+:END:
+
+Hello! This is David, a mathematician and software engineer interested
+in low-latency systems, electronic trading, and high-performance
+computing.  I'm a strong advocate of free (as in /freedom/) software and
+devoted Emacs user.
+
+On latency-sensitive paths, it's beneficial to manually replace dynamic
+dispatch with /static polymorphism/, so calls are resolved at compile
+time and the abstraction has effectively zero runtime cost.
