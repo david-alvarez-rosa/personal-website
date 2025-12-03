@@ -206,15 +206,23 @@ footer,
 table,
 sig,
 dl,
-ol,
-ul,
 .highlight {
     width: 55%;
+}
+
+ol,
+ul {
+    width: 50%;
+    padding-inline-start: 5%;
 }
 
 ul p {
     width: 100%;
     margin: 0!important;
+}
+
+p, dd {
+    text-align: justify;
 }
 
 dt:not(:first-child),
@@ -357,6 +365,7 @@ h3 > code {
     padding: 1em;
     overflow-x: auto;
     border-radius: 8px;
+    border: 1px solid dimgray;
 }
 
 pre.fullwidth > code {
@@ -410,6 +419,7 @@ label.margin-toggle:not(.sidenote-number) {
     }
 
     body {
+        width: 90%;
         padding: 0;
     }
 
@@ -423,6 +433,16 @@ label.margin-toggle:not(.sidenote-number) {
     ul,
     .highlight {
         width: 100%;
+    }
+
+    ol,
+    ul {
+        width: 95%;
+        padding-inline-start: 5%;
+    }
+
+    p, dd {
+        text-align: left;
     }
 
     figure {
