@@ -2,7 +2,7 @@
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
 date = 2025-11-25T09:48:00+00:00
-layout = "cv"
+layout = "about"
 draft = false
 +++
 
