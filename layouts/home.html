@@ -17,7 +17,7 @@
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       <br/>
-      {{ .Summary | plainify | truncate 140 }}
+      {{ .Summary | truncate 160 | plainify }}
     </p>
   {{ end }}
 
@@ -30,5 +30,5 @@
     <input type="email" required placeholder="your-name@domain.com" />
     <button type="submit">Subscribe</button>
   </form>
-  <div style="height: 6rem;"></div>
+  <div style="height: 4rem;"></div>
 {{ end }}
