@@ -29,9 +29,9 @@ trading signals.  Mentor and interviewer.
 
 **Software Engineer II** --- Amazon
 {{< marginnote >}}Mar 2022--Aug 2024<br/>Madrid, Spain{{< /marginnote >}}<br />
-Contributed to 100+ internal repos.  Won org hackathon.  Designed
-systems for 10M+ monthly active customers.  Promoted in 18 months (top
-5%).  Mentored 3.  On-call.  Interviewer.
+Designed systems for 10M+ monthly active customers.  Contributed to 100+
+internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
+Mentored 3.  On-call.  Interviewer.
 
 **Machine Learning Engineer** --- Sopra Steria
 {{< marginnote >}}Apr 2024--Jul 2024<br/>Remote{{< /marginnote >}}<br />

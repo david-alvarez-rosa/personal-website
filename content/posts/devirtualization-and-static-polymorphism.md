@@ -5,9 +5,9 @@ date = 2025-12-02T15:57:00+00:00
 draft = false
 +++
 
-Virtual dispatch is the basis of C++ runtime polymorphism, but it comes
-with non-trivial overhead: pointer indirection, larger object layouts,
-and fewer inlining opportunities.  _Devirtualization_ lets the compiler
+Virtual dispatch is the basis of runtime polymorphism, but it comes with
+non-trivial overhead: pointer indirection, larger object layouts, and
+fewer inlining opportunities.  _Devirtualization_ lets the compiler
 recover some of this by turning virtual calls into direct calls when it
 can infer the dynamic type.
 
@@ -189,7 +189,7 @@ test(Derived*):
 ## Static polymorphism {#static-polymorphism}
 
 When the compiler can't devirtualize on its own, one option is to drop
-dynamic dispatch and use static polymorphism instead.  The canonical C++
+dynamic dispatch and use static polymorphism instead.  The canonical
 tool for this is the Curiously Recurring Template Pattern{{< sidenote >}}The curiously recurring template pattern is an idiom where a class X derives from a class template instantiated with X itself as a template argument. More generally{{< /sidenote >}} (CRTP).
 
 With CRTP, the base class is templated on the derived class, and instead
