@@ -257,6 +257,26 @@ figure.fullwidth figcaption {
     margin-right: 24%;
 }
 
+table {
+    font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
+    border: none;
+    border-collapse: collapse;
+    font-size: 1.1rem;
+    border-block: 2px solid #111;
+}
+
+table tbody tr:first-child td {
+    border-top: 1px solid #111;
+    padding-top: 0.6rem;
+}
+
+table th,
+table td {
+    padding: 0.4rem 1rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
 a {
     color: #003366;
     text-decoration: none;
@@ -326,11 +346,6 @@ table.fullwidth {
     width: 100%;
 }
 
-div.table-wrapper {
-    overflow-x: auto;
-    font-family: "Trebuchet MS", "Gill Sans", "Gill Sans MT", sans-serif;
-}
-
 code {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
@@ -339,6 +354,7 @@ p code,
 dl code,
 ul code,
 ol code,
+td code,
 span code {
     font-size: 1.0rem;
     line-height: 1.42;
@@ -512,10 +528,5 @@ label.margin-toggle:not(.sidenote-number) {
 
     label {
         cursor: pointer;
-    }
-
-    div.table-wrapper,
-    table {
-        width: 85%;
     }
 }
