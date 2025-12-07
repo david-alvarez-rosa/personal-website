@@ -89,7 +89,6 @@ h3 {
 hr {
     display: block;
     height: 1px;
-    width: 55%;
     border: 0;
     border-top: 1px solid #111;
     margin: 1.4rem 0;
@@ -195,6 +194,7 @@ blockquote p:last-of-type {
 h1,
 h2,
 h3,
+hr,
 p,
 footer,
 table,
@@ -463,15 +463,16 @@ label.margin-toggle:not(.sidenote-number) {
         padding: 0;
     }
 
+    h1,
+    h2,
+    h3,
     hr,
     p,
     footer,
     table,
     sig,
     dl,
-    ol,
-    ul,
-    .highlight {
+     .highlight {
         width: 100%;
     }
 
