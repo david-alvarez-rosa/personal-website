@@ -99,7 +99,7 @@ To illustrate this, when you call:
 
 ```cpp
 auto square = Square{2};
-std::cout << area(square) << '\n';
+std::println("Area is {:.2f}", square.area());
 ```
 
 The compiler compiles the method `area<Square>`, by more or less

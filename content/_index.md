@@ -5,7 +5,7 @@ date = 2025-12-02T19:58:00+00:00
 draft = false
 +++
 
-This is my personal site, where I share notes on software and
+Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
 to make them run fast, very fast.
 

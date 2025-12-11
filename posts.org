@@ -17,6 +17,30 @@ https://www.youtube.com/watch?v=AN6XHy2znzc
 
 Might be wrong with the right youtube series.
 
+* TODO SFINAE
+:LOGBOOK:
+- State "TODO"       from              [2025-12-06 Sat 10:19]
+:END:
+
+* TODO Lru Cache
+:LOGBOOK:
+- State "TODO"       from              [2025-12-06 Sat 10:19]
+:END:
+
+* TODO Small buffer optimization
+:LOGBOOK:
+- State "TODO"       from              [2025-12-06 Sat 10:21]
+:END:
+
+Specially small string optimization.
+
+* TODO Optimizing Matrix Multiplication
+:LOGBOOK:
+- State "TODO"       from              [2025-12-06 Sat 10:14]
+:END:
+
+Fastest matrix multiplication.
+
 * TODO Translation Look Aside Buffer
 :PROPERTIES:
 :EXPORT_FILE_NAME: translation-look-aside-buffer
@@ -51,11 +75,44 @@ Implement a shared_ptr
 
 Pending.
 
+* TODO The billionaire’s typewriter
+:PROPERTIES:
+:EXPORT_FILE_NAME: testing-new-styles
+:END:
+:LOGBOOK:
+- State "TODO"       from              [2025-12-11 Thu 17:41]
+:END:
+
+A friend pointed me to a story on Medium called “Death to Typewriters,” by Medium designer Marcin Wichary. The story is about the influence of the typewriter on digital typesetting. It references my “excellent list” of typewriter habits.
+
+Thank you for the compliment, Mr. Wichary. I can’t quibble with the details of your piece. It’s true that Medium and I are opposed to certain typographic shortcuts imported from the typewriter.
+
+But by the end, I realized I disagree deeply with Medium about the ethics of design. And by ethics, I mean something simple: though Medium and I are both making tools for writers, what I want for writers and what Medium wants couldn’t be more different. Medium may be avoiding what made the typewriter bad, but it’s also avoiding what made it good. Writers who are tempted to use Medium—or similar publishing tools—should be conscious of these tradeoffs.
+
+So, a few words about that.
+
+For those who don’t incessantly follow internet startups, Medium is a blogging service run by one of the founders of Twitter, multibillionaire Evan Williams. Though it owes much to blogging services of the past (including Blogger, also founded by Mr. Williams), Medium is oriented toward longer, less diaristic stories.
+
+Medium also differs from earlier blogging services in a significant, contrarian way: it offers you, the writer, nearly zero options for the presentation of your stories. No matter what kind of story you write, or who your readers are, it gets packaged into a single, non-negotiable template.
+
+Medium isn’t the only blogging service riding this wave, though so far
+it seems to have the biggest surfboard. Others include Svbtle, Postagon,
+and Silvrback. They all promote a similarly constrained approach to
+design, which is sometimes called minimalist.
+
+** Minimalist vs. homogeneous design
+
+As a fan of minimalism, however, I think that term is misapplied here. Minimalism doesn’t foreclose either expressive breadth or conceptual depth. On the contrary, the minimalist program—as it initially emerged in fine art of the 20th century—has been about diverting the viewer’s attention from overt signs of authorship to the deeper purity of the ingredients.
+
+
 * TODO Optimizing a Lock-Free Ring Buffer
 :PROPERTIES:
 :EXPORT_FILE_NAME: single-producer-single-consumer-queue
 :END:
 :LOGBOOK:
+- State "DONE"       from "WAIT"       [2025-12-06 Sat 10:18]
+- State "WAIT"       from "DONE"       [2025-12-06 Sat 10:18]
+- State "DONE"       from "TODO"       [2025-12-06 Sat 10:18]
 - State "TODO"       from "DONE"       [2025-12-02 Tue 19:54]
 :END:
 
@@ -69,54 +126,51 @@ progressively remove costs while preserving correctness.
 
 ** What is a ring buffer?
 
-{{{marginfig(ringbuffer.jpg, **Ring buffer**. a buffer with 32 slots. The producer has filled 15 of them, indicated by blue. The consumer is behind the producer, reading data from the slots, freeing them as it does so. A free slot is indicated by orange.)}}}
-You may have heard of something called a circular buffer, or maybe even
-a cyclic queue. Both of those are just other names for the ring
-buffer. You can think of a ring buffer as a specialized type of
-queue. Just as with any old, vanilla queue, a producer produces some
-data, shoves it into the data structure, and a consumer comes along and
-consumes it. This all happens in first-in-first-out (FIFO) order. But
-what sets the ring buffer apart is the way it manages its data and the
-limitations it imposes.
+{{{marginfig(ringbuffer.jpg, **Ring buffer with 32 slots.** The producer
+has filled 15 of them\, indicated by blue. The consumer is behind the
+producer\, reading data from the slots\, freeing them as it does so.  A
+free slot is indicated by orange.)}}}  You may have heard of something
+called a circular buffer, or maybe even a cyclic queue.  Both are just
+other names for the /ring buffer/, a specialized queue in which a
+producer produces some data and shoves it into the data structure, and a
+consumer comes along and consumes it, all in first-in-first-out order.
 
-A ring buffer has a fixed capacity. It can’t grow and it can’t
-shrink. If you create a ring buffer that can store 10 items, 10 items
-will forever be its max capacity. Because the capacity is fixed, a
-producer has two options once it fills the ring buffer – the choice of
-which is largely driven by how the ring buffer is designed and the
-application’s needs. The producer can either wait until a slot is free
-in the ring buffer so that it can add more data. Or it can just stomp
-over data that hasn’t been consumed yet. Both approaches are valid in
-certain contexts.
+What sets the ring buffer apart is the way it manages its data and the
+limitations it imposes.  A ring buffer has a fixed capacity; it can’t
+grow and it can’t shrink.  Because of that, once the buffer is full, the
+producer either has to wait for a slot to become free or start stomping
+over data that hasn’t been consumed yet, depending on how the buffer and
+the application are designed.  Both approaches can be perfectly valid.
 
-The consumer’s role is to consume data.  If there’s no data available in
-the ring buffer, the consumer has to wait or go do something else. The
-side-effect of a consumer reading data is that it frees up slots within
-the ring buffer for the producer to use.
-
-Ideally, the producer’s producing is always just slightly ahead of the
-consumer’s consuming, resulting in a nice game of “catch me if you can”
-with virtually no waiting by either party.
-
-# [[~/tmp/ringbuffer.jpg]]
+The consumer’s role is simply to consume data. If there’s nothing
+available in the ring buffer, the consumer has to wait or go do
+something else. Each time the consumer reads an item, it frees up a slot
+that the producer can reuse. Ideally, the producer is always just
+slightly ahead of the consumer, turning the whole thing into a little
+game of /"catch me if you can,"/ with almost no waiting on either side.
 
 ** Single-threaded ring buffer
 
-Let's start with a single-threaded ring buffer, which is just an array
-and two indices. Leave one slot empty to distinguish “full” from
-“empty.” Push writes to head and advances it; pop reads from tail and
-advances it. Modulo arithmetic handles wrap-around.
+Let's start with a single-threaded ring buffer, which is just an
+array{{{sidenote(By using `std::array` we are forcing clients to define
+the buffer size as `constexpr`.  It's also common to use instead a
+`std::vector` to remove that restriction.)}}}
+and two indices.  We can leave one slot empty to distinguish "full" from
+"empty."  Push writes to head and advances it; pop reads from tail and
+advances it.
 
 #+begin_src cpp
   template <typename T, std::size_t N>
-  class RingBuffer {
+  class RingBufferV1 {
     std::array<T, N> buffer_;
     std::size_t head_;
     std::size_t tail_;
   };
 #+end_src
 
-We can now implement the push (or write) operation:
+We can now implement the ~push~ (or write) operation{{{sidenote(Note how
+one item is left unused to indicate that the queue is full\, when
+`head_` is one item behind `tail_` the queue is full.)}}}
 
 #+begin_src cpp
   auto push(const T& value) noexcept -> bool {
@@ -133,10 +187,9 @@ We can now implement the push (or write) operation:
   }
 #+end_src
 
-Note how one item is left unused to indicate that the queue is full,
-when ~head_~ is one item behind ~tail_~ the queue is full.
+Next we implement the ~pop~ (or read) operation{{{sidenote(Again note that
+`head_ == tail_` indicates that the queue is empty.)}}}
 
-Next we implement the pop (or read) operation:
 #+begin_src cpp
   auto pop(T& value) noexcept -> bool {
     if (head_ == tail_) {  // Empty
@@ -152,14 +205,10 @@ Next we implement the pop (or read) operation:
   }
 #+end_src
 
-Again note that ~head_ == tail_~ indicates that the queue is empty.
-
-This version is intentionally boring. It nails down the mechanics: where
-data lives, how indices advance, and how empty/full are defined.
-
 ** Thread-safe ring buffer
 
-With two threads, the first working solution usually adds a mutex around
+You probably already noticed that the previous version is not
+thread-safe.  The easiest way to solve this, is to add a ~mutex~ around
 push and pop.
 
 #+begin_src cpp
@@ -391,9 +440,7 @@ asdfasd
 
 Some closing comments here.
 
-
-* DONE Deriving Type Erasure
-CLOSED: [2025-12-04 Thu 18:12]
+* TODO Deriving Type Erasure
 :PROPERTIES:
 :EXPORT_FILE_NAME: type-erasure
 :END:
@@ -496,7 +543,7 @@ would compile with the templated type replaced with the concrete type
 To illustrate this, when you call:
 #+begin_src cpp
   auto square = Square{2};
-  std::cout << area(square) << '\n';
+  std::println("Area is {:.2f}", square.area());
 #+end_src
 
 The compiler compiles the method ~area<Square>~, by more or less
@@ -758,8 +805,7 @@ names:
 That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
-* DONE Devirtualization and Static Polymorphism
-CLOSED: [2025-12-02 Tue 15:57]
+* TODO Devirtualization and Static Polymorphism
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
@@ -1098,15 +1144,11 @@ and C++23's deducing-this approach give the compiler exactly what it
 needs to emit non-virtual, highly optimized code.
 
 * DONE David Álvarez Rosa
-CLOSED: [2025-11-25 Tue 09:48]
+CLOSED: [2025-12-07 Sun 11:24]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
 :EXPORT_HUGO_LAYOUT: about
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-11-25 Tue 09:48]
-- State "TODO"       from              [2025-11-25 Tue 09:48]
 :END:
 
 {{{marginfig(portrait.png, **That's me!** March 2022.)}}}
@@ -1218,10 +1260,23 @@ CLOSED: [2025-12-02 Tue 19:58]
 - State "DONE"       from              [2025-12-02 Tue 19:58]
 :END:
 
-This is my personal site, where I share notes on software and
+Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
 to make them run fast, very fast.
 
 I'm a mathematician and engineer, a strong advocate of
 free{{{sidenote(As in _freedom_.)}}} software, and a devoted Emacs
 user.  I live in sunny Dublin.
+
+* DONE Page Not Found
+CLOSED: [2025-12-07 Sun 11:13]
+:PROPERTIES:
+:EXPORT_FILE_NAME: 404
+:EXPORT_HUGO_SECTION: .
+:END:
+:LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-07 Sun 11:13]
+- State "TODO"       from              [2025-12-05 Fri 20:03]
+:END:
+
+That page couldn't be found (404 error).

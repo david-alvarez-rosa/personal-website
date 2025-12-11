@@ -15,53 +15,45 @@ progressively remove costs while preserving correctness.
 
 ## What is a ring buffer? {#what-is-a-ring-buffer}
 
-{{< figure src="/ox-hugo/ringbuffer.jpg" width="margin" caption=" **Ring buffer**. a buffer with 32 slots. The producer has filled 15 of them" >}}
-You may have heard of something called a circular buffer, or maybe even
-a cyclic queue. Both of those are just other names for the ring
-buffer. You can think of a ring buffer as a specialized type of
-queue. Just as with any old, vanilla queue, a producer produces some
-data, shoves it into the data structure, and a consumer comes along and
-consumes it. This all happens in first-in-first-out (FIFO) order. But
-what sets the ring buffer apart is the way it manages its data and the
-limitations it imposes.
+{{< figure src="/ox-hugo/ringbuffer.jpg" width="margin" caption=" **Ring buffer with 32 slots.** The producer has filled 15 of them, indicated by blue. The consumer is behind the producer, reading data from the slots, freeing them as it does so. A free slot is indicated by orange." >}}  You may have heard of something
+called a circular buffer, or maybe even a cyclic queue.  Both are just
+other names for the _ring buffer_, a specialized queue in which a
+producer produces some data and shoves it into the data structure, and a
+consumer comes along and consumes it, all in first-in-first-out order.
 
-A ring buffer has a fixed capacity. It can’t grow and it can’t
-shrink. If you create a ring buffer that can store 10 items, 10 items
-will forever be its max capacity. Because the capacity is fixed, a
-producer has two options once it fills the ring buffer – the choice of
-which is largely driven by how the ring buffer is designed and the
-application’s needs. The producer can either wait until a slot is free
-in the ring buffer so that it can add more data. Or it can just stomp
-over data that hasn’t been consumed yet. Both approaches are valid in
-certain contexts.
+What sets the ring buffer apart is the way it manages its data and the
+limitations it imposes.  A ring buffer has a fixed capacity; it can’t
+grow and it can’t shrink.  Because of that, once the buffer is full, the
+producer either has to wait for a slot to become free or start stomping
+over data that hasn’t been consumed yet, depending on how the buffer and
+the application are designed.  Both approaches can be perfectly valid.
 
-The consumer’s role is to consume data.  If there’s no data available in
-the ring buffer, the consumer has to wait or go do something else. The
-side-effect of a consumer reading data is that it frees up slots within
-the ring buffer for the producer to use.
-
-Ideally, the producer’s producing is always just slightly ahead of the
-consumer’s consuming, resulting in a nice game of “catch me if you can”
-with virtually no waiting by either party.
+The consumer’s role is simply to consume data. If there’s nothing
+available in the ring buffer, the consumer has to wait or go do
+something else. Each time the consumer reads an item, it frees up a slot
+that the producer can reuse. Ideally, the producer is always just
+slightly ahead of the consumer, turning the whole thing into a little
+game of _"catch me if you can,"_ with almost no waiting on either side.
 
 
 ## Single-threaded ring buffer {#single-threaded-ring-buffer}
 
-Let's start with a single-threaded ring buffer, which is just an array
-and two indices. Leave one slot empty to distinguish “full” from
-“empty.” Push writes to head and advances it; pop reads from tail and
-advances it. Modulo arithmetic handles wrap-around.
+Let's start with a single-threaded ring buffer, which is just an
+array{{< sidenote >}}By using `std::array` we are forcing clients to define the buffer size as `constexpr`. It's also common to use instead a `std::vector` to remove that restriction.{{< /sidenote >}}
+and two indices.  We can leave one slot empty to distinguish "full" from
+"empty."  Push writes to head and advances it; pop reads from tail and
+advances it.
 
 ```cpp
 template <typename T, std::size_t N>
-class RingBuffer {
+class RingBufferV1 {
   std::array<T, N> buffer_;
   std::size_t head_;
   std::size_t tail_;
 };
 ```
 
-We can now implement the push (or write) operation:
+We can now implement the `push` (or write) operation{{< sidenote >}}Note how one item is left unused to indicate that the queue is full, when `head_` is one item behind `tail_` the queue is full.{{< /sidenote >}}
 
 ```cpp
 auto push(const T& value) noexcept -> bool {
@@ -78,10 +70,7 @@ auto push(const T& value) noexcept -> bool {
 }
 ```
 
-Note how one item is left unused to indicate that the queue is full,
-when `head_` is one item behind `tail_` the queue is full.
-
-Next we implement the pop (or read) operation:
+Next we implement the `pop` (or read) operation{{< sidenote >}}Again note that `head_ == tail_` indicates that the queue is empty.{{< /sidenote >}}
 
 ```cpp
 auto pop(T& value) noexcept -> bool {
@@ -98,15 +87,11 @@ auto pop(T& value) noexcept -> bool {
 }
 ```
 
-Again note that `head_ == tail_` indicates that the queue is empty.
-
-This version is intentionally boring. It nails down the mechanics: where
-data lives, how indices advance, and how empty/full are defined.
-
 
 ## Thread-safe ring buffer {#thread-safe-ring-buffer}
 
-With two threads, the first working solution usually adds a mutex around
+You probably already noticed that the previous version is not
+thread-safe.  The easiest way to solve this, is to add a `mutex` around
 push and pop.
 
 ```cpp
