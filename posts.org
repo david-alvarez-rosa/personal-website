@@ -453,7 +453,9 @@ Some closing comments here.
 
 Ever looked at ~std::any~ and wondered what’s actually going on behind
 the scenes? Beneath the intimidating interface is a clean case of type
-erasure: concrete types hidden behind a small, uniform wrapper. Starting
+erasure: concrete types hidden behind a small, uniform wrapper.
+
+Starting
 from familiar tools---virtual functions and templates---we’ll build
 a minimal ~std::any~. Along the way, type erasure shifts from buzzword
 to practical technique you can recognize and reuse in your own designs.
@@ -805,11 +807,13 @@ names:
 That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
-* TODO Devirtualization and Static Polymorphism
+* DONE Devirtualization and Static Polymorphism
+CLOSED: [2025-12-11 Thu 18:28]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-11 Thu 18:28]
 - State "DONE"       from "WAIT"       [2025-12-02 Tue 15:57]
 - State "WAIT"       from "TODO"       [2025-12-02 Tue 15:57]
 - State "TODO"       from "DONE"       [2025-12-02 Tue 15:57]
@@ -820,7 +824,7 @@ for another entry.
 :END:
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
-non-trivial overhead: pointer indirection, larger object layouts, and
+a hidden overhead: pointer indirection, larger object layouts, and
 fewer inlining opportunities.  /Devirtualization/ lets the compiler
 recover some of this by turning virtual calls into direct calls when it
 can infer the dynamic type.
@@ -833,6 +837,7 @@ time and the abstraction has effectively zero runtime cost.
 
 ** Virtual dispatch
 
+{{{marginfig(diagram.png, **Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`\, and each object gets a `vptr` pointing to the corresponding `vtable`.)}}}
 Runtime polymorphism arises when a base interface exposes virtual
 methods that derived classes override.  Calls made through a ~Base&~ (or
 ~Base*~) are then dispatched to the appropriate override at runtime.
@@ -848,23 +853,9 @@ On a virtual call, the compiler emits code that loads the ~vptr~,
 selects the right slot in the ~vtable~, and performs an indirect call
 through that function pointer.
 
-#+begin_src plantuml :file diagram.png
+#+begin_src plantuml :file diagram.png :eval never
   @startuml
-
   hide empty members
-
-  interface Base {
-    + virtual auto foo()
-  }
-
-  class Derived {
-    + auto foo() override
-  }
-
-  Base <|-- Derived
-
-  class ZZZ
-  hide ZZZ
 
   object BaseVT <<vtable>> {
     + &Base::foo
@@ -892,22 +883,16 @@ through that function pointer.
   BaseObject --> BaseVT : vptr
   DerivedObject --> DerivedVT : vptr
   DerivedObject2 --> DerivedVT : vptr
-
   @enduml
 #+end_src
-
-#+caption: *Virtual dispatch diagram.*  The method ~foo~ is declared virtual in ~Base~ and overridden in ~Derived~.  Both classes get a ~vtable~, and each object gets a ~vptr~ pointing to the corresponding ~vtable~.  Diagram created by the author.
-#+results:
-[[file:diagram.png]]
 
 The additional ~vptr~ increases object size, which can hurt cache
 locality.  The ~vtable~ makes the call target harder to predict, raising
 the chance of branch mispredictions, and the lack of compile-time
 knowledge prevents inlining and other optimizations.
 
-*** Inspecting assembly
-
-To see why virtual calls can be costly, it's useful to inspect the code
+To see why virtual calls can be costly, it's useful to inspect the
+assembly code
 the compiler actually emits for a minimal example.
 
 #+begin_src cpp
@@ -1165,90 +1150,90 @@ Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
 in Artificial Intelligence.
 
 ** Experience
-*Software Engineer* --- Susquehanna
+/Software Engineer/ --- Susquehanna
 {{{marginnote(Jul 2024--Present<br/>Dublin\, Ireland)}}}\\
 High-frequency options trading.  Low-latency market data and
 trading signals.  Mentor and interviewer.
 
-*Software Engineer II* --- Amazon
+/Software Engineer II/ --- Amazon
 {{{marginnote(Mar 2022--Aug 2024<br/>Madrid\, Spain)}}}\\
 Designed systems for 10M+ monthly active customers.  Contributed to 100+
 internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
 Mentored 3.  On-call.  Interviewer.
 
-*Machine Learning Engineer* --- Sopra Steria
+/Machine Learning Engineer/ --- Sopra Steria
 {{{marginnote(Apr 2024--Jul 2024<br/>Remote)}}}\\
 Researched, designed, and built a semantic cache for LLMs.
 
-*Risk Analyst* --- Deloitte
+/Risk Analyst/ --- Deloitte
 {{{marginnote(Sep 2021--Mar 2022<br/>Madrid\, Spain)}}}\\
 Quantitative analysis of technological and cybersecurity risks for
 top-tier banking companies.
 
-*Visiting Researcher* --- Vector Institute
+/Visiting Researcher/ --- Vector Institute
 {{{marginnote(Sep 2020--Jun 2021<br/>Toronto\, Canada)}}}\\
 Research thesis on multimodal learning (recomprehension.com).
 
-*Machine Learning Engineer* --- BCN eMotorsport
+/Machine Learning Engineer/ --- BCN eMotorsport
 {{{marginnote(Sep 2019--Feb 2020<br/>Barcelona\, Spain)}}}\\
 Perception at Driverless UPC.  I served as LiDAR lead and collaborated
 on computer vision for a fully autonomous car.
 
 ** Education
-*MSc in Artificial Intelligence* --- UNIR
+/MSc in Artificial Intelligence/ --- UNIR
 {{{marginnote(GPA 9.00/10)}}}\\
 Official study program focused on AI research and enabling PhD.
 
-*MSc in Mathematics* --- UNED\\
+/MSc in Mathematics/ --- UNED\\
 Math-lover part-time student. Dropout (joined Amazon).
 
-*Research Thesis* --- UofT
+/Research Thesis/ --- UofT
 {{{marginnote(GPA 10/10 (A+))}}}\\
 Research thesis on multimodal learning (recomprehension.com).
 
-*BSc in Mathematics* --- UPC
+/BSc in Mathematics/ --- UPC
 {{{marginnote(GPA 8.12/10 (top 10%)<br/>Honors in 9 subjects)}}}\\
 Rigorous and proof-oriented degree with a robust mathematical base.
 
-*BEng in Industrial Engineering* --- UPC
+/BEng in Industrial Engineering/ --- UPC
 {{{marginnote(GPA 8.03/10 (top 2%)<br/>Honors in 14 subjects)}}}\\
 Multidisciplinary and integrative vision of industrial engineering.
 
 ** Licenses & certifications
-*Certificate in Advanced English (C1)* --- Cambridge University\\
-*Machine Learning* --- Stanford University\\
-*Deep Learning* --- deeplearning.ai\\
-*Blockchain & Financial Technology* --- Hong Kong University\\
-*Nova Talent Member* --- Nova
+/Certificate in Advanced English (C1)/ --- Cambridge University\\
+/Machine Learning/ --- Stanford University\\
+/Deep Learning/ --- deeplearning.ai\\
+/Blockchain & Financial Technology/ --- Hong Kong University\\
+/Nova Talent Member/ --- Nova
 
 ** Volunteering
-*Mathematics Tutor*\\
+/Mathematics Tutor/\\
 Academic training for the Mathematical Olympiads.
 
-*Volunteer* --- Banco de Alimentos\\
+/Volunteer/ --- Banco de Alimentos\\
 Food collection for people in need.
 
 ** Honors & awards
-*Mathematical Olympiad*\\
+/Mathematical Olympiad/\\
 Silver in local (Pamplona), honors in national (Barcelona).
 
-*Physics Olympiad*\\
+/Physics Olympiad/\\
 Gold in local (Pamplona), silver in national (Seville).
 
-*Mobility Scholarship* --- Cellex (CFIS)
+/Mobility Scholarship/ --- Cellex (CFIS)
 {{{marginnote(Canceled due to Covid-19)}}}\\
 Scholarship to carry out my research thesis at Toronto (€6k).
 
-*Tuition and Housing Scholarship*  --- Cellex (CFIS)\\
+/Tuition and Housing Scholarship/  --- Cellex (CFIS)\\
 University tuition and housing (€19k).
 
-*General Scholarship* --- Government of Spain\\
+/General Scholarship/ --- Government of Spain\\
 Full university tuition plus an annual stipend (€11k).
 
 ** Languages
-*English* --- Proficient\\
-*Spanish* --- Native\\
-*Catalan* --- Intermediate
+/English/ --- Proficient\\
+/Spanish/ --- Native\\
+/Catalan/ --- Intermediate
 
 * DONE Welcome
 CLOSED: [2025-12-02 Tue 19:58]

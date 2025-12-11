@@ -1,15 +1,5 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
-  <hr/>
   {{ .Content }}
 
   <h2>Recent Entries</h2>
@@ -17,7 +7,7 @@
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       <br/>
-      {{ .Summary | truncate 160 | plainify }}
+      {{ .Summary | truncate 140 | plainify }}
     </p>
   {{ end }}
 
@@ -31,4 +21,13 @@
     <button type="submit">Subscribe</button>
   </form>
   <div style="height: 4rem;"></div>
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
 {{ end }}

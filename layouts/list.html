@@ -1,15 +1,5 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
-  <hr/>
   {{ range first 5 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
@@ -19,8 +9,17 @@
         <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
       </span>
       <br/>
-      {{ .Summary | truncate 160 | plainify }}
+      {{ .Summary | truncate 140 | plainify }}
     </p>
   {{ end }}
-  <div style="height: 1rem;"></div>
+  <div style="height: 3rem;"></div>
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  {{ end }}
 {{ end }}
