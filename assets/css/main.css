@@ -309,6 +309,11 @@ main img {
     position: relative;
 }
 
+.sidenote code,
+.marginnote code {
+    padding: 1px;
+}
+
 .sidenote-number {
     counter-increment: sidenote-counter;
 }
