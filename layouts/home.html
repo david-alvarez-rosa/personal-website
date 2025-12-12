@@ -7,7 +7,7 @@
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       <br/>
-      {{ .Summary | truncate 140 | plainify }}
+      {{ .Summary | truncate 130 | plainify }}
     </p>
   {{ end }}
 
@@ -20,7 +20,6 @@
     <input type="email" required placeholder="your-name@domain.com" />
     <button type="submit">Subscribe</button>
   </form>
-  <div style="height: 4rem;"></div>
   {{ with site.Menus.main }}
     <nav>
       <ul>
