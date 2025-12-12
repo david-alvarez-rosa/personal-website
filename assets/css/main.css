@@ -8,7 +8,7 @@ body {
     background-color: #fcfcfc;
     color: #111;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1060px;
     counter-reset: sidenote-counter;
 }
 
@@ -119,10 +119,7 @@ figure {
     border: 0;
     font-size: 100%;
     font: inherit;
-    max-width: 55%;
-    -webkit-margin-start: 0;
-    -webkit-margin-end: 0;
-    margin: 0 0 3em 0;
+    margin: 1.4rem auto;
 }
 
 figcaption {
@@ -175,7 +172,6 @@ main img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     border-radius: 8px;
-    margin-right: 2rem;
 }
 
 .sidenote,
@@ -184,9 +180,7 @@ main img {
     clear: right;
     margin-right: -24rem;
     width: 21rem;
-    margin-top: 0.3rem;
-    margin-bottom: 0;
-    font-size: 1.1rem;
+     font-size: 1.1rem;
     line-height: 1.4;
     position: relative;
 }
@@ -234,9 +228,24 @@ span code {
     font-size: 1.3rem;
 }
 
-h1 > code,
-h2 > code {
-    font-size: 0.8em;
+.anchor {
+    margin-left: 0.25rem;
+    position: relative;
+    transition: opacity 0.2s;
+    opacity: 0;
+}
+.anchor::before {
+    content: "";
+    position: absolute;
+    top: -12px; bottom: -12px;
+    left: -12px; right: -12px;
+    background: transparent;
+    pointer-events: auto;
+}
+
+h2:hover .anchor,
+h2:focus-within .anchor {
+    opacity: 1;
 }
 
 .marginnote > code,
@@ -245,8 +254,8 @@ h2 > code {
 }
 
 .chroma {
-    font-size: 1.2rem;
-    padding: 0.5rem 1rem;
+    font-size: 1.15rem;
+    padding: 0.5rem 0.75rem;
     overflow-x: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -310,14 +319,14 @@ label.margin-toggle:not(.sidenote-number) {
     background: #e8e8e8;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 860px) {
     html {
         font-size: 14px;
     }
 
     body {
-        margin: 2rem auto;
-        max-width: 600px;
+        margin: 1.5rem auto;
+        max-width: 580px;
     }
 
     main, footer {
