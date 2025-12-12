@@ -1,20 +1,24 @@
 html {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 body {
-    width: 87.5%;
     margin: 4rem auto;
-    padding-left: 12.5%;
     font-family: "Alegreya", serif;
     background-color: #fcfcfc;
     color: #111;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1000px;
     counter-reset: sidenote-counter;
 }
 
+main {
+    margin-left: 2rem;
+    margin-right: 26rem;
+}
+
 h1 {
-    border-top: 1px solid black;
+    border-top: 1px solid #111;
     padding-top: 0.4rem;
     font-weight: normal;
     margin-bottom: 2.2rem;
@@ -44,39 +48,34 @@ h2 {
 }
 
 sig {
-    margin-bottom: 6rem;
     display: block;
     text-align: right;
     text-transform: lowercase;
     font-family: "Alegreya SC";
     font-variant-caps: small-caps;
     font-weight: 500;
+    font-size: 1.4rem;
 }
 
 .figure-number {
     display: none;
 }
 
-p,
-dl,
-ol,
-ul,
-sig {
+main p, main dd {
+    text-align: justify;
+    hyphens: auto;
     font-size: 1.4rem;
     line-height: 2rem;
-}
-
-p {
     margin-top: 0;
     margin-bottom: 1.2rem;
     padding-right: 0;
-    vertical-align: baseline;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    margin: -0.5rem 0;
+    margin-bottom: 0.5rem;
+    margin-top: 4rem;
     gap: 1.5rem;
     display: flex;
     align-items: center;
@@ -88,7 +87,7 @@ nav li {
     padding: 0;
     font-variant-caps: small-caps;
     font-family: "Alegreya SC";
-
+    font-size: 1.6rem;
     text-transform: lowercase;
     font-weight: 500;
 }
@@ -98,8 +97,9 @@ nav li a {
 }
 
 footer {
-    border-top: 1px solid black;
-    margin-top: 0.8rem;
+    border-top: 1px solid #111;
+    margin-left: 2rem;
+    margin-right: 26rem;
 }
 
 footer p {
@@ -109,60 +109,9 @@ footer p {
     margin: 0.6rem 0 !important;
 }
 
-blockquote {
-    font-size: 1.4rem;
-}
-
-blockquote p {
-    width: 55%;
-    margin-right: 40px;
-}
-
-blockquote p:last-of-type {
-    width: 55%;
-    font-size: 1.1rem;
-    text-align: right;
-}
-
-h1,
-h2,
-p,
-footer,
-table,
-sig,
-dl,
-.highlight {
-    width: 55%;
-}
-
-ol,
-ul {
-    width: 52.5%;
-    padding-inline-start: 2.5%;
-}
-
-ul p {
-    width: 100%;
-    margin: 0 !important;
-}
-
-p,
-span,
-dd,
-ul,
-ol {
-    text-align: justify;
-    hyphens: auto;
-}
-
 .sidenote,
 .marginnote {
     text-align: left;
-}
-
-dt:not(:first-child),
-li:not(:first-child) {
-    margin-top: 0.25rem;
 }
 
 figure {
@@ -170,7 +119,6 @@ figure {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
     max-width: 55%;
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
@@ -184,7 +132,6 @@ figcaption {
     margin-bottom: 0;
     font-size: 1.1rem;
     line-height: 1.6;
-    vertical-align: baseline;
     position: relative;
     max-width: 40%;
 }
@@ -210,7 +157,6 @@ table th,
 table td {
     padding: 0.4rem 1rem;
     text-align: left;
-    vertical-align: middle;
 }
 
 a {
@@ -225,7 +171,6 @@ a:hover {
     border-radius: 4px;
 }
 
-/* Sidenotes, margin notes, figures, captions */
 main img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 100%;
@@ -237,19 +182,13 @@ main img {
 .marginnote {
     float: right;
     clear: right;
-    margin-right: -60%;
-    width: 50%;
+    margin-right: -24rem;
+    width: 21rem;
     margin-top: 0.3rem;
     margin-bottom: 0;
     font-size: 1.1rem;
-    line-height: 1.3;
-    vertical-align: baseline;
+    line-height: 1.4;
     position: relative;
-}
-
-.sidenote code,
-.marginnote code {
-    padding: 1px;
 }
 
 .sidenote-number {
@@ -259,7 +198,6 @@ main img {
 .sidenote-number:after,
 .sidenote:before {
     position: relative;
-    vertical-align: baseline;
     color: #660000;
 }
 
@@ -276,20 +214,13 @@ main img {
     top: -0.5rem;
 }
 
-blockquote .sidenote,
-blockquote .marginnote {
-    margin-right: -82%;
-    min-width: 59%;
-    text-align: left;
-}
-
 div.fullwidth,
 table.fullwidth {
     width: 100%;
 }
 
 code {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-family: "Inconsolata", monospace;
 }
 
 p code,
@@ -298,13 +229,9 @@ ul code,
 ol code,
 td code,
 span code {
-    font-size: 1rem;
-    line-height: 1.42;
-    -webkit-text-size-adjust: 100%;
+    font-weight: 500;
     color: #660000;
-    background: #f2f2f2;
-    padding: 4px 2px 2px 2px;
-    border-radius: 4px;
+    font-size: 1.3rem;
 }
 
 h1 > code,
@@ -314,11 +241,11 @@ h2 > code {
 
 .marginnote > code,
 .sidenote > code {
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
 .chroma {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     padding: 0.5rem 1rem;
     overflow-x: auto;
     border-radius: 8px;
@@ -383,39 +310,23 @@ label.margin-toggle:not(.sidenote-number) {
     background: #e8e8e8;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     html {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     body {
-        width: 90%;
-        padding: 0;
+        margin: 2rem auto;
+        max-width: 600px;
     }
 
-    h1,
-  h2,
-  h3,
-  p,
-  footer,
-  table,
-  sig,
-  dl,
-  .highlight {
-      width: 100%;
-  }
+    main, footer {
+        margin: 0 2rem;
+    }
 
-    ol,
-  ul {
-      width: 95%;
-      padding-inline-start: 5%;
-  }
-
-    p,
-  span,
-  dd {
-      text-align: left;
-  }
+    main p {
+        text-align: left;
+    }
 
     figure {
         max-width: 100%;
@@ -425,16 +336,6 @@ label.margin-toggle:not(.sidenote-number) {
   figure.fullwidth figcaption {
       margin-right: 0%;
       max-width: none;
-  }
-
-    blockquote {
-        margin-left: 1.5em;
-        margin-right: 0em;
-    }
-
-    blockquote p,
-  blockquote footer {
-      width: 100%;
   }
 
     label.margin-toggle:not(.sidenote-number) {
@@ -454,7 +355,6 @@ label.margin-toggle:not(.sidenote-number) {
       clear: both;
       width: 95%;
       margin: 1rem 2.5%;
-      vertical-align: baseline;
       position: relative;
   }
 
