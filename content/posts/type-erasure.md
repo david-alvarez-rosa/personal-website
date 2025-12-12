@@ -1,13 +1,15 @@
 +++
 title = "Deriving Type Erasure"
 author = ["David Álvarez Rosa"]
-date = 2025-12-04T18:12:00+00:00
+date = 2025-12-11T23:15:00+00:00
 draft = false
 +++
 
 Ever looked at `std::any` and wondered what’s actually going on behind
 the scenes? Beneath the intimidating interface is a clean case of type
-erasure: concrete types hidden behind a small, uniform wrapper. Starting
+erasure: concrete types hidden behind a small, uniform wrapper.
+
+Starting
 from familiar tools---virtual functions and templates---we’ll build
 a minimal `std::any`. Along the way, type erasure shifts from buzzword
 to practical technique you can recognize and reuse in your own designs.

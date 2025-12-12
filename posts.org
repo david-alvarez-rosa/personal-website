@@ -12,10 +12,11 @@
 :END:
 
 Pending. Optimizing a spin-lock using this youtube series.
+Might be wrong with the right youtube series bla bla bla more text.
 
 https://www.youtube.com/watch?v=AN6XHy2znzc
 
-Might be wrong with the right youtube series.
+
 
 * TODO SFINAE
 :LOGBOOK:
@@ -105,11 +106,13 @@ design, which is sometimes called minimalist.
 As a fan of minimalism, however, I think that term is misapplied here. Minimalism doesn’t foreclose either expressive breadth or conceptual depth. On the contrary, the minimalist program—as it initially emerged in fine art of the 20th century—has been about diverting the viewer’s attention from overt signs of authorship to the deeper purity of the ingredients.
 
 
-* TODO Optimizing a Lock-Free Ring Buffer
+* DONE Optimizing a Lock-Free Ring Buffer
+CLOSED: [2025-12-11 Thu 23:15]
 :PROPERTIES:
 :EXPORT_FILE_NAME: single-producer-single-consumer-queue
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-11 Thu 23:15]
 - State "DONE"       from "WAIT"       [2025-12-06 Sat 10:18]
 - State "WAIT"       from "DONE"       [2025-12-06 Sat 10:18]
 - State "DONE"       from "TODO"       [2025-12-06 Sat 10:18]
@@ -440,11 +443,13 @@ asdfasd
 
 Some closing comments here.
 
-* TODO Deriving Type Erasure
+* DONE Deriving Type Erasure
+CLOSED: [2025-12-11 Thu 23:15]
 :PROPERTIES:
 :EXPORT_FILE_NAME: type-erasure
 :END:
 :LOGBOOK:
+- State "DONE"       from "TODO"       [2025-12-11 Thu 23:15]
 - State "DONE"       from "TODO"       [2025-12-04 Thu 18:12]
 - State "TODO"       from "DONE"       [2025-12-03 Wed 14:40]
 - State "DONE"       from "TODO"       [2025-12-02 Tue 16:05]
@@ -837,25 +842,37 @@ time and the abstraction has effectively zero runtime cost.
 
 ** Virtual dispatch
 
-{{{marginfig(diagram.png, **Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`\, and each object gets a `vptr` pointing to the corresponding `vtable`.)}}}
+# {{{marginfig(diagram.png, **Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`\, and each object gets a `vptr` pointing to the corresponding `vtable`.)}}}
 Runtime polymorphism arises when a base interface exposes virtual
 methods that derived classes override.  Calls made through a ~Base&~ (or
 ~Base*~) are then dispatched to the appropriate override at runtime.
 Under the hood, it works roughly like this:
 
-- Each polymorphic class has a virtual table (~vtable~) that holds the
-  function pointers for its virtual methods.
-
-- Each object of such a class carries a hidden pointer (~vptr~) to the
-  corresponding ~vtable~.
+Each polymorphic class has a virtual table (~vtable~) that holds the
+function pointers for its virtual methods.  Each object of such a class
+carries a hidden pointer (~vptr~) to the corresponding ~vtable~.
 
 On a virtual call, the compiler emits code that loads the ~vptr~,
 selects the right slot in the ~vtable~, and performs an indirect call
 through that function pointer.
 
-#+begin_src plantuml :file diagram.png :eval never
+#+begin_src plantuml :file diagram.png
   @startuml
+
   hide empty members
+
+  interface Base {
+    + virtual auto foo()
+  }
+
+  class Derived {
+    + auto foo() override
+  }
+
+  Base <|-- Derived
+
+  class ZZZ
+  hide ZZZ
 
   object BaseVT <<vtable>> {
     + &Base::foo
@@ -883,8 +900,13 @@ through that function pointer.
   BaseObject --> BaseVT : vptr
   DerivedObject --> DerivedVT : vptr
   DerivedObject2 --> DerivedVT : vptr
+
   @enduml
 #+end_src
+
+#+caption: *Virtual dispatch diagram.*  The method ~foo~ is declared virtual in ~Base~ and overridden in ~Derived~.  Both classes get a ~vtable~, and each object gets a ~vptr~ pointing to the corresponding ~vtable~.
+#+RESULTS:
+[[file:diagram.png]]
 
 The additional ~vptr~ increases object size, which can hurt cache
 locality.  The ~vtable~ makes the call target harder to predict, raising
@@ -1086,13 +1108,11 @@ functionality{{{sidenote(Also\, no polymorphic containers
 (`std::vector<Base*>`) unless you wrap things.)}}} that operates across
 different derived types must itself be templated.
 
-*** Deducing this
-
-C++23's /deducing this/ keeps the same static-dispatch model but makes
-it easier to write and reason about.  Instead of templating the entire
-class (and writing ~Base<Derived>~ everywhere), you template only the
-member function that needs access to the derived type, and let the
-compiler deduce ~self~ from ~*this~:
+*Deducing this.* C++23's /deducing this/ keeps the same static-dispatch
+model but makes it easier to write and reason about.  Instead of
+templating the entire class (and writing ~Base<Derived>~ everywhere),
+you template only the member function that needs access to the derived
+type, and let the compiler deduce ~self~ from ~*this~:
 
 #+begin_src cpp
   class Base {
@@ -1126,7 +1146,7 @@ It's still not dynamic dispatch: a call through a ~Base*~ only sees what
 ~Base~ exposes, unless you also use ~virtual~.  But for
 performance-critical paths where the concrete type is known, both CRTP
 and C++23's deducing-this approach give the compiler exactly what it
-needs to emit non-virtual, highly optimized code.
+needs to emit non-virtual, highly optimized code, highly optimized code, highly optimized code.
 
 * DONE David Álvarez Rosa
 CLOSED: [2025-12-07 Sun 11:24]
@@ -1150,67 +1170,67 @@ Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
 in Artificial Intelligence.
 
 ** Experience
-/Software Engineer/ --- Susquehanna
+/Software Engineer @ Susquehanna/
 {{{marginnote(Jul 2024--Present<br/>Dublin\, Ireland)}}}\\
 High-frequency options trading.  Low-latency market data and
 trading signals.  Mentor and interviewer.
 
-/Software Engineer II/ --- Amazon
+/Software Engineer II @ Amazon/
 {{{marginnote(Mar 2022--Aug 2024<br/>Madrid\, Spain)}}}\\
 Designed systems for 10M+ monthly active customers.  Contributed to 100+
 internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
 Mentored 3.  On-call.  Interviewer.
 
-/Machine Learning Engineer/ --- Sopra Steria
+/Machine Learning Engineer @ Sopra Steria/
 {{{marginnote(Apr 2024--Jul 2024<br/>Remote)}}}\\
 Researched, designed, and built a semantic cache for LLMs.
 
-/Risk Analyst/ --- Deloitte
+/Risk Analyst @ Deloitte/
 {{{marginnote(Sep 2021--Mar 2022<br/>Madrid\, Spain)}}}\\
 Quantitative analysis of technological and cybersecurity risks for
 top-tier banking companies.
 
-/Visiting Researcher/ --- Vector Institute
+/Visiting Researcher @ Vector Institute/
 {{{marginnote(Sep 2020--Jun 2021<br/>Toronto\, Canada)}}}\\
 Research thesis on multimodal learning (recomprehension.com).
 
-/Machine Learning Engineer/ --- BCN eMotorsport
+/Machine Learning Engineer @ BCN eMotorsport/
 {{{marginnote(Sep 2019--Feb 2020<br/>Barcelona\, Spain)}}}\\
 Perception at Driverless UPC.  I served as LiDAR lead and collaborated
 on computer vision for a fully autonomous car.
 
 ** Education
-/MSc in Artificial Intelligence/ --- UNIR
+/MSc in Artificial Intelligence/
 {{{marginnote(GPA 9.00/10)}}}\\
 Official study program focused on AI research and enabling PhD.
 
-/MSc in Mathematics/ --- UNED\\
+/MSc in Mathematics/\\
 Math-lover part-time student. Dropout (joined Amazon).
 
-/Research Thesis/ --- UofT
+/Research Thesis/
 {{{marginnote(GPA 10/10 (A+))}}}\\
-Research thesis on multimodal learning (recomprehension.com).
+Research thesis on multimodal learning at University of Toronto.
 
-/BSc in Mathematics/ --- UPC
+/BSc in Mathematics/
 {{{marginnote(GPA 8.12/10 (top 10%)<br/>Honors in 9 subjects)}}}\\
 Rigorous and proof-oriented degree with a robust mathematical base.
 
-/BEng in Industrial Engineering/ --- UPC
+/BEng in Industrial Engineering/
 {{{marginnote(GPA 8.03/10 (top 2%)<br/>Honors in 14 subjects)}}}\\
 Multidisciplinary and integrative vision of industrial engineering.
 
 ** Licenses & certifications
-/Certificate in Advanced English (C1)/ --- Cambridge University\\
-/Machine Learning/ --- Stanford University\\
-/Deep Learning/ --- deeplearning.ai\\
-/Blockchain & Financial Technology/ --- Hong Kong University\\
-/Nova Talent Member/ --- Nova
+Certificate in Advanced English (C1) --- Cambridge University\\
+Machine Learning --- Stanford University\\
+Deep Learning --- deeplearning.ai\\
+Blockchain & Financial Technology --- Hong Kong University\\
+Nova Talent Member --- Nova
 
 ** Volunteering
 /Mathematics Tutor/\\
 Academic training for the Mathematical Olympiads.
 
-/Volunteer/ --- Banco de Alimentos\\
+/Volunteer @ Banco de Alimentos/\\
 Food collection for people in need.
 
 ** Honors & awards
@@ -1231,9 +1251,9 @@ University tuition and housing (€19k).
 Full university tuition plus an annual stipend (€11k).
 
 ** Languages
-/English/ --- Proficient\\
-/Spanish/ --- Native\\
-/Catalan/ --- Intermediate
+English --- Proficient\\
+Spanish --- Native\\
+Catalan --- Intermediate
 
 * DONE Welcome
 CLOSED: [2025-12-02 Tue 19:58]
@@ -1247,7 +1267,7 @@ CLOSED: [2025-12-02 Tue 19:58]
 
 Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
-to make them run fast, very fast.
+to make them run fast, /very/ fast.
 
 I'm a mathematician and engineer, a strong advocate of
 free{{{sidenote(As in _freedom_.)}}} software, and a devoted Emacs

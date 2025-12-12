@@ -1,12 +1,12 @@
 +++
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
-date = 2025-12-02T15:57:00+00:00
+date = 2025-12-11T18:28:00+00:00
 draft = false
 +++
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
-non-trivial overhead: pointer indirection, larger object layouts, and
+a hidden overhead: pointer indirection, larger object layouts, and
 fewer inlining opportunities.  _Devirtualization_ lets the compiler
 recover some of this by turning virtual calls into direct calls when it
 can infer the dynamic type.
@@ -25,27 +25,23 @@ methods that derived classes override.  Calls made through a `Base&` (or
 `Base*`) are then dispatched to the appropriate override at runtime.
 Under the hood, it works roughly like this:
 
--   Each polymorphic class has a virtual table (`vtable`) that holds the
-    function pointers for its virtual methods.
-
--   Each object of such a class carries a hidden pointer (`vptr`) to the
-    corresponding `vtable`.
+Each polymorphic class has a virtual table (`vtable`) that holds the
+function pointers for its virtual methods.  Each object of such a class
+carries a hidden pointer (`vptr`) to the corresponding `vtable`.
 
 On a virtual call, the compiler emits code that loads the `vptr`,
 selects the right slot in the `vtable`, and performs an indirect call
 through that function pointer.
 
-{{< figure src="/ox-hugo/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`.  Diagram created by the author." >}}
+{{< figure src="/ox-hugo/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
 The additional `vptr` increases object size, which can hurt cache
 locality.  The `vtable` makes the call target harder to predict, raising
 the chance of branch mispredictions, and the lack of compile-time
 knowledge prevents inlining and other optimizations.
 
-
-### Inspecting assembly {#inspecting-assembly}
-
-To see why virtual calls can be costly, it's useful to inspect the code
+To see why virtual calls can be costly, it's useful to inspect the
+assembly code
 the compiler actually emits for a minimal example.
 
 ```cpp
@@ -233,14 +229,11 @@ no common runtime base to upcast to.  Any shared
 functionality{{< sidenote >}}Also, no polymorphic containers (`std::vector<Base*>`) unless you wrap things.{{< /sidenote >}} that operates across
 different derived types must itself be templated.
 
-
-### Deducing this {#deducing-this}
-
-C++23's _deducing this_ keeps the same static-dispatch model but makes
-it easier to write and reason about.  Instead of templating the entire
-class (and writing `Base<Derived>` everywhere), you template only the
-member function that needs access to the derived type, and let the
-compiler deduce `self` from `*this`:
+**Deducing this.** C++23's _deducing this_ keeps the same static-dispatch
+model but makes it easier to write and reason about.  Instead of
+templating the entire class (and writing `Base<Derived>` everywhere),
+you template only the member function that needs access to the derived
+type, and let the compiler deduce `self` from `*this`:
 
 ```cpp
 class Base {
@@ -274,4 +267,4 @@ It's still not dynamic dispatch: a call through a `Base*` only sees what
 `Base` exposes, unless you also use `virtual`.  But for
 performance-critical paths where the concrete type is known, both CRTP
 and C++23's deducing-this approach give the compiler exactly what it
-needs to emit non-virtual, highly optimized code.
+needs to emit non-virtual, highly optimized code, highly optimized code, highly optimized code.
