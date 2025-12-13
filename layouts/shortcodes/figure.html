@@ -17,9 +17,9 @@
 
 <!-- begin child elements -->
 {{- if eq $width "full" -}}<!-- child for full -->
-  {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
-  <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
-  {{ if .Get "link" }}</a>{{ end }}
+  <a href="{{ .Get "src" }}">
+    <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
+  </a>
   <figcaption>
 {{- else -}}<!--  child for margin or normal (begin) -->
 
@@ -30,9 +30,9 @@
   {{- end -}}
 
   {{- if eq $width "margin" -}}<!-- margin image inside marginnote -->
-    {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
-    <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
-    {{ if .Get "link" }}</a>{{ end }}
+    <a href="{{ .Get "src" }}">
+      <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
+    </a>
   {{- end -}}
 
 {{- end -}}<!--  child for margin or normal (end) -->
@@ -47,9 +47,9 @@
 {{ end }}
 
 {{ if (eq $width "normal") }}
-  {{ with .Get "link" }}<a href="{{ . }}">{{ end }}
-  <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
-  {{ if .Get "link" }}</a>{{ end }}
+  <a href="{{ .Get "src" }}">
+    <img src="{{ .Get "src" }}" alt="{{ .Get "caption" }}">
+  </a>
 {{ end }}
 
 <!-- end figure tag -->
