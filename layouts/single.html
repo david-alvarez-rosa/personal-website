@@ -6,7 +6,6 @@
 
   {{ $content := .Content }}
   {{ $footnotes := index (findRE `(?s)<div class="footnotes".*?</div>` $content) 0 }}
-
   {{ range findRE `(?s)<li id="fn:[^"]*">.*?</li>` $footnotes }}
     {{ $id := replaceRE `id="fn:([^"]+)"` `${1}` (index (findRE `id="fn:[^"]*"` .) 0) }}
     {{ $footnote := replaceRE `(?s)^<li[^>]*>(.*?)</li>$` `${1}` . }}
@@ -17,7 +16,6 @@
     {{ $replacement := printf `<sup>%s</sup>%s` $id $sidenote }}
     {{ $content = replaceRE $pattern $replacement $content }}
   {{ end }}
-
   {{ replace $content $footnotes "" | safeHTML }}
 
   <sig>&mdash;{{ index .Params.Author 0 }}</sig>
