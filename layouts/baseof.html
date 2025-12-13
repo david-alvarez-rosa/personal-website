@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
   <title>{{ printf "%s | %s" .Title site.Title }}</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="{{ .Plain | truncate 160 }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ printf "%s | %s" .Title site.Title }}">
+  <meta property="og:description" content="{{ .Plain | truncate 160 }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <!-- <meta property="og:image" content=""> TODO: add image -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml">
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -25,7 +34,7 @@
   {{ end }}
 
   {{ with resources.Get "js/main.js" | minify | fingerprint }}
-    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}
 </head>
 <body>
