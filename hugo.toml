@@ -1,5 +1,6 @@
 baseURL = 'https://david.alvarezrosa.com/'
 title = 'David Álvarez Rosa | Personal Website'
+disableHugoGeneratorInject = true
 
 [menus]
   [[menus.main]]
