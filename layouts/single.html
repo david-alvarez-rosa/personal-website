@@ -8,14 +8,14 @@
   {{ $footnotes := index (findRE `(?s)<div class="footnotes".*?</div>` $content) 0 }}
 
   {{ range findRE `(?s)<li id="fn:[^"]*">.*?</li>` $footnotes }}
-    {{ $id := replaceRE `id="([^"]+)"` `${1}` (index (findRE `id="fn:[^"]*"` .) 0) }}
+    {{ $id := replaceRE `id="fn:([^"]+)"` `${1}` (index (findRE `id="fn:[^"]*"` .) 0) }}
     {{ $footnote := replaceRE `(?s)^<li[^>]*>(.*?)</li>$` `${1}` . }}
     {{ $footnote := replaceRE `(?s)<p>(.*?)</p>` `${1}` $footnote }}
     {{ $footnote = replaceRE `<a href="#fnref:[^"]*"[^>]*>.*?</a>` `` $footnote }}
-    {{ $sidenote := printf `<span class="sidenote" data-footnote="%s">%s</sidenote>` $id $footnote }}
-    {{ $refPattern := printf `(?s)(<sup id=".*"><a href="#%s".*?</a></sup>)` $id }}
-    {{ $replacement := printf `${1}%s` $sidenote }}
-    {{ $content = replaceRE $refPattern $replacement $content }}
+    {{ $sidenote := printf `<span class="sidenote"><sup>%s</sup>%s</span>` $id $footnote }}
+    {{ $pattern := printf `(?s)(<sup id=".*"><a href="#fn:%s".*?</a></sup>)` $id }}
+    {{ $replacement := printf `<sup>%s</sup>%s` $id $sidenote }}
+    {{ $content = replaceRE $pattern $replacement $content }}
   {{ end }}
 
   {{ replace $content $footnotes "" | safeHTML }}
