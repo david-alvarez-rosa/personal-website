@@ -184,6 +184,7 @@ sup {
 }
 
 .side sup:has(+ img),
+.side sup:has(+ a img),
 sup:has(+ .side img) {
     display: none;
 }
