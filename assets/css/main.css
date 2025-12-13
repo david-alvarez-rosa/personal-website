@@ -208,6 +208,11 @@ main img {
     top: -0.5rem;
 }
 
+.marginnote img {
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
 div.fullwidth,
 table.fullwidth {
     width: 100%;

@@ -9,7 +9,7 @@
         <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
       </span>
       <br/>
-      {{ .Summary | truncate 130 | plainify }}
+      {{ .Summary | truncate 140 | plainify }}
     </p>
   {{ end }}
   {{ with site.Menus.main }}
