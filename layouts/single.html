@@ -1,17 +1,17 @@
 {{ define "main" }}
-  {{ $content := .Content }}
-  {{ $footnotes := index (findRE `(?s)<div class="footnotes".*?</div>` $content) 0 }}
-
-  {{ range findRE `(?s)<li id="fn:[^"]*">.*?</li>` $footnotes }}
-    {{ $id := replaceRE `id="([^"]+)"` `${1}` (index (findRE `id="fn:[^"]*"` .) 0) }}
-    {{ $footnote := replaceRE `(?s)^<li[^>]*>(.*?)</li>$` `${1}` . }}
-    {{ $footnote := replaceRE `(?s)<p>(.*?)</p>` `${1}` $footnote }}
-    {{ $footnote = replaceRE `<a href="#fnref:[^"]*"[^>]*>.*?</a>` `` $footnote }}
-    {{ $sidenote := printf `<span class="sidenote" data-footnote="%s">%s</sidenote>` $id $footnote }}
-    {{ $refPattern := printf `(?s)(<sup id=".*"><a href="#%s".*?</a></sup>)` $id }}
-    {{ $replacement := printf `${1}%s` $sidenote }}
-    {{ $content = replaceRE $refPattern $replacement $content }}
+  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+  {{ $dateHuman := .Date | time.Format ":date_long" }}
+  <time class="subtitle" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  <sig>&mdash;{{ index .Params.Author 0 }}</sig>
+  {{ with site.Menus.main }}
+    <nav>
+      <ul>
+        {{ range . }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
   {{ end }}
-
-  {{ replace $content $footnotes "" | safeHTML }}
 {{ end }}
