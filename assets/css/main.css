@@ -5,11 +5,12 @@ html {
 body {
     margin: 4rem auto;
     font-family: "Alegreya", serif;
+    font-weight: 420;
     background-color: #fcfcfc;
     color: #111;
     width: 100%;
     max-width: 1060px;
-    counter-reset: sidenote-counter;
+    counter-reset: margin-counter;
 }
 
 main {
@@ -109,32 +110,8 @@ footer p {
     margin: 0.6rem 0 !important;
 }
 
-.sidenote,
-.marginnote {
-    text-align: left;
-}
-
 figure {
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    margin: 1.4rem auto;
-}
-
-figcaption {
-    float: right;
-    clear: right;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    position: relative;
-    max-width: 40%;
-}
-
-figure.fullwidth figcaption {
-    margin-right: 24%;
+    margin: 0 auto 1.4rem auto;
 }
 
 table {
@@ -172,62 +149,50 @@ main img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     border-radius: 8px;
+    margin-top: 0.2rem;
 }
 
-.sidenote,
-.marginnote {
+
+sup {
+    color: #660000;
+    line-height: 0;
+}
+
+.side, figcaption {
     float: right;
     clear: right;
+    padding-top: 0.2rem;
+    margin-bottom: 0.2rem;
     margin-right: -24rem;
     width: 21rem;
-     font-size: 1.1rem;
-    line-height: 1.4;
     position: relative;
 }
 
-.sidenote-number {
-    counter-increment: sidenote-counter;
+.side, figcaption p {
+    font-size: 1.1rem;
+    line-height: 1.54rem;
+    text-align: left;
 }
 
-.sidenote-number:after,
-.sidenote:before {
-    position: relative;
-    color: #660000;
+.side code, figcaption p code {
+    font-size: 1.05rem;
 }
 
-.sidenote-number:after {
-    content: counter(sidenote-counter);
-    font-size: 1rem;
-    top: -0.5rem;
-    left: 0.1rem;
-}
-
-.sidenote:before {
-    content: counter(sidenote-counter) " ";
-    font-size: 1rem;
-    top: -0.5rem;
-}
-
-.marginnote img {
+.side img {
     display: block;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.4rem;
 }
 
-div.fullwidth,
-table.fullwidth {
-    width: 100%;
+.side sup:has(+ img),
+sup:has(+ .side img) {
+    display: none;
 }
 
 code {
     font-family: "Inconsolata", monospace;
 }
 
-p code,
-dl code,
-ul code,
-ol code,
-td code,
-span code {
+p code {
     font-weight: 500;
     color: #660000;
     font-size: 1.3rem;
@@ -253,51 +218,12 @@ h2:focus-within .anchor {
     opacity: 1;
 }
 
-.marginnote > code,
-.sidenote > code {
-    font-size: 1.05rem;
-}
-
 .chroma {
     font-size: 1.15rem;
     padding: 0.5rem 0.75rem;
     overflow-x: auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-pre.fullwidth > code {
-    width: 90%;
-}
-
-.fullwidth {
-    max-width: 90%;
-    clear: both;
-}
-
-input.margin-toggle {
-    display: none;
-}
-
-label.sidenote-number {
-    display: inline-block;
-    max-height: 2rem; /* should be less than or equal to paragraph line-height */
-    position: relative;
-    color: #660000;
-}
-
-label.sidenote-number::before {
-    /* tap target 48px bigger all around */
-    content: "";
-    position: absolute;
-    top: -24px;
-    bottom: -24px;
-    left: -24px;
-    right: -24px;
-}
-
-label.margin-toggle:not(.sidenote-number) {
-    display: none;
 }
 
 .subscribe-form input[type="email"] {
@@ -342,37 +268,7 @@ label.margin-toggle:not(.sidenote-number) {
         text-align: left;
     }
 
-    figure {
-        max-width: 100%;
-    }
-
-    figcaption,
-  figure.fullwidth figcaption {
-      margin-right: 0%;
-      max-width: none;
-  }
-
-    label.margin-toggle:not(.sidenote-number) {
-        display: inline;
-    }
-
-    .sidenote,
-  .marginnote {
-      display: none;
-  }
-
-    .margin-toggle:checked + .sidenote,
-  .margin-toggle:checked + .marginnote {
-      display: block;
-      float: left;
-      left: 1rem;
-      clear: both;
-      width: 95%;
-      margin: 1rem 2.5%;
-      position: relative;
-  }
-
-    label {
-        cursor: pointer;
+    .side {
+        display: none;
     }
 }

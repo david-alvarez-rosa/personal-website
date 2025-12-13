@@ -56,9 +56,9 @@ auto bar(Base* base) -> int {
 ```
 
 For a regular, non-virtual member function like in the example, the free
-function `bar` issues a direct call{{< sidenote >}}Assembly generated on an x86-64 system with `gcc` at `-O3`. Similar results were observed with `clang` on the same platform.{{< /sidenote >}} to `foo`.  Because the target is known
-at compile time, the compiler can inline it, propagate constants, and
-optimize across the call boundary.
+function `bar` issues a direct call[^fn:1] to `foo`.  Because the target
+is known at compile time, the compiler can inline it, propagate
+constants, and optimize across the call boundary.
 
 ```asm
 bar(Base*):
@@ -113,9 +113,8 @@ auto bar() -> int{
 }
 ```
 
-Here, the compiler{{< sidenote >}}It can even devirtualize through a base pointer, as long as it can track the allocation and prove there is only one possible concrete type. The problem is that with traditional separate compilation, objects are often created in one translation unit and used in another, so that global view is missing.{{< /sidenote >}} can emit a
-direct call to `Derived::foo` (or inline it), because `derived` cannot
-have any other dynamic type.
+Here, the compiler[^fn:2] can emit a direct call to `Derived::foo` (or
+inline it), because `derived` cannot have any other dynamic type.
 
 In C++, a translation unit (TU) is a single preprocessed `.cpp` file
 that gets compiled and optimized in isolation, then emitted as object
@@ -186,7 +185,7 @@ test(Derived*):
 
 When the compiler can't devirtualize on its own, one option is to drop
 dynamic dispatch and use static polymorphism instead.  The canonical
-tool for this is the Curiously Recurring Template Pattern{{< sidenote >}}The curiously recurring template pattern is an idiom where a class X derives from a class template instantiated with X itself as a template argument. More generally{{< /sidenote >}} (CRTP).
+tool for this is the Curiously Recurring Template Pattern[^fn:3] (CRTP).
 
 With CRTP, the base class is templated on the derived class, and instead
 of invoking virtual methods, it calls into the derived type via a
@@ -225,9 +224,8 @@ test():
 The compiler inlines `foo` and `bar` and constant-folds the result;
 there are no vtables and no virtual calls.  The trade-off is that each
 `Base<Derived>` instantiation is a distinct, unrelated type, so there's
-no common runtime base to upcast to.  Any shared
-functionality{{< sidenote >}}Also, no polymorphic containers (`std::vector<Base*>`) unless you wrap things.{{< /sidenote >}} that operates across
-different derived types must itself be templated.
+no common runtime base to upcast to.  Any shared functionality[^fn:4]
+that operates across different derived types must itself be templated.
 
 **Deducing this.** C++23's _deducing this_ keeps the same static-dispatch
 model but makes it easier to write and reason about.  Instead of
@@ -268,3 +266,17 @@ It's still not dynamic dispatch: a call through a `Base*` only sees what
 performance-critical paths where the concrete type is known, both CRTP
 and C++23's deducing-this approach give the compiler exactly what it
 needs to emit non-virtual, highly optimized code, highly optimized code, highly optimized code.
+
+[^fn:1]: Assembly generated on an x86-64 system with `gcc` at `-O3`.
+    Similar results were observed with `clang` on the same platform.
+[^fn:2]: It can even devirtualize through a base pointer, as long as it
+    can track the allocation and prove there is only one possible concrete
+    type.  The problem is that with traditional separate compilation,
+    objects are often created in one translation unit and used in another,
+    so that global view is missing.
+[^fn:3]: The curiously recurring template pattern is an idiom where a
+    class X derives from a class template instantiated with X itself as a
+    template argument.  More generally, this is known as F-bound
+    polymorphism, a form of F-bounded quantification.
+[^fn:4]: Also, no polymorphic containers (`std::vector<Base*>`) unless you
+    wrap things.

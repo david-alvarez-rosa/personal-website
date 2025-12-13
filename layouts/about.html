@@ -1,8 +1,8 @@
 {{ define "main" }}
-  <style> img { max-width: 225px!important; box-shadow: none!important;}</style>
+  <style> sup {display: none;} img { max-width: 225px!important; box-shadow: none!important;}</style>
   <span class="subtitle">Curriculum Vitae</span>
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  {{ partial "processed-content.html" . }}
   {{ with site.Menus.main }}
     <nav>
       <ul>

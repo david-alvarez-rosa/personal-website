@@ -1,6 +1,6 @@
 {{ define "main" }}
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
+  {{ partial "processed-content.html" . }}
 
   <h2>Recent Entries</h2>
   {{ range first 3 (where site.RegularPages "Section" "posts") }}

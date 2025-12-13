@@ -9,6 +9,7 @@ Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
 to make them run fast, _very_ fast.
 
-I'm a mathematician and engineer, a strong advocate of
-free{{< sidenote >}}As in _freedom_.{{< /sidenote >}} software, and a devoted Emacs
-user.  I live in sunny Dublin.
+I'm a mathematician and engineer, a strong advocate of free[^fn:1]
+software, and a devoted Emacs user.  I live in sunny Dublin.
+
+[^fn:1]: As in _freedom_.
