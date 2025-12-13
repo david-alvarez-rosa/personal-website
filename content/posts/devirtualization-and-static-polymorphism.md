@@ -33,7 +33,7 @@ On a virtual call, the compiler emits code that loads the `vptr`,
 selects the right slot in the `vtable`, and performs an indirect call
 through that function pointer.
 
-{{< figure src="/ox-hugo/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
+{{< figure src="/images/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
 The additional `vptr` increases object size, which can hurt cache
 locality.  The `vtable` makes the call target harder to predict, raising

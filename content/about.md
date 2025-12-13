@@ -6,7 +6,7 @@ layout = "about"
 draft = false
 +++
 
-{{< figure src="/ox-hugo/portrait.png" width="margin" caption=" **That's me!** March 2022." >}}
+{{< figure src="/images/portrait.png" width="margin" caption=" **That's me!** March 2022." >}}
 Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna.  Strong
 advocate of free (as in _freedom_) software and devoted Emacs user.

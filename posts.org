@@ -1,7 +1,7 @@
 #+startup: logdone
 #+macro: marginnote @@hugo:{{< marginnote >}}$1{{< /marginnote >}}@@
 #+macro: sidenote @@hugo:{{< sidenote >}}$1{{< /sidenote >}}@@
-#+macro: marginfig @@hugo:{{< figure src="/ox-hugo/$1" width="margin" caption="$2" >}}@@
+#+macro: marginfig @@hugo:{{< figure src="/images/$1" width="margin" caption="$2" >}}@@
 
 * TODO Spin-Lock
 :PROPERTIES:

@@ -16,7 +16,7 @@ progressively remove costs while preserving correctness.
 
 ## What is a ring buffer? {#what-is-a-ring-buffer}
 
-{{< figure src="/ox-hugo/ringbuffer.jpg" width="margin" caption=" **Ring buffer with 32 slots.** The producer has filled 15 of them, indicated by blue. The consumer is behind the producer, reading data from the slots, freeing them as it does so. A free slot is indicated by orange." >}}  You may have heard of something
+{{< figure src="/images/ringbuffer.jpg" width="margin" caption=" **Ring buffer with 32 slots.** The producer has filled 15 of them, indicated by blue. The consumer is behind the producer, reading data from the slots, freeing them as it does so. A free slot is indicated by orange." >}}  You may have heard of something
 called a circular buffer, or maybe even a cyclic queue.  Both are just
 other names for the _ring buffer_, a specialized queue in which a
 producer produces some data and shoves it into the data structure, and a
