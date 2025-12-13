@@ -2,7 +2,7 @@
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
 
-  <h2>Recent Entries</h2>
+  <h2 id="recent-entries">Recent Entries <a class="anchor" href="#recent-entries">&sect;</a></h2>
   {{ range first 3 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
@@ -11,7 +11,7 @@
     </p>
   {{ end }}
 
-  <h2>Subscribe</h2>
+  <h2 id="subscribe">Subscribe<a class="anchor" href="#subscribe">&sect;</a></h2>
   <p>
     My mailing list is free and occasional.  I will never sell or share
    your email address.
