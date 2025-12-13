@@ -1,3 +1,1235 @@
-* Personal Website
+#+title: Personal Website
+#+author: David Álvarez Rosa
+#+startup: logdone
 
-This repository contains the source code of my web: [[https://david.alvarezrosa.com][https://david.alvarezrosa.com]]
+This repository contains the source code of my web:
+[[https://david.alvarezrosa.com][https://david.alvarezrosa.com]]
+
+* TODO Spin-Lock
+:PROPERTIES:
+:EXPORT_FILE_NAME: spin-lock
+:END:
+
+Pending. Optimizing a spin-lock using this youtube series.
+Might be wrong with the right youtube series bla bla bla more text.
+
+https://www.youtube.com/watch?v=AN6XHy2znzc
+
+Pending.
+
+* TODO SFINAE
+
+Pending.
+
+* TODO Lru Cache
+
+Pending.
+
+* TODO Small buffer optimization
+
+Specially small string optimization.
+
+* TODO Optimizing Matrix Multiplication
+
+Fastest matrix multiplication.
+
+* TODO Translation Look Aside Buffer
+:PROPERTIES:
+:EXPORT_FILE_NAME: translation-look-aside-buffer
+:END:
+
+Explain what the TLB is, using maybe hrt blog?
+
+* TODO Vector push_back
+
+In-depth vector push_back following guide
+
+* TODO Implementing a Shared_ptr
+
+Implement a shared_ptr
+
+* TODO Exploring CPU Caches
+:PROPERTIES:
+:EXPORT_FILE_NAME: exploring-cpu-caches
+:END:
+
+Pending.
+
+* DONE Optimizing a Lock-Free Ring Buffer
+CLOSED: [2025-12-11 Thu 23:15]
+:PROPERTIES:
+:EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
+:END:
+
+A single-producer single-consumer (SPSC) queue is a great example of how
+far constraints can take a design. One writer, one reader, fixed
+capacity. With those rules it’s possible to remove locks, avoid
+heavyweight atomics, and still get FIFO semantics with predictable
+latency. The path there is incremental: start with the simplest ring
+buffer, make it thread-safe with the most conservative choices, then
+progressively remove costs while preserving correctness.
+
+** What is a ring buffer?
+
+You[fn:9] may have heard of something called a circular buffer, or maybe
+even a cyclic queue.  Both are just other names for the /ring buffer/, a
+specialized queue in which a producer produces some data and shoves it
+into the data structure, and a consumer comes along and consumes it, all
+in first-in-first-out order.
+
+What sets the ring buffer apart is the way it manages its data and the
+limitations it imposes.  A ring buffer has a fixed capacity; it can’t
+grow and it can’t shrink.  Because of that, once the buffer is full, the
+producer either has to wait for a slot to become free or start stomping
+over data that hasn’t been consumed yet, depending on how the buffer and
+the application are designed.  Both approaches can be perfectly valid.
+
+The consumer’s role is simply to consume data. If there’s nothing
+available in the ring buffer, the consumer has to wait or go do
+something else. Each time the consumer reads an item, it frees up a slot
+that the producer can reuse. Ideally, the producer is always just
+slightly ahead of the consumer, turning the whole thing into a little
+game of /"catch me if you can,"/ with almost no waiting on either side.
+
+** Single-threaded ring buffer
+
+Let's start with a single-threaded ring buffer, which is just an
+array[fn:1] and two indices.  We can leave one slot empty to distinguish
+"full" from "empty."  Push writes to head and advances it; pop reads
+from tail and advances it.
+
+#+begin_src cpp
+  template <typename T, std::size_t N>
+  class RingBufferV1 {
+    std::array<T, N> buffer_;
+    std::size_t head_;
+    std::size_t tail_;
+  };
+#+end_src
+
+We can now implement the ~push~ (or write) operation[fn:2]
+
+#+begin_src cpp
+  auto push(const T& value) noexcept -> bool {
+    auto new_head = head_ + 1;
+    if (new_head == buffer_.size()) {  // Wrap-around
+      new_head = 0;
+    }
+    if (new_head == tail_) {  // Full
+      return false;
+    }
+    buffer_[new_head] = value;
+    head_ = new_head;
+    return true;
+  }
+#+end_src
+
+Next we implement the ~pop~ (or read) operation[fn:3]
+
+#+begin_src cpp
+  auto pop(T& value) noexcept -> bool {
+    if (head_ == tail_) {  // Empty
+      return false;
+    }
+    value = buffer_[tail_];
+    auto next_tail = tail_ + 1;
+    if (next_tail == buffer_.size()) {  // Wrap-around
+      next_tail = 0;
+    }
+    tail_ = next_tail;
+    return true;
+  }
+#+end_src
+
+** Thread-safe ring buffer
+
+You probably already noticed that the previous version is not
+thread-safe.  The easiest way to solve this, is to add a ~mutex~ around
+push and pop.
+
+#+begin_src cpp
+  #include <array>
+  #include <mutex>
+
+  template <typename T, std::size_t N>
+  class RingBufferV2 {
+    std::array<T, N> buffer_;
+    alignas(std::hardware_destructive_interference_size) std::size_t head_{0};
+    alignas(std::hardware_destructive_interference_size) std::size_t tail_{0};
+    std::mutex mutex_;
+
+  public:
+    auto push(const T& value) noexcept -> bool {
+      auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe
+      auto next_head = head_ + 1;
+      if (next_head == buffer_.size()) {
+        next_head = 0;
+      }
+      if (next_head == tail_) {
+        return false;
+      }
+      buffer_[head_] = value;
+      head_ = next_head;
+      return true;
+    }
+
+    auto pop(T& value) noexcept -> bool {
+      auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe
+      if (head_ == tail_) {
+        return false;
+      }
+      value = buffer_[tail_];
+      auto next_tail = tail_ + 1;
+      if (next_tail == buffer_.size()) {
+        next_tail = 0;
+      }
+      tail_ = next_tail;
+      return true;
+    }
+  };
+#+end_src
+
+It’s correct and often fast enough, but it pays for mutual
+exclusion even though the producer and consumer never write the same
+index. The ownership is asymmetric: the producer is the only writer of
+head, and the consumer is the only writer of tail. That asymmetry is the
+lever to remove locks.
+
+** Lock-free ring buffer
+
+Now using atomics instead of locks.
+
+#+begin_src cpp
+  template <typename T, std::size_t N>
+  class RingBufferV3 {
+    std::array<T, N> buffer_;
+    alignas(std::hardware_destructive_interference_size) std::atomic_size_t head_{0};
+    alignas(std::hardware_destructive_interference_size) std::atomic_size_t tail_{0};
+  };
+#+end_src
+
+The push implementation
+
+#+begin_src cpp
+  auto push(const T& value) noexcept -> bool {
+    const auto head = head_.load();
+    auto next_head = head + 1;
+    if (next_head == buffer_.size()) {
+      next_head = 0;
+    }
+    if (next_head == tail_.load()) {
+      return false;
+    }
+    buffer_[head] = value;
+    head_.store(next_head);
+    return true;
+  }
+#+end_src
+
+The pop implementation.
+
+#+begin_src cpp
+  auto pop(T& value) noexcept -> bool {
+    const auto tail = tail_.load();
+    if (tail == head_.load()) {
+      return false;
+    }
+    value = buffer_[tail];
+    auto next_tail = tail + 1;
+    if (next_tail == buffer_.size()) {
+      next_tail = 0;
+    }
+    tail_.store(next_tail);
+    return true;
+  }
+#+end_src
+
+Results are XXM ops/s, put here the output of perf.
+
+*** Tuning memory order
+
+How to tune memory order.
+
+#+begin_src cpp
+  auto push(const T& value) noexcept -> bool {
+    const auto head = head_.load(std::memory_order_relaxed);
+    auto next_head = head + 1;
+    if (next_head == buffer_.size()) {
+      next_head = 0;
+    }
+    if (next_head == tail_.load(std::memory_order_acquire)) {
+      return false;
+    }
+    buffer_[head] = value;
+    head_.store(next_head, std::memory_order_release);
+    return true;
+  }
+#+end_src
+
+And then, the pop
+
+#+begin_src cpp
+  auto pop(T& value) noexcept -> bool {
+    const auto tail = tail_.load(std::memory_order_relaxed);
+    if (tail == head_.load(std::memory_order_acquire)) {
+      return false;
+    }
+    value = buffer_[tail];
+    auto next_tail = tail + 1;
+    if (next_tail == buffer_.size()) {
+      next_tail = 0;
+    }
+    tail_.store(next_tail, std::memory_order_release);
+    return true;
+  }
+#+end_src
+
+** Further optimizations
+
+We already have a pretty fast ring buffer, but what if we want to go
+even further?  We can do by following the approach from
+https://rigtorp.se/ringbuffer/ put this as a side note.
+
+Why do we have 3 cache misses per read-write pair? Consider a read
+operation: the read index needs to be updated and thus that cache line
+is loaded into the L1 cache in exclusive state (see MESI protocol). The
+write index needs to be read in order to check that the queue is not
+empty and is thus loaded into the L1 cache in shared state. Since a
+queue write operation needs to read the read index it causes the
+reader’s read index cache line to be evicted or transition into shared
+state. Now the read operation requires some cache coherency traffic to
+bring the read index cache line back into exclusive state. In turn a
+write operation will require some cache coherency traffic to bring the
+write index cache line back into exclusive state. In the worst case
+there will be one cache line transition from shared to exclusive for
+every read and write operation. These cache line state transitions are
+counted as cache misses. We don’t know the exact implementation details
+of the cache coherency protocol, but it will behave roughly as the MESI
+protocol.
+
+To reduce the amount of coherency traffic the reader and writer can keep
+a cached copy of the write and read index respectively. In this case
+when a reader first observes that N items are available to read, it
+caches this information and the N-1 subsequent reads won’t need to read
+the write index. Similarly when a writer first observes that N items are
+available for writing, it caches this information and the N-1 subsequent
+writes won’t need to read the read index.
+
+The new ring buffer is defined as follows:
+
+#+begin_src cpp
+  template <typename T, std::size_t N>
+  class RingBufferV5 {
+    std::array<T, N> buffer_;
+    alignas(std::hardware_destructive_interference_size) std::atomic_size_t head_{0};
+    alignas(std::hardware_destructive_interference_size) std::size_t head_cached_{0};
+    alignas(std::hardware_destructive_interference_size) std::atomic_size_t tail_{0};
+    alignas(std::hardware_destructive_interference_size) std::size_t tail_cached_{0};
+  };
+#+end_src
+
+The push operation is updated to first consult the cached read index
+(readIdxCached_) and if that fails retry after updating the cache:
+
+#+begin_src cpp
+  if (next_head == tail_cached_) {
+    tail_cached_ = tail_.load(std::memory_order_acquire);
+    if (next_head == tail_cached_) {
+      return false;
+    }
+   }
+#+end_src
+
+
+The pop operation is updated in a similar way to first consult the
+cached write index (writeIdxCached_):
+#+begin_src cpp
+  if (tail == head_cached_) {
+    head_cached_ = head_.load(std::memory_order_acquire);
+    if (tail == head_cached_) {
+      return false;
+    }
+   }
+#+end_src
+
+Re-running the same benchmark as before with the new ring buffer
+implementation:
+
+Put results of running with perf.
+
+Wow this is great! Throughput is now 112M items per second and the
+number of cache misses was significantly reduced. Checkout
+ringbuffer.cpp if you want to verify this yourself.
+
+** Summary
+asdfasd
+
+
+| Version | Throughput | Notes                                            |
+|---------+------------+--------------------------------------------------|
+|       1 | N/A        | Not thread-safe                                  |
+|       2 | 12M ops/s  | Mutex / lock                                     |
+|       3 | 35M ops/s  | Lock-free (atomics)                              |
+|       4 | 108M ops/s | Lock-free (atomics) + memory order               |
+|       5 | 305M ops/s | Lock-free (atomics) + memory order + index cache |
+
+
+Some closing comments here.
+
+* DONE Deriving Type Erasure
+CLOSED: [2025-12-11 Thu 23:15]
+:PROPERTIES:
+:EXPORT_FILE_NAME: type-erasure
+:END:
+
+Ever looked at ~std::any~ and wondered what’s actually going on behind
+the scenes? Beneath the intimidating interface is a clean case of type
+erasure: concrete types hidden behind a small, uniform wrapper.
+
+Starting
+from familiar tools---virtual functions and templates---we’ll build
+a minimal ~std::any~. Along the way, type erasure shifts from buzzword
+to practical technique you can recognize and reuse in your own designs.
+
+** Polymorphism with interfaces
+
+The typical way to achieve polymorphism is to define an interface
+consisting of pure-virtual methods you want to be able to call. Then,
+for each implementation that you want to use polymorphically, you create
+a subclass that inherits from the base class and implement those
+methods.
+
+As an example, let's implement a variaty of shapes that have an ~area()~
+method. We start with an interface class:
+
+# Mention here the virtual dtor
+
+#+begin_src cpp
+  class Shape {
+  public:
+    virtual ~Shape() = default;
+    virtual auto area() const noexcept -> double = 0;
+  };
+#+end_src
+
+And add a couple of concrete implementations
+
+#+begin_src cpp
+  class Square : public Shape {
+    int side_;
+  public:
+    explicit Square(int side) noexcept : side_{side} {}
+    auto area() const noexcept -> double override { return side_ * side_; }
+  };
+
+  class Circle : public Shape {
+    int radius_;
+  public:
+    explicit Circle(int radius) noexcept : radius_{radius} {}
+    auto area() const noexcept -> double override {
+      return M_PI * radius_ * radius_;
+    }
+  };
+#+end_src
+
+Now we can use these implementations generically, by coding against the
+interface:
+#+begin_src cpp
+  auto area(const Shape& shape) -> double {
+    return shape.area();
+  }
+#+end_src
+
+Not rocket science, right?
+
+** Polymorphism with templates
+
+Inheritance is a good solution to problems that require polymorphism, as
+long as the concrete types you’re working with (~Square~ and ~Circle~ in
+the example above) all inherit from a common base (~Shape~), which
+exposes all the required functionality.
+
+But sometimes the concrete types you’re trying to make polymorphic can’t
+inherit from a common base. You may not have control of the concrete
+types (e.g. think STL types like ~std::string~), or it may not even be
+possible for the concrete type to inherit (e.g. built-ins like int).
+
+If you’re in this situation, however, you’re not out of luck! Even if
+the concrete types don’t share a common base, if they conform to a
+common interface (that is, they can be used the same way by a caller),
+we can instead use a template to make the types polymorphic:
+
+#+begin_src cpp
+  auto area(const auto& shape) -> double {
+    return shape.area();
+  }
+#+end_src
+
+You can call this above method on ~Square~, ~Circle~, and anything else
+that has zero-argument ~area()~ method that return doubles. This works
+due to the way templates are compiled: when you invoke a template on a
+type, the compiler compiles a new overload of the method, specialized
+for the concrete type you’re passing in. Thus, as long as the method
+would compile with the templated type replaced with the concrete type
+(say, ~Circle~), the template invocation is valid.
+
+To illustrate this, when you call:
+#+begin_src cpp
+  auto square = Square{2};
+  std::println("Area is {:.2f}", square.area());
+#+end_src
+
+The compiler compiles the method ~area<Square>~, by more or less
+replacing the templated type with ~Square~. The body of that method would look something like
+this:
+
+#+begin_src cpp
+  auto area<Square>(const Square& shape) -> double {
+    return shape.area();
+  }
+#+end_src
+
+If you tried to pass in a type that doesn’t conform to the 'interface'
+(say, ~std::string~), the compiler would hit an error when you tried to
+compile the method call, complaining that ~std::string~ doesn’t have an
+~area~ method.
+
+** Drawbacks to Template Polymorphism
+
+Although achieving polymorphism with templates is a neat trick, there
+are two drawbacks:
+
+First, we can’t shove disparate types into an array. When we were using
+interfaces, we could store an instance of each of ~Square~ and ~Circle~
+in an array of ~Shape~:
+
+#+begin_src cpp
+  auto printAreas(const std::vector<Shape*>& shapes) -> void {
+    for (auto* shape : shapes) {
+      std::println("Area is {:.2f}", shape->area());
+    }
+  }
+
+  auto main() -> int {
+    auto square = Square{2};
+    auto circle = Circle{1};
+
+    auto shapes = std::vector<Shape*>{&square, &circle};
+    printAreas(shapes);
+  }
+
+  // Area is 4.00
+  // Area is 3.14
+#+end_src
+
+However, with the template-based polymorphism approach, we couldn’t
+create this array, because there is no common subtype for the array:
+
+#+begin_src cpp
+  auto shapes = std::vector< ??? >{&square, &circle};
+#+end_src
+
+The second drawback is a little more subtle. Anybody who uses the
+template-based ~area(const auto&)~ method has two options:
+
+- If the concrete type is known, the method can explicitly specify the
+  concrete type, non-polymorphically.
+- Otherwise, the caller must also be a template, to pass along the
+  template type off ~area()~.
+
+Since you’re employing polymorphism in the first place, most callers
+will likely fall into the second group, meaning large swathes of your
+program will need to be implemented in templates. This can get out of
+hand quickly, making your program hard to read and hard to
+organize. Overuse of this technique can make it take longer to compile
+your program, and can bloat the size of your program, wasting space and
+making it take longer to start your program at runtime.
+
+Yuck!
+
+** Deriving std::any
+
+Pretend, for some reason, ~Square~ and ~Circle~ are set in stone, and the
+designers originally did not give them a common base class. We would
+like to unite them under some common base class ourselves. And, since we
+don’t control the implementation of ~Square~ and ~Circle~, it’s not possible
+for us to simply change them to inherit from a base interface.
+
+Here’s a basic plan for fixing this: if we don’t have the inheritance
+chain we want, and we can’t change the objects to make them inherit,
+then we can build our own inheritance chain out of wrapper objects. That
+is, we define our own interface, and implement it multiple times. Each
+implementation of the interface wraps a ~Square~ or ~Circle~ and calls
+into that for all the virtual methods.
+
+In this example, our common interface might be:
+
+#+begin_src cpp
+  class Shape {
+  public:
+    virtual ~Shape() = default;
+    virtual auto area() const noexcept -> double = 0;
+  };
+#+end_src
+
+Then we create wrapper objects which inherit from MyAnimal. Each wrapper
+does not except but call into the ‘real’ underlying object:
+
+#+begin_src cpp
+  class SquareWrapper : public Shape {
+    std::unique_ptr<Square> square_;
+  public:
+    explicit SquareWrapper(Square square) noexcept
+        : square_{std::make_unique<Square>(std::move(square))} {}
+    auto area() const noexcept -> double override { return square_->area(); }
+  };
+
+  class CircleWrapper : public Shape {
+    std::unique_ptr<Circle> circle_;
+  public:
+    explicit CircleWrapper(Circle circle) noexcept
+        : circle_{std::make_unique<Circle>(std::move(circle))} {}
+    auto area() const noexcept -> double override { return circle_->area(); }
+  };
+#+end_src
+
+Now we can work with instances of ~Shape~, each of which wraps one of
+~Square~ or ~Circle~:
+#+begin_src cpp
+  auto printAreas(const std::vector<Shape*>& shapes) -> void {
+    for (auto* shape : shapes) {
+      std::println("Area is {:.2f}", shape->area());
+    }
+  }
+
+  auto main() -> int {
+    auto square = SquareWrapper{Square{2}};
+    auto circle = CircleWrapper{Circle{1}};
+
+    auto shapes = std::vector<Shape*>{&square, &circle};
+    printAreas(shapes);
+  }
+
+  // Area is 4.00
+  // Area is 3.14
+#+end_src
+
+This works, but there’s a glaring drawback: we have to define one
+wrapper class (like ~CircleWrapper~) for every concrete type we want to
+wrap (like ~Circle~). Holy boilerplate, Batman!
+
+However, we’ve already seen an easy way to have the compiler do this
+work for us: by using templates for polymorphism
+#+begin_src cpp
+  template <typename T>
+  class ShapeWrapper : public Shape {
+    std::unique_ptr<T> shape_;
+  public:
+    explicit ShapeWrapper(T shape) noexcept
+        : shape_{std::make_unique<T>(std::move(shape))} {}
+    auto area() const noexcept -> double override { return shape_->area(); }
+  };
+#+end_src
+
+
+What we built above is the basis of the ‘type erasure’ idiom. All that’s
+left is to hide all this machinery behind a another class, so that
+callers don’t have to deal with our custom interfaces and templates:
+
+#+begin_src cpp
+  class AnyShape {
+    class Shape {  // The interface
+    public:
+      virtual ~Shape() = default;
+      virtual auto area() const noexcept -> double = 0;
+    };
+
+    template <typename T>
+    class ShapeWrapper : public Shape {  // The wrappers
+      std::unique_ptr<T> shape_;
+
+    public:
+      explicit ShapeWrapper(T shape) noexcept
+          : shape_{std::make_unique<T>(std::move(shape))} {}
+      auto area() const noexcept -> double override { return shape_->area(); }
+    };
+
+    std::unique_ptr<Shape> shape_;
+
+  public:
+    template <typename T>
+    explicit AnyShape(T&& shape) noexcept
+        : shape_{std::make_unique<ShapeWrapper<T>>(std::forward<T>(shape))} {}
+
+    auto area() const noexcept -> double { return shape_->area(); }
+  };
+#+end_src
+
+It works as expected:
+
+#+begin_src cpp
+  auto printAreas(const std::vector<AnyShape>& shapes) -> void {
+    for (const auto& shape : shapes) {
+      std::println("Area is {:.2f}", shape.area());
+    }
+  }
+
+  auto main() -> int {
+    auto shapes = std::vector<AnyShape>{};
+    shapes.emplace_back(Square{2});
+    shapes.emplace_back(Circle{1});
+    printAreas(shapes);
+  }
+
+  // Area is 4.00
+  // Area is 3.14
+#+end_src
+
+*** Generic std::any
+
+Both ~Shape~ and ~ShapeWrapper~ have accepted standard names.
+
+~Shape~ is an example of a type erasure concept. That is, ~Shape~
+captures the concept of an animal, which is shared among all the
+concrete types we accept (~Square~ and ~Circle~). In the end, a concept
+is just the interface we program against internally.
+
+~ShapeWrapper~ is an example of a type erasure model. That is,
+~ShapeWrapper~ models the concrete types as instances of the concept. The
+model is a templated wrapper object, which implements the concept
+interface and forwards all concept methods to the underlying concrete
+type.
+
+In parting, let’s rewrite our original type erasure example to
+use the standard parlance. Nothing needs to be changed except a few type
+names:
+
+#+begin_src cpp
+  #include <memory>
+
+  class Any {
+    class Concept {
+    public:
+      virtual ~Concept() = default;
+      virtual auto f() const noexcept -> double = 0;
+    };
+
+    template <typename T>
+    class Model : public Concept {
+      std::unique_ptr<T> obj_;
+
+    public:
+      explicit Model(T obj) noexcept
+          : obj_{std::make_unique<T>(std::move(obj))} {}
+      auto f() const noexcept -> double override { obj_->f(); }
+    };
+
+    std::unique_ptr<Concept> obj_;
+
+  public:
+    template <typename T>
+    explicit Any(T&& obj) noexcept
+        : obj_{std::make_unique<Model<T>>(std::forward<T>(obj))} {}
+
+    auto f() const noexcept -> double { obj_->f(); }
+  };
+#+end_src
+
+That's it! The class ~Any~ is a simplified version of ~std::any~, which
+is even used in the STL itself (namely, for ~std::function~). But that's
+for another entry.
+
+* DONE Devirtualization and Static Polymorphism
+CLOSED: [2025-12-11 Thu 18:28]
+:PROPERTIES:
+:EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
+:END:
+
+Virtual dispatch is the basis of runtime polymorphism, but it comes with
+a hidden overhead: pointer indirection, larger object layouts, and
+fewer inlining opportunities.  /Devirtualization/ lets the compiler
+recover some of this by turning virtual calls into direct calls when it
+can infer the dynamic type.
+
+Unfortunately, that is often not possible.
+
+On latency-sensitive paths, it's beneficial to manually replace dynamic
+dispatch with /static polymorphism/, so calls are resolved at compile
+time and the abstraction has effectively zero runtime cost.
+
+** Virtual dispatch
+
+Runtime polymorphism arises when a base interface exposes virtual
+methods that derived classes override.  Calls made through a ~Base&~ (or
+~Base*~) are then dispatched to the appropriate override at runtime.
+Under the hood, it works roughly like this:
+
+Each polymorphic class has a virtual table (~vtable~) that holds the
+function pointers for its virtual methods.  Each object of such a class
+carries a hidden pointer (~vptr~) to the corresponding ~vtable~.
+
+On a virtual call, the compiler emits code that loads the ~vptr~,
+selects the right slot in the ~vtable~, and performs an indirect call
+through that function pointer.
+
+#+begin_src plantuml :file diagram.png
+  @startuml
+
+  hide empty members
+
+  interface Base {
+    + virtual auto foo()
+  }
+
+  class Derived {
+    + auto foo() override
+  }
+
+  Base <|-- Derived
+
+  class ZZZ
+  hide ZZZ
+
+  object BaseVT <<vtable>> {
+    + &Base::foo
+  }
+
+  object DerivedVT <<vtable>> {
+    + &Derived::foo
+  }
+
+  object BaseObject {
+    - vptr : *vtable
+    - ...members...
+  }
+
+  object DerivedObject {
+    - vptr : *vtable
+    - ...members...
+  }
+
+  object DerivedObject2 {
+    - vptr : *vtable
+    - ...members...
+  }
+
+  BaseObject --> BaseVT : vptr
+  DerivedObject --> DerivedVT : vptr
+  DerivedObject2 --> DerivedVT : vptr
+
+  @enduml
+#+end_src
+
+#+caption: *Virtual dispatch diagram.*  The method ~foo~ is declared virtual in ~Base~ and overridden in ~Derived~.  Both classes get a ~vtable~, and each object gets a ~vptr~ pointing to the corresponding ~vtable~.
+#+RESULTS:
+[[file:diagram.png]]
+
+The additional ~vptr~ increases object size, which can hurt cache
+locality.  The ~vtable~ makes the call target harder to predict, raising
+the chance of branch mispredictions, and the lack of compile-time
+knowledge prevents inlining and other optimizations.
+
+To see why virtual calls can be costly, it's useful to inspect the
+assembly code
+the compiler actually emits for a minimal example.
+
+#+begin_src cpp
+  class Base {
+  public:
+    auto foo() -> int;
+  };
+
+  auto bar(Base* base) -> int {
+    return base->foo() + 77;
+  }
+#+end_src
+
+For a regular, non-virtual member function like in the example, the free
+function ~bar~ issues a direct call[fn:4] to ~foo~.  Because the target
+is known at compile time, the compiler can inline it, propagate
+constants, and optimize across the call boundary.
+
+#+begin_src asm
+  bar(Base*):
+          sub     rsp, 8
+          call    Base::foo()  // Direct call
+          add     rsp, 8
+          add     eax, 77
+          ret
+#+end_src
+
+However, declaring ~foo~ as virtual changes ~bar~'s assembly from a
+direct call into an indirect, vtable-based call.
+
+#+begin_src asm
+  bar(Base*):
+          sub     rsp, 8
+          mov     rax, QWORD PTR [rdi]  // vptr (pointer to vtable)
+          call    [QWORD PTR [rax]]  // Virtual call
+          add     rsp, 8
+          add     eax, 77
+          ret
+#+end_src
+
+Those extra loads are potential cache misses, and the indirect branch is
+harder for the CPU to predict.  More importantly, because the call
+target isn't known statically, the compiler generally can't inline ~foo~
+or propagate constants from the caller into its body.
+
+** Devirtualization
+
+The process by which the compiler statically determines which override a
+virtual call will hit is called /devirtualization/.  When it can prove
+at compile time which implementation will be used, it can skip the
+~vtable~ lookup and emit a direct call instead.
+
+For example, devirtualization is straightforward when the dynamic type
+is clearly fixed:
+
+#+begin_src cpp
+  struct Base {
+    virtual auto foo() -> int = 0;
+  };
+
+  struct Derived : Base {
+    auto foo() -> int override { return 77; }
+  };
+
+  auto bar() -> int{
+    Derived derived;
+    return derived.foo();  // compiler knows this is Derived::foo
+  }
+#+end_src
+
+Here, the compiler[fn:5] can emit a direct call to ~Derived::foo~ (or
+inline it), because ~derived~ cannot have any other dynamic type.
+
+In C++, a translation unit (TU) is a single preprocessed ~.cpp~ file
+that gets compiled and optimized in isolation, then emitted as object
+code.  The linker simply stitches those objects together, so cross-TU
+optimizations are inherently limited.  That's where compiler flags are
+useful.
+
+- ~-fwhole-program~ :: tells the compiler "this translation unit is the
+  entire program." If no class derives from ~Base~ in this TU, the
+  compiler is free to assume nothing ever does, and can devirtualize
+  calls on ~Base~.
+
+- ~-flto~ :: (link-time optimization) keeps an intermediate
+  representation in the object files and performs optimization at link
+  time across all of them together.  Multiple source files are
+  effectively treated as a single large TU, which enables more
+  devirtualization, inlining, and constant propagation across file
+  boundaries.
+
+On the language side, ~final~ is a lightweight way to give the compiler
+comparable guarantees for specific methods.
+
+#+begin_src cpp
+  class Base {
+  public:
+    virtual auto foo() -> int;
+    virtual auto bar() -> int;
+  };
+
+  class Derived : public Base {
+  public:
+    auto foo() -> int override;
+    auto bar() -> int final;
+  };
+
+  auto test(Derived* derived) -> int {
+    return derived->foo() + derived->bar();
+  }
+#+end_src
+
+Here, ~foo()~ can still be overridden by a subclass of ~Derived~, so
+~derived->foo()~ remains a virtual call.  ~bar()~, however, is marked
+~final~, so the compiler knows there can be no further overrides and can
+emit a direct call to ~Derived::bar~ (and inline it) even though it's
+declared ~virtual~ in the base.
+
+#+begin_src asm
+  test(Derived*):
+          push    rbx
+          sub     rsp, 16
+          mov     rax, QWORD PTR [rdi]
+          mov     QWORD PTR [rsp+8], rdi
+          call    [QWORD PTR [rax]]       // Virtual call
+          mov     rdi, QWORD PTR [rsp+8]
+          mov     ebx, eax
+          call    Derived::bar()          // Direct call
+          add     rsp, 16
+          add     eax, ebx
+          pop     rbx
+          ret
+#+end_src
+
+** Static polymorphism
+
+When the compiler can't devirtualize on its own, one option is to drop
+dynamic dispatch and use static polymorphism instead.  The canonical
+tool for this is the Curiously Recurring Template Pattern[fn:6] (CRTP).
+
+With CRTP, the base class is templated on the derived class, and instead
+of invoking virtual methods, it calls into the derived type via a
+~static_cast~.
+
+#+begin_src cpp
+  template <typename Derived>
+  class Base {
+  public:
+    auto foo() -> int {
+      return 77 + static_cast<Derived*>(this)->bar();
+    }
+  };
+
+  class Derived : public Base<Derived> {
+  public:
+    auto bar() -> int {
+      return 88;
+    }
+  };
+
+  auto test() -> int {
+    Derived derived;
+    return derived.foo();
+  }
+#+end_src
+
+With ~-O3~ enabled, ~test~ compiles down to:
+
+#+begin_src asm
+  test():
+          mov     eax, 165  // 77 + 88
+          ret
+#+end_src
+
+The compiler inlines ~foo~ and ~bar~ and constant-folds the result;
+there are no vtables and no virtual calls.  The trade-off is that each
+~Base<Derived>~ instantiation is a distinct, unrelated type, so there's
+no common runtime base to upcast to.  Any shared functionality[fn:7]
+that operates across different derived types must itself be templated.
+
+*Deducing this.* C++23's /deducing this/ keeps the same static-dispatch
+model but makes it easier to write and reason about.  Instead of
+templating the entire class (and writing ~Base<Derived>~ everywhere),
+you template only the member function that needs access to the derived
+type, and let the compiler deduce ~self~ from ~*this~:
+
+#+begin_src cpp
+  class Base {
+  public:
+    auto foo(this auto&& self) -> int { return 77 + self.bar(); }
+  };
+
+  class Derived : public Base {
+  public:
+    auto bar() -> int { return 88; }
+  };
+
+  auto test() -> int {
+    Derived derived;
+    return derived.foo();
+  }
+#+end_src
+
+This yields essentially the same optimized code as the CRTP version:
+~foo~ is instantiated as if it were ~foo<Derived>~, and the call to
+~bar~ is resolved statically and inlined.  The key differences are
+syntactic and structural:
+
+- you still get static polymorphism (no vtables, fully optimizable
+  calls),
+
+- but you also retain a single ~Base~ type that all derived classes
+  share.
+
+It's still not dynamic dispatch: a call through a ~Base*~ only sees what
+~Base~ exposes, unless you also use ~virtual~.  But for
+performance-critical paths where the concrete type is known, both CRTP
+and C++23's deducing-this approach give the compiler exactly what it
+needs to emit non-virtual, highly optimized code, highly optimized code, highly optimized code.
+
+* DONE David Álvarez Rosa
+CLOSED: [2025-12-07 Sun 11:24]
+:PROPERTIES:
+:EXPORT_FILE_NAME: about
+:EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_LAYOUT: about
+:END:
+
+Software[fn:10] engineer with experience in low-latency systems, electronic
+trading, and HFT infrastructure. Currently at Susquehanna.  Strong
+advocate of free (as in /freedom/) software and devoted Emacs user.
+
+Previously designed and implemented embedded systems at Amazon impacting
+10M+ monthly active customers, developed semantic caching for LLMs at
+Sopra Steria, and conducted quantitative analysis of cybersecurity risks
+at Deloitte.
+
+Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
+in Artificial Intelligence.
+
+** Experience
+/Software Engineer @ Susquehanna/
+[fn::Jul 2024--Present \\
+Dublin, Ireland]\\
+High-frequency options trading.  Low-latency market data and trading
+signals.  Mentor and interviewer.
+
+/Software Engineer II @ Amazon/
+[fn::Mar 2022--Aug 2024\\
+Madrid, Spain]\\
+Designed systems for 10M+ monthly active customers.  Contributed to 100+
+internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
+Mentored 3.  On-call.  Interviewer.
+
+/Machine Learning Engineer @ Sopra Steria/
+[fn::Apr 2024--Jul 2024\\
+Remote]\\
+Researched, designed, and built a semantic cache for LLMs.
+
+/Risk Analyst @ Deloitte/
+[fn::Sep 2021--Mar 2022\\
+Madrid, Spain]\\
+Quantitative analysis of technological and cybersecurity risks for
+top-tier banking companies.
+
+/Visiting Researcher @ Vector Institute/
+[fn::Sep 2020--Jun 2021\\
+Toronto, Canada]\\
+Research thesis on multimodal learning (recomprehension.com).
+
+/Machine Learning Engineer @ BCN eMotorsport/
+[fn::Sep 2019--Feb 2020\\
+Barcelona, Spain]\\
+Perception at Driverless UPC.  I served as LiDAR lead and collaborated
+on computer vision for a fully autonomous car.
+
+** Education
+/MSc in Artificial Intelligence/
+[fn::GPA 9.00/10]\\
+Official study program focused on AI research and enabling PhD.
+
+/MSc in Mathematics/\\
+Math-lover part-time student. Dropout (joined Amazon).
+
+/Research Thesis/
+[fn::GPA 10/10 (A+)]\\
+Research thesis on multimodal learning at University of Toronto.
+
+/BSc in Mathematics/
+[fn::GPA 8.12/10 (top 10%)\\
+Honors in 9 subjects]\\
+Rigorous and proof-oriented degree with a robust mathematical base.
+
+/BEng in Industrial Engineering/
+[fn::GPA 8.03/10 (top 2%)\\
+Honors in 14 subjects]\\
+Multidisciplinary and integrative vision of industrial engineering.
+
+** Licenses & certifications
+Certificate in Advanced English (C1) --- Cambridge University\\
+Machine Learning --- Stanford University\\
+Deep Learning --- deeplearning.ai\\
+Blockchain & Financial Technology --- Hong Kong University\\
+Nova Talent Member --- Nova
+
+** Volunteering
+/Mathematics Tutor/\\
+Academic training for the Mathematical Olympiads.
+
+/Volunteer @ Banco de Alimentos/\\
+Food collection for people in need.
+
+** Honors & awards
+/Mathematical Olympiad/\\
+Silver in local (Pamplona), honors in national (Barcelona).
+
+/Physics Olympiad/\\
+Gold in local (Pamplona), silver in national (Seville).
+
+/Mobility Scholarship/ --- Cellex (CFIS)
+[fn::Canceled due to Covid-19]\\
+Scholarship to carry out my research thesis at Toronto (€6k).
+
+/Tuition and Housing Scholarship/  --- Cellex (CFIS)\\
+University tuition and housing (€19k).
+
+/General Scholarship/ --- Government of Spain\\
+Full university tuition plus an annual stipend (€11k).
+
+** Languages
+English --- Proficient\\
+Spanish --- Native\\
+Catalan --- Intermediate
+
+* DONE Welcome
+CLOSED: [2025-12-02 Tue 19:58]
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_SECTION: .
+:END:
+
+Hi! This is my personal site, where I share notes on software and
+self-hosting.  You'll learn how things work behind the scenes, and how
+to make them run fast, /very/ fast.
+
+I'm a mathematician and engineer, a strong advocate of free[fn:8]
+software, and a devoted Emacs user.  I live in sunny Dublin.
+
+* DONE Page Not Found
+CLOSED: [2025-12-13 Sat 22:23]
+:PROPERTIES:
+:EXPORT_FILE_NAME: 404
+:EXPORT_HUGO_SECTION: .
+:END:
+That page couldn't be found (404 error).
+
+* DONE Subscribed
+CLOSED: [2025-12-13 Sat 22:06]
+:PROPERTIES:
+:EXPORT_FILE_NAME: subscribed
+:EXPORT_HUGO_SECTION: .
+:END:
+
+Now, you are subscribed.
+
+* Footnotes
+
+[fn:10] [[./static/images/portrait.png]] *That's me!* March 2022.
+
+[fn:9] [[./static/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
+producer has filled 15 of them, indicated by blue.  The consumer is
+behind the producer, reading data from the slots, freeing them as it
+does so.  A free slot is indicated by orange.
+
+[fn:1] By using ~std::array~ we are forcing clients to define the buffer
+size as ~constexpr~.  It's also common to use instead a ~std::vector~ to
+remove that restriction.
+
+[fn:2] Note how one item is left unused to indicate that the queue is
+full, when ~head_~ is one item behind ~tail_~ the queue is full.
+
+[fn:3] Again note that ~head_ == tail_~ indicates that the queue is
+empty.
+
+[fn:4] Assembly generated on an x86-64 system with ~gcc~ at ~-O3~.
+Similar results were observed with ~clang~ on the same platform.
+
+[fn:5] It can even devirtualize through a base pointer, as long as it
+can track the allocation and prove there is only one possible concrete
+type.  The problem is that with traditional separate compilation,
+objects are often created in one translation unit and used in another,
+so that global view is missing.
+
+[fn:6] The curiously recurring template pattern is an idiom where a
+class X derives from a class template instantiated with X itself as a
+template argument.  More generally, this is known as F-bound
+polymorphism, a form of F-bounded quantification.
+
+[fn:7] Also, no polymorphic containers (~std::vector<Base*>~) unless you
+wrap things.
+
+[fn:8] As in /freedom/.
