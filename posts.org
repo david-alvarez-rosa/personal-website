@@ -4,38 +4,27 @@
 :PROPERTIES:
 :EXPORT_FILE_NAME: spin-lock
 :END:
-:LOGBOOK:
-- State "TODO"       from              [2025-12-04 Thu 18:28]
-:END:
 
 Pending. Optimizing a spin-lock using this youtube series.
 Might be wrong with the right youtube series bla bla bla more text.
 
 https://www.youtube.com/watch?v=AN6XHy2znzc
 
-
+Pending.
 
 * TODO SFINAE
-:LOGBOOK:
-- State "TODO"       from              [2025-12-06 Sat 10:19]
-:END:
+
+Pending.
 
 * TODO Lru Cache
-:LOGBOOK:
-- State "TODO"       from              [2025-12-06 Sat 10:19]
-:END:
+
+Pending.
 
 * TODO Small buffer optimization
-:LOGBOOK:
-- State "TODO"       from              [2025-12-06 Sat 10:21]
-:END:
 
 Specially small string optimization.
 
 * TODO Optimizing Matrix Multiplication
-:LOGBOOK:
-- State "TODO"       from              [2025-12-06 Sat 10:14]
-:END:
 
 Fastest matrix multiplication.
 
@@ -43,32 +32,20 @@ Fastest matrix multiplication.
 :PROPERTIES:
 :EXPORT_FILE_NAME: translation-look-aside-buffer
 :END:
-:LOGBOOK:
-- State "TODO"       from              [2025-12-05 Fri 14:23]
-:END:
 
 Explain what the TLB is, using maybe hrt blog?
 
 * TODO Vector push_back
-:LOGBOOK:
-- State "TODO"       from              [2025-12-05 Fri 11:47]
-:END:
 
 In-depth vector push_back following guide
 
 * TODO Implementing a Shared_ptr
-:LOGBOOK:
-- State "TODO"       from              [2025-12-05 Fri 11:47]
-:END:
 
 Implement a shared_ptr
 
 * TODO Exploring CPU Caches
 :PROPERTIES:
 :EXPORT_FILE_NAME: exploring-cpu-caches
-:END:
-:LOGBOOK:
-- State "TODO"       from "DONE"       [2025-12-02 Tue 19:55]
 :END:
 
 Pending.
@@ -77,13 +54,6 @@ Pending.
 CLOSED: [2025-12-11 Thu 23:15]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-11 Thu 23:15]
-- State "DONE"       from "WAIT"       [2025-12-06 Sat 10:18]
-- State "WAIT"       from "DONE"       [2025-12-06 Sat 10:18]
-- State "DONE"       from "TODO"       [2025-12-06 Sat 10:18]
-- State "TODO"       from "DONE"       [2025-12-02 Tue 19:54]
 :END:
 
 A single-producer single-consumer (SPSC) queue is a great example of how
@@ -405,13 +375,6 @@ Some closing comments here.
 CLOSED: [2025-12-11 Thu 23:15]
 :PROPERTIES:
 :EXPORT_FILE_NAME: type-erasure
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-11 Thu 23:15]
-- State "DONE"       from "TODO"       [2025-12-04 Thu 18:12]
-- State "TODO"       from "DONE"       [2025-12-03 Wed 14:40]
-- State "DONE"       from "TODO"       [2025-12-02 Tue 16:05]
-- State "TODO"       from              [2025-12-02 Tue 16:05]
 :END:
 
 Ever looked at ~std::any~ and wondered what’s actually going on behind
@@ -770,20 +733,11 @@ names:
 That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
+
 * DONE Devirtualization and Static Polymorphism
 CLOSED: [2025-12-11 Thu 18:28]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
-:END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-11 Thu 18:28]
-- State "DONE"       from "WAIT"       [2025-12-02 Tue 15:57]
-- State "WAIT"       from "TODO"       [2025-12-02 Tue 15:57]
-- State "TODO"       from "DONE"       [2025-12-02 Tue 15:57]
-- State "DONE"       from "TODO"       [2025-12-01 Mon 18:52]
-- State "TODO"       from "DONE"       [2025-12-01 Mon 18:52]
-- State "DONE"       from "TODO"       [2025-12-01 Mon 18:49]
-- State "TODO"       from              [2025-12-01 Mon 18:49]
 :END:
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
@@ -1212,9 +1166,6 @@ CLOSED: [2025-12-02 Tue 19:58]
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_SECTION: .
 :END:
-:LOGBOOK:
-- State "DONE"       from              [2025-12-02 Tue 19:58]
-:END:
 
 Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
@@ -1224,17 +1175,21 @@ I'm a mathematician and engineer, a strong advocate of free[fn:8]
 software, and a devoted Emacs user.  I live in sunny Dublin.
 
 * DONE Page Not Found
-CLOSED: [2025-12-07 Sun 11:13]
+CLOSED: [2025-12-13 Sat 22:23]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 404
 :EXPORT_HUGO_SECTION: .
 :END:
-:LOGBOOK:
-- State "DONE"       from "TODO"       [2025-12-07 Sun 11:13]
-- State "TODO"       from              [2025-12-05 Fri 20:03]
+That page couldn't be found (404 error).
+
+* DONE Subscribed
+CLOSED: [2025-12-13 Sat 22:06]
+:PROPERTIES:
+:EXPORT_FILE_NAME: subscribed
+:EXPORT_HUGO_SECTION: .
 :END:
 
-That page couldn't be found (404 error).
+Now, you are subscribed.
 
 * Footnotes
 
