@@ -24,9 +24,7 @@
 {{- else -}}<!--  child for margin or normal (begin) -->
 
   {{- if or (or (.Get "caption") (.Get "attr")) (eq $width "margin") -}}<!-- begin marginnote -->
-    <label for="{{ $label }}" class="margin-toggle marginnote-ind">⊕</label>
-    <input type="checkbox" id="{{ $label }}" class="margin-toggle"/>
-    <span class="marginnote">
+    <span class="side">
   {{- end -}}
 
   {{- if eq $width "margin" -}}<!-- margin image inside marginnote -->
