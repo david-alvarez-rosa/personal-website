@@ -16,24 +16,16 @@
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
   {{ end }}
 
-  {{ with resources.Get "css/syntax.css" }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ else }}
-      {{ with . | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{ end }}
-    {{ end }}
+  {{ with resources.Get "css/syntax.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
   {{ end }}
 
-  {{ with resources.Get "css/main.css" }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}">
-    {{ else }}
-      {{ with . | minify | fingerprint }}
-        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-      {{ end }}
-    {{ end }}
+  {{ with resources.Get "css/main.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{ end }}
+
+  {{ with resources.Get "js/main.js" | minify | fingerprint }}
+    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
   {{ end }}
 </head>
 <body>
