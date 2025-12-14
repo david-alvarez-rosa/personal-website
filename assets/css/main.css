@@ -41,7 +41,6 @@ h2 {
 
 .subtitle {
     font-style: italic;
-    margin-top: 2rem;
     margin-bottom: 0.4rem;
     font-size: 1.4rem;
     display: block;
@@ -262,7 +261,7 @@ h2:focus-within .anchor {
     }
 
     body {
-        margin: 1.2rem auto;
+        margin: 2.2rem auto;
         max-width: 580px;
     }
 
