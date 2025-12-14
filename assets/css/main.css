@@ -231,6 +231,10 @@ h2:focus-within .anchor {
     background-color: inherit;
 }
 
+.subscribe-form {
+    margin-top: -0.4rem;
+}
+
 .subscribe-form input[type="email"] {
     font-family: "Alegreya Sans", sans-serif;
     font-size: 1.3rem;
@@ -266,7 +270,7 @@ h2:focus-within .anchor {
     }
 
     main, footer {
-        margin: 0 2rem;
+        margin: 0 1.5rem;
     }
 
     main p {
