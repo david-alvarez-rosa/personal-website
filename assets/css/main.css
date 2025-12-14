@@ -13,7 +13,7 @@ body {
     counter-reset: margin-counter;
 }
 
-main {
+main, footer {
     margin-left: 2rem;
     margin-right: 26rem;
 }
@@ -72,6 +72,10 @@ main p, main dd {
     padding-right: 0;
 }
 
+figcaption p {
+    margin-bottom: 0;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -99,8 +103,6 @@ nav li a {
 
 footer {
     border-top: 1px solid #111;
-    margin-left: 2rem;
-    margin-right: 26rem;
 }
 
 footer p {
@@ -193,7 +195,7 @@ code {
     font-family: "Inconsolata", monospace;
 }
 
-p code {
+p code, dt code {
     font-weight: 500;
     color: #660000;
     font-size: 1.3rem;
@@ -221,10 +223,9 @@ h2:focus-within .anchor {
 
 .chroma {
     font-size: 1.15rem;
-    padding: 0.5rem 0.75rem;
     overflow-x: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.4rem 0.5rem;
+    border: 1px solid #ccc;
 }
 
 .subscribe-form input[type="email"] {
@@ -269,7 +270,18 @@ h2:focus-within .anchor {
         text-align: left;
     }
 
-    .side {
-        display: none;
+    .side, figcaption {
+        float: none;
+        display: block;
+        margin: 0.6rem 0;
+        width: unset;
+        padding: 0.4rem 0.5rem;
+        border: 1px solid #ccc;
+        border-left: 3px solid #ccc;
+    }
+
+    .side img {
+        box-shadow: none;
+        margin: auto;
     }
 }

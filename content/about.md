@@ -6,7 +6,7 @@ layout = "about"
 draft = false
 +++
 
-Software[^fn:1] engineer with experience in low-latency systems, electronic
+&nbsp;[^fn:1]Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna.  Strong
 advocate of free (as in _freedom_) software and devoted Emacs user.
 

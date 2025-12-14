@@ -16,7 +16,7 @@ progressively remove costs while preserving correctness.
 
 ## What is a ring buffer? {#what-is-a-ring-buffer}
 
-You[^fn:1] may have heard of something called a circular buffer, or maybe
+&nbsp;[^fn:1]You may have heard of something called a circular buffer, or maybe
 even a cyclic queue.  Both are just other names for the _ring buffer_, a
 specialized queue in which a producer produces some data and shoves it
 into the data structure, and a consumer comes along and consumes it, all
