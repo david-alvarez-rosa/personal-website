@@ -273,7 +273,7 @@ h2:focus-within .anchor {
     .side, figcaption {
         float: none;
         display: block;
-        margin: 0.6rem 0;
+        margin: 0.4rem 0;
         width: unset;
         padding: 0.4rem 0.5rem;
         border: 1px solid #ccc;
