@@ -273,7 +273,7 @@ h2:focus-within .anchor {
         margin: 0 1.5rem;
     }
 
-    main p {
+    main p, main dd, main ul li {
         text-align: left;
     }
 
