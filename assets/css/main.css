@@ -62,7 +62,7 @@ sig {
     display: none;
 }
 
-main p, main dd {
+main p, main dd, main ul li {
     text-align: justify;
     hyphens: auto;
     font-size: 1.4rem;
@@ -150,8 +150,8 @@ a:hover {
 
 main img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
     border-radius: 8px;
+    max-width: 100%;
     margin-top: 0.2rem;
 }
 
@@ -203,10 +203,11 @@ p code, dt code {
 }
 
 .anchor {
-    margin-left: 0.25rem;
+    padding: 0 0.4rem;
     position: relative;
     transition: opacity 0.2s;
     opacity: 0;
+    font-size: 1.4rem;
 }
 .anchor::before {
     content: "";
@@ -225,8 +226,10 @@ h2:focus-within .anchor {
 .chroma {
     font-size: 1.15rem;
     overflow-x: auto;
-    padding: 0.4rem 0.5rem;
+    padding: 0.5rem 0.75rem;
     border: 1px solid #ccc;
+    border-left: 3px solid #ccc;;
+    background-color: inherit;
 }
 
 .subscribe-form input[type="email"] {
