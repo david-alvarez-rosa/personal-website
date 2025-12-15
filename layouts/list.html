@@ -1,4 +1,5 @@
 {{ define "main" }}
+  <style>@media (max-width: 860px) { .side + br { display: none; } }</style>
   <h1>{{ .Title }}</h1>
   {{ range first 5 (where site.RegularPages "Section" "posts") }}
     <p>
