@@ -99,14 +99,14 @@ Silver in local (Pamplona), honors in national (Barcelona).
 _Physics Olympiad_<br />
 Gold in local (Pamplona), silver in national (Seville).
 
-_Mobility Scholarship_ --- Cellex (CFIS)
+_Mobility Scholarship --- Cellex (CFIS)_
 [^fn:12]<br />
 Scholarship to carry out my research thesis at Toronto (€6k).
 
-_Tuition and Housing Scholarship_  --- Cellex (CFIS)<br />
+_Tuition and Housing Scholarship  --- Cellex (CFIS)_<br />
 University tuition and housing (€19k).
 
-_General Scholarship_ --- Government of Spain<br />
+_General Scholarship --- Government of Spain_<br />
 Full university tuition plus an annual stipend (€11k).
 
 
