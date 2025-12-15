@@ -7,13 +7,4 @@
   {{ partial "processed-content.html" . }}
 
   <sig>&mdash;{{ index .Params.Author 0 }}</sig>
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
 {{ end }}

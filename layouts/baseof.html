@@ -40,6 +40,15 @@
 <body>
   <main>
     {{ block "main" . }}{{ end }}
+    {{ with site.Menus.main }}
+      <nav>
+        <ul>
+          {{ range . }}
+            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+    {{ end }}
   </main>
   <footer>
     <p>Copyright 2018&ndash;{{ now.Year }} &centerdot; David Álvarez Rosa</p>

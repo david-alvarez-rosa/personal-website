@@ -20,13 +20,4 @@
     <input type="email" required placeholder="your-name@domain.com" />
     <button type="submit">Subscribe</button>
   </form>
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
 {{ end }}

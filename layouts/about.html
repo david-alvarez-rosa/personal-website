@@ -3,13 +3,4 @@
   <span class="subtitle">Curriculum Vitae</span>
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
 {{ end }}

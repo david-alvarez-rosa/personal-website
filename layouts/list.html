@@ -12,13 +12,4 @@
       {{ .Summary | truncate 140 | plainify }}
     </p>
   {{ end }}
-  {{ with site.Menus.main }}
-    <nav>
-      <ul>
-        {{ range . }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-        {{ end }}
-      </ul>
-    </nav>
-  {{ end }}
 {{ end }}
