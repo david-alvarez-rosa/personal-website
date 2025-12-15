@@ -7,7 +7,7 @@
   {{ $footnote = replaceRE `<a href="#fnref:[^"]*"[^>]*>.*?</a>` `` $footnote }}
   {{ $side := printf `<span class="side"><sup>%s</sup>%s</span>` $id $footnote }}
   {{ $pattern := printf `(?s)(<sup id=".*"><a href="#fn:%s".*?</a></sup>)` $id }}
-  {{ $replacement := printf `<sup>%s</sup>%s` $id $side }}
+  {{ $replacement := printf `<sup>%s</sup> %s` $id $side }}
   {{ $content = replaceRE $pattern $replacement $content }}
 {{ end }}
 {{ replace $content $footnotes "" | safeHTML }}
