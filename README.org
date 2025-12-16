@@ -1172,12 +1172,12 @@ CLOSED: [2025-12-02 Tue 19:58]
 :EXPORT_HUGO_SECTION: .
 :END:
 
-Hi! This is my personal site, where I share notes on software and
+ [fn:11]Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
 to make them run fast, /very/ fast.
 
-I'm a mathematician and engineer, a strong advocate of free[fn:8]
-software, and a devoted Emacs user.  I live in sunny Dublin.
+I'm a mathematician and engineer, a strong advocate of free (as in
+/freedom/) software, and a devoted Emacs user.  I live in sunny Dublin.
 
 * DONE Page Not Found
 CLOSED: [2025-12-13 Sat 22:23]
@@ -1197,6 +1197,7 @@ CLOSED: [2025-12-13 Sat 22:06]
 Now, you are subscribed.
 
 * Footnotes
+[fn:11] [[./static/images/home-illustration.png]] ‎
 
 [fn:10] [[./static/images/portrait.png]] *That's me!* March 2022.
 

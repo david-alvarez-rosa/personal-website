@@ -1,4 +1,5 @@
 {{ define "main" }}
+  <style>.side img { width: 250px; margin-top: -12px; box-shadow: none; } @media (max-width: 860px) {.side img { margin-top: 0!important; margin-bottom: -1.6rem; }}</style>
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
 

@@ -183,6 +183,7 @@ sup {
 .side img {
     display: block;
     margin-bottom: 0.4rem;
+    margin-top: 0;
 }
 
 .side sup:has(+ img),
