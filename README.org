@@ -71,7 +71,7 @@ progressively remove costs while preserving correctness.
 
 ** What is a ring buffer?
 
-[fn:9]You may have heard of something called a circular buffer, or maybe
+ [fn:11]You may have heard of something called a circular buffer, or maybe
 even a cyclic queue.  Both are just other names for the /ring buffer/, a
 specialized queue in which a producer produces some data and shoves it
 into the data structure, and a consumer comes along and consumes it, all
@@ -746,12 +746,9 @@ CLOSED: [2025-12-11 Thu 18:28]
 :END:
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
-a hidden overhead: pointer indirection, larger object layouts, and
-fewer inlining opportunities.  /Devirtualization/ lets the compiler
-recover some of this by turning virtual calls into direct calls when it
-can infer the dynamic type.
-
-Unfortunately, that is often not possible.
+a hidden overhead: pointer indirection, larger object layouts, and fewer
+inlining opportunities.  Compilers try to devirtualize the calls, but
+unfortunately it is not always possible.
 
 On latency-sensitive paths, it's beneficial to manually replace dynamic
 dispatch with /static polymorphism/, so calls are resolved at compile
@@ -759,18 +756,11 @@ time and the abstraction has effectively zero runtime cost.
 
 ** Virtual dispatch
 
-Runtime polymorphism arises when a base interface exposes virtual
-methods that derived classes override.  Calls made through a ~Base&~ (or
+Runtime polymorphism occurs when a base interface exposes a virtual
+method that derived classes override.  Calls made through a ~Base&~ (or
 ~Base*~) are then dispatched to the appropriate override at runtime.
-Under the hood, it works roughly like this:
-
-Each polymorphic class has a virtual table (~vtable~) that holds the
-function pointers for its virtual methods.  Each object of such a class
-carries a hidden pointer (~vptr~) to the corresponding ~vtable~.
-
-On a virtual call, the compiler emits code that loads the ~vptr~,
-selects the right slot in the ~vtable~, and performs an indirect call
-through that function pointer.
+Under the hood, a virtual table (~vtable~) is created per /each class/,
+and a pointer (~vptr~) to the ~vtable~ is added to /each instance/.
 
 #+begin_src plantuml :file diagram.png
   @startuml
@@ -824,14 +814,15 @@ through that function pointer.
 #+RESULTS:
 [[file:diagram.png]]
 
-The additional ~vptr~ increases object size, which can hurt cache
-locality.  The ~vtable~ makes the call target harder to predict, raising
-the chance of branch mispredictions, and the lack of compile-time
-knowledge prevents inlining and other optimizations.
+On a virtual call, the compiler emits code that loads the ~vptr~,
+selects the right slot in the ~vtable~, and performs an indirect call
+through that function pointer.  Sounds reasonable, right?  The problem
+is that the additional ~vptr~ increases object size, and the ~vtable~
+makes the call hard to predict.  This prevents inlining, increases the
+chance of branch mispredictions, and hurts cache efficiency.
 
-To see why virtual calls can be costly, it's useful to inspect the
-assembly code
-the compiler actually emits for a minimal example.
+The best way to observe this phenomena is by inspecting the assembly
+code[fn:4] emitted by the compiler for a minimal example.
 
 #+begin_src cpp
   class Base {
@@ -844,10 +835,8 @@ the compiler actually emits for a minimal example.
   }
 #+end_src
 
-For a regular, non-virtual member function like in the example, the free
-function ~bar~ issues a direct call[fn:4] to ~foo~.  Because the target
-is known at compile time, the compiler can inline it, propagate
-constants, and optimize across the call boundary.
+For a regular, non-virtual member function ~foo~ like in the example above,
+the free function ~bar~ issues a direct call.
 
 #+begin_src asm
   bar(Base*):
@@ -858,8 +847,8 @@ constants, and optimize across the call boundary.
           ret
 #+end_src
 
-However, declaring ~foo~ as virtual changes ~bar~'s assembly from a
-direct call into an indirect, vtable-based call.
+However, if we instead declare ~foo~ as ~virtual~, it changes ~bar~'s
+assembly from a direct call into an indirect, vtable-based call.
 
 #+begin_src asm
   bar(Base*):
@@ -871,20 +860,13 @@ direct call into an indirect, vtable-based call.
           ret
 #+end_src
 
-Those extra loads are potential cache misses, and the indirect branch is
-harder for the CPU to predict.  More importantly, because the call
-target isn't known statically, the compiler generally can't inline ~foo~
-or propagate constants from the caller into its body.
-
 ** Devirtualization
 
-The process by which the compiler statically determines which override a
-virtual call will hit is called /devirtualization/.  When it can prove
-at compile time which implementation will be used, it can skip the
-~vtable~ lookup and emit a direct call instead.
-
-For example, devirtualization is straightforward when the dynamic type
-is clearly fixed:
+In some cases, the compiler is able to statically deduce which override
+a virtual call will hit.  In those cases, it will /devirtualize/ the
+call and emit a direct call instead (skiping the ~vtable~).  For
+example, devirtualization is straightforward[fn:5] when the runtime type
+is clearly fixed.
 
 #+begin_src cpp
   struct Base {
@@ -901,17 +883,16 @@ is clearly fixed:
   }
 #+end_src
 
-Here, the compiler[fn:5] can emit a direct call to ~Derived::foo~ (or
-inline it), because ~derived~ cannot have any other dynamic type.
-
-In C++, a translation unit (TU) is a single preprocessed ~.cpp~ file
-that gets compiled and optimized in isolation, then emitted as object
-code.  The linker simply stitches those objects together, so cross-TU
-optimizations are inherently limited.  That's where compiler flags are
-useful.
+The compiler is able to devirtualize even through a base pointer, as
+long as it can track the allocation and prove there is only one possible
+concrete type.  The problem is that with traditional compilation,
+objects are created per translation unit (TU)---compiled and optimized
+in isolation.  The linker simply stitches those objects together, so
+cross-TU optimizations are inherently limited.  That's where compiler
+flags are useful.
 
 - ~-fwhole-program~ :: tells the compiler "this translation unit is the
-  entire program." If no class derives from ~Base~ in this TU, the
+  entire program."  If no class derives from ~Base~ in this TU, the
   compiler is free to assume nothing ever does, and can devirtualize
   calls on ~Base~.
 
@@ -944,10 +925,10 @@ comparable guarantees for specific methods.
 #+end_src
 
 Here, ~foo()~ can still be overridden by a subclass of ~Derived~, so
-~derived->foo()~ remains a virtual call.  ~bar()~, however, is marked
+~derived->foo()~ remains a virtual call.  However, ~bar()~, is marked as
 ~final~, so the compiler knows there can be no further overrides and can
-emit a direct call to ~Derived::bar~ (and inline it) even though it's
-declared ~virtual~ in the base.
+emit a direct call to ~Derived::bar~ even though it's declared ~virtual~
+in the base.
 
 #+begin_src asm
   test(Derived*):
@@ -970,7 +951,6 @@ declared ~virtual~ in the base.
 When the compiler can't devirtualize on its own, one option is to drop
 dynamic dispatch and use static polymorphism instead.  The canonical
 tool for this is the Curiously Recurring Template Pattern[fn:6] (CRTP).
-
 With CRTP, the base class is templated on the derived class, and instead
 of invoking virtual methods, it calls into the derived type via a
 ~static_cast~.
@@ -997,19 +977,15 @@ of invoking virtual methods, it calls into the derived type via a
   }
 #+end_src
 
-With ~-O3~ enabled, ~test~ compiles down to:
+With ~-O3~ optimization, the compiler inlines ~foo~ and ~bar~ and
+constant-folds the results.  No ~vtable~, no ~vptr~.  Fully
+optimized[fn:7] call.
 
 #+begin_src asm
   test():
           mov     eax, 165  // 77 + 88
           ret
 #+end_src
-
-The compiler inlines ~foo~ and ~bar~ and constant-folds the result;
-there are no vtables and no virtual calls.  The trade-off is that each
-~Base<Derived>~ instantiation is a distinct, unrelated type, so there's
-no common runtime base to upcast to.  Any shared functionality[fn:7]
-that operates across different derived types must itself be templated.
 
 *Deducing this.* C++23's /deducing this/ keeps the same static-dispatch
 model but makes it easier to write and reason about.  Instead of
@@ -1027,29 +1003,17 @@ type, and let the compiler deduce ~self~ from ~*this~:
   public:
     auto bar() -> int { return 88; }
   };
-
-  auto test() -> int {
-    Derived derived;
-    return derived.foo();
-  }
 #+end_src
 
 This yields essentially the same optimized code as the CRTP version:
 ~foo~ is instantiated as if it were ~foo<Derived>~, and the call to
-~bar~ is resolved statically and inlined.  The key differences are
-syntactic and structural:
-
-- you still get static polymorphism (no vtables, fully optimizable
-  calls),
-
-- but you also retain a single ~Base~ type that all derived classes
-  share.
+~bar~ is resolved statically and inlined.
 
 It's still not dynamic dispatch: a call through a ~Base*~ only sees what
 ~Base~ exposes, unless you also use ~virtual~.  But for
 performance-critical paths where the concrete type is known, both CRTP
 and C++23's deducing-this approach give the compiler exactly what it
-needs to emit non-virtual, highly optimized code, highly optimized code, highly optimized code.
+needs to emit non-virtual, highly optimized code.
 
 * DONE David Álvarez Rosa
 CLOSED: [2025-12-07 Sun 11:24]
@@ -1059,7 +1023,7 @@ CLOSED: [2025-12-07 Sun 11:24]
 :EXPORT_HUGO_LAYOUT: about
 :END:
 
- [fn:10]Software engineer with experience in low-latency systems, electronic
+ [fn:8]Software engineer with experience in low-latency systems, electronic
 trading, and HFT infrastructure. Currently at Susquehanna.  Strong
 advocate of free (as in /freedom/) software and devoted Emacs user.
 
@@ -1172,7 +1136,7 @@ CLOSED: [2025-12-02 Tue 19:58]
 :EXPORT_HUGO_SECTION: .
 :END:
 
- [fn:11]Hi! This is my personal site, where I share notes on software and
+ [fn:9]Hi! This is my personal site, where I share notes on software and
 self-hosting.  You'll learn how things work behind the scenes, and how
 to make them run fast, /very/ fast.
 
@@ -1197,11 +1161,11 @@ CLOSED: [2025-12-13 Sat 22:06]
 Now, you are subscribed.
 
 * Footnotes
-[fn:11] [[./static/images/home-illustration.png]] ‎
+[fn:9] [[./static/images/home-illustration.png]] ‎
 
-[fn:10] [[./static/images/portrait.png]] *That's me!* March 2022.
+[fn:8] [[./static/images/portrait.png]] *That's me!* March 2022.
 
-[fn:9] [[./static/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
+[fn:11] [[./static/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
 producer has filled 15 of them, indicated by blue.  The consumer is
 behind the producer, reading data from the slots, freeing them as it
 does so.  A free slot is indicated by orange.
@@ -1219,18 +1183,15 @@ empty.
 [fn:4] Assembly generated on an x86-64 system with ~gcc~ at ~-O3~.
 Similar results were observed with ~clang~ on the same platform.
 
-[fn:5] It can even devirtualize through a base pointer, as long as it
-can track the allocation and prove there is only one possible concrete
-type.  The problem is that with traditional separate compilation,
-objects are often created in one translation unit and used in another,
-so that global view is missing.
+[fn:5] In this case, the compiler emits a direct call to ~Derived::foo~
+(or inline it), because ~derived~ cannot have any other dynamic type.
 
 [fn:6] The curiously recurring template pattern is an idiom where a
 class X derives from a class template instantiated with X itself as a
 template argument.  More generally, this is known as F-bound
 polymorphism, a form of F-bounded quantification.
 
-[fn:7] Also, no polymorphic containers (~std::vector<Base*>~) unless you
-wrap things.
-
-[fn:8] As in /freedom/.
+[fn:7] The trade-off is that each ~Base<Derived>~ instantiation is a
+distinct, unrelated type, so there's no common runtime base to upcast
+to.  Any shared functionality that operates across different derived
+types must itself be templated.
