@@ -6,13 +6,13 @@ draft = false
 +++
 
 Ever looked at `std::any` and wondered what’s actually going on behind
-the scenes? Beneath the intimidating interface is a clean case of type
+the scenes?  Beneath the intimidating interface is a clean case of type
 erasure: concrete types hidden behind a small, uniform wrapper.
 
-Starting
-from familiar tools---virtual functions and templates---we’ll build
-a minimal `std::any`. Along the way, type erasure shifts from buzzword
-to practical technique you can recognize and reuse in your own designs.
+Starting from familiar tools---virtual functions and templates---we’ll
+build a minimal `std::any`.  Along the way, type erasure shifts from
+buzzword to practical technique you can recognize and reuse in your own
+designs.
 
 
 ## Polymorphism with interfaces {#polymorphism-with-interfaces}
@@ -23,8 +23,8 @@ for each implementation that you want to use polymorphically, you create
 a subclass that inherits from the base class and implement those
 methods.
 
-As an example, let's implement a variaty of shapes that have an `area()`
-method. We start with an interface class:
+As an example, let's implement shape classes that have an `area()`
+method.  We start with an interface[^fn:1] class
 
 ```cpp
 class Shape {
@@ -34,7 +34,7 @@ public:
 };
 ```
 
-And add a couple of concrete implementations
+And add a couple of concrete implementations for `Square` and `Circle`
 
 ```cpp
 class Square : public Shape {
@@ -54,12 +54,12 @@ public:
 };
 ```
 
-Now we can use these implementations generically, by coding against the
-interface:
+Now, we can use these implementations generically, by coding against the
+interface
 
 ```cpp
-auto area(const Shape& shape) -> double {
-  return shape.area();
+auto printArea(const Shape& shape) {
+  std::println("Area is {:.2f}", shape.area());
 }
 ```
 
@@ -74,50 +74,25 @@ the example above) all inherit from a common base (`Shape`), which
 exposes all the required functionality.
 
 But sometimes the concrete types you’re trying to make polymorphic can’t
-inherit from a common base. You may not have control of the concrete
-types (e.g. think STL types like `std::string`), or it may not even be
-possible for the concrete type to inherit (e.g. built-ins like int).
-
-If you’re in this situation, however, you’re not out of luck! Even if
-the concrete types don’t share a common base, if they conform to a
-common interface (that is, they can be used the same way by a caller),
-we can instead use a template to make the types polymorphic:
+inherit from a common base[^fn:2].  If you’re in this situation,
+however, you’re not out of luck! Even if the concrete types don’t share
+a common base, if they conform to a common interface (that is, they can
+be used the same way by a caller), we can instead use a template to make
+the types polymorphic:
 
 ```cpp
-auto area(const auto& shape) -> double {
-  return shape.area();
+auto printArea(const auto& shape) {
+  std::println("Area is {:.2f}", shape.area());
 }
 ```
 
 You can call this above method on `Square`, `Circle`, and anything else
-that has zero-argument `area()` method that return doubles. This works
+that has zero-argument `area()` method that return doubles.  This works
 due to the way templates are compiled: when you invoke a template on a
 type, the compiler compiles a new overload of the method, specialized
-for the concrete type you’re passing in. Thus, as long as the method
+for the concrete type you’re passing in.  Thus, as long as the method
 would compile with the templated type replaced with the concrete type
-(say, `Circle`), the template invocation is valid.
-
-To illustrate this, when you call:
-
-```cpp
-auto square = Square{2};
-std::println("Area is {:.2f}", square.area());
-```
-
-The compiler compiles the method `area<Square>`, by more or less
-replacing the templated type with `Square`. The body of that method would look something like
-this:
-
-```cpp
-auto area<Square>(const Square& shape) -> double {
-  return shape.area();
-}
-```
-
-If you tried to pass in a type that doesn’t conform to the 'interface'
-(say, `std::string`), the compiler would hit an error when you tried to
-compile the method call, complaining that `std::string` doesn’t have an
-`area` method.
+(say, `Circle`), the template invocation is valid[^fn:3].
 
 
 ## Drawbacks to Template Polymorphism {#drawbacks-to-template-polymorphism}
@@ -125,27 +100,14 @@ compile the method call, complaining that `std::string` doesn’t have an
 Although achieving polymorphism with templates is a neat trick, there
 are two drawbacks:
 
-First, we can’t shove disparate types into an array. When we were using
-interfaces, we could store an instance of each of `Square` and `Circle`
-in an array of `Shape`:
+**First,** we can’t shove disparate types into an array.  When we were
+using interfaces, we could store an instance of each of `Square` and
+`Circle` in an array of `Shape`:
 
 ```cpp
-auto printAreas(const std::vector<Shape*>& shapes) -> void {
-  for (auto* shape : shapes) {
-    std::println("Area is {:.2f}", shape->area());
-  }
-}
-
-auto main() -> int {
-  auto square = Square{2};
-  auto circle = Circle{1};
-
-  auto shapes = std::vector<Shape*>{&square, &circle};
-  printAreas(shapes);
-}
-
-// Area is 4.00
-// Area is 3.14
+auto square = Square{2};
+auto circle = Circle{1};
+auto shapes = std::vector<Shape*>{&square, &circle};
 ```
 
 However, with the template-based polymorphism approach, we couldn’t
@@ -155,13 +117,10 @@ create this array, because there is no common subtype for the array:
 auto shapes = std::vector< ??? >{&square, &circle};
 ```
 
-The second drawback is a little more subtle. Anybody who uses the
-template-based `area(const auto&)` method has two options:
-
--   If the concrete type is known, the method can explicitly specify the
-    concrete type, non-polymorphically.
--   Otherwise, the caller must also be a template, to pass along the
-    template type off `area()`.
+The **second** drawback is a little more subtle. Anybody who uses the
+template-based `area(const auto&)` method must either explicitly specify
+the concrete type, or be a template itself, to pass along the template
+type off `area()`.
 
 Since you’re employing polymorphism in the first place, most callers
 will likely fall into the second group, meaning large swathes of your
@@ -177,46 +136,36 @@ Yuck!
 ## Deriving std::any {#deriving-std-any}
 
 Pretend, for some reason, `Square` and `Circle` are set in stone, and the
-designers originally did not give them a common base class. We would
-like to unite them under some common base class ourselves. And, since we
+designers originally did not give them a common base class.  We would
+like to unite them under some common base class ourselves.  And, since we
 don’t control the implementation of `Square` and `Circle`, it’s not possible
 for us to simply change them to inherit from a base interface.
 
 Here’s a basic plan for fixing this: if we don’t have the inheritance
 chain we want, and we can’t change the objects to make them inherit,
-then we can build our own inheritance chain out of wrapper objects. That
-is, we define our own interface, and implement it multiple times. Each
-implementation of the interface wraps a `Square` or `Circle` and calls
-into that for all the virtual methods.
-
-In this example, our common interface might be:
-
-```cpp
-class Shape {
-public:
-  virtual ~Shape() = default;
-  virtual auto area() const noexcept -> double = 0;
-};
-```
+then we can build our own inheritance chain out of wrapper objects.
+That is, we define our own interface, and implement it multiple times.
+Each implementation of the interface wraps a `Square` or `Circle` and
+calls into that for all the virtual methods.
 
 Then we create wrapper objects which inherit from MyAnimal. Each wrapper
-does not except but call into the ‘real’ underlying object:
+does nothing but call into the ‘real’ underlying object:
 
 ```cpp
 class SquareWrapper : public Shape {
-  std::unique_ptr<Square> square_;
+  Square square_;
 public:
   explicit SquareWrapper(Square square) noexcept
-      : square_{std::make_unique<Square>(std::move(square))} {}
-  auto area() const noexcept -> double override { return square_->area(); }
+      : square_{std::move(square)} {}
+  auto area() const noexcept -> double override { return square.area(); }
 };
 
 class CircleWrapper : public Shape {
-  std::unique_ptr<Circle> circle_;
+  Circle circle_;
 public:
   explicit CircleWrapper(Circle circle) noexcept
-      : circle_{std::make_unique<Circle>(std::move(circle))} {}
-  auto area() const noexcept -> double override { return circle_->area(); }
+      : circle_{std::move(circle)} {}
+  auto area() const noexcept -> double override { return circle.area(); }
 };
 ```
 
@@ -233,7 +182,6 @@ auto printAreas(const std::vector<Shape*>& shapes) -> void {
 auto main() -> int {
   auto square = SquareWrapper{Square{2}};
   auto circle = CircleWrapper{Circle{1}};
-
   auto shapes = std::vector<Shape*>{&square, &circle};
   printAreas(shapes);
 }
@@ -252,11 +200,10 @@ work for us: by using templates for polymorphism
 ```cpp
 template <typename T>
 class ShapeWrapper : public Shape {
-  std::unique_ptr<T> shape_;
+  T shape_;
 public:
-  explicit ShapeWrapper(T shape) noexcept
-      : shape_{std::make_unique<T>(std::move(shape))} {}
-  auto area() const noexcept -> double override { return shape_->area(); }
+  explicit ShapeWrapper(T shape) noexcept : shape_{std::move(shape)} {}
+  auto area() const noexcept -> double override { return shape.area(); }
 };
 ```
 
@@ -274,12 +221,11 @@ class AnyShape {
 
   template <typename T>
   class ShapeWrapper : public Shape {  // The wrappers
-    std::unique_ptr<T> shape_;
+    T shape_;
 
   public:
-    explicit ShapeWrapper(T shape) noexcept
-        : shape_{std::make_unique<T>(std::move(shape))} {}
-    auto area() const noexcept -> double override { return shape_->area(); }
+    explicit ShapeWrapper(T shape) noexcept : shape_{std::move(shape)} {}
+    auto area() const noexcept -> double override { return shape.area(); }
   };
 
   std::unique_ptr<Shape> shape_;
@@ -345,12 +291,11 @@ class Any {
 
   template <typename T>
   class Model : public Concept {
-    std::unique_ptr<T> obj_;
+    T obj_;
 
   public:
-    explicit Model(T obj) noexcept
-        : obj_{std::make_unique<T>(std::move(obj))} {}
-    auto f() const noexcept -> double override { obj_->f(); }
+    explicit Model(T obj) noexcept : obj_{std::move(obj)} {}
+    auto f() const noexcept -> double override { obj.f(); }
   };
 
   std::unique_ptr<Concept> obj_;
@@ -367,3 +312,14 @@ public:
 That's it! The class `Any` is a simplified version of `std::any`, which
 is even used in the STL itself (namely, for `std::function`). But that's
 for another entry.
+
+[^fn:1]: Remember that interfaces that are intended to be used through a
+    `Base&` or `Base*` must have a virtual destructor, to ensure derived
+    classes are properly destructed [(C.127)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor).
+[^fn:2]: In some cases, you may not have control of the concrete types
+    (e.g. think STL types like `std::string`), or it may not even be
+    possible for the concrete type to inherit (e.g. built-ins like int).
+[^fn:3]: If you tried to pass in a type that doesn’t conform to the
+    'interface' (say, `std::string`), the compiler would hit an error when
+    you tried to compile the method call, complaining that `std::string`
+    doesn’t have an `area` method.

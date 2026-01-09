@@ -129,7 +129,8 @@ Catalan --- Intermediate
     Toronto, Canada
 [^fn:7]: Sep 2019--Feb 2020<br />
     Barcelona, Spain
-[^fn:8]: GPA 9.00/10
+[^fn:8]: GPA 9.00/10<br />
+    Honors in 6 subjects
 [^fn:9]: GPA 10/10 (A+)
 [^fn:10]: GPA 8.12/10 (top 10%)<br />
     Honors in 9 subjects

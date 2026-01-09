@@ -1,14 +1,13 @@
 +++
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
-date = 2025-12-11T18:28:00+00:00
-draft = false
+draft = true
 +++
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
 a hidden overhead: pointer indirection, larger object layouts, and fewer
-inlining opportunities.  Compilers try to devirtualize the calls, but
-unfortunately it is not always possible.
+inlining opportunities.  Compilers try their best to _devirtualize_ the
+calls, but unfortunately it is not always possible.
 
 On latency-sensitive paths, it's beneficial to manually replace dynamic
 dispatch with _static polymorphism_, so calls are resolved at compile
@@ -23,7 +22,7 @@ method that derived classes override.  Calls made through a `Base&` (or
 Under the hood, a virtual table (`vtable`) is created per _each class_,
 and a pointer (`vptr`) to the `vtable` is added to _each instance_.
 
-{{< figure src="/images/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
+{{< figure src="/ox-hugo/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
 On a virtual call, the compiler emits code that loads the `vptr`,
 selects the right slot in the `vtable`, and performs an indirect call
@@ -139,11 +138,10 @@ auto test(Derived* derived) -> int {
 }
 ```
 
-Here, `foo()` can still be overridden by a subclass of `Derived`, so
-`derived->foo()` remains a virtual call.  However, `bar()`, is marked as
-`final`, so the compiler knows there can be no further overrides and can
-emit a direct call to `Derived::bar` even though it's declared `virtual`
-in the base.
+Here, `foo()` can still be overridden, so `derived->foo()` remains a
+virtual call.  However, `bar()`, is marked as `final`, so the compiler
+knows there can be no further overrides and can emit a direct call to
+even though it's declared `virtual` in the base.
 
 ```asm
 test(Derived*):
