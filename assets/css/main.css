@@ -9,7 +9,7 @@ body {
     background-color: #fcfcfc;
     color: #111;
     width: 100%;
-    max-width: 1060px;
+    max-width: 1080px;
     counter-reset: margin-counter;
 }
 
@@ -226,7 +226,7 @@ h2:focus-within .anchor {
 .chroma {
     font-size: 1.15rem;
     overflow-x: auto;
-    padding: 0.5rem 0.75rem;
+    padding: 0.4rem 0.6rem;
     border: 1px solid #ccc;
     border-left: 3px solid #ccc;;
     background-color: inherit;
