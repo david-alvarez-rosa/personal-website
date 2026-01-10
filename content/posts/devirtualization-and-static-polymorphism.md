@@ -24,7 +24,7 @@ method that derived classes override.  Calls made through a `Base&` (or
 Under the hood, a virtual table (`vtable`) is created per _each class_,
 and a pointer (`vptr`) to the `vtable` is added to _each instance_.
 
-{{< figure src="/ox-hugo/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
+{{< figure src="/images/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
 On a virtual call, the compiler emits code that loads the `vptr`,
 selects the right slot in the `vtable`, and performs an indirect call
