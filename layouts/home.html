@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <style>.side img { width: 250px; margin-top: -16px; box-shadow: none; } @media (max-width: 860px) {.side img { margin-top: 0!important; margin-bottom: -1.6rem; }}</style>
+  <style>.side img { width: 240px; margin-top: -20px; box-shadow: none; } @media (max-width: 860px) {.side img { margin-top: 0!important; margin-bottom: -1.6rem; }}</style>
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
 
@@ -7,6 +7,11 @@
   {{ range first 3 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <span class="side">
+        <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+      </span>
       <br/>
       {{ .Summary | truncate 152 | plainify }}
     </p>
