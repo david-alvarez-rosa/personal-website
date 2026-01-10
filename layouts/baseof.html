@@ -32,6 +32,7 @@
   {{ with resources.Get "js/main.js" | minify | fingerprint }}
     <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}
+  <script defer src="https://umami.alvarezrosa.com/script.js" data-website-id="ca48bc5a-733d-47f3-8240-59944a4d9bda"></script>
 </head>
 <body>
   <main>
