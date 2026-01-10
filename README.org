@@ -957,6 +957,7 @@ This yields essentially the same optimized code as the CRTP version:
 ~bar~ is resolved statically and inlined.
 
 * TODO [#B] David Álvarez Rosa
+CLOSED: [2026-01-10 Sat 17:04]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
