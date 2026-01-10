@@ -1,6 +1,7 @@
 +++
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
+date = 2026-01-10T17:04:00+00:00
 layout = "about"
 tags = ["pers", "blog"]
 draft = true
