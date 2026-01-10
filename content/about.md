@@ -1,9 +1,9 @@
 +++
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
-date = 2025-12-07T11:24:00+00:00
 layout = "about"
-draft = false
+tags = ["pers", "blog"]
+draft = true
 +++
 
 &nbsp;[^fn:1]Software engineer with experience in low-latency systems, electronic

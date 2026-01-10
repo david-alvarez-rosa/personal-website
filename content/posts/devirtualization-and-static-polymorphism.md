@@ -1,6 +1,8 @@
 +++
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
+date = 2026-01-10T14:45:00+00:00
+tags = ["pers", "blog"]
 draft = true
 +++
 
@@ -31,8 +33,8 @@ is that the additional `vptr` increases object size, and the `vtable`
 makes the call hard to predict.  This prevents inlining, increases the
 chance of branch mispredictions, and hurts cache efficiency.
 
-The best way to observe this phenomena is by inspecting the assembly
-code[^fn:1] emitted by the compiler for a minimal example.
+The best way to observe this phenomena is by inspecting the
+assembly[^fn:1] code emitted by the compiler for a minimal example.
 
 ```cpp
 class Base {
@@ -64,7 +66,7 @@ assembly from a direct call into an indirect, vtable-based call.
 bar(Base*):
         sub     rsp, 8
         mov     rax, QWORD PTR [rdi]  // vptr (pointer to vtable)
-        call    [QWORD PTR [rax]]  // Virtual call
+        call    [QWORD PTR [rax]]     // Virtual call
         add     rsp, 8
         add     eax, 77
         ret
@@ -113,9 +115,8 @@ flags are useful.
 : (link-time optimization) keeps an intermediate
     representation in the object files and performs optimization at link
     time across all of them together.  Multiple source files are
-    effectively treated as a single large TU, which enables more
-    devirtualization, inlining, and constant propagation across file
-    boundaries.
+    effectively treated as a single large TU, which enables compiler
+    optimizations across file boundaries.
 
 On the language side, `final` is a lightweight way to give the compiler
 comparable guarantees for specific methods.
@@ -222,12 +223,6 @@ public:
 This yields essentially the same optimized code as the CRTP version:
 `foo` is instantiated as if it were `foo<Derived>`, and the call to
 `bar` is resolved statically and inlined.
-
-It's still not dynamic dispatch: a call through a `Base*` only sees what
-`Base` exposes, unless you also use `virtual`.  But for
-performance-critical paths where the concrete type is known, both CRTP
-and C++23's deducing-this approach give the compiler exactly what it
-needs to emit non-virtual, highly optimized code.
 
 [^fn:1]: Assembly generated on an x86-64 system with `gcc` at `-O3`.
     Similar results were observed with `clang` on the same platform.

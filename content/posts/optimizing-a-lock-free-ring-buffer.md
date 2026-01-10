@@ -1,8 +1,8 @@
 +++
 title = "Optimizing a Lock-Free Ring Buffer"
 author = ["David Álvarez Rosa"]
-date = 2025-12-11T23:15:00+00:00
-draft = false
+tags = ["pers", "blog"]
+draft = true
 +++
 
 A single-producer single-consumer (SPSC) queue is a great example of how
@@ -312,7 +312,7 @@ number of cache misses was significantly reduced. Checkout
 ringbuffer.cpp if you want to verify this yourself.
 
 
-## Submmary {#submmary}
+## Summary {#summary}
 
 asdfasd
 

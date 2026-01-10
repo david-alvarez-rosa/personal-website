@@ -1,11 +1,13 @@
 #+title: Personal Website
 #+author: David Álvarez Rosa
 #+startup: logdone
+#+filetags: :pers:blog:
+#+CATEGORY: Blog
 
 This repository contains the source code of my web:
 [[https://david.alvarezrosa.com][https://david.alvarezrosa.com]]
 
-* TODO Spin-Lock
+* TODO [#B] Spin-Lock                                               :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: spin-lock
 :END:
@@ -17,46 +19,45 @@ https://www.youtube.com/watch?v=AN6XHy2znzc
 
 Pending.
 
-* TODO SFINAE
+* TODO [#B] SFINAE                                                  :backlog:
 
 Pending.
 
-* TODO Lru Cache
+* TODO [#B] Lru Cache                                               :backlog:
 
 Pending.
 
-* TODO Small buffer optimization
+* TODO [#B] Small buffer optimization                               :backlog:
 
 Specially small string optimization.
 
-* TODO Optimizing Matrix Multiplication
+* TODO [#B] Optimizing Matrix Multiplication                        :backlog:
 
 Fastest matrix multiplication.
 
-* TODO Translation Look Aside Buffer
+* TODO [#B] Translation Look Aside Buffer                           :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: translation-look-aside-buffer
 :END:
 
 Explain what the TLB is, using maybe hrt blog?
 
-* TODO Vector push_back
+* TODO [#B] Vector push_back                                        :backlog:
 
 In-depth vector push_back following guide
 
-* TODO Implementing a Shared_ptr
+* TODO [#B] Implementing a Shared_ptr                               :backlog:
 
 Implement a shared_ptr
 
-* TODO Exploring CPU Caches
+* TODO [#B] Exploring CPU Caches                                    :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: exploring-cpu-caches
 :END:
 
 Pending.
 
-* DONE Optimizing a Lock-Free Ring Buffer
-CLOSED: [2025-12-11 Thu 23:15]
+* TODO [#D] Optimizing a Lock-Free Ring Buffer
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:
@@ -376,8 +377,7 @@ asdfasd
 
 Some closing comments here.
 
-* DONE Deriving Type Erasure
-CLOSED: [2025-12-11 Thu 23:15]
+* TODO [#B] Deriving Type Erasure
 :PROPERTIES:
 :EXPORT_FILE_NAME: type-erasure
 :END:
@@ -684,7 +684,8 @@ That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
 
-* WAIT Devirtualization and Static Polymorphism
+* TODO [#B] Devirtualization and Static Polymorphism
+CLOSED: [2026-01-10 Sat 14:45]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
@@ -769,8 +770,8 @@ is that the additional ~vptr~ increases object size, and the ~vtable~
 makes the call hard to predict.  This prevents inlining, increases the
 chance of branch mispredictions, and hurts cache efficiency.
 
-The best way to observe this phenomena is by inspecting the assembly
-code[fn:4] emitted by the compiler for a minimal example.
+The best way to observe this phenomena is by inspecting the
+assembly[fn:4] code emitted by the compiler for a minimal example.
 
 #+begin_src cpp
   class Base {
@@ -802,7 +803,7 @@ assembly from a direct call into an indirect, vtable-based call.
   bar(Base*):
           sub     rsp, 8
           mov     rax, QWORD PTR [rdi]  // vptr (pointer to vtable)
-          call    [QWORD PTR [rax]]  // Virtual call
+          call    [QWORD PTR [rax]]     // Virtual call
           add     rsp, 8
           add     eax, 77
           ret
@@ -847,9 +848,8 @@ flags are useful.
 - ~-flto~ :: (link-time optimization) keeps an intermediate
   representation in the object files and performs optimization at link
   time across all of them together.  Multiple source files are
-  effectively treated as a single large TU, which enables more
-  devirtualization, inlining, and constant propagation across file
-  boundaries.
+  effectively treated as a single large TU, which enables compiler
+  optimizations across file boundaries.
 
 On the language side, ~final~ is a lightweight way to give the compiler
 comparable guarantees for specific methods.
@@ -956,14 +956,7 @@ This yields essentially the same optimized code as the CRTP version:
 ~foo~ is instantiated as if it were ~foo<Derived>~, and the call to
 ~bar~ is resolved statically and inlined.
 
-It's still not dynamic dispatch: a call through a ~Base*~ only sees what
-~Base~ exposes, unless you also use ~virtual~.  But for
-performance-critical paths where the concrete type is known, both CRTP
-and C++23's deducing-this approach give the compiler exactly what it
-needs to emit non-virtual, highly optimized code.
-
-* DONE David Álvarez Rosa
-CLOSED: [2025-12-07 Sun 11:24]
+* TODO [#B] David Álvarez Rosa
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
@@ -1077,7 +1070,7 @@ English --- Proficient\\
 Spanish --- Native\\
 Catalan --- Intermediate
 
-* DONE Welcome
+* DONE [#B] Welcome
 CLOSED: [2025-12-02 Tue 19:58]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
@@ -1085,13 +1078,16 @@ CLOSED: [2025-12-02 Tue 19:58]
 :END:
 
  [fn:9]Hi! This is my personal site, where I share notes on software and
-self-hosting.  You'll learn how things work behind the scenes, and how
-to make them run fast, /very/ fast.
+self-hosting.  You'll learn how things work under the hood, and how to
+make them run fast, /very/ fast.
 
-I'm a mathematician and engineer, a strong advocate of free (as in
-/freedom/) software, and a devoted Emacs user.  I live in sunny Dublin.
+I'm a mathematician and engineer based in sunny Dublin, passionate about
+low-latency, high-performance systems.  I'm a strong advocate of free
+(as in /freedom/) software, and a devoted Emacs user.
 
-* DONE Page Not Found
+Find me on [[https://github.com/david-alvarez-rosa/][GitHub]], [[https://gitlab.com/david-alvarez-rosa][GitLab]], [[https://linkedin.com/in/david-alvarez-rosa][LinkedIn]], [[https://david-alvarez-rosa.medium.com/][Medium]].
+
+* DONE [#B] Page Not Found
 CLOSED: [2025-12-13 Sat 22:23]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 404
@@ -1099,7 +1095,7 @@ CLOSED: [2025-12-13 Sat 22:23]
 :END:
 That page couldn't be found (404 error).
 
-* DONE Subscribed
+* DONE [#B] Subscribed
 CLOSED: [2025-12-13 Sat 22:06]
 :PROPERTIES:
 :EXPORT_FILE_NAME: subscribed
