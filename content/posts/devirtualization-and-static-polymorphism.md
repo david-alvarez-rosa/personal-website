@@ -130,8 +130,8 @@ public:
 
 class Derived : public Base {
 public:
-  auto foo() -> int override;
-  auto bar() -> int final;
+  auto foo() -> int override;  // override
+  auto bar() -> int final;     // final
 };
 
 auto test(Derived* derived) -> int {
