@@ -1070,7 +1070,7 @@ English --- Proficient\\
 Spanish --- Native\\
 Catalan --- Intermediate
 
-* DONE [#B] Welcome
+* DONE [#B] Welcomeasdf
 CLOSED: [2025-12-02 Tue 19:58]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
