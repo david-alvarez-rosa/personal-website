@@ -684,8 +684,8 @@ That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
 
-* TODO [#B] Devirtualization and Static Polymorphism
-CLOSED: [2026-01-10 Sat 14:45]
+* DONE [#B] Devirtualization and Static Polymorphism
+CLOSED: [2026-01-10 Sat 17:09]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
@@ -956,8 +956,8 @@ This yields essentially the same optimized code as the CRTP version:
 ~foo~ is instantiated as if it were ~foo<Derived>~, and the call to
 ~bar~ is resolved statically and inlined.
 
-* TODO [#B] David Álvarez Rosa
-CLOSED: [2026-01-10 Sat 17:04]
+* DONE [#B] David Álvarez Rosa
+CLOSED: [2026-01-10 Sat 17:09]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .

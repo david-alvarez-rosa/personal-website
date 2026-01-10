@@ -1,9 +1,9 @@
 +++
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
-date = 2026-01-10T14:45:00+00:00
+date = 2026-01-10T17:09:00+00:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 +++
 
 Virtual dispatch is the basis of runtime polymorphism, but it comes with
