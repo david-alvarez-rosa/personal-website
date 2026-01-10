@@ -1,0 +1,30 @@
+name: Build and Deploy Site
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build site
+        run: hugo -D --minify
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ ${{ secrets.HOST }}:${{ secrets.DEPLOYMENT_DIR }}
