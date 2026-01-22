@@ -62,7 +62,6 @@ sig {
 }
 
 main p, main dd, main ul li {
-    text-align: justify;
     hyphens: auto;
     font-size: 1.4rem;
     line-height: 2rem;
@@ -83,7 +82,6 @@ nav ul {
     gap: 1.5rem;
     display: flex;
     align-items: center;
-    justify-content: left;
 }
 
 nav li {
@@ -132,7 +130,6 @@ table tbody tr:first-child td {
 table th,
 table td {
     padding: 0.4rem 1rem;
-    text-align: left;
 }
 
 a {
@@ -173,7 +170,6 @@ sup {
 .side, figcaption p {
     font-size: 1.1rem;
     line-height: 1.54rem;
-    text-align: left;
 }
 
 .side code, figcaption p code {
@@ -272,10 +268,6 @@ h2:focus-within .anchor {
 
     main, footer {
         margin: 0 1.2rem;
-    }
-
-    main p, main dd, main ul li {
-        text-align: left;
     }
 
     .side, figcaption {
