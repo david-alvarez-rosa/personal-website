@@ -173,7 +173,7 @@ sup {
 }
 
 .side code, figcaption p code {
-    font-size: 1.05rem;
+    font-size: 1.05rem!important;
 }
 
 .side img {
@@ -192,7 +192,7 @@ code {
     font-family: "Inconsolata", monospace;
 }
 
-p code, dt code {
+code:not(.chroma code) {
     font-weight: 500;
     color: #660000;
     font-size: 1.3rem;
