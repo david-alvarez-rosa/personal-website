@@ -562,18 +562,10 @@ consoomer
 
 ** Generic std::any
 
-Both ~Shape~ and ~ShapeWrapper~ have accepted standard names.
-
-~Shape~ is an example of a type erasure concept.[fn:19] That is, ~Shape~
-captures the concept of a shape, which is shared among all the concrete
-types we accept (~Square~ and ~Circle~).  In the end, a concept is just
-the interface we program against internally.
-
-~ShapeWrapper~ is an example of a type erasure model.  That is,
-~ShapeWrapper~ models the concrete types as instances of the concept.
-The model is a templated wrapper object, which implements the concept
-interface and forwards all concept methods to the underlying concrete
-type.
+Both ~Shape~ and ~ShapeWrapper~ have accepted standard names: the former
+is the type-erasure concept[fn:19] (the interface we program against),
+and the latter is the model (a templated wrapper that implements the
+interface and forwards to a concrete type).
 
 Let's rewrite our original type erasure example to use the standard
 parlance.  Nothing needs to be changed except a few type names
