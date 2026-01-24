@@ -117,9 +117,9 @@ table {
     font-family: "Alegreya Sans", sans-serif;
     border: none;
     border-collapse: collapse;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     border-block: 2px solid #111;
-    margin-bottom: 1.2rem;
+    margin: 1.6rem auto;
 }
 
 table tbody tr:first-child td {
@@ -129,7 +129,7 @@ table tbody tr:first-child td {
 
 table th,
 table td {
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
 }
 
 a {
