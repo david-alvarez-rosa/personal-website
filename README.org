@@ -1,6 +1,3 @@
-#+title: Personal Website
-#+author: David Álvarez Rosa
-
 * Personal Website
 
 This repository contains the source code of my web:
