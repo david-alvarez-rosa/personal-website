@@ -71,7 +71,8 @@ Implement a shared_ptr
 
 Pending.
 
-* WAIT [#B] Optimizing a Lock-Free Ring Buffer
+* DONE [#B] Optimizing a Lock-Free Ring Buffer
+CLOSED: [2026-01-24 Sat 13:32]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:
@@ -329,8 +330,8 @@ approach.
 
 ** Summary
 Try it yourself with the [[/code/spsc-bench.cpp][benchmark]] file.  Make sure to compile with at
-least =-O3 -march=native -ffast-math=, threads will be CPU-pinned by the
-benchmark itself.
+least ~-O3~, ~-march-native~, and ~-ffast-math~, threads will be
+CPU-pinned by the benchmark itself.
 
 | Version | Throughput | Notes                                            |
 |---------+------------+--------------------------------------------------|
@@ -652,7 +653,8 @@ That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
 
-* WAIT [#B] Devirtualization and Static Polymorphism
+* DONE [#B] Devirtualization and Static Polymorphism
+CLOSED: [2026-01-10 Sat 13:32]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
