@@ -1,20 +1,19 @@
 +++
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
-date = 2026-01-10T17:09:00+00:00
+date = 2026-01-24T12:31:00+00:00
 layout = "about"
 tags = ["pers", "blog"]
 draft = false
 +++
 
-&nbsp;[^fn:1]Software engineer with experience in low-latency systems, electronic
-trading, and HFT infrastructure. Currently at Susquehanna.  Strong
-advocate of free (as in _freedom_) software and devoted Emacs user.
+&nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin passionate about
+low-latency, high-performance systems.
 
-Previously designed and implemented embedded systems at Amazon impacting
-10M+ monthly active customers, developed semantic caching for LLMs at
-Sopra Steria, and conducted quantitative analysis of cybersecurity risks
-at Deloitte.
+Currently working in algorithmic trading at Susquehanna.  Previously
+designed and built systems at Amazon serving 10M+ monthly active
+customers, developed semantic caching for LLMs at Sopra Steria, and
+conducted quantitative cybersecurity risk analysis at Deloitte.
 
 Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
 in Artificial Intelligence.

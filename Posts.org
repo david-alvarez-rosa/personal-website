@@ -71,8 +71,7 @@ Implement a shared_ptr
 
 Pending.
 
-* DONE [#B] Optimizing a Lock-Free Ring Buffer
-CLOSED: [2026-01-24 Sat 12:00]
+* WAIT [#B] Optimizing a Lock-Free Ring Buffer
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:
@@ -653,8 +652,7 @@ That's it! The class ~Any~ is a simplified version of ~std::any~, which
 is even used in the STL itself (namely, for ~std::function~). But that's
 for another entry.
 
-* DONE [#B] Devirtualization and Static Polymorphism
-CLOSED: [2026-01-10 Sat 17:09]
+* WAIT [#B] Devirtualization and Static Polymorphism
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
@@ -936,21 +934,20 @@ CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 10:47] =>  0:00
 Pending.
 
 * DONE [#B] David Álvarez Rosa
-CLOSED: [2026-01-10 Sat 17:09]
+CLOSED: [2026-01-24 Sat 12:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
 :EXPORT_HUGO_LAYOUT: about
 :END:
 
- [fn:8]Software engineer with experience in low-latency systems, electronic
-trading, and HFT infrastructure. Currently at Susquehanna.  Strong
-advocate of free (as in /freedom/) software and devoted Emacs user.
+ [fn:8]Mathematician and engineer based in sunny Dublin passionate about
+low-latency, high-performance systems.
 
-Previously designed and implemented embedded systems at Amazon impacting
-10M+ monthly active customers, developed semantic caching for LLMs at
-Sopra Steria, and conducted quantitative analysis of cybersecurity risks
-at Deloitte.
+Currently working in algorithmic trading at Susquehanna.  Previously
+designed and built systems at Amazon serving 10M+ monthly active
+customers, developed semantic caching for LLMs at Sopra Steria, and
+conducted quantitative cybersecurity risk analysis at Deloitte.
 
 Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
 in Artificial Intelligence.
