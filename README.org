@@ -1,9 +1,6 @@
 * Personal Website
 
-This repository contains the source code of my web:
-[[https://david.alvarezrosa.com][https://david.alvarezrosa.com]]
+Source code for my personal website https://david.alvarezrosa.com
 
-Posts are written in Emacs org-mode in [[file:Posts.org][Posts.org]], and then exported to
-Markdown with ~ox-hugo~.
-
-Hugo then builds the webiste, using my own theme.
+Posts live in [[file:Posts.org][Posts.org]] (Org mode), exported to Markdown via ~ox-hugo~.
+Hugo builds the site with my custom theme.
