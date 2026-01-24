@@ -61,7 +61,7 @@ sig {
     display: none;
 }
 
-main p, main dd, main ul li {
+main p, main dd, main ul li, main ol li {
     hyphens: auto;
     font-size: 1.4rem;
     line-height: 2rem;

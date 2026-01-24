@@ -1,7 +1,7 @@
 +++
 title = "Optimizing a Lock-Free Ring Buffer"
 author = ["David Álvarez Rosa"]
-date = 2026-01-24T13:32:00+00:00
+date = 2026-01-19T13:32:00+00:00
 tags = ["pers", "blog"]
 draft = false
 +++

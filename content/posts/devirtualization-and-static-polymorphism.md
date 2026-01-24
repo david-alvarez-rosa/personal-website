@@ -6,14 +6,16 @@ tags = ["pers", "blog"]
 draft = false
 +++
 
-Virtual dispatch is the basis of runtime polymorphism, but it comes with
-a hidden overhead: pointer indirection, larger object layouts, and fewer
-inlining opportunities.  Compilers try their best to _devirtualize_ the
-calls, but unfortunately it is not always possible.
+Ever wondered why your "clean" polymorphic design underperforms in
+benchmarks?  Virtual dispatch enables runtime polymorphism, but it comes
+with a hidden overhead: pointer indirection, larger object layouts, and
+fewer inlining opportunities.
 
-On latency-sensitive paths, it's beneficial to manually replace dynamic
-dispatch with _static polymorphism_, so calls are resolved at compile
-time and the abstraction has effectively zero runtime cost.
+Compilers do their best to _devirtualize_ these calls, but it isn't
+always possible.  On latency-sensitive paths, it's beneficial to
+manually replace dynamic dispatch with _static polymorphism_, so calls
+are resolved at compile time and the abstraction has effectively zero
+runtime cost.
 
 
 ## Virtual dispatch {#virtual-dispatch}

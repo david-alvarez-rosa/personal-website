@@ -72,7 +72,7 @@ Implement a shared_ptr
 Pending.
 
 * DONE [#B] Optimizing a Lock-Free Ring Buffer
-CLOSED: [2026-01-24 Sat 13:32]
+CLOSED: [2026-01-19 Sat 13:32]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:
@@ -343,19 +343,21 @@ CPU-pinned by the benchmark itself.
 
 Long live lock-free and wait-free data structures!
 
-* TODO [#B] Deriving Type Erasure
+* DONE [#B] Deriving Type Erasure
+CLOSED: [2026-01-24 Sat 20:06]
 :PROPERTIES:
-:EXPORT_FILE_NAME: type-erasure
+:EXPORT_FILE_NAME: deriving-type-erasure
 :END:
 :LOGBOOK:
+CLOCK: [2026-01-24 Sat 18:10]--[2026-01-24 Sat 20:06] =>  1:56
 CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 10:47] =>  0:00
 :END:
 
-Ever looked at ~std::any~ and wondered what’s actually going on behind
+Ever looked at ~std::any~ and wondered what's actually going on behind
 the scenes?  Beneath the intimidating interface is a clean case of type
 erasure: concrete types hidden behind a small, uniform wrapper.
 
-Starting from familiar tools---virtual functions and templates---we’ll
+Starting from familiar tools---virtual functions and templates---we'll
 build a minimal ~std::any~.  Along the way, type erasure shifts from
 buzzword to practical technique you can recognize and reuse in your own
 designs.
@@ -363,7 +365,7 @@ designs.
 ** Polymorphism with interfaces
 
 The typical way to achieve polymorphism is to define an interface
-consisting of pure-virtual methods you want to be able to call. Then,
+consisting of pure-virtual methods you want to be able to call.  Then,
 for each implementation that you want to use polymorphically, you create
 a subclass that inherits from the base class and implement those
 methods.
@@ -408,21 +410,15 @@ interface
   }
 #+end_src
 
-Not rocket science, right?
+Simple enough, right?
 
 ** Polymorphism with templates
 
-Inheritance is a good solution to problems that require polymorphism, as
-long as the concrete types you’re working with (~Square~ and ~Circle~ in
-the example above) all inherit from a common base (~Shape~), which
-exposes all the required functionality.
-
-But sometimes the concrete types you’re trying to make polymorphic can’t
-inherit from a common base[fn:12].  If you’re in this situation,
-however, you’re not out of luck! Even if the concrete types don’t share
-a common base, if they conform to a common interface (that is, they can
-be used the same way by a caller), we can instead use a template to make
-the types polymorphic:
+Inheritance is a good solution to problems that require polymorphism,
+but sometimes the concrete types you want to handle polymorphically
+cannot share a common base class.[fn:12] In that case, if the types
+provide the same interface, you can use a template to get polymorphism
+instead
 
 #+begin_src cpp
   auto printArea(const auto& shape) {
@@ -430,89 +426,57 @@ the types polymorphic:
   }
 #+end_src
 
-You can call this above method on ~Square~, ~Circle~, and anything else
-that has zero-argument ~area()~ method that return doubles.  This works
-due to the way templates are compiled: when you invoke a template on a
-type, the compiler compiles a new overload of the method, specialized
-for the concrete type you’re passing in.  Thus, as long as the method
-would compile with the templated type replaced with the concrete type
-(say, ~Circle~), the template invocation is valid[fn:13].
+You can use this method with ~Square~, ~Circle~, or any type that
+provides a zero-argument ~area()~ returning ~double~. Templates work
+because the compiler generates a version of the function for each
+concrete type you use, and the call is valid as long as that generated
+code would compile[fn:13] for the given type.
 
-** Drawbacks to Template Polymorphism
+Unfortunately, template-based polymorphism has two main downsides.
 
-Although achieving polymorphism with templates is a neat trick, there
-are two drawbacks:
-
-*First,* we can’t shove disparate types into an array.  When we were
-using interfaces, we could store an instance of each of ~Square~ and
-~Circle~ in an array of ~Shape~:
-
-#+begin_src cpp
-  auto square = Square{2};
-  auto circle = Circle{1};
-  auto shapes = std::vector<Shape*>{&square, &circle};
-#+end_src
-
-However, with the template-based polymorphism approach, we couldn’t
-create this array, because there is no common subtype for the array:
+*First,* templates do not give you one shared runtime base type like
+~Shape~. Each instantiation is a distinct type, so there is no common
+type for a homogeneous container; you cannot store a mix of ~Square~ and
+~Circle~ in one array and handle them uniformly the way you can with a
+pointer to base technique
 
 #+begin_src cpp
   auto shapes = std::vector< ??? >{&square, &circle};
 #+end_src
 
-The *second* drawback is a little more subtle. Anybody who uses the
-template-based ~area(const auto&)~ method must either explicitly specify
-the concrete type, or be a template itself, to pass along the template
-type off ~area()~.
-
-Since you’re employing polymorphism in the first place, most callers
-will likely fall into the second group, meaning large swathes of your
-program will need to be implemented in templates. This can get out of
-hand quickly, making your program hard to read and hard to
-organize. Overuse of this technique can make it take longer to compile
-your program, and can bloat the size of your program, wasting space and
-making it take longer to start your program at runtime.
-
-Yuck!
+The *second* drawback[fn:20] is a little more subtle.  Anybody who uses
+the template-based ~area(const auto&)~ method must either explicitly
+specify the concrete type, or be a template itself, to pass along the
+template type of ~area()~.
 
 ** Deriving std::any
 
-Pretend, for some reason, ~Square~ and ~Circle~ are set in stone, and the
-designers originally did not give them a common base class.  We would
-like to unite them under some common base class ourselves.  And, since we
-don’t control the implementation of ~Square~ and ~Circle~, it’s not possible
-for us to simply change them to inherit from a base interface.
+Imagine ~Square~ and ~Circle~ are fixed types with no shared base class,
+and you cannot change them to inherit from one.  But you still want to
+handle them through a single common interface.
 
-Here’s a basic plan for fixing this: if we don’t have the inheritance
-chain we want, and we can’t change the objects to make them inherit,
-then we can build our own inheritance chain out of wrapper objects.
-That is, we define our own interface, and implement it multiple times.
-Each implementation of the interface wraps a ~Square~ or ~Circle~ and
-calls into that for all the virtual methods.
-
-Then we create wrapper objects which inherit from MyAnimal. Each wrapper
-does nothing but call into the ‘real’ underlying object:
+One way to do that is to introduce wrappers.  Define your own ~Shape~
+interface, then create wrapper classes that inherit from ~Shape~ and
+contain a ~Square~ or ~Circle~; each wrapper implements the virtual
+methods by simply forwarding calls to the wrapped object
 
 #+begin_src cpp
   class SquareWrapper : public Shape {
     Square square_;
   public:
-    explicit SquareWrapper(Square square) noexcept
-        : square_{std::move(square)} {}
+    explicit SquareWrapper(Square square) noexcept : square_{std::move(square)} {}
     auto area() const noexcept -> double override { return square.area(); }
   };
 
   class CircleWrapper : public Shape {
     Circle circle_;
   public:
-    explicit CircleWrapper(Circle circle) noexcept
-        : circle_{std::move(circle)} {}
+    explicit CircleWrapper(Circle circle) noexcept : circle_{std::move(circle)} {}
     auto area() const noexcept -> double override { return circle.area(); }
   };
 #+end_src
 
-Now we can work with instances of ~Shape~, each of which wraps one of
-~Square~ or ~Circle~:
+Now we can work directly with instances of ~Shape~
 
 #+begin_src cpp
   auto printAreas(const std::vector<Shape*>& shapes) -> void {
@@ -527,17 +491,14 @@ Now we can work with instances of ~Shape~, each of which wraps one of
     auto shapes = std::vector<Shape*>{&square, &circle};
     printAreas(shapes);
   }
-
-  // Area is 4.00
-  // Area is 3.14
 #+end_src
 
-This works, but there’s a glaring drawback: we have to define one
-wrapper class (like ~CircleWrapper~) for every concrete type we want to
-wrap (like ~Circle~). Holy boilerplate, Batman!
+This approach works, but it has an obvious downside: you need a separate
+wrapper type (like ~CircleWrapper~) for every concrete type you want to
+adapt (like ~Circle~), which quickly turns into a pile of
+boilerplate. Luckily, templates can offload much of that work to the
+compiler by generating the needed code for each type automatically
 
-However, we’ve already seen an easy way to have the compiler do this
-work for us: by using templates for polymorphism
 #+begin_src cpp
   template <typename T>
   class ShapeWrapper : public Shape {
@@ -548,9 +509,10 @@ work for us: by using templates for polymorphism
   };
 #+end_src
 
-What we built above is the basis of the ‘type erasure’ idiom. All that’s
-left is to hide all this machinery behind a another class, so that
-callers don’t have to deal with our custom interfaces and templates:
+What we built above is the basis of the "type erasure" idiom.  All
+that's left is to hide all this machinery behind a another class, so
+that callers don't have to deal with our custom interfaces and
+templates[fn:18]
 
 #+begin_src cpp
   class AnyShape {
@@ -566,7 +528,7 @@ callers don’t have to deal with our custom interfaces and templates:
 
     public:
       explicit ShapeWrapper(T shape) noexcept : shape_{std::move(shape)} {}
-      auto area() const noexcept -> double override { return shape.area(); }
+      auto area() const noexcept -> double override { return shape_.area(); }
     };
 
     std::unique_ptr<Shape> shape_;
@@ -580,7 +542,8 @@ callers don’t have to deal with our custom interfaces and templates:
   };
 #+end_src
 
-It works as expected:
+It works the same as before, but the wrapper logic is hidden from the
+consoomer
 
 #+begin_src cpp
   auto printAreas(const std::vector<AnyShape>& shapes) -> void {
@@ -595,29 +558,25 @@ It works as expected:
     shapes.emplace_back(Circle{1});
     printAreas(shapes);
   }
-
-  // Area is 4.00
-  // Area is 3.14
 #+end_src
 
-*** Generic std::any
+** Generic std::any
 
 Both ~Shape~ and ~ShapeWrapper~ have accepted standard names.
 
-~Shape~ is an example of a type erasure concept. That is, ~Shape~
-captures the concept of an animal, which is shared among all the
-concrete types we accept (~Square~ and ~Circle~). In the end, a concept
-is just the interface we program against internally.
+~Shape~ is an example of a type erasure concept.[fn:19] That is, ~Shape~
+captures the concept of a shape, which is shared among all the concrete
+types we accept (~Square~ and ~Circle~).  In the end, a concept is just
+the interface we program against internally.
 
-~ShapeWrapper~ is an example of a type erasure model. That is,
-~ShapeWrapper~ models the concrete types as instances of the concept. The
-model is a templated wrapper object, which implements the concept
+~ShapeWrapper~ is an example of a type erasure model.  That is,
+~ShapeWrapper~ models the concrete types as instances of the concept.
+The model is a templated wrapper object, which implements the concept
 interface and forwards all concept methods to the underlying concrete
 type.
 
-In parting, let’s rewrite our original type erasure example to
-use the standard parlance. Nothing needs to be changed except a few type
-names:
+Let's rewrite our original type erasure example to use the standard
+parlance.  Nothing needs to be changed except a few type names
 
 #+begin_src cpp
   #include <memory>
@@ -635,7 +594,7 @@ names:
 
     public:
       explicit Model(T obj) noexcept : obj_{std::move(obj)} {}
-      auto f() const noexcept -> double override { obj.f(); }
+      auto f() const noexcept -> double override { return obj_.f(); }
     };
 
     std::unique_ptr<Concept> obj_;
@@ -645,12 +604,12 @@ names:
     explicit Any(T&& obj) noexcept
         : obj_{std::make_unique<Model<T>>(std::forward<T>(obj))} {}
 
-    auto f() const noexcept -> double { obj_->f(); }
+    auto f() const noexcept -> double { return obj_->f(); }
   };
 #+end_src
 
-That's it! The class ~Any~ is a simplified version of ~std::any~, which
-is even used in the STL itself (namely, for ~std::function~). But that's
+That's it!  The class ~Any~ is a simplified version of ~std::any~, which
+is even used in the STL itself (namely, for ~std::function~).  But that's
 for another entry.
 
 * DONE [#B] Devirtualization and Static Polymorphism
@@ -663,14 +622,16 @@ CLOSED: [2026-01-10 Sat 13:32]
 - State "NEXT"       from "DONE"       [2025-12-18 Thu 20:02]
 :END:
 
-Virtual dispatch is the basis of runtime polymorphism, but it comes with
-a hidden overhead: pointer indirection, larger object layouts, and fewer
-inlining opportunities.  Compilers try their best to /devirtualize/ the
-calls, but unfortunately it is not always possible.
+Ever wondered why your "clean" polymorphic design underperforms in
+benchmarks?  Virtual dispatch enables runtime polymorphism, but it comes
+with a hidden overhead: pointer indirection, larger object layouts, and
+fewer inlining opportunities.
 
-On latency-sensitive paths, it's beneficial to manually replace dynamic
-dispatch with /static polymorphism/, so calls are resolved at compile
-time and the abstraction has effectively zero runtime cost.
+Compilers do their best to /devirtualize/ these calls, but it isn't
+always possible.  On latency-sensitive paths, it's beneficial to
+manually replace dynamic dispatch with /static polymorphism/, so calls
+are resolved at compile time and the abstraction has effectively zero
+runtime cost.
 
 ** Virtual dispatch
 
@@ -1084,6 +1045,21 @@ CLOSED: [2025-12-13 Sat 22:06]
 Now, you are subscribed.
 
 * Footnotes
+
+[fn:20] Since you're employing polymorphism in the first place, most
+callers will likely fall into the second group, and will need to be
+templates themselves too so they can pass the type through.  That can
+quickly spread templates across the codebase, making it harder to read
+and structure, increasing compile times, and producing larger binaries
+with slower startup.
+
+[fn:19] The type erasure concept is an OO-style interface (a vtable).
+It's unrelated to C++20 ~concept~ (compile-time predicates).
+
+[fn:18] This implementation always heap-allocates.  Production
+~std::any~ implementations often use small buffer optimization (SBO)
+techniques to store small objects inline and avoid allocation.
+
 [fn:17] It's useful to observe the number of cache misses with ~perf
 stat -e cache-misses~, they are greatly reduced in this approach.
 
@@ -1098,14 +1074,14 @@ prevents false sharing, hence optimizes CPU cache usage.
 level, and ~-march=native -ffast-math~.  Consumer and producer threads
 are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [[/code/spsc-bench.cpp][benchmark]].
 
-[fn:13] If you tried to pass in a type that doesn’t conform to the
+[fn:13] If you tried to pass in a type that doesn't conform to the
 'interface' (say, ~std::string~), the compiler would hit an error when
-you tried to compile the method call, complaining that ~std::string~
-doesn’t have an ~area~ method.
+you try to compile the method call, complaining that ~std::string~
+doesn't have an ~area~ method.
 
 [fn:12] In some cases, you may not have control of the concrete types
 (e.g. think STL types like ~std::string~), or it may not even be
-possible for the concrete type to inherit (e.g. built-ins like int).
+possible for the concrete type to inherit (e.g. builtins like ~int~).
 
 [fn:10] Remember that interfaces that are intended to be used through a
 ~Base&~ or ~Base*~ must have a virtual destructor, to ensure derived
