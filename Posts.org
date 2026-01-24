@@ -1017,7 +1017,7 @@ I'm a mathematician and engineer based in sunny Dublin, passionate about
 low-latency, high-performance systems.  I'm a strong advocate of free
 (as in /freedom/) software, and a devoted Emacs user.
 
-Find me on [[https://github.com/david-alvarez-rosa/][GitHub]], [[https://gitlab.com/david-alvarez-rosa][GitLab]], [[https://linkedin.com/in/david-alvarez-rosa][LinkedIn]], [[https://david-alvarez-rosa.medium.com/][Medium]].
+Find me on [[https://github.com/david-alvarez-rosa/][GitHub]], [[https://gitlab.com/david-alvarez-rosa][GitLab]], and [[https://linkedin.com/in/david-alvarez-rosa][LinkedIn]].
 
 * DONE [#B] Page Not Found
 CLOSED: [2025-12-13 Sat 22:23]
