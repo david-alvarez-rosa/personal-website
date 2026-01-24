@@ -8,7 +8,3 @@ document.addEventListener('DOMContentLoaded', function () {
         link.appendChild(img);
     });
 });
-
-document.querySelectorAll("p").forEach(p => {
-    p.innerHTML = p.innerHTML.replace(/^(?:&nbsp;|\s)+/, '');
-});

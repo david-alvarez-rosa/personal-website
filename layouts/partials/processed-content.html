@@ -10,4 +10,5 @@
   {{ $replacement := printf `<sup>%s</sup> %s` $id $side }}
   {{ $content = replaceRE $pattern $replacement $content }}
 {{ end }}
+{{ $content = replaceRE `<p>\x{00A0}<sup.*?<\/sup>(.*)` `<p>$1` $content }}
 {{ replace $content $footnotes "" | safeHTML }}
