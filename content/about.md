@@ -7,8 +7,8 @@ tags = ["pers", "blog"]
 draft = false
 +++
 
-&nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin passionate about
-low-latency, high-performance systems.
+&nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin, passionate
+about low-latency, high-performance systems.
 
 Currently working in algorithmic trading at Susquehanna.  Previously
 designed and built systems at Amazon serving 10M+ monthly active

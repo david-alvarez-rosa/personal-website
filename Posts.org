@@ -941,8 +941,8 @@ CLOSED: [2026-01-24 Sat 12:31]
 :EXPORT_HUGO_LAYOUT: about
 :END:
 
- [fn:8]Mathematician and engineer based in sunny Dublin passionate about
-low-latency, high-performance systems.
+ [fn:8]Mathematician and engineer based in sunny Dublin, passionate
+about low-latency, high-performance systems.
 
 Currently working in algorithmic trading at Susquehanna.  Previously
 designed and built systems at Amazon serving 10M+ monthly active
