@@ -329,9 +329,10 @@ tuned lock-free version and 25x faster than the original locking
 approach.
 
 ** Summary
-Try it yourself with the [[/code/spsc-bench.cpp][benchmark]] file.  Make sure to compile with at
-least ~-O3~, ~-march-native~, and ~-ffast-math~, threads will be
-CPU-pinned by the benchmark itself.
+If you want to reproduce these results, run the included [[/code/spsc-bench.cpp][benchmark]]
+compiled with at least ~-O3~ optimization level.[fn:21] The benchmark
+pins the producer and consumer threads to dedicated CPU cores to
+minimize scheduling noise.
 
 | Version | Throughput | Notes                                            |
 |---------+------------+--------------------------------------------------|
@@ -1037,6 +1038,8 @@ CLOSED: [2025-12-13 Sat 22:06]
 Now, you are subscribed.
 
 * Footnotes
+[fn:21] Alongside ~-O3~, the benchmark was compiled with ~-march=native~
+and ~-ffast-math~, though these flags shouldn't make a difference here.
 
 [fn:20] Since you're employing polymorphism in the first place, most
 callers will likely fall into the second group, and will need to be

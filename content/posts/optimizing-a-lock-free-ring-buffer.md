@@ -261,9 +261,10 @@ approach.
 
 ## Summary {#summary}
 
-Try it yourself with the [benchmark](/code/spsc-bench.cpp) file.  Make sure to compile with at
-least `-O3`, `-march-native`, and `-ffast-math`, threads will be
-CPU-pinned by the benchmark itself.
+If you want to reproduce these results, run the included [benchmark](/code/spsc-bench.cpp)
+compiled with at least `-O3` optimization level.[^fn:9] The benchmark
+pins the producer and consumer threads to dedicated CPU cores to
+minimize scheduling noise.
 
 | Version | Throughput | Notes                                            |
 |---------|------------|--------------------------------------------------|
@@ -296,3 +297,5 @@ Long live lock-free and wait-free data structures!
     stat -e cache-misses`, they are greatly reduced in this approach.
 [^fn:8]: This advanced optimization was initially proposed by [Erik
     Rigtorp](https://rigtorp.se).
+[^fn:9]: Alongside `-O3`, the benchmark was compiled with `-march=native`
+    and `-ffast-math`, though these flags shouldn't make a difference here.
