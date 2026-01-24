@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:title" content="{{ printf "%s | %s" .Title site.Title }}">
-  <meta property="og:description" content="{{ .Plain | truncate 160 }}">
+  <meta property="og:description" content="{{ replaceRE `^\x{00A0}\d(.*?)` `$1` .Plain | truncate 160 }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ site.Title }}">
   <!-- <meta property="og:image" content=""> TODO: add image -->
