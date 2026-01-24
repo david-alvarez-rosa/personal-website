@@ -220,8 +220,8 @@ auto main() -> int {
 ## Generic std::any {#generic-std-any}
 
 Both `Shape` and `ShapeWrapper` have accepted standard names: the former
-is the type-erasure concept[^fn:6] (the interface we program against),
-and the latter is the model (a templated wrapper that implements the
+is the type-erasure _concept_[^fn:6] (the interface we program against),
+and the latter is the _model_ (a templated wrapper that implements the
 interface and forwards to a concrete type).
 
 Let's rewrite our original type erasure example to use the standard
@@ -258,8 +258,8 @@ public:
 ```
 
 That's it!  The class `Any` is a simplified version of `std::any`, which
-is even used in the STL itself (namely, for `std::function`).  But that's
-for another entry.
+is even used in the STL itself (namely, in `std::function`).  But that's
+for another post.
 
 [^fn:1]: Remember that interfaces that are intended to be used through a
     `Base&` or `Base*` must have a virtual destructor, to ensure derived

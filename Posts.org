@@ -563,8 +563,8 @@ consoomer
 ** Generic std::any
 
 Both ~Shape~ and ~ShapeWrapper~ have accepted standard names: the former
-is the type-erasure concept[fn:19] (the interface we program against),
-and the latter is the model (a templated wrapper that implements the
+is the type-erasure /concept/[fn:19] (the interface we program against),
+and the latter is the /model/ (a templated wrapper that implements the
 interface and forwards to a concrete type).
 
 Let's rewrite our original type erasure example to use the standard
@@ -601,8 +601,8 @@ parlance.  Nothing needs to be changed except a few type names
 #+end_src
 
 That's it!  The class ~Any~ is a simplified version of ~std::any~, which
-is even used in the STL itself (namely, for ~std::function~).  But that's
-for another entry.
+is even used in the STL itself (namely, in ~std::function~).  But that's
+for another post.
 
 * DONE [#B] Devirtualization and Static Polymorphism
 CLOSED: [2026-01-10 Sat 13:32]
