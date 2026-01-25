@@ -7,9 +7,9 @@ draft = false
 +++
 
 Ever wondered why your "clean" polymorphic design underperforms in
-benchmarks?  Virtual dispatch enables runtime polymorphism, but it comes
-with a hidden overhead: pointer indirection, larger object layouts, and
-fewer inlining opportunities.
+benchmarks?  Virtual dispatch enables polymorphism, but it comes with a
+hidden overhead: pointer indirection, larger object layouts, and fewer
+inlining opportunities.
 
 Compilers do their best to _devirtualize_ these calls, but it isn't
 always possible.  On latency-sensitive paths, it's beneficial to
@@ -21,19 +21,19 @@ runtime cost.
 ## Virtual dispatch {#virtual-dispatch}
 
 Runtime polymorphism occurs when a base interface exposes a virtual
-method that derived classes override.  Calls made through a `Base&` (or
-`Base*`) are then dispatched to the appropriate override at runtime.
-Under the hood, a virtual table (`vtable`) is created per _each class_,
-and a pointer (`vptr`) to the `vtable` is added to _each instance_.
+method that derived classes override.  Calls made through a `Base&` are
+then dispatched to the appropriate override at runtime.  Under the hood,
+a virtual table (`vtable`) is created _per each class_, and a pointer
+(`vptr`) to the `vtable` is added _to each instance_.
 
 {{< figure src="/images/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
 On a virtual call, the compiler emits code that loads the `vptr`,
 selects the right slot in the `vtable`, and performs an indirect call
-through that function pointer.  Sounds reasonable, right?  The problem
-is that the additional `vptr` increases object size, and the `vtable`
-makes the call hard to predict.  This prevents inlining, increases the
-chance of branch mispredictions, and hurts cache efficiency.
+through that function pointer.  The drawback is that the extra `vptr`
+increases object size, and the `vtable` makes the call hard to predict.
+This prevents inlining, increases the chance of branch mispredictions,
+and reduces cache efficiency.
 
 The best way to observe this phenomena is by inspecting the
 assembly[^fn:1] code emitted by the compiler for a minimal example.
@@ -49,8 +49,8 @@ auto bar(Base* base) -> int {
 }
 ```
 
-For a regular, non-virtual member function `foo` like in the example above,
-the free function `bar` issues a direct call.
+For a regular, non-virtual member function `foo` like in the example
+above, the free function `bar` issues a direct call.
 
 ```asm
 bar(Base*):
