@@ -28,4 +28,6 @@ def subscribe(email: EmailStr = Form(...)):
     with Session(engine) as session:
         session.add(Subscription(email=email.strip().lower()))
         session.commit()
-    return RedirectResponse(url="https://beta.alvarezrosa.com/subscription", status_code=HTTP_303_SEE_OTHER)
+    return RedirectResponse(
+        url="https://beta.alvarezrosa.com/subscription", status_code=HTTP_303_SEE_OTHER
+    )
