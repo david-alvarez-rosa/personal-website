@@ -11,7 +11,7 @@
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
 
-  <h2 id="recent-entries">Recent Entries <a class="anchor" href="#recent-entries">&sect;</a></h2>
+  <h2 id="recent-entries">Recent Posts <a class="anchor" href="#recent-entries">&sect;</a></h2>
   {{ range first 3 (where site.RegularPages "Section" "posts") }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
