@@ -70,10 +70,6 @@ main p, main dd, main ul li, main ol li {
     padding-right: 0;
 }
 
-figcaption p {
-    margin-bottom: 0;
-}
-
 nav ul {
     list-style: none;
     padding: 0;
@@ -157,7 +153,7 @@ sup {
     line-height: 0;
 }
 
-.side, figcaption {
+.side {
     float: right;
     clear: right;
     padding-top: 0.2rem;
@@ -167,12 +163,12 @@ sup {
     position: relative;
 }
 
-.side, figcaption p {
+.side {
     font-size: 1.1rem;
     line-height: 1.54rem;
 }
 
-.side code, figcaption p code {
+.side code {
     font-size: 1.05rem!important;
 }
 
@@ -270,7 +266,7 @@ h2:focus-within .anchor {
         margin: 0 1.2rem;
     }
 
-    .side, figcaption {
+    .side {
         float: none;
         display: block;
         margin: 0.4rem 0;
@@ -282,6 +278,6 @@ h2:focus-within .anchor {
 
     .side img {
         box-shadow: none;
-        margin: auto;
+        margin: auto auto 0.4rem auto;
     }
 }
