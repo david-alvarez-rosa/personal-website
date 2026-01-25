@@ -1,7 +1,9 @@
 from contextlib import asynccontextmanager
+from fastapi.responses import RedirectResponse
 from fastapi import FastAPI, Form
 from pydantic import EmailStr
 from sqlmodel import SQLModel, Field, Session, create_engine
+from starlette.status import HTTP_303_SEE_OTHER
 
 
 class Subscription(SQLModel, table=True):
@@ -26,3 +28,4 @@ def subscribe(email: EmailStr = Form(...)):
     with Session(engine) as session:
         session.add(Subscription(email=email.strip().lower()))
         session.commit()
+    return RedirectResponse(url="https://beta.alvarezrosa.com/subscription", status_code=HTTP_303_SEE_OTHER)

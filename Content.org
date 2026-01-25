@@ -1028,14 +1028,17 @@ CLOSED: [2025-12-13 Sat 22:23]
 :END:
 That page couldn't be found (404 error).
 
-* DONE [#B] Subscribed
+* DONE [#B] Subscription
 CLOSED: [2025-12-13 Sat 22:06]
 :PROPERTIES:
-:EXPORT_FILE_NAME: subscribed
+:EXPORT_FILE_NAME: subscription
 :EXPORT_HUGO_SECTION: .
 :END:
 
-Now, you are subscribed.
+Welcome! Your subscription is confirmed.
+
+You can unsubscribe anytime by emailing david@alvarezrosa.com from the
+same email address you subscribed with.
 
 * Footnotes
 [fn:21] Alongside ~-O3~, the benchmark was compiled with ~-march=native~
