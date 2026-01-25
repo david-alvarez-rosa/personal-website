@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI
+from fastapi import FastAPI, Form
 from pydantic import EmailStr
 from sqlmodel import SQLModel, Field, Session, create_engine
 
@@ -22,7 +22,7 @@ app = FastAPI(lifespan=lifespan)
 
 
 @app.post("/subscribe")
-def subscribe(email: EmailStr):
+def subscribe(email: EmailStr = Form(...)):
     with Session(engine) as session:
         session.add(Subscription(email=email.strip().lower()))
         session.commit()
