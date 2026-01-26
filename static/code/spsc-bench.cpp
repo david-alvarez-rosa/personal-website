@@ -23,7 +23,7 @@ public:
     if (next_head == tail_) {  // Full
       return false;
     }
-    buffer_[next_head] = value;
+    buffer_[head_] = value;
     head_ = next_head;
     return true;
   }

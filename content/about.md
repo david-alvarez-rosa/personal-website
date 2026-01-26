@@ -116,6 +116,12 @@ English --- Proficient<br />
 Spanish --- Native<br />
 Catalan --- Intermediate
 
+
+## Contact {#contact}
+
+You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
+39 30.
+
 [^fn:1]: ![](/images/portrait.png) **That's me!** March 2022.
 [^fn:2]: Jul 2024--Present <br />
     Dublin, Ireland

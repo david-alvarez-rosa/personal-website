@@ -91,16 +91,15 @@ share data between threads in the lowest-latency environments.
 ** What is a ring buffer?
 
  [fn:11]You might have run into the term circular buffer, or perhaps
-cyclic queue.  These are simply other names for a /ring buffer/: a kind
-of queue where a producer generates data and inserts it into the buffer,
-and a consumer later pulls it back out, in first-in-first-out order.
+cyclic queue.  These are simply other names for a /ring buffer:/ a queue
+where a producer generates data and inserts it into the buffer, and a
+consumer later pulls it back out, in first-in-first-out order.
 
 What makes a ring buffer distinctive is how it stores data and the
-constraints it enforces.  It has a fixed capacity; it neither expands nor
-shrinks.  As a result, when the buffer fills up, the producer must either
-wait until space becomes available or overwrite entries that have not
-been read yet, depending on the buffer's semantics and what the
-application expects.
+constraints it enforces.  It has a fixed capacity; it neither expands
+nor shrinks.  As a result, when the buffer fills up, the producer must
+either wait until space becomes available or overwrite entries that have
+not been read yet, depending on what the application expects.
 
 The consumer's job is straightforward: read items as they arrive.  When
 the ring buffer is empty, the consumer has to block, spin, or move on to
@@ -112,16 +111,16 @@ waiting on both sides.
 ** Single-threaded ring buffer
 
 Let's start with a single-threaded ring buffer, which is just an
-array[fn:1] and two indices.  We can leave one slot empty to distinguish
-"full" from "empty."  Push writes to head and advances it; pop reads
-from tail and advances it.
+array[fn:1] and two indices.  We leave one slot permanently unused to
+distinguish "full" from "empty."  Push writes to head and advances it;
+pop reads from tail and advances it.
 
 #+begin_src cpp
   template <typename T, std::size_t N>
   class RingBufferV1 {
     std::array<T, N> buffer_;
-    std::size_t head_;
-    std::size_t tail_;
+    std::size_t head_{0};
+    std::size_t tail_{0};
   };
 #+end_src
 
@@ -136,7 +135,7 @@ We can now implement the ~push~ (or write) operation[fn:2]
     if (new_head == tail_) {  // Full
       return false;
     }
-    buffer_[new_head] = value;
+    buffer_[head_] = value;
     head_ = new_head;
     return true;
   }
@@ -190,7 +189,7 @@ the only writer of tail.  That asymmetry is the lever to remove locks.
 
 ** Lock-free ring buffer
 
-We can remove the locks by using atomics insteads[fn:15]
+We can remove the locks by using atomics instead[fn:15]
 
 #+begin_src cpp
   template <typename T, std::size_t N>
@@ -241,7 +240,7 @@ Simply removing the locks yields *35M ops/s*, more than double the
 throughput of the locked version!  You probably have noticed that we are
 using the default ~std::memory_order_seq_cst~ memory order for loading /
 storing the atomics, which is the slowest.  Let's manually tune the
-memory order
+memory order[fn:25]
 
 #+begin_src cpp
   auto push(const T& value) noexcept -> bool {
@@ -329,6 +328,7 @@ tuned lock-free version and 25x faster than the original locking
 approach.
 
 ** Summary
+
 If you want to reproduce these results, run the included [[/code/spsc-bench.cpp][benchmark]]
 compiled with at least ~-O3~ optimization level.[fn:21] The benchmark
 pins the producer and consumer threads to dedicated CPU cores to
@@ -879,7 +879,8 @@ This yields essentially the same optimized code as the CRTP version:
 ~foo~ is instantiated as if it were ~foo<Derived>~, and the call to
 ~bar~ is resolved statically and inlined.
 
-* TODO [#B] About this Website
+* DONE [#B] About this Site
+CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about-this-website
 :END:
@@ -887,7 +888,31 @@ This yields essentially the same optimized code as the CRTP version:
 CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 10:47] =>  0:00
 :END:
 
-Pending.
+After nearly a decade, I've rebuilt my personal site from scratch---a
+blog on software, self-hosting, and lessons learned along the way.  This
+first post is backdated to when I originally launched a site on this
+domain, back in 2018.
+
+*What?*---A personal blog.  Posts aim to be concise, practical, and
+rigorous.
+
+*Why?*---To give back to the /libre/ software community.  To keep a
+record of my learning journey.  To force myself to truly understand
+things.[fn:23]
+
+*Who?*---See the About page.
+
+*Where?*---Self-hosted at my mother's house in northern Spain (ha!),
+exposed to the Internet through a WireGuard tunnel to a VPS, and served
+via a global CDN.
+
+*When?*---Once or twice a month.
+
+*How?*---Written in Emacs Org-mode and exported to Hugo, with a custom
+theme.[fn:22]
+
+If you spot an error or have suggestions, I welcome feedback---use the
+contact link on the About page. Enjoy!
 
 * DONE [#B] David Álvarez Rosa
 CLOSED: [2026-01-24 Sat 12:31]
@@ -909,6 +934,7 @@ Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
 in Artificial Intelligence.
 
 ** Experience
+
 /Software Engineer @ Susquehanna/
 [fn::Jul 2024--Present \\
 Dublin, Ireland]\\
@@ -945,6 +971,7 @@ Perception at Driverless UPC.  I served as LiDAR lead and collaborated
 on computer vision for a fully autonomous car.
 
 ** Education
+
 /MSc in Artificial Intelligence/
 [fn::GPA 9.00/10\\
 Honors in 6 subjects]\\
@@ -968,6 +995,7 @@ Honors in 14 subjects]\\
 Multidisciplinary and integrative vision of industrial engineering.
 
 ** Licenses & certifications
+
 Certificate in Advanced English (C1) --- Cambridge University\\
 Machine Learning --- Stanford University\\
 Deep Learning --- deeplearning.ai\\
@@ -975,6 +1003,7 @@ Blockchain & Financial Technology --- Hong Kong University\\
 Nova Talent Member --- Nova
 
 ** Volunteering
+
 /Mathematics Tutor/\\
 Academic training for the Mathematical Olympiads.
 
@@ -982,6 +1011,7 @@ Academic training for the Mathematical Olympiads.
 Food collection for people in need.
 
 ** Honors & awards
+
 /Mathematical Olympiad/\\
 Silver in local (Pamplona), honors in national (Barcelona).
 
@@ -999,9 +1029,16 @@ University tuition and housing (€19k).
 Full university tuition plus an annual stipend (€11k).
 
 ** Languages
+
 English --- Proficient\\
 Spanish --- Native\\
 Catalan --- Intermediate
+
+** Contact
+
+You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
+39 30.
+
 
 * DONE [#B] Welcome
 CLOSED: [2025-12-02 Tue 19:58]
@@ -1041,6 +1078,17 @@ You can unsubscribe anytime by emailing david@alvarezrosa.com from the
 same email address you subscribed with.
 
 * Footnotes
+[fn:25] The producer uses ~release~ so the consumer sees the data before
+seeing the new index.  The consumer uses ~acquire~ so it reads the data
+only after seeing the new index.  Both use ~relaxed~ for their own index
+since no other thread writes to it.
+
+[fn:23] As Einstein put it, /"If you can't explain it simply, you don't
+understand it well enough."/ Feynman followed the same principle,
+testing his understanding by teaching from first principles.
+
+[fn:22] Inspired by the work of Edward Tufte and Matthew Butterick.
+
 [fn:21] Alongside ~-O3~, the benchmark was compiled with ~-march=native~
 and ~-ffast-math~, though these flags shouldn't make a difference here.
 
@@ -1099,7 +1147,7 @@ size as ~constexpr~.  It's also common to use instead a ~std::vector~ to
 remove that restriction.
 
 [fn:2] Note how one item is left unused to indicate that the queue is
-full, when ~head_~ is one item behind ~tail_~ the queue is full.
+full, when ~head_~ is one item ahead of ~tail_~ the queue is full.
 
 [fn:3] Again note that ~head_ == tail_~ indicates that the queue is
 empty.

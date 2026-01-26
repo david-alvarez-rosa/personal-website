@@ -17,16 +17,15 @@ share data between threads in the lowest-latency environments.
 ## What is a ring buffer? {#what-is-a-ring-buffer}
 
 &nbsp;[^fn:1]You might have run into the term circular buffer, or perhaps
-cyclic queue.  These are simply other names for a _ring buffer_: a kind
-of queue where a producer generates data and inserts it into the buffer,
-and a consumer later pulls it back out, in first-in-first-out order.
+cyclic queue.  These are simply other names for a _ring buffer:_ a queue
+where a producer generates data and inserts it into the buffer, and a
+consumer later pulls it back out, in first-in-first-out order.
 
 What makes a ring buffer distinctive is how it stores data and the
-constraints it enforces.  It has a fixed capacity; it neither expands nor
-shrinks.  As a result, when the buffer fills up, the producer must either
-wait until space becomes available or overwrite entries that have not
-been read yet, depending on the buffer's semantics and what the
-application expects.
+constraints it enforces.  It has a fixed capacity; it neither expands
+nor shrinks.  As a result, when the buffer fills up, the producer must
+either wait until space becomes available or overwrite entries that have
+not been read yet, depending on what the application expects.
 
 The consumer's job is straightforward: read items as they arrive.  When
 the ring buffer is empty, the consumer has to block, spin, or move on to
@@ -39,16 +38,16 @@ waiting on both sides.
 ## Single-threaded ring buffer {#single-threaded-ring-buffer}
 
 Let's start with a single-threaded ring buffer, which is just an
-array[^fn:2] and two indices.  We can leave one slot empty to distinguish
-"full" from "empty."  Push writes to head and advances it; pop reads
-from tail and advances it.
+array[^fn:2] and two indices.  We leave one slot permanently unused to
+distinguish "full" from "empty."  Push writes to head and advances it;
+pop reads from tail and advances it.
 
 ```cpp
 template <typename T, std::size_t N>
 class RingBufferV1 {
   std::array<T, N> buffer_;
-  std::size_t head_;
-  std::size_t tail_;
+  std::size_t head_{0};
+  std::size_t tail_{0};
 };
 ```
 
@@ -63,7 +62,7 @@ auto push(const T& value) noexcept -> bool {
   if (new_head == tail_) {  // Full
     return false;
   }
-  buffer_[new_head] = value;
+  buffer_[head_] = value;
   head_ = new_head;
   return true;
 }
@@ -119,7 +118,7 @@ the only writer of tail.  That asymmetry is the lever to remove locks.
 
 ## Lock-free ring buffer {#lock-free-ring-buffer}
 
-We can remove the locks by using atomics insteads[^fn:6]
+We can remove the locks by using atomics instead[^fn:6]
 
 ```cpp
 template <typename T, std::size_t N>
@@ -170,7 +169,7 @@ Simply removing the locks yields **35M ops/s**, more than double the
 throughput of the locked version!  You probably have noticed that we are
 using the default `std::memory_order_seq_cst` memory order for loading /
 storing the atomics, which is the slowest.  Let's manually tune the
-memory order
+memory order[^fn:7]
 
 ```cpp
 auto push(const T& value) noexcept -> bool {
@@ -211,10 +210,10 @@ right?
 
 We already have a fast ring buffer, but we can push it further.  The
 main slowdown comes from the reader and writer constantly touching each
-other's indexes.  That makes the CPU bounce cache lines[^fn:7] between cores,
+other's indexes.  That makes the CPU bounce cache lines[^fn:8] between cores,
 which is expensive.
 
-To reduce this, the reader can keep a local cached copy[^fn:8] of the write
+To reduce this, the reader can keep a local cached copy[^fn:9] of the write
 index, and the writer keeps a local cached copy of the read index.  Then
 they don't need to re-check the other side on every single operation:
 only once in a while.
@@ -262,7 +261,7 @@ approach.
 ## Summary {#summary}
 
 If you want to reproduce these results, run the included [benchmark](/code/spsc-bench.cpp)
-compiled with at least `-O3` optimization level.[^fn:9] The benchmark
+compiled with at least `-O3` optimization level.[^fn:10] The benchmark
 pins the producer and consumer threads to dedicated CPU cores to
 minimize scheduling noise.
 
@@ -284,7 +283,7 @@ Long live lock-free and wait-free data structures!
     size as `constexpr`.  It's also common to use instead a `std::vector` to
     remove that restriction.
 [^fn:3]: Note how one item is left unused to indicate that the queue is
-    full, when `head_` is one item behind `tail_` the queue is full.
+    full, when `head_` is one item ahead of `tail_` the queue is full.
 [^fn:4]: Again note that `head_ == tail_` indicates that the queue is
     empty.
 [^fn:5]: Compiled with `clang` compiler with highest `-O3` optimization
@@ -293,9 +292,13 @@ Long live lock-free and wait-free data structures!
 [^fn:6]: Note that we are manually aligning `alignas` the atomics to
     ensure they fall in different cache lines (commonly 64 bytes).  This
     prevents false sharing, hence optimizes CPU cache usage.
-[^fn:7]: It's useful to observe the number of cache misses with `perf
+[^fn:7]: The producer uses `release` so the consumer sees the data before
+    seeing the new index.  The consumer uses `acquire` so it reads the data
+    only after seeing the new index.  Both use `relaxed` for their own index
+    since no other thread writes to it.
+[^fn:8]: It's useful to observe the number of cache misses with `perf
     stat -e cache-misses`, they are greatly reduced in this approach.
-[^fn:8]: This advanced optimization was initially proposed by [Erik
+[^fn:9]: This advanced optimization was initially proposed by [Erik
     Rigtorp](https://rigtorp.se).
-[^fn:9]: Alongside `-O3`, the benchmark was compiled with `-march=native`
+[^fn:10]: Alongside `-O3`, the benchmark was compiled with `-march=native`
     and `-ffast-math`, though these flags shouldn't make a difference here.
