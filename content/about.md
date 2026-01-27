@@ -103,7 +103,7 @@ _Mobility Scholarship --- Cellex (CFIS)_
 [^fn:12]<br />
 Scholarship to carry out my research thesis at Toronto (€6k).
 
-_Tuition and Housing Scholarship  --- Cellex (CFIS)_<br />
+_Tuition and Housing Scholarship --- Cellex (CFIS)_<br />
 University tuition and housing (€19k).
 
 _General Scholarship --- Government of Spain_<br />

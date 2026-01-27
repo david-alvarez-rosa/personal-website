@@ -50,7 +50,7 @@ class Circle : public Shape {
 public:
   explicit Circle(int radius) noexcept : radius_{radius} {}
   auto area() const noexcept -> double override {
-    return M_PI * radius_ * radius_;
+    return std::numbers::pi * radius_ * radius_;
   }
 };
 ```
@@ -121,14 +121,14 @@ class SquareWrapper : public Shape {
   Square square_;
 public:
   explicit SquareWrapper(Square square) noexcept : square_{std::move(square)} {}
-  auto area() const noexcept -> double override { return square.area(); }
+  auto area() const noexcept -> double override { return square_.area(); }
 };
 
 class CircleWrapper : public Shape {
   Circle circle_;
 public:
   explicit CircleWrapper(Circle circle) noexcept : circle_{std::move(circle)} {}
-  auto area() const noexcept -> double override { return circle.area(); }
+  auto area() const noexcept -> double override { return circle_.area(); }
 };
 ```
 
@@ -161,7 +161,7 @@ class ShapeWrapper : public Shape {
   T shape_;
 public:
   explicit ShapeWrapper(T shape) noexcept : shape_{std::move(shape)} {}
-  auto area() const noexcept -> double override { return shape.area(); }
+  auto area() const noexcept -> double override { return shape_.area(); }
 };
 ```
 

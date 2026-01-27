@@ -15,8 +15,8 @@ domain, back in 2018.
 rigorous.
 
 **Why?**---To give back to the _libre_ software community.  To keep a
-record of my learning journey.  To force myself to truly understand
-things.[^fn:1]
+record of my learning journey.  To deepen my own understanding by
+writing things down.[^fn:1]
 
 **Who?**---See the About page.
 
@@ -26,11 +26,11 @@ via a global CDN.
 
 **When?**---Once or twice a month.
 
-**How?**---Written in Emacs Org-mode and exported to Hugo, with a custom
+**How?**---Written in Emacs Org-mode, exported to Hugo, with a custom
 theme.[^fn:2]
 
-If you spot an error or have suggestions, I welcome feedback---use the
-contact link on the About page. Enjoy!
+If you spot an error or have suggestions, I welcome feedback---reach out
+via the contact link on the About page.
 
 [^fn:1]: As Einstein put it, _"If you can't explain it simply, you don't
     understand it well enough."_ Feynman followed the same principle,

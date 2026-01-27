@@ -281,7 +281,9 @@ Long live lock-free and wait-free data structures!
     does so.  A free slot is indicated by orange.
 [^fn:2]: By using `std::array` we are forcing clients to define the buffer
     size as `constexpr`.  It's also common to use instead a `std::vector` to
-    remove that restriction.
+    remove that restriction.  A further optimization is to constrain the
+    capacity to a power of two, allowing wrap-around via bit masking `head &
+    (N - 1)` instead of a branch.
 [^fn:3]: Note how one item is left unused to indicate that the queue is
     full, when `head_` is one item ahead of `tail_` the queue is full.
 [^fn:4]: Again note that `head_ == tail_` indicates that the queue is
@@ -292,10 +294,9 @@ Long live lock-free and wait-free data structures!
 [^fn:6]: Note that we are manually aligning `alignas` the atomics to
     ensure they fall in different cache lines (commonly 64 bytes).  This
     prevents false sharing, hence optimizes CPU cache usage.
-[^fn:7]: The producer uses `release` so the consumer sees the data before
-    seeing the new index.  The consumer uses `acquire` so it reads the data
-    only after seeing the new index.  Both use `relaxed` for their own index
-    since no other thread writes to it.
+[^fn:7]: `release` ensures prior writes are visible to threads that
+    `acquire` the same variable.  Both sides use `relaxed` for their own
+    index since no other thread writes to it.
 [^fn:8]: It's useful to observe the number of cache misses with `perf
     stat -e cache-misses`, they are greatly reduced in this approach.
 [^fn:9]: This advanced optimization was initially proposed by [Erik

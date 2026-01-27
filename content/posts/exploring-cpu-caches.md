@@ -1,7 +1,7 @@
 +++
 title = "Exploring CPU Caches"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog", "backlog"]
+tags = ["pers", "blog"]
 draft = true
 +++
 

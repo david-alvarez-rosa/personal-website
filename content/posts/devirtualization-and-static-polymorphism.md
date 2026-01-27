@@ -7,7 +7,7 @@ draft = false
 +++
 
 Ever wondered why your "clean" polymorphic design underperforms in
-benchmarks?  Virtual dispatch enables polymorphism, but it comes with a
+benchmarks?  Virtual dispatch enables polymorphism, but it comes with
 hidden overhead: pointer indirection, larger object layouts, and fewer
 inlining opportunities.
 
@@ -23,20 +23,19 @@ runtime cost.
 Runtime polymorphism occurs when a base interface exposes a virtual
 method that derived classes override.  Calls made through a `Base&` are
 then dispatched to the appropriate override at runtime.  Under the hood,
-a virtual table (`vtable`) is created _per each class_, and a pointer
+a virtual table (`vtable`) is created _for each class_, and a pointer
 (`vptr`) to the `vtable` is added _to each instance_.
 
 {{< figure src="/images/diagram.png" caption="<span class=\"figure-number\">Figure 1: </span>**Virtual dispatch diagram.**  The method `foo` is declared virtual in `Base` and overridden in `Derived`.  Both classes get a `vtable`, and each object gets a `vptr` pointing to the corresponding `vtable`." >}}
 
-On a virtual call, the compiler emits code that loads the `vptr`,
-selects the right slot in the `vtable`, and performs an indirect call
-through that function pointer.  The drawback is that the extra `vptr`
-increases object size, and the `vtable` makes the call hard to predict.
-This prevents inlining, increases the chance of branch mispredictions,
-and reduces cache efficiency.
+On a virtual call, the compiler loads the `vptr`, selects the right slot
+in the `vtable`, and performs an indirect call through that function
+pointer.  The drawback is that the extra `vptr` increases object size,
+and the `vtable` makes the call hard to predict.  This prevents
+inlining, increases branch mispredictions, and reduces cache efficiency.
 
-The best way to observe this phenomena is by inspecting the
-assembly[^fn:1] code emitted by the compiler for a minimal example.
+The best way to observe this phenomenon is by inspecting the
+assembly[^fn:1] code emitted by the compiler for a minimal example
 
 ```cpp
 class Base {
@@ -49,8 +48,8 @@ auto bar(Base* base) -> int {
 }
 ```
 
-For a regular, non-virtual member function `foo` like in the example
-above, the free function `bar` issues a direct call.
+For a non-virtual member function `foo` like in the example above, the
+free function `bar` issues a direct call
 
 ```asm
 bar(Base*):
@@ -61,8 +60,8 @@ bar(Base*):
         ret
 ```
 
-However, if we instead declare `foo` as `virtual`, it changes `bar`'s
-assembly from a direct call into an indirect, vtable-based call.
+However, declaring `foo` as `virtual` changes `bar`'s assembly into an
+indirect, vtable-based call
 
 ```asm
 bar(Base*):
@@ -77,11 +76,11 @@ bar(Base*):
 
 ## Devirtualization {#devirtualization}
 
-In some cases, the compiler is able to statically deduce which override
-a virtual call will hit.  In those cases, it will _devirtualize_ the
-call and emit a direct call instead (skiping the `vtable`).  For
-example, devirtualization is straightforward[^fn:2] when the runtime type
-is clearly fixed.
+Sometimes the compiler can statically deduce which override a virtual
+call will hit.  In those cases, it _devirtualizes_ the call and emits a
+direct call instead (skipping the `vtable`).  For example,
+devirtualization is straightforward[^fn:2] when the runtime type is
+clearly fixed
 
 ```cpp
 struct Base {
@@ -92,7 +91,7 @@ struct Derived : Base {
   auto foo() -> int override { return 77; }
 };
 
-auto bar() -> int{
+auto bar() -> int {
   Derived derived;
   return derived.foo();  // compiler knows this is Derived::foo
 }
@@ -100,9 +99,9 @@ auto bar() -> int{
 
 The compiler is able to devirtualize even through a base pointer, as
 long as it can track the allocation and prove there is only one possible
-concrete type.  The problem is that with traditional compilation,
-objects are created per translation unit (TU)---compiled and optimized
-in isolation.  The linker simply stitches those objects together, so
+concrete type.  The problem is that with traditional compilation, object
+files are created per translation unit (TU)---compiled and optimized in
+isolation.  The linker simply stitches those objects together, so
 cross-TU optimizations are inherently limited.  That's where compiler
 flags are useful.
 
@@ -114,14 +113,12 @@ flags are useful.
 
 
 `-flto`
-: (link-time optimization) keeps an intermediate
-    representation in the object files and performs optimization at link
-    time across all of them together.  Multiple source files are
-    effectively treated as a single large TU, which enables compiler
-    optimizations across file boundaries.
+: link-time optimization.  Keeps an intermediate
+    representation in the object files and optimizes across all of them at
+    link time, effectively treating multiple source files as a single TU.
 
 On the language side, `final` is a lightweight way to give the compiler
-comparable guarantees for specific methods.
+the same guarantee for specific methods
 
 ```cpp
 class Base {
@@ -142,9 +139,8 @@ auto test(Derived* derived) -> int {
 ```
 
 Here, `foo()` can still be overridden, so `derived->foo()` remains a
-virtual call.  However, `bar()`, is marked as `final`, so the compiler
-knows there can be no further overrides and can emit a direct call to
-even though it's declared `virtual` in the base.
+virtual call.  However, `bar()` is marked as `final`, so the compiler
+emits a direct call even though it's declared `virtual` in the base
 
 ```asm
 test(Derived*):
@@ -165,12 +161,11 @@ test(Derived*):
 
 ## Static polymorphism {#static-polymorphism}
 
-When the compiler can't devirtualize on its own, one option is to drop
-dynamic dispatch and use static polymorphism instead.  The canonical
-tool for this is the Curiously Recurring Template Pattern[^fn:3] (CRTP).
-With CRTP, the base class is templated on the derived class, and instead
-of invoking virtual methods, it calls into the derived type via a
-`static_cast`.
+When the compiler can't devirtualize, one option is to use static
+polymorphism instead.  The canonical tool for this is the Curiously
+Recurring Template Pattern[^fn:3] (CRTP).  With CRTP, the base class is
+templated on the derived class, and invokes methods on it via
+`static_cast`---no virtual keyword involved
 
 ```cpp
 template <typename Derived>
@@ -194,9 +189,9 @@ auto test() -> int {
 }
 ```
 
-With `-O3` optimization, the compiler inlines `foo` and `bar` and
-constant-folds the results.  No `vtable`, no `vptr`.  Fully
-optimized[^fn:4] call.
+With `-O3` optimization, the compiler inlines everything and
+constant-folds the result.  No `vtable`, no `vptr`, no indirection.
+Fully optimized[^fn:4] call.
 
 ```asm
 test():
@@ -205,10 +200,10 @@ test():
 ```
 
 **Deducing this.** C++23's _deducing this_ keeps the same static-dispatch
-model but makes it easier to write and reason about.  Instead of
-templating the entire class (and writing `Base<Derived>` everywhere),
-you template only the member function that needs access to the derived
-type, and let the compiler deduce `self` from `*this`:
+model but makes it easier to write.  Instead of templating the entire
+class (and writing `Base<Derived>` everywhere), you template only the
+member function that needs access to the derived type, and let the
+compiler deduce `self` from `*this`
 
 ```cpp
 class Base {
@@ -222,14 +217,14 @@ public:
 };
 ```
 
-This yields essentially the same optimized code as the CRTP version:
-`foo` is instantiated as if it were `foo<Derived>`, and the call to
-`bar` is resolved statically and inlined.
+This yields identical optimized code: `foo` is instantiated as
+`foo<Derived>`, and the call to `bar` is resolved statically and
+inlined.
 
-[^fn:1]: Assembly generated on an x86-64 system with `gcc` at `-O3`.
-    Similar results were observed with `clang` on the same platform.
-[^fn:2]: In this case, the compiler emits a direct call to `Derived::foo`
-    (or inline it), because `derived` cannot have any other dynamic type.
+[^fn:1]: Assembly generated with `gcc` at `-O3` on x86-64.  Similar
+    results were observed with `clang` on the same platform.
+[^fn:2]: The compiler emits a direct call to `Derived::foo` (or inlines
+    it), because `derived` cannot have any other dynamic type.
 [^fn:3]: The curiously recurring template pattern is an idiom where a
     class X derives from a class template instantiated with X itself as a
     template argument.  More generally, this is known as F-bound
