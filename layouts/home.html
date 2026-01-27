@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <style>.side img { transition: transform 600ms ease; width: 240px; margin-top: -20px; box-shadow: none; } @media (max-width: 860px) {.side img { margin-top: 0!important; margin-bottom: -1.6rem; } .side + br { display: none; } }</style>
+  <style>.side img { transition: transform 600ms ease; width: 240px;  margin-top: -20px; box-shadow: none; } @media (max-width: 860px) { .side, figcaption { float: none; } .side img { margin-top: 0!important; margin-bottom: -1.6rem; } .side + br { display: none; } }</style>
   <script>
     document.addEventListener("mouseover", (e) => {
       const img = e.target.closest("img");

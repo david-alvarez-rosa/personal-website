@@ -1,11 +1,6 @@
 {{ define "main" }}
-  <style>@media (max-width: 860px) { .side { float: inline-end; } }</style>
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time class="subtitle" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <span class="subtitle">{{ with .Params.subtitle }}{{ . }}{{ else }}{{ $.Date | time.Format ":date_long" }}{{ end }}</span>
   <h1>{{ .Title }}</h1>
-
   {{ partial "processed-content.html" . }}
-
   <sig>&mdash;{{ index .Params.Author 0 }}</sig>
 {{ end }}

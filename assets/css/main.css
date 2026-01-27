@@ -145,8 +145,6 @@ a:hover {
 }
 
 main img {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
     max-width: 100%;
     margin-top: 0.2rem;
 }
@@ -271,7 +269,7 @@ h2:focus-within .anchor {
     }
 
     .side, figcaption {
-        float: none;
+        float: inline-end;
         display: block;
         margin: 0.4rem 0;
         width: unset;
@@ -281,7 +279,6 @@ h2:focus-within .anchor {
     }
 
     .side img {
-        box-shadow: none;
         margin: auto auto 0.4rem auto;
     }
 }

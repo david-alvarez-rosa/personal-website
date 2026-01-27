@@ -2,10 +2,21 @@
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
 date = 2026-01-24T12:31:00+00:00
-layout = "about"
 tags = ["pers", "blog"]
 draft = false
+subtitle = "Curriculum Vitae"
 +++
+
+<style>
+  sig { display: none; }
+  sup { display: none; }
+  .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
+  @media (max-width: 860px) {
+    .side + br { display: none; }
+    .side img { margin-top: 0!important; }
+    .side, figcaption { float: none; }
+  }
+</style>
 
 &nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin, passionate
 about low-latency, high-performance systems.

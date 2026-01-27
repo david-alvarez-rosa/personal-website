@@ -914,8 +914,21 @@ CLOSED: [2026-01-24 Sat 12:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_LAYOUT: about
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle Curriculum Vitae
 :END:
+
+#+begin_export html
+<style>
+  sig { display: none; }
+  sup { display: none; }
+  .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
+  @media (max-width: 860px) {
+    .side + br { display: none; }
+    .side img { margin-top: 0!important; }
+    .side, figcaption { float: none; }
+  }
+</style>
+#+end_export
 
  [fn:8]Mathematician and engineer based in sunny Dublin, passionate
 about low-latency, high-performance systems.
@@ -1056,17 +1069,24 @@ CLOSED: [2025-12-13 Sat 22:23]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 404
 :EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " "
 :END:
-That page couldn't be found (404 error).
+
+#+begin_export html
+<style> sig { display: none; } </style>
+#+end_export
+
+That page couldn't be found (404 error).  Try the [[/][Home page]].
 
 * DONE [#B] Subscription
 CLOSED: [2025-12-13 Sat 22:06]
 :PROPERTIES:
 :EXPORT_FILE_NAME: subscription
 :EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " "
 :END:
 
-Welcome! Your subscription is confirmed.
+Welcome! Your subscription is confirmed.  Thanks for signing up.
 
 You can unsubscribe anytime by emailing david@alvarezrosa.com from the
 same email address you subscribed with.
