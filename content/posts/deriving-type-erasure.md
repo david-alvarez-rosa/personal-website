@@ -166,8 +166,8 @@ public:
 ```
 
 What we built above is the basis of the "type erasure" idiom.  All
-that's left is to hide all this machinery behind a another class, so
-that callers don't have to deal with our custom interfaces and
+that's left is to hide all this machinery behind another class, so that
+callers don't have to deal with our custom interfaces and
 templates[^fn:5]
 
 ```cpp

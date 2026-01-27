@@ -161,7 +161,7 @@ Next we implement the ~pop~ (or read) operation[fn:3]
 ** Thread-safe ring buffer
 
 You probably already noticed that the previous version is not
-thread-safe.  The easiest way to solve this, is to add a ~mutex~ around
+thread-safe.  The easiest way to solve this is to add a ~mutex~ around
 push and pop.
 
 #+begin_src cpp
@@ -237,7 +237,7 @@ And the pop implementation
 #+end_src
 
 Simply removing the locks yields *35M ops/s*, more than double the
-throughput of the locked version!  You probably have noticed that we are
+throughput of the locked version!  You have probably noticed that we are
 using the default ~std::memory_order_seq_cst~ memory order for loading /
 storing the atomics, which is the slowest.  Let's manually tune the
 memory order[fn:25]
@@ -511,8 +511,8 @@ compiler by generating the needed code for each type automatically
 #+end_src
 
 What we built above is the basis of the "type erasure" idiom.  All
-that's left is to hide all this machinery behind a another class, so
-that callers don't have to deal with our custom interfaces and
+that's left is to hide all this machinery behind another class, so that
+callers don't have to deal with our custom interfaces and
 templates[fn:18]
 
 #+begin_src cpp
@@ -938,13 +938,13 @@ designed and built systems at Amazon serving 10M+ monthly active
 customers, developed semantic caching for LLMs at Sopra Steria, and
 conducted quantitative cybersecurity risk analysis at Deloitte.
 
-Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
+Holds a BSc in Mathematics, a BEng in Industrial Engineering, and an MSc
 in Artificial Intelligence.
 
 ** Experience
 
 /Software Engineer @ Susquehanna/
-[fn::Jul 2024--Present \\
+[fn::Jul 2024--Present\\
 Dublin, Ireland]\\
 High-frequency options trading.  Low-latency market data and trading
 signals.  Mentor and interviewer.
@@ -1120,7 +1120,7 @@ It's unrelated to C++20 ~concept~ (compile-time predicates).
 techniques to store small objects inline and avoid allocation.
 
 [fn:17] It's useful to observe the number of cache misses with ~perf
-stat -e cache-misses~, they are greatly reduced in this approach.
+stat -e cache-misses~; they are greatly reduced in this approach.
 
 [fn:16] This advanced optimization was initially proposed by [[https://rigtorp.se][Erik
 Rigtorp]].
@@ -1162,7 +1162,7 @@ capacity to a power of two, allowing wrap-around via bit masking ~head &
 (N - 1)~ instead of a branch.
 
 [fn:2] Note how one item is left unused to indicate that the queue is
-full, when ~head_~ is one item ahead of ~tail_~ the queue is full.
+full.  When ~head_~ is one item ahead of ~tail_~, the queue is full.
 
 [fn:3] Again note that ~head_ == tail_~ indicates that the queue is
 empty.

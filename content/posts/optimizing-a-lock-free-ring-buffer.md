@@ -89,7 +89,7 @@ auto pop(T& value) noexcept -> bool {
 ## Thread-safe ring buffer {#thread-safe-ring-buffer}
 
 You probably already noticed that the previous version is not
-thread-safe.  The easiest way to solve this, is to add a `mutex` around
+thread-safe.  The easiest way to solve this is to add a `mutex` around
 push and pop.
 
 ```cpp
@@ -166,7 +166,7 @@ auto pop(T& value) noexcept -> bool {
 ```
 
 Simply removing the locks yields **35M ops/s**, more than double the
-throughput of the locked version!  You probably have noticed that we are
+throughput of the locked version!  You have probably noticed that we are
 using the default `std::memory_order_seq_cst` memory order for loading /
 storing the atomics, which is the slowest.  Let's manually tune the
 memory order[^fn:7]
@@ -285,7 +285,7 @@ Long live lock-free and wait-free data structures!
     capacity to a power of two, allowing wrap-around via bit masking `head &
     (N - 1)` instead of a branch.
 [^fn:3]: Note how one item is left unused to indicate that the queue is
-    full, when `head_` is one item ahead of `tail_` the queue is full.
+    full.  When `head_` is one item ahead of `tail_`, the queue is full.
 [^fn:4]: Again note that `head_ == tail_` indicates that the queue is
     empty.
 [^fn:5]: Compiled with `clang` compiler with highest `-O3` optimization
@@ -298,7 +298,7 @@ Long live lock-free and wait-free data structures!
     `acquire` the same variable.  Both sides use `relaxed` for their own
     index since no other thread writes to it.
 [^fn:8]: It's useful to observe the number of cache misses with `perf
-    stat -e cache-misses`, they are greatly reduced in this approach.
+    stat -e cache-misses`; they are greatly reduced in this approach.
 [^fn:9]: This advanced optimization was initially proposed by [Erik
     Rigtorp](https://rigtorp.se).
 [^fn:10]: Alongside `-O3`, the benchmark was compiled with `-march=native`

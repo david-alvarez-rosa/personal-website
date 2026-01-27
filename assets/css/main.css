@@ -222,7 +222,7 @@ h2:focus-within .anchor {
     overflow-x: auto;
     padding: 0.4rem 0.6rem;
     border: 1px solid #ccc;
-    border-left: 3px solid #ccc;;
+    border-left: 3px solid #ccc;
     background-color: inherit;
 }
 

@@ -26,7 +26,7 @@ designed and built systems at Amazon serving 10M+ monthly active
 customers, developed semantic caching for LLMs at Sopra Steria, and
 conducted quantitative cybersecurity risk analysis at Deloitte.
 
-Holds a BSc in Mathematics, a BEng in Industrial Engineering, and a MSc
+Holds a BSc in Mathematics, a BEng in Industrial Engineering, and an MSc
 in Artificial Intelligence.
 
 
@@ -134,7 +134,7 @@ You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
 39 30.
 
 [^fn:1]: ![](/images/portrait.png) **That's me!** March 2022.
-[^fn:2]: Jul 2024--Present <br />
+[^fn:2]: Jul 2024--Present<br />
     Dublin, Ireland
 [^fn:3]: Mar 2022--Aug 2024<br />
     Madrid, Spain
