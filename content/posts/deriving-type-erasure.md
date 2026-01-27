@@ -191,7 +191,7 @@ class AnyShape {
 
 public:
   template <typename T>
-  explicit AnyShape(T&& shape) noexcept
+  explicit AnyShape(T&& shape)
       : shape_{std::make_unique<ShapeWrapper<T>>(std::forward<T>(shape))} {}
 
   auto area() const noexcept -> double { return shape_->area(); }
@@ -250,8 +250,7 @@ class Any {
 
 public:
   template <typename T>
-  explicit Any(T&& obj) noexcept
-      : obj_{std::make_unique<Model<T>>(std::forward<T>(obj))} {}
+  explicit Any(T&& obj) : obj_{std::make_unique<Model<T>>(std::forward<T>(obj))} {}
 
   auto f() const noexcept -> double { return obj_->f(); }
 };
