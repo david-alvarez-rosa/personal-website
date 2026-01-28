@@ -2,5 +2,5 @@
   <span class="subtitle">{{ with .Params.subtitle }}{{ . }}{{ else }}{{ $.Date | time.Format ":date_long" }}{{ end }}</span>
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}
-  <div class="signature">&mdash;{{ index .Params.Author 0 }}</div>
+  <sig class="signature">&mdash;{{ index .Params.Author 0 }}</sig>
 {{ end }}
