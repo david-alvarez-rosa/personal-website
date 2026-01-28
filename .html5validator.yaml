@@ -1,3 +1,5 @@
+root: public/
+
 ignore_re:
   - 'Element "style" not allowed as child of element "main"'
   - '"font-weight": "420" is not a "font-weight" value'
