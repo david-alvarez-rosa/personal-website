@@ -17,10 +17,10 @@ class RingBufferV1 {
 public:
   auto push(const T& value) noexcept -> bool {
     auto next_head = head_ + 1;
-    if (next_head == buffer_.size()) {  // Wrap-around
+    if (next_head == buffer_.size()) [[unlikely]] {  // Wrap-around
       next_head = 0;
     }
-    if (next_head == tail_) {  // Full
+    if (next_head == tail_) [[unlikely]] {  // Full
       return false;
     }
     buffer_[head_] = value;
@@ -29,12 +29,12 @@ public:
   }
 
   auto pop(T& value) noexcept -> bool {
-    if (head_ == tail_) {  // Empty
+    if (head_ == tail_) [[unlikely]] {  // Empty
       return false;
     }
     value = buffer_[tail_];
     auto next_tail = tail_ + 1;
-    if (next_tail == buffer_.size()) {  // Wrap-around
+    if (next_tail == buffer_.size()) [[unlikely]] {  // Wrap-around
       next_tail = 0;
     }
     tail_ = next_tail;
@@ -53,10 +53,10 @@ public:
   auto push(const T& value) noexcept -> bool {
     auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe
     auto next_head = head_ + 1;
-    if (next_head == buffer_.size()) {
+    if (next_head == buffer_.size()) [[unlikely]] {
       next_head = 0;
     }
-    if (next_head == tail_) {
+    if (next_head == tail_) [[unlikely]] {
       return false;
     }
     buffer_[head_] = value;
@@ -66,12 +66,12 @@ public:
 
   auto pop(T& value) noexcept -> bool {
     auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe
-    if (head_ == tail_) {
+    if (head_ == tail_) [[unlikely]] {
       return false;
     }
     value = buffer_[tail_];
     auto next_tail = tail_ + 1;
-    if (next_tail == buffer_.size()) {
+    if (next_tail == buffer_.size()) [[unlikely]] {
       next_tail = 0;
     }
     tail_ = next_tail;
@@ -89,10 +89,10 @@ public:
   auto push(const T& value) noexcept -> bool {
     const auto head = head_.load();
     auto next_head = head + 1;
-    if (next_head == buffer_.size()) {
+    if (next_head == buffer_.size()) [[unlikely]] {
       next_head = 0;
     }
-    if (next_head == tail_.load()) {
+    if (next_head == tail_.load()) [[unlikely]] {
       return false;
     }
     buffer_[head] = value;
@@ -102,12 +102,12 @@ public:
 
   auto pop(T& value) noexcept -> bool {
     const auto tail = tail_.load();
-    if (tail == head_.load()) {
+    if (tail == head_.load()) [[unlikely]] {
       return false;
     }
     value = buffer_[tail];
     auto next_tail = tail + 1;
-    if (next_tail == buffer_.size()) {
+    if (next_tail == buffer_.size()) [[unlikely]] {
       next_tail = 0;
     }
     tail_.store(next_tail);
@@ -125,10 +125,10 @@ public:
   auto push(const T& value) noexcept -> bool {
     const auto head = head_.load(std::memory_order_relaxed);
     auto next_head = head + 1;
-    if (next_head == buffer_.size()) {
+    if (next_head == buffer_.size()) [[unlikely]] {
       next_head = 0;
     }
-    if (next_head == tail_.load(std::memory_order_acquire)) {
+    if (next_head == tail_.load(std::memory_order_acquire)) [[unlikely]] {
       return false;
     }
     buffer_[head] = value;
@@ -138,12 +138,12 @@ public:
 
   auto pop(T& value) noexcept -> bool {
     const auto tail = tail_.load(std::memory_order_relaxed);
-    if (tail == head_.load(std::memory_order_acquire)) {
+    if (tail == head_.load(std::memory_order_acquire)) [[unlikely]] {
       return false;
     }
     value = buffer_[tail];
     auto next_tail = tail + 1;
-    if (next_tail == buffer_.size()) {
+    if (next_tail == buffer_.size()) [[unlikely]] {
       next_tail = 0;
     }
     tail_.store(next_tail, std::memory_order_release);
@@ -163,10 +163,10 @@ public:
   auto push(const T& value) noexcept -> bool {
     const auto head = head_.load(std::memory_order_relaxed);
     auto next_head = head + 1;
-    if (next_head == buffer_.size()) {
+    if (next_head == buffer_.size()) [[unlikely]] {
       next_head = 0;
     }
-    if (next_head == tail_cached_) {
+    if (next_head == tail_cached_) [[unlikely]] {
       tail_cached_ = tail_.load(std::memory_order_acquire);
       if (next_head == tail_cached_) {
         return false;
@@ -179,7 +179,7 @@ public:
 
   auto pop(T& value) noexcept -> bool {
     const auto tail = tail_.load(std::memory_order_relaxed);
-    if (tail == head_cached_) {
+    if (tail == head_cached_) [[unlikely]] {
       head_cached_ = head_.load(std::memory_order_acquire);
       if (tail == head_cached_) {
         return false;
@@ -187,7 +187,7 @@ public:
     }
     value = buffer_[tail];
     auto next_tail = tail + 1;
-    if (next_tail == buffer_.size()) {
+    if (next_tail == buffer_.size()) [[unlikely]] {
       next_tail = 0;
     }
     tail_.store(next_tail, std::memory_order_release);
