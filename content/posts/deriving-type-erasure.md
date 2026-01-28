@@ -240,7 +240,6 @@ class Any {
   template <typename T>
   class Model : public Concept {
     T obj_;
-
   public:
     explicit Model(T obj) noexcept : obj_{std::move(obj)} {}
     auto f() const noexcept -> double override { return obj_.f(); }
