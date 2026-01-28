@@ -329,7 +329,7 @@ approach.
 
 ** Summary
 
-If you want to reproduce these results, run the included [[/code/spsc-bench.cpp][benchmark]]
+If you want to reproduce these results, run the included [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/DataStructures/ring_buffer.cpp][benchmark]]
 compiled with at least ~-O3~ optimization level.[fn:21] The benchmark
 pins the producer and consumer threads to dedicated CPU cores to
 minimize scheduling noise.
@@ -1125,7 +1125,7 @@ prevents false sharing, hence optimizes CPU cache usage.
 
 [fn:14] Compiled with ~clang~ compiler with highest ~-O3~ optimization
 level, and ~-march=native -ffast-math~.  Consumer and producer threads
-are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [[/code/spsc-bench.cpp][benchmark]].
+are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/DataStructures/ring_buffer.cpp][benchmark]].
 
 [fn:13] If you tried to pass in a type that doesn't conform to the
 'interface' (say, ~std::string~), the compiler would hit an error when

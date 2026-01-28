@@ -260,7 +260,7 @@ approach.
 
 ## Summary {#summary}
 
-If you want to reproduce these results, run the included [benchmark](/code/spsc-bench.cpp)
+If you want to reproduce these results, run the included [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/DataStructures/ring_buffer.cpp)
 compiled with at least `-O3` optimization level.[^fn:10] The benchmark
 pins the producer and consumer threads to dedicated CPU cores to
 minimize scheduling noise.
@@ -290,7 +290,7 @@ Long live lock-free and wait-free data structures!
     empty.
 [^fn:5]: Compiled with `clang` compiler with highest `-O3` optimization
     level, and `-march=native -ffast-math`.  Consumer and producer threads
-    are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [benchmark](/code/spsc-bench.cpp).
+    are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/DataStructures/ring_buffer.cpp).
 [^fn:6]: Note that we are manually aligning `alignas` the atomics to
     ensure they fall in different cache lines (commonly 64 bytes).  This
     prevents false sharing, hence optimizes CPU cache usage.
