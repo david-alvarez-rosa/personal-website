@@ -8,7 +8,7 @@ subtitle = "Curriculum Vitae"
 +++
 
 <style>
-  sig { display: none; }
+  .signature { display: none; }
   sup { display: none; }
   .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
   @media (max-width: 860px) { .side img { margin-top: 0!important; } }
