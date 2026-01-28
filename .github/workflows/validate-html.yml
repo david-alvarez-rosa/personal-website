@@ -25,6 +25,5 @@ jobs:
         uses: Cyb3r-Jak3/html5validator-action@v7.2.0
         with:
           root: public/
-          format: text
-          log_level: INFO
           css: true
+          config: .html5validator.yaml

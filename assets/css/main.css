@@ -47,7 +47,7 @@ h2 {
     font-weight: lighter;
 }
 
-sig {
+.signature {
     display: block;
     text-align: right;
     text-transform: lowercase;
