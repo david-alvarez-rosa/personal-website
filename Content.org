@@ -1,11 +1,8 @@
-#+title: Personal Website
+#+title: Personal Website Content
 #+author: David Álvarez Rosa
 #+startup: logdone
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
-
-This repository contains the source code of my web:
-[[https://david.alvarezrosa.com][https://david.alvarezrosa.com]]
 
 * TODO [#B] How to setup a tunnel from vps to local homelab         :backlog:
 :PROPERTIES:

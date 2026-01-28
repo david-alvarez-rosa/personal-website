@@ -1,6 +1,49 @@
 * Personal Website
 
-Source code for my personal website https://david.alvarezrosa.com
+Source code for my personal website at [[https://david.alvarezrosa.com][david.alvarezrosa.com]].
 
-Posts live in [[file:Posts.org][Posts.org]] (Org mode), exported to Markdown via ~ox-hugo~.
-Hugo builds the site with my custom theme.
+** Tech Stack
+
+Hugo builds the static site using a custom theme.  Content is written in
+Emacs Org mode and exported to Markdown via [[https://ox-hugo.scripter.co/][ox-hugo]].  A Python FastAPI
+service handles email subscriptions.
+
+** Content Workflow
+
+#+begin_example
+  Content.org (Org-mode) -> ox-hugo export -> content/*.md -> Hugo build -> public/
+#+end_example
+
+Posts are written in [[file:Content.org][Content.org]] using Org-mode.  The ~.dir-locals.el~
+enables auto-export on save in Emacs.
+
+** Development
+
+Run the development server with drafts enabled
+
+#+begin_src shell
+  hugo server -D
+#+end_src
+
+Build for production
+
+#+begin_src shell
+  hugo --minify
+#+end_src
+
+** Backend
+
+The subscription API runs separately
+
+#+begin_src shell
+  uv sync                        # Install dependencies
+  uvicorn backend:app --reload   # Run on localhost:8000
+#+end_src
+
+** Deployment
+
+Push to ~main~ triggers GitHub Actions, which builds with Hugo and
+deploys via rsync.
+
+** Contributions
+Suggestions or improvements?  Raise a pull request!
