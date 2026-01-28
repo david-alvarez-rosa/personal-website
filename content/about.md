@@ -11,11 +11,7 @@ subtitle = "Curriculum Vitae"
   sig { display: none; }
   sup { display: none; }
   .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
-  @media (max-width: 860px) {
-    .side + br { display: none; }
-    .side img { margin-top: 0!important; }
-    .side, figcaption { float: none; }
-  }
+  @media (max-width: 860px) { .side img { margin-top: 0!important; } }
 </style>
 
 &nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin, passionate
