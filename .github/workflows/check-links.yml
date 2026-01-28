@@ -21,7 +21,7 @@ jobs:
           extended: true
 
       - name: Build site
-        run: hugo --minify
+        run: hugo --minify --panicOnWarning
 
       - name: Check for broken links
         uses: lycheeverse/lychee-action@v2

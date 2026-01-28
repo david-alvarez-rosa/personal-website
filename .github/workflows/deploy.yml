@@ -19,7 +19,7 @@ jobs:
           extended: true
 
       - name: Build site
-        run: hugo --minify
+        run: hugo --minify --panicOnWarning
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
