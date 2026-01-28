@@ -1,70 +1,42 @@
 * Personal Website
 
-Source code for my personal website at [[https://david.alvarezrosa.com][david.alvarezrosa.com]].
+Source code for [[https://david.alvarezrosa.com][david.alvarezrosa.com]].
 
-** Tech Stack
-
-Hugo builds the static site using a custom theme.  Content is written in
-Emacs Org mode and exported to Markdown via [[https://ox-hugo.scripter.co/][ox-hugo]].  A Python FastAPI
-service handles email subscriptions.
-
-** Content Workflow
+Static site built with Hugo and a custom theme.  Posts are written in
+Emacs Org mode within [[file:Content.org][Content.org]], automatically exported to Markdown
+via [[https://ox-hugo.scripter.co/][ox-hugo]], then built by Hugo.  A Python FastAPI backend handles email
+subscriptions.
 
 #+begin_example
-  Content.org (Org-mode) -> ox-hugo export -> content/*.md -> Hugo build -> public/
+  Content.org (Org-mode) -> ox-hugo -> content/*.md -> Hugo -> public/
 #+end_example
-
-Posts are written in [[file:Content.org][Content.org]] using Org-mode.  The ~.dir-locals.el~
-enables auto-export on save in Emacs.
 
 ** Development
 
-Run the development server with drafts enabled
-
 #+begin_src shell
-  hugo server -D
-#+end_src
-
-Build for production
-
-#+begin_src shell
-  hugo --minify
+  hugo server -D  # Dev server with drafts
+  hugo --minify   # Prod build
 #+end_src
 
 ** Backend
 
-The subscription API runs separately
-
 #+begin_src shell
   uv sync                        # Install dependencies
-  uvicorn backend:app --reload   # Run on localhost:8000
+  uvicorn backend:app --reload   # Dev server on localhost:8000
 #+end_src
 
 ** Validation
 
-Build the site first with warnings treated as errors
-
 #+begin_src shell
-  hugo --minify --panicOnWarning
-#+end_src
-
-Check for broken links with lychee
-
-#+begin_src shell
-  lychee --accept 200,403,405,429 --root-dir public 'public/**/*.html'
-#+end_src
-
-Validate HTML and CSS with html5validator (uses ~.html5validator.yaml~
-for configuration)
-
-#+begin_src shell
-  html5validator --config .html5validator.yaml
+  hugo --minify --panicOnWarning                                        # Warnings as errors
+  lychee --accept 200,403,405,429 --root-dir public 'public/**/*.html'  # Check broken links
+  html5validator --config .html5validator.yaml                          # Validate HTML/CSS
 #+end_src
 
 ** Deployment
 
-Push to ~main~ triggers GitHub Actions, which builds with Hugo and
-deploys via rsync.
+Push to ~main~ triggers GitHub Actions to build and deploy via rsync.
 
 ** Contributions
-Suggestions or improvements?  Raise a pull request!
+
+Pull requests welcome!
