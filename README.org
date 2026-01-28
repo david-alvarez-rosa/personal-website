@@ -40,6 +40,27 @@ The subscription API runs separately
   uvicorn backend:app --reload   # Run on localhost:8000
 #+end_src
 
+** Validation
+
+Build the site first with warnings treated as errors
+
+#+begin_src shell
+  hugo --minify --panicOnWarning
+#+end_src
+
+Check for broken links with lychee
+
+#+begin_src shell
+  lychee --accept 200,403,405,429 --root-dir public 'public/**/*.html'
+#+end_src
+
+Validate HTML and CSS with html5validator (uses ~.html5validator.yaml~
+for configuration)
+
+#+begin_src shell
+  html5validator --config .html5validator.yaml
+#+end_src
+
 ** Deployment
 
 Push to ~main~ triggers GitHub Actions, which builds with Hugo and
