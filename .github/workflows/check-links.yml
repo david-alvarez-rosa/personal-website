@@ -26,7 +26,7 @@ jobs:
       - name: Check for broken links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress --accept 200,403,405,429 --root-dir public 'public/**/*.html'
+          args: --verbose --no-progress --accept 200,403,405,429 --root-dir ${{ github.workspace }}/public 'public/**/*.html'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
