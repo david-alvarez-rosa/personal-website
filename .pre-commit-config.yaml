@@ -1,0 +1,30 @@
+repos:
+  - repo: local
+    hooks:
+      - id: hugo-build
+        name: Hugo build (with --panicOnWarning)
+        entry: hugo --minify --panicOnWarning
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: lychee
+        name: Check broken links with lychee
+        entry: bash -c 'lychee --accept 200,403,405,429 --root-dir public "public/**/*.html"'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: html5validator
+        name: Validate HTML/CSS
+        entry: html5validator --config .html5validator.yaml
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: playwright
+        name: Run Playwright tests
+        entry: pnpm test
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

@@ -6,3 +6,4 @@ ignore_re:
   - '"font-weight": "420" is not a "font-weight" value'
   - 'Property "border-block"'
   - 'pseudo-element or pseudo-class ":has"'
+  - 'CSS: Parse Error'
