@@ -59,7 +59,7 @@ Now, we can use these implementations generically, by coding against the
 interface
 
 ```cpp
-auto printArea(const Shape& shape) {
+auto printArea(const Shape& shape) -> void {
   std::println("Area is {:.2f}", shape.area());
 }
 ```
@@ -76,7 +76,7 @@ provide the same interface, you can use a template to get polymorphism
 instead
 
 ```cpp
-auto printArea(const auto& shape) {
+auto printArea(const auto& shape) -> void {
   std::println("Area is {:.2f}", shape.area());
 }
 ```
