@@ -10,7 +10,8 @@ export default defineConfig({
   },
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: 0.05,
+      // Allow 5% pixel differences in CI, but require exact match locally
+      maxDiffPixelRatio: process.env.CI ? 0.05 : 0,
     },
   },
   projects: [
