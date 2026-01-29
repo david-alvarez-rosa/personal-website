@@ -2,3 +2,16 @@
 /.hugo_build.lock
 /__pycache__/
 /subscriptions.db
+
+# Node.js
+/node_modules/
+pnpm-lock.yaml
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+# Keep baseline snapshots in git, ignore only diff images
+*-actual.png
+*-expected.png
+*-diff.png
