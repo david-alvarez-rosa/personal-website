@@ -33,6 +33,9 @@ for (const page of PAGES) {
       await playwright.setViewportSize({ width: viewport.width, height: viewport.height });
       await playwright.goto(page.url);
       await playwright.waitForLoadState('networkidle');
+      await playwright.waitForLoadState('load');
+      // Wait for fonts to load to ensure consistent rendering
+      await playwright.evaluate(() => document.fonts.ready);
       await expect(playwright).toHaveScreenshot(`${page.name}-${viewport.name}.png`, {
         fullPage: true,
         animations: 'disabled',
@@ -55,6 +58,8 @@ test.describe('Blog Posts', () => {
     for (const url of postsToTest) {
       await page.goto(url);
       await page.waitForLoadState('networkidle');
+      await page.waitForLoadState('load');
+      await page.evaluate(() => document.fonts.ready);
       const filename = getSafeFilename(url, 'desktop');
       await expect(page).toHaveScreenshot(filename, {
         fullPage: true,
@@ -68,6 +73,8 @@ test.describe('Blog Posts', () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto(blogPostUrls[0]);
     await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
+    await page.evaluate(() => document.fonts.ready);
     const filename = getSafeFilename(blogPostUrls[0], 'mobile');
     await expect(page).toHaveScreenshot(filename, {
       fullPage: true,

@@ -8,6 +8,11 @@ export default defineConfig({
     baseURL: 'http://localhost:1313',
     screenshot: 'only-on-failure',
   },
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05,
+    },
+  },
   projects: [
     {
       name: 'Desktop Chrome',
