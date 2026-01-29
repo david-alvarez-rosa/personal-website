@@ -5,7 +5,6 @@
 
 # Node.js
 /node_modules/
-pnpm-lock.yaml
 
 # Playwright
 /test-results/
