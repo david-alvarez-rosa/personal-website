@@ -135,16 +135,16 @@ public:
 Now we can work directly with instances of `Shape`
 
 ```cpp
-auto printAreas(const std::vector<Shape*>& shapes) -> void {
-  for (auto* shape : shapes) {
+auto printAreas(const std::vector<std::unique_ptr<Shape>>& shapes) -> void {
+  for (const auto& shape : shapes) {
     std::println("Area is {:.2f}", shape->area());
   }
 }
 
 auto main() -> int {
-  auto square = SquareWrapper{Square{2}};
-  auto circle = CircleWrapper{Circle{1}};
-  auto shapes = std::vector<Shape*>{&square, &circle};
+  auto shapes = std::vector<std::unique_ptr<Shape>>{};
+  shapes.emplace_back(std::make_unique<SquareWrapper>(Square{2}));
+  shapes.emplace_back(std::make_unique<CircleWrapper>(Circle{1}));
   printAreas(shapes);
 }
 ```
