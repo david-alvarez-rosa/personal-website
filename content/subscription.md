@@ -7,6 +7,8 @@ draft = false
 subtitle = " "
 +++
 
+<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
+
 Welcome! Your subscription is confirmed.  Thanks for signing up.
 
 You can unsubscribe anytime by emailing david@alvarezrosa.com from the

@@ -7,3 +7,4 @@ ignore_re:
   - 'Property "border-block"'
   - 'pseudo-element or pseudo-class ":has"'
   - 'CSS: Parse Error'
+  - 'error: CSS: .* "revert" is not a .* value.'

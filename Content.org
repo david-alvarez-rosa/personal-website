@@ -596,9 +596,9 @@ parlance.  Nothing needs to be changed except a few type names
   };
 #+end_src
 
-That's it!  The class ~Any~ is a simplified version of ~std::any~, which
-is even used in the STL itself (namely, in ~std::function~).  But that's
-for another post.
+That's it!  The class ~Any~ is a simplified version of
+~std::any~,[fn:24] which is even used in the STL itself (namely, in
+~std::function~).  But that's for another post.
 
 * DONE [#B] Devirtualization and Static Polymorphism
 CLOSED: [2026-01-10 Sat 13:32]
@@ -918,6 +918,7 @@ CLOSED: [2026-01-24 Sat 12:31]
   sup { display: none; }
   .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
   @media (max-width: 860px) { .side img { margin-top: 0!important; } }
+  main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; }
 </style>
 #+end_export
 
@@ -1064,7 +1065,7 @@ CLOSED: [2025-12-13 Sat 22:23]
 :END:
 
 #+begin_export html
-<style> .signature { display: none; } </style>
+<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
 #+end_export
 
 That page couldn't be found (404 error).  Try the [[/][Home page]].
@@ -1076,6 +1077,10 @@ CLOSED: [2025-12-13 Sat 22:06]
 :EXPORT_HUGO_SECTION: .
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " "
 :END:
+
+#+begin_export html
+<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
+#+end_export
 
 Welcome! Your subscription is confirmed.  Thanks for signing up.
 
