@@ -255,9 +255,9 @@ public:
 };
 ```
 
-That's it!  The class `Any` is a simplified version of `std::any`, which
-is even used in the STL itself (namely, in `std::function`).  But that's
-for another post.
+That's it!  The class `Any` is a simplified version of
+`std::any`,[^fn:7] which is even used in the STL itself (namely, in
+`std::function`).  But that's for another post.
 
 [^fn:1]: Remember that interfaces that are intended to be used through a
     `Base&` or `Base*` must have a virtual destructor, to ensure derived
@@ -280,3 +280,5 @@ for another post.
     techniques to store small objects inline and avoid allocation.
 [^fn:6]: The type erasure concept is an OO-style interface (a vtable).
     It's unrelated to C++20 `concept` (compile-time predicates).
+[^fn:7]: For a Rust version, see Waifod's post [Polymorphism in C++ and
+    Rust: Type Erasure](https://waifod.dev/blog/polymorphism-type-erasure/).

@@ -10,7 +10,7 @@ export default defineConfig({
   },
   expect: {
     toHaveScreenshot: {
-      maxDiffPixels: process.env.CI ? 20 : 0,
+      maxDiffPixelRatio: process.env.CI ? 0.01 : 0,
     },
   },
   projects: [

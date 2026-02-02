@@ -1088,6 +1088,9 @@ You can unsubscribe anytime by emailing david@alvarezrosa.com from the
 same email address you subscribed with.
 
 * Footnotes
+[fn:24] For a Rust version, see Waifod's post [[https://waifod.dev/blog/polymorphism-type-erasure/][Polymorphism in C++ and
+Rust: Type Erasure]].
+
 [fn:25] ~release~ ensures prior writes are visible to threads that
 ~acquire~ the same variable.  Both sides use ~relaxed~ for their own
 index since no other thread writes to it.
