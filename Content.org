@@ -4,12 +4,412 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Initial server setup
+1. Get a distro (LTS recommended, Debian 13) and a domain name. If it's
+   own hardware, install the server. For partitions, it's very difficult
+   to tell, so I prefer to just have one big ~/~ + swap
+2. Point domain to VPS IP from DNS provider, wait until changes are
+   propagated through global CDN. An A record for IPv4 and an AAAA
+   record for IPv6.
+   #+begin_src sh
+    $ dig alvarezmagan.com A +short
+    213.32.19.229
+    $ dig alvarezmagan.com AAAA +short
+    2001:41d0:305:2100::febc
+  #+end_src
+4. Log-in with provided credentials and change root password
+   #+begin_src
+     $ ssh root@alvarezmagan.com
+     # passwd
+   #+end_src
+   Validate that new password is working
+5. Create new user ~david~ with sudo and password
+   #+begin_src
+     # useradd --create-home --groups sudo david
+     # passwd david
+   #+end_src
+   Validate new password an user with ~su david~
+6. Log out, log back with user
+   #+begin_src sh
+     $ ssh david@alvarezmagan.com
+   #+end_src
+7. Upgrade and update
+   #+begin_src
+     # apt update
+     # apt upgrade
+   #+end_src
+8. Get dotfiles (optionally setup github with ssh keys)
+    #+begin_src sh
+      $ git init
+      $ git remote add origin git@github.com:david-alvarez-rosa/dotfiles.git
+      $ git fetch origin
+      $ git checkout -t origin/main
+      $ git submodule update --init --recursive
+      $ git config status.showUntrackedFiles no
+   #+end_src
+9. Configure shell (install zsh, oh-my-zsh and plugins and starship)
+   #+BEGIN_SRC
+     # sudo apt install zsh
+     # chsh --shell $(which zsh) david
+     $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+     $ curl -sS https://starship.rs/install.sh | sh
+   #+end_src
+   Relogin and validate that new shell is open with no errors.
+10. Configure ssh keys for sshing without password (from local), also for root
+    #+begin_src sh
+      $ ssh-copy-id david@alvarezmagan.com
+      $ ssh david@alvarezmagan.com
+      $ su -
+      $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
+    #+end_src
+    Validate that you can loging to root and david without password.  I
+    like to keep password authentication enabled for user, but disabled
+    for root, but tweak sshd config as per your preference
+11. Setup firewall blocking all incoming connections except 22/tcp for
+    SSH (safest is to block all, and then allow as per your needs)
+    #+begin_src
+      # apt install ufw
+      # ufw default deny incoming
+      # ufw allow 22/tcp
+      # ufw enable
+    #+end_src
+    Check with sudo ufw status
+12. Setup fail2ban, a security tool that automatically blocks (“bans”)
+    IP addresses that show malicious behavior in your server logs—most
+    commonly repeated failed login attempts against SSH.
+    #+begin_src
+      # apt install fail2ban
+      # systemctl enable --now fail2ban
+    #+end_src
+    Check with systemctl status fail2ban
+13. Enable automatic security updates unattended-upgrades
+   #+begin_src
+     # apt install unattended-upgrades apt-listchanges
+     # dpkg-reconfigure --priority=low unattended-upgrades
+   #+end_src
+14. Setup correct timezone
+    #+begin_src
+      # timedatectl list-timezones
+      # timedatectl set-timezone Europe/Madrid
+    #+end_src
+    Validate with date command
+15. Setup locales
+    #+begin_src
+      # vim /etc/locale.gen
+         en_US.UTF-8 UTF-8  # uncomment this line
+      # locale-gen
+    #+end_src
+16. Setup hostname
+    #+begin_src
+      # hostnamectl set-hostname homelab
+      # vim /etc/hosts
+         127.0.1.1    homelab
+    #+end_src
+
+Optionally,
+
+1. Install a webserver like nginx
+    #+begin_src
+      # apt install nginx
+      # systemctl enable --now nginx
+      # ufw allow 80/tcp
+    #+end_src
+    Check that HTTP(s) ports are allowed with sudo ufw status, and that
+    nginx is up with systemctl status nginx. Then either use curl
+    localhost, or navigate with a browser to http://alvarezmagan.com and
+    check you see the welcome message
+2. Setup TLS/HTTPS
+    #+begin_src
+      # ufw allow 443/tcp
+      # apt install certbot python3-certbot-nginx
+      # certbot
+    #+end_src
+
+
+* TODO [#B] Selfhost an email server guide
+Email guide:
+
+1. Receiving email
+2. Sending email
+3. Connecting clients (IMAP only)
+4. rDNS, SPF, DKIM, DMARC
+5. Multiple domains
+
+
+** Receiving email
+
+1. Configure DNS records A/AAAA for mail.alvarezmagan.com, wait for them
+   to propagate, and validate. Also DNS MX (Mail Exchanger) records ~MX
+   10 mail.alvarezmagan.com.~ Check with
+   #+begin_src
+     $ dig +short A mail.alvarezmagan.com
+    213.32.19.229
+    $ dig +short AAAA mail.alvarezmagan.com
+    2001:41d0:305:2100::febc
+     $ dig +short MX alvarezmagan.com
+       10 mail.alvarezmagan.com
+   #+end_src
+1. Hostname can be whatever, but ensure that in /etc/hosts it points
+   to mail.alvarezmagan.com
+   #+begin_src sh
+     sudo vim /etc/hosts
+        127.0.1.1       mail.alvarezmagan.com        homelab
+$ hostname -f
+  mail.alvarezmagan.com
+   #+end_src
+5. Install Postfix, enter internet site with mail name
+   mail.alvarezmagan.com, and open port 25
+   #+begin_src sh
+     apt install postfix
+     ufw allow 25/tcp
+   #+end_src
+8. From your computer should already be able to telnet potfix
+   #+begin_src sh
+     $ telnet mail.alvarezmagan.com 25
+       Trying 213.32.19.229...
+       Connected to mail.alvarezmagan.com.
+       220 mail.alvarezmagan.com ESMTP Postfix (Debian)
+   #+end_src
+9. Add domain to /etc/postfix/main.cf mydestination
+   #+begin_src sh
+   mydestination = $myhostname, mail.alvarezmagan.com, localhost.alvarezmagan.com, , localhost, alvarezmagan.com
+   #+end_src
+   Restart ~systemctl restart postfix~
+10. The server is ready to receive email! Sent an email to your account
+    david@alvarezmagan.com from. check it
+    #+begin_src
+      # apt install mailutils
+      $ mail
+ Mail version 8.1.2 01/15/2001.  Type ? for help.
+ "/var/mail/david": 1 message 1 unread
+ >U  1 david@alvarezrosa  Mon Feb  2 21:09   33/1292  Hola hola
+    #+end_src
+
+** Sending email
+
+11. Update postfix conf in /etc/postfix/main.cf
+    #+begin_src
+      mydomain = alvarezmagan.com
+      myorigin = $mydomain
+    #+end_src
+    restart, ~systemctl restart postfix~
+12. You are ready to send email to any address you like
+    #+begin_src sh
+      echo test | mail --subject "test 4" --append "From: david@alvarezmagan.com" david@alvarezrosa.com
+    #+end_src
+
+** Connecting clients
+
+13. Now we expose mailboxes via IMAP so clients can read mail
+    #+begin_src
+      # apt install dovecot-core dovecot-imapd
+    #+end_src
+14. Get certificate for fqdn imap
+        #+begin_src
+          # certbot certonly -d mail.alvarezmagan.com
+        #+end_src
+15. Configure Dovecot TLS: =/etc/dovecot/conf.d/10-ssl.conf= Set:
+     #+begin_src
+     ssl = required
+     ssl_cert = /etc/letsencrypt/live/mail.alvarezmagan.com/fullchain.pem
+     ssl_key = /etc/letsencrypt/live/mail.alvarezmagan.com/privkey.pem
+     #+end_src
+16. Uncomment lines =/etc/postfix/master.cf=
+  #+begin_src conf
+submission inet n       -       y       -       -       smtpd
+  -o syslog_name=postfix/submission
+  -o smtpd_tls_security_level=encrypt
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
+  -o milter_macro_daemon_name=ORIGINATING
+  #+end_src
+17. Open firewall.   - *587*: SMTP submission (recommended for clients;
+    typically STARTTLS), and   - *993*: IMAP over TLS/SSL
+    #+begin_src
+# ufw allow 587/tcp
+# ufw allow 993/tcp
+    #+end_src
+18. Restart services
+    #+begin_src
+# systemctl restart dovecot postfix
+    #+end_src
+19. Edit /etc/dovecot/conf.d/10-master.conf. Find =service auth {
+    ... }= and ensure you have: (just uncomment)
+    #+begin_src sh
+      service auth {
+        unix_listener /var/spool/postfix/private/auth {
+          mode = 0660
+        }
+      }
+    #+end_src
+21. use thunderbird / mutt or mu4e to check. thunderbird is nice for
+    testing (only for testing), because it autofills some fields for you
+
+** rDNS, SPF, DKIM, DMARC
+
+rDNS
+
+1. Configure rDNS from the VPS provider from "homelab" host back to
+   DNS. Validate that it's working:
+   #+begin_src sh
+     $ dig +short -x 213.32.19.229
+       mail.alvarezmagan.com.
+      $ dig +short -x 2001:41d0:305:2100::febc
+      mail.alvarezmagan.com.
+   #+end_src
+
+SPF
+
+2. Setup SPF Sender Policy Framework, and validate.  =v=spf1 mx -all=
+   means only the servers listed in your domain’s MX records are allowed
+   to send email for the domain, and all other senders should fail SPF.
+   #+begin_src
+     $ dig +short TXT alvarezmagan.com
+     v=spf1 mx -all
+   #+end_src
+
+DMARC
+
+3. Set up DMARC by publishing a DNS TXT record at
+   *_dmarc.yourdomain.com* that tells receivers what to do when SPF/DKIM
+   checks (and alignment) fail. It’s a DMARC policy that tells receivers
+   to reject mail that fails DMARC checks and to send aggregate reports
+   to david@yourdomain.com.
+   #+begin_src
+     v=DMARC1; p=reject; rua=mailto:david@alvarezmagan.com
+     $ dig +short TXT _dmarc.alvarezmagan.com
+   #+end_src
+
+DKIM
+
+1. Install opendkim
+   #+begin_src
+     apt install opendkim opendkim-tools
+   #+end_src
+2. generate keys
+   #+begin_src
+     sudo mkdir -p /etc/opendkim/keys/alvarezmagan.com
+sudo opendkim-genkey -D /etc/opendkim/keys/alvarezmagan.com -d alvarezmagan.com -s mail
+sudo chown -R opendkim:opendkim /etc/opendkim/keys
+sudo chmod 600 /etc/opendkim/keys/alvarezmagan.com/mail.private
+   #+end_src
+3. Create a DNS TXT record, - *Name:*
+   =mail._domainkey.alvarezmagan.com=, - *Value:* the =v=DKIM1; ... p=...= from that file (as one TXT value)
+   #+begin_src
+     sudo cat /etc/opendkim/keys/alvarezmagan.com/mail.txt
+   #+end_src
+   Validate it has been created
+   #+begin_src
+     dig +short TXT mail._domainkey.alvarezmagan.com
+   #+end_src
+4. Configure opendkim
+   #+begin_src
+     ❯ sudo cat /etc/opendkim.conf
+Mode            sv
+Domain          alvarezmagan.com
+Selector        mail
+KeyFile         /etc/opendkim/keys/alvarezmagan.com/mail.private
+Socket          inet:12301@localhost
+UserID opendkim
+PidFile /run/opendkim/opendkim.pid
+   #+end_src
+5. hook postfix to opendkim   Add to =/etc/postfix/main.cf=:
+  #+begin_src conf
+milter_default_action = accept
+milter_protocol = 6
+smtpd_milters = inet:localhost:12301
+non_smtpd_milters = inet:localhost:12301
+  #+end_src
+  Restart ~systemctl restart postfix~
+6. Validate by sending email to gmail, check headers, and also
+   mail-tester.com to get score 10/10 and also testemailserver from
+   mxtoolbox.com and get everything green
+
+* TODO [#B] Template Argument Deduction                             :backlog:
+
+- https://en.cppreference.com/w/cpp/language/template_argument_deduction.html
+- Perfect forwarding
+
+* TODO [#B] Value Categories                                        :backlog:
+
+- https://en.cppreference.com/w/cpp/language/value_category.html
+- https://0xghost.dev/blog/std-move-deep-dive/
+
 * TODO [#B] How to setup a tunnel from vps to local homelab         :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: pending-tunnel
 :END:
 
 Write a blog on how to setup a tunnel from vps to local homelab
+
+How to manage a selfhosted homelab behind CGNAT?
+
+Homelab <-> Router <-> NAT <-> ONT <-> *CGNAT* <-> ISP <-> Internet
+
+Expose the server through public VPS
+
+Setting up a VPN tunnel from VPS to local homelab
+
+Server
+#+begin_src conf
+  [Interface]
+  Address = 10.0.0.1/24
+  PrivateKey = <server-private-key>
+  ListenPort = 51820
+  MTU = 1280
+  PostUp = iptables -t nat -A PREROUTING -i ens6 -p udp --dport 51820 -j RETURN
+  PostUp = iptables -t nat -A PREROUTING -i ens6 -j DNAT --to-destination 10.0.0.2
+  PostUp = iptables -A FORWARD -i wg0 -o ens6 -s 10.0.0.2 -j ACCEPT
+  PostUp = iptables -t nat -A POSTROUTING -j MASQUERADE
+  PostDown = iptables -t nat -D PREROUTING -i ens6 -p udp --dport 51820 -j RETURN
+  PostDown = iptables -t nat -D PREROUTING -i ens6 -j DNAT --to-destination 10.0.0.2
+  PostDown = iptables -D FORWARD -i wg0 -o ens6 -s 10.0.0.2 -j ACCEPT
+  PostDown = iptables -t nat -D POSTROUTING -j MASQUERADE
+
+  [Peer]
+  PublicKey = <homelab-public-key>
+  AllowedIPs = 10.0.0.2/32
+#+end_src
+
+Homelab
+#+begin_src conf
+  [Interface]
+  Address = 10.0.0.2/24
+  PrivateKey = <homelab-private-key>
+
+  [Peer]
+  PublicKey = <server-public-key>
+  Endpoint = <server-public-ip>:51820
+  AllowedIPs = 10.0.0.1/32
+  PersistentKeepalive = 25
+#+end_src
+
+Now the proxy all stuff with iptables (DNAT)
+#+begin_src sh
+  sysctl -w net.ipv4.ip_forward=1
+  echo net.ipv4.ip_forward=1 >/etc/sysctl.d/99-forward.conf  # Persist config
+  sysctl -w net.ipv4.conf.ens6.route_localnet=1  # Change ens6 with eth0 or whatever
+#+end_src
+
+What happens if VPS is not working?
+
+Setup an alternate way of accessing the homelab
+
+- Port forwarding + DynDNS: not possible behind CGNAT, but good option
+  otherwise
+- Use a third party: Tailscale/Cloudflare, etc. On my case, I've setup
+  cloudflare one zero trust.  It uses outbound service daemon on both
+  client and server, so no need to expose anything (same as vps bastion
+  or jump box). need to run cloudflared both in server and client
+
+What happens if homelab is not working?
+
+In that case, you'll like to reboot, but if you cannot access it on the
+first place that's a big problem
+
+- Manually restarted if you are physically close to the server
+- Setup heuristic cronjobs: check if the server is accessible by itself
+  once in a while, and if that fails, then it will restart and notify
 
 * TODO [#B] Incremental clang-tidy tool                             :backlog:
 :PROPERTIES:
@@ -61,7 +461,7 @@ In-depth vector push_back following guide
 
 Implement a shared_ptr
 
-* TODO [#B] Exploring CPU Caches
+* TODO [#B] Exploring CPU Caches                                    :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: exploring-cpu-caches
 :END:
