@@ -7,7 +7,7 @@
 * DONE [#B] Server Setup
 CLOSED: [2026-02-03 Mon 20:00]
 :PROPERTIES:
-:EXPORT_FILE_NAME: server-hardening
+:EXPORT_FILE_NAME: server-setup
 :END:
 
 A misconfigured server is an open invitation to attackers. After
@@ -21,7 +21,7 @@ keep it simple: one large root partition plus swap.[fn::Predicting
 partition sizes is hard. A single root partition simplifies management
 and avoids running out of space in one mount point while others sit
 empty.] While I run Arch on my personal machine, I prefer Debian for
-servers because its stability and the long term support.
+servers because of its stability and long-term support.
 
 From your DNS registrar point your domain to the server's IP. Create an
 A record for IPv4 and an AAAA record for IPv6. Wait a few minutes for
@@ -129,11 +129,11 @@ Configure locales by uncommenting en_US in ~/etc/locale.gen~, then run
 Set a meaningful hostname and add it to ~/etc/hosts~
 
 #+begin_src sh
-    $ sudo hostnamectl set-hostname homelab
-    $ cat /etc/hosts
-    127.0.0.1  localhost
-    ::1        localhost  ip6-localhost  ip6-loopback
-    127.0.1.1  homelab
+  $ sudo hostnamectl set-hostname homelab
+  $ cat /etc/hosts
+  127.0.0.1  localhost
+  ::1        localhost  ip6-localhost  ip6-loopback
+  127.0.1.1  homelab
 #+end_src
 
 ** Security
@@ -178,7 +178,7 @@ to use Apache, but nginx has better performance.]
 #+end_src
 
 Verify by navigating to http://alvarezrosa.com from the browser.  Then
-secure the site with HTTPs[fn::Certbot automatically obtains and
+secure the site with HTTPS[fn::Certbot automatically obtains and
 installs free TLS certificates from Let's Encrypt. It also sets up
 automatic renewal via a systemd timer.]
 
@@ -191,204 +191,271 @@ automatic renewal via a systemd timer.]
 Follow the prompts to configure HTTPS. Then, go back to the browser and
 verify https://alvarezrosa.com loads correctly.
 
-* TODO [#B] Selfhost an email server guide
-Email guide:
+* DONE [#B] Self-Hosting an Email Server
+CLOSED: [2026-02-03 Mon 21:00]
+:PROPERTIES:
+:EXPORT_FILE_NAME: selfhost-email-server
+:END:
 
-1. Receiving email
-2. Sending email
-3. Connecting clients (IMAP only)
-4. rDNS, SPF, DKIM, DMARC
-5. Multiple domains
+Running your own email server sounds intimidating, but it's more
+straightforward than you'd think. After hosting email for multiple
+domains, these are the essential steps I follow every time.
 
+This guide assumes you have a server with a clean Linux install[fn::I use
+Debian for servers. For initial server setup, see my [[/server-setup/][Server Setup]]
+post.] and a domain name pointing to your server's IP.
 
-** Receiving email
+** DNS configuration
 
-1. Configure DNS records A/AAAA for mail.alvarezmagan.com, wait for them
-   to propagate, and validate. Also DNS MX (Mail Exchanger) records ~MX
-   10 mail.alvarezmagan.com.~ Check with
-   #+begin_src
-     $ dig +short A mail.alvarezmagan.com
-    213.32.19.229
-    $ dig +short AAAA mail.alvarezmagan.com
-    2001:41d0:305:2100::febc
-     $ dig +short MX alvarezmagan.com
-       10 mail.alvarezmagan.com
-   #+end_src
-1. Hostname can be whatever, but ensure that in /etc/hosts it points
-   to mail.alvarezmagan.com
-   #+begin_src sh
-     sudo vim /etc/hosts
-        127.0.1.1       mail.alvarezmagan.com        homelab
-$ hostname -f
-  mail.alvarezmagan.com
-   #+end_src
-5. Install Postfix, enter internet site with mail name
-   mail.alvarezmagan.com, and open port 25
-   #+begin_src sh
-     apt install postfix
-     ufw allow 25/tcp
-   #+end_src
-8. From your computer should already be able to telnet potfix
-   #+begin_src sh
-     $ telnet mail.alvarezmagan.com 25
-       Trying 213.32.19.229...
-       Connected to mail.alvarezmagan.com.
-       220 mail.alvarezmagan.com ESMTP Postfix (Debian)
-   #+end_src
-9. Add domain to /etc/postfix/main.cf mydestination
-   #+begin_src sh
-   mydestination = $myhostname, mail.alvarezmagan.com, localhost.alvarezmagan.com, , localhost, alvarezmagan.com
-   #+end_src
-   Restart ~systemctl restart postfix~
-10. The server is ready to receive email! Sent an email to your account
-    david@alvarezmagan.com from. check it
-    #+begin_src
-      # apt install mailutils
-      $ mail
- Mail version 8.1.2 01/15/2001.  Type ? for help.
- "/var/mail/david": 1 message 1 unread
- >U  1 david@alvarezrosa  Mon Feb  2 21:09   33/1292  Hola hola
-    #+end_src
+Create DNS records for your mail server: A/AAAA records for
+mail.alvarezrosa.com, and an MX record pointing to it.[fn::MX records
+tell other mail servers where to deliver mail. The number 10 is the
+priority---lower numbers are tried first if you have multiple mail
+servers.] Verify propagation
 
-** Sending email
+#+begin_src sh
+  $ dig +short A mail.alvarezrosa.com
+  213.32.19.229
+  $ dig +short AAAA mail.alvarezrosa.com
+  2001:41d0:305:2100::febc
+  $ dig +short MX alvarezrosa.com
+  10 mail.alvarezrosa.com.
+#+end_src
 
-11. Update postfix conf in /etc/postfix/main.cf
-    #+begin_src
-      mydomain = alvarezmagan.com
-      myorigin = $mydomain
-    #+end_src
-    restart, ~systemctl restart postfix~
-12. You are ready to send email to any address you like
-    #+begin_src sh
-      echo test | mail --subject "test 4" --append "From: david@alvarezmagan.com" david@alvarezrosa.com
-    #+end_src
+Set your server's hostname to match. Edit ~/etc/hosts~[fn::Postfix uses
+the FQDN (Fully Qualified Domain Name) to identify itself in SMTP
+conversations. Make sure ~hostname -f~ returns your mail server's
+address.]
 
-** Connecting clients
+#+begin_src sh
+  127.0.1.1  mail.alvarezrosa.com  homelab
+#+end_src
 
-13. Now we expose mailboxes via IMAP so clients can read mail
-    #+begin_src
-      # apt install dovecot-core dovecot-imapd
-    #+end_src
-14. Get certificate for fqdn imap
-        #+begin_src
-          # certbot certonly -d mail.alvarezmagan.com
-        #+end_src
-15. Configure Dovecot TLS: =/etc/dovecot/conf.d/10-ssl.conf= Set:
-     #+begin_src
-     ssl = required
-     ssl_cert = /etc/letsencrypt/live/mail.alvarezmagan.com/fullchain.pem
-     ssl_key = /etc/letsencrypt/live/mail.alvarezmagan.com/privkey.pem
-     #+end_src
-16. Uncomment lines =/etc/postfix/master.cf=
-  #+begin_src conf
-submission inet n       -       y       -       -       smtpd
-  -o syslog_name=postfix/submission
-  -o smtpd_tls_security_level=encrypt
-  -o smtpd_sasl_auth_enable=yes
-  -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
-  -o milter_macro_daemon_name=ORIGINATING
-  #+end_src
-17. Open firewall.   - *587*: SMTP submission (recommended for clients;
-    typically STARTTLS), and   - *993*: IMAP over TLS/SSL
-    #+begin_src
-# ufw allow 587/tcp
-# ufw allow 993/tcp
-    #+end_src
-18. Restart services
-    #+begin_src
-# systemctl restart dovecot postfix
-    #+end_src
-19. Edit /etc/dovecot/conf.d/10-master.conf. Find =service auth {
-    ... }= and ensure you have: (just uncomment)
-    #+begin_src sh
-      service auth {
-        unix_listener /var/spool/postfix/private/auth {
-          mode = 0660
-        }
-      }
-    #+end_src
-21. use thunderbird / mutt or mu4e to check. thunderbird is nice for
-    testing (only for testing), because it autofills some fields for you
+** Receiving mail
 
-** rDNS, SPF, DKIM, DMARC
+Install Postfix and open port 25[fn::During installation, select "Internet
+Site" and enter ~mail.alvarezrosa.com~ as the system mail name. Postfix
+handles SMTP---it receives mail from other servers and stores it in
+~/var/mail/~.]
 
-rDNS
+#+begin_src sh
+  $ sudo apt install postfix
+  $ sudo ufw allow 25/tcp
+#+end_src
 
-1. Configure rDNS from the VPS provider from "homelab" host back to
-   DNS. Validate that it's working:
-   #+begin_src sh
-     $ dig +short -x 213.32.19.229
-       mail.alvarezmagan.com.
-      $ dig +short -x 2001:41d0:305:2100::febc
-      mail.alvarezmagan.com.
-   #+end_src
+Configure Postfix to accept mail for your domain. Edit
+~/etc/postfix/main.cf~ and add your domain to ~mydestination~
 
-SPF
+#+begin_src conf
+  mydestination = $myhostname, mail.alvarezrosa.com, localhost.alvarezrosa.com, localhost, alvarezrosa.com
+#+end_src
 
-2. Setup SPF Sender Policy Framework, and validate.  =v=spf1 mx -all=
-   means only the servers listed in your domain’s MX records are allowed
-   to send email for the domain, and all other senders should fail SPF.
-   #+begin_src
-     $ dig +short TXT alvarezmagan.com
-     v=spf1 mx -all
-   #+end_src
+Restart and verify Postfix is listening[fn::Use ~telnet mail.alvarezrosa.com 25~ to test the
+connection. You should see a Postfix greeting.]
 
-DMARC
+#+begin_src sh
+  $ sudo systemctl restart postfix
+  $ sudo ss -tlnp | grep :25
+#+end_src
 
-3. Set up DMARC by publishing a DNS TXT record at
-   *_dmarc.yourdomain.com* that tells receivers what to do when SPF/DKIM
-   checks (and alignment) fail. It’s a DMARC policy that tells receivers
-   to reject mail that fails DMARC checks and to send aggregate reports
-   to david@yourdomain.com.
-   #+begin_src
-     v=DMARC1; p=reject; rua=mailto:david@alvarezmagan.com
-     $ dig +short TXT _dmarc.alvarezmagan.com
-   #+end_src
+Send a test email to ~david@alvarezrosa.com~ from Gmail, then check it
+arrived
 
-DKIM
+#+begin_src sh
+  $ sudo apt install mailutils
+  $ mail
+#+end_src
 
-1. Install opendkim
-   #+begin_src
-     apt install opendkim opendkim-tools
-   #+end_src
-2. generate keys
-   #+begin_src
-     sudo mkdir -p /etc/opendkim/keys/alvarezmagan.com
-sudo opendkim-genkey -D /etc/opendkim/keys/alvarezmagan.com -d alvarezmagan.com -s mail
-sudo chown -R opendkim:opendkim /etc/opendkim/keys
-sudo chmod 600 /etc/opendkim/keys/alvarezmagan.com/mail.private
-   #+end_src
-3. Create a DNS TXT record, - *Name:*
-   =mail._domainkey.alvarezmagan.com=, - *Value:* the =v=DKIM1; ... p=...= from that file (as one TXT value)
-   #+begin_src
-     sudo cat /etc/opendkim/keys/alvarezmagan.com/mail.txt
-   #+end_src
-   Validate it has been created
-   #+begin_src
-     dig +short TXT mail._domainkey.alvarezmagan.com
-   #+end_src
-4. Configure opendkim
-   #+begin_src
-     ❯ sudo cat /etc/opendkim.conf
-Mode            sv
-Domain          alvarezmagan.com
-Selector        mail
-KeyFile         /etc/opendkim/keys/alvarezmagan.com/mail.private
-Socket          inet:12301@localhost
-UserID opendkim
-PidFile /run/opendkim/opendkim.pid
-   #+end_src
-5. hook postfix to opendkim   Add to =/etc/postfix/main.cf=:
-  #+begin_src conf
-milter_default_action = accept
-milter_protocol = 6
-smtpd_milters = inet:localhost:12301
-non_smtpd_milters = inet:localhost:12301
-  #+end_src
-  Restart ~systemctl restart postfix~
-6. Validate by sending email to gmail, check headers, and also
-   mail-tester.com to get score 10/10 and also testemailserver from
-   mxtoolbox.com and get everything green
+** Sending mail
+
+Configure Postfix to use your domain in outgoing messages. Edit
+~/etc/postfix/main.cf~
+
+#+begin_src conf
+  mydomain = alvarezrosa.com
+  myorigin = $mydomain
+#+end_src
+
+Restart and test
+
+#+begin_src sh
+  $ sudo systemctl restart postfix
+  $ echo "Hello, world!" | mail -s "Subject" recipient@example.com
+#+end_src
+
+** Client access
+
+Install Dovecot to expose mailboxes via IMAP[fn::IMAP keeps messages on
+the server and syncs across devices. I prefer it over POP3, which
+downloads and typically deletes messages from the server.]
+
+#+begin_src sh
+  $ sudo apt install dovecot-core dovecot-imapd
+#+end_src
+
+Get a TLS certificate[fn::Certbot obtains free certificates from Let's
+Encrypt and auto-renews them. Email clients require TLS.]
+
+#+begin_src sh
+  $ sudo certbot certonly -d mail.alvarezrosa.com
+#+end_src
+
+Configure Dovecot TLS. Edit ~/etc/dovecot/conf.d/10-ssl.conf~
+
+#+begin_src conf
+  ssl = required
+  ssl_cert = </etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
+  ssl_key = </etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
+#+end_src
+
+Enable SMTP submission. Edit ~/etc/postfix/master.cf~ and uncomment the
+submission section[fn::Port 587 is for mail submission with STARTTLS. Port
+465 (SMTPS) also works, but 587 is the modern standard.]
+
+#+begin_src conf
+  submission inet n       -       y       -       -       smtpd
+    -o syslog_name=postfix/submission
+    -o smtpd_tls_security_level=encrypt
+    -o smtpd_sasl_auth_enable=yes
+    -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
+    -o milter_macro_daemon_name=ORIGINATING
+#+end_src
+
+Open ports 587 (SMTP) and 993 (IMAP)
+
+#+begin_src sh
+  $ sudo ufw allow 587/tcp
+  $ sudo ufw allow 993/tcp
+#+end_src
+
+Connect Dovecot authentication to Postfix. Edit
+~/etc/dovecot/conf.d/10-master.conf~ and find ~service auth~[fn::This
+lets Postfix authenticate users against Dovecot, so clients can send mail
+using their Linux credentials.]
+
+#+begin_src conf
+  service auth {
+    unix_listener /var/spool/postfix/private/auth {
+      mode = 0660
+      user = postfix
+      group = postfix
+    }
+  }
+#+end_src
+
+Restart services
+
+#+begin_src sh
+  $ sudo systemctl restart dovecot postfix
+#+end_src
+
+Configure your email client.[fn::I use mu4e in Emacs. For testing,
+Thunderbird works well and auto-configures most settings. Use IMAP server
+~mail.alvarezrosa.com~ port 993, SMTP server ~mail.alvarezrosa.com~ port
+587, both with TLS and your Linux user credentials.] Verify you can send
+and receive.
+
+** Mail authentication
+
+Your server works, but mail will land in spam without proper
+authentication. Modern email requires four mechanisms: rDNS, SPF, DKIM,
+and DMARC.
+
+*rDNS.* Configure reverse DNS through your VPS provider's control
+panel.[fn::Also called PTR records. rDNS maps your IP back to your domain,
+proving you control it. Most servers reject mail from IPs without proper
+rDNS.] Map your IPs to ~mail.alvarezrosa.com~ and verify
+
+#+begin_src sh
+  $ dig +short -x 213.32.19.229
+  mail.alvarezrosa.com.
+#+end_src
+
+*SPF.* Create a DNS TXT record specifying which IPs can send mail for your
+domain[fn::SPF prevents spammers from forging your domain. ~v=spf1 mx
+-all~ means only servers in your MX records can send; reject all others.
+Use ~?all~ for soft fail during testing.]
+
+#+begin_src sh
+  $ dig +short TXT alvarezrosa.com
+  "v=spf1 mx -all"
+#+end_src
+
+*DKIM.* Install OpenDKIM to sign outgoing messages[fn::DKIM adds a digital
+signature verified against a public key in DNS, proving the message came
+from your server and wasn't tampered with.]
+
+#+begin_src sh
+  $ sudo apt install opendkim opendkim-tools
+  $ sudo mkdir -p /etc/opendkim/keys/alvarezrosa.com
+  $ sudo opendkim-genkey -D /etc/opendkim/keys/alvarezrosa.com -d alvarezrosa.com -s mail
+  $ sudo chown -R opendkim:opendkim /etc/opendkim/keys
+  $ sudo chmod 600 /etc/opendkim/keys/alvarezrosa.com/mail.private
+#+end_src
+
+Publish the public key as a DNS TXT record at
+~mail._domainkey.alvarezrosa.com~. The value is in the generated file
+
+#+begin_src sh
+  $ sudo cat /etc/opendkim/keys/alvarezrosa.com/mail.txt
+#+end_src
+
+Configure OpenDKIM. Edit ~/etc/opendkim.conf~[fn::Mode ~sv~ tells OpenDKIM
+to sign outgoing mail and verify incoming signatures.]
+
+#+begin_src conf
+  Mode            sv
+  Domain          alvarezrosa.com
+  Selector        mail
+  KeyFile         /etc/opendkim/keys/alvarezrosa.com/mail.private
+  Socket          inet:12301@localhost
+  UserID          opendkim
+  PidFile         /run/opendkim/opendkim.pid
+#+end_src
+
+Hook Postfix to OpenDKIM. Add to ~/etc/postfix/main.cf~
+
+#+begin_src conf
+  milter_default_action = accept
+  milter_protocol = 6
+  smtpd_milters = inet:localhost:12301
+  non_smtpd_milters = inet:localhost:12301
+#+end_src
+
+Restart services
+
+#+begin_src sh
+  $ sudo systemctl restart opendkim postfix
+#+end_src
+
+*DMARC.* Create a DNS TXT record at ~_dmarc.alvarezrosa.com~ through your
+DNS provider's control panel[fn::DMARC ties SPF and DKIM together.
+~p=reject~ tells receivers to reject mail that fails. Start with ~p=none~
+to monitor without affecting delivery, then switch to ~p=reject~ once
+everything works. The ~rua~ parameter sends aggregate reports to your
+email.]
+
+#+begin_example
+  v=DMARC1; p=reject; rua=mailto:david@alvarezrosa.com
+#+end_example
+
+Verify the record is published
+
+#+begin_src sh
+  $ dig +short TXT _dmarc.alvarezrosa.com
+#+end_src
+
+** Testing
+
+Send a test email to Gmail and inspect the headers---SPF, DKIM, and DMARC
+should all pass. Use [[https://www.mail-tester.com][mail-tester.com]] for a comprehensive check (aim for
+10/10) and [[https://mxtoolbox.com/SuperTool.aspx][MX Toolbox]] to verify DNS records.
+
+Your email server is now fully operational. Messages should reach inboxes
+instead of spam folders.[fn::New mail servers often face deliverability
+issues due to IP reputation. If your mail lands in spam initially, keep
+sending legitimate emails and request delisting from any blacklists your
+IP appears on. It can take weeks to build a positive reputation.]
 
 * TODO [#B] Template Argument Deduction                             :backlog:
 
