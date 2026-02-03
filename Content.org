@@ -4,127 +4,192 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
-* TODO [#B] Initial server setup
-1. Get a distro (LTS recommended, Debian 13) and a domain name. If it's
-   own hardware, install the server. For partitions, it's very difficult
-   to tell, so I prefer to just have one big ~/~ + swap
-2. Point domain to VPS IP from DNS provider, wait until changes are
-   propagated through global CDN. An A record for IPv4 and an AAAA
-   record for IPv6.
-   #+begin_src sh
-    $ dig alvarezmagan.com A +short
-    213.32.19.229
-    $ dig alvarezmagan.com AAAA +short
-    2001:41d0:305:2100::febc
-  #+end_src
-4. Log-in with provided credentials and change root password
-   #+begin_src
-     $ ssh root@alvarezmagan.com
-     # passwd
-   #+end_src
-   Validate that new password is working
-5. Create new user ~david~ with sudo and password
-   #+begin_src
-     # useradd --create-home --groups sudo david
-     # passwd david
-   #+end_src
-   Validate new password an user with ~su david~
-6. Log out, log back with user
-   #+begin_src sh
-     $ ssh david@alvarezmagan.com
-   #+end_src
-7. Upgrade and update
-   #+begin_src
-     # apt update
-     # apt upgrade
-   #+end_src
-8. Get dotfiles (optionally setup github with ssh keys)
-    #+begin_src sh
-      $ git init
-      $ git remote add origin git@github.com:david-alvarez-rosa/dotfiles.git
-      $ git fetch origin
-      $ git checkout -t origin/main
-      $ git submodule update --init --recursive
-      $ git config status.showUntrackedFiles no
-   #+end_src
-9. Configure shell (install zsh, oh-my-zsh and plugins and starship)
-   #+BEGIN_SRC
-     # sudo apt install zsh
-     # chsh --shell $(which zsh) david
-     $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-     $ curl -sS https://starship.rs/install.sh | sh
-   #+end_src
-   Relogin and validate that new shell is open with no errors.
-10. Configure ssh keys for sshing without password (from local), also for root
-    #+begin_src sh
-      $ ssh-copy-id david@alvarezmagan.com
-      $ ssh david@alvarezmagan.com
-      $ su -
-      $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
-    #+end_src
-    Validate that you can loging to root and david without password.  I
-    like to keep password authentication enabled for user, but disabled
-    for root, but tweak sshd config as per your preference
-11. Setup firewall blocking all incoming connections except 22/tcp for
-    SSH (safest is to block all, and then allow as per your needs)
-    #+begin_src
-      # apt install ufw
-      # ufw default deny incoming
-      # ufw allow 22/tcp
-      # ufw enable
-    #+end_src
-    Check with sudo ufw status
-12. Setup fail2ban, a security tool that automatically blocks (“bans”)
-    IP addresses that show malicious behavior in your server logs—most
-    commonly repeated failed login attempts against SSH.
-    #+begin_src
-      # apt install fail2ban
-      # systemctl enable --now fail2ban
-    #+end_src
-    Check with systemctl status fail2ban
-13. Enable automatic security updates unattended-upgrades
-   #+begin_src
-     # apt install unattended-upgrades apt-listchanges
-     # dpkg-reconfigure --priority=low unattended-upgrades
-   #+end_src
-14. Setup correct timezone
-    #+begin_src
-      # timedatectl list-timezones
-      # timedatectl set-timezone Europe/Madrid
-    #+end_src
-    Validate with date command
-15. Setup locales
-    #+begin_src
-      # vim /etc/locale.gen
-         en_US.UTF-8 UTF-8  # uncomment this line
-      # locale-gen
-    #+end_src
-16. Setup hostname
-    #+begin_src
-      # hostnamectl set-hostname homelab
-      # vim /etc/hosts
-         127.0.1.1    homelab
-    #+end_src
+* DONE [#B] Server Setup
+CLOSED: [2026-02-03 Mon 20:00]
+:PROPERTIES:
+:EXPORT_FILE_NAME: server-hardening
+:END:
 
-Optionally,
+A misconfigured server is an open invitation to attackers. After
+managing dozens of servers, these are the essential steps I run on every
+fresh install.
 
-1. Install a webserver like nginx
-    #+begin_src
-      # apt install nginx
-      # systemctl enable --now nginx
-      # ufw allow 80/tcp
-    #+end_src
-    Check that HTTP(s) ports are allowed with sudo ufw status, and that
-    nginx is up with systemctl status nginx. Then either use curl
-    localhost, or navigate with a browser to http://alvarezmagan.com and
-    check you see the welcome message
-2. Setup TLS/HTTPS
-    #+begin_src
-      # ufw allow 443/tcp
-      # apt install certbot python3-certbot-nginx
-      # certbot
-    #+end_src
+** Installation and DNS
 
+Start with a clean Linux install and a domain name. For partitioning, I
+keep it simple: one large root partition plus swap.[fn::Predicting
+partition sizes is hard. A single root partition simplifies management
+and avoids running out of space in one mount point while others sit
+empty.] While I run Arch on my personal machine, I prefer Debian for
+servers because its stability and the long term support.
+
+From your DNS registrar point your domain to the server's IP. Create an
+A record for IPv4 and an AAAA record for IPv6. Wait a few minutes for
+changes to propagate, then verify
+
+#+begin_src sh
+  $ dig alvarezrosa.com A +short
+  213.32.19.229
+  $ dig alvarezrosa.com AAAA +short
+  2001:41d0:305:2100::febc
+#+end_src
+
+** First login
+
+Log in, change the root password, and update installed packages
+
+#+begin_src sh
+  $ ssh root@alvarezrosa.com
+  $ passwd
+  $ apt update && apt upgrade
+#+end_src
+
+Create a non-root user with sudo privileges
+
+#+begin_src sh
+  $ useradd --create-home --groups sudo david
+  $ passwd david
+#+end_src
+
+Log out and log back in as the new user[fn::From this point forward,
+avoid using root directly. Running as a non-root user with sudo is safer
+and prevents accidental system-wide changes.]
+
+#+begin_src sh
+  $ ssh david@alvarezrosa.com
+#+end_src
+
+** Dotfiles
+
+I like to set up my dotfiles from the start for a familiar
+environment[fn::I usually set up SSH keys for GitHub.  The commands here
+treat your home directory as a git repo, which lets you track dotfiles
+without symlinking.]
+
+#+begin_src sh
+  $ git init
+  $ git remote add origin https://github.com/david-alvarez-rosa/dotfiles.git
+  $ git fetch origin
+  $ git checkout -t origin/main
+  $ git submodule update --init --recursive
+  $ git config status.showUntrackedFiles no
+#+end_src
+
+I configure zsh with oh-my-zsh and starship[fn::oh-my-zsh provides
+plugins and themes for zsh. starship is a fast, customizable prompt that
+works across shells.]
+
+#+begin_src sh
+  $ sudo apt install zsh
+  $ chsh --shell $(which zsh) david
+  $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  $ curl -sS https://starship.rs/install.sh | sh
+#+end_src
+
+Log out and back in to verify the new shell loads.
+
+** SSH keys
+
+Configure SSH key-based authentication.  From your local machine, copy
+your public key to the server, and verify you can log in without a
+password
+
+#+begin_src sh
+  $ ssh-copy-id david@alvarezrosa.com
+  $ ssh david@alvarezrosa.com
+#+end_src
+
+If you need root access via SSH keys, copy the authorized keys file
+
+#+begin_src sh
+  $ su -
+  $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
+#+end_src
+
+I keep password authentication enabled for my user but disabled for
+root.[fn::Sometimes I SSH from computers that aren't my laptop. Disable
+it entirely by setting ~PasswordAuthentication no~ in ~sshd_config~.]
+
+** Timezone, locale, and hostname
+
+Set your timezone, and verify with ~date~
+
+#+begin_src sh
+  $ timedatectl list-timezones
+  $ sudo timedatectl set-timezone Europe/Madrid
+  $ date
+#+end_src
+
+Configure locales by uncommenting en_US in ~/etc/locale.gen~, then run
+
+#+begin_src sh
+  $ sudo locale-gen
+#+end_src
+
+Set a meaningful hostname and add it to ~/etc/hosts~
+
+#+begin_src sh
+    $ sudo hostnamectl set-hostname homelab
+    $ cat /etc/hosts
+    127.0.0.1  localhost
+    ::1        localhost  ip6-localhost  ip6-loopback
+    127.0.1.1  homelab
+#+end_src
+
+** Security
+
+Block all incoming connections by default, then allow only what you
+need[fn::Open port 22 before enabling the firewall, or you'll lose SSH
+access to the server.]
+
+#+begin_src sh
+  $ sudo apt install ufw
+  $ sudo ufw default deny incoming
+  $ sudo ufw allow 22/tcp
+  $ sudo ufw enable
+#+end_src
+
+Install fail2ban[fn::fail2ban monitors logs for malicious patterns and
+automatically bans offending IP addresses.]
+
+#+begin_src sh
+  $ sudo apt install fail2ban
+  $ sudo systemctl enable --now fail2ban
+#+end_src
+
+Enable unattended-upgrades[fn::Automatic security updates ensure your
+system stays patched without manual intervention.]
+
+#+begin_src sh
+  $ sudo apt install unattended-upgrades apt-listchanges
+  $ sudo dpkg-reconfigure --priority=low unattended-upgrades
+#+end_src
+
+** Web server
+
+I usually install a web server early on to verify everything
+works[fn::nginx is a lightweight, high-performance web server. I used
+to use Apache, but nginx has better performance.]
+
+#+begin_src sh
+  $ sudo apt install nginx
+  $ sudo systemctl enable --now nginx
+  $ sudo ufw allow 80/tcp
+#+end_src
+
+Verify by navigating to http://alvarezrosa.com from the browser.  Then
+secure the site with HTTPs[fn::Certbot automatically obtains and
+installs free TLS certificates from Let's Encrypt. It also sets up
+automatic renewal via a systemd timer.]
+
+#+begin_src sh
+  $ sudo ufw allow 443/tcp
+  $ sudo apt install certbot python3-certbot-nginx
+  $ sudo certbot
+#+end_src
+
+Follow the prompts to configure HTTPS. Then, go back to the browser and
+verify https://alvarezrosa.com loads correctly.
 
 * TODO [#B] Selfhost an email server guide
 Email guide:
