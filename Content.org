@@ -80,10 +80,8 @@ plugins and themes for zsh. starship is a fast, customizable prompt that
 works across shells.]
 
 #+begin_src sh
-  $ sudo apt install zsh
+  $ sudo apt install zsh starship
   $ chsh --shell $(which zsh) david
-  $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  $ curl -sS https://starship.rs/install.sh | sh
 #+end_src
 
 Log out and back in to verify the new shell loads.
@@ -214,11 +212,11 @@ priority---lower numbers are tried first if you have multiple mail
 servers.] Verify propagation
 
 #+begin_src sh
-  $ dig +short A mail.alvarezrosa.com
+  $ dig mail.alvarezrosa.com A +short
   213.32.19.229
-  $ dig +short AAAA mail.alvarezrosa.com
+  $ dig mail.alvarezrosa.com AAAA +short
   2001:41d0:305:2100::febc
-  $ dig +short MX alvarezrosa.com
+  $ dig alvarezrosa.com MX +short
   10 mail.alvarezrosa.com.
 #+end_src
 
@@ -230,6 +228,9 @@ address.]
 #+begin_src sh
   127.0.1.1  mail.alvarezrosa.com  homelab
 #+end_src
+
+Check here that hostname -f returns FQDN (but hostname can stay just
+homelab).
 
 ** Receiving mail
 
@@ -256,6 +257,8 @@ connection. You should see a Postfix greeting.]
 #+begin_src sh
   $ sudo systemctl restart postfix
   $ sudo ss -tlnp | grep :25
+  LISTEN 0      100          0.0.0.0:25        0.0.0.0:*    users:(("master",pid=13124,fd=13))
+  LISTEN 0      100             [::]:25           [::]:*    users:(("master",pid=13124,fd=14))
 #+end_src
 
 Send a test email to ~david@alvarezrosa.com~ from Gmail, then check it
@@ -264,6 +267,8 @@ arrived
 #+begin_src sh
   $ sudo apt install mailutils
   $ mail
+  "/var/mail/david": 1 message 1 new
+  >N   1 David Álvarez Ros Wed Feb  4 19:39  80/4544  Hello from GMail
 #+end_src
 
 ** Sending mail
@@ -272,6 +277,7 @@ Configure Postfix to use your domain in outgoing messages. Edit
 ~/etc/postfix/main.cf~
 
 #+begin_src conf
+  myhostname = mail.alvarezrosa.com
   mydomain = alvarezrosa.com
   myorigin = $mydomain
 #+end_src
@@ -280,7 +286,23 @@ Restart and test
 
 #+begin_src sh
   $ sudo systemctl restart postfix
-  $ echo "Hello, world!" | mail -s "Subject" recipient@example.com
+  $ echo "Hello, world" | mail -s "Subject" recipient@example.com
+#+end_src
+
+If you try to send email to a big email provider like GMail, etc, it
+might not arrive at all (not even to Spam folder). That's because they
+have strict checks. You can use a recipient something else like???
+
+I receiveda an email back (that's because of DMARC that I setup before...)
+#+begin_src text
+<davidolazegues@gmail.com>: host gmail-smtp-in.l.google.com[64.233.167.26]
+    said: 550-5.7.26 Unauthenticated email from alvarezmagan.com is not
+    accepted due to 550-5.7.26 domain's DMARC policy. Please contact the
+    administrator of 550-5.7.26 alvarezmagan.com domain if this was a
+    legitimate mail. To learn 550-5.7.26 about the DMARC initiative, go to 550
+    5.7.26  https://support.google.com/mail/?p=DmarcRejection
+    ffacd0b85a97d-43618071e8dsi5766024f8f.211 - gsmtp (in reply to end of DATA
+    command)
 #+end_src
 
 ** Client access
@@ -304,27 +326,33 @@ Configure Dovecot TLS. Edit ~/etc/dovecot/conf.d/10-ssl.conf~
 
 #+begin_src conf
   ssl = required
-  ssl_cert = </etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
-  ssl_key = </etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
+  ssl_server_cert_file = /etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
+  ssl_server_key_file = /etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
+#+end_src
+
+Also, configure Postfix TLS in /etc/postfix/main.cf
+#+begin_src
+smtpd_tls_key_file =/etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
+smtpd_tls_cert_file = /etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
+smtpd_tls_security_level = encrypt
 #+end_src
 
 Enable SMTP submission. Edit ~/etc/postfix/master.cf~ and uncomment the
-submission section[fn::Port 587 is for mail submission with STARTTLS. Port
-465 (SMTPS) also works, but 587 is the modern standard.]
+submission section
 
 #+begin_src conf
-  submission inet n       -       y       -       -       smtpd
-    -o syslog_name=postfix/submission
-    -o smtpd_tls_security_level=encrypt
+  submissions inet n       -       y       -       -       smtpd
+    -o syslog_name=postfix/submissions
+    -o smtpd_tls_wrappermode=yes
     -o smtpd_sasl_auth_enable=yes
     -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject
     -o milter_macro_daemon_name=ORIGINATING
 #+end_src
 
-Open ports 587 (SMTP) and 993 (IMAP)
+Open ports 465 (SMTP) and 993 (IMAP)
 
 #+begin_src sh
-  $ sudo ufw allow 587/tcp
+  $ sudo ufw allow 465/tcp
   $ sudo ufw allow 993/tcp
 #+end_src
 
@@ -337,8 +365,6 @@ using their Linux credentials.]
   service auth {
     unix_listener /var/spool/postfix/private/auth {
       mode = 0660
-      user = postfix
-      group = postfix
     }
   }
 #+end_src
@@ -398,6 +424,11 @@ Publish the public key as a DNS TXT record at
 
 #+begin_src sh
   $ sudo cat /etc/opendkim/keys/alvarezrosa.com/mail.txt
+#+end_src
+
+#+begin_src sh
+  ❯ dig +short TXT mail._domainkey.alvarezmagan.com
+"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0xdtbvzBrvRcevo35tuoPo1o3Tx4Tk1kWSYY4VF6NNe1yTCft/+cwt0yu1LgZI8+JBKaKgnGaoXzXUSiDcbCAze1IhKq6ZT1B7IO0bVHVsgtxthAtRotdyqhdq1Ok67MzMs8UfE/EKN69dnEkYZFnJsdbHMxXLWdkb3RECtfe9DHP5uqYzvuvFG" "mfR1wqvv+Z5Dh++9Ncw3Hwqxw3EgRmNaIojTY9e/dQkpae5fBJyFLN0lSKqrTKKX6q5JRGotv4nWHswzW0F31rCdbzBFHO4ZOPgirqiIXnDU9hb38Py9Z6ZPaGpPACFxWpRiTHjdySW0h56RIPxB5Hr6e87YrCQIDAQAB"
 #+end_src
 
 Configure OpenDKIM. Edit ~/etc/opendkim.conf~[fn::Mode ~sv~ tells OpenDKIM
