@@ -4,27 +4,27 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
-* DONE [#B] Server Setup
+* DONE [#B] Initial Server Setup
 CLOSED: [2026-02-03 Mon 20:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: server-setup
 :END:
 
-A misconfigured server is an open invitation to attackers. After
+A misconfigured server is an open invitation to attackers.  After
 managing dozens of servers, these are the essential steps I run on every
 fresh install.
 
-** Installation and DNS
+** Linux and DNS
 
-Start with a clean Linux install and a domain name. For partitioning, I
+Start with a clean Linux install and a domain name.  For partitioning, I
 keep it simple: one large root partition plus swap.[fn::Predicting
-partition sizes is hard. A single root partition simplifies management
+partition sizes is hard.  A single root partition simplifies management
 and avoids running out of space in one mount point while others sit
-empty.] While I run Arch on my personal machine, I prefer Debian for
+empty.]  While I run Arch on my personal machine, I prefer Debian for
 servers because of its stability and long-term support.
 
-From your DNS registrar point your domain to the server's IP. Create an
-A record for IPv4 and an AAAA record for IPv6. Wait a few minutes for
+Point your domain to the server's IP from your DNS registrar.  Create an
+A record for IPv4 and an AAAA record for IPv6.  Wait a few minutes for
 changes to propagate, then verify
 
 #+begin_src sh
@@ -36,7 +36,8 @@ changes to propagate, then verify
 
 ** First login
 
-Log in, change the root password, and update installed packages
+Log in as root, change the default password, and update installed
+packages
 
 #+begin_src sh
   $ ssh root@alvarezrosa.com
@@ -51,9 +52,9 @@ Create a non-root user with sudo privileges
   $ passwd david
 #+end_src
 
-Log out and log back in as the new user[fn::From this point forward,
-avoid using root directly. Running as a non-root user with sudo is safer
-and prevents accidental system-wide changes.]
+Log out and reconnect as the new user.[fn::From this point forward,
+avoid using root directly.  Running as a non-root user with sudo is
+safer and leaves an audit trail.]
 
 #+begin_src sh
   $ ssh david@alvarezrosa.com
@@ -61,10 +62,11 @@ and prevents accidental system-wide changes.]
 
 ** Dotfiles
 
-I like to set up my dotfiles from the start for a familiar
-environment[fn::I usually set up SSH keys for GitHub.  The commands here
-treat your home directory as a git repo, which lets you track dotfiles
-without symlinking.]
+I set up my dotfiles early for a familiar environment---there's nothing
+worse than fumbling with an unfamiliar shell while debugging a
+misconfiguration.[fn::The commands below treat your home directory as a
+git repo, letting you track dotfiles without symlinks.  I usually
+configure SSH keys for GitHub first.]
 
 #+begin_src sh
   $ git init
@@ -75,9 +77,9 @@ without symlinking.]
   $ git config status.showUntrackedFiles no
 #+end_src
 
-I configure zsh with oh-my-zsh and starship[fn::oh-my-zsh provides
-plugins and themes for zsh. starship is a fast, customizable prompt that
-works across shells.]
+I configure zsh with oh-my-zsh and starship.[fn::oh-my-zsh provides
+plugins and themes for zsh.  starship is a fast, cross-shell prompt
+written in Rust.]
 
 #+begin_src sh
   $ sudo apt install zsh starship
@@ -89,15 +91,19 @@ Log out and back in to verify the new shell loads.
 ** SSH keys
 
 Configure SSH key-based authentication.  From your local machine, copy
-your public key to the server, and verify you can log in without a
-password
+your public key to the server
 
 #+begin_src sh
   $ ssh-copy-id david@alvarezrosa.com
+#+end_src
+
+Verify you can log in without a password
+
+#+begin_src sh
   $ ssh david@alvarezrosa.com
 #+end_src
 
-If you need root access via SSH keys, copy the authorized keys file
+If you need root access via SSH, copy the authorized keys file
 
 #+begin_src sh
   $ su -
@@ -105,12 +111,13 @@ If you need root access via SSH keys, copy the authorized keys file
 #+end_src
 
 I keep password authentication enabled for my user but disabled for
-root.[fn::Sometimes I SSH from computers that aren't my laptop. Disable
-it entirely by setting ~PasswordAuthentication no~ in ~sshd_config~.]
+root.[fn::Sometimes I SSH from machines without my keys.  To disable
+password auth entirely, set ~PasswordAuthentication no~ in
+~/etc/ssh/sshd_config~ and restart the SSH daemon.]
 
 ** Timezone, locale, and hostname
 
-Set your timezone, and verify with ~date~
+Set your timezone and verify with ~date~
 
 #+begin_src sh
   $ timedatectl list-timezones
@@ -118,13 +125,14 @@ Set your timezone, and verify with ~date~
   $ date
 #+end_src
 
-Configure locales by uncommenting en_US in ~/etc/locale.gen~, then run
+Configure locales by uncommenting ~en_US.UTF-8~ in ~/etc/locale.gen~,
+then generate them
 
 #+begin_src sh
   $ sudo locale-gen
 #+end_src
 
-Set a meaningful hostname and add it to ~/etc/hosts~
+Set a meaningful hostname and update ~/etc/hosts~
 
 #+begin_src sh
   $ sudo hostnamectl set-hostname homelab
@@ -134,11 +142,11 @@ Set a meaningful hostname and add it to ~/etc/hosts~
   127.0.1.1  homelab
 #+end_src
 
-** Security
+** Firewall
 
-Block all incoming connections by default, then allow only what you
-need[fn::Open port 22 before enabling the firewall, or you'll lose SSH
-access to the server.]
+Block all incoming connections by default, then open only what you
+need.[fn::Open port 22 before enabling the firewall, or you'll lock
+yourself out.]
 
 #+begin_src sh
   $ sudo apt install ufw
@@ -147,27 +155,33 @@ access to the server.]
   $ sudo ufw enable
 #+end_src
 
-Install fail2ban[fn::fail2ban monitors logs for malicious patterns and
-automatically bans offending IP addresses.]
+** Automatic security updates
 
-#+begin_src sh
-  $ sudo apt install fail2ban
-  $ sudo systemctl enable --now fail2ban
-#+end_src
-
-Enable unattended-upgrades[fn::Automatic security updates ensure your
-system stays patched without manual intervention.]
+Enable unattended-upgrades to keep the system patched without manual
+intervention[fn::On Debian, unattended-upgrades installs security
+updates automatically.  Check ~/var/log/unattended-upgrades/~ for logs.]
 
 #+begin_src sh
   $ sudo apt install unattended-upgrades apt-listchanges
   $ sudo dpkg-reconfigure --priority=low unattended-upgrades
 #+end_src
 
+** Intrusion prevention
+
+Install fail2ban to monitor logs and ban IPs that show malicious
+patterns[fn::fail2ban watches authentication logs and temporarily blocks
+IP addresses after repeated failed login attempts.]
+
+#+begin_src sh
+  $ sudo apt install fail2ban
+  $ sudo systemctl enable --now fail2ban
+#+end_src
+
 ** Web server
 
-I usually install a web server early on to verify everything
-works[fn::nginx is a lightweight, high-performance web server. I used
-to use Apache, but nginx has better performance.]
+Install a web server to verify everything works.[fn::nginx is a
+lightweight, high-performance web server.  I used to prefer Apache, but
+nginx handles concurrency better and uses less memory.]
 
 #+begin_src sh
   $ sudo apt install nginx
@@ -175,10 +189,12 @@ to use Apache, but nginx has better performance.]
   $ sudo ufw allow 80/tcp
 #+end_src
 
-Verify by navigating to http://alvarezrosa.com from the browser.  Then
-secure the site with HTTPS[fn::Certbot automatically obtains and
-installs free TLS certificates from Let's Encrypt. It also sets up
-automatic renewal via a systemd timer.]
+Navigate to ~http://alvarezrosa.com~ in your browser---you should see
+the default nginx page.
+
+Secure the site with HTTPS using Let's Encrypt.[fn::Certbot obtains free
+TLS certificates and configures nginx automatically.  It also sets up a
+systemd timer for renewal.]
 
 #+begin_src sh
   $ sudo ufw allow 443/tcp
@@ -186,8 +202,8 @@ automatic renewal via a systemd timer.]
   $ sudo certbot
 #+end_src
 
-Follow the prompts to configure HTTPS. Then, go back to the browser and
-verify https://alvarezrosa.com loads correctly.
+Follow the prompts to select your domain and enable HTTPS.  Then verify
+~https://alvarezrosa.com~ loads correctly in the browser.
 
 * DONE [#B] Self-Hosting an Email Server
 CLOSED: [2026-02-03 Mon 21:00]
@@ -195,21 +211,22 @@ CLOSED: [2026-02-03 Mon 21:00]
 :EXPORT_FILE_NAME: selfhost-email-server
 :END:
 
-Running your own email server sounds intimidating, but it's more
-straightforward than you'd think. After hosting email for multiple
-domains, these are the essential steps I follow every time.
+Self-hosting email gives you full control over your communications---no
+ads, no scanning, no one can lock you out.  It's easier than most people
+think, and this guide covers everything I do when setting up a new mail
+server.
 
-This guide assumes you have a server with a clean Linux install[fn::I use
-Debian for servers. For initial server setup, see my [[/server-setup/][Server Setup]]
-post.] and a domain name pointing to your server's IP.
+You'll need a server with a clean Linux install[fn::I use Debian for
+servers.  For initial server setup, see my [[/server-setup/][Server Setup]] post.] and a
+domain name pointing to your server's IP.
 
-** DNS configuration
+** DNS records
 
-Create DNS records for your mail server: A/AAAA records for
-mail.alvarezrosa.com, and an MX record pointing to it.[fn::MX records
-tell other mail servers where to deliver mail. The number 10 is the
+Create DNS records for your mail server: A and AAAA records for
+~mail.alvarezrosa.com~, plus an MX record pointing to it.[fn::MX records
+tell other mail servers where to deliver mail.  The number 10 is the
 priority---lower numbers are tried first if you have multiple mail
-servers.] Verify propagation
+servers.]  Verify propagation
 
 #+begin_src sh
   $ dig mail.alvarezrosa.com A +short
@@ -220,45 +237,42 @@ servers.] Verify propagation
   10 mail.alvarezrosa.com.
 #+end_src
 
-Set your server's hostname to match. Edit ~/etc/hosts~[fn::Postfix uses
-the FQDN (Fully Qualified Domain Name) to identify itself in SMTP
-conversations. Make sure ~hostname -f~ returns your mail server's
-address.]
+Update your server's hostname to match the mail FQDN.  Edit ~/etc/hosts~
+so that ~hostname -f~ returns the fully qualified domain name[fn::Postfix
+uses the FQDN to identify itself in SMTP conversations.  The short
+hostname can remain ~homelab~, but ~hostname -f~ must return
+~mail.alvarezrosa.com~.]
 
-#+begin_src sh
+#+begin_src text
   127.0.1.1  mail.alvarezrosa.com  homelab
 #+end_src
 
-Check here that hostname -f returns FQDN (but hostname can stay just
-homelab).
-
 ** Receiving mail
 
-Install Postfix and open port 25[fn::During installation, select "Internet
-Site" and enter ~mail.alvarezrosa.com~ as the system mail name. Postfix
-handles SMTP---it receives mail from other servers and stores it in
-~/var/mail/~.]
+Install Postfix and open port 25.  During installation, select "Internet
+Site" and enter ~mail.alvarezrosa.com~ as the system mail name.
 
 #+begin_src sh
   $ sudo apt install postfix
   $ sudo ufw allow 25/tcp
 #+end_src
 
-Configure Postfix to accept mail for your domain. Edit
+Configure Postfix to accept mail for your domain.  Edit
 ~/etc/postfix/main.cf~ and add your domain to ~mydestination~
 
 #+begin_src conf
   mydestination = $myhostname, mail.alvarezrosa.com, localhost.alvarezrosa.com, localhost, alvarezrosa.com
 #+end_src
 
-Restart and verify Postfix is listening[fn::Use ~telnet mail.alvarezrosa.com 25~ to test the
-connection. You should see a Postfix greeting.]
+Restart Postfix and verify it's listening[fn::You can also test the
+connection with ~telnet mail.alvarezrosa.com 25~---you should see a
+Postfix greeting.]
 
 #+begin_src sh
   $ sudo systemctl restart postfix
   $ sudo ss -tlnp | grep :25
-  LISTEN 0      100          0.0.0.0:25        0.0.0.0:*    users:(("master",pid=13124,fd=13))
-  LISTEN 0      100             [::]:25           [::]:*    users:(("master",pid=13124,fd=14))
+  LISTEN 0  100  0.0.0.0:25  0.0.0.0:*  users:(("master",pid=13124,fd=13))
+  LISTEN 0  100     [::]:25     [::]:*  users:(("master",pid=13124,fd=14))
 #+end_src
 
 Send a test email to ~david@alvarezrosa.com~ from Gmail, then check it
@@ -271,9 +285,11 @@ arrived
   >N   1 David Álvarez Ros Wed Feb  4 19:39  80/4544  Hello from GMail
 #+end_src
 
+Your server can now receive mail from anywhere in the world.
+
 ** Sending mail
 
-Configure Postfix to use your domain in outgoing messages. Edit
+Configure Postfix to use your domain in outgoing messages.  Edit
 ~/etc/postfix/main.cf~
 
 #+begin_src conf
@@ -282,47 +298,41 @@ Configure Postfix to use your domain in outgoing messages. Edit
   myorigin = $mydomain
 #+end_src
 
-Restart and test
+Restart and send a test message
 
 #+begin_src sh
   $ sudo systemctl restart postfix
-  $ echo "Hello, world" | mail -s "Subject" recipient@example.com
+  $ echo "Test from my mail server" | mail -s "Hello" recipient@example.com
 #+end_src
 
-If you try to send email to a big email provider like GMail, etc, it
-might not arrive at all (not even to Spam folder). That's because they
-have strict checks. You can use a recipient something else like???
-
-I receiveda an email back (that's because of DMARC that I setup before...)
-#+begin_src text
-<davidolazegues@gmail.com>: host gmail-smtp-in.l.google.com[64.233.167.26]
-    said: 550-5.7.26 Unauthenticated email from alvarezmagan.com is not
-    accepted due to 550-5.7.26 domain's DMARC policy. Please contact the
-    administrator of 550-5.7.26 alvarezmagan.com domain if this was a
-    legitimate mail. To learn 550-5.7.26 about the DMARC initiative, go to 550
-    5.7.26  https://support.google.com/mail/?p=DmarcRejection
-    ffacd0b85a97d-43618071e8dsi5766024f8f.211 - gsmtp (in reply to end of DATA
-    command)
-#+end_src
+TODO check this without DMARC policy -- If you send to a major provider
+like Gmail before setting up authentication, your message will likely
+land in spam or be silently dropped.  That's expected---we'll fix it in
+the authentication section.
 
 ** Client access
 
-Install Dovecot to expose mailboxes via IMAP[fn::IMAP keeps messages on
-the server and syncs across devices. I prefer it over POP3, which
-downloads and typically deletes messages from the server.]
+At this point you can send and receive mail, but only from the server's
+command line.  To use a real email client, you need IMAP for reading and
+authenticated SMTP for sending.
+
+Install Dovecot to expose mailboxes via IMAP.[fn::IMAP keeps messages on
+the server and syncs across devices.  I prefer it over POP3, which
+downloads messages and typically deletes them from the server.]
 
 #+begin_src sh
   $ sudo apt install dovecot-core dovecot-imapd
 #+end_src
 
-Get a TLS certificate[fn::Certbot obtains free certificates from Let's
-Encrypt and auto-renews them. Email clients require TLS.]
+Obtain a TLS certificate for the mail subdomain[fn::Certbot obtains free
+certificates from Let's Encrypt and auto-renews them.  Email clients
+require TLS for secure connections.]
 
 #+begin_src sh
   $ sudo certbot certonly -d mail.alvarezrosa.com
 #+end_src
 
-Configure Dovecot TLS. Edit ~/etc/dovecot/conf.d/10-ssl.conf~
+Configure Dovecot TLS.  Edit ~/etc/dovecot/conf.d/10-ssl.conf~
 
 #+begin_src conf
   ssl = required
@@ -330,15 +340,16 @@ Configure Dovecot TLS. Edit ~/etc/dovecot/conf.d/10-ssl.conf~
   ssl_server_key_file = /etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
 #+end_src
 
-Also, configure Postfix TLS in /etc/postfix/main.cf
-#+begin_src
-smtpd_tls_key_file =/etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
-smtpd_tls_cert_file = /etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
-smtpd_tls_security_level = encrypt
+Configure Postfix TLS.  Add to ~/etc/postfix/main.cf~
+
+#+begin_src conf
+  smtpd_tls_key_file = /etc/letsencrypt/live/mail.alvarezrosa.com/privkey.pem
+  smtpd_tls_cert_file = /etc/letsencrypt/live/mail.alvarezrosa.com/fullchain.pem
+  smtpd_tls_security_level = encrypt
 #+end_src
 
-Enable SMTP submission. Edit ~/etc/postfix/master.cf~ and uncomment the
-submission section
+Enable authenticated SMTP submission.  Edit ~/etc/postfix/master.cf~ and
+uncomment the submissions section
 
 #+begin_src conf
   submissions inet n       -       y       -       -       smtpd
@@ -349,17 +360,18 @@ submission section
     -o milter_macro_daemon_name=ORIGINATING
 #+end_src
 
-Open ports 465 (SMTP) and 993 (IMAP)
+Configure Postfix to use Dovecot for SASL authentication.  Add to
+~/etc/postfix/main.cf~
 
-#+begin_src sh
-  $ sudo ufw allow 465/tcp
-  $ sudo ufw allow 993/tcp
+#+begin_src conf
+  smtpd_sasl_type = dovecot
+  smtpd_sasl_path = private/auth
+  smtpd_sasl_auth_enable = yes
 #+end_src
 
-Connect Dovecot authentication to Postfix. Edit
-~/etc/dovecot/conf.d/10-master.conf~ and find ~service auth~[fn::This
-lets Postfix authenticate users against Dovecot, so clients can send mail
-using their Linux credentials.]
+Connect Dovecot authentication to Postfix.  This lets Postfix
+authenticate users against Dovecot.  Edit
+~/etc/dovecot/conf.d/10-master.conf~ and configure the auth service
 
 #+begin_src conf
   service auth {
@@ -369,47 +381,62 @@ using their Linux credentials.]
   }
 #+end_src
 
+Open ports 465 (SMTPS) and 993 (IMAPS)
+
+#+begin_src sh
+  $ sudo ufw allow 465/tcp
+  $ sudo ufw allow 993/tcp
+#+end_src
+
 Restart services
 
 #+begin_src sh
   $ sudo systemctl restart dovecot postfix
 #+end_src
 
-Configure your email client.[fn::I use mu4e in Emacs. For testing,
-Thunderbird works well and auto-configures most settings. Use IMAP server
-~mail.alvarezrosa.com~ port 993, SMTP server ~mail.alvarezrosa.com~ port
-587, both with TLS and your Linux user credentials.] Verify you can send
-and receive.
+Configure your email client: IMAP server ~mail.alvarezrosa.com~ port
+993, SMTP server ~mail.alvarezrosa.com~ port 465, both with SSL/TLS.
+Use your Linux username and password as credentials.[fn::I use mu4e in
+Emacs.  For testing, Thunderbird works well and auto-detects most
+settings.]  Verify you can send and receive.
 
-** Mail authentication
+You now have a fully functional email server---you can read and compose
+mail from any client.  The hard part is done.
+
+** Authentication
 
 Your server works, but mail will land in spam without proper
-authentication. Modern email requires four mechanisms: rDNS, SPF, DKIM,
-and DMARC.
+authentication.  Modern email requires four mechanisms: rDNS, SPF, DKIM,
+and DMARC.  Each one builds trust with receiving servers, proving you
+are who you claim to be and that your messages haven't been forged or
+tampered with.
 
-*rDNS.* Configure reverse DNS through your VPS provider's control
-panel.[fn::Also called PTR records. rDNS maps your IP back to your domain,
-proving you control it. Most servers reject mail from IPs without proper
-rDNS.] Map your IPs to ~mail.alvarezrosa.com~ and verify
+*rDNS.*  Reverse DNS (also called PTR records) maps your IP back to your
+domain, proving you control it.  Most mail servers reject messages from
+IPs without proper rDNS.  Configure it through your VPS provider's
+control panel---map your IPs to ~mail.alvarezrosa.com~ and verify
 
 #+begin_src sh
   $ dig +short -x 213.32.19.229
   mail.alvarezrosa.com.
 #+end_src
 
-*SPF.* Create a DNS TXT record specifying which IPs can send mail for your
-domain[fn::SPF prevents spammers from forging your domain. ~v=spf1 mx
--all~ means only servers in your MX records can send; reject all others.
-Use ~?all~ for soft fail during testing.]
+*SPF.*  SPF (Sender Policy Framework) specifies which servers can send
+mail for your domain, preventing spammers from forging your address.
+Create a DNS TXT record on your root domain: ~v=spf1 mx -all~ means only
+servers listed in your MX records can send; reject all others.[fn::Use
+~~all~ (soft fail) instead of ~-all~ (hard fail) during testing.]
+Verify the record
 
 #+begin_src sh
   $ dig +short TXT alvarezrosa.com
   "v=spf1 mx -all"
 #+end_src
 
-*DKIM.* Install OpenDKIM to sign outgoing messages[fn::DKIM adds a digital
-signature verified against a public key in DNS, proving the message came
-from your server and wasn't tampered with.]
+*DKIM.*  DKIM (DomainKeys Identified Mail) adds a cryptographic
+signature to outgoing mail.  Receivers verify it against a public key in
+your DNS, proving the message came from your server and wasn't altered
+in transit.  Install OpenDKIM to sign outgoing messages.
 
 #+begin_src sh
   $ sudo apt install opendkim opendkim-tools
@@ -419,20 +446,22 @@ from your server and wasn't tampered with.]
   $ sudo chmod 600 /etc/opendkim/keys/alvarezrosa.com/mail.private
 #+end_src
 
-Publish the public key as a DNS TXT record at
-~mail._domainkey.alvarezrosa.com~. The value is in the generated file
+The generated file contains your public key.  Create a DNS TXT record at
+~mail._domainkey.alvarezrosa.com~ with its contents
 
 #+begin_src sh
   $ sudo cat /etc/opendkim/keys/alvarezrosa.com/mail.txt
 #+end_src
 
+Verify the record is published
+
 #+begin_src sh
-  ❯ dig +short TXT mail._domainkey.alvarezmagan.com
-"v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0xdtbvzBrvRcevo35tuoPo1o3Tx4Tk1kWSYY4VF6NNe1yTCft/+cwt0yu1LgZI8+JBKaKgnGaoXzXUSiDcbCAze1IhKq6ZT1B7IO0bVHVsgtxthAtRotdyqhdq1Ok67MzMs8UfE/EKN69dnEkYZFnJsdbHMxXLWdkb3RECtfe9DHP5uqYzvuvFG" "mfR1wqvv+Z5Dh++9Ncw3Hwqxw3EgRmNaIojTY9e/dQkpae5fBJyFLN0lSKqrTKKX6q5JRGotv4nWHswzW0F31rCdbzBFHO4ZOPgirqiIXnDU9hb38Py9Z6ZPaGpPACFxWpRiTHjdySW0h56RIPxB5Hr6e87YrCQIDAQAB"
+  $ dig +short TXT mail._domainkey.alvarezrosa.com
+  "v=DKIM1; h=sha256; k=rsa; p=MIIBIjANBgkqhkiG9w0B..."
 #+end_src
 
-Configure OpenDKIM. Edit ~/etc/opendkim.conf~[fn::Mode ~sv~ tells OpenDKIM
-to sign outgoing mail and verify incoming signatures.]
+Configure OpenDKIM.  Edit ~/etc/opendkim.conf~[fn::Mode ~sv~ tells
+OpenDKIM to sign outgoing mail and verify incoming signatures.]
 
 #+begin_src conf
   Mode            sv
@@ -444,7 +473,7 @@ to sign outgoing mail and verify incoming signatures.]
   PidFile         /run/opendkim/opendkim.pid
 #+end_src
 
-Hook Postfix to OpenDKIM. Add to ~/etc/postfix/main.cf~
+Hook Postfix to OpenDKIM.  Add to ~/etc/postfix/main.cf~
 
 #+begin_src conf
   milter_default_action = accept
@@ -456,37 +485,42 @@ Hook Postfix to OpenDKIM. Add to ~/etc/postfix/main.cf~
 Restart services
 
 #+begin_src sh
-  $ sudo systemctl restart opendkim postfix
+  $ sudo systemctl enable --now opendkim
+  $ sudo systemctl restart postfix
 #+end_src
 
-*DMARC.* Create a DNS TXT record at ~_dmarc.alvarezrosa.com~ through your
-DNS provider's control panel[fn::DMARC ties SPF and DKIM together.
-~p=reject~ tells receivers to reject mail that fails. Start with ~p=none~
-to monitor without affecting delivery, then switch to ~p=reject~ once
-everything works. The ~rua~ parameter sends aggregate reports to your
-email.]
+*DMARC.*  DMARC ties SPF and DKIM together, telling receivers what to do
+when checks fail.  Create a DNS TXT record at ~_dmarc.alvarezrosa.com~.
+The ~p~ parameter sets the policy: start with ~p=none~ to monitor
+without affecting delivery, then switch to ~p=reject~ once everything
+works.  The ~rua~ parameter sends aggregate reports to your email.
 
 #+begin_example
   v=DMARC1; p=reject; rua=mailto:david@alvarezrosa.com
 #+end_example
 
-Verify the record is published
+Verify the record
 
 #+begin_src sh
   $ dig +short TXT _dmarc.alvarezrosa.com
+  "v=DMARC1; p=reject; rua=mailto:david@alvarezrosa.com"
 #+end_src
 
-** Testing
+** Verification
 
-Send a test email to Gmail and inspect the headers---SPF, DKIM, and DMARC
-should all pass. Use [[https://www.mail-tester.com][mail-tester.com]] for a comprehensive check (aim for
-10/10) and [[https://mxtoolbox.com/SuperTool.aspx][MX Toolbox]] to verify DNS records.
+Send a test email to Gmail and check the message headers---SPF, DKIM,
+and DMARC should all show ~pass~.  Use [[https://www.mail-tester.com][mail-tester.com]] for a
+comprehensive deliverability check (aim for 10/10) and [[https://mxtoolbox.com/SuperTool.aspx][MX Toolbox]] to
+verify your DNS records.
 
-Your email server is now fully operational. Messages should reach inboxes
-instead of spam folders.[fn::New mail servers often face deliverability
-issues due to IP reputation. If your mail lands in spam initially, keep
-sending legitimate emails and request delisting from any blacklists your
-IP appears on. It can take weeks to build a positive reputation.]
+Congratulations---your email server is now fully operational, with
+proper authentication that major providers will trust.  Messages should
+land in inboxes, not spam folders.
+
+Note that new mail servers often face deliverability issues due to IP
+reputation.  If your mail lands in spam initially, keep sending
+legitimate emails and request delisting from any blacklists your IP
+appears on.  Building a positive reputation can take weeks.
 
 * TODO [#B] Template Argument Deduction                             :backlog:
 
