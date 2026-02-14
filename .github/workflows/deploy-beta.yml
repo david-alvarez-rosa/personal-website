@@ -27,4 +27,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Deploy
-        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
