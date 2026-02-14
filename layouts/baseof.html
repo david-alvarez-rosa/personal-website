@@ -25,6 +25,7 @@
     <style>{{ .Content | safeCSS }}</style>
   {{ end }}
   <link rel="preload" href="/fonts/alegreya-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/alegreya-sc-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin>
   {{ with resources.Get "js/instantpage.js" | minify | fingerprint }}
     <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}
