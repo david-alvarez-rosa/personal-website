@@ -3,11 +3,11 @@
 <head>
   <title>{{ printf "%s | %s" .Title site.Title }}</title>
   <meta charset="UTF-8">
-  <meta name="description" content="{{ replaceRE `^\x{00A0}\d(.*?)` `$1` .Plain | truncate 160 }}">
+  <meta name="description" content="{{ replaceRE `^( |\x{00A0})\d(.*?)` `$2` .Plain | truncate 160 }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:title" content="{{ printf "%s | %s" .Title site.Title }}">
-  <meta property="og:description" content="{{ replaceRE `^\x{00A0}\d(.*?)` `$1` .Plain | truncate 160 }}">
+  <meta property="og:description" content="{{ replaceRE `^( |\x{00A0})\d(.*?)` `$2` .Plain | truncate 160 }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ site.Title }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -15,7 +15,6 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
   {{ if .Params.latex }}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
