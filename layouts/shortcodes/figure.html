@@ -1,0 +1,6 @@
+<figure>
+  {{- partial "img.html" (dict "src" (.Get "src")) -}}
+  {{- with .Get "caption" }}
+    <figcaption>{{ . | safeHTML }}</figcaption>
+  {{- end }}
+</figure>
