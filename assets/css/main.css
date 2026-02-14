@@ -146,6 +146,7 @@ a:hover {
 
 main img {
     max-width: 100%;
+    height: auto;
     margin-top: 0.2rem;
 }
 
