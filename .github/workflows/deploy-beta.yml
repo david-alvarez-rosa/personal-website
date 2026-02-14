@@ -1,4 +1,4 @@
-name: Build and Deploy Site
+name: Build and Deploy Beta Site
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
           extended: true
 
       - name: Build site
-        run: hugo --minify --panicOnWarning
+        run: hugo --minify --panicOnWarning --buildDrafts
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
@@ -27,4 +27,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Deploy
-        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ ssh.alvarezrosa.com:/srv/david.alvarezrosa.com
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
