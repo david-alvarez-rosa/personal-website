@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
   {{ end }}
   {{ with resources.Get "js/instantpage.js" | minify | fingerprint }}
-    <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}
   <script defer src="https://umami.alvarezrosa.com/script.js" data-website-id="ca48bc5a-733d-47f3-8240-59944a4d9bda"></script>
 </head>
