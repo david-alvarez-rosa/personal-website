@@ -440,7 +440,7 @@
 /* GoudyInitialen */
 @font-face {
     font-family: "GoudyInitialen";
-    src: url("/fonts/GoudyInitialen.ttf") format("truetype");
+    src: url("/fonts/GoudyInitialen.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
