@@ -4,7 +4,7 @@ html {
 
 body {
     margin: 4rem auto;
-    font-family: "Alegreya", serif;
+    font-family: "Alegreya", "Alegreya Fallback", serif;
     font-weight: 420;
     background-color: #fcfcfc;
     color: #111;
@@ -29,7 +29,7 @@ h1 {
 }
 
 h2 {
-    font-family: "Alegreya SC";
+    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-size: 1.65rem;
     font-variant-caps: small-caps;
     font-weight: bolder;
@@ -51,7 +51,7 @@ h2 {
     display: block;
     text-align: right;
     text-transform: lowercase;
-    font-family: "Alegreya SC";
+    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-variant-caps: small-caps;
     font-weight: 500;
     font-size: 1.4rem;
@@ -88,7 +88,7 @@ nav li {
     margin: 0 !important;
     padding: 0;
     font-variant-caps: small-caps;
-    font-family: "Alegreya SC";
+    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-size: 1.6rem;
     text-transform: lowercase;
     font-weight: 500;

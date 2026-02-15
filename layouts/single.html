@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <style>main > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
+  <style>main > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
   <span class="subtitle">{{ with .Params.subtitle }}{{ . }}{{ else }}{{ $.Date | time.Format ":date_long" }}{{ end }}</span>
   <h1>{{ .Title }}</h1>
   {{ partial "processed-content.html" . }}

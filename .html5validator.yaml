@@ -8,3 +8,7 @@ ignore_re:
   - 'pseudo-element or pseudo-class ":has"'
   - 'CSS: Parse Error'
   - 'error: CSS: .* "revert" is not a .* value.'
+  - 'Property "size-adjust"'
+  - 'Property "ascent-override"'
+  - 'Property "descent-override"'
+  - 'Property "line-gap-override"'
