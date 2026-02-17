@@ -1526,7 +1526,7 @@ via a global CDN.
 
 *When?*---Once or twice a month.
 
-*How?*---Written in Emacs Org-mode, exported to Hugo, with a custom
+*How?*---Written in Emacs Org-mode, exported to Hugo with a custom
 theme.[fn:22]
 
 If you spot an error or have suggestions, I welcome feedback---reach out
