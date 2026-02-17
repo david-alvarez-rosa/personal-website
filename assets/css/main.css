@@ -5,7 +5,7 @@ html {
 body {
     margin: 4rem auto;
     font-family: "Alegreya", "Alegreya Fallback", serif;
-    font-weight: 420;
+    font-weight: 440;
     background-color: #fcfcfc;
     color: #111;
     width: 100%;
@@ -30,11 +30,10 @@ h1 {
 
 h2 {
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
-    font-size: 1.65rem;
-    font-variant-caps: small-caps;
-    font-weight: bolder;
+    font-size: 1.6rem;
+    font-weight: 700;
     line-height: 1;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.64rem;
     margin-top: 2.4rem;
     text-transform: lowercase;
 }
@@ -50,10 +49,8 @@ h2 {
 .signature {
     display: block;
     text-align: right;
-    text-transform: lowercase;
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
-    font-variant-caps: small-caps;
-    font-weight: 500;
+    text-transform: lowercase;
     font-size: 1.4rem;
 }
 
@@ -79,7 +76,7 @@ nav ul {
     padding: 0;
     margin-bottom: 0.4rem;
     margin-top: 4rem;
-    gap: 1.5rem;
+    gap: 1.4rem;
     display: flex;
     align-items: center;
 }
@@ -87,15 +84,14 @@ nav ul {
 nav li {
     margin: 0 !important;
     padding: 0;
-    font-variant-caps: small-caps;
-    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
-    font-size: 1.6rem;
-    text-transform: lowercase;
-    font-weight: 500;
 }
 
 nav li a {
     color: #111;
+    font-family: "Alegreya", "Alegreya Fallback", serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 footer {
@@ -193,9 +189,9 @@ code {
 }
 
 code:not(.chroma code) {
-    font-weight: 500;
+    font-weight: 530;
     color: #660000;
-    font-size: 1.3rem;
+    font-size: 1.33rem;
 }
 
 .anchor {

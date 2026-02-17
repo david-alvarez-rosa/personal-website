@@ -3,7 +3,7 @@ vnu:
   - --also-check-css
 ignore_re:
   - 'Element "style" not allowed as child of element "main"'
-  - '"font-weight": "420" is not a "font-weight" value'
+  - '"font-weight": .* is not a "font-weight" value'
   - 'Property "border-block"'
   - 'pseudo-element or pseudo-class ":has"'
   - 'CSS: Parse Error'

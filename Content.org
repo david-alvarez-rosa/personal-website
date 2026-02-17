@@ -221,7 +221,7 @@ think, and this guide covers everything I do when setting up a new mail
 server.
 
 You'll need a server with a clean Linux install[fn::I use Debian for
-servers.  For initial server setup, see my [[/posts/server-setup/][Server Setup]] post.] and a
+servers.  For initial server setup, see my [[/posts/initial-server-setup/][Server Setup]] post.] and a
 domain name pointing to your server's IP.
 
 ** DNS records

@@ -2,7 +2,7 @@
   <style>.side img { transition: transform 600ms ease; width: 240px; height: auto;  margin-top: -20px; box-shadow: none; } @media (max-width: 860px) { .side img { margin-top: 0!important; margin-bottom: -1.6rem; } }</style>
   <script>
     document.addEventListener("mouseover", (e) => {
-      const img = e.target.closest("img");
+      const img = e.target.closest(".side img");
       if (!img) return;
       setTimeout(() => { img.style.transform = "rotate(180deg)"; }, 1000);
       setTimeout(() => { img.style.transform = ""; }, 3000);

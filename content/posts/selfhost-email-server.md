@@ -306,7 +306,7 @@ legitimate emails and request delisting from any blacklists your IP
 appears on.  Building a positive reputation can take weeks.
 
 [^fn:1]: I use Debian for
-    servers.  For initial server setup, see my [Server Setup](/posts/server-setup/) post.
+    servers.  For initial server setup, see my [Server Setup](/posts/initial-server-setup/) post.
 [^fn:2]: MX records
     tell other mail servers where to deliver mail.  The number 10 is the
     priority---lower numbers are tried first if you have multiple mail
