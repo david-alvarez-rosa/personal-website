@@ -1595,8 +1595,8 @@ Research thesis on multimodal learning (recomprehension.com).
 /Machine Learning Engineer @ BCN eMotorsport/
 [fn::Sep 2019--Feb 2020\\
 Barcelona, Spain]\\
-Perception at Driverless UPC.  I served as LiDAR lead and collaborated
-on computer vision for a fully autonomous car.
+Perception at Driverless UPC.  Served as LiDAR lead and collaborated on
+computer vision for a fully autonomous car.
 
 ** Education
 
