@@ -1257,7 +1257,7 @@ then dispatched to the appropriate override at runtime.  Under the hood,
 a virtual table (~vtable~) is created /for each class/, and a pointer
 (~vptr~) to the ~vtable~ is added /to each instance/.
 
-#+begin_src plantuml :file diagram.png
+#+begin_src plantuml :file ./assets/images/diagram.png
   @startuml
 
   hide empty members
@@ -1307,7 +1307,7 @@ a virtual table (~vtable~) is created /for each class/, and a pointer
 
 #+caption: *Virtual dispatch diagram.*  The method ~foo~ is declared virtual in ~Base~ and overridden in ~Derived~.  Both classes get a ~vtable~, and each object gets a ~vptr~ pointing to the corresponding ~vtable~.
 #+RESULTS:
-[[file:diagram.png]]
+[[file:./assets/images/diagram.png]]
 
 On a virtual call, the compiler loads the ~vptr~, selects the right slot
 in the ~vtable~, and performs an indirect call through that function

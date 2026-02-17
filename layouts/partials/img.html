@@ -1,37 +1,34 @@
-{{- $src := .src -}}
+{{ $src := .src }}
 
-{{- /* Derive alt text from filename: strip path and extension, replace hyphens with spaces */ -}}
-{{- $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper -}}
+{{ $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}
+{{ $src := strings.TrimPrefix "./assets/" .src }}
+{{ $img := resources.Get $src }}
 
-{{- /* Strip leading slash to get asset path */ -}}
-{{- $path := strings.TrimPrefix "/" $src -}}
-{{- $img := resources.Get $path -}}
+{{ if $img }}
+  {{ $widths := slice 480 768 1024 1536 }}
+  {{ $origWidth := $img.Width }}
+  {{ $origHeight := $img.Height }}
 
-{{- if $img -}}
-  {{- $widths := slice 480 768 1024 1536 -}}
-  {{- $origWidth := $img.Width -}}
-  {{- $origHeight := $img.Height -}}
+  {{ $webpSrcset := slice }}
+  {{ $origSrcset := slice }}
+  {{ $hasOrigWidth := false }}
+  {{ range $widths }}
+    {{ if le . $origWidth }}
+      {{ if eq . $origWidth }}
+        {{ $hasOrigWidth = true }}
+      {{ end }}
+      {{ $resized := $img.Resize (printf "%dx webp" .) }}
+      {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+      {{ $resizedOrig := $img.Resize (printf "%dx" .) }}
+      {{ $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) }}
+    {{ end }}
+  {{ end }}
 
-  {{- $webpSrcset := slice -}}
-  {{- $origSrcset := slice -}}
-  {{- $hasOrigWidth := false -}}
-  {{- range $widths -}}
-    {{- if le . $origWidth -}}
-      {{- if eq . $origWidth -}}
-        {{- $hasOrigWidth = true -}}
-      {{- end -}}
-      {{- $resized := $img.Resize (printf "%dx webp" .) -}}
-      {{- $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) -}}
-      {{- $resizedOrig := $img.Resize (printf "%dx" .) -}}
-      {{- $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- if not $hasOrigWidth -}}
-    {{- $webpFull := $img.Process "webp" -}}
-    {{- $webpSrcset = $webpSrcset | append (printf "%s %dw" $webpFull.RelPermalink $origWidth) -}}
-    {{- $origSrcset = $origSrcset | append (printf "%s %dw" $img.RelPermalink $origWidth) -}}
-  {{- end -}}
+  {{ if not $hasOrigWidth }}
+    {{ $webpFull := $img.Process "webp" }}
+    {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $webpFull.RelPermalink $origWidth) }}
+    {{ $origSrcset = $origSrcset | append (printf "%s %dw" $img.RelPermalink $origWidth) }}
+  {{ end }}
 
   <a href="{{ $img.RelPermalink }}">
   <picture>
@@ -50,6 +47,6 @@
       decoding="async">
   </picture>
   </a>
-{{- else -}}
+{{ else }}
   <a href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async"></a>
-{{- end -}}
+{{ end }}

@@ -274,7 +274,7 @@ minimize scheduling noise.
 
 Long live lock-free and wait-free data structures!
 
-[^fn:1]: ![](/images/ringbuffer.jpg) **Ring buffer with 32 slots.** The
+[^fn:1]: ![](./assets/images/ringbuffer.jpg) **Ring buffer with 32 slots.** The
     producer has filled 15 of them, indicated by blue.  The consumer is
     behind the producer, reading data from the slots, freeing them as it
     does so.  A free slot is indicated by orange.

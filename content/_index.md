@@ -16,4 +16,4 @@ low-latency, high-performance systems.  I'm a strong advocate of free
 
 Find me on [GitHub](https://github.com/david-alvarez-rosa/), [GitLab](https://gitlab.com/david-alvarez-rosa), and [LinkedIn](https://linkedin.com/in/david-alvarez-rosa).
 
-[^fn:1]: ![](/images/home-illustration.png) ‎
+[^fn:1]: ![](./assets/images/home-illustration.png) ‎
