@@ -4,17 +4,22 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
-* DONE [#B] Initial Server Setup
-CLOSED: [2026-02-03 Mon 20:00]
+* TODO [#B] Initial Server Setup
 :PROPERTIES:
-:EXPORT_FILE_NAME: server-setup
+:EXPORT_FILE_NAME: initial-server-setup
 :END:
 
 A misconfigured server is an open invitation to attackers.  After
 managing dozens of servers, these are the essential steps I run on every
 fresh install.
 
-** Linux and DNS
+** Hardware, distro, and DNS
+
+Hardware can be whatever, from a cheap VPS, to a Raspberry Pi, to a
+thick ass server.
+
+If the hardware is managed by a provider, you'll only be able to choose
+the operating system.
 
 Start with a clean Linux install and a domain name.  For partitioning, I
 keep it simple: one large root partition plus swap.[fn::Predicting
@@ -205,8 +210,7 @@ systemd timer for renewal.]
 Follow the prompts to select your domain and enable HTTPS.  Then verify
 ~https://alvarezrosa.com~ loads correctly in the browser.
 
-* DONE [#B] Self-Hosting an Email Server
-CLOSED: [2026-02-03 Mon 21:00]
+* TODO [#B] Self-Hosting an Email Server
 :PROPERTIES:
 :EXPORT_FILE_NAME: selfhost-email-server
 :END:
@@ -217,7 +221,7 @@ think, and this guide covers everything I do when setting up a new mail
 server.
 
 You'll need a server with a clean Linux install[fn::I use Debian for
-servers.  For initial server setup, see my [[/server-setup/][Server Setup]] post.] and a
+servers.  For initial server setup, see my [[/posts/server-setup/][Server Setup]] post.] and a
 domain name pointing to your server's IP.
 
 ** DNS records
@@ -547,20 +551,50 @@ Expose the server through public VPS
 
 Setting up a VPN tunnel from VPS to local homelab
 
+Steps:
+
+In vps bridge *and* homelab
+
+#+begin_src
+sudo apt install wireguard
+#+end_src
+
+this generates privatekey and publickey files
+
+#+begin_src
+umask 077
+wg genkey | tee privatekey | wg pubkey > publickey
+#+end_src
+
+in vps bridge:
+
+find first the interface, example ens3
+#+begin_src
+  ip a
+#+end_src
+then run this, but remember to change ens3 with your interface
+#+begin_src
+echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-wireguard.conf
+echo 'net.ipv4.conf.ens3.route_localnet=1' | sudo tee -a /etc/sysctl.d/99-wireguard.conf
+sudo sysctl --system
+#+end_src
+
+
+
+
 Server
 #+begin_src conf
   [Interface]
   Address = 10.0.0.1/24
   PrivateKey = <server-private-key>
   ListenPort = 51820
-  MTU = 1280
-  PostUp = iptables -t nat -A PREROUTING -i ens6 -p udp --dport 51820 -j RETURN
-  PostUp = iptables -t nat -A PREROUTING -i ens6 -j DNAT --to-destination 10.0.0.2
-  PostUp = iptables -A FORWARD -i wg0 -o ens6 -s 10.0.0.2 -j ACCEPT
+  PostUp = iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  PostUp = iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
+  PostUp = iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
   PostUp = iptables -t nat -A POSTROUTING -j MASQUERADE
-  PostDown = iptables -t nat -D PREROUTING -i ens6 -p udp --dport 51820 -j RETURN
-  PostDown = iptables -t nat -D PREROUTING -i ens6 -j DNAT --to-destination 10.0.0.2
-  PostDown = iptables -D FORWARD -i wg0 -o ens6 -s 10.0.0.2 -j ACCEPT
+  PostDown = iptables -t nat -D PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  PostDown = iptables -t nat -D PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
+  PostDown = iptables -D FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
   PostDown = iptables -t nat -D POSTROUTING -j MASQUERADE
 
   [Peer]
@@ -581,12 +615,12 @@ Homelab
   PersistentKeepalive = 25
 #+end_src
 
-Now the proxy all stuff with iptables (DNAT)
-#+begin_src sh
-  sysctl -w net.ipv4.ip_forward=1
-  echo net.ipv4.ip_forward=1 >/etc/sysctl.d/99-forward.conf  # Persist config
-  sysctl -w net.ipv4.conf.ens6.route_localnet=1  # Change ens6 with eth0 or whatever
+Then, on both:
+
+#+begin_src
+sudo systemctl enable --now wg-quick@wg0
 #+end_src
+
 
 What happens if VPS is not working?
 
@@ -665,8 +699,7 @@ Implement a shared_ptr
 
 Pending.
 
-* DONE [#B] Optimizing a Lock-Free Ring Buffer
-CLOSED: [2026-01-19 Sat 13:32]
+* WAIT [#B] Optimizing a Lock-Free Ring Buffer
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:
@@ -938,8 +971,7 @@ minimize scheduling noise.
 
 Long live lock-free and wait-free data structures!
 
-* DONE [#B] Deriving Type Erasure
-CLOSED: [2026-01-24 Sat 20:06]
+* WAIT [#B] Deriving Type Erasure
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-type-erasure
 :END:
@@ -1197,8 +1229,7 @@ That's it!  The class ~Any~ is a simplified version of
 ~std::any~,[fn:24] which is even used in the STL itself (namely, in
 ~std::function~).  But that's for another post.
 
-* DONE [#B] Devirtualization and Static Polymorphism
-CLOSED: [2026-01-10 Sat 13:32]
+* WAIT [#B] Devirtualization and Static Polymorphism
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:
@@ -1742,11 +1773,11 @@ possible for the concrete type to inherit (e.g. builtins like ~int~).
 ~Base&~ or ~Base*~ must have a virtual destructor, to ensure derived
 classes are properly destructed [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor][(C.127)]].
 
-[fn:9] [[./static/images/home-illustration.png]] ‎
+[fn:9] [[./assets/images/home-illustration.png]] ‎
 
-[fn:8] [[./static/images/portrait.png]] *That's me!* March 2022.
+[fn:8] [[./assets/images/portrait.png]] *That's me!* March 2022.
 
-[fn:11] [[./static/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
+[fn:11] [[./assets/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
 producer has filled 15 of them, indicated by blue.  The consumer is
 behind the producer, reading data from the slots, freeing them as it
 does so.  A free slot is indicated by orange.
