@@ -94,7 +94,7 @@ push and pop.
 ```cpp
 template <typename T, std::size_t N>
 class RingBufferV2 {
-  std::mutex mutex_;
+  mutable std::mutex mutex_;
 
   auto push(const T& value) noexcept -> bool {
     auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe

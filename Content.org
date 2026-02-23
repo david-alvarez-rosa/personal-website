@@ -580,9 +580,28 @@ sudo sysctl --system
 #+end_src
 
 
+RETURN for port 22 and 51820 (SSH, and Wireguard)
+#+begin_src
+  iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 22 -j RETURN
+#+end_src
 
+Setup forward rest of ports inbound from VPS -> homelab,
+#+begin_src
+  iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
+#+end_src
 
-Server
+Allow ACCEPT exiting wg0 (homelab) to VPS (ens3):
+#+begin_src
+  iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
+#+end_src
+
+MASQUERADE (convert IP)
+#+begin_src
+  iptables -t nat -A POSTROUTING -j MASQUERADE
+#+end_src
+
+VPS
 #+begin_src conf
   [Interface]
   Address = 10.0.0.1/24
@@ -794,7 +813,7 @@ push and pop.
 #+begin_src cpp
   template <typename T, std::size_t N>
   class RingBufferV2 {
-    std::mutex mutex_;
+    mutable std::mutex mutex_;
 
     auto push(const T& value) noexcept -> bool {
       auto lock = std::lock_guard<std::mutex>{mutex_};  // Thread-safe

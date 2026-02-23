@@ -46,7 +46,32 @@ echo 'net.ipv4.conf.ens3.route_localnet=1' | sudo tee -a /etc/sysctl.d/99-wiregu
 sudo sysctl --system
 ```
 
-Server
+RETURN for port 22 and 51820 (SSH, and Wireguard)
+
+```nil
+iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 22 -j RETURN
+```
+
+Setup forward rest of ports inbound from VPS -&gt; homelab,
+
+```nil
+iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
+```
+
+Allow ACCEPT exiting wg0 (homelab) to VPS (ens3):
+
+```nil
+iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
+```
+
+MASQUERADE (convert IP)
+
+```nil
+iptables -t nat -A POSTROUTING -j MASQUERADE
+```
+
+VPS
 
 ```cfg
 [Interface]
