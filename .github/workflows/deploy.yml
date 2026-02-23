@@ -29,7 +29,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Deploy
-        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -J root@ssh.alvarezrosa.com" public/ root@10.0.0.2:/srv/beta.alvarezrosa.com
 
   deploy-production:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -54,4 +54,4 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Deploy
-        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/david.alvarezrosa.com
+        run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no -J root@ssh.alvarezrosa.com" public/ root@10.0.0.2:/srv/david.alvarezrosa.com
