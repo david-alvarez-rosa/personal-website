@@ -30,8 +30,9 @@ a virtual table (`vtable`) is created _for each class_, and a pointer
 On a virtual call, the compiler loads the `vptr`, selects the right slot
 in the `vtable`, and performs an indirect call through that function
 pointer.  The drawback is that the extra `vptr` increases object size,
-and the `vtable` makes the call hard to predict.  This prevents
-inlining, increases branch mispredictions, and reduces cache efficiency.
+and the indirection through the `vtable` makes the call hard to predict.
+This prevents inlining, increases branch mispredictions, and reduces
+cache efficiency.
 
 The best way to observe this phenomenon is by inspecting the
 assembly[^fn:1] code emitted by the compiler for a minimal example
