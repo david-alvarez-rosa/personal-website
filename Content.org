@@ -1248,7 +1248,8 @@ That's it!  The class ~Any~ is a simplified version of
 ~std::any~,[fn:24] which is even used in the STL itself (namely, in
 ~std::function~).  But that's for another post.
 
-* WAIT [#B] Devirtualization and Static Polymorphism
+* DONE [#B] Devirtualization and Static Polymorphism
+CLOSED: [2026-02-25 Wed 09:45]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
 :END:

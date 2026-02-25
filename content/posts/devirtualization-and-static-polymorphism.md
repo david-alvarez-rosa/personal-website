@@ -1,8 +1,9 @@
 +++
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
+date = 2026-02-25T09:45:00+00:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 +++
 
 Ever wondered why your "clean" polymorphic design underperforms in
