@@ -32,6 +32,7 @@ h2 {
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-size: 1.6rem;
     font-weight: 700;
+    letter-spacing: -0.02rem;
     line-height: 1;
     margin-bottom: 0.64rem;
     margin-top: 2.4rem;
@@ -186,6 +187,7 @@ sup:has(+ .side img) {
 
 code {
     font-family: "Inconsolata", monospace;
+    letter-spacing: -0.01rem;
 }
 
 code:not(.chroma code) {
