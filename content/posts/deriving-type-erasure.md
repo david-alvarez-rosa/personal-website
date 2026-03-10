@@ -1,8 +1,9 @@
 +++
 title = "Deriving Type Erasure"
 author = ["David Álvarez Rosa"]
+date = 2026-03-10T09:46:00+00:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 +++
 
 Ever looked at `std::any` and wondered what's actually going on behind

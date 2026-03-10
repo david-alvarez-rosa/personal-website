@@ -990,7 +990,8 @@ minimize scheduling noise.
 
 Long live lock-free and wait-free data structures!
 
-* WAIT [#B] Deriving Type Erasure
+* DONE [#B] Deriving Type Erasure
+CLOSED: [2026-03-10 Tue 09:46]
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-type-erasure
 :END:
