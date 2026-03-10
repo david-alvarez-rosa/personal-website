@@ -6,14 +6,14 @@ tags = ["pers", "blog"]
 draft = false
 +++
 
-Ever looked at `std::any` and wondered what's actually going on behind
-the scenes?  Beneath the intimidating interface is a clean case of type
-erasure: concrete types hidden behind a small, uniform wrapper.
+Ever looked at `std::any` and wondered what's going on behind the
+scenes?  Beneath the intimidating interface is a classic technique
+called type erasure: concrete types hidden behind a small, uniform
+wrapper.
 
-Starting from familiar tools---virtual functions and templates---we'll
-build a minimal `std::any`.  Along the way, type erasure shifts from
-buzzword to practical technique you can recognize and reuse in your own
-designs.
+Starting from familiar tools like virtual functions and templates, we'll
+build a minimal `std::any`.  By the end, you'll have a clear
+understanding of how type erasure works under the hood.
 
 
 ## Polymorphism with interfaces {#polymorphism-with-interfaces}
