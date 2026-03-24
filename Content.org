@@ -696,6 +696,9 @@ Specially small string optimization.
 
 Fastest matrix multiplication.
 
+- https://www.youtube.com/watch?v=GHctcSBd6Z4
+-
+
 * TODO [#B] Translation Look Aside Buffer                           :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: translation-look-aside-buffer
@@ -718,7 +721,8 @@ Implement a shared_ptr
 
 Pending.
 
-* WAIT [#B] Optimizing a Lock-Free Ring Buffer
+* DONE [#B] Optimizing a Lock-Free Ring Buffer
+CLOSED: [2026-03-24 Tue 11:51]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
 :END:

@@ -1,8 +1,9 @@
 +++
 title = "Optimizing a Lock-Free Ring Buffer"
 author = ["David Álvarez Rosa"]
+date = 2026-03-24T11:51:00+00:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 +++
 
 A single-producer single-consumer (SPSC) queue is a great example of how
