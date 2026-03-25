@@ -299,7 +299,11 @@ Long live lock-free and wait-free data structures!
     index since no other thread writes to it.
 [^fn:8]: It's useful to observe the number of cache misses with `perf
     stat -e cache-misses`; they are greatly reduced in this approach.
-[^fn:9]: This advanced optimization was initially proposed by [Erik
-    Rigtorp](https://rigtorp.se).
+[^fn:9]: This advanced optimization was inspired by [Erik Rigtorp](https://rigtorp.se).  For an
+    earlier publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
+    lock-free, cache-efficient multi-core synchronization mechanism for
+    line-rate network traffic monitoring," _2010 IEEE International
+    Symposium on Parallel &amp; Distributed Processing
+    (IPDPS)_---[doi:10.1109/IPDPS.2010.5470368](https://doi.org/10.1109/IPDPS.2010.5470368) ([PDF](https://www.cse.cuhk.edu.hk/~pclee/www/pubs/ipdps10.pdf)).
 [^fn:10]: Alongside `-O3`, the benchmark was compiled with `-march=native`
     and `-ffast-math`, though these flags shouldn't make a difference here.

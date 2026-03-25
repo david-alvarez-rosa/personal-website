@@ -1775,8 +1775,12 @@ techniques to store small objects inline and avoid allocation.
 [fn:17] It's useful to observe the number of cache misses with ~perf
 stat -e cache-misses~; they are greatly reduced in this approach.
 
-[fn:16] This advanced optimization was initially proposed by [[https://rigtorp.se][Erik
-Rigtorp]].
+[fn:16] This advanced optimization was inspired by [[https://rigtorp.se][Erik Rigtorp]].  For an
+earlier publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
+lock-free, cache-efficient multi-core synchronization mechanism for
+line-rate network traffic monitoring," /2010 IEEE International
+Symposium on Parallel & Distributed Processing
+(IPDPS)/---[[https://doi.org/10.1109/IPDPS.2010.5470368][doi:10.1109/IPDPS.2010.5470368]] ([[https://www.cse.cuhk.edu.hk/~pclee/www/pubs/ipdps10.pdf][PDF]]).
 
 [fn:15] Note that we are manually aligning ~alignas~ the atomics to
 ensure they fall in different cache lines (commonly 64 bytes).  This
