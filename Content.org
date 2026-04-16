@@ -210,6 +210,160 @@ systemd timer for renewal.]
 Follow the prompts to select your domain and enable HTTPS.  Then verify
 ~https://alvarezrosa.com~ loads correctly in the browser.
 
+* TODO [#B] Fundamental Theorem of Calculus
+:PROPERTIES:
+:EXPORT_FILE_NAME: fundamental-theorem-of-calculus
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :latex true
+:END:
+
+Everyone has an intuition of area; making it rigorous requires the
+Riemann integral.  This post defines it through partition sums, builds
+the necessary calculus machinery, and proves the fundamental theorem
+that reduces integration to antidifferentiation.
+
+** Riemann integral
+
+Given a bounded[fn::Note that continuity is not required here;
+boundedness alone ensures the subinterval infima and suprema are
+finite.] function \(f:[a,b]\to\mathbb{R}\), we can approximate the area
+under its graph by rectangles.  Choose a partition of its domain
+
+\[
+  \mathcal{P}=\{x_0,x_1,\ldots,x_n\mid a=x_0<x_1<\cdots<x_n=b\}.
+\]
+
+For each subinterval \([x_{k-1},x_k]\), define the width \(\Delta
+x_k=x_k-x_{k-1}\), and let \(m_k\) and \(M_k\) denote the infimum and
+supremum of \(f\) on that subinterval.  The lower and upper sums are
+
+\[
+  L(f,\mathcal{P})=\sum_{k=1}^{n}m_k\Delta x_k,
+  \qquad
+  U(f,\mathcal{P})=\sum_{k=1}^{n}M_k\Delta x_k.
+\]
+
+We define \(f\) to be Riemann integrable[fn::Every continuous function
+on \([a,b]\) is Riemann integrable; so is every monotone function.  The
+exact characterization is Lebesgue's criterion: \(f\) is Riemann
+integrable iff it is bounded and continuous almost everywhere.] on
+\([a,b]\) iff for every \(\varepsilon>0\) there exists a partition
+\(\mathcal{P}\) such that
+\(U(f,\mathcal{P})-L(f,\mathcal{P})<\varepsilon\), in which case
+
+\[
+  \int_a^b f
+  =\sup_{\mathcal{P}}L(f,\mathcal{P})
+  =\inf_{\mathcal{P}}U(f,\mathcal{P}).
+\]
+
+** Calculus machinery
+
+The proof requires the mean value theorem, which in turn rests on Rolle
+theorem and Fermat's proposition.
+
+*Fermat Proposition.* Let \(I\subset\mathbb{R}\) be open and
+\(f:I\to\mathbb{R}\) differentiable at \(a\in I\).  If \(f\) has a local
+extremum at \(a\), then \(f^{\prime}(a)=0\).
+
+/Proof./ Assume \(f\) has a local maximum[fn::The local minimum case is
+identical, with all inequalities reversed.] at \(a\).  Then there exists
+\(\delta>0\) such that \(f(x)-f(a)\le 0\) for all
+\(x\in(a-\delta,a+\delta)\).  Therefore
+
+\[
+\frac{f(x)-f(a)}{x-a}\ge 0 \quad (x<a),
+\qquad
+\frac{f(x)-f(a)}{x-a}\le 0 \quad (x>a).
+\]
+
+Taking limits, \(f^{\prime}_-(a)\ge 0\) and \(f^{\prime}_+(a)\le 0\).
+Since \(f\) is differentiable at \(a\),
+\(f^{\prime}_-(a)=f^{\prime}_+(a)=f^{\prime}(a)\), hence
+\(f^{\prime}(a)=0\).  \(\square\)
+
+*Rolle Theorem.* If \(g:[a,b]\to\mathbb{R}\) is continuous on \([a,b]\),
+differentiable on \((a,b)\), and \(g(a)=g(b)\), then there exists
+\(\xi\in(a,b)\) such that \(g^{\prime}(\xi)=0\).
+
+/Proof./ By the extreme value theorem,[fn::Topological result: \([a,b]\)
+is compact (Heine-Borel), the continuous image of a compact set is
+compact, and compact subsets of \(\mathbb{R}\) are closed and bounded,
+so they contain their \(\inf\) and \(\sup\), which are finite.]  \(g\)
+attains its minimum \(m\) and maximum \(M\) on \([a,b]\).  If \(m=M\),
+then \(g\) is constant and any \(\xi\in(a,b)\) works.  Otherwise, since
+\(g(a)=g(b)\), at least one extremum is attained at some
+\(\xi\in(a,b)\); by Fermat, \(g^{\prime}(\xi)=0\).  \(\square\)
+
+*Mean Value Theorem.*[fn::Geometrically: there is always a point where
+the tangent line is parallel to the secant through the endpoints.]  If
+\(f\) is continuous on \([a,b]\) and differentiable on \((a,b)\), then
+there exists \(\xi\in(a,b)\) such that
+
+\[
+  f^{\prime}(\xi)=\frac{f(b)-f(a)}{b-a}.
+\]
+
+/Proof./  Define
+
+\[
+g(x)=f(a)+\frac{f(b)-f(a)}{b-a}(x-a),
+\qquad
+h(x)=f(x)-g(x).
+\]
+
+Then \(h\) is continuous on \([a,b]\), differentiable on \((a,b)\), and
+\(h(a)=h(b)=0\).  By Rolle theorem, there exists \(\xi\in(a,b)\) with
+\(h^{\prime}(\xi)=0\), which gives
+
+\[
+  f^{\prime}(\xi)-\frac{f(b)-f(a)}{b-a}=0.\,\square
+\]
+
+** Fundamental theorem of calculus
+
+We now have everything needed to prove the main result.
+
+*Fundamental Theorem of Calculus.*[fn::A broader formulation also
+includes the statement that \(x\mapsto\int_a^x f(t)\,dt\) is an
+antiderivative of \(f\) under suitable regularity assumptions.]  Let
+\(f:[a,b]\to\mathbb{R}\) be Riemann integrable and let
+\(F:[a,b]\to\mathbb{R}\) satisfy \(F^{\prime}=f\) on \((a,b)\).  Then
+
+\[
+\int_a^b f = F(b)-F(a).
+\]
+
+/Proof./  Fix a partition \(\mathcal{P}=\{x_0,\ldots,x_n\}\).  For
+each \([x_{k-1},x_k]\), the mean value theorem applied to \(F\) gives
+\(z_k\in(x_{k-1},x_k)\) such that
+
+\[
+F(x_k)-F(x_{k-1})=f(z_k)\,\Delta x_k.
+\]
+
+Since \(m_k\le f(z_k)\le M_k\), we obtain
+
+\[
+L(f,\mathcal{P})
+\le
+\sum_{k=1}^{n}F(x_k)-F(x_{k-1}) = F(b)-F(a)
+\le
+U(f,\mathcal{P}).
+\]
+
+Taking supremum and infimum over all partitions and using integrability,
+we get
+
+\[
+\int_a^b f=F(b)-F(a).\,\square
+\]
+
+And there it is: an area problem that looked like it needed
+infinitely many rectangles collapses to evaluating one function at two
+points.[fn::For example, \(\int_0^1 x^2\,dx = F(1)-F(0) = 1/3\) with
+\(F(x)=x^3/3\).  No partitions needed.]  The Lebesgue integral pushes
+this idea further, but that is for another post.
+
 * TODO [#B] Self-Hosting an Email Server
 :PROPERTIES:
 :EXPORT_FILE_NAME: selfhost-email-server

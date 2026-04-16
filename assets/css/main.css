@@ -254,6 +254,15 @@ h2:focus-within .anchor {
     background: #e8e8e8;
 }
 
+.katex {
+    font-size: 1.1em;
+}
+
+.katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 @media (max-width: 860px) {
     html {
         font-size: 14px;
