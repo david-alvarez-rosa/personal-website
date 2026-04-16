@@ -258,10 +258,10 @@ integrable iff it is bounded and continuous almost everywhere.] on
 
 ** Calculus machinery
 
-The proof requires the mean value theorem, which in turn rests on Rolle
-theorem and Fermat's proposition.
+The proof requires the mean value theorem, which in turn rests on
+Rolle's theorem and Fermat's proposition.
 
-*Fermat Proposition.* Let \(I\subset\mathbb{R}\) be open and
+*Fermat's Proposition.* Let \(I\subset\mathbb{R}\) be open and
 \(f:I\to\mathbb{R}\) differentiable at \(a\in I\).  If \(f\) has a local
 extremum at \(a\), then \(f^{\prime}(a)=0\).
 
@@ -281,14 +281,14 @@ Since \(f\) is differentiable at \(a\),
 \(f^{\prime}_-(a)=f^{\prime}_+(a)=f^{\prime}(a)\), hence
 \(f^{\prime}(a)=0\).  \(\square\)
 
-*Rolle Theorem.* If \(g:[a,b]\to\mathbb{R}\) is continuous on \([a,b]\),
+*Rolle's Theorem.* If \(g:[a,b]\to\mathbb{R}\) is continuous on \([a,b]\),
 differentiable on \((a,b)\), and \(g(a)=g(b)\), then there exists
 \(\xi\in(a,b)\) such that \(g^{\prime}(\xi)=0\).
 
-/Proof./ By the extreme value theorem,[fn::Topological result: \([a,b]\)
+/Proof./ By the extreme value theorem[fn::Topological result: \([a,b]\)
 is compact (Heine-Borel), the continuous image of a compact set is
 compact, and compact subsets of \(\mathbb{R}\) are closed and bounded,
-so they contain their \(\inf\) and \(\sup\), which are finite.]  \(g\)
+so they contain their \(\inf\) and \(\sup\), which are finite.], \(g\)
 attains its minimum \(m\) and maximum \(M\) on \([a,b]\).  If \(m=M\),
 then \(g\) is constant and any \(\xi\in(a,b)\) works.  Otherwise, since
 \(g(a)=g(b)\), at least one extremum is attained at some
@@ -312,7 +312,7 @@ h(x)=f(x)-g(x).
 \]
 
 Then \(h\) is continuous on \([a,b]\), differentiable on \((a,b)\), and
-\(h(a)=h(b)=0\).  By Rolle theorem, there exists \(\xi\in(a,b)\) with
+\(h(a)=h(b)=0\).  By Rolle's theorem, there exists \(\xi\in(a,b)\) with
 \(h^{\prime}(\xi)=0\), which gives
 
 \[
@@ -326,8 +326,10 @@ We now have everything needed to prove the main result.
 *Fundamental Theorem of Calculus.*[fn::A broader formulation also
 includes the statement that \(x\mapsto\int_a^x f(t)\,dt\) is an
 antiderivative of \(f\) under suitable regularity assumptions.]  Let
-\(f:[a,b]\to\mathbb{R}\) be Riemann integrable and let
-\(F:[a,b]\to\mathbb{R}\) satisfy \(F^{\prime}=f\) on \((a,b)\).  Then
+\(f:[a,b]\to\mathbb{R}\) be Riemann integrable, and let
+\(F:[a,b]\to\mathbb{R}\) be continuous on \([a,b]\), differentiable on
+\((a,b)\), and satisfy \(F^{\prime}(x)=f(x)\) for all \(x\in(a,b)\).
+Then
 
 \[
 \int_a^b f = F(b)-F(a).
@@ -346,7 +348,7 @@ Since \(m_k\le f(z_k)\le M_k\), we obtain
 \[
 L(f,\mathcal{P})
 \le
-\sum_{k=1}^{n}F(x_k)-F(x_{k-1}) = F(b)-F(a)
+\sum_{k=1}^{n}\left(F(x_k)-F(x_{k-1})\right) = F(b)-F(a)
 \le
 U(f,\mathcal{P}).
 \]

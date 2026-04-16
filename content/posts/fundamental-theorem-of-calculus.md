@@ -45,10 +45,10 @@ We define \\(f\\) to be Riemann integrable[^fn:2] on
 
 ## Calculus machinery {#calculus-machinery}
 
-The proof requires the mean value theorem, which in turn rests on Rolle
-theorem and Fermat's proposition.
+The proof requires the mean value theorem, which in turn rests on
+Rolle's theorem and Fermat's proposition.
 
-**Fermat Proposition.** Let \\(I\subset\mathbb{R}\\) be open and
+**Fermat's Proposition.** Let \\(I\subset\mathbb{R}\\) be open and
 \\(f:I\to\mathbb{R}\\) differentiable at \\(a\in I\\).  If \\(f\\) has a local
 extremum at \\(a\\), then \\(f^{\prime}(a)=0\\).
 
@@ -67,11 +67,11 @@ Since \\(f\\) is differentiable at \\(a\\),
 \\(f^{\prime}\_-(a)=f^{\prime}\_+(a)=f^{\prime}(a)\\), hence
 \\(f^{\prime}(a)=0\\).  \\(\square\\)
 
-**Rolle Theorem.** If \\(g:[a,b]\to\mathbb{R}\\) is continuous on \\([a,b]\\),
+**Rolle's Theorem.** If \\(g:[a,b]\to\mathbb{R}\\) is continuous on \\([a,b]\\),
 differentiable on \\((a,b)\\), and \\(g(a)=g(b)\\), then there exists
 \\(\xi\in(a,b)\\) such that \\(g^{\prime}(\xi)=0\\).
 
-_Proof._ By the extreme value theorem,[^fn:4]  \\(g\\)
+_Proof._ By the extreme value theorem[^fn:4], \\(g\\)
 attains its minimum \\(m\\) and maximum \\(M\\) on \\([a,b]\\).  If \\(m=M\\),
 then \\(g\\) is constant and any \\(\xi\in(a,b)\\) works.  Otherwise, since
 \\(g(a)=g(b)\\), at least one extremum is attained at some
@@ -94,7 +94,7 @@ h(x)=f(x)-g(x).
 \\]
 
 Then \\(h\\) is continuous on \\([a,b]\\), differentiable on \\((a,b)\\), and
-\\(h(a)=h(b)=0\\).  By Rolle theorem, there exists \\(\xi\in(a,b)\\) with
+\\(h(a)=h(b)=0\\).  By Rolle's theorem, there exists \\(\xi\in(a,b)\\) with
 \\(h^{\prime}(\xi)=0\\), which gives
 
 \\[
@@ -107,8 +107,10 @@ Then \\(h\\) is continuous on \\([a,b]\\), differentiable on \\((a,b)\\), and
 We now have everything needed to prove the main result.
 
 **Fundamental Theorem of Calculus.**[^fn:6]  Let
-\\(f:[a,b]\to\mathbb{R}\\) be Riemann integrable and let
-\\(F:[a,b]\to\mathbb{R}\\) satisfy \\(F^{\prime}=f\\) on \\((a,b)\\).  Then
+\\(f:[a,b]\to\mathbb{R}\\) be Riemann integrable, and let
+\\(F:[a,b]\to\mathbb{R}\\) be continuous on \\([a,b]\\), differentiable on
+\\((a,b)\\), and satisfy \\(F^{\prime}(x)=f(x)\\) for all \\(x\in(a,b)\\).
+Then
 
 \\[
 \int\_a^b f = F(b)-F(a).
@@ -127,7 +129,7 @@ Since \\(m\_k\le f(z\_k)\le M\_k\\), we obtain
 \\[
 L(f,\mathcal{P})
 \le
-\sum\_{k=1}^{n}F(x\_k)-F(x\_{k-1}) = F(b)-F(a)
+\sum\_{k=1}^{n}\left(F(x\_k)-F(x\_{k-1})\right) = F(b)-F(a)
 \le
 U(f,\mathcal{P}).
 \\]
