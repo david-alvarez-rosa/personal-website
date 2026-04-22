@@ -1,8 +1,9 @@
 +++
 title = "Fundamental Theorem of Calculus"
 author = ["David Álvarez Rosa"]
+date = 2026-04-22T20:14:00+01:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 latex = true
 +++
 
