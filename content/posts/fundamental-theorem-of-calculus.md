@@ -6,10 +6,10 @@ draft = true
 latex = true
 +++
 
-Everyone has an intuition of area; making it rigorous requires the
-Riemann integral.  This post defines it through partition sums, builds
-the necessary calculus machinery, and proves the fundamental theorem
-that reduces integration to antidifferentiation.
+Although the notion of area is intuitive, its mathematical treatment
+requires a rigorous definition of integration.  This post introduces the
+Riemann integral and proves the fundamental theorem of calculus, a
+beautiful result that connects integrals and derivatives.
 
 
 ## Riemann integral {#riemann-integral}
@@ -67,15 +67,15 @@ Since \\(f\\) is differentiable at \\(a\\),
 \\(f^{\prime}\_-(a)=f^{\prime}\_+(a)=f^{\prime}(a)\\), hence
 \\(f^{\prime}(a)=0\\).  \\(\square\\)
 
-**Rolle's Theorem.** If \\(g:[a,b]\to\mathbb{R}\\) is continuous on \\([a,b]\\),
-differentiable on \\((a,b)\\), and \\(g(a)=g(b)\\), then there exists
-\\(\xi\in(a,b)\\) such that \\(g^{\prime}(\xi)=0\\).
+**Rolle's Theorem.** If \\(f:[a,b]\to\mathbb{R}\\) is continuous on \\([a,b]\\),
+differentiable on \\((a,b)\\), and \\(f(a)=f(b)\\), then there exists
+\\(\xi\in(a,b)\\) such that \\(f^{\prime}(\xi)=0\\).
 
-_Proof._ By the extreme value theorem[^fn:4], \\(g\\)
+_Proof._ By the extreme value theorem,[^fn:4] \\(f\\)
 attains its minimum \\(m\\) and maximum \\(M\\) on \\([a,b]\\).  If \\(m=M\\),
-then \\(g\\) is constant and any \\(\xi\in(a,b)\\) works.  Otherwise, since
-\\(g(a)=g(b)\\), at least one extremum is attained at some
-\\(\xi\in(a,b)\\); by Fermat, \\(g^{\prime}(\xi)=0\\).  \\(\square\\)
+then \\(f\\) is constant and any \\(\xi\in(a,b)\\) works.  Otherwise, since
+\\(f(a)=f(b)\\), at least one extremum is attained at some
+\\(\xi\in(a,b)\\); by Fermat, \\(f^{\prime}(\xi)=0\\).  \\(\square\\)
 
 **Mean Value Theorem.**[^fn:5]  If
 \\(f\\) is continuous on \\([a,b]\\) and differentiable on \\((a,b)\\), then
@@ -141,10 +141,11 @@ we get
 \int\_a^b f=F(b)-F(a).\\,\square
 \\]
 
-And there it is: an area problem that looked like it needed
-infinitely many rectangles collapses to evaluating one function at two
-points.[^fn:7]  The Lebesgue integral pushes
-this idea further, but that is for another post.
+Thus computing an area, which appears to require infinitely many
+rectangles, reduces to evaluating an antiderivative at two
+points.[^fn:7]  This theorem is fundamental
+because it unifies differentiation and integration, the two central
+operations of calculus.
 
 [^fn:1]: Note that continuity is not required here;
     boundedness alone ensures the subinterval infima and suprema are
