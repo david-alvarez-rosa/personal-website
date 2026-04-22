@@ -142,8 +142,7 @@ we get
 \int\_a^b f=F(b)-F(a).\\,\square
 \\]
 
-Thus computing an area, which appears to require infinitely many
-rectangles, reduces to evaluating an antiderivative at two
+Thus computing an area reduces to evaluating an antiderivative at two
 points.[^fn:7]  This theorem is fundamental
 because it unifies differentiation and integration, the two central
 operations of calculus.

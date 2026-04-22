@@ -872,8 +872,7 @@ we get
 \int_a^b f=F(b)-F(a).\,\square
 \]
 
-Thus computing an area, which appears to require infinitely many
-rectangles, reduces to evaluating an antiderivative at two
+Thus computing an area reduces to evaluating an antiderivative at two
 points.[fn::For example, \(\int_0^1 x^2\,dx = F(1)-F(0) = 1/3\) with
 \(F(x)=x^3/3\).  No partitions needed.]  This theorem is fundamental
 because it unifies differentiation and integration, the two central
