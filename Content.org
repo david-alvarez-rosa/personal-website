@@ -729,9 +729,9 @@ CLOSED: [2026-04-22 Wed 20:14]
 :END:
 
 Although the notion of area is intuitive, its mathematical treatment
-requires a rigorous definition of integration.  This post introduces the
-Riemann integral and proves the fundamental theorem of calculus, a
-beautiful result that connects integrals and derivatives.
+requires a rigorous definition.  This post introduces the Riemann
+integral, and proves the fundamental theorem of calculus---a beautiful
+result that connects integrals and derivatives.
 
 ** Riemann integral
 
