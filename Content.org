@@ -4,212 +4,6 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
-* TODO [#B] Initial Server Setup
-:PROPERTIES:
-:EXPORT_FILE_NAME: initial-server-setup
-:END:
-
-A misconfigured server is an open invitation to attackers.  After
-managing dozens of servers, these are the essential steps I run on every
-fresh install.
-
-** Hardware, distro, and DNS
-
-Hardware can be whatever, from a cheap VPS, to a Raspberry Pi, to a
-thick ass server.
-
-If the hardware is managed by a provider, you'll only be able to choose
-the operating system.
-
-Start with a clean Linux install and a domain name.  For partitioning, I
-keep it simple: one large root partition plus swap.[fn::Predicting
-partition sizes is hard.  A single root partition simplifies management
-and avoids running out of space in one mount point while others sit
-empty.]  While I run Arch on my personal machine, I prefer Debian for
-servers because of its stability and long-term support.
-
-Point your domain to the server's IP from your DNS registrar.  Create an
-A record for IPv4 and an AAAA record for IPv6.  Wait a few minutes for
-changes to propagate, then verify
-
-#+begin_src sh
-  $ dig alvarezrosa.com A +short
-  213.32.19.229
-  $ dig alvarezrosa.com AAAA +short
-  2001:41d0:305:2100::febc
-#+end_src
-
-** First login
-
-Log in as root, change the default password, and update installed
-packages
-
-#+begin_src sh
-  $ ssh root@alvarezrosa.com
-  $ passwd
-  $ apt update && apt upgrade
-#+end_src
-
-Create a non-root user with sudo privileges
-
-#+begin_src sh
-  $ useradd --create-home --groups sudo david
-  $ passwd david
-#+end_src
-
-Log out and reconnect as the new user.[fn::From this point forward,
-avoid using root directly.  Running as a non-root user with sudo is
-safer and leaves an audit trail.]
-
-#+begin_src sh
-  $ ssh david@alvarezrosa.com
-#+end_src
-
-** Dotfiles
-
-I set up my dotfiles early for a familiar environment---there's nothing
-worse than fumbling with an unfamiliar shell while debugging a
-misconfiguration.[fn::The commands below treat your home directory as a
-git repo, letting you track dotfiles without symlinks.  I usually
-configure SSH keys for GitHub first.]
-
-#+begin_src sh
-  $ git init
-  $ git remote add origin https://github.com/david-alvarez-rosa/dotfiles.git
-  $ git fetch origin
-  $ git checkout -t origin/main
-  $ git submodule update --init --recursive
-  $ git config status.showUntrackedFiles no
-#+end_src
-
-I configure zsh with oh-my-zsh and starship.[fn::oh-my-zsh provides
-plugins and themes for zsh.  starship is a fast, cross-shell prompt
-written in Rust.]
-
-#+begin_src sh
-  $ sudo apt install zsh starship
-  $ chsh --shell $(which zsh) david
-#+end_src
-
-Log out and back in to verify the new shell loads.
-
-** SSH keys
-
-Configure SSH key-based authentication.  From your local machine, copy
-your public key to the server
-
-#+begin_src sh
-  $ ssh-copy-id david@alvarezrosa.com
-#+end_src
-
-Verify you can log in without a password
-
-#+begin_src sh
-  $ ssh david@alvarezrosa.com
-#+end_src
-
-If you need root access via SSH, copy the authorized keys file
-
-#+begin_src sh
-  $ su -
-  $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
-#+end_src
-
-I keep password authentication enabled for my user but disabled for
-root.[fn::Sometimes I SSH from machines without my keys.  To disable
-password auth entirely, set ~PasswordAuthentication no~ in
-~/etc/ssh/sshd_config~ and restart the SSH daemon.]
-
-** Timezone, locale, and hostname
-
-Set your timezone and verify with ~date~
-
-#+begin_src sh
-  $ timedatectl list-timezones
-  $ sudo timedatectl set-timezone Europe/Madrid
-  $ date
-#+end_src
-
-Configure locales by uncommenting ~en_US.UTF-8~ in ~/etc/locale.gen~,
-then generate them
-
-#+begin_src sh
-  $ sudo locale-gen
-#+end_src
-
-Set a meaningful hostname and update ~/etc/hosts~
-
-#+begin_src sh
-  $ sudo hostnamectl set-hostname homelab
-  $ cat /etc/hosts
-  127.0.0.1  localhost
-  ::1        localhost  ip6-localhost  ip6-loopback
-  127.0.1.1  homelab
-#+end_src
-
-** Firewall
-
-Block all incoming connections by default, then open only what you
-need.[fn::Open port 22 before enabling the firewall, or you'll lock
-yourself out.]
-
-#+begin_src sh
-  $ sudo apt install ufw
-  $ sudo ufw default deny incoming
-  $ sudo ufw allow 22/tcp
-  $ sudo ufw enable
-#+end_src
-
-** Automatic security updates
-
-Enable unattended-upgrades to keep the system patched without manual
-intervention[fn::On Debian, unattended-upgrades installs security
-updates automatically.  Check ~/var/log/unattended-upgrades/~ for logs.]
-
-#+begin_src sh
-  $ sudo apt install unattended-upgrades apt-listchanges
-  $ sudo dpkg-reconfigure --priority=low unattended-upgrades
-#+end_src
-
-** Intrusion prevention
-
-Install fail2ban to monitor logs and ban IPs that show malicious
-patterns[fn::fail2ban watches authentication logs and temporarily blocks
-IP addresses after repeated failed login attempts.]
-
-#+begin_src sh
-  $ sudo apt install fail2ban
-  $ sudo systemctl enable --now fail2ban
-#+end_src
-
-** Web server
-
-Install a web server to verify everything works.[fn::nginx is a
-lightweight, high-performance web server.  I used to prefer Apache, but
-nginx handles concurrency better and uses less memory.]
-
-#+begin_src sh
-  $ sudo apt install nginx
-  $ sudo systemctl enable --now nginx
-  $ sudo ufw allow 80/tcp
-#+end_src
-
-Navigate to ~http://alvarezrosa.com~ in your browser---you should see
-the default nginx page.
-
-Secure the site with HTTPS using Let's Encrypt.[fn::Certbot obtains free
-TLS certificates and configures nginx automatically.  It also sets up a
-systemd timer for renewal.]
-
-#+begin_src sh
-  $ sudo ufw allow 443/tcp
-  $ sudo apt install certbot python3-certbot-nginx
-  $ sudo certbot
-#+end_src
-
-Follow the prompts to select your domain and enable HTTPS.  Then verify
-~https://alvarezrosa.com~ loads correctly in the browser.
-
 * TODO [#B] Self-Hosting an Email Server
 :PROPERTIES:
 :EXPORT_FILE_NAME: selfhost-email-server
@@ -720,6 +514,212 @@ Implement a shared_ptr
 :END:
 
 Pending.
+
+* TODO [#B] Initial Server Setup
+:PROPERTIES:
+:EXPORT_FILE_NAME: initial-server-setup
+:END:
+
+A misconfigured server is an open invitation to attackers.  After
+managing dozens of servers, these are the essential steps I run on every
+fresh install.
+
+** Hardware, distro, and DNS
+
+Hardware can be whatever, from a cheap VPS, to a Raspberry Pi, to a
+thick ass server.
+
+If the hardware is managed by a provider, you'll only be able to choose
+the operating system.
+
+Start with a clean Linux install and a domain name.  For partitioning, I
+keep it simple: one large root partition plus swap.[fn::Predicting
+partition sizes is hard.  A single root partition simplifies management
+and avoids running out of space in one mount point while others sit
+empty.]  While I run Arch on my personal machine, I prefer Debian for
+servers because of its stability and long-term support.
+
+Point your domain to the server's IP from your DNS registrar.  Create an
+A record for IPv4 and an AAAA record for IPv6.  Wait a few minutes for
+changes to propagate, then verify
+
+#+begin_src sh
+  $ dig alvarezrosa.com A +short
+  213.32.19.229
+  $ dig alvarezrosa.com AAAA +short
+  2001:41d0:305:2100::febc
+#+end_src
+
+** First login
+
+Log in as root, change the default password, and update installed
+packages
+
+#+begin_src sh
+  $ ssh root@alvarezrosa.com
+  $ passwd
+  $ apt update && apt upgrade
+#+end_src
+
+Create a non-root user with sudo privileges
+
+#+begin_src sh
+  $ useradd --create-home --groups sudo david
+  $ passwd david
+#+end_src
+
+Log out and reconnect as the new user.[fn::From this point forward,
+avoid using root directly.  Running as a non-root user with sudo is
+safer and leaves an audit trail.]
+
+#+begin_src sh
+  $ ssh david@alvarezrosa.com
+#+end_src
+
+** Dotfiles
+
+I set up my dotfiles early for a familiar environment---there's nothing
+worse than fumbling with an unfamiliar shell while debugging a
+misconfiguration.[fn::The commands below treat your home directory as a
+git repo, letting you track dotfiles without symlinks.  I usually
+configure SSH keys for GitHub first.]
+
+#+begin_src sh
+  $ git init
+  $ git remote add origin https://github.com/david-alvarez-rosa/dotfiles.git
+  $ git fetch origin
+  $ git checkout -t origin/main
+  $ git submodule update --init --recursive
+  $ git config status.showUntrackedFiles no
+#+end_src
+
+I configure zsh with oh-my-zsh and starship.[fn::oh-my-zsh provides
+plugins and themes for zsh.  starship is a fast, cross-shell prompt
+written in Rust.]
+
+#+begin_src sh
+  $ sudo apt install zsh starship
+  $ chsh --shell $(which zsh) david
+#+end_src
+
+Log out and back in to verify the new shell loads.
+
+** SSH keys
+
+Configure SSH key-based authentication.  From your local machine, copy
+your public key to the server
+
+#+begin_src sh
+  $ ssh-copy-id david@alvarezrosa.com
+#+end_src
+
+Verify you can log in without a password
+
+#+begin_src sh
+  $ ssh david@alvarezrosa.com
+#+end_src
+
+If you need root access via SSH, copy the authorized keys file
+
+#+begin_src sh
+  $ su -
+  $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
+#+end_src
+
+I keep password authentication enabled for my user but disabled for
+root.[fn::Sometimes I SSH from machines without my keys.  To disable
+password auth entirely, set ~PasswordAuthentication no~ in
+~/etc/ssh/sshd_config~ and restart the SSH daemon.]
+
+** Timezone, locale, and hostname
+
+Set your timezone and verify with ~date~
+
+#+begin_src sh
+  $ timedatectl list-timezones
+  $ sudo timedatectl set-timezone Europe/Madrid
+  $ date
+#+end_src
+
+Configure locales by uncommenting ~en_US.UTF-8~ in ~/etc/locale.gen~,
+then generate them
+
+#+begin_src sh
+  $ sudo locale-gen
+#+end_src
+
+Set a meaningful hostname and update ~/etc/hosts~
+
+#+begin_src sh
+  $ sudo hostnamectl set-hostname homelab
+  $ cat /etc/hosts
+  127.0.0.1  localhost
+  ::1        localhost  ip6-localhost  ip6-loopback
+  127.0.1.1  homelab
+#+end_src
+
+** Firewall
+
+Block all incoming connections by default, then open only what you
+need.[fn::Open port 22 before enabling the firewall, or you'll lock
+yourself out.]
+
+#+begin_src sh
+  $ sudo apt install ufw
+  $ sudo ufw default deny incoming
+  $ sudo ufw allow 22/tcp
+  $ sudo ufw enable
+#+end_src
+
+** Automatic security updates
+
+Enable unattended-upgrades to keep the system patched without manual
+intervention[fn::On Debian, unattended-upgrades installs security
+updates automatically.  Check ~/var/log/unattended-upgrades/~ for logs.]
+
+#+begin_src sh
+  $ sudo apt install unattended-upgrades apt-listchanges
+  $ sudo dpkg-reconfigure --priority=low unattended-upgrades
+#+end_src
+
+** Intrusion prevention
+
+Install fail2ban to monitor logs and ban IPs that show malicious
+patterns[fn::fail2ban watches authentication logs and temporarily blocks
+IP addresses after repeated failed login attempts.]
+
+#+begin_src sh
+  $ sudo apt install fail2ban
+  $ sudo systemctl enable --now fail2ban
+#+end_src
+
+** Web server
+
+Install a web server to verify everything works.[fn::nginx is a
+lightweight, high-performance web server.  I used to prefer Apache, but
+nginx handles concurrency better and uses less memory.]
+
+#+begin_src sh
+  $ sudo apt install nginx
+  $ sudo systemctl enable --now nginx
+  $ sudo ufw allow 80/tcp
+#+end_src
+
+Navigate to ~http://alvarezrosa.com~ in your browser---you should see
+the default nginx page.
+
+Secure the site with HTTPS using Let's Encrypt.[fn::Certbot obtains free
+TLS certificates and configures nginx automatically.  It also sets up a
+systemd timer for renewal.]
+
+#+begin_src sh
+  $ sudo ufw allow 443/tcp
+  $ sudo apt install certbot python3-certbot-nginx
+  $ sudo certbot
+#+end_src
+
+Follow the prompts to select your domain and enable HTTPS.  Then verify
+~https://alvarezrosa.com~ loads correctly in the browser.
 
 * DONE [#B] Fundamental Theorem of Calculus
 CLOSED: [2026-04-22 Wed 20:14]
