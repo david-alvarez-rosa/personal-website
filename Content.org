@@ -737,8 +737,8 @@ result that connects integrals and derivatives.
 
 Given a bounded[fn::Note that continuity is not required here;
 boundedness alone ensures the subinterval infima and suprema are
-finite.] function \(f:[a,b]\to\mathbb{R}\), we can approximate the area
-under its graph by rectangles.  Choose a partition of its domain
+finite.] function \(f\colon[a,b]\to\mathbb{R}\), we can approximate the
+area under its graph by rectangles.  Choose a partition of its domain
 
 \[
   \mathcal{P}=\{x_0,x_1,\ldots,x_n\mid a=x_0<x_1<\cdots<x_n=b\}.
@@ -773,8 +773,8 @@ integrable iff it is bounded and continuous almost everywhere.] on
 The proof requires the mean value theorem, which in turn rests on
 Rolle's theorem and Fermat's proposition.
 
-*Fermat's Proposition.* Let \(I\subset\mathbb{R}\) be open and
-\(f:I\to\mathbb{R}\) differentiable at \(a\in I\).  If \(f\) has a local
+*Fermat's Proposition.* Let \(I\subset\mathbb{R}\) be open and \(f\colon
+I\to\mathbb{R}\) differentiable at \(a\in I\).  If \(f\) has a local
 extremum at \(a\), then \(f^{\prime}(a)=0\).
 
 /Proof./ Assume \(f\) has a local maximum[fn::The local minimum case is
@@ -793,9 +793,9 @@ Since \(f\) is differentiable at \(a\),
 \(f^{\prime}_-(a)=f^{\prime}_+(a)=f^{\prime}(a)\), hence
 \(f^{\prime}(a)=0\).  \(\square\)
 
-*Rolle's Theorem.* If \(f:[a,b]\to\mathbb{R}\) is continuous on \([a,b]\),
-differentiable on \((a,b)\), and \(f(a)=f(b)\), then there exists
-\(\xi\in(a,b)\) such that \(f^{\prime}(\xi)=0\).
+*Rolle's Theorem.* If \(f\colon[a,b]\to\mathbb{R}\) is continuous on
+\([a,b]\), differentiable on \((a,b)\), and \(f(a)=f(b)\), then there
+exists \(\xi\in(a,b)\) such that \(f^{\prime}(\xi)=0\).
 
 /Proof./ By the extreme value theorem,[fn::Topological result: \([a,b]\)
 is compact (Heine-Borel), the continuous image of a compact set is
@@ -838,9 +838,9 @@ We now have everything needed to prove the main result.
 *Fundamental Theorem of Calculus.*[fn::A broader formulation also
 includes the statement that \(x\mapsto\int_a^x f(t)\,dt\) is an
 antiderivative of \(f\) under suitable regularity assumptions.]  Let
-\(f:[a,b]\to\mathbb{R}\) be Riemann integrable, and let
-\(F:[a,b]\to\mathbb{R}\) be continuous on \([a,b]\), differentiable on
-\((a,b)\), and satisfy \(F^{\prime}(x)=f(x)\) for all \(x\in(a,b)\).
+\(f\colon[a,b]\to\mathbb{R}\) be Riemann integrable, and let
+\(F\colon[a,b]\to\mathbb{R}\) be continuous on \([a,b]\), differentiable
+on \((a,b)\), and satisfy \(F^{\prime}(x)=f(x)\) for all \(x\in(a,b)\).
 Then
 
 \[

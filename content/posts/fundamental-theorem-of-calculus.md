@@ -15,8 +15,8 @@ result that connects integrals and derivatives.
 
 ## Riemann integral {#riemann-integral}
 
-Given a bounded[^fn:1] function \\(f:[a,b]\to\mathbb{R}\\), we can approximate the area
-under its graph by rectangles.  Choose a partition of its domain
+Given a bounded[^fn:1] function \\(f\colon[a,b]\to\mathbb{R}\\), we can approximate the
+area under its graph by rectangles.  Choose a partition of its domain
 
 \\[
   \mathcal{P}=\\{x\_0,x\_1,\ldots,x\_n\mid a=x\_0<x\_1<\cdots<x\_n=b\\}.
@@ -49,8 +49,8 @@ We define \\(f\\) to be Riemann integrable[^fn:2] on
 The proof requires the mean value theorem, which in turn rests on
 Rolle's theorem and Fermat's proposition.
 
-**Fermat's Proposition.** Let \\(I\subset\mathbb{R}\\) be open and
-\\(f:I\to\mathbb{R}\\) differentiable at \\(a\in I\\).  If \\(f\\) has a local
+**Fermat's Proposition.** Let \\(I\subset\mathbb{R}\\) be open and \\(f\colon
+I\to\mathbb{R}\\) differentiable at \\(a\in I\\).  If \\(f\\) has a local
 extremum at \\(a\\), then \\(f^{\prime}(a)=0\\).
 
 _Proof._ Assume \\(f\\) has a local maximum[^fn:3] at \\(a\\).  Then there exists
@@ -68,9 +68,9 @@ Since \\(f\\) is differentiable at \\(a\\),
 \\(f^{\prime}\_-(a)=f^{\prime}\_+(a)=f^{\prime}(a)\\), hence
 \\(f^{\prime}(a)=0\\).  \\(\square\\)
 
-**Rolle's Theorem.** If \\(f:[a,b]\to\mathbb{R}\\) is continuous on \\([a,b]\\),
-differentiable on \\((a,b)\\), and \\(f(a)=f(b)\\), then there exists
-\\(\xi\in(a,b)\\) such that \\(f^{\prime}(\xi)=0\\).
+**Rolle's Theorem.** If \\(f\colon[a,b]\to\mathbb{R}\\) is continuous on
+\\([a,b]\\), differentiable on \\((a,b)\\), and \\(f(a)=f(b)\\), then there
+exists \\(\xi\in(a,b)\\) such that \\(f^{\prime}(\xi)=0\\).
 
 _Proof._ By the extreme value theorem,[^fn:4] \\(f\\)
 attains its minimum \\(m\\) and maximum \\(M\\) on \\([a,b]\\).  If \\(m=M\\),
@@ -108,9 +108,9 @@ Then \\(h\\) is continuous on \\([a,b]\\), differentiable on \\((a,b)\\), and
 We now have everything needed to prove the main result.
 
 **Fundamental Theorem of Calculus.**[^fn:6]  Let
-\\(f:[a,b]\to\mathbb{R}\\) be Riemann integrable, and let
-\\(F:[a,b]\to\mathbb{R}\\) be continuous on \\([a,b]\\), differentiable on
-\\((a,b)\\), and satisfy \\(F^{\prime}(x)=f(x)\\) for all \\(x\in(a,b)\\).
+\\(f\colon[a,b]\to\mathbb{R}\\) be Riemann integrable, and let
+\\(F\colon[a,b]\to\mathbb{R}\\) be continuous on \\([a,b]\\), differentiable
+on \\((a,b)\\), and satisfy \\(F^{\prime}(x)=f(x)\\) for all \\(x\in(a,b)\\).
 Then
 
 \\[
