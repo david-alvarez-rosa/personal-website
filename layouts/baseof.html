@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="description" content="{{ replaceRE `^( |\x{00A0})\d(.*?)` `$2` .Plain | truncate 160 }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="robots" content="{{ if .Params.noindex }}noindex,follow{{ else }}index,follow,max-image-preview:large{{ end }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:title" content="{{ printf "%s | %s" .Title site.Title }}">
   <meta property="og:description" content="{{ replaceRE `^( |\x{00A0})\d(.*?)` `$2` .Plain | truncate 160 }}">
@@ -21,6 +21,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   {{ if or .IsHome (eq .RelPermalink "/about/") }} <script type="application/ld+json"> {{ dict "@context" "https://schema.org" "@type" "Person" "name" "David Álvarez Rosa" "alternateName" "David Alvarez Rosa" "url" site.BaseURL "jobTitle" "Software Engineer" "sameAs" (slice "https://github.com/david-alvarez-rosa/" "https://gitlab.com/david-alvarez-rosa" "https://linkedin.com/in/david-alvarez-rosa") | jsonify | safeJS }} </script> {{ end }}
+  {{ if and .IsPage (eq .Section "posts") }} <script type="application/ld+json"> {{ dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" (replaceRE `^( |\x{00A0})\d(.*?)` `$2` .Plain | truncate 160) "url" .Permalink "mainEntityOfPage" .Permalink "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" (dict "@type" "Person" "name" (index .Params.Author 0)) "publisher" (dict "@type" "Person" "name" "David Álvarez Rosa" "url" site.BaseURL) | jsonify | safeJS }} </script> {{ end }}
   {{ if .Params.latex }}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>

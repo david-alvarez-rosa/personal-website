@@ -5,6 +5,8 @@ date = 2025-12-13T22:06:00+00:00
 tags = ["pers", "blog"]
 draft = false
 subtitle = " "
+noindex = true
+sitemap.disable = true
 +++
 
 <style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
