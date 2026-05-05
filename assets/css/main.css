@@ -263,7 +263,7 @@ h2:focus-within .anchor {
     overflow-y: hidden;
 }
 
-@media (max-width: 860px) {
+@media screen and (max-width: 860px) {
     html {
         font-size: 14px;
     }
@@ -288,5 +288,21 @@ h2:focus-within .anchor {
 
     .side img {
         margin: auto auto 0.4rem auto;
+    }
+}
+
+@media print {
+    html {
+        font-size: 12px;
+    }
+
+    main, footer {
+        margin-left: 1rem;
+        margin-right: 18rem;
+    }
+
+    .side, figcaption {
+        margin-right: -16.5rem;
+        width: 15rem;
     }
 }
