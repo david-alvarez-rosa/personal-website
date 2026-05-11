@@ -72,6 +72,11 @@ jobs:
           hugo-version: latest
           extended: true
 
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('pnpm-lock.yaml') }}
+
       - run: pnpm exec playwright install-deps
       - run: pnpm exec playwright install
       - run: pnpm test
