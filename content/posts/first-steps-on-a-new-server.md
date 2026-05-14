@@ -195,6 +195,8 @@ $ sudo certbot
 Follow the prompts; Certbot rewrites the nginx config and sets up
 renewal automatically.  Confirm your domain loads over HTTPS.
 
+<br />
+
 That's the baseline.  From here, the machine is yours---go build on it.
 
 [^fn:1]: Predicting future partitioning needs is easy for a desktop,

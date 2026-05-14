@@ -723,6 +723,8 @@ automatic renewal.]
 Follow the prompts; Certbot rewrites the nginx config and sets up
 renewal automatically.  Confirm your domain loads over HTTPS.
 
+\\
+
 That's the baseline.  From here, the machine is yours---go build on it.
 
 * DONE [#B] Fundamental Theorem of Calculus
