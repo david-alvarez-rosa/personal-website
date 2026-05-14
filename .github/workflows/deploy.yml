@@ -3,11 +3,11 @@ name: Deploy
 on:
   workflow_run:
     workflows: [ Validate ]
-    branches: [ main ]
     types: [ completed ]
 
 jobs:
   deploy-beta:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,7 +38,7 @@ jobs:
         run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
 
   deploy-production:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch != 'main' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read

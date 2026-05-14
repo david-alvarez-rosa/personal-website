@@ -3,6 +3,8 @@ name: Validate
 on:
   push:
     branches: [ main ]
+    tags:
+      - '*'
 
 jobs:
   html-validation:
