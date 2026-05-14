@@ -402,13 +402,15 @@ VPS
   PrivateKey = <server-private-key>
   ListenPort = 51820
   PostUp = iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  PostUp = iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 2222 -j RETURN
   PostUp = iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
   PostUp = iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
-  PostUp = iptables -t nat -A POSTROUTING -j MASQUERADE
+  PostUp = iptables -A FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
   PostDown = iptables -t nat -D PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  PostDown = iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 2222 -j RETURN
   PostDown = iptables -t nat -D PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
   PostDown = iptables -D FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
-  PostDown = iptables -t nat -D POSTROUTING -j MASQUERADE
+  PostDown = iptables -D FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
 
   [Peer]
   PublicKey = <homelab-public-key>
@@ -420,11 +422,16 @@ Homelab
   [Interface]
   Address = 10.0.0.2/24
   PrivateKey = <homelab-private-key>
+  Table = off
+  PostUp = ip route add default dev wg0 table 200
+  PostUp = ip rule add from 10.0.0.2 table 200
+  PostDown = ip rule del from 10.0.0.2 table 200
+  PostDown = ip route del default dev wg0 table 200A
 
   [Peer]
   PublicKey = <server-public-key>
   Endpoint = <server-public-ip>:51820
-  AllowedIPs = 10.0.0.1/32
+  AllowedIPs = 0.0.0.0/0
   PersistentKeepalive = 25
 #+end_src
 
