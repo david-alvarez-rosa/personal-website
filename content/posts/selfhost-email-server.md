@@ -10,8 +10,7 @@ ads, no scanning, no one can lock you out.  It's easier than most people
 think, and this guide covers everything I do when setting up a new mail
 server.
 
-You'll need a server with a clean Linux install[^fn:1] and a
-domain name pointing to your server's IP.
+You'll need a server with a clean Linux install[^fn:1] and a domain name pointing to your server's IP.
 
 
 ## DNS records {#dns-records}
@@ -306,7 +305,8 @@ legitimate emails and request delisting from any blacklists your IP
 appears on.  Building a positive reputation can take weeks.
 
 [^fn:1]: I use Debian for
-    servers.  For initial server setup, see my [First Steps on a New Server](/posts/first-steps-on-a-new-server/) post.
+    servers.  For initial server setup, see my [First Steps on a New Server](/posts/first-steps-on-a-new-server/)
+    post.
 [^fn:2]: MX records
     tell other mail servers where to deliver mail.  The number 10 is the
     priority---lower numbers are tried first if you have multiple mail
