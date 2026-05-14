@@ -474,7 +474,7 @@ How to incrementally run clang-tidy or cppcheck
 :EXPORT_FILE_NAME: spin-lock
 :END:
 
-Pending. Optimizing a spin-lock using this youtube series.
+Pending.  Optimizing a spin-lock using this youtube series.
 Might be wrong with the right youtube series bla bla bla more text
 
 https://www.youtube.com/watch?v=AN6XHy2znzc
@@ -1242,7 +1242,7 @@ instead
 #+end_src
 
 You can use this method with ~Square~, ~Circle~, or any type that
-provides a zero-argument ~area()~ returning ~double~. Templates work
+provides a zero-argument ~area()~ returning ~double~.  Templates work
 because the compiler generates a version of the function for each
 concrete type you use, and the call is valid as long as that generated
 code would compile[fn:13] for the given type.
@@ -1250,7 +1250,7 @@ code would compile[fn:13] for the given type.
 Unfortunately, template-based polymorphism has two main downsides.
 
 *First,* templates do not give you one shared runtime base type like
-~Shape~. Each instantiation is a distinct type, so there is no common
+~Shape~.  Each instantiation is a distinct type, so there is no common
 type for a homogeneous container; you cannot store a mix of ~Square~ and
 ~Circle~ in one array and handle them uniformly the way you can with a
 pointer to base technique
@@ -1311,7 +1311,7 @@ Now we can work directly with instances of ~Shape~
 This approach works, but it has an obvious downside: you need a separate
 wrapper type (like ~CircleWrapper~) for every concrete type you want to
 adapt (like ~Circle~), which quickly turns into a pile of
-boilerplate. Luckily, templates can offload much of that work to the
+boilerplate.  Luckily, templates can offload much of that work to the
 compiler by generating the needed code for each type automatically
 
 #+begin_src cpp
@@ -1796,7 +1796,7 @@ Honors in 6 subjects]\\
 Official study program focused on AI research and enabling PhD.
 
 /MSc in Mathematics/\\
-Math-lover part-time student. Dropout (joined Amazon).
+Math-lover part-time student.  Dropout (joined Amazon).
 
 /Research Thesis/
 [fn::GPA 10/10 (A+)]\\
