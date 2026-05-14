@@ -15,7 +15,7 @@ think, and this guide covers everything I do when setting up a new mail
 server.
 
 You'll need a server with a clean Linux install[fn::I use Debian for
-servers.  For initial server setup, see my [[/posts/initial-server-setup/][Server Setup]] post.] and a
+servers.  For initial server setup, see my [[/posts/first-steps-on-a-new-server/][First Steps on a New Server]] post.] and a
 domain name pointing to your server's IP.
 
 ** DNS records
@@ -522,33 +522,28 @@ Implement a shared_ptr
 
 Pending.
 
-* TODO [#B] Initial Server Setup
+* TODO [#B] First Steps on a New Server
 :PROPERTIES:
-:EXPORT_FILE_NAME: initial-server-setup
+:EXPORT_FILE_NAME: first-steps-on-a-new-server
 :END:
 
-A misconfigured server is an open invitation to attackers.  After
-managing dozens of servers, these are the essential steps I run on every
-fresh install.
+Over the last decade I've been playing with dozens of servers across the
+world from multiple providers.  These are the steps I've been perfecting
+to get up to speed fast and feel right at home on a new machine.  Wrote
+it down here mostly as a personal reference, but hopefully useful to
+someone else too.
 
 ** Hardware, distro, and DNS
 
-Hardware can be whatever, from a cheap VPS, to a Raspberry Pi, to a
-thick ass server.
+Clean Linux install with one large root partition plus big
+swap.[fn::Predicting future partitioning needs is easy for a desktop,
+but can be difficult for a server.  One large root filesystem is easier
+to manage.]  While I run Arch on my laptop, Debian tends to be a better
+fit for servers because of its stability and long support window.
 
-If the hardware is managed by a provider, you'll only be able to choose
-the operating system.
-
-Start with a clean Linux install and a domain name.  For partitioning, I
-keep it simple: one large root partition plus swap.[fn::Predicting
-partition sizes is hard.  A single root partition simplifies management
-and avoids running out of space in one mount point while others sit
-empty.]  While I run Arch on my personal machine, I prefer Debian for
-servers because of its stability and long-term support.
-
-Point your domain to the server's IP from your DNS registrar.  Create an
-A record for IPv4 and an AAAA record for IPv6.  Wait a few minutes for
-changes to propagate, then verify
+Point your domain[fn::This post uses my domain alvarezrosa.com as an
+example.] to your server's IP at your DNS provider: an A record for IPv4
+and an AAAA record for IPv6.  Wait a few minutes, then verify both.
 
 #+begin_src sh
   $ dig alvarezrosa.com A +short
@@ -557,39 +552,40 @@ changes to propagate, then verify
   2001:41d0:305:2100::febc
 #+end_src
 
+Hardware doesn't matter: a VPS, a Raspberry Pi, or a dedicated box will
+do.
+
 ** First login
 
-Log in as root, change the default password, and update installed
-packages
+Log in as root, change the password, and update.
 
 #+begin_src sh
   $ ssh root@alvarezrosa.com
   $ passwd
-  $ apt update && apt upgrade
+  $ apt update && apt full-upgrade
 #+end_src
 
-Create a non-root user with sudo privileges
+Create a non-root user with sudo privileges.
 
 #+begin_src sh
   $ useradd --create-home --groups sudo david
   $ passwd david
 #+end_src
 
-Log out and reconnect as the new user.[fn::From this point forward,
-avoid using root directly.  Running as a non-root user with sudo is
-safer and leaves an audit trail.]
+Log out, then reconnect as the new user.
 
 #+begin_src sh
   $ ssh david@alvarezrosa.com
 #+end_src
 
+From here on, stay on this account and use sudo when you need it.
+
 ** Dotfiles
 
-I set up my dotfiles early for a familiar environment---there's nothing
-worse than fumbling with an unfamiliar shell while debugging a
-misconfiguration.[fn::The commands below treat your home directory as a
-git repo, letting you track dotfiles without symlinks.  I usually
-configure SSH keys for GitHub first.]
+I like to set up dotfiles early.  Debugging on an unfamiliar shell is
+its own kind of miserable.[fn::These commands treat the home directory
+as a Git repository, which lets you track dotfiles without symlink
+gymnastics.  GitHub access can be configured shortly after this.]
 
 #+begin_src sh
   $ git init
@@ -600,47 +596,45 @@ configure SSH keys for GitHub first.]
   $ git config status.showUntrackedFiles no
 #+end_src
 
-I configure zsh with oh-my-zsh and starship.[fn::oh-my-zsh provides
-plugins and themes for zsh.  starship is a fast, cross-shell prompt
-written in Rust.]
+Switch to zsh and install starship.[fn::Oh My Zsh is a common shell
+add-on, but it isn't required for the server itself.  starship is a fast
+cross-shell prompt.]
 
 #+begin_src sh
   $ sudo apt install zsh starship
-  $ chsh --shell $(which zsh) david
+  $ chsh --shell $(which zsh)
 #+end_src
 
-Log out and back in to verify the new shell loads.
+Log out and back in to confirm the shell loads correctly.
 
 ** SSH keys
 
-Configure SSH key-based authentication.  From your local machine, copy
-your public key to the server
+Copy your public key to the server from your local machine.
 
 #+begin_src sh
   $ ssh-copy-id david@alvarezrosa.com
 #+end_src
 
-Verify you can log in without a password
+Confirm you can get in without a password.
 
 #+begin_src sh
   $ ssh david@alvarezrosa.com
 #+end_src
 
-If you need root access via SSH, copy the authorized keys file
+If you need root access over SSH, install the key there too.
 
 #+begin_src sh
-  $ su -
-  $ cp /home/david/.ssh/authorized_keys ~/.ssh/authorized_keys
+  $ sudo install -d -m 700 /root/.ssh
+  $ sudo install -m 600 ~/.ssh/authorized_keys /root/.ssh/authorized_keys
 #+end_src
 
-I keep password authentication enabled for my user but disabled for
-root.[fn::Sometimes I SSH from machines without my keys.  To disable
-password auth entirely, set ~PasswordAuthentication no~ in
-~/etc/ssh/sshd_config~ and restart the SSH daemon.]
+Once that's working, disable password auth at least for
+root.[fn::Debian's default is already ~PermitRootLogin
+prohibit-password~, which only allows key-based root logins.]
 
 ** Timezone, locale, and hostname
 
-Set your timezone and verify with ~date~
+Set the timezone and verify with ~date~.
 
 #+begin_src sh
   $ timedatectl list-timezones
@@ -648,14 +642,14 @@ Set your timezone and verify with ~date~
   $ date
 #+end_src
 
-Configure locales by uncommenting ~en_US.UTF-8~ in ~/etc/locale.gen~,
-then generate them
+Then enable ~en_US.UTF-8~ locale and regenerate.
 
 #+begin_src sh
+  $ sudo vim /etc/locale.gen  # Uncomment en_US.UTF-8
   $ sudo locale-gen
 #+end_src
 
-Set a meaningful hostname and update ~/etc/hosts~
+Set a sensible hostname and make sure ~/etc/hosts~ matches.
 
 #+begin_src sh
   $ sudo hostnamectl set-hostname homelab
@@ -667,9 +661,9 @@ Set a meaningful hostname and update ~/etc/hosts~
 
 ** Firewall
 
-Block all incoming connections by default, then open only what you
-need.[fn::Open port 22 before enabling the firewall, or you'll lock
-yourself out.]
+Deny all inbound traffic and allow only the ports you need.[fn::Make
+sure SSH is allowed before enabling the firewall, or you will lock
+yourself out of the machine.]
 
 #+begin_src sh
   $ sudo apt install ufw
@@ -678,22 +672,25 @@ yourself out.]
   $ sudo ufw enable
 #+end_src
 
+Add more rules only as services are exposed.
+
 ** Automatic security updates
 
-Enable unattended-upgrades to keep the system patched without manual
-intervention[fn::On Debian, unattended-upgrades installs security
-updates automatically.  Check ~/var/log/unattended-upgrades/~ for logs.]
+Security patches shouldn't depend on remembering to log in every few
+days.[fn::Logs for unattended updates live in
+~/var/log/unattended-upgrades/~.]
 
 #+begin_src sh
   $ sudo apt install unattended-upgrades apt-listchanges
   $ sudo dpkg-reconfigure --priority=low unattended-upgrades
 #+end_src
 
+After that, security updates mostly take care of themselves.
+
 ** Intrusion prevention
 
-Install fail2ban to monitor logs and ban IPs that show malicious
-patterns[fn::fail2ban watches authentication logs and temporarily blocks
-IP addresses after repeated failed login attempts.]
+~fail2ban~ watches authentication logs and temporarily blocks IPs that
+look like they're brute-forcing your services.
 
 #+begin_src sh
   $ sudo apt install fail2ban
@@ -702,9 +699,9 @@ IP addresses after repeated failed login attempts.]
 
 ** Web server
 
-Install a web server to verify everything works.[fn::nginx is a
-lightweight, high-performance web server.  I used to prefer Apache, but
-nginx handles concurrency better and uses less memory.]
+Install a web server to verify everything works end to end.[fn::I've
+been using Apache for quite a few years, but nginx is more lightweight
+and handles concurrent connections more efficiently.]
 
 #+begin_src sh
   $ sudo apt install nginx
@@ -712,12 +709,10 @@ nginx handles concurrency better and uses less memory.]
   $ sudo ufw allow 80/tcp
 #+end_src
 
-Navigate to ~http://alvarezrosa.com~ in your browser---you should see
-the default nginx page.
-
-Secure the site with HTTPS using Let's Encrypt.[fn::Certbot obtains free
-TLS certificates and configures nginx automatically.  It also sets up a
-systemd timer for renewal.]
+Open your domain in a browser.  You should see the default nginx page.  Then
+enable HTTPS with Let's Encrypt.[fn::Certbot obtains free TLS
+certificates, updates the nginx configuration for you, and sets up
+automatic renewal.]
 
 #+begin_src sh
   $ sudo ufw allow 443/tcp
@@ -725,8 +720,10 @@ systemd timer for renewal.]
   $ sudo certbot
 #+end_src
 
-Follow the prompts to select your domain and enable HTTPS.  Then verify
-~https://alvarezrosa.com~ loads correctly in the browser.
+Follow the prompts; Certbot rewrites the nginx config and sets up
+renewal automatically.  Confirm your domain loads over HTTPS.
+
+That's the baseline.  From here, the machine is yours---go build on it.
 
 * DONE [#B] Fundamental Theorem of Calculus
 CLOSED: [2026-04-22 Wed 20:14]

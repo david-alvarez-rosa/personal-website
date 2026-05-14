@@ -82,7 +82,7 @@ auto printArea(const auto& shape) -> void {
 ```
 
 You can use this method with `Square`, `Circle`, or any type that
-provides a zero-argument `area()` returning `double`. Templates work
+provides a zero-argument `area()` returning `double`.  Templates work
 because the compiler generates a version of the function for each
 concrete type you use, and the call is valid as long as that generated
 code would compile[^fn:3] for the given type.
@@ -90,7 +90,7 @@ code would compile[^fn:3] for the given type.
 Unfortunately, template-based polymorphism has two main downsides.
 
 **First,** templates do not give you one shared runtime base type like
-`Shape`. Each instantiation is a distinct type, so there is no common
+`Shape`.  Each instantiation is a distinct type, so there is no common
 type for a homogeneous container; you cannot store a mix of `Square` and
 `Circle` in one array and handle them uniformly the way you can with a
 pointer to base technique
@@ -152,7 +152,7 @@ auto main() -> int {
 This approach works, but it has an obvious downside: you need a separate
 wrapper type (like `CircleWrapper`) for every concrete type you want to
 adapt (like `Circle`), which quickly turns into a pile of
-boilerplate. Luckily, templates can offload much of that work to the
+boilerplate.  Luckily, templates can offload much of that work to the
 compiler by generating the needed code for each type automatically
 
 ```cpp

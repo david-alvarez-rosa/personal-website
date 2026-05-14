@@ -66,7 +66,7 @@ _MSc in Artificial Intelligence_
 Official study program focused on AI research and enabling PhD.
 
 _MSc in Mathematics_<br />
-Math-lover part-time student. Dropout (joined Amazon).
+Math-lover part-time student.  Dropout (joined Amazon).
 
 _Research Thesis_
 [^fn:9]<br />
