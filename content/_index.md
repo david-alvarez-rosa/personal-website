@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2025-12-02T19:58:00+00:00
 tags = ["pers", "blog"]
 draft = false
+seotitle = "David Álvarez Rosa | Personal Website"
 +++
 
 &nbsp;[^fn:1]Hi! This is my personal site, where I share notes on software and
