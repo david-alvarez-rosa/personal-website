@@ -1,1 +1,1 @@
-{{- partial "img.html" (dict "src" .Destination) -}}
+{{- partial "img.html" (dict "src" .Destination "priority" (eq .Ordinal 0)) -}}
