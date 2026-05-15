@@ -2,18 +2,18 @@
 @font-face {
     font-family: "Alegreya Fallback";
     src: local("Times New Roman");
-    size-adjust: 136.95%;
-    ascent-override: 74.19%;
-    descent-override: 25.19%;
+    size-adjust: 101.69%;
+    ascent-override: 99.91%;
+    descent-override: 33.93%;
     line-gap-override: 0%;
 }
 /* Metric-matched serif fallback for Alegreya SC (targets Times New Roman) */
 @font-face {
     font-family: "Alegreya SC Fallback";
     src: local("Times New Roman");
-    size-adjust: 141.19%;
-    ascent-override: 71.96%;
-    descent-override: 24.44%;
+    size-adjust: 118.33%;
+    ascent-override: 85.86%;
+    descent-override: 29.16%;
     line-gap-override: 0%;
 }
 /* Alegreya - normal */
