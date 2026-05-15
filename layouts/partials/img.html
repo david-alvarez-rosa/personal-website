@@ -12,15 +12,21 @@
   {{ $origWidth := $img.Width }}
   {{ $origHeight := $img.Height }}
 
+  {{ $useWidths := slice }}
+  {{ range $widths }}
+    {{ if lt . $origWidth }}
+      {{ $useWidths = $useWidths | append . }}
+    {{ end }}
+  {{ end }}
+  {{ $useWidths = $useWidths | append $origWidth }}
+
   {{ $webpSrcset := slice }}
   {{ $origSrcset := slice }}
-  {{ range $widths }}
-    {{ if le . $origWidth }}
-      {{ $resized := $img.Resize (printf "%dx webp #fcfcfc" .) }}
-      {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) }}
-      {{ $resizedOrig := $img.Resize (printf "%dx #fcfcfc" .) }}
-      {{ $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) }}
-    {{ end }}
+  {{ range $useWidths }}
+    {{ $resized := $img.Resize (printf "%dx webp #fcfcfc" .) }}
+    {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+    {{ $resizedOrig := $img.Resize (printf "%dx #fcfcfc" .) }}
+    {{ $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) }}
   {{ end }}
 
   <a href="{{ $img.RelPermalink }}">
