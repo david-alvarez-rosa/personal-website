@@ -1,7 +1,5 @@
 {{ $src := .src }}
 {{ $priority := .priority }}
-{{ $loading := cond $priority "eager" "lazy" }}
-{{ $sizes := "(max-width: 860px) 100vw, 21rem" }}
 
 {{ $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}
 {{ $src := strings.TrimPrefix "./assets/" .src }}
@@ -16,9 +14,9 @@
   {{ $origSrcset := slice }}
   {{ range $widths }}
     {{ if le . $origWidth }}
-      {{ $resized := $img.Resize (printf "%dx webp" .) }}
+      {{ $resized := $img.Resize (printf "%dx webp #fcfcfc" .) }}
       {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) }}
-      {{ $resizedOrig := $img.Resize (printf "%dx" .) }}
+      {{ $resizedOrig := $img.Resize (printf "%dx #fcfcfc" .) }}
       {{ $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) }}
     {{ end }}
   {{ end }}
@@ -28,19 +26,19 @@
     <source
       type="image/webp"
       srcset="{{ delimit $webpSrcset ", " }}"
-      sizes="{{ $sizes }}">
+      sizes="auto">
     <img
       src="{{ $img.RelPermalink }}"
       srcset="{{ delimit $origSrcset ", " }}"
-      sizes="{{ $sizes }}"
+      sizes="auto"
       width="{{ $origWidth }}"
       height="{{ $origHeight }}"
       alt="{{ $alt }}"
-      loading="{{ $loading }}"
+      loading="lazy"
       {{ if $priority }}fetchpriority="high"{{ end }}
       decoding="async">
   </picture>
   </a>
 {{ else }}
-  <a href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}" loading="{{ $loading }}"{{ if $priority }} fetchpriority="high"{{ end }} decoding="async"></a>
+  <a href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}" loading="lazy"{{ if $priority }} fetchpriority="high"{{ end }} decoding="async"></a>
 {{ end }}

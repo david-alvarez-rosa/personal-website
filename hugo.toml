@@ -29,7 +29,7 @@ disableKinds = ['taxonomy', 'term']
     weight = 40
 
 [imaging]
-  quality = 60
+  quality = 50
 
 [markup.goldmark.renderer]
   unsafe = true
