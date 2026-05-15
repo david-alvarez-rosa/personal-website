@@ -1,5 +1,7 @@
 {{ $src := .src }}
 {{ $priority := .priority }}
+{{ $loading := cond $priority "eager" "lazy" }}
+{{ $sizes := cond $priority "(max-width: 860px) 100vw, 21rem" "auto" }}
 
 {{ $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}
 {{ $src := strings.TrimPrefix "./assets/" .src }}
@@ -26,19 +28,19 @@
     <source
       type="image/webp"
       srcset="{{ delimit $webpSrcset ", " }}"
-      sizes="auto">
+      sizes="{{ $sizes }}">
     <img
       src="{{ $img.RelPermalink }}"
       srcset="{{ delimit $origSrcset ", " }}"
-      sizes="auto"
+      sizes="{{ $sizes }}"
       width="{{ $origWidth }}"
       height="{{ $origHeight }}"
       alt="{{ $alt }}"
-      loading="lazy"
+      loading="{{ $loading }}"
       {{ if $priority }}fetchpriority="high"{{ end }}
       decoding="async">
   </picture>
   </a>
 {{ else }}
-  <a href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}" loading="lazy"{{ if $priority }} fetchpriority="high"{{ end }} decoding="async"></a>
+  <a href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}" loading="{{ $loading }}"{{ if $priority }} fetchpriority="high"{{ end }} decoding="async"></a>
 {{ end }}
