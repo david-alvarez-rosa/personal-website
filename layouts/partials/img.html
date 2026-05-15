@@ -1,11 +1,12 @@
 {{ $src := .src }}
+{{ $sizes := "(max-width: 860px) 100vw, 21rem" }}
 
 {{ $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}
 {{ $src := strings.TrimPrefix "./assets/" .src }}
 {{ $img := resources.Get $src }}
 
 {{ if $img }}
-  {{ $widths := slice 480 768 1024 1536 }}
+  {{ $widths := slice 240 360 480 768 1024 1536 }}
   {{ $origWidth := $img.Width }}
   {{ $origHeight := $img.Height }}
 
@@ -35,11 +36,11 @@
     <source
       type="image/webp"
       srcset="{{ delimit $webpSrcset ", " }}"
-      sizes="(max-width: 860px) 100vw, 860px">
+      sizes="{{ $sizes }}">
     <img
       src="{{ $img.RelPermalink }}"
       srcset="{{ delimit $origSrcset ", " }}"
-      sizes="(max-width: 860px) 100vw, 860px"
+      sizes="{{ $sizes }}"
       width="{{ $origWidth }}"
       height="{{ $origHeight }}"
       alt="{{ $alt }}"

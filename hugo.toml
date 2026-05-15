@@ -28,6 +28,9 @@ disableKinds = ['taxonomy', 'term']
     url = '/index.xml'
     weight = 40
 
+[imaging]
+  quality = 60
+
 [markup.goldmark.renderer]
   unsafe = true
 
