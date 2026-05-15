@@ -12,3 +12,5 @@ ignore_re:
   - 'Property "ascent-override"'
   - 'Property "descent-override"'
   - 'Property "line-gap-override"'
+  - 'Bad value "auto" for attribute "sizes"'
+  - 'Attribute "fetchpriority" not allowed on element "img"'
