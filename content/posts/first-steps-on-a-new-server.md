@@ -84,7 +84,7 @@ Log out and back in to confirm the shell loads correctly.
 
 ## SSH keys {#ssh-keys}
 
-Copy your public key to the server from your local machine.
+Copy your public key to the server from your local machine.[^fn:5]
 
 ```sh
 $ ssh-copy-id david@alvarezrosa.com
@@ -104,7 +104,7 @@ $ sudo install -m 600 ~/.ssh/authorized_keys /root/.ssh/authorized_keys
 ```
 
 Once that's working, disable password auth at least for
-root.[^fn:5]
+root.[^fn:6]
 
 
 ## Timezone, locale, and hostname {#timezone-locale-and-hostname}
@@ -117,11 +117,12 @@ $ sudo timedatectl set-timezone Europe/Madrid
 $ date
 ```
 
-Then enable `en_US.UTF-8` locale and regenerate.
+Then enable `en_US.UTF-8` locale and make it the default.
 
 ```sh
 $ sudo vim /etc/locale.gen  # Uncomment en_US.UTF-8
 $ sudo locale-gen
+$ sudo update-locale LANG=en_US.UTF-8
 ```
 
 Set a sensible hostname and make sure `/etc/hosts` matches.
@@ -137,7 +138,7 @@ $ cat /etc/hosts
 
 ## Firewall {#firewall}
 
-Deny all inbound traffic and allow only the ports you need.[^fn:6]
+Deny all inbound traffic and allow only the ports you need.[^fn:7]
 
 ```sh
 $ sudo apt install ufw
@@ -152,7 +153,7 @@ Add more rules only as services are exposed.
 ## Automatic security updates {#automatic-security-updates}
 
 Security patches shouldn't depend on remembering to log in every few
-days.[^fn:7]
+days.[^fn:8]
 
 ```sh
 $ sudo apt install unattended-upgrades apt-listchanges
@@ -175,7 +176,7 @@ $ sudo systemctl enable --now fail2ban
 
 ## Web server {#web-server}
 
-Install a web server to verify everything works end to end.[^fn:8]
+Install a web server to verify everything works end to end.[^fn:9]
 
 ```sh
 $ sudo apt install nginx
@@ -184,7 +185,7 @@ $ sudo ufw allow 80/tcp
 ```
 
 Open your domain in a browser.  You should see the default nginx page.  Then
-enable HTTPS with Let's Encrypt.[^fn:9]
+enable HTTPS with Let's Encrypt.[^fn:10]
 
 ```sh
 $ sudo ufw allow 443/tcp
@@ -210,16 +211,19 @@ That's the baseline.  From here, the machine is yours---go build on it.
 [^fn:4]: Oh My Zsh is a common shell
     add-on, but it isn't required for the server itself.  starship is a fast
     cross-shell prompt.
-[^fn:5]: Debian's default is already `PermitRootLogin
+[^fn:5]: If you
+    don't have a key on your local machine yet, generate one first with
+    `ssh-keygen`.
+[^fn:6]: Debian's default is already `PermitRootLogin
     prohibit-password`, which only allows key-based root logins.
-[^fn:6]: Make
+[^fn:7]: Make
     sure SSH is allowed before enabling the firewall, or you will lock
     yourself out of the machine.
-[^fn:7]: Logs for unattended updates live in
+[^fn:8]: Logs for unattended updates live in
     `/var/log/unattended-upgrades/`.
-[^fn:8]: I've
+[^fn:9]: I've
     been using Apache for quite a few years, but nginx is more lightweight
     and handles concurrent connections more efficiently.
-[^fn:9]: Certbot obtains free TLS
+[^fn:10]: Certbot obtains free TLS
     certificates, updates the nginx configuration for you, and sets up
     automatic renewal.

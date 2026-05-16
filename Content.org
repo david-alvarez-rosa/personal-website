@@ -609,7 +609,9 @@ Log out and back in to confirm the shell loads correctly.
 
 ** SSH keys
 
-Copy your public key to the server from your local machine.
+Copy your public key to the server from your local machine.[fn::If you
+don't have a key on your local machine yet, generate one first with
+~ssh-keygen~.]
 
 #+begin_src sh
   $ ssh-copy-id david@alvarezrosa.com
@@ -642,11 +644,12 @@ Set the timezone and verify with ~date~.
   $ date
 #+end_src
 
-Then enable ~en_US.UTF-8~ locale and regenerate.
+Then enable ~en_US.UTF-8~ locale and make it the default.
 
 #+begin_src sh
   $ sudo vim /etc/locale.gen  # Uncomment en_US.UTF-8
   $ sudo locale-gen
+  $ sudo update-locale LANG=en_US.UTF-8
 #+end_src
 
 Set a sensible hostname and make sure ~/etc/hosts~ matches.
