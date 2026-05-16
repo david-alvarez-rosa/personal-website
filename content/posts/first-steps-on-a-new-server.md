@@ -5,11 +5,11 @@ tags = ["pers", "blog"]
 draft = true
 +++
 
-Over the last decade I've been playing with dozens of servers across the
-world from multiple providers.  These are the steps I've been perfecting
-to get up to speed fast and feel right at home on a new machine.  Wrote
-it down here mostly as a personal reference, but hopefully useful to
-someone else too.
+Over the last decade I've been playing with dozens of servers from
+multiple providers.  These are the steps I've been perfecting to get up
+to speed fast and feel right at home on a new machine.  Wrote it down
+here mostly as a personal reference, but hopefully useful to someone
+else too.
 
 
 ## Hardware, distro, and DNS {#hardware-distro-and-dns}
