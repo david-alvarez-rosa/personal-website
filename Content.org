@@ -4,6 +4,14 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Self-hosting deep web                                   :backlog:
+
+* TODO [#B] Laissez faire, laisaez mourir                           :backlog:
+
+* TODO [#B] Deriving and understanding Black-Scholes                :backlog:
+
+* TODO [#B] Starting a new C++ project                              :backlog:
+
 * TODO [#B] Self-Hosting an Email Server
 :PROPERTIES:
 :EXPORT_FILE_NAME: selfhost-email-server
