@@ -705,7 +705,8 @@ Implement a shared_ptr
 
 Pending.
 
-* TODO [#B] First Steps on a New Server
+* DONE [#B] First Steps on a New Server
+CLOSED: [2026-05-17 Sun 17:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: first-steps-on-a-new-server
 :END:
