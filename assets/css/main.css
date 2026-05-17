@@ -168,6 +168,24 @@ sup {
     position: relative;
 }
 
+.fullwidth {
+    margin-right: -24rem;
+    clear: right;
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+}
+
+.fullwidth table {
+    width: 100%;
+    table-layout: fixed;
+    margin: 0;
+}
+
+.fullwidth img {
+    width: 100%;
+    height: auto;
+}
+
 .side, figcaption p {
     font-size: 1.1rem;
     line-height: 1.54rem;
@@ -186,6 +204,7 @@ sup {
 
 .side sup:has(+ img),
 .side sup:has(+ a img),
+.side sup:has(+ figure),
 sup:has(+ .side img) {
     display: none;
 }
@@ -293,6 +312,10 @@ h2:focus-within .anchor {
 
     .side img {
         margin: auto auto 0.4rem auto;
+    }
+
+    .fullwidth {
+        margin-right: 0;
     }
 }
 
