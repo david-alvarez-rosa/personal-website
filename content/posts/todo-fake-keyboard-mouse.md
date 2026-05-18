@@ -8,11 +8,10 @@ draft = true
 A microcontroller that pretends to be a keyboard and mouse is one of the
 most useful weekend projects I've put together.  It can keep a machine
 awake during a long compile, replay a tedious sequence of shortcuts at
-the press of a button, or type out whatever you
-want[^fn:1]---all
-from a board that costs a couple of euros.
+the press of a button, or type out whatever you want---all from a board
+that costs a couple of euros.
 
-I built mine on an RP2040---Raspberry Pi's first in-house silicon, whose
+I built mine on an RP2040[^fn:1]---Raspberry Pi's first in-house silicon, whose
 native USB controller makes HID emulation possible without any extra
 hardware.  Source and prebuilt firmware are on [GitHub](https://github.com/david-alvarez-rosa/FakeKeyboardMouse).
 
@@ -166,9 +165,11 @@ photos---no datasheet, no pinout diagram, nothing.[^fn:5]
 
 That's all the moving parts.  The repository ships a few example
 scripts to get you started---swap them out, recompile, and the board
-will type or wiggle in whatever pattern you like.
+will type[^fn:6] or wiggle in whatever pattern you like.
 
-[^fn:1]: ![](/images/keyboard-demo.gif) **The keyboard variant in action.**
+[^fn:1]: ![](./assets/images/spec-2.jpg) **The board.**
+    Roughly the size of a thumbnail---the USB-A plug is etched into the PCB
+    instead of soldered on.
 [^fn:2]: `arm-none-eabi-gcc` is the cross-compiler targeting ARM
     microcontrollers; `arm-none-eabi-newlib` provides a slim C standard
     library suited for embedded targets.
@@ -180,3 +181,5 @@ will type or wiggle in whatever pattern you like.
 [^fn:5]: Welcome to
     no-name AliExpress electronics.  The RP2040 itself is well documented,
     so in practice the official datasheet is what you'll lean on.
+[^fn:6]: ![](/images/keyboard-demo.gif) **The keyboard variant in
+    action.**

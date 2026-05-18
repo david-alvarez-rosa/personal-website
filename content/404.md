@@ -8,6 +8,8 @@ subtitle = " "
 noindex = true
 [sitemap]
   disable = true
+[build]
+  list = "never"
 +++
 
 <style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>

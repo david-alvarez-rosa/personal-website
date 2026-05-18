@@ -60,6 +60,9 @@ jobs:
       - name: Build site
         run: hugo --minify --panicOnWarning
 
+      - name: Tag RSS links for analytics
+        run: sed -i -E 's|(<link>https://david\.alvarezrosa\.com/[^<]+)(</link>)|\1?utm_source=rss\2|g' public/index.xml
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
