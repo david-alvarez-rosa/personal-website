@@ -8,7 +8,7 @@
 {{ $img := resources.Get $src }}
 
 {{ if $img }}
-  {{ $widths := slice 240 360 480 768 1024 1536 }}
+  {{ $widths := slice 240 360 420 480 768 1024 1536 }}
   {{ $origWidth := $img.Width }}
   {{ $origHeight := $img.Height }}
 
