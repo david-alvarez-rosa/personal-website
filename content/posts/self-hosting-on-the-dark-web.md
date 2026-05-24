@@ -6,15 +6,17 @@ draft = true
 +++
 
 This site is now reachable over Tor as a hidden service, at a `.onion`
-address that resolves only inside the Tor network.[^fn:1]  [Tor](https://www.torproject.org/) routes your
-traffic through volunteer-run relays so that no single party---not your
-ISP, not the site you visit---can link who you are to what you are
+address that resolves only inside the Tor network.[^fn:1]  [Tor](https://www.torproject.org/) relays and
+encrypts your traffic as it passes through thousands of volunteer-run
+servers, so that no single party can link who you are to what you are
 doing; a hidden service extends that anonymity to the server itself.
 
-It's built by the nonprofit [Tor Project](https://www.torproject.org/) to help people resist tracking,
-surveillance, and censorship.  The network only works because people use
-it, so consider [supporting them](https://donate.torproject.org/) or running a relay---your contribution
-helps millions stay safe and private online every day.
+It's built by the nonprofit [Tor Project](https://www.torproject.org/), which advances human rights and
+freedoms through free software and open networks, so that anyone can use
+the internet free from tracking, surveillance, and censorship.  The
+network only works because people use it, so consider [supporting them](https://donate.torproject.org/) or
+running a relay---your contribution helps millions stay safe and private
+online every day.
 
 
 ## The hidden service {#the-hidden-service}
