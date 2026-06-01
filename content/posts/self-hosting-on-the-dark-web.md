@@ -1,8 +1,9 @@
 +++
 title = "Self-Hosting on the Dark Web"
 author = ["David Álvarez Rosa"]
+date = 2026-06-01T10:55:00+01:00
 tags = ["pers", "blog"]
-draft = true
+draft = false
 +++
 
 This site is now reachable over Tor as a hidden service, at a `.onion`
@@ -76,7 +77,7 @@ URL
 $ hugo --minify --baseURL="http://dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion/"
 ```
 
-My deploy pipeline does this automatically: every push builds the site
+The deploy pipeline does this automatically: every push builds the site
 once per target---clearnet and Tor---and rsyncs each to its own web
 root, so the two stay in sync without any manual work.[^fn:3]
 

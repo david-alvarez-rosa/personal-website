@@ -181,96 +181,6 @@ action.*] or wiggle in whatever pattern you like.
 
 * TODO [#B] Minimalist Invoice
 
-* TODO [#B] Self-Hosting on the Dark Web
-:PROPERTIES:
-:EXPORT_FILE_NAME: self-hosting-on-the-dark-web
-:END:
-
-This site is now reachable over Tor as a hidden service, at a ~.onion~
-address that resolves only inside the Tor network.[fn::Open it in the
-[[https://www.torproject.org/][Tor Browser]].  There is no certificate authority, no DNS, and no exposed
-IP---the address is derived directly from a public key, and the
-connection is end-to-end encrypted by Tor itself.]  [[https://www.torproject.org/][Tor]] relays and
-encrypts your traffic as it passes through thousands of volunteer-run
-servers, so that no single party can link who you are to what you are
-doing; a hidden service extends that anonymity to the server itself.
-
-It's built by the nonprofit [[https://www.torproject.org/][Tor Project]], which advances human rights and
-freedoms through free software and open networks, so that anyone can use
-the internet free from tracking, surveillance, and censorship.  The
-network only works because people use it, so consider [[https://donate.torproject.org/][supporting them]] or
-running a relay---your contribution helps millions stay safe and private
-online every day.
-
-** The hidden service
-
-Install Tor and point a hidden service at a local port.  Edit
-~/etc/tor/torrc~
-
-#+begin_src conf
-  HiddenServiceDir /var/lib/tor/blog/
-  HiddenServicePort 80 127.0.0.1:8080
-#+end_src
-
-The directory must be a dedicated, Tor-owned path---not your web
-root.[fn::Tor stores the service's private key and ~hostname~ file here
-and insists on owning it (~chmod 700~, user ~debian-tor~).  Point it at
-your site files and Tor refuses to start.]  Restart Tor and read the
-address it generates
-
-#+begin_src sh
-  $ sudo systemctl restart tor@default
-  $ sudo cat /var/lib/tor/blog/hostname
-  dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion
-#+end_src
-
-** Serving the site
-
-Tor forwards the onion's port 80 to ~127.0.0.1:8080~, so the web server
-just needs to listen there.  Add an nginx server block for it---no TLS,
-no HTTP/2, no QUIC, since Tor speaks plain TCP and provides its own
-encryption.
-
-#+begin_src nginx
-  server {
-    listen 127.0.0.1:8080;
-    server_name dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion;
-
-    root /srv/tor.david.alvarezrosa.com;
-    index index.html;
-    error_page 404 /404/index.html;
-
-    location / {
-      try_files $uri $uri/ =404;
-    }
-  }
-#+end_src
-
-Reload nginx and the site is live on Tor.
-
-** Building for the onion
-
-A static site bakes its base URL into absolute links, so a clearnet
-build would point visitors back to the clearnet domain even when served
-over Tor.  The fix is to build a second copy with the onion as its base
-URL
-
-#+begin_src sh
-  $ hugo --minify --baseURL="http://dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion/"
-#+end_src
-
-My deploy pipeline does this automatically: every push builds the site
-once per target---clearnet and Tor---and rsyncs each to its own web
-root, so the two stay in sync without any manual work.[fn::See [[/posts/first-steps-on-a-new-server/][First
-Steps on a New Server]] for the underlying machine; the full configuration
-lives in my [[https://github.com/david-alvarez-rosa/homelab][homelab]] repository, and the [[https://github.com/david-alvarez-rosa/personal-website][site's own repository]] holds the
-GitHub Actions workflow that builds and deploys the Tor copy.]
-
-\\
-
-That's it.  Read this site over Tor at
-~dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion~.
-
 * TODO [#B] Laissez faire, laisaez mourir                           :backlog:
 
 * TODO [#B] Deriving and understanding Black-Scholes                :backlog:
@@ -794,6 +704,97 @@ Implement a shared_ptr
 :END:
 
 Pending.
+
+* DONE [#B] Self-Hosting on the Dark Web
+CLOSED: [2026-06-01 Mon 10:55]
+:PROPERTIES:
+:EXPORT_FILE_NAME: self-hosting-on-the-dark-web
+:END:
+
+This site is now reachable over Tor as a hidden service, at a ~.onion~
+address that resolves only inside the Tor network.[fn::Open it in the
+[[https://www.torproject.org/][Tor Browser]].  There is no certificate authority, no DNS, and no exposed
+IP---the address is derived directly from a public key, and the
+connection is end-to-end encrypted by Tor itself.]  [[https://www.torproject.org/][Tor]] relays and
+encrypts your traffic as it passes through thousands of volunteer-run
+servers, so that no single party can link who you are to what you are
+doing; a hidden service extends that anonymity to the server itself.
+
+It's built by the nonprofit [[https://www.torproject.org/][Tor Project]], which advances human rights and
+freedoms through free software and open networks, so that anyone can use
+the internet free from tracking, surveillance, and censorship.  The
+network only works because people use it, so consider [[https://donate.torproject.org/][supporting them]] or
+running a relay---your contribution helps millions stay safe and private
+online every day.
+
+** The hidden service
+
+Install Tor and point a hidden service at a local port.  Edit
+~/etc/tor/torrc~
+
+#+begin_src conf
+  HiddenServiceDir /var/lib/tor/blog/
+  HiddenServicePort 80 127.0.0.1:8080
+#+end_src
+
+The directory must be a dedicated, Tor-owned path---not your web
+root.[fn::Tor stores the service's private key and ~hostname~ file here
+and insists on owning it (~chmod 700~, user ~debian-tor~).  Point it at
+your site files and Tor refuses to start.]  Restart Tor and read the
+address it generates
+
+#+begin_src sh
+  $ sudo systemctl restart tor@default
+  $ sudo cat /var/lib/tor/blog/hostname
+  dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion
+#+end_src
+
+** Serving the site
+
+Tor forwards the onion's port 80 to ~127.0.0.1:8080~, so the web server
+just needs to listen there.  Add an nginx server block for it---no TLS,
+no HTTP/2, no QUIC, since Tor speaks plain TCP and provides its own
+encryption.
+
+#+begin_src nginx
+  server {
+    listen 127.0.0.1:8080;
+    server_name dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion;
+
+    root /srv/tor.david.alvarezrosa.com;
+    index index.html;
+    error_page 404 /404/index.html;
+
+    location / {
+      try_files $uri $uri/ =404;
+    }
+  }
+#+end_src
+
+Reload nginx and the site is live on Tor.
+
+** Building for the onion
+
+A static site bakes its base URL into absolute links, so a clearnet
+build would point visitors back to the clearnet domain even when served
+over Tor.  The fix is to build a second copy with the onion as its base
+URL
+
+#+begin_src sh
+  $ hugo --minify --baseURL="http://dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion/"
+#+end_src
+
+The deploy pipeline does this automatically: every push builds the site
+once per target---clearnet and Tor---and rsyncs each to its own web
+root, so the two stay in sync without any manual work.[fn::See [[/posts/first-steps-on-a-new-server/][First
+Steps on a New Server]] for the underlying machine; the full configuration
+lives in my [[https://github.com/david-alvarez-rosa/homelab][homelab]] repository, and the [[https://github.com/david-alvarez-rosa/personal-website][site's own repository]] holds the
+GitHub Actions workflow that builds and deploys the Tor copy.]
+
+\\
+
+That's it.  Read this site over Tor at
+~dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion~.
 
 * DONE [#B] First Steps on a New Server
 CLOSED: [2026-05-17 Sun 17:26]

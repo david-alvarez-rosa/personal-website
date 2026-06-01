@@ -218,6 +218,7 @@ code:not(.chroma code) {
     font-weight: 530;
     color: #660000;
     font-size: 1.33rem;
+    overflow-wrap: anywhere;
 }
 
 .anchor {
