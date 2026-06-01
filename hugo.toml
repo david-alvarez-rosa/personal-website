@@ -39,3 +39,14 @@ disableKinds = ['taxonomy', 'term']
     noClasses = false
     style = "modus-operandi"
     lineNumbers = true
+
+[module]
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  [[module.mounts]]
+    source = 'COPYING'
+    target = 'static/COPYING'
+  [[module.mounts]]
+    source = 'LICENSE'
+    target = 'static/LICENSE'
