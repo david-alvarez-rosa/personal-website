@@ -9,7 +9,7 @@
         <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
       </span>
       <br/>
-      {{ .Summary | truncate 153 | plainify }}
+      {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
     </p>
   {{ end }}
 {{ end }}
