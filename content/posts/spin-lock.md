@@ -1,7 +1,7 @@
 +++
 title = "Spin-Lock"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog", "backlog"]
+tags = ["pers", "blog"]
 draft = true
 +++
 
