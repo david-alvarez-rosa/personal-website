@@ -311,6 +311,15 @@ h2:focus-within .anchor {
         border-left: 3px solid #ccc;
     }
 
+    figure {
+        display: flex;
+        flex-direction: column;
+    }
+
+    figcaption {
+        order: 1;
+    }
+
     .side img {
         margin: auto auto 0.4rem auto;
     }
