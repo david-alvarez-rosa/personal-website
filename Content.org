@@ -737,137 +737,199 @@ appears on.  Building a positive reputation can take weeks.
 - https://en.cppreference.com/w/cpp/language/value_category.html
 - https://0xghost.dev/blog/std-move-deep-dive/
 
-* TODO [#B] How to setup a tunnel from vps to local homelab         :backlog:
+* TODO [#B] Self-Hosting Behind CGNAT
 :PROPERTIES:
-:EXPORT_FILE_NAME: pending-tunnel
+:EXPORT_FILE_NAME: self-hosting-behind-cgnat
 :END:
 
-Write a blog on how to setup a tunnel from vps to local homelab
+This site is self-hosted on a server that cannot accept a single
+inbound connection: the ISP puts it behind CGNAT, so there is no public
+IP to forward ports on.  The fix is a /bridge/---a bastion with a
+real public address---and a WireGuard tunnel dialed out from the
+homelab: clients connect to the bridge, and the bridge forwards
+everything back through the tunnel.
 
-How to manage a selfhosted homelab behind CGNAT?
+** The plan
 
-Homelab <-> Router <-> NAT <-> ONT <-> *CGNAT* <-> ISP <-> Internet
+With carrier-grade NAT, the ISP shares one public IPv4 address across
+many customers: your router's WAN address is itself
+private[fn::Usually in ~100.64.0.0/10~, the shared address space
+reserved for CGNAT by RFC 6598.]---a second NAT, outside your home,
+that you don't control.  The classic recipe of port forwarding plus
+dynamic DNS[fn::Shaky even without CGNAT: a rotating address is bad
+for anything reputation-sensitive like mail, and every rotation means
+downtime while resolvers keep serving the old IP until the TTL
+expires.] dies here: forwarding only gets you through the first NAT,
+and the address DDNS would publish is shared with hundreds of
+strangers.  Inbound connections are simply impossible.
 
-Expose the server through public VPS
+But outbound connections still work fine---so the homelab dials /out/,
+opening a WireGuard tunnel to the bridge and keeping it alive.  The
+bridge keeps only WireGuard itself and its own SSH, and forwards every
+other inbound connection through the tunnel.  From the outside, the
+bridge /is/ the homelab---DNS just points at it.[fn::The bridge only
+pushes packets, so the smallest of servers will do.  See [[/posts/first-steps-on-a-new-server/][First Steps on
+a New Server]] for the basic setup.]  Inside the tunnel, the bridge is ~10.0.0.1~ and the
+homelab ~10.0.0.2~.
 
-Setting up a VPN tunnel from VPS to local homelab
+#+begin_example
+     client                                 admin
+        |                                     |
+        |                                     |
+  +---------------------------------------------------------+
+  |                     public Internet                     |
+  +---------------------------------------------------------+
+        |                         |               |
+        |                         |               |
+  +---------------------+    +--------------+     |
+  | bridge    10.0.0.1  |    |  Cloudflare  |     |  homelab's own
+  | DNAT  * ->  homelab |    +--------------+     |  outbound traffic
+  +---------------------+         ^^              |
+        ^^                        ||              |
+        ||  WireGuard             || cloudflared  |
+        ||  (all ports)           || (backup SSH) |
+        vv                        vv              |
+  +---------------------------------------------------------+
+  |           homelab   10.0.0.2   (behind CGNAT)           |
+  +---------------------------------------------------------+
+        |                                     ^
+        |   self-check via bridge---or reboot |
+        +-------------------------------------+
+#+end_example
 
-Steps:
+Both tunnels are dialed out from the homelab---only outbound works
+behind CGNAT.  The admin SSHes in through the bridge like any other
+client (port 22 is forwarded with the rest); the homelab's own
+outbound traffic never crosses it, only replies to forwarded
+connections do.  The Cloudflare backup tunnel and the watchdog loop
+are covered at the end.
 
-In vps bridge *and* homelab
+** The tunnel
 
-#+begin_src
-sudo apt install wireguard
-#+end_src
+On both machines, install WireGuard and generate a keypair; exchange
+the public keys---the private ones never leave their machine.
 
-this generates privatekey and publickey files
+The bridge's entire setup lives in ~/etc/wireguard/wg0.conf~
 
-#+begin_src
-umask 077
-wg genkey | tee privatekey | wg pubkey > publickey
-#+end_src
-
-in vps bridge:
-
-find first the interface, example ens3
-#+begin_src
-  ip a
-#+end_src
-then run this, but remember to change ens3 with your interface
-#+begin_src
-echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-wireguard.conf
-echo 'net.ipv4.conf.ens3.route_localnet=1' | sudo tee -a /etc/sysctl.d/99-wireguard.conf
-sudo sysctl --system
-#+end_src
-
-
-RETURN for port 22 and 51820 (SSH, and Wireguard)
-#+begin_src
-  iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
-  iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 22 -j RETURN
-#+end_src
-
-Setup forward rest of ports inbound from VPS -> homelab,
-#+begin_src
-  iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
-#+end_src
-
-Allow ACCEPT exiting wg0 (homelab) to VPS (ens3):
-#+begin_src
-  iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
-#+end_src
-
-MASQUERADE (convert IP)
-#+begin_src
-  iptables -t nat -A POSTROUTING -j MASQUERADE
-#+end_src
-
-VPS
 #+begin_src conf
   [Interface]
   Address = 10.0.0.1/24
-  PrivateKey = <server-private-key>
+  PrivateKey = <bridge-private-key>
   ListenPort = 51820
-  PostUp = iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
-  PostUp = iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 2222 -j RETURN
-  PostUp = iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
-  PostUp = iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
-  PostUp = iptables -A FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
-  PostDown = iptables -t nat -D PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
-  PostDown = iptables -t nat -D PREROUTING -i ens3 -p tcp --dport 2222 -j RETURN
-  PostDown = iptables -t nat -D PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
-  PostDown = iptables -D FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
-  PostDown = iptables -D FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
+  PostUp = ...
+  PostDown = ...
 
   [Peer]
   PublicKey = <homelab-public-key>
   AllowedIPs = 10.0.0.2/32
 #+end_src
 
-Homelab
+where ~PostUp~ enables IP forwarding and installs the five iptables
+rules that do the forwarding, tying their lifetime to the
+tunnel's[fn::~PostDown~ mirrors ~PostUp~, undoing every command.
+~ens3~ is the bridge's public interface---find yours with ~ip a~ and
+adjust.]
+
+#+begin_src sh
+  sysctl -w net.ipv4.ip_forward=1 net.ipv4.conf.ens3.route_localnet=1
+  iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
+  iptables -t nat -A PREROUTING -i ens3 -p tcp --dport 2222 -j RETURN
+  iptables -t nat -A PREROUTING -i ens3 -j DNAT --to-destination 10.0.0.2
+  iptables -A FORWARD -i wg0 -o ens3 -s 10.0.0.2 -j ACCEPT
+  iptables -A FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
+#+end_src
+
+Two ~RETURN~ rules keep WireGuard (~51820/udp~) and the bridge's own
+SSH (~2222/tcp~) local; the catch-all ~DNAT~ rewrites everything
+else---port 22 included---to the homelab's tunnel address; and two
+~FORWARD~ accepts let that traffic flow both ways.[fn::Note there is no
+~MASQUERADE~: conntrack reverses the DNAT on the way out, and the
+homelab routes its replies back through the tunnel.  Forwarded services
+see the /real/ client IP---something proxies and third-party tunnels
+can't offer.]  Everything happens inside the kernel: netfilter does
+the rewriting, and no userspace process ever touches a packet.
+
+The bridge's own sshd listens on 2222 precisely so that port 22 can be
+forwarded with everything else: ~ssh alvarezrosa.com~ lands on the
+homelab, ~ssh -p 2222~ on the bridge.[fn::Add ~Port 2222~ to the
+bridge's ~/etc/ssh/sshd_config~ /before/ bringing the tunnel up---the
+moment the DNAT rule takes effect, port 22 belongs to the homelab.]
+
+The homelab side dials out and answers.  Its ~/etc/wireguard/wg0.conf~
+
 #+begin_src conf
   [Interface]
   Address = 10.0.0.2/24
   PrivateKey = <homelab-private-key>
   Table = off
-  PostUp = ip route add default dev wg0 table 200
-  PostUp = ip rule add from 10.0.0.2 table 200
-  PostDown = ip rule del from 10.0.0.2 table 200
-  PostDown = ip route del default dev wg0 table 200A
+  PostUp = ...
+  PostDown = ...
 
   [Peer]
-  PublicKey = <server-public-key>
-  Endpoint = <server-public-ip>:51820
+  PublicKey = <bridge-public-key>
+  Endpoint = 213.32.19.229:51820
   AllowedIPs = 0.0.0.0/0
   PersistentKeepalive = 25
 #+end_src
 
-Then, on both:
+where ~PostUp~ sets up policy routing.
 
-#+begin_src
-sudo systemctl enable --now wg-quick@wg0
+#+begin_src sh
+  ip route add default dev wg0 table 200
+  ip rule add from 10.0.0.2 table 200
 #+end_src
 
+Each line earns its place: ~AllowedIPs = 0.0.0.0/0~ accepts forwarded
+clients from anywhere on the Internet; ~Table = off~ stops ~wg-quick~
+from hijacking /all/ of the homelab's traffic through the
+bridge[fn::Without it, ~wg-quick~ would install a default route
+matching ~AllowedIPs~.]; the policy routing sends only replies of
+forwarded connections---packets /from/ ~10.0.0.2~---back through the
+tunnel; and ~PersistentKeepalive~ keeps the CGNAT's idle UDP mapping
+alive, so the bridge can always reach in.
 
-What happens if VPS is not working?
+Enable the tunnel on both machines with
+~sudo systemctl enable --now wg-quick@wg0~ and verify the handshake
+with ~sudo wg~.  Then the real test: from outside, any connection to
+the bridge's public IP should land on the homelab.  Point your DNS
+records at the bridge and the homelab is, for all practical purposes,
+on the public Internet.
 
-Setup an alternate way of accessing the homelab
+The detour adds latency: this bridge sits in France, the homelab in
+northern Spain, and the tunnel adds ~37 ms of RTT to every
+connection.[fn::Amusingly, pinging the bridge's /public/ IP from the
+homelab reports ~74 ms---exactly double.  The echo request is DNAT'd
+back through the tunnel to the homelab itself, so every packet crosses
+the tunnel twice.]  Not a problem in practice: with heavy optimization
+and a CDN absorbing most requests, this site---served through this
+very tunnel---is among the fastest on the web.
 
-- Port forwarding + DynDNS: not possible behind CGNAT, but good option
-  otherwise
-- Use a third party: Tailscale/Cloudflare, etc. On my case, I've setup
-  cloudflare one zero trust.  It uses outbound service daemon on both
-  client and server, so no need to expose anything (same as vps bastion
-  or jump box). need to run cloudflared both in server and client
+** Plan for failure
 
-What happens if homelab is not working?
+Two single points of failure, and a plan for each.
 
-In that case, you'll like to reboot, but if you cannot access it on the
-first place that's a big problem
+If the /bridge/ dies, the tunnel dies with it---so keep a way into the
+homelab that bypasses it entirely.  I run a [[https://developers.cloudflare.com/cloudflare-one/][Cloudflare Tunnel]]:
+~cloudflared~ uses the same dial-out trick, outbound-only on both ends,
+so it also works behind CGNAT.[fn::Tailscale fills the same role.]  It
+exposes the homelab's sshd at a hostname of its own, and a
+~ProxyCommand~ in the client's ~\~/.ssh/config~ connects through
+it---whatever happens to the bridge, ~ssh homelab2~ still gets in.
 
-- Manually restarted if you are physically close to the server
-- Setup heuristic cronjobs: check if the server is accessible by itself
-  once in a while, and if that fails, then it will restart and notify
+If the /homelab/ dies, no tunnel will save you---the machine to reboot
+is the one you can't reach.  So it watches itself with a root cron
+job---~0 5 * * * ssh ssh.alvarezrosa.com || reboot~---that SSHes to
+its own public hostname, out through CGNAT to the bridge and back in
+through the tunnel, the whole chain end to end, and reboots if that
+fails.[fn::A bridge outage also trips this check and reboots a
+perfectly healthy homelab---an acceptable false positive, since a
+reboot is harmless.]
+
+\\
+
+That's the whole trick: one cheap bridge, one tunnel, five iptables
+rules---and a server behind CGNAT serves the public Internet, this very
+page included.
 
 * TODO [#B] Incremental clang-tidy tool                             :backlog:
 :PROPERTIES:
