@@ -8,6 +8,7 @@ ignore_re:
   - 'pseudo-element or pseudo-class ":has"'
   - 'CSS: Parse Error'
   - 'error: CSS: .* "revert" is not a .* value.'
+  - 'Property "paint-order"'
   - 'Property "size-adjust"'
   - 'Property "ascent-override"'
   - 'Property "descent-override"'
