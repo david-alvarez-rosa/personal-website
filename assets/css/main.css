@@ -186,6 +186,15 @@ sup {
     height: auto;
 }
 
+.fullwidth figcaption {
+    float: none;
+    clear: both;
+    width: auto;
+    position: static;
+    margin: 0.4rem 0 0;
+    padding-top: 0;
+}
+
 .side, figcaption p {
     font-size: 1.1rem;
     line-height: 1.54rem;
