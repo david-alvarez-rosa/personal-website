@@ -170,15 +170,14 @@ billion in income tax---a true rate of 3.4%: Musk 3.27% (zero in
 withheld, 7.65% more via the employer, borne by the worker---four and
 a half times the billionaires' rate, before income tax even begins.
 
-Jeff Yass, owner of Susquehanna ($65 billion),[^fn:4] paid the 20% long-term rate on trading income
-ordinarily taxed near 40%---roughly $1 billion saved, disputed in
-court.[^fn:5]
-Susquehanna also owns some 15% of ByteDance, TikTok's
-parent;[^fn:6] Yass put $100 million into the 2024 election
-cycle---$16 million linked to anti-Muslim and pro-Israel
-groups[^fn:7]---and days after they met in March
-2024, Trump reversed his support for the TikTok ban; the
-divest-or-ban law, passed anyway, went unenforced.  $100 million
+Jeff Yass, owner of Susquehanna ($65 billion),[^fn:4] paid the 20% long-term rate on trading income ordinarily
+taxed near 40%---roughly $1 billion saved, disputed in
+court.[^fn:5]  Susquehanna also owns some 15% of ByteDance, TikTok's
+parent;[^fn:6] Yass put $100 million into the
+2024 election cycle---$16 million linked to anti-Muslim and pro-Israel
+groups[^fn:7]---and days after
+they met in March 2024, Trump reversed his support for the TikTok ban;
+the divest-or-ban law, passed anyway, went unenforced.  $100 million
 shielding a $21 billion stake: 210 to 1.
 
 None of this breaks the law, because the law taxes realization, not
@@ -208,17 +207,17 @@ Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
     [_The Secret IRS Files_](https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax), June 8, 2021.  The "true tax rate" compares
     federal income tax paid with growth in net worth over the same
     period.
-[^fn:4]: [Forbes profile](https://www.forbes.com/profile/jeffrey-yass/),
+[^fn:4]: [Forbes profile](https://www.forbes.com/profile/jeff-yass/),
     December 2025.
-[^fn:5]: ProPublica,
-    [_How Susquehanna's Jeff Yass Avoided $1 Billion in Taxes_](https://www.propublica.org/article/how-susquehanna-yass-avoided-billion-taxes), 2022.
-    The Tax Court dispute was filed in 2020 and remains pending.
-[^fn:6]: ["A ban on TikTok would be a blow to local billionaire investor and GOP megadonor Jeff Yass,"](https://www.inquirer.com/politics/pennsylvania/tiktok-ban-jeff-yass-congress-house-20240313.html)
-    _The Philadelphia Inquirer_, March 13, 2024;
-    [ABC News](https://abcnews.go.com/Politics/trumps-tiktok-ban-reversal-after-meeting-megadonor-stake/story?id=108013785), March 2024.
+[^fn:5]: ProPublica, [_How Susquehanna's Jeff Yass Avoided $1 Billion
+    in Taxes_](https://www.propublica.org/article/how-susquehanna-yass-avoided-billion-taxes), 2022.  The Tax Court dispute was filed in 2020 and remains
+    pending.
+[^fn:6]: ["A ban on TikTok would be a blow to local billionaire
+    investor and GOP megadonor Jeff Yass,"](https://www.inquirer.com/politics/pennsylvania/tiktok-ban-jeff-yass-congress-house-20240313.html) _The Philadelphia Inquirer_,
+    March 13, 2024; [ABC News](https://abcnews.go.com/Politics/trumps-tiktok-ban-reversal-after-meeting-megadonor-stake/story?id=108013785), March 2024.
 [^fn:7]: [OpenSecrets, donor detail, 2024 cycle](https://www.opensecrets.org/outside-spending/donor_detail/2024?id=U0000004245&name=Yass%2C+Jeffrey+S); E. Clifton,
-    ["Billionaire Jeff Yass linked to $16m in donations to anti-Muslim and pro-Israel groups,"](https://www.theguardian.com/us-news/2024/apr/24/jeff-yass-anti-muslim-pro-israel-donations)
-    _The Guardian_, April 24, 2024.
+    ["Billionaire Jeff Yass linked to $16m in donations to anti-Muslim and
+    pro-Israel groups,"](https://www.theguardian.com/us-news/2024/apr/24/jeff-yass-anti-muslim-pro-israel-donations) _The Guardian_, April 24, 2024.
 [^fn:8]: Congressional Budget Office, Budget Option:
     [_Change the Tax Treatment of Capital Gains from Sales of Inherited Assets_](https://www.cbo.gov/budget-options/60943),
     December 2024.
