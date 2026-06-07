@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://david.alvarezrosa.com/sitemap.xml
+Sitemap: https://david.alvarezrosa.com/sitemap-extra.xml
