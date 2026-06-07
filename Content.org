@@ -15,7 +15,7 @@
 
 * TODO [#B] Building a Mouse Jiggler
 :PROPERTIES:
-:EXPORT_FILE_NAME: todo-fake-keyboard-mouse
+:EXPORT_FILE_NAME: building-a-mouse-jiggler
 :END:
 
 A microcontroller that pretends to be a keyboard and mouse is one of the
@@ -412,7 +412,7 @@ Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 
 * TODO [#B] Self-Hosting an Email Server
 :PROPERTIES:
-:EXPORT_FILE_NAME: selfhost-email-server
+:EXPORT_FILE_NAME: self-hosting-an-email-server
 :END:
 
 Self-hosting email gives you full control over your communications---no
@@ -932,7 +932,7 @@ page included.
 
 * TODO [#B] Incremental clang-tidy tool                             :backlog:
 :PROPERTIES:
-:EXPORT_FILE_NAME: pending-incremental
+:EXPORT_FILE_NAME: incremental-clang-tidy-tool
 :END:
 
 How to incrementally run clang-tidy or cppcheck
@@ -2715,7 +2715,7 @@ inlined.
 * DONE [#B] About this Site
 CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
-:EXPORT_FILE_NAME: about-this-website
+:EXPORT_FILE_NAME: about-this-site
 :END:
 :LOGBOOK:
 CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 10:47] =>  0:00
