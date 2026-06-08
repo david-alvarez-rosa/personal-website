@@ -2,6 +2,7 @@ import hashlib
 import hmac
 import os
 import smtplib
+from datetime import datetime, timezone
 from email.message import EmailMessage
 
 from fastapi import FastAPI, Form, HTTPException
@@ -10,11 +11,28 @@ from pydantic import EmailStr
 from sqlmodel import SQLModel, Field, Session, create_engine, select
 from starlette.status import HTTP_303_SEE_OTHER
 
+SES_SMTP_HOST = "email-smtp.eu-west-2.amazonaws.com"
+SES_SMTP_PORT = 587
+SES_SMTP_USER = os.environ["SES_SMTP_USER"]
+SES_SMTP_PASS = os.environ["SES_SMTP_PASS"]
+NEWSLETTER_SECRET = os.environ["NEWSLETTER_SECRET"]
+FROM = "David Álvarez Rosa <david@alvarezrosa.com>"
+API_BASE = "https://api.alvarezrosa.com"
+SITE_BASE = "https://david.alvarezrosa.com"
+SIGNATURE = """
+--
+David Álvarez Rosa
+
+web    david.alvarezrosa.com
+email  david@alvarezrosa.com
+tel    +34 647 13 39 30
+"""
+
 
 class Subscription(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     email: EmailStr = Field(index=True)
-    confirmed: bool = Field(default=False)
+    unsubscribed_at: datetime | None = Field(default=None)
 
 
 engine = create_engine("sqlite:///subscriptions.db")
@@ -24,34 +42,37 @@ app = FastAPI()
 
 def sign(purpose, email):
     return hmac.new(
-        os.environ["NEWSLETTER_SECRET"].encode(),
+        NEWSLETTER_SECRET.encode(),
         f"{purpose}:{email}".encode(),
         hashlib.sha256,
     ).hexdigest()
 
 
+def smtp_login():
+    smtp = smtplib.SMTP(SES_SMTP_HOST, SES_SMTP_PORT)
+    smtp.starttls()
+    smtp.login(SES_SMTP_USER, SES_SMTP_PASS)
+    return smtp
+
+
 @app.post("/subscribe")
 def subscribe(email: EmailStr = Form()):
     email = email.strip().lower()
-    link = f"https://api.alvarezrosa.com/confirm?email={email}&token={sign('confirm', email)}"
+    link = f"{API_BASE}/confirm?email={email}&token={sign('confirm', email)}"
     msg = EmailMessage()
-    msg["From"] = "David Álvarez Rosa <david@alvarezrosa.com>"
+    msg["From"] = FROM
     msg["To"] = email
     msg["Subject"] = "Confirm your subscription to david.alvarezrosa.com"
     msg.set_content(
-        "Hi,\n\n"
-        "You signed up for David Álvarez Rosa's newsletter at "
-        "david.alvarezrosa.com. Click below to confirm your subscription:\n\n"
+        "Confirm your subscription to David Álvarez Rosa's newsletter:\n\n"
         f"{link}\n\n"
-        "If you didn't sign up, just ignore this email — nothing will happen.\n\n"
-        "— David\n"
+        "If you didn't sign up, ignore this email.\n"
+        f"{SIGNATURE}"
     )
-    with smtplib.SMTP("email-smtp.eu-west-1.amazonaws.com", 587) as smtp:
-        smtp.starttls()
-        smtp.login(os.environ["SES_SMTP_USER"], os.environ["SES_SMTP_PASS"])
+    with smtp_login() as smtp:
         smtp.send_message(msg)
     return RedirectResponse(
-        "https://david.alvarezrosa.com/subscription-pending",
+        f"{SITE_BASE}/subscription-pending",
         status_code=HTTP_303_SEE_OTHER,
     )
 
@@ -65,12 +86,10 @@ def confirm(email: str, token: str):
         sub = session.exec(
             select(Subscription).where(Subscription.email == email)
         ).first() or Subscription(email=email)
-        sub.confirmed = True
+        sub.unsubscribed_at = None
         session.add(sub)
         session.commit()
-    return RedirectResponse(
-        "https://david.alvarezrosa.com/subscription", status_code=HTTP_303_SEE_OTHER
-    )
+    return RedirectResponse(f"{SITE_BASE}/subscription", status_code=HTTP_303_SEE_OTHER)
 
 
 @app.api_route("/unsubscribe", methods=["GET", "POST"])
@@ -83,8 +102,7 @@ def unsubscribe(email: str, token: str):
             select(Subscription).where(Subscription.email == email)
         ).first()
         if sub:
-            session.delete(sub)
+            sub.unsubscribed_at = datetime.now(timezone.utc)
+            session.add(sub)
             session.commit()
-    return RedirectResponse(
-        "https://david.alvarezrosa.com/unsubscribed", status_code=HTTP_303_SEE_OTHER
-    )
+    return RedirectResponse(f"{SITE_BASE}/unsubscribed", status_code=HTTP_303_SEE_OTHER)
