@@ -5,7 +5,7 @@ date = 2026-01-24T12:31:00+00:00
 tags = ["pers", "blog"]
 draft = false
 subtitle = "Curriculum Vitae"
-seotitle = "About | David Álvarez Rosa | Personal Website"
+seotitle = "About | David Álvarez Rosa | Personal Site"
 +++
 
 <style>

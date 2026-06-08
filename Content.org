@@ -1,4 +1,4 @@
-#+title: Personal Website Content
+#+title: Personal Site Content
 #+author: David Álvarez Rosa
 #+startup: logdone
 #+filetags: :pers:blog:
@@ -2752,7 +2752,7 @@ CLOSED: [2026-01-24 Sat 12:31]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle Curriculum Vitae :seotitle "About | David Álvarez Rosa | Personal Website"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle Curriculum Vitae :seotitle "About | David Álvarez Rosa | Personal Site"
 :END:
 
 #+begin_export html
@@ -2887,7 +2887,7 @@ CLOSED: [2025-12-02 Tue 19:58]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :seotitle "David Álvarez Rosa | Personal Website"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :seotitle "David Álvarez Rosa | Personal Site"
 :END:
 
  [fn:9]Hi! This is my personal site, where I share notes on software and

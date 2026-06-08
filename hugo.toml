@@ -1,11 +1,11 @@
 baseURL = 'https://david.alvarezrosa.com/'
-title = 'David Álvarez Rosa | Personal Website'
+title = 'David Álvarez Rosa | Personal Site'
 disableHugoGeneratorInject = true
 enableRobotsTXT = false
 disableKinds = ['taxonomy', 'term']
 
 [params]
-  description = 'Personal website of David Álvarez Rosa'
+  description = 'Personal site of David Álvarez Rosa'
 
 [menus]
   [[menus.main]]
