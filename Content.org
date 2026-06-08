@@ -2931,6 +2931,39 @@ Welcome! Your subscription is confirmed.  Thanks for signing up.
 You can unsubscribe anytime by emailing david@alvarezrosa.com from the
 same email address you subscribed with.
 
+* DONE [#B] Subscription Pending
+:PROPERTIES:
+:EXPORT_FILE_NAME: subscription-pending
+:EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:END:
+
+#+begin_export html
+<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
+#+end_export
+
+Almost there!  Check your inbox for a confirmation email and click the
+link inside to complete your subscription.
+
+If it doesn't arrive within a few minutes, have a look in your spam
+folder.
+
+* DONE [#B] Unsubscribed
+:PROPERTIES:
+:EXPORT_FILE_NAME: unsubscribed
+:EXPORT_HUGO_SECTION: .
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:END:
+
+#+begin_export html
+<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
+#+end_export
+
+You've been unsubscribed.  Sorry to see you go---you won't receive any
+more emails from this list.
+
+Changed your mind?  You can [[/#subscribe][subscribe again]] anytime.
+
 * Footnotes
 [fn:24] For a Rust version, see Waifod's post [[https://waifod.dev/blog/polymorphism-type-erasure/][Polymorphism in C++ and
 Rust: Type Erasure]].
