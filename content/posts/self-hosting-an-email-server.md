@@ -223,7 +223,7 @@ in transit.  Install OpenDKIM to sign outgoing messages.
 ```sh
 $ sudo apt install opendkim opendkim-tools
 $ sudo mkdir -p /etc/opendkim/keys/alvarezrosa.com
-$ sudo opendkim-genkey -D /etc/opendkim/keys/alvarezrosa.com -d alvarezrosa.com -s mail
+$ sudo opendkim-genkey -b 2048 -D /etc/opendkim/keys/alvarezrosa.com -d alvarezrosa.com -s mail
 $ sudo chown -R opendkim:opendkim /etc/opendkim/keys
 $ sudo chmod 600 /etc/opendkim/keys/alvarezrosa.com/mail.private
 ```
