@@ -20,8 +20,8 @@ SES_SMTP_USER = os.environ["SES_SMTP_USER"]
 SES_SMTP_PASS = os.environ["SES_SMTP_PASS"]
 NEWSLETTER_SECRET = os.environ["NEWSLETTER_SECRET"]
 FROM = "David Álvarez Rosa <david@alvarezrosa.com>"
-API_BASE = "http://localhost:8000"
-SITE_BASE = "http://localhost:1313"
+API_BASE = os.environ.get("API_BASE", "https://api.alvarezrosa.com")
+SITE_BASE = os.environ.get("SITE_BASE", "https://david.alvarezrosa.com")
 EMAIL_POLICY = policy.SMTP.clone(max_line_length=998)
 
 
