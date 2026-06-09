@@ -50,13 +50,15 @@ def to_html(text):
 
 def email_html(body, footer=""):
     return (
-        "<html><body>\n"
-        '<div style="background:#fcfcfc">\n'
-        '<div style="max-width:34em;margin:0 auto;padding:0 20px;'
+        "<html><head>"
+        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+        "</head><body>\n"
+        '<div style="max-width:34em;margin:0 auto;padding:0 12px;'
+        "-webkit-text-size-adjust:100%;text-size-adjust:100%;"
         "font-family:Alegreya,Georgia,'Times New Roman',serif;"
         'color:#111111;font-size:18px;line-height:1.55">\n'
         f"{to_html(body)}\n{SIGNATURE_HTML}\n{footer}"
-        "\n</div>\n</div>\n</body></html>"
+        "\n</div>\n</body></html>"
     )
 
 
