@@ -12,19 +12,6 @@ web    david.alvarezrosa.com
 email  david@alvarezrosa.com
 tel    +34 647 13 39 30
 """
-SIGNATURE_HTML = (
-    "<p>Best,<br>d.</p>\n"
-    '<div style="margin-top:1.5em;text-align:center">'
-    '<div style="font-size:16px;color:#555555">'
-    '<a href="https://david.alvarezrosa.com" '
-    'style="color:#003366;text-decoration:none">david.alvarezrosa.com</a>'
-    " &middot; "
-    '<a href="mailto:david@alvarezrosa.com" '
-    'style="color:#003366;text-decoration:none">david@alvarezrosa.com</a>'
-    " &middot; "
-    "+34 647 13 39 30"
-    "</div></div>"
-)
 
 
 def _linkify(match):
@@ -32,7 +19,7 @@ def _linkify(match):
     url = match.group("mdurl") or match.group("bare")
     if text is None:
         text = re.sub(r"^https?://", "", url)
-    return f'<a href="{url}" style="color:#003366;text-decoration:none">{text}</a>'
+    return f'<a href="{url}">{text}</a>'
 
 
 def to_html(text):
@@ -49,22 +36,25 @@ def to_html(text):
 
 
 def email_html(body, footer=""):
-    return (
-        "<html><head>"
-        '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        "</head><body>\n"
-        '<div style="max-width:34em;margin:0 auto;padding:0 12px;'
-        "-webkit-text-size-adjust:100%;text-size-adjust:100%;"
-        "font-family:Alegreya,Georgia,'Times New Roman',serif;"
-        'color:#111111;font-size:18px;line-height:1.55">\n'
-        f"{to_html(body)}\n{SIGNATURE_HTML}\n{footer}"
-        "\n</div>\n</body></html>"
-    )
+    return f"""
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>a {{ color:#003366; text-decoration:none }} </style>
+  </head>
+  <body>
+    <div style="box-sizing:border-box;width:34em;max-width:100%;padding:4px;line-height:1.55">
+      {to_html(body)}
+      <p>Best,<br>David</p>
+      {footer}
+    </div>
+  </body>
+</html>"""
 
 
 def footer_html(unsub):
-    return (
-        '<p style="margin-top:1em;font-size:12px;color:#bbbbbb">'
-        f'<a href="{html.escape(unsub)}" '
-        'style="color:#bbbbbb;text-decoration:underline">Unsubscribe</a></p>'
-    )
+    return f"""
+<p style="margin-top:1em;font-size:0.75em;color:#bbbbbb">
+  <a href="{html.escape(unsub)}" style="color:#bbbbbb;text-decoration:underline">Unsubscribe</a>
+</p>
+"""
