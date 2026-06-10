@@ -16,10 +16,11 @@ share data between threads in the lowest-latency environments.
 
 ## What is a ring buffer? {#what-is-a-ring-buffer}
 
-&nbsp;[^fn:1]You might have run into the term circular buffer, or perhaps
-cyclic queue.  These are simply other names for a _ring buffer:_ a queue
-where a producer generates data and inserts it into the buffer, and a
-consumer later pulls it back out, in first-in-first-out order.
+&nbsp;[^fn:1]You might have run into
+the term circular buffer, or perhaps cyclic queue.  These are simply
+other names for a _ring buffer:_ a queue where a producer generates data
+and inserts it into the buffer, and a consumer later pulls it back out,
+in first-in-first-out order.
 
 What makes a ring buffer distinctive is how it stores data and the
 constraints it enforces.  It has a fixed capacity; it neither expands
@@ -38,9 +39,10 @@ waiting on both sides.
 ## Single-threaded ring buffer {#single-threaded-ring-buffer}
 
 Let's start with a single-threaded ring buffer, which is just an
-array[^fn:2] and two indices.  We leave one slot permanently unused to
-distinguish "full" from "empty."  Push writes to head and advances it;
-pop reads from tail and advances it.
+array[^fn:2] and two indices.  We
+leave one slot permanently unused to distinguish "full" from "empty."
+Push writes to head and advances it; pop reads from tail and advances
+it.
 
 ```cpp
 template <typename T, std::size_t N>
@@ -210,13 +212,13 @@ right?
 
 We already have a fast ring buffer, but we can push it further.  The
 main slowdown comes from the reader and writer constantly touching each
-other's indexes.  That makes the CPU bounce cache lines[^fn:8] between cores,
-which is expensive.
+other's indexes.  That makes the CPU bounce cache lines[^fn:8] between cores, which is
+expensive.
 
-To reduce this, the reader can keep a local cached copy[^fn:9] of the write
-index, and the writer keeps a local cached copy of the read index.  Then
-they don't need to re-check the other side on every single operation:
-only once in a while.
+To reduce this, the reader can keep a local cached copy[^fn:9] of the write index,
+and the writer keeps a local cached copy of the read index.  Then they
+don't need to re-check the other side on every single operation: only
+once in a while.
 
 ```cpp
 template <typename T, std::size_t N>
@@ -261,9 +263,9 @@ approach.
 ## Summary {#summary}
 
 If you want to reproduce these results, run the included [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp)
-compiled with at least `-O3` optimization level.[^fn:10] The benchmark
-pins the producer and consumer threads to dedicated CPU cores to
-minimize scheduling noise.
+compiled with at least `-O3` optimization level.[^fn:10] The benchmark pins
+the producer and consumer threads to dedicated CPU cores to minimize
+scheduling noise.
 
 | Version | Throughput | Notes                                            |
 |---------|------------|--------------------------------------------------|
@@ -279,31 +281,37 @@ Long live lock-free and wait-free data structures!
     producer has filled 15 of them, indicated by blue.  The consumer is
     behind the producer, reading data from the slots, freeing them as it
     does so.  A free slot is indicated by orange.
-[^fn:2]: By using `std::array` we are forcing clients to define the buffer
-    size as `constexpr`.  It's also common to use instead a `std::vector` to
-    remove that restriction.  A further optimization is to constrain the
-    capacity to a power of two, allowing wrap-around via bit masking `head &
-    (N - 1)` instead of a branch.
-[^fn:3]: Note how one item is left unused to indicate that the queue is
-    full.  When `head_` is one item ahead of `tail_`, the queue is full.
-[^fn:4]: Again note that `head_ == tail_` indicates that the queue is
-    empty.
-[^fn:5]: Compiled with `clang` compiler with highest `-O3` optimization
-    level, and `-march=native -ffast-math`.  Consumer and producer threads
-    are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp).
-[^fn:6]: Note that we are manually aligning `alignas` the atomics to
-    ensure they fall in different cache lines (commonly 64 bytes).  This
-    prevents false sharing, hence optimizes CPU cache usage.
-[^fn:7]: `release` ensures prior writes are visible to threads that
-    `acquire` the same variable.  Both sides use `relaxed` for their own
-    index since no other thread writes to it.
-[^fn:8]: It's useful to observe the number of cache misses with `perf
-    stat -e cache-misses`; they are greatly reduced in this approach.
-[^fn:9]: This advanced optimization was inspired by [Erik Rigtorp](https://rigtorp.se).  For an
-    earlier publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
+[^fn:2]: By using `std::array` we are forcing clients to define the
+    buffer size as `constexpr`.  It's also common to use instead a
+    `std::vector` to remove that restriction.  A further optimization is to
+    constrain the capacity to a power of two, allowing wrap-around via bit
+    masking `head & (N - 1)` instead of a branch.
+[^fn:3]: Note how one
+    item is left unused to indicate that the queue is full.  When `head_` is
+    one item ahead of `tail_`, the queue is full.
+[^fn:4]: Again note that
+    `head_ == tail_` indicates that the queue is empty.
+[^fn:5]: Compiled with
+    `clang` compiler with highest `-O3` optimization level, and
+    `-march=native -ffast-math`.  Consumer and producer threads are pinned
+    to dedicated cores (Intel Core Ultra 5 135U).  See [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp).
+[^fn:6]: Note that we are
+    manually aligning `alignas` the atomics to ensure they fall in different
+    cache lines (commonly 64 bytes).  This prevents false sharing, hence
+    optimizes CPU cache usage.
+[^fn:7]: `release` ensures prior writes are visible to threads
+    that `acquire` the same variable.  Both sides use `relaxed` for their
+    own index since no other thread writes to it.
+[^fn:8]: It's useful
+    to observe the number of cache misses with `perf stat -e cache-misses`;
+    they are greatly reduced in this approach.
+[^fn:9]: This
+    advanced optimization was inspired by [Erik Rigtorp](https://rigtorp.se).  For an earlier
+    publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
     lock-free, cache-efficient multi-core synchronization mechanism for
     line-rate network traffic monitoring," _2010 IEEE International
     Symposium on Parallel &amp; Distributed Processing
     (IPDPS)_---[doi:10.1109/IPDPS.2010.5470368](https://doi.org/10.1109/IPDPS.2010.5470368) ([PDF](https://www.cse.cuhk.edu.hk/~pclee/www/pubs/ipdps10.pdf)).
-[^fn:10]: Alongside `-O3`, the benchmark was compiled with `-march=native`
-    and `-ffast-math`, though these flags shouldn't make a difference here.
+[^fn:10]: Alongside `-O3`,
+    the benchmark was compiled with `-march=native` and `-ffast-math`,
+    though these flags shouldn't make a difference here.

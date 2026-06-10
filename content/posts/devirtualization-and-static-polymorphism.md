@@ -36,7 +36,8 @@ This prevents inlining, increases branch mispredictions, and reduces
 cache efficiency.
 
 The best way to observe this phenomenon is by inspecting the
-assembly[^fn:1] code emitted by the compiler for a minimal example
+assembly[^fn:1] code emitted
+by the compiler for a minimal example
 
 ```cpp
 class Base {
@@ -80,8 +81,7 @@ bar(Base*):
 Sometimes the compiler can statically deduce which override a virtual
 call will hit.  In those cases, it _devirtualizes_ the call and emits a
 direct call instead (skipping the `vtable`).  For example,
-devirtualization is straightforward[^fn:2] when the runtime type is
-clearly fixed
+devirtualization is straightforward[^fn:2] when the runtime type is clearly fixed
 
 ```cpp
 struct Base {
@@ -164,9 +164,9 @@ test(Derived*):
 
 When the compiler can't devirtualize, one option is to use static
 polymorphism instead.  The canonical tool for this is the Curiously
-Recurring Template Pattern[^fn:3] (CRTP).  With CRTP, the base class is
-templated on the derived class, and invokes methods on it via
-`static_cast`---no virtual keyword involved
+Recurring Template Pattern[^fn:3] (CRTP).  With
+CRTP, the base class is templated on the derived class, and invokes
+methods on it via `static_cast`---no virtual keyword involved
 
 ```cpp
 template <typename Derived>
@@ -224,13 +224,14 @@ inlined.
 
 [^fn:1]: Assembly generated with `gcc` at `-O3` on x86-64.  Similar
     results were observed with `clang` on the same platform.
-[^fn:2]: The compiler emits a direct call to `Derived::foo` (or inlines
-    it), because `derived` cannot have any other dynamic type.
-[^fn:3]: The curiously recurring template pattern is an idiom where a
-    class X derives from a class template instantiated with X itself as a
-    template argument.  More generally, this is known as F-bound
-    polymorphism, a form of F-bounded quantification.
-[^fn:4]: The trade-off is that each `Base<Derived>` instantiation is a
-    distinct, unrelated type, so there's no common runtime base to upcast
-    to.  Any shared functionality that operates across different derived
-    types must itself be templated.
+[^fn:2]: The compiler emits a direct call
+    to `Derived::foo` (or inlines it), because `derived` cannot have any
+    other dynamic type.
+[^fn:3]: The curiously recurring template pattern
+    is an idiom where a class X derives from a class template instantiated
+    with X itself as a template argument.  More generally, this is known as
+    F-bound polymorphism, a form of F-bounded quantification.
+[^fn:4]: The trade-off is that each `Base<Derived>`
+    instantiation is a distinct, unrelated type, so there's no common
+    runtime base to upcast to.  Any shared functionality that operates
+    across different derived types must itself be templated.

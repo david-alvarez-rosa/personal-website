@@ -7,9 +7,10 @@ draft = false
 seotitle = "David Álvarez Rosa | Personal Site"
 +++
 
-&nbsp;[^fn:1]Hi! This is my personal site, where I share notes on software and
-self-hosting.  You'll learn how things work under the hood, and how to
-make them run fast, _very_ fast.
+&nbsp;[^fn:1]Hi! This is my personal
+site, where I share notes on software and self-hosting.  You'll learn
+how things work under the hood, and how to make them run fast, _very_
+fast.
 
 I'm a mathematician and engineer based in sunny Dublin, passionate about
 low-latency, high-performance systems.  I'm a strong advocate of free

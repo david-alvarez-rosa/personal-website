@@ -16,8 +16,8 @@ seotitle = "About | David Álvarez Rosa | Personal Site"
   main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; }
 </style>
 
-&nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin, passionate
-about low-latency, high-performance systems.
+&nbsp;[^fn:1]Mathematician and engineer based in sunny Dublin, passionate about
+low-latency, high-performance systems.
 
 Currently working in algorithmic trading at Susquehanna.  Previously
 designed and built systems at Amazon serving 10M+ monthly active
@@ -131,7 +131,8 @@ Catalan --- Intermediate
 You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
 39 30.
 
-[^fn:1]: ![](./assets/images/portrait.png) **That's me!** March 2022.
+[^fn:1]: ![](./assets/images/portrait.png) **That's me!** March
+    2022.
 [^fn:2]: Jul 2024--Present<br />
     Dublin, Ireland
 [^fn:3]: Mar 2022--Aug 2024<br />

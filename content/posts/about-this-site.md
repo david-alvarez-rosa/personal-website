@@ -32,7 +32,7 @@ theme.[^fn:2]
 If you spot an error or have suggestions, I welcome feedback---reach out
 via the contact link on the About page.
 
-[^fn:1]: As Einstein put it, _"If you can't explain it simply, you don't
-    understand it well enough."_ Feynman followed the same principle,
-    testing his understanding by teaching from first principles.
+[^fn:1]: As Einstein put it, _"If you can't explain it
+    simply, you don't understand it well enough."_ Feynman followed the same
+    principle, testing his understanding by teaching from first principles.
 [^fn:2]: Inspired by the work of Edward Tufte and Matthew Butterick.

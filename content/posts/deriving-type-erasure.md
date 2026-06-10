@@ -25,7 +25,8 @@ a subclass that inherits from the base class and implement those
 methods.
 
 As an example, let's implement shape classes that have an `area()`
-method.  We start with an interface[^fn:1] class
+method.  We start with an interface[^fn:1]
+class
 
 ```cpp
 class Shape {
@@ -71,9 +72,8 @@ Simple enough, right?
 
 Inheritance is a good solution to problems that require polymorphism,
 but sometimes the concrete types you want to handle polymorphically
-cannot share a common base class.[^fn:2] In that case, if the types
-provide the same interface, you can use a template to get polymorphism
-instead
+cannot share a common base class.[^fn:2] In that case, if the types provide the same
+interface, you can use a template to get polymorphism instead
 
 ```cpp
 auto printArea(const auto& shape) -> void {
@@ -99,10 +99,10 @@ pointer to base technique
 auto shapes = std::vector< ??? >{&square, &circle};
 ```
 
-The **second** drawback[^fn:4] is a little more subtle.  Anybody who uses
-the template-based `area(const auto&)` method must either explicitly
-specify the concrete type, or be a template itself, to pass along the
-template type of `area()`.
+The **second** drawback[^fn:4] is a little more subtle.  Anybody
+who uses the template-based `area(const auto&)` method must either
+explicitly specify the concrete type, or be a template itself, to pass
+along the template type of `area()`.
 
 
 ## Deriving std::any {#deriving-std-any}
@@ -220,9 +220,9 @@ auto main() -> int {
 ## Generic std::any {#generic-std-any}
 
 Both `Shape` and `ShapeWrapper` have accepted standard names: the former
-is the type-erasure _concept_[^fn:6] (the interface we program against),
-and the latter is the _model_ (a templated wrapper that implements the
-interface and forwards to a concrete type).
+is the type-erasure _concept_[^fn:6] (the interface we program against), and the
+latter is the _model_ (a templated wrapper that implements the interface
+and forwards to a concrete type).
 
 Let's rewrite our original type erasure example to use the standard
 parlance.  Nothing needs to be changed except a few type names
@@ -256,29 +256,31 @@ public:
 ```
 
 That's it!  The class `Any` is a simplified version of
-`std::any`,[^fn:7] which is even used in the STL itself (namely, in
-`std::function`).  But that's for another post.
+`std::any`,[^fn:7] which is even used in the STL itself
+(namely, in `std::function`).  But that's for another post.
 
-[^fn:1]: Remember that interfaces that are intended to be used through a
-    `Base&` or `Base*` must have a virtual destructor, to ensure derived
-    classes are properly destructed [(C.127)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor).
-[^fn:2]: In some cases, you may not have control of the concrete types
-    (e.g. think STL types like `std::string`), or it may not even be
-    possible for the concrete type to inherit (e.g. builtins like `int`).
-[^fn:3]: If you tried to pass in a type that doesn't conform to the
-    'interface' (say, `std::string`), the compiler would hit an error when
-    you try to compile the method call, complaining that `std::string`
-    doesn't have an `area` method.
-[^fn:4]: Since you're employing polymorphism in the first place, most
-    callers will likely fall into the second group, and will need to be
-    templates themselves too so they can pass the type through.  That can
-    quickly spread templates across the codebase, making it harder to read
-    and structure, increasing compile times, and producing larger binaries
-    with slower startup.
+[^fn:1]: Remember that interfaces that
+    are intended to be used through a `Base&` or `Base*` must have a virtual
+    destructor, to ensure derived classes are properly destructed [(C.127)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor).
+[^fn:2]: In some cases, you may not have
+    control of the concrete types (e.g. think STL types like `std::string`),
+    or it may not even be possible for the concrete type to inherit
+    (e.g. builtins like `int`).
+[^fn:3]: If you tried to pass in a type that doesn't
+    conform to the 'interface' (say, `std::string`), the compiler would hit
+    an error when you try to compile the method call, complaining that
+    `std::string` doesn't have an `area` method.
+[^fn:4]: Since you're employing polymorphism in the
+    first place, most callers will likely fall into the second group, and
+    will need to be templates themselves too so they can pass the type
+    through.  That can quickly spread templates across the codebase, making
+    it harder to read and structure, increasing compile times, and producing
+    larger binaries with slower startup.
 [^fn:5]: This implementation always heap-allocates.  Production
     `std::any` implementations often use small buffer optimization (SBO)
     techniques to store small objects inline and avoid allocation.
-[^fn:6]: The type erasure concept is an OO-style interface (a vtable).
-    It's unrelated to C++20 `concept` (compile-time predicates).
-[^fn:7]: For a Rust version, see Waifod's post [Polymorphism in C++ and
-    Rust: Type Erasure](https://waifod.dev/blog/polymorphism-type-erasure/).
+[^fn:6]: The type erasure concept is an
+    OO-style interface (a vtable).  It's unrelated to C++20 `concept`
+    (compile-time predicates).
+[^fn:7]: For a Rust version, see Waifod's post [Polymorphism in
+    C++ and Rust: Type Erasure](https://waifod.dev/blog/polymorphism-type-erasure/).

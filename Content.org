@@ -1929,10 +1929,14 @@ share data between threads in the lowest-latency environments.
 
 ** What is a ring buffer?
 
- [fn:11]You might have run into the term circular buffer, or perhaps
-cyclic queue.  These are simply other names for a /ring buffer:/ a queue
-where a producer generates data and inserts it into the buffer, and a
-consumer later pulls it back out, in first-in-first-out order.
+ [fn::[[./assets/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
+producer has filled 15 of them, indicated by blue.  The consumer is
+behind the producer, reading data from the slots, freeing them as it
+does so.  A free slot is indicated by orange.]You might have run into
+the term circular buffer, or perhaps cyclic queue.  These are simply
+other names for a /ring buffer:/ a queue where a producer generates data
+and inserts it into the buffer, and a consumer later pulls it back out,
+in first-in-first-out order.
 
 What makes a ring buffer distinctive is how it stores data and the
 constraints it enforces.  It has a fixed capacity; it neither expands
@@ -1950,9 +1954,14 @@ waiting on both sides.
 ** Single-threaded ring buffer
 
 Let's start with a single-threaded ring buffer, which is just an
-array[fn:1] and two indices.  We leave one slot permanently unused to
-distinguish "full" from "empty."  Push writes to head and advances it;
-pop reads from tail and advances it.
+array[fn::By using ~std::array~ we are forcing clients to define the
+buffer size as ~constexpr~.  It's also common to use instead a
+~std::vector~ to remove that restriction.  A further optimization is to
+constrain the capacity to a power of two, allowing wrap-around via bit
+masking ~head & (N - 1)~ instead of a branch.] and two indices.  We
+leave one slot permanently unused to distinguish "full" from "empty."
+Push writes to head and advances it; pop reads from tail and advances
+it.
 
 #+begin_src cpp
   template <typename T, std::size_t N>
@@ -1963,7 +1972,9 @@ pop reads from tail and advances it.
   };
 #+end_src
 
-We can now implement the ~push~ (or write) operation[fn:2]
+We can now implement the ~push~ (or write) operation[fn::Note how one
+item is left unused to indicate that the queue is full.  When ~head_~ is
+one item ahead of ~tail_~, the queue is full.]
 
 #+begin_src cpp
   auto push(const T& value) noexcept -> bool {
@@ -1980,7 +1991,8 @@ We can now implement the ~push~ (or write) operation[fn:2]
   }
 #+end_src
 
-Next we implement the ~pop~ (or read) operation[fn:3]
+Next we implement the ~pop~ (or read) operation[fn::Again note that
+~head_ == tail_~ indicates that the queue is empty.]
 
 #+begin_src cpp
   auto pop(T& value) noexcept -> bool {
@@ -2020,7 +2032,10 @@ push and pop.
   };
 #+end_src
 
-It's correct and often fast enough: around *12M ops/s*[fn:14] on
+It's correct and often fast enough: around *12M ops/s*[fn::Compiled with
+~clang~ compiler with highest ~-O3~ optimization level, and
+~-march=native -ffast-math~.  Consumer and producer threads are pinned
+to dedicated cores (Intel Core Ultra 5 135U).  See [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp][benchmark]].] on
 consoomer hardware.  However, it pays for mutual exclusion even though
 the producer and consumer never write the same index.  The ownership is
 asymmetric: the producer is the only writer of head, and the consumer is
@@ -2028,7 +2043,10 @@ the only writer of tail.  That asymmetry is the lever to remove locks.
 
 ** Lock-free ring buffer
 
-We can remove the locks by using atomics instead[fn:15]
+We can remove the locks by using atomics instead[fn::Note that we are
+manually aligning ~alignas~ the atomics to ensure they fall in different
+cache lines (commonly 64 bytes).  This prevents false sharing, hence
+optimizes CPU cache usage.]
 
 #+begin_src cpp
   template <typename T, std::size_t N>
@@ -2079,7 +2097,9 @@ Simply removing the locks yields *35M ops/s*, more than double the
 throughput of the locked version!  You have probably noticed that we are
 using the default ~std::memory_order_seq_cst~ memory order for loading /
 storing the atomics, which is the slowest.  Let's manually tune the
-memory order[fn:25]
+memory order[fn::~release~ ensures prior writes are visible to threads
+that ~acquire~ the same variable.  Both sides use ~relaxed~ for their
+own index since no other thread writes to it.]
 
 #+begin_src cpp
   auto push(const T& value) noexcept -> bool {
@@ -2119,13 +2139,21 @@ right?
 
 We already have a fast ring buffer, but we can push it further.  The
 main slowdown comes from the reader and writer constantly touching each
-other's indexes.  That makes the CPU bounce cache lines[fn:17] between cores,
-which is expensive.
+other's indexes.  That makes the CPU bounce cache lines[fn::It's useful
+to observe the number of cache misses with ~perf stat -e cache-misses~;
+they are greatly reduced in this approach.] between cores, which is
+expensive.
 
-To reduce this, the reader can keep a local cached copy[fn:16] of the write
-index, and the writer keeps a local cached copy of the read index.  Then
-they don't need to re-check the other side on every single operation:
-only once in a while.
+To reduce this, the reader can keep a local cached copy[fn::This
+advanced optimization was inspired by [[https://rigtorp.se][Erik Rigtorp]].  For an earlier
+publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
+lock-free, cache-efficient multi-core synchronization mechanism for
+line-rate network traffic monitoring," /2010 IEEE International
+Symposium on Parallel & Distributed Processing
+(IPDPS)/---[[https://doi.org/10.1109/IPDPS.2010.5470368][doi:10.1109/IPDPS.2010.5470368]] ([[https://www.cse.cuhk.edu.hk/~pclee/www/pubs/ipdps10.pdf][PDF]]).] of the write index,
+and the writer keeps a local cached copy of the read index.  Then they
+don't need to re-check the other side on every single operation: only
+once in a while.
 
 #+begin_src cpp
   template <typename T, std::size_t N>
@@ -2169,9 +2197,11 @@ approach.
 ** Summary
 
 If you want to reproduce these results, run the included [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp][benchmark]]
-compiled with at least ~-O3~ optimization level.[fn:21] The benchmark
-pins the producer and consumer threads to dedicated CPU cores to
-minimize scheduling noise.
+compiled with at least ~-O3~ optimization level.[fn::Alongside ~-O3~,
+the benchmark was compiled with ~-march=native~ and ~-ffast-math~,
+though these flags shouldn't make a difference here.] The benchmark pins
+the producer and consumer threads to dedicated CPU cores to minimize
+scheduling noise.
 
 | Version | Throughput | Notes                                            |
 |---------+------------+--------------------------------------------------|
@@ -2211,7 +2241,10 @@ a subclass that inherits from the base class and implement those
 methods.
 
 As an example, let's implement shape classes that have an ~area()~
-method.  We start with an interface[fn:10] class
+method.  We start with an interface[fn::Remember that interfaces that
+are intended to be used through a ~Base&~ or ~Base*~ must have a virtual
+destructor, to ensure derived classes are properly destructed [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor][(C.127)]].]
+class
 
 #+begin_src cpp
   class Shape {
@@ -2256,9 +2289,11 @@ Simple enough, right?
 
 Inheritance is a good solution to problems that require polymorphism,
 but sometimes the concrete types you want to handle polymorphically
-cannot share a common base class.[fn:12] In that case, if the types
-provide the same interface, you can use a template to get polymorphism
-instead
+cannot share a common base class.[fn::In some cases, you may not have
+control of the concrete types (e.g. think STL types like ~std::string~),
+or it may not even be possible for the concrete type to inherit
+(e.g. builtins like ~int~).] In that case, if the types provide the same
+interface, you can use a template to get polymorphism instead
 
 #+begin_src cpp
   auto printArea(const auto& shape) -> void {
@@ -2270,7 +2305,10 @@ You can use this method with ~Square~, ~Circle~, or any type that
 provides a zero-argument ~area()~ returning ~double~.  Templates work
 because the compiler generates a version of the function for each
 concrete type you use, and the call is valid as long as that generated
-code would compile[fn:13] for the given type.
+code would compile[fn::If you tried to pass in a type that doesn't
+conform to the 'interface' (say, ~std::string~), the compiler would hit
+an error when you try to compile the method call, complaining that
+~std::string~ doesn't have an ~area~ method.] for the given type.
 
 Unfortunately, template-based polymorphism has two main downsides.
 
@@ -2284,10 +2322,15 @@ pointer to base technique
   auto shapes = std::vector< ??? >{&square, &circle};
 #+end_src
 
-The *second* drawback[fn:20] is a little more subtle.  Anybody who uses
-the template-based ~area(const auto&)~ method must either explicitly
-specify the concrete type, or be a template itself, to pass along the
-template type of ~area()~.
+The *second* drawback[fn::Since you're employing polymorphism in the
+first place, most callers will likely fall into the second group, and
+will need to be templates themselves too so they can pass the type
+through.  That can quickly spread templates across the codebase, making
+it harder to read and structure, increasing compile times, and producing
+larger binaries with slower startup.] is a little more subtle.  Anybody
+who uses the template-based ~area(const auto&)~ method must either
+explicitly specify the concrete type, or be a template itself, to pass
+along the template type of ~area()~.
 
 ** Deriving std::any
 
@@ -2352,7 +2395,9 @@ compiler by generating the needed code for each type automatically
 What we built above is the basis of the "type erasure" idiom.  All
 that's left is to hide all this machinery behind another class, so that
 callers don't have to deal with our custom interfaces and
-templates[fn:18]
+templates[fn::This implementation always heap-allocates.  Production
+~std::any~ implementations often use small buffer optimization (SBO)
+techniques to store small objects inline and avoid allocation.]
 
 #+begin_src cpp
   class AnyShape {
@@ -2403,9 +2448,11 @@ consoomer
 ** Generic std::any
 
 Both ~Shape~ and ~ShapeWrapper~ have accepted standard names: the former
-is the type-erasure /concept/[fn:19] (the interface we program against),
-and the latter is the /model/ (a templated wrapper that implements the
-interface and forwards to a concrete type).
+is the type-erasure /concept/[fn::The type erasure concept is an
+OO-style interface (a vtable).  It's unrelated to C++20 ~concept~
+(compile-time predicates).] (the interface we program against), and the
+latter is the /model/ (a templated wrapper that implements the interface
+and forwards to a concrete type).
 
 Let's rewrite our original type erasure example to use the standard
 parlance.  Nothing needs to be changed except a few type names
@@ -2439,8 +2486,9 @@ parlance.  Nothing needs to be changed except a few type names
 #+end_src
 
 That's it!  The class ~Any~ is a simplified version of
-~std::any~,[fn:24] which is even used in the STL itself (namely, in
-~std::function~).  But that's for another post.
+~std::any~,[fn::For a Rust version, see Waifod's post [[https://waifod.dev/blog/polymorphism-type-erasure/][Polymorphism in
+C++ and Rust: Type Erasure]].] which is even used in the STL itself
+(namely, in ~std::function~).  But that's for another post.
 
 * DONE [#B] Devirtualization and Static Polymorphism
 CLOSED: [2026-02-25 Wed 09:45]
@@ -2531,7 +2579,9 @@ This prevents inlining, increases branch mispredictions, and reduces
 cache efficiency.
 
 The best way to observe this phenomenon is by inspecting the
-assembly[fn:4] code emitted by the compiler for a minimal example
+assembly[fn::Assembly generated with ~gcc~ at ~-O3~ on x86-64.  Similar
+results were observed with ~clang~ on the same platform.] code emitted
+by the compiler for a minimal example
 
 #+begin_src cpp
   class Base {
@@ -2574,8 +2624,9 @@ indirect, vtable-based call
 Sometimes the compiler can statically deduce which override a virtual
 call will hit.  In those cases, it /devirtualizes/ the call and emits a
 direct call instead (skipping the ~vtable~).  For example,
-devirtualization is straightforward[fn:5] when the runtime type is
-clearly fixed
+devirtualization is straightforward[fn::The compiler emits a direct call
+to ~Derived::foo~ (or inlines it), because ~derived~ cannot have any
+other dynamic type.] when the runtime type is clearly fixed
 
 #+begin_src cpp
   struct Base {
@@ -2654,9 +2705,12 @@ emits a direct call even though it's declared ~virtual~ in the base
 
 When the compiler can't devirtualize, one option is to use static
 polymorphism instead.  The canonical tool for this is the Curiously
-Recurring Template Pattern[fn:6] (CRTP).  With CRTP, the base class is
-templated on the derived class, and invokes methods on it via
-~static_cast~---no virtual keyword involved
+Recurring Template Pattern[fn::The curiously recurring template pattern
+is an idiom where a class X derives from a class template instantiated
+with X itself as a template argument.  More generally, this is known as
+F-bound polymorphism, a form of F-bounded quantification.] (CRTP).  With
+CRTP, the base class is templated on the derived class, and invokes
+methods on it via ~static_cast~---no virtual keyword involved
 
 #+begin_src cpp
   template <typename Derived>
@@ -2682,7 +2736,10 @@ templated on the derived class, and invokes methods on it via
 
 With ~-O3~ optimization, the compiler inlines everything and
 constant-folds the result.  No ~vtable~, no ~vptr~, no indirection.
-Fully optimized[fn:7] call.
+Fully optimized[fn::The trade-off is that each ~Base<Derived>~
+instantiation is a distinct, unrelated type, so there's no common
+runtime base to upcast to.  Any shared functionality that operates
+across different derived types must itself be templated.] call.
 
 #+begin_src asm
   test():
@@ -2731,7 +2788,9 @@ rigorous.
 
 *Why?*---To give back to the /libre/ software community.  To keep a
 record of my learning journey.  To deepen my own understanding by
-writing things down.[fn:23]
+writing things down.[fn::As Einstein put it, /"If you can't explain it
+simply, you don't understand it well enough."/ Feynman followed the same
+principle, testing his understanding by teaching from first principles.]
 
 *Who?*---See the About page.
 
@@ -2742,7 +2801,7 @@ via a global CDN.
 *When?*---Once or twice a month.
 
 *How?*---Written in Emacs Org-mode, exported to Hugo with a custom
-theme.[fn:22]
+theme.[fn::Inspired by the work of Edward Tufte and Matthew Butterick.]
 
 If you spot an error or have suggestions, I welcome feedback---reach out
 via the contact link on the About page.
@@ -2765,8 +2824,9 @@ CLOSED: [2026-01-24 Sat 12:31]
 </style>
 #+end_export
 
- [fn:8]Mathematician and engineer based in sunny Dublin, passionate
-about low-latency, high-performance systems.
+ [fn::[[./assets/images/portrait.png]] *That's me!* March
+2022.]Mathematician and engineer based in sunny Dublin, passionate about
+low-latency, high-performance systems.
 
 Currently working in algorithmic trading at Susquehanna.  Previously
 designed and built systems at Amazon serving 10M+ monthly active
@@ -2890,9 +2950,10 @@ CLOSED: [2025-12-02 Tue 19:58]
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :seotitle "David Álvarez Rosa | Personal Site"
 :END:
 
- [fn:9]Hi! This is my personal site, where I share notes on software and
-self-hosting.  You'll learn how things work under the hood, and how to
-make them run fast, /very/ fast.
+ [fn::[[./assets/images/home-illustration.png]] ‎]Hi! This is my personal
+site, where I share notes on software and self-hosting.  You'll learn
+how things work under the hood, and how to make them run fast, /very/
+fast.
 
 I'm a mathematician and engineer based in sunny Dublin, passionate about
 low-latency, high-performance systems.  I'm a strong advocate of free
@@ -2964,102 +3025,3 @@ You've been unsubscribed.  Sorry to see you go---you won't receive any
 more emails from this list.
 
 Changed your mind?  You can [[/#subscribe][subscribe again]] anytime.
-
-* Footnotes
-[fn:24] For a Rust version, see Waifod's post [[https://waifod.dev/blog/polymorphism-type-erasure/][Polymorphism in C++ and
-Rust: Type Erasure]].
-
-[fn:25] ~release~ ensures prior writes are visible to threads that
-~acquire~ the same variable.  Both sides use ~relaxed~ for their own
-index since no other thread writes to it.
-
-[fn:23] As Einstein put it, /"If you can't explain it simply, you don't
-understand it well enough."/ Feynman followed the same principle,
-testing his understanding by teaching from first principles.
-
-[fn:22] Inspired by the work of Edward Tufte and Matthew Butterick.
-
-[fn:21] Alongside ~-O3~, the benchmark was compiled with ~-march=native~
-and ~-ffast-math~, though these flags shouldn't make a difference here.
-
-[fn:20] Since you're employing polymorphism in the first place, most
-callers will likely fall into the second group, and will need to be
-templates themselves too so they can pass the type through.  That can
-quickly spread templates across the codebase, making it harder to read
-and structure, increasing compile times, and producing larger binaries
-with slower startup.
-
-[fn:19] The type erasure concept is an OO-style interface (a vtable).
-It's unrelated to C++20 ~concept~ (compile-time predicates).
-
-[fn:18] This implementation always heap-allocates.  Production
-~std::any~ implementations often use small buffer optimization (SBO)
-techniques to store small objects inline and avoid allocation.
-
-[fn:17] It's useful to observe the number of cache misses with ~perf
-stat -e cache-misses~; they are greatly reduced in this approach.
-
-[fn:16] This advanced optimization was inspired by [[https://rigtorp.se][Erik Rigtorp]].  For an
-earlier publication, see: P. P. C. Lee, T. Bu, and G. Chandranmenon, "A
-lock-free, cache-efficient multi-core synchronization mechanism for
-line-rate network traffic monitoring," /2010 IEEE International
-Symposium on Parallel & Distributed Processing
-(IPDPS)/---[[https://doi.org/10.1109/IPDPS.2010.5470368][doi:10.1109/IPDPS.2010.5470368]] ([[https://www.cse.cuhk.edu.hk/~pclee/www/pubs/ipdps10.pdf][PDF]]).
-
-[fn:15] Note that we are manually aligning ~alignas~ the atomics to
-ensure they fall in different cache lines (commonly 64 bytes).  This
-prevents false sharing, hence optimizes CPU cache usage.
-
-[fn:14] Compiled with ~clang~ compiler with highest ~-O3~ optimization
-level, and ~-march=native -ffast-math~.  Consumer and producer threads
-are pinned to dedicated cores (Intel Core Ultra 5 135U).  See [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/ring_buffer.cpp][benchmark]].
-
-[fn:13] If you tried to pass in a type that doesn't conform to the
-'interface' (say, ~std::string~), the compiler would hit an error when
-you try to compile the method call, complaining that ~std::string~
-doesn't have an ~area~ method.
-
-[fn:12] In some cases, you may not have control of the concrete types
-(e.g. think STL types like ~std::string~), or it may not even be
-possible for the concrete type to inherit (e.g. builtins like ~int~).
-
-[fn:10] Remember that interfaces that are intended to be used through a
-~Base&~ or ~Base*~ must have a virtual destructor, to ensure derived
-classes are properly destructed [[https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c127-a-class-with-a-virtual-function-should-have-a-virtual-or-protected-destructor][(C.127)]].
-
-[fn:9] [[./assets/images/home-illustration.png]] ‎
-
-[fn:8] [[./assets/images/portrait.png]] *That's me!* March 2022.
-
-[fn:11] [[./assets/images/ringbuffer.jpg]] *Ring buffer with 32 slots.* The
-producer has filled 15 of them, indicated by blue.  The consumer is
-behind the producer, reading data from the slots, freeing them as it
-does so.  A free slot is indicated by orange.
-
-[fn:1] By using ~std::array~ we are forcing clients to define the buffer
-size as ~constexpr~.  It's also common to use instead a ~std::vector~ to
-remove that restriction.  A further optimization is to constrain the
-capacity to a power of two, allowing wrap-around via bit masking ~head &
-(N - 1)~ instead of a branch.
-
-[fn:2] Note how one item is left unused to indicate that the queue is
-full.  When ~head_~ is one item ahead of ~tail_~, the queue is full.
-
-[fn:3] Again note that ~head_ == tail_~ indicates that the queue is
-empty.
-
-[fn:4] Assembly generated with ~gcc~ at ~-O3~ on x86-64.  Similar
-results were observed with ~clang~ on the same platform.
-
-[fn:5] The compiler emits a direct call to ~Derived::foo~ (or inlines
-it), because ~derived~ cannot have any other dynamic type.
-
-[fn:6] The curiously recurring template pattern is an idiom where a
-class X derives from a class template instantiated with X itself as a
-template argument.  More generally, this is known as F-bound
-polymorphism, a form of F-bounded quantification.
-
-[fn:7] The trade-off is that each ~Base<Derived>~ instantiation is a
-distinct, unrelated type, so there's no common runtime base to upcast
-to.  Any shared functionality that operates across different derived
-types must itself be templated.
