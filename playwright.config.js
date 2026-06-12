@@ -10,15 +10,13 @@ export default defineConfig({
   },
   expect: {
     toHaveScreenshot: {
-      maxDiffPixelRatio: process.env.CI ? 0.01 : 0,
+      maxDiffPixelRatio: 0.01,
     },
   },
   projects: [
     {
       name: 'Desktop Chrome',
       use: { ...devices['Desktop Chrome'] },
-      // Skip Desktop Chrome in CI due to rendering inconsistencies
-      ...(process.env.CI && { testIgnore: /.*/ }),
     },
     {
       name: 'Desktop Firefox',
@@ -27,8 +25,6 @@ export default defineConfig({
     {
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
-      // Skip Mobile Chrome in CI due to rendering inconsistencies
-      ...(process.env.CI && { testIgnore: /.*/ }),
     },
   ],
   webServer: {

@@ -32,6 +32,7 @@ subscriptions.
   lychee --accept 200,403,405,429 --root-dir public 'public/**/*.html'  # Check broken links
   html5validator --config .html5validator.yaml                          # Validate HTML/CSS
   pnpm test                                                             # Playwright
+  pnpm test:update                                                      # Regenerate visual baselines
 #+end_src
 
 ** Deployment
