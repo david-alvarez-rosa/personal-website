@@ -1,8 +1,8 @@
 {
   "name": "personal-website",
   "scripts": {
-    "test": "scripts/visual-test.sh",
-    "test:update": "scripts/visual-test.sh --update-snapshots"
+    "test": "scripts/test.sh",
+    "test:update": "scripts/test.sh --update-snapshots"
   },
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {
