@@ -7,7 +7,7 @@ from pathlib import Path
 
 from sqlmodel import Session, col, select
 
-from .backend import (
+from .api import (
     API_BASE,
     EMAIL_POLICY,
     FROM,
