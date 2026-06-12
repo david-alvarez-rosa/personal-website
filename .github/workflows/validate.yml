@@ -60,7 +60,19 @@ jobs:
         with:
           lfs: true
 
-      - run: CONTAINER_ENGINE=docker ./scripts/visual-test.sh
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build visual-test image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          tags: personal-website-visual
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - run: SKIP_BUILD=1 CONTAINER_ENGINE=docker ./scripts/visual-test.sh
 
       - if: always()
         uses: actions/upload-artifact@v4

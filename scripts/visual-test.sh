@@ -5,7 +5,10 @@ set -eux
 ENGINE="${CONTAINER_ENGINE:-podman}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-"$ENGINE" build -t personal-website-visual - < "$ROOT/Dockerfile"
+# In CI the image is built separately with a layer cache, so allow skipping it.
+if [ -z "${SKIP_BUILD:-}" ]; then
+  "$ENGINE" build -t personal-website-visual - < "$ROOT/Dockerfile"
+fi
 
 status=0
 "$ENGINE" run --rm --shm-size=1g \
