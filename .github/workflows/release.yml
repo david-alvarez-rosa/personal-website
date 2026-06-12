@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eu
+          if [ "${{ github.event_name }}" = push ]; then
+            tags="${{ github.ref_name }}"
+          else
+            tags="$(git tag --sort=creatordate)"
+          fi
+          for tag in $tags; do
+            if gh release view "$tag" >/dev/null 2>&1; then
+              continue
+            fi
+            gh release create "$tag" --verify-tag \
+              --title "$(git log -1 --format=%s "$tag")" \
+              --notes "$(scripts/release-notes.sh "$tag")"
+          done
