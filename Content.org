@@ -4,6 +4,9 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Optimizing and Order Book
+https://github.com/atribout
+
 * TODO [#B] Perf improvements website
 - CDN
 - RTT optimization -> HTML at edge
