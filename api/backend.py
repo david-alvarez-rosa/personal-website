@@ -12,7 +12,7 @@ from pydantic import EmailStr
 from sqlmodel import SQLModel, Field, Session, create_engine, select
 from starlette.status import HTTP_303_SEE_OTHER
 
-from mail import SIGNATURE, email_html
+from .mail import SIGNATURE, email_html
 
 SES_SMTP_HOST = "email-smtp.eu-west-2.amazonaws.com"
 SES_SMTP_PORT = 587

@@ -21,8 +21,8 @@ subscriptions.
 ** Backend
 
 #+begin_src shell
-  uv sync                        # Install dependencies
-  uvicorn backend:app --reload   # Dev server on localhost:8000
+  uv sync                           # Install dependencies
+  uvicorn api.backend:app --reload  # Dev server on localhost:8000
 #+end_src
 
 ** Validation

@@ -7,7 +7,7 @@ from pathlib import Path
 
 from sqlmodel import Session, col, select
 
-from backend import (
+from .backend import (
     API_BASE,
     EMAIL_POLICY,
     FROM,
@@ -17,7 +17,7 @@ from backend import (
     sign,
     smtp_login,
 )
-from mail import SIGNATURE, email_html, footer_html
+from .mail import SIGNATURE, email_html, footer_html
 
 
 def clean(md):
