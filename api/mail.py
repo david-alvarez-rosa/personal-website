@@ -43,11 +43,9 @@ def email_html(body, footer=""):
     <style>a {{ color:#003366; text-decoration:none }} </style>
   </head>
   <body>
-    <div style="box-sizing:border-box;width:34em;max-width:100%;padding:4px;line-height:1.55">
-      {to_html(body)}
-      <p>Best,<br>David</p>
-      {footer}
-    </div>
+    {to_html(body)}
+    <p>Best,<br>David</p>
+    {footer}
   </body>
 </html>"""
 

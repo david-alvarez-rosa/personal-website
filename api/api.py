@@ -5,6 +5,7 @@ import smtplib
 from datetime import datetime, timezone
 from email import policy
 from email.message import EmailMessage
+from pathlib import Path
 
 from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import RedirectResponse
@@ -31,7 +32,8 @@ class Subscription(SQLModel, table=True):
     unsubscribed_at: datetime | None = Field(default=None)
 
 
-engine = create_engine("sqlite:///subscriptions.db")
+DB_PATH = Path(__file__).resolve().parent.parent / "subscriptions.db"
+engine = create_engine(f"sqlite:///{DB_PATH}")
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
 
