@@ -4,6 +4,8 @@
 #+filetags: :pers:blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Emacs config and/or Arch Linux config
+
 * TODO [#B] Optimizing and Order Book
 https://github.com/atribout
 
@@ -957,7 +959,7 @@ Specially small string optimization.
 Fastest matrix multiplication.
 
 - https://www.youtube.com/watch?v=GHctcSBd6Z4
--
+- https://siboehm.com/
 
 * TODO [#B] Translation Look Aside Buffer                           :backlog:
 :PROPERTIES:
