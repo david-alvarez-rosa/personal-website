@@ -32,7 +32,9 @@ class Subscription(SQLModel, table=True):
     unsubscribed_at: datetime | None = Field(default=None)
 
 
-DB_PATH = Path(__file__).resolve().parent.parent / "subscriptions.db"
+DB_PATH = os.environ.get(
+    "DB_PATH", Path(__file__).resolve().parent.parent / "subscriptions.db"
+)
 engine = create_engine(f"sqlite:///{DB_PATH}")
 SQLModel.metadata.create_all(engine)
 app = FastAPI()

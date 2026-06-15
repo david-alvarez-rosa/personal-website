@@ -68,6 +68,20 @@ jobs:
       - name: Deploy
         run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/david.alvarezrosa.com
 
+      - name: Deploy API backend
+        run: |
+          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" api/ root@ssh.alvarezrosa.com:/srv/api.alvarezrosa.com/api/
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" pyproject.toml uv.lock root@ssh.alvarezrosa.com:/srv/api.alvarezrosa.com/
+          ssh -o StrictHostKeyChecking=no root@ssh.alvarezrosa.com '
+            set -e
+            cd /srv/api.alvarezrosa.com
+            chown -R api:api api pyproject.toml uv.lock
+            sudo -u api env HOME=/srv/api.alvarezrosa.com .local/bin/uv sync --frozen
+            systemctl restart api.service
+            sleep 1
+            systemctl is-active api.service
+          '
+
       - name: Purge Cloudflare cache
         run: |
           curl --fail-with-body -sS -X POST \
