@@ -99,7 +99,8 @@ iptables -A FORWARD -i ens3 -o wg0 -d 10.0.0.2 -j ACCEPT
 Two `RETURN` rules keep WireGuard (`51820/udp`) and the bridge's own
 SSH (`2222/tcp`) local; the catch-all `DNAT` rewrites everything
 else---port 22 included---to the homelab's tunnel address; and two
-`FORWARD` accepts let that traffic flow both ways.[^fn:5]  Everything happens inside the kernel: netfilter does
+`FORWARD` accepts let that traffic flow both ways.[^fn:5]
+Everything happens inside the kernel: netfilter does
 the rewriting, and no userspace process ever touches a packet.
 
 The bridge's own sshd listens on 2222 precisely so that port 22 can be
@@ -128,6 +129,9 @@ where `PostUp` sets up policy routing.
 ```sh
 ip route add default dev wg0 table 200
 ip rule add from 10.0.0.2 table 200
+iptables -t mangle -A PREROUTING -i wg0 -m conntrack --ctstate NEW -j CONNMARK --set-mark 0x1
+iptables -t mangle -A PREROUTING -m conntrack --ctdir REPLY -j CONNMARK --restore-mark
+ip rule add fwmark 0x1 lookup 200 pref 1000
 ```
 
 Each line earns its place: `AllowedIPs = 0.0.0.0/0` accepts forwarded
@@ -137,6 +141,24 @@ bridge[^fn:7]; the policy routing sends only replies of
 forwarded connections---packets _from_ `10.0.0.2`---back through the
 tunnel; and `PersistentKeepalive` keeps the CGNAT's idle UDP mapping
 alive, so the bridge can always reach in.
+
+This source-based rule is enough for services that listen on the
+homelab itself, but it quietly breaks the moment a forwarded service
+lives behind a second NAT---a Docker container, most commonly.  Such a
+service sits on its own address (say `172.19.0.4`), reached by a
+further DNAT; and the reply's source is rewritten back to `10.0.0.2`
+only in `POSTROUTING`, _after_ the routing decision is made.  At
+routing time the packet still reads `from 172.19.0.4`, misses the
+rule, falls through to the main table, and leaks out the WAN
+interface---straight into the CGNAT, where it dies.  The cure is to
+route by the connection rather than by an address that isn't settled
+yet---the last three lines above.  The first marks every new
+connection arriving on `wg0`; the second restores that mark onto the
+packets travelling the other way, in `PREROUTING`, _before_ the
+routing decision; and the `fwmark` rule sends whatever carries the
+mark through the tunnel.  Routing by mark instead of by source keeps
+the real client IP intact---a `MASQUERADE` on the homelab would have
+been shorter, but it would rewrite that address away.
 
 Enable the tunnel on both machines with
 `sudo systemctl enable --now wg-quick@wg0` and verify the handshake
@@ -193,7 +215,9 @@ page included.
     `MASQUERADE`: conntrack reverses the DNAT on the way out, and the
     homelab routes its replies back through the tunnel.  Forwarded services
     see the _real_ client IP---something proxies and third-party tunnels
-    can't offer.
+    can't offer.  This holds for services that terminate on the homelab
+    itself; a service behind a _second_ NAT hop---anything in a Docker
+    container, say---needs one more touch on the homelab, noted below.
 [^fn:6]: Add `Port 2222` to the
     bridge's `/etc/ssh/sshd_config` _before_ bringing the tunnel up---the
     moment the DNAT rule takes effect, port 22 belongs to the homelab.
