@@ -72,13 +72,20 @@ def subscribe(email: EmailStr = Form()):
     msg["From"] = FROM
     msg["To"] = email
     msg["Subject"] = "Confirm your subscription to david.alvarezrosa.com"
-    body = f"""Confirm your subscription to David Álvarez Rosa's newsletter:
+    intro = "Almost there! Confirm your email to subscribe:"
+    outro = "If you didn't sign up, just ignore this email."
+    text_body = f"""{intro}
 
 {link}
 
-If you didn't sign up, ignore this email."""
-    msg.set_content(f"{body}\n{SIGNATURE}")
-    msg.add_alternative(email_html(body), subtype="html")
+{outro}"""
+    html_body = f"""{intro}
+
+[Confirm subscription]({link})
+
+{outro}"""
+    msg.set_content(f"{text_body}\n{SIGNATURE}")
+    msg.add_alternative(email_html(html_body), subtype="html")
     with smtp_login() as smtp:
         smtp.send_message(msg)
     return RedirectResponse(
