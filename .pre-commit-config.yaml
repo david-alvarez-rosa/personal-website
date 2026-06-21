@@ -10,7 +10,7 @@ repos:
 
       - id: lychee
         name: Check broken links with lychee
-        entry: bash -c 'lychee --accept 200,403,405,429 --root-dir public --remap "https://david.alvarezrosa.com file://$(pwd)/public" "public/**/*.html"'
+        entry: bash -c 'lychee --accept 200,202,403,405,429 --root-dir public --remap "https://david.alvarezrosa.com file://$(pwd)/public" "public/**/*.html"'
         language: system
         pass_filenames: false
         stages: [pre-push]

@@ -1308,10 +1308,10 @@ percent faster or slower between runs, as clocks ramp up and down, the
 scheduler migrates threads, and background noise leaks into the
 measurement.  In this post we take a tiny benchmark and tune the machine
 step by step---re-measuring after every change---until runs become
-deterministic.[fn::Tuning for /benchmarking/ is not tuning for
-/performance:/ a benchmark wants the machine repeatable, even at the
-cost of some peak speed; a production system wants every last bit of
-speed.  Where the knobs below diverge, I'll point it out.]
+deterministic.[fn::Note that tuning for /benchmarking/ is not the same
+as tuning for /performance:/ a benchmark wants the machine repeatable,
+even at the cost of some peak speed.  A production box, however, wants
+every last bit of speed.]
 
 ** A noisy baseline
 
@@ -1331,7 +1331,7 @@ optimizer; without it the compiler deletes the entire loop.]
       state.PauseTiming();  // Idle between bursts, like a real service
       std::this_thread::sleep_for(std::chrono::milliseconds(2));
       state.ResumeTiming();
-      for (int i = 0; i < 256; ++i) {
+      for (auto i = 0; i < 256; ++i) {
         auto sum = std::accumulate(data.cbegin(), data.cend(), 0.0);
         benchmark::DoNotOptimize(sum);
       }
@@ -1341,9 +1341,9 @@ optimizer; without it the compiler deletes the entire loop.]
   BENCHMARK(BM_Sum);
 #+end_src
 
-Compile it with full optimizations, ~-O3 -march=native -mtune=native
--flto -ffast-math~---a debug build measures nothing worth measuring.
-Then run ten repetitions and aggregate them
+Compile it in release with all optimizations, ~-O3~, and ~-march=native
+-mtune=native -flto -ffast-math~.  Then run ten repetitions and
+aggregate them
 
 #+begin_src sh
   $ ./benchmark --benchmark_repetitions=10 --benchmark_min_time=200x
@@ -1359,17 +1359,17 @@ optimization smaller than that is invisible.  Let's bring it down.
 ** Know your hardware
 
 Before turning any knob, look at what you are tuning.  ~lstopo~ draws
-the whole machine in one picture: caches, cores, SMT pairs, and the
-PCIe devices hanging off them.  Start with my laptop
+the whole machine in one picture: caches, cores, SMT pairs, and the PCIe
+devices hanging off them.  Start with my laptop
 
-#+caption: *My laptop* (Intel Core Ultra 5 135U).  Three kinds of cores: two P-cores with two hardware threads each (dotted), eight E-cores in clusters of four sharing an L2, and two low-power E-cores (bottom left) sitting outside the L3 entirely.
+#+caption: *My laptop (Intel Core Ultra 5 135U).*  Three kinds of cores: two P-cores with two hardware threads each (dotted), eight E-cores in clusters of four sharing an L2, and two low-power E-cores (bottom left) sitting outside the L3 entirely.
 [[./assets/images/lstopo-laptop.png]]
 
 Here the choice of core changes what you measure: land on CPU 4 and you
 get an E-core at lower clocks; on CPU 12 you lose the L3 too.  Now
 compare that against my homelab server
 
-#+caption: *My homelab server* (AMD Ryzen 7 PRO 8700GE).  Eight identical cores with identical caches; the NVMe drives and the NIC hang off PCIe on the right.
+#+caption: *My homelab server (AMD Ryzen 7 PRO 8700GE).*  Eight identical cores with identical caches; the NVMe drives and the NIC hang off PCIe on the right.
 [[./assets/images/lstopo-homelab.png]]
 
 On the server every core is as good as any other: homogeneous machines
@@ -1419,7 +1419,7 @@ wakes up on a cold clock again.
 
 ** Disable hyperthreading
 
-CPU 2 still shares its execution units and L1/L2 caches with its SMT
+CPU still shares its execution units and L1/L2 caches with its SMT
 sibling: anything the scheduler places there perturbs our measurement.
 Disable SMT entirely
 
@@ -1441,27 +1441,23 @@ lower than on a cool one.  Disable turbo for stable clocks
 #+end_src
 
 On this machine nothing changes, since our short bursts never gave the
-silicon time to boost anyway.  On a machine where
-turbo does engage, expect the mean to climb instead: you are giving up
-peak performance.  That trade is fine, since when optimizing we care
-about /relative/ numbers, and those are now comparable across
-runs.[fn::Low-latency production tuning makes the /opposite/ call and
-keeps turbo on: there, every nanosecond counts.  The most
-latency-sensitive shops go further and run overclocked servers, locked
-at a fixed all-core frequency above stock---speed /and/ stable clocks,
-bought with better cooling.  A benchmark wants two runs to be
-comparable; a production system wants each run to be fast.]
+silicon time to boost anyway.  On a machine where turbo does engage,
+expect the mean to climb instead: you are giving up peak performance.
+That trade is fine, since when optimizing we care about /relative/
+numbers, and those are now comparable across runs.[fn::Low-latency
+production tuning makes the /opposite/ call and keeps turbo on: there,
+every nanosecond counts.  The most latency-sensitive trading shops go
+further and run overclocked servers, locked at a fixed all-core
+frequency above stock---speed /and/ stable clocks, bought with better
+cooling.]
 
 ** Summary
 
-Four knobs later, here is the whole journey in one table, each row
-adding one change on top of all the previous ones.  We went from almost
-*3%* of noise down to *0.26%*, and got 1.8x faster along the way;
-differences of half a percent are now real, measurable
-signal.[fn::To reproduce this, the [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scratch/benchmark.cpp][benchmark]] scaffolding and the
-[[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scripts/bench-remote.sh][bench-remote.sh]] script live in my [[https://github.com/david-alvarez-rosa/CppPlayground][CppPlayground]] repository; the
-script tunes a remote server, runs the benchmark there, and restores
-the previous state on exit.]
+Here is the whole journey in one table, each row adding one change on
+top of all the previous ones.  We went from almost *3%* of noise down to
+*0.26%*, and got 1.8x faster along the way; differences of half a
+percent are now real, measurable signal.[fn::Feel free to reproduce on
+your machine using the [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scratch/benchmark.cpp][benchmark]] from my [[https://github.com/david-alvarez-rosa/CppPlayground][CppPlayground]] repository.]
 
 | Step                   | Mean      | StdDev  | CV      |
 |------------------------+-----------+---------+---------|
@@ -1473,10 +1469,9 @@ the previous state on exit.]
 
 On busier machines there is a longer tail of knobs worth trying:
 disabling address space layout randomization, the NMI watchdog, or
-transparent huge pages, and running at real-time priority.  The
-[[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scripts/bench-remote.sh][bench-remote.sh]] script applies all but the last.  None of it survives a
-reboot, which is exactly what you want: tune, measure, and reboot back
-to a normal machine.
+transparent huge pages.  The [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scripts/bench-remote.sh][bench-remote.sh]] script applies all.  None
+of it survives a reboot, which is exactly what you want: tune, measure,
+and reboot back to a normal machine.
 
 \\
 
