@@ -9,11 +9,9 @@ draft = false
 Optimizing code starts with measuring it, and a measurement is only
 useful if it is repeatable: a 2% improvement is invisible under 5% of
 noise.  Yet on an untuned machine the same binary can easily run several
-percent faster or slower between runs, as clocks ramp up and down, the
-scheduler migrates threads, and background noise leaks into the
-measurement.  In this post we take a tiny benchmark and tune the machine
-step by step---re-measuring after every change---until runs become
-deterministic.[^fn:1]
+percent faster or slower between runs.  In this post we take a tiny
+benchmark and tune the machine step by step, re-measuring after every
+change, until runs become deterministic.[^fn:1]
 
 
 ## A noisy baseline {#a-noisy-baseline}
@@ -176,10 +174,10 @@ and reboot back to a normal machine.
 
 Long live reproducible benchmarks!
 
-[^fn:1]: Note that tuning for _benchmarking_ is not the same
-    as tuning for _performance:_ a benchmark wants the machine repeatable,
-    even at the cost of some peak speed.  A production box, however, wants
-    every last bit of speed.
+[^fn:1]: Note that tuning for
+    _benchmarking_ is not the same as tuning for _performance:_ a benchmark
+    wants the machine repeatable, even at the cost of some peak speed.  A
+    production box, however, wants every last bit of speed.
 [^fn:2]: `PauseTiming` / `ResumeTiming` keep the sleep out of the
     measured time, and `DoNotOptimize` keeps the result alive past the
     optimizer; without it the compiler deletes the entire loop.
