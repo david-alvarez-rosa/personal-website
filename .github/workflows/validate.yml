@@ -47,7 +47,7 @@ jobs:
       - name: Check for broken links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --accept 200,403,405,429 --root-dir ${{ github.workspace }}/public --remap "https://david.alvarezrosa.com file://${{ github.workspace }}/public" 'public/**/*.html'
+          args: --accept 200,202,403,405,429 --root-dir ${{ github.workspace }}/public --remap "https://david.alvarezrosa.com file://${{ github.workspace }}/public" 'public/**/*.html'
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
