@@ -2,7 +2,7 @@
 title = "Self-Hosting on the Dark Web"
 author = ["David Álvarez Rosa"]
 date = 2026-06-01T10:55:00+01:00
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 +++
 

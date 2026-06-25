@@ -2,7 +2,7 @@
 title = "About this Site"
 author = ["David Álvarez Rosa"]
 date = 2018-05-11T21:18:00+01:00
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 +++
 

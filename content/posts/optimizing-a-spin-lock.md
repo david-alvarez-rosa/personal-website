@@ -1,7 +1,7 @@
 +++
 title = "Optimizing a Spin-Lock"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = true
 +++
 

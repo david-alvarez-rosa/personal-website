@@ -2,7 +2,7 @@
 title = "First Steps on a New Server"
 author = ["David Álvarez Rosa"]
 date = 2026-05-17T17:26:00+01:00
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 +++
 

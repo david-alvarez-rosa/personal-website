@@ -1,7 +1,7 @@
 +++
 title = "Incremental clang-tidy tool"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog", "backlog"]
+tags = ["blog", "backlog"]
 draft = true
 +++
 

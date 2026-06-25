@@ -2,7 +2,7 @@
 title = "Welcome"
 author = ["David Álvarez Rosa"]
 date = 2025-12-02T19:58:00+00:00
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 seotitle = "David Álvarez Rosa | Personal Site"
 +++

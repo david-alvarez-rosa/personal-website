@@ -1,7 +1,7 @@
 #+title: Personal Site Content
 #+author: David Álvarez Rosa
 #+startup: logdone
-#+filetags: :pers:blog:
+#+filetags: :blog:
 #+CATEGORY: Blog
 
 * TODO [#B] Emacs config and/or Arch Linux config

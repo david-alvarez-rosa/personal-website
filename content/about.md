@@ -2,7 +2,7 @@
 title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
 date = 2026-01-24T12:31:00+00:00
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 subtitle = "Curriculum Vitae"
 seotitle = "About | David Álvarez Rosa | Personal Site"

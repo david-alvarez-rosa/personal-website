@@ -1,7 +1,7 @@
 +++
 title = "Self-Hosting Behind CGNAT"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = true
 +++
 

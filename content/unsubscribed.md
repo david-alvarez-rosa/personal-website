@@ -1,7 +1,7 @@
 +++
 title = "Unsubscribed"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = false
 subtitle = " "
 noindex = true

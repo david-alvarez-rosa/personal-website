@@ -1,7 +1,7 @@
 +++
 title = "Laissez Faire, Laissez Mourir"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = true
 +++
 
