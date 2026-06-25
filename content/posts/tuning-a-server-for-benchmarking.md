@@ -1,8 +1,9 @@
 +++
 title = "Tuning a Server for Benchmarking"
 author = ["David Álvarez Rosa"]
+date = 2026-06-25T18:02:00+01:00
 tags = ["blog"]
-draft = true
+draft = false
 +++
 
 Optimizing code starts with measuring it, and a measurement is only

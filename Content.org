@@ -1296,7 +1296,8 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* TODO [#B] Tuning a Server for Benchmarking
+* DONE [#B] Tuning a Server for Benchmarking
+CLOSED: [2026-06-25 Thu 18:02]
 :PROPERTIES:
 :EXPORT_FILE_NAME: tuning-a-server-for-benchmarking
 :END:
