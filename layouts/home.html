@@ -8,7 +8,10 @@
       setTimeout(() => { img.style.transform = ""; }, 3000);
     });
   </script>
-  <h1>{{ .Title }}</h1>
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
+  </header>
   {{ partial "processed-content.html" . }}
 
   <h2 id="recent-entries">Recent Posts <a class="anchor" href="#recent-entries">&sect;</a></h2>

@@ -1,15 +1,21 @@
 {{ define "main" }}
-  <h1>{{ .Title }}</h1>
-  {{ range (where site.RegularPages "Section" "posts") }}
-    <p>
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := .Date | time.Format ":date_long" }}
-      <span class="side">
-        <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-      </span>
-      <br/>
-      {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
-    </p>
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
+  </header>
+  {{ range (where site.RegularPages "Section" "posts").GroupByDate "2006" }}
+    <h2>{{ .Key }}</h2>
+    {{ range .Pages }}
+      <p>
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+        {{ $dateHuman := .Date | time.Format ":date_long" }}
+        <span class="side">
+          <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        </span>
+        <br/>
+        {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
+      </p>
+    {{ end }}
   {{ end }}
 {{ end }}

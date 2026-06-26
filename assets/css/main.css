@@ -55,13 +55,30 @@ main, footer {
 }
 
 h1 {
-    border-top: 1px solid var(--text);
-    padding-top: 0.4rem;
+    text-align: center;
+    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
+    text-transform: lowercase;
+    letter-spacing: 0.06rem;
     font-weight: 420;
     margin-bottom: 2.2rem;
     margin-top: 0;
-    font-size: 3rem;
+    font-size: 2.8rem;
     line-height: 1;
+}
+
+h1::before {
+    content: "";
+    display: block;
+    width: 19rem;
+    aspect-ratio: 475 / 59;
+    margin: 0 auto 1.25rem;
+    background-color: var(--text);
+    -webkit-mask: url(/images/ornament.svg) center / contain no-repeat;
+    mask: url(/images/ornament.svg) center / contain no-repeat;
+}
+
+h1:has(+ .subtitle) {
+    margin-bottom: 0.65rem;
 }
 
 .notice main, .notice footer {
@@ -101,15 +118,39 @@ h2 {
     margin-bottom: 0.4rem;
     font-size: 1.4rem;
     display: block;
-    font-weight: lighter;
+    font-weight: 400;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 2.8rem;
+}
+
+header .subtitle {
+    margin: 0 auto;
+    max-width: 30rem;
 }
 
 .signature {
+    text-align: left;
+    margin-top: 4.2rem;
+}
+
+.signature .author {
     display: block;
-    text-align: right;
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     text-transform: lowercase;
-    font-size: 1.4rem;
+    letter-spacing: 0.02rem;
+}
+
+.signature .author i {
+    font-family: "Alegreya", "Alegreya Fallback", serif;
+}
+
+.signature .date {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
 }
 
 .figure-number {
@@ -375,6 +416,15 @@ h2:focus-within .anchor {
         padding: 0.4rem 0.5rem;
         border: 1px solid var(--border);
         border-left: 3px solid var(--border);
+    }
+
+    .signature {
+        float: none;
+        width: auto;
+        margin: 0 0 0.8rem;
+        padding: 0;
+        border: none;
+        text-align: center;
     }
 
     figure {

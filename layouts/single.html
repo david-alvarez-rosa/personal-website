@@ -7,8 +7,14 @@
 {{ end }}
 {{ define "main" }}
   <style>main > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
-  <span class="subtitle">{{ with .Params.subtitle }}{{ . }}{{ else }}{{ $.Date | time.Format ":date_long" }}{{ end }}</span>
-  <h1>{{ .Title }}</h1>
+  <header>
+    <aside class="side signature">
+      <span class="author"><i>by</i> {{ index .Params.Author 0 }}</span>
+      <span class="date">{{ $.Date | time.Format ":date_long" }}</span>
+    </aside>
+    <h1>{{ .Title }}</h1>
+    {{ $subtitle := .Params.subtitle | default ($.Date | time.Format ":date_long") }}
+    {{ with strings.TrimSpace $subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
+  </header>
   {{ partial "processed-content.html" . }}
-  <div class="signature">&mdash;{{ index .Params.Author 0 }}</div>
 {{ end }}
