@@ -73,7 +73,7 @@
   {{ end }}
   <script defer src="https://analytics.alvarezrosa.com/script.js" data-website-id="d91623ad-7bf5-4c14-8e39-8c6b2a5596c7" data-performance="true"></script>
 </head>
-<body>
+<body{{ if .Params.notice }} class="notice"{{ end }}>
   <main>
     {{ block "main" . }}{{ end }}
     {{ with site.Menus.main }}

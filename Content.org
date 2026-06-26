@@ -3003,12 +3003,8 @@ CLOSED: [2025-12-13 Sat 22:23]
 :PROPERTIES:
 :EXPORT_FILE_NAME: 404
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :notice true :noindex true :sitemap '(:disable true) :build '(:list "never")
 :END:
-
-#+begin_export html
-<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
-#+end_export
 
 That page couldn't be found (404 error).  Try the [[/][Home page]].
 
@@ -3017,12 +3013,8 @@ CLOSED: [2025-12-13 Sat 22:06]
 :PROPERTIES:
 :EXPORT_FILE_NAME: subscription
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :notice true :noindex true :sitemap '(:disable true) :build '(:list "never")
 :END:
-
-#+begin_export html
-<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
-#+end_export
 
 Welcome! Your subscription is confirmed.  Thanks for signing up.
 
@@ -3033,12 +3025,8 @@ same email address you subscribed with.
 :PROPERTIES:
 :EXPORT_FILE_NAME: subscription-pending
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :notice true :noindex true :sitemap '(:disable true) :build '(:list "never")
 :END:
-
-#+begin_export html
-<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
-#+end_export
 
 Almost there!  Check your inbox for a confirmation email and click the
 link inside to complete your subscription.
@@ -3051,12 +3039,8 @@ and I'll sort it out.
 :PROPERTIES:
 :EXPORT_FILE_NAME: unsubscribed
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :noindex true :sitemap '(:disable true) :build '(:list "never")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle " " :notice true :noindex true :sitemap '(:disable true) :build '(:list "never")
 :END:
-
-#+begin_export html
-<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
-#+end_export
 
 You've been unsubscribed.  Sorry to see you go---you won't receive any
 more emails from this list.

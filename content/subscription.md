@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2025-12-13T22:06:00+00:00
 tags = ["blog"]
 draft = false
+notice = true
 subtitle = " "
 noindex = true
 [sitemap]
@@ -11,8 +12,6 @@ noindex = true
 [build]
   list = "never"
 +++
-
-<style> .signature { display: none; } main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; } </style>
 
 Welcome! Your subscription is confirmed.  Thanks for signing up.
 

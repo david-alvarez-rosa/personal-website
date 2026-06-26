@@ -64,6 +64,27 @@ h1 {
     line-height: 1;
 }
 
+.notice main, .notice footer {
+    max-width: 34rem;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.notice .signature {
+    display: none;
+}
+
+.notice nav ul {
+    justify-content: center;
+}
+
+.notice main p:first-of-type::first-letter {
+    float: revert;
+    font-size: revert;
+    font-family: revert;
+    padding: revert;
+}
+
 h2 {
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-size: 1.6rem;
@@ -339,6 +360,11 @@ h2:focus-within .anchor {
     }
 
     main, footer {
+        margin: 0 1.2rem;
+    }
+
+    .notice main, .notice footer {
+        max-width: none;
         margin: 0 1.2rem;
     }
 
