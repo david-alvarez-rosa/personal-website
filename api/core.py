@@ -9,7 +9,7 @@ from pathlib import Path
 from pydantic import EmailStr
 from sqlmodel import Field, SQLModel, create_engine
 
-SES_SMTP_HOST = "email-smtp.eu-west-2.amazonaws.com"
+SES_SMTP_HOST = "email-smtp.eu-north-1.amazonaws.com"
 SES_SMTP_PORT = 587
 SES_SMTP_USER = os.environ["SES_SMTP_USER"]
 SES_SMTP_PASS = os.environ["SES_SMTP_PASS"]
