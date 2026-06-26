@@ -251,7 +251,9 @@ a:hover {
 
 nav li a:hover,
 .tags a:hover,
-.anchor:hover {
+.anchor:hover,
+.author a[href="/"]:hover,
+footer p a[href="/"]:hover {
     background: none;
 }
 
