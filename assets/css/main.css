@@ -87,7 +87,7 @@ h1:has(+ .subtitle) {
     text-align: center;
 }
 
-.notice .signature {
+.notice .byline {
     display: none;
 }
 
@@ -131,26 +131,33 @@ header .subtitle {
     max-width: 30rem;
 }
 
-.signature {
+.byline {
     text-align: left;
     margin-top: 4.2rem;
 }
 
-.signature .author {
+.byline .author {
     display: block;
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     text-transform: lowercase;
     letter-spacing: 0.02rem;
 }
 
-.signature .author i {
+.byline .author i {
     font-family: "Alegreya", "Alegreya Fallback", serif;
 }
 
-.signature .date {
+.byline .date {
     display: block;
     font-style: italic;
     font-weight: 400;
+}
+
+.byline .tags {
+    display: block;
+    font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
+    text-transform: lowercase;
+    letter-spacing: 0.02rem;
 }
 
 .figure-number {
@@ -418,7 +425,7 @@ h2:focus-within .anchor {
         border-left: 3px solid var(--border);
     }
 
-    .signature {
+    .byline {
         float: none;
         width: auto;
         margin: 0 0 0.8rem;

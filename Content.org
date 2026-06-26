@@ -1296,7 +1296,7 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* DONE [#B] Tuning a Server for Benchmarking
+* DONE [#B] Tuning a Server for Benchmarking  :performance:
 CLOSED: [2026-06-25 Thu 18:02]
 :PROPERTIES:
 :EXPORT_FILE_NAME: tuning-a-server-for-benchmarking
@@ -1477,7 +1477,7 @@ and reboot back to a normal machine.
 
 Long live reproducible benchmarks!
 
-* DONE [#B] Self-Hosting on the Dark Web
+* DONE [#B] Self-Hosting on the Dark Web  :self_hosting:
 CLOSED: [2026-06-01 Mon 10:55]
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-on-the-dark-web
@@ -1569,7 +1569,7 @@ GitHub Actions workflow that builds and deploys the Tor copy.]
 That's it.  Read this site over Tor at
 ~dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion~.
 
-* DONE [#B] First Steps on a New Server
+* DONE [#B] First Steps on a New Server  :self_hosting:
 CLOSED: [2026-05-17 Sun 17:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: first-steps-on-a-new-server
@@ -1779,7 +1779,7 @@ renewal automatically.  Confirm your domain loads over HTTPS.
 
 That's the baseline.  From here, the machine is yours---go build on it.
 
-* DONE [#B] Fundamental Theorem of Calculus
+* DONE [#B] Fundamental Theorem of Calculus  :mathematics:
 CLOSED: [2026-04-22 Wed 20:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: fundamental-theorem-of-calculus
@@ -1936,7 +1936,7 @@ points.[fn::For example, \(\int_0^1 x^2\,dx = F(1)-F(0) = 1/3\) with
 because it unifies differentiation and integration, the two central
 operations of calculus.
 
-* DONE [#B] Optimizing a Lock-Free Ring Buffer
+* DONE [#B] Optimizing a Lock-Free Ring Buffer  :performance:
 CLOSED: [2026-03-24 Tue 11:51]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
@@ -2240,7 +2240,7 @@ scheduling noise.
 
 Long live lock-free and wait-free data structures!
 
-* DONE [#B] Deriving Type Erasure
+* DONE [#B] Deriving Type Erasure  :cpp:
 CLOSED: [2026-03-10 Tue 09:46]
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-type-erasure
@@ -2518,7 +2518,7 @@ That's it!  The class ~Any~ is a simplified version of
 C++ and Rust: Type Erasure]].] which is even used in the STL itself
 (namely, in ~std::function~).  But that's for another post.
 
-* DONE [#B] Devirtualization and Static Polymorphism
+* DONE [#B] Devirtualization and Static Polymorphism  :cpp:
 CLOSED: [2026-02-25 Wed 09:45]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
@@ -2798,7 +2798,7 @@ This yields identical optimized code: ~foo~ is instantiated as
 ~foo<Derived>~, and the call to ~bar~ is resolved statically and
 inlined.
 
-* DONE [#B] About this Site
+* DONE [#B] About this Site  :meta:
 CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about-this-site

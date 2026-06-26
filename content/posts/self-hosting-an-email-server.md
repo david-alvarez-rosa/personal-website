@@ -1,7 +1,7 @@
 +++
 title = "Self-Hosting an Email Server"
 author = ["David Álvarez Rosa"]
-tags = ["pers", "blog"]
+tags = ["blog"]
 draft = true
 +++
 

@@ -2,7 +2,7 @@
 title = "Tuning a Server for Benchmarking"
 author = ["David Álvarez Rosa"]
 date = 2026-06-25T18:02:00+01:00
-tags = ["blog"]
+tags = ["blog", "performance"]
 draft = false
 subtitle = "Taming OS and hardware noise for repeatable benchmarks."
 +++

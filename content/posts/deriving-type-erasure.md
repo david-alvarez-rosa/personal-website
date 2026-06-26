@@ -2,7 +2,7 @@
 title = "Deriving Type Erasure"
 author = ["David Álvarez Rosa"]
 date = 2026-03-10T09:46:00+00:00
-tags = ["blog"]
+tags = ["blog", "cpp"]
 draft = false
 subtitle = "Building a minimal std::any to demystify type erasure."
 +++
