@@ -5,7 +5,6 @@ date = 2025-12-13T22:06:00+00:00
 tags = ["blog"]
 draft = false
 notice = true
-subtitle = " "
 noindex = true
 [sitemap]
   disable = true

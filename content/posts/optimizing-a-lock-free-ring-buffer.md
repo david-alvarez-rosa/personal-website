@@ -2,7 +2,7 @@
 title = "Optimizing a Lock-Free Ring Buffer"
 author = ["David Álvarez Rosa"]
 date = 2026-03-24T11:51:00+00:00
-tags = ["blog", "performance"]
+tags = ["blog", "cpp", "performance"]
 draft = false
 subtitle = "Building a lock-free SPSC queue for the lowest latency."
 +++

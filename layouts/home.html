@@ -1,13 +1,8 @@
 {{ define "main" }}
-  <style>.side img { transition: transform 600ms ease; width: 240px; height: auto;  margin-top: -20px; box-shadow: none; } @media (max-width: 860px) { .side img { margin-top: 0!important; margin-bottom: -1.6rem; } }</style>
-  <script>
-    document.addEventListener("mouseover", (e) => {
-      const img = e.target.closest(".side img");
-      if (!img) return;
-      setTimeout(() => { img.style.transform = "rotate(180deg)"; }, 1000);
-      setTimeout(() => { img.style.transform = ""; }, 3000);
-    });
-  </script>
+  <style>.side img { width: 240px; height: auto;  margin-top: -20px; transition: transform 600ms ease-out; } @media (max-width: 860px) { .side img { margin-top: 0!important; margin-bottom: -1.6rem; } }</style>
+  {{ with resources.Get "js/easter-egg.js" | minify | fingerprint }}
+    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{ end }}
   <header>
     <h1>{{ .Title }}</h1>
     {{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
@@ -15,13 +10,16 @@
   {{ partial "processed-content.html" . }}
 
   <h2 id="recent-entries">Recent Posts <a class="anchor" href="#recent-entries">&sect;</a></h2>
-  {{ range first 3 (where site.RegularPages "Section" "posts") }}
+  {{ range first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
     <p>
       <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := .Date | time.Format ":date_long" }}
       <span class="side">
-        <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+        {{ $dateHuman := .Date | time.Format ":date_long" }}
+        <time class="date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+        {{ with complement (slice "blog" "backlog" "pers") .Params.tags }}
+          <span class="tags">{{ partial "tags.html" . }}</span>
+        {{ end }}
       </span>
       <br />
       {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}

@@ -1,0 +1,9 @@
+{{- range $i, $tag := . -}}
+  {{- if $i }} · {{ end -}}
+  {{- $label := replace $tag "cpp" "c++" -}}
+  {{- with site.GetPage (printf "/tags/%s" $tag) -}}
+    <a href="{{ .RelPermalink }}">{{ $label }}</a>
+  {{- else -}}
+    {{ $label }}
+  {{- end -}}
+{{- end -}}

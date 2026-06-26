@@ -4,7 +4,6 @@ author = ["David Álvarez Rosa"]
 tags = ["blog"]
 draft = false
 notice = true
-subtitle = " "
 noindex = true
 [sitemap]
   disable = true

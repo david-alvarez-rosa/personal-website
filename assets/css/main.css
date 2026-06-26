@@ -147,17 +147,20 @@ header .subtitle {
     font-family: "Alegreya", "Alegreya Fallback", serif;
 }
 
-.byline .date {
+.date {
     display: block;
-    font-style: italic;
     font-weight: 400;
 }
 
-.byline .tags {
+.tags {
     display: block;
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     text-transform: lowercase;
     letter-spacing: 0.02rem;
+}
+
+.tags a {
+    color: var(--text);
 }
 
 .figure-number {
@@ -246,6 +249,12 @@ a:hover {
     border-radius: 4px;
 }
 
+nav li a:hover,
+.tags a:hover,
+.anchor:hover {
+    background: none;
+}
+
 main img {
     max-width: 100%;
     height: auto;
@@ -332,6 +341,7 @@ code:not(.chroma code) {
 
 .anchor {
     padding: 0 0.4rem;
+    color: inherit;
     position: relative;
     transition: opacity 0.2s;
     opacity: 0;

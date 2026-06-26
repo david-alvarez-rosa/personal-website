@@ -2,7 +2,7 @@
 title = "Devirtualization and Static Polymorphism"
 author = ["David Álvarez Rosa"]
 date = 2026-02-25T09:45:00+00:00
-tags = ["blog", "cpp"]
+tags = ["blog", "cpp", "performance"]
 draft = false
 subtitle = "The hidden cost of virtual dispatch, and how to escape it."
 +++

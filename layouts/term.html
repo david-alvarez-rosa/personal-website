@@ -1,11 +1,11 @@
 {{ define "main" }}
+  {{ $label := replace .Data.Term "cpp" "c++" }}
   <header>
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
+    <h1>{{ $label | title }}</h1>
+    <span class="subtitle">Posts tagged &ldquo;{{ $label }}&rdquo;.</span>
   </header>
-  {{ .Content }}
   {{ $lastYear := 0 }}
-  {{ range (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+  {{ range .Pages.ByDate.Reverse }}
     {{ $year := .Date.Year }}
     {{ if ne $year $lastYear }}
       {{ if ne $year now.Year }}<h2>{{ $year }}</h2>{{ end }}
