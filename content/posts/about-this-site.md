@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2018-05-11T21:18:00+01:00
 tags = ["blog"]
 draft = false
+subtitle = "Rebuilding a personal blog from scratch, a decade on."
 +++
 
 After nearly a decade, I've rebuilt my personal site from scratch---a

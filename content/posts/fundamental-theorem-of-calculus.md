@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-04-22T20:14:00+01:00
 tags = ["blog"]
 draft = false
+subtitle = "From the Riemann integral to the keystone of calculus."
 latex = true
 +++
 

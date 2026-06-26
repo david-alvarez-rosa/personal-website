@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-06-01T10:55:00+01:00
 tags = ["blog"]
 draft = false
+subtitle = "Bringing this site to Tor as a hidden service."
 +++
 
 This site is now reachable over Tor as a hidden service, at a `.onion`

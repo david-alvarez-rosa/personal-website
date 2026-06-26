@@ -1,9 +1,10 @@
 +++
-title = "Welcome"
+title = "David Álvarez Rosa"
 author = ["David Álvarez Rosa"]
 date = 2025-12-02T19:58:00+00:00
 tags = ["blog"]
 draft = false
+subtitle = "Mathematician · Engineer · Dublin"
 seotitle = "David Álvarez Rosa | Personal Site"
 +++
 

@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-03-24T11:51:00+00:00
 tags = ["blog"]
 draft = false
+subtitle = "Building a lock-free SPSC queue for the lowest latency."
 +++
 
 A single-producer single-consumer (SPSC) queue is a great example of how

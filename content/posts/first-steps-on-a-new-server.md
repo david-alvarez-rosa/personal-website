@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-05-17T17:26:00+01:00
 tags = ["blog"]
 draft = false
+subtitle = "A personal checklist for settling into a fresh machine."
 +++
 
 Over the last decade I've been playing with dozens of servers from

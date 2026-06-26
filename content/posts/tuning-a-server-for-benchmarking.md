@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-06-25T18:02:00+01:00
 tags = ["blog"]
 draft = false
+subtitle = "Taming OS and hardware noise for repeatable benchmarks."
 +++
 
 Optimizing code starts with measuring it, and a measurement is only

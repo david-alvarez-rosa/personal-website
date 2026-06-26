@@ -1300,6 +1300,7 @@ measured the difference.
 CLOSED: [2026-06-25 Thu 18:02]
 :PROPERTIES:
 :EXPORT_FILE_NAME: tuning-a-server-for-benchmarking
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Taming OS and hardware noise for repeatable benchmarks."
 :END:
 
 Optimizing code starts with measuring it, and a measurement is only
@@ -1480,6 +1481,7 @@ Long live reproducible benchmarks!
 CLOSED: [2026-06-01 Mon 10:55]
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-on-the-dark-web
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Bringing this site to Tor as a hidden service."
 :END:
 
 This site is now reachable over Tor as a hidden service, at a ~.onion~
@@ -1571,6 +1573,7 @@ That's it.  Read this site over Tor at
 CLOSED: [2026-05-17 Sun 17:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: first-steps-on-a-new-server
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "A personal checklist for settling into a fresh machine."
 :END:
 
 Over the last decade I've been playing with dozens of servers from
@@ -1780,7 +1783,7 @@ That's the baseline.  From here, the machine is yours---go build on it.
 CLOSED: [2026-04-22 Wed 20:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: fundamental-theorem-of-calculus
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :latex true
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :latex true :subtitle "From the Riemann integral to the keystone of calculus."
 :END:
 
 Although the notion of area is intuitive, its mathematical treatment
@@ -1937,6 +1940,7 @@ operations of calculus.
 CLOSED: [2026-03-24 Tue 11:51]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Building a lock-free SPSC queue for the lowest latency."
 :END:
 :LOGBOOK:
 CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 11:35] =>  0:48
@@ -2240,6 +2244,7 @@ Long live lock-free and wait-free data structures!
 CLOSED: [2026-03-10 Tue 09:46]
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-type-erasure
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Building a minimal std::any to demystify type erasure."
 :END:
 :LOGBOOK:
 CLOCK: [2026-01-24 Sat 18:10]--[2026-01-24 Sat 20:06] =>  1:56
@@ -2517,6 +2522,7 @@ C++ and Rust: Type Erasure]].] which is even used in the STL itself
 CLOSED: [2026-02-25 Wed 09:45]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "The hidden cost of virtual dispatch, and how to escape it."
 :END:
 :LOGBOOK:
 - State "WAIT"       from "NEXT"       [2025-12-18 Thu 20:02]
@@ -2796,6 +2802,7 @@ inlined.
 CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about-this-site
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Rebuilding a personal blog from scratch, a decade on."
 :END:
 :LOGBOOK:
 CLOCK: [2026-01-24 Sat 10:47]--[2026-01-24 Sat 10:47] =>  0:00
@@ -2965,12 +2972,12 @@ Catalan --- Intermediate
 You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
 39 30.
 
-* DONE [#B] Welcome
+* DONE [#B] David Álvarez Rosa
 CLOSED: [2025-12-02 Tue 19:58]
 :PROPERTIES:
 :EXPORT_FILE_NAME: _index
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :seotitle "David Álvarez Rosa | Personal Site"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Mathematician · Engineer · Dublin" :seotitle "David Álvarez Rosa | Personal Site"
 :END:
 
  [fn::[[./assets/images/home-illustration.png]] ‎]Hi! This is my personal
@@ -2983,6 +2990,13 @@ low-latency, high-performance systems.  I'm a strong advocate of free
 (as in /freedom/) software, and a devoted Emacs user.
 
 Find me on [[https://github.com/david-alvarez-rosa/][GitHub]], [[https://gitlab.com/david-alvarez-rosa][GitLab]], and [[https://linkedin.com/in/david-alvarez-rosa][LinkedIn]].
+
+* DONE [#B] Posts
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Essays on software, performance, and self-hosting."
+:END:
 
 * DONE [#B] Page Not Found
 CLOSED: [2025-12-13 Sat 22:23]

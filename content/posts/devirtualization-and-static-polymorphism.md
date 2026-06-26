@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 date = 2026-02-25T09:45:00+00:00
 tags = ["blog"]
 draft = false
+subtitle = "The hidden cost of virtual dispatch, and how to escape it."
 +++
 
 Ever wondered why your "clean" polymorphic design underperforms in
