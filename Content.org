@@ -2924,7 +2924,7 @@ CLOSED: [2026-01-24 Sat 12:31]
 :EXPORT_TITLE: David Álvarez Rosa
 :EXPORT_FILE_NAME: about
 :EXPORT_HUGO_SECTION: .
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle Curriculum Vitae :seotitle "About | David Álvarez Rosa | Personal Site"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle Curriculum Vitae :seotitle "About | David Álvarez Rosa"
 :END:
 
 #+begin_export html
