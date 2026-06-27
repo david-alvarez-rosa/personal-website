@@ -10,7 +10,7 @@
   <header>
     <aside class="side byline">
       <span class="date">{{ $.Date | time.Format ":date_long" }}</span>
-      <span class="author"><i>by</i> <a href="/" style="color: var(--text)">{{ index .Params.Author 0 }}</a></span>
+      <span class="author"><i>by</i> <a href="/">{{ index .Params.Author 0 }}</a></span>
       {{ with complement (slice "blog" "backlog" "pers") .Params.tags }}
       <span class="tags">{{ partial "tags.html" . }}</span>
       {{ end }}
