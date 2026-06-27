@@ -1296,7 +1296,90 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* DONE [#B] Tuning a Server for Benchmarking  :performance:
+* TODO [#B] Reflecting on One Hundred Thousand Reads                   :meta:
+:PROPERTIES:
+:EXPORT_FILE_NAME: reflecting-on-one-hundred-thousand-reads
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "A thank-you, and where the reads come from."
+:END:
+
+This site just passed one hundred thousand reads.  It began as a
+notebook kept in public, read by almost no one, and the idea hasn't
+changed: one well-made post a month, not quick writeups---only deep
+dives into things that genuinely interest me.  So to everyone who has
+read one: thank you; that is what matters, the rest is just numbers.
+
+The numbers are uneven.  Visitors tend to stay---five and a half minutes
+on average---but where they come from is the surprise: Reddit and Hacker
+News send nearly 90% of readers, every search engine under 5%.
+
+#+begin_export html
+<figure class="sources">
+  <figcaption><p><strong>Two sites, most of it.</strong>  Reddit and Hacker News send nearly nine in ten readers; every search engine put together sends under one in twenty.</p></figcaption>
+  <div class="chart">
+    <div class="plot" role="img" aria-label="Bar chart of traffic sources. Reddit 69 percent, Hacker News 20 percent, search engines under 5 percent, and others 6 percent.">
+      <div class="row"><span class="name">reddit</span><span class="track"><span class="bar" style="width:69%"></span><span class="val" data-egg>69%</span></span></div>
+      <div class="row"><span class="name">hacker news</span><span class="track"><span class="bar" style="width:20%"></span><span class="val">20%</span></span></div>
+      <div class="row"><span class="name">search engines</span><span class="track"><span class="bar" style="width:4%"></span><span class="val">&lt;5%</span></span></div>
+      <div class="row"><span class="name">others</span><span class="track"><span class="bar" style="width:6%"></span><span class="val">6%</span></span></div>
+    </div>
+  </div>
+</figure>
+<style>
+  figure.sources { color: var(--text); margin: 0 0 1.4rem; }
+  figure.sources .chart {
+    border: 2px solid var(--text); padding: 0.5rem 0.8rem; box-sizing: border-box;
+  }
+  figure.sources .plot {
+    max-width: 34rem; margin: 0 auto;
+    display: grid; grid-template-columns: max-content 1fr; align-items: stretch;
+  }
+  figure.sources .row { display: contents; }
+  figure.sources .name {
+    font-family: var(--font-sc); font-size: 1.25rem; white-space: nowrap;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0.8rem;
+  }
+  figure.sources .track {
+    display: flex; align-items: center;
+    border-left: 2px solid var(--text); padding: 0.5rem 0;
+  }
+  figure.sources .bar {
+    flex: none; height: 1.4rem; box-sizing: border-box;
+    border: 1.5px solid var(--text);
+    background: repeating-linear-gradient(45deg, var(--text) 0 1.6px, transparent 1.6px 7px);
+  }
+  figure.sources .val {
+    font-family: var(--font-body); font-size: 1.25rem;
+    margin-left: 0.6rem; white-space: nowrap;
+  }
+  figure.sources .val[data-egg] { position: relative; }
+  figure.sources .val[data-egg]::after {
+    content: "if you know, you know";
+    position: absolute; top: 100%; right: 0; margin-top: 0.1rem;
+    white-space: nowrap; font-style: italic; font-size: 1rem; color: var(--accent);
+    opacity: 0; transition: opacity 0.25s ease; pointer-events: none;
+  }
+  figure.sources .val[data-egg]:hover::after { opacity: 1; }
+  @media (min-width: 861px) {
+    figure.sources figcaption { padding-top: 0; margin-top: -0.3rem; }
+  }
+</style>
+#+end_export
+
+And that is fragile.  This traffic spikes, then fades---a post hits a
+front page, pulls a few thousand reads in a day, then goes quiet; the
+three most-read owe their 40,000-odd reads to a few such days, not
+steady interest.[fn::[[/posts/optimizing-a-lock-free-ring-buffer/][Optimizing a Lock-Free Ring Buffer]] leads with
+16,635 reads, followed by the [[/posts/fundamental-theorem-of-calculus/][Fundamental Theorem of Calculus]] (12,506)
+and [[/posts/devirtualization-and-static-polymorphism/][Devirtualization and Static Polymorphism]] (11,848).] Search is the
+opposite: tiny now, but it grows over time, so the deeper posts are
+being set up to show up there---and each new one is syndicated more
+widely.
+
+Thank you, again, for reading.  [[/#subscribe][Subscribe]] or follow by [[/index.xml][RSS]], and feedback
+is always welcome---[[/about/#contact][get in touch]].
+
+* DONE [#B] Tuning a Server for Benchmarking                    :performance:
 CLOSED: [2026-06-25 Thu 18:02]
 :PROPERTIES:
 :EXPORT_FILE_NAME: tuning-a-server-for-benchmarking
@@ -1477,7 +1560,7 @@ and reboot back to a normal machine.
 
 Long live reproducible benchmarks!
 
-* DONE [#B] Self-Hosting on the Dark Web  :self_hosting:
+* DONE [#B] Self-Hosting on the Dark Web                       :self_hosting:
 CLOSED: [2026-06-01 Mon 10:55]
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-on-the-dark-web
@@ -1569,7 +1652,7 @@ GitHub Actions workflow that builds and deploys the Tor copy.]
 That's it.  Read this site over Tor at
 ~dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion~.
 
-* DONE [#B] First Steps on a New Server  :self_hosting:
+* DONE [#B] First Steps on a New Server                        :self_hosting:
 CLOSED: [2026-05-17 Sun 17:26]
 :PROPERTIES:
 :EXPORT_FILE_NAME: first-steps-on-a-new-server
@@ -1779,7 +1862,7 @@ renewal automatically.  Confirm your domain loads over HTTPS.
 
 That's the baseline.  From here, the machine is yours---go build on it.
 
-* DONE [#B] Fundamental Theorem of Calculus  :mathematics:
+* DONE [#B] Fundamental Theorem of Calculus                     :mathematics:
 CLOSED: [2026-04-22 Wed 20:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: fundamental-theorem-of-calculus
@@ -1936,7 +2019,7 @@ points.[fn::For example, \(\int_0^1 x^2\,dx = F(1)-F(0) = 1/3\) with
 because it unifies differentiation and integration, the two central
 operations of calculus.
 
-* DONE [#B] Optimizing a Lock-Free Ring Buffer  :cpp:performance:
+* DONE [#B] Optimizing a Lock-Free Ring Buffer              :cpp:performance:
 CLOSED: [2026-03-24 Tue 11:51]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-lock-free-ring-buffer
@@ -2240,7 +2323,7 @@ scheduling noise.
 
 Long live lock-free and wait-free data structures!
 
-* DONE [#B] Deriving Type Erasure  :cpp:
+* DONE [#B] Deriving Type Erasure                                       :cpp:
 CLOSED: [2026-03-10 Tue 09:46]
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-type-erasure
@@ -2518,7 +2601,7 @@ That's it!  The class ~Any~ is a simplified version of
 C++ and Rust: Type Erasure]].] which is even used in the STL itself
 (namely, in ~std::function~).  But that's for another post.
 
-* DONE [#B] Devirtualization and Static Polymorphism  :cpp:performance:
+* DONE [#B] Devirtualization and Static Polymorphism        :cpp:performance:
 CLOSED: [2026-02-25 Wed 09:45]
 :PROPERTIES:
 :EXPORT_FILE_NAME: devirtualization-and-static-polymorphism
@@ -2798,7 +2881,7 @@ This yields identical optimized code: ~foo~ is instantiated as
 ~foo<Derived>~, and the call to ~bar~ is resolved statically and
 inlined.
 
-* DONE [#B] About this Site
+* DONE [#B] About this Site                                            :meta:
 CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about-this-site
