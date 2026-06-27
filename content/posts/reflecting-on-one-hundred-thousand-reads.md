@@ -49,7 +49,7 @@ News send nearly 90% of readers, every search engine under 5%.
   figure.sources .bar {
     flex: none; height: 1.4rem; box-sizing: border-box;
     border: 1.5px solid var(--text);
-    background: repeating-linear-gradient(45deg, var(--text) 0 1.6px, transparent 1.6px 7px);
+    background: repeating-linear-gradient(45deg, var(--text) 0, var(--text) 1.6px, transparent 1.6px, transparent 7px);
   }
   figure.sources .val {
     font-family: var(--font-body); font-size: 1.25rem;

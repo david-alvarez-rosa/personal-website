@@ -14,13 +14,5 @@
     {{ partial "post-entry.html" . }}
   {{ end }}
 
-  <h2 id="subscribe">Subscribe<a class="anchor" href="#subscribe">&sect;</a></h2>
-  <p>
-    My mailing list is free, occasional, and covers a variety of topics.
-    I will never sell or share your email address.
-  </p>
-  <form action="https://api.alvarezrosa.com/subscribe" method="post" class="subscribe-form">
-    <input type="email" name="email" required placeholder="your-name@domain.com" />
-    <button type="submit">Subscribe</button>
-  </form>
+  {{ partial "subscribe.html" . }}
 {{ end }}

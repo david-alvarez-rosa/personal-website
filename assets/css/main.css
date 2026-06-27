@@ -87,6 +87,15 @@ h1:has(+ .subtitle) {
     margin-bottom: 0.65rem;
 }
 
+.ornament {
+    width: 5.5rem;
+    aspect-ratio: 331.75 / 162.67;
+    margin: 3.2rem auto 2.4rem;
+    background-color: var(--text);
+    -webkit-mask: url(/images/ornament-divider.svg) center / contain no-repeat;
+    mask: url(/images/ornament-divider.svg) center / contain no-repeat;
+}
+
 .notice main, .notice footer {
     max-width: 34rem;
     margin-inline: auto;
@@ -360,6 +369,9 @@ h2:focus-within .anchor {
 }
 
 .subscribe-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-top: -0.4rem;
 }
 
@@ -372,9 +384,8 @@ h2:focus-within .anchor {
 }
 
 .subscribe-form input[type="email"] {
+    flex: 1 1 16rem;
     max-width: 20rem;
-    width: 100%;
-    margin: 0 0.5rem 0.5rem 0;
 }
 
 .subscribe-form button {
