@@ -7,5 +7,7 @@
   </span>
   <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
   <br/>
-  {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
+  <span class="summary">
+    {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
+  </span>
 </p>

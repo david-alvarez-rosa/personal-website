@@ -431,11 +431,33 @@ h2:focus-within .anchor {
         margin-bottom: 2.4rem;
     }
 
+    p:has(> .side.meta) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    p:has(> .side.meta) br {
+        display: none;
+    }
+
+    p:has(> .side.meta) > a {
+        order: 1;
+    }
+
+    p:has(> .side.meta) > .side.meta {
+        order: 2;
+    }
+
+    p:has(> .side.meta) > .summary {
+        order: 3;
+    }
+
     .side.meta {
         display: block;
         float: none;
         width: auto;
-        margin: 0 0 0.1rem;
+        margin: 0;
         padding: 0;
         border: none;
     }
