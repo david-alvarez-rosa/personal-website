@@ -1376,8 +1376,7 @@ opposite: tiny now, but it grows over time, so the deeper posts are
 being set up to show up there---and each new one is syndicated more
 widely.
 
-Thank you, again, for reading.  [[/#subscribe][Subscribe]] or follow by [[/index.xml][RSS]], and feedback
-is always welcome---[[/about/#contact][get in touch]].
+Thank you, again, for reading.
 
 * DONE [#B] Tuning a Server for Benchmarking                    :performance:
 CLOSED: [2026-06-25 Thu 18:02]

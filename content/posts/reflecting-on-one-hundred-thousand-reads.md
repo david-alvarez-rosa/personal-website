@@ -76,8 +76,7 @@ opposite: tiny now, but it grows over time, so the deeper posts are
 being set up to show up there---and each new one is syndicated more
 widely.
 
-Thank you, again, for reading.  [Subscribe](/#subscribe) or follow by [RSS](/index.xml), and feedback
-is always welcome---[get in touch](/about/#contact).
+Thank you, again, for reading.
 
 [^fn:1]: [Optimizing a Lock-Free Ring Buffer](/posts/optimizing-a-lock-free-ring-buffer/) leads with
     16,635 reads, followed by the [Fundamental Theorem of Calculus](/posts/fundamental-theorem-of-calculus/) (12,506)
