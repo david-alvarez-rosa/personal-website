@@ -92,7 +92,7 @@ $ taskset -c 2 ./benchmark ...
 The mean falls to **55.3 µs** and the CV better than halves, to **1.06%**.
 The win is bigger than migration costs alone would suggest: every burst
 now wakes the same core, so that core's clock never has time to sag
-between bursts.
+between bursts.[^fn:3]
 
 
 ## Lock the CPU frequency {#lock-the-cpu-frequency}
@@ -147,7 +147,7 @@ On this machine nothing changes, since our short bursts never gave the
 silicon time to boost anyway.  On a machine where turbo does engage,
 expect the mean to climb instead: you are giving up peak performance.
 That trade is fine, since when optimizing we care about _relative_
-numbers, and those are now comparable across runs.[^fn:3]
+numbers, and those are now comparable across runs.[^fn:4]
 
 
 ## Summary {#summary}
@@ -155,7 +155,7 @@ numbers, and those are now comparable across runs.[^fn:3]
 Here is the whole journey in one table, each row adding one change on
 top of all the previous ones.  We went from almost **3%** of noise down to
 **0.26%**, and got 1.8x faster along the way; differences of half a
-percent are now real, measurable signal.[^fn:4]
+percent are now real, measurable signal.[^fn:5]
 
 | Step                   | Mean        | StdDev  | CV        |
 |------------------------|-------------|---------|-----------|
@@ -182,11 +182,16 @@ Long live reproducible benchmarks!
 [^fn:2]: `PauseTiming` / `ResumeTiming` keep the sleep out of the
     measured time, and `DoNotOptimize` keeps the result alive past the
     optimizer; without it the compiler deletes the entire loop.
-[^fn:3]: Low-latency
+[^fn:3]: Pinning puts the benchmark _onto_ the core but does
+    not keep _other_ tasks off it.  On a busy box, go further and reserve
+    the core for the benchmark alone, either on the kernel command line
+    (`isolcpus=2 nohz_full=2 rcu_nocbs=2`) or at runtime with a `cpuset`
+    cgroup.
+[^fn:4]: Low-latency
     production tuning makes the _opposite_ call and keeps turbo on: there,
     every nanosecond counts.  The most latency-sensitive trading shops go
     further and run overclocked servers, locked at a fixed all-core
     frequency above stock---speed _and_ stable clocks, bought with better
     cooling.
-[^fn:4]: Feel free to reproduce on
+[^fn:5]: Feel free to reproduce on
     your machine using the [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/scratch/benchmark.cpp) from my [CppPlayground](https://github.com/david-alvarez-rosa/CppPlayground) repository.

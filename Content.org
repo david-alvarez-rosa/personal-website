@@ -1474,7 +1474,11 @@ Pin the benchmark to a single core (on hybrid parts, a P-core)
 The mean falls to *55.3 µs* and the CV better than halves, to *1.06%*.
 The win is bigger than migration costs alone would suggest: every burst
 now wakes the same core, so that core's clock never has time to sag
-between bursts.
+between bursts.[fn::Pinning puts the benchmark /onto/ the core but does
+not keep /other/ tasks off it.  On a busy box, go further and reserve
+the core for the benchmark alone, either on the kernel command line
+(~isolcpus=2 nohz_full=2 rcu_nocbs=2~) or at runtime with a ~cpuset~
+cgroup.]
 
 ** Lock the CPU frequency
 
