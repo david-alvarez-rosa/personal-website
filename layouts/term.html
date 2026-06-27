@@ -4,25 +4,5 @@
     <h1>{{ $label | title }}</h1>
     <span class="subtitle">Posts tagged &ldquo;{{ $label }}&rdquo;.</span>
   </header>
-  {{ $lastYear := 0 }}
-  {{ range .Pages.ByDate.Reverse }}
-    {{ $year := .Date.Year }}
-    {{ if ne $year $lastYear }}
-      {{ if ne $year now.Year }}<h2>{{ $year }}</h2>{{ end }}
-      {{ $lastYear = $year }}
-    {{ end }}
-    <p>
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      <span class="side">
-        {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-        {{ $dateHuman := .Date | time.Format ":date_long" }}
-        <time class="date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-        {{ with complement (slice "blog" "backlog" "pers") .Params.tags }}
-          <span class="tags">{{ partial "tags.html" . }}</span>
-        {{ end }}
-      </span>
-      <br/>
-      {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
-    </p>
-  {{ end }}
+  {{ partial "post-list.html" .Pages.ByDate.Reverse }}
 {{ end }}

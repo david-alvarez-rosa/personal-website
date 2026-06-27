@@ -1,0 +1,9 @@
+{{ $lastYear := 0 }}
+{{ range . }}
+  {{ $year := .Date.Year }}
+  {{ if ne $year $lastYear }}
+    {{ if ne $year now.Year }}<h2>{{ $year }}</h2>{{ end }}
+    {{ $lastYear = $year }}
+  {{ end }}
+  {{ partial "post-entry.html" . }}
+{{ end }}

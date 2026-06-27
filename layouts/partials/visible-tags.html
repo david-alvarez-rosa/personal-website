@@ -1,0 +1,3 @@
+{{ with complement (slice "blog" "backlog" "pers") .Params.tags }}
+  <span class="tags">{{ partial "tags.html" . }}</span>
+{{ end }}
