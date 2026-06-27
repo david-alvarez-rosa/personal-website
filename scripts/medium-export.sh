@@ -2,7 +2,27 @@
 set -euo pipefail
 
 BASE_URL="https://david.alvarezrosa.com"
-src="$1"
+
+latest_published() {
+  local dir now f d e
+  dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/../content/posts" && pwd)"
+  now=$(date +%s)
+  for f in "$dir"/*.md; do
+    [[ "$(basename "$f")" == _index.md ]] && continue
+    grep -q '^draft = false' "$f" || continue
+    d=$(grep -m1 '^date = ' "$f" | sed -E 's/^date = //')
+    e=$(date -d "$d" +%s 2>/dev/null) || continue
+    (( e <= now )) && printf '%s\t%s\n' "$e" "$f"
+  done | sort -rn | head -1 | cut -f2-
+}
+
+if [[ $# -ge 1 ]]; then
+  src="$1"
+else
+  src="$(latest_published)"
+  [[ -n "$src" ]] || { echo "No published post found." >&2; exit 1; }
+  echo "Defaulting to latest published post: $src" >&2
+fi
 slug="$(basename "$src" .md)"
 root="$(cd "$(dirname "$src")/../.." && pwd)"
 out="${TMPDIR:-/tmp}/medium-${slug}.html"
