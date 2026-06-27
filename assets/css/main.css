@@ -423,10 +423,37 @@ h2:focus-within .anchor {
         border-left: 3px solid var(--border);
     }
 
+    p:has(.side:not(.meta)) + h2 {
+        clear: both;
+    }
+
+    p:has(.side:not(.meta)):has(+ h2) .side {
+        margin-bottom: 2.4rem;
+    }
+
+    .side.meta {
+        display: block;
+        float: none;
+        width: auto;
+        margin: 0 0 0.1rem;
+        padding: 0;
+        border: none;
+    }
+
+    .side.meta .date,
+    .side.meta .tags {
+        display: inline;
+    }
+
+    .side.meta .tags::before {
+        content: "·";
+        margin: 0 0.4rem;
+    }
+
     .byline {
         float: none;
         width: auto;
-        margin: 0 0 0.8rem;
+        margin: 0 0 1.6rem;
         padding: 0;
         border: none;
         text-align: center;

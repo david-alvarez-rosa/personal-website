@@ -12,8 +12,7 @@
   <h2 id="recent-entries">Recent Posts <a class="anchor" href="#recent-entries">&sect;</a></h2>
   {{ range first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
     <p>
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-      <span class="side">
+      <span class="side meta">
         {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
         {{ $dateHuman := .Date | time.Format ":date_long" }}
         <time class="date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
@@ -21,6 +20,7 @@
           <span class="tags">{{ partial "tags.html" . }}</span>
         {{ end }}
       </span>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       <br />
       {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
     </p>
