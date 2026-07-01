@@ -1,7 +1,7 @@
 +++
 title = "Building a Mouse Jiggler"
 author = ["David Álvarez Rosa"]
-tags = ["blog"]
+tags = ["blog", "backlog"]
 draft = true
 +++
 

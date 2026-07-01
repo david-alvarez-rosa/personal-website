@@ -4,21 +4,21 @@
 #+filetags: :blog:
 #+CATEGORY: Blog
 
-* TODO [#B] Emacs config and/or Arch Linux config
+* TODO [#B] Emacs config and/or Arch Linux config                   :backlog:
 
-* TODO [#B] Optimizing and Order Book
+* TODO [#B] Optimizing an Order Book                                :backlog:
 https://github.com/atribout
 
-* TODO [#B] Perf improvements website
+* TODO [#B] Perf improvements website                               :backlog:
 - CDN
 - RTT optimization -> HTML at edge
 - Multiple image sizes
 - Font split for dropcap
 - etc.
 
-* TODO [#B] QUIC protocol
+* TODO [#B] QUIC protocol                                           :backlog:
 
-* TODO [#B] Building a Mouse Jiggler
+* TODO [#B] Building a Mouse Jiggler                                :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: building-a-mouse-jiggler
 :END:
@@ -191,9 +191,9 @@ scripts to get you started---swap them out, recompile, and the board
 will type[fn::[[/images/keyboard-demo.gif]] *The keyboard variant in
 action.*] or wiggle in whatever pattern you like.
 
-* TODO [#B] Minimalist Invoice
+* TODO [#B] Minimalist Invoice                                      :backlog:
 
-* TODO [#B] Laissez Faire, Laissez Mourir
+* TODO [#B] Laissez Faire, Laissez Mourir                           :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: laissez-faire-laissez-mourir
 :END:
@@ -415,7 +415,7 @@ Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 
 * TODO [#B] Starting a new C++ project                              :backlog:
 
-* TODO [#B] Self-Hosting an Email Server
+* TODO [#B] Self-Hosting an Email Server                            :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-an-email-server
 :END:
@@ -741,7 +741,7 @@ appears on.  Building a positive reputation can take weeks.
 - https://en.cppreference.com/w/cpp/language/value_category.html
 - https://0xghost.dev/blog/std-move-deep-dive/
 
-* TODO [#B] Self-Hosting Behind CGNAT
+* TODO [#B] Self-Hosting Behind CGNAT                               :backlog:
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-behind-cgnat
 :END:
