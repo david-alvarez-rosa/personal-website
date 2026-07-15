@@ -34,7 +34,12 @@ def get_subscription(session, email):
 
 
 @app.post("/subscribe")
-def subscribe(email: EmailStr = Form()):
+def subscribe(email: EmailStr = Form(), website: str = Form("")):
+    if website:
+        return RedirectResponse(
+            f"{SITE_BASE}/subscription-pending",
+            status_code=HTTP_303_SEE_OTHER,
+        )
     email = email.strip().lower()
     link = f"{API_BASE}/confirm?email={email}&token={sign('confirm', email)}"
     msg = EmailMessage(policy=EMAIL_POLICY)
