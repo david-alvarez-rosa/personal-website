@@ -1296,21 +1296,20 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* TODO [#B] Reflecting on One Hundred Thousand Reads                   :meta:
+* NEXT [#B] One Hundred Thousand Reads                                 :meta:
 :PROPERTIES:
-:EXPORT_FILE_NAME: reflecting-on-one-hundred-thousand-reads
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "A thank-you, and where the reads come from."
+:EXPORT_FILE_NAME: one-hundred-thousand-reads
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "A thank you, and a look at the numbers."
 :END:
 
-This site just passed one hundred thousand reads.  It began as a
-notebook kept in public, read by almost no one, and the idea hasn't
-changed: one well-made post a month, not quick writeups---only deep
-dives into things that genuinely interest me.  So to everyone who has
-read one: thank you; that is what matters, the rest is just numbers.
+This site just passed one hundred thousand reads.  It started as a
+public notebook that almost no one read.  The plan hasn't changed: one
+post a month, no quick takes, only deep dives into things I care about.
+If you have read even one, thank you.  That number is you.
 
-The numbers are uneven.  Visitors tend to stay---five and a half minutes
-on average---but where they come from is the surprise: Reddit and Hacker
-News send nearly 90% of readers, every search engine under 5%.
+Visitors stay five and a half minutes on average.  Reddit and Hacker
+News send almost nine in ten of them; every search engine put together
+sends fewer than one in twenty.
 
 #+begin_export html
 <figure class="sources">
@@ -1366,15 +1365,12 @@ News send nearly 90% of readers, every search engine under 5%.
 </style>
 #+end_export
 
-And that is fragile.  This traffic spikes, then fades---a post hits a
-front page, pulls a few thousand reads in a day, then goes quiet; the
-three most-read owe their 40,000-odd reads to a few such days, not
-steady interest.[fn::[[/posts/optimizing-a-lock-free-ring-buffer/][Optimizing a Lock-Free Ring Buffer]] leads with
-16,635 reads, followed by the [[/posts/fundamental-theorem-of-calculus/][Fundamental Theorem of Calculus]] (12,506)
-and [[/posts/devirtualization-and-static-polymorphism/][Devirtualization and Static Polymorphism]] (11,848).] Search is the
-opposite: tiny now, but it grows over time, so the deeper posts are
-being set up to show up there---and each new one is syndicated more
-widely.
+The traffic comes in spikes: a post hits a front page, pulls a few
+thousand reads in a day, then goes quiet.  The three most-read posts owe
+over 41,000 reads to a few such days.[fn::[[/posts/optimizing-a-lock-free-ring-buffer/][Optimizing a Lock-Free Ring
+Buffer]] leads with 17,169 reads, followed by the [[/posts/fundamental-theorem-of-calculus/][Fundamental Theorem of
+Calculus]] (12,575) and [[/posts/devirtualization-and-static-polymorphism/][Devirtualization and Static Polymorphism]]
+(11,961).]
 
 Thank you, again, for reading.
 
