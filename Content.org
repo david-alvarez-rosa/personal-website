@@ -4,6 +4,8 @@
 #+filetags: :blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Heaptrack tool                                          :backlog:
+
 * TODO [#B] Emacs config and/or Arch Linux config                   :backlog:
 
 * TODO [#B] Optimizing an Order Book                                :backlog:
@@ -1296,10 +1298,14 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* NEXT [#B] One Hundred Thousand Reads                                 :meta:
+* DONE [#B] One Hundred Thousand Reads                                 :meta:
+CLOSED: [2026-07-16 Thu 11:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: one-hundred-thousand-reads
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "A thank you, and a look at the numbers."
+:END:
+:LOGBOOK:
+CLOCK: [2026-07-18 Sat 11:00]--[2026-07-18 Sat 11:00] =>  0:00
 :END:
 
 This site just passed one hundred thousand reads.  It started as a
