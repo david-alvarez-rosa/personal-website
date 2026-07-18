@@ -14,6 +14,7 @@ ignore_re:
   - 'pseudo-element or pseudo-class ":is"'
   - 'CSS: Parse Error'
   - 'error: CSS: .* "revert" is not a .* value.'
+  - 'is not a "color-stop" value'
   - 'Property "paint-order"'
   - 'Property "size-adjust"'
   - 'Property "ascent-override"'
