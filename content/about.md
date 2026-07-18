@@ -12,7 +12,20 @@ seotitle = "About | David Álvarez Rosa"
   .byline { display: none; }
   sup { display: none; }
   .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
-  @media (max-width: 860px) { .side img { margin-top: 0!important; } }
+  main .side:not(.meta):not(.byline):not(:has(img)) .sep { display: block; }
+  @media (max-width: 860px) {
+    .side img { margin-top: 0!important; }
+    main .side:not(.meta):not(.byline):not(:has(img)) {
+      float: none;
+      display: block;
+      margin: 0.1rem 0 0.4rem;
+      padding: 0;
+      border: none;
+    }
+    main .side:not(.meta):not(.byline):not(:has(img)) + br { display: none; }
+    main .side:not(.meta):not(.byline):not(:has(img)) .sep { display: inline; }
+    main .side:not(.meta):not(.byline):not(:has(img)) .sep::before { content: "·"; margin: 0 0.4rem; }
+  }
   main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; }
 </style>
 
@@ -133,23 +146,14 @@ You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
 
 [^fn:1]: ![](./assets/images/portrait.png) **That's me!** March
     2022.
-[^fn:2]: Jul 2024--Present<br />
-    Dublin, Ireland
-[^fn:3]: Mar 2022--Aug 2024<br />
-    Madrid, Spain
-[^fn:4]: Apr 2024--Jul 2024<br />
-    Remote
-[^fn:5]: Sep 2021--Mar 2022<br />
-    Madrid, Spain
-[^fn:6]: Sep 2020--Jun 2021<br />
-    Toronto, Canada
-[^fn:7]: Sep 2019--Feb 2020<br />
-    Barcelona, Spain
-[^fn:8]: GPA 9.00/10<br />
-    Honors in 6 subjects
+[^fn:2]: Jul 2024--Present<span class="sep"></span>Dublin, Ireland
+[^fn:3]: Mar 2022--Aug 2024<span class="sep"></span>Madrid, Spain
+[^fn:4]: Apr 2024--Jul 2024<span class="sep"></span>Remote
+[^fn:5]: Sep 2021--Mar 2022<span class="sep"></span>Madrid, Spain
+[^fn:6]: Sep 2020--Jun 2021<span class="sep"></span>Toronto, Canada
+[^fn:7]: Sep 2019--Feb 2020<span class="sep"></span>Barcelona, Spain
+[^fn:8]: GPA 9.00/10<span class="sep"></span>Honors in 6 subjects
 [^fn:9]: GPA 10/10 (A+)
-[^fn:10]: GPA 8.12/10 (top 10%)<br />
-    Honors in 9 subjects
-[^fn:11]: GPA 8.03/10 (top 2%)<br />
-    Honors in 14 subjects
+[^fn:10]: GPA 8.12/10 (top 10%)<span class="sep"></span>Honors in 9 subjects
+[^fn:11]: GPA 8.03/10 (top 2%)<span class="sep"></span>Honors in 14 subjects
 [^fn:12]: Canceled due to Covid-19

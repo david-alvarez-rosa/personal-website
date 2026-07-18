@@ -4,6 +4,8 @@
 #+filetags: :blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Valgrind                                                :backlog:
+
 * TODO [#B] Heaptrack tool                                          :backlog:
 
 * TODO [#B] Emacs config and/or Arch Linux config                   :backlog:
@@ -2938,7 +2940,20 @@ CLOSED: [2026-01-24 Sat 12:31]
   .byline { display: none; }
   sup { display: none; }
   .side img { max-width: 225px; box-shadow: none; margin-top: -26px;}
-  @media (max-width: 860px) { .side img { margin-top: 0!important; } }
+  main .side:not(.meta):not(.byline):not(:has(img)) .sep { display: block; }
+  @media (max-width: 860px) {
+    .side img { margin-top: 0!important; }
+    main .side:not(.meta):not(.byline):not(:has(img)) {
+      float: none;
+      display: block;
+      margin: 0.1rem 0 0.4rem;
+      padding: 0;
+      border: none;
+    }
+    main .side:not(.meta):not(.byline):not(:has(img)) + br { display: none; }
+    main .side:not(.meta):not(.byline):not(:has(img)) .sep { display: inline; }
+    main .side:not(.meta):not(.byline):not(:has(img)) .sep::before { content: "·"; margin: 0 0.4rem; }
+  }
   main p:first-of-type::first-letter { float: revert; font-size: revert; font-family: revert; padding: revert; }
 </style>
 #+end_export
@@ -2958,45 +2973,38 @@ in Artificial Intelligence.
 ** Experience
 
 /Software Engineer @ Susquehanna/
-[fn::Jul 2024--Present\\
-Dublin, Ireland]\\
+[fn::Jul 2024--Present@@html:<span class="sep"></span>@@Dublin, Ireland]\\
 High-frequency options trading.  Low-latency market data and trading
 signals.  Mentor and interviewer.
 
 /Software Engineer II @ Amazon/
-[fn::Mar 2022--Aug 2024\\
-Madrid, Spain]\\
+[fn::Mar 2022--Aug 2024@@html:<span class="sep"></span>@@Madrid, Spain]\\
 Designed systems for 10M+ monthly active customers.  Contributed to 100+
 internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
 Mentored 3.  On-call.  Interviewer.
 
 /Machine Learning Engineer @ Sopra Steria/
-[fn::Apr 2024--Jul 2024\\
-Remote]\\
+[fn::Apr 2024--Jul 2024@@html:<span class="sep"></span>@@Remote]\\
 Researched, designed, and built a semantic cache for LLMs.
 
 /Risk Analyst @ Deloitte/
-[fn::Sep 2021--Mar 2022\\
-Madrid, Spain]\\
+[fn::Sep 2021--Mar 2022@@html:<span class="sep"></span>@@Madrid, Spain]\\
 Quantitative analysis of technological and cybersecurity risks for
 top-tier banking companies.
 
 /Visiting Researcher @ Vector Institute/
-[fn::Sep 2020--Jun 2021\\
-Toronto, Canada]\\
+[fn::Sep 2020--Jun 2021@@html:<span class="sep"></span>@@Toronto, Canada]\\
 Research thesis on multimodal learning (recomprehension.com).
 
 /Machine Learning Engineer @ BCN eMotorsport/
-[fn::Sep 2019--Feb 2020\\
-Barcelona, Spain]\\
+[fn::Sep 2019--Feb 2020@@html:<span class="sep"></span>@@Barcelona, Spain]\\
 Perception at Driverless UPC.  Served as LiDAR lead and collaborated on
 computer vision for a fully autonomous car.
 
 ** Education
 
 /MSc in Artificial Intelligence/
-[fn::GPA 9.00/10\\
-Honors in 6 subjects]\\
+[fn::GPA 9.00/10@@html:<span class="sep"></span>@@Honors in 6 subjects]\\
 Official study program focused on AI research and enabling PhD.
 
 /MSc in Mathematics/\\
@@ -3007,13 +3015,11 @@ Math-lover part-time student.  Dropout (joined Amazon).
 Research thesis on multimodal learning at University of Toronto.
 
 /BSc in Mathematics/
-[fn::GPA 8.12/10 (top 10%)\\
-Honors in 9 subjects]\\
+[fn::GPA 8.12/10 (top 10%)@@html:<span class="sep"></span>@@Honors in 9 subjects]\\
 Rigorous and proof-oriented degree with a robust mathematical base.
 
 /BEng in Industrial Engineering/
-[fn::GPA 8.03/10 (top 2%)\\
-Honors in 14 subjects]\\
+[fn::GPA 8.03/10 (top 2%)@@html:<span class="sep"></span>@@Honors in 14 subjects]\\
 Multidisciplinary and integrative vision of industrial engineering.
 
 ** Licenses & certifications
