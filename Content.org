@@ -1298,7 +1298,7 @@ measurement---turned that into a 3.4x win.  In real code,
 critical section is tiny, the threads have dedicated cores, and you have
 measured the difference.
 
-* DONE [#B] One Hundred Thousand Reads                                 :meta:
+* DONE [#B] One Hundred Thousand Reads
 CLOSED: [2026-07-16 Thu 11:00]
 :PROPERTIES:
 :EXPORT_FILE_NAME: one-hundred-thousand-reads
@@ -2886,7 +2886,7 @@ This yields identical optimized code: ~foo~ is instantiated as
 ~foo<Derived>~, and the call to ~bar~ is resolved statically and
 inlined.
 
-* DONE [#B] About this Site                                            :meta:
+* DONE [#B] About this Site
 CLOSED: [2018-05-11 Mon 21:18]
 :PROPERTIES:
 :EXPORT_FILE_NAME: about-this-site

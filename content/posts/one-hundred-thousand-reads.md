@@ -2,7 +2,7 @@
 title = "One Hundred Thousand Reads"
 author = ["David Álvarez Rosa"]
 date = 2026-07-16T11:00:00+01:00
-tags = ["blog", "meta"]
+tags = ["blog"]
 draft = false
 subtitle = "A thank you, and a look at the numbers."
 +++
