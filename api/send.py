@@ -59,7 +59,7 @@ html_body = f"""{intro}
 
 {excerpt}
 
-Continue reading—[{subject}]({url})."""
+Continue reading—[{subject}]({url}?utm_source=newsletter&utm_medium=email&utm_campaign={slug})."""
 
 with Session(engine) as session:
     emails = [
