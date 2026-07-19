@@ -16,7 +16,7 @@ from .core import (
     Subscription,
     engine,
     sign,
-    smtp_login,
+    smtp_connect,
 )
 from .mail import SIGNATURE, email_html
 
@@ -60,7 +60,7 @@ def subscribe(email: EmailStr = Form(), website: str = Form("")):
 {outro}"""
     msg.set_content(f"{text_body}\n{SIGNATURE}")
     msg.add_alternative(email_html(html_body), subtype="html")
-    with smtp_login() as smtp:
+    with smtp_connect() as smtp:
         smtp.send_message(msg)
     return RedirectResponse(
         f"{SITE_BASE}/subscription-pending",

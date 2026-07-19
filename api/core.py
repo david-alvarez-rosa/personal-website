@@ -9,10 +9,7 @@ from pathlib import Path
 from pydantic import EmailStr
 from sqlmodel import Field, SQLModel, create_engine
 
-SES_SMTP_HOST = "email-smtp.eu-north-1.amazonaws.com"
-SES_SMTP_PORT = 587
-SES_SMTP_USER = os.environ["SES_SMTP_USER"]
-SES_SMTP_PASS = os.environ["SES_SMTP_PASS"]
+SMTP_PASS = os.environ["SMTP_PASS"]
 NEWSLETTER_SECRET = os.environ["NEWSLETTER_SECRET"]
 FROM = "David Álvarez Rosa <david@alvarezrosa.com>"
 API_BASE = os.environ.get("API_BASE", "https://api.alvarezrosa.com")
@@ -40,8 +37,7 @@ def sign(purpose, email):
     ).hexdigest()
 
 
-def smtp_login():
-    smtp = smtplib.SMTP(SES_SMTP_HOST, SES_SMTP_PORT)
-    smtp.starttls()
-    smtp.login(SES_SMTP_USER, SES_SMTP_PASS)
+def smtp_connect():
+    smtp = smtplib.SMTP_SSL("mail.alvarezrosa.com", 465)
+    smtp.login("david@alvarezrosa.com", SMTP_PASS)
     return smtp

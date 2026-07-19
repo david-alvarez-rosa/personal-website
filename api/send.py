@@ -15,7 +15,7 @@ from .core import (
     Subscription,
     engine,
     sign,
-    smtp_login,
+    smtp_connect,
 )
 from .mail import SIGNATURE, email_html, footer_html
 
@@ -82,7 +82,7 @@ for e in emails:
 if input("Send? (y/n) ").strip().lower() != "y":
     raise SystemExit
 
-with smtp_login() as smtp:
+with smtp_connect() as smtp:
     for email in emails:
         unsub = f"{API_BASE}/unsubscribe?email={email}&token={sign('unsub', email)}"
         msg = EmailMessage(policy=EMAIL_POLICY)
