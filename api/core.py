@@ -1,5 +1,6 @@
 import hashlib
 import hmac
+import imaplib
 import os
 import smtplib
 from datetime import datetime
@@ -41,3 +42,9 @@ def smtp_connect():
     smtp = smtplib.SMTP_SSL("mail.alvarezrosa.com", 465)
     smtp.login("david@alvarezrosa.com", SMTP_PASS)
     return smtp
+
+
+def imap_connect():
+    imap = imaplib.IMAP4_SSL("mail.alvarezrosa.com", 993)
+    imap.login("david@alvarezrosa.com", SMTP_PASS)
+    return imap

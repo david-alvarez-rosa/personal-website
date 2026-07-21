@@ -1,17 +1,14 @@
 import html
 import re
 
-SIGNATURE = """
-Best,
-d.
+SIGN_OFF = "Best,\nd."
 
---
+SIGNATURE = """--
 David Álvarez Rosa
 
 web    david.alvarezrosa.com
 email  david@alvarezrosa.com
-tel    +34 647 13 39 30
-"""
+tel    +34 647 13 39 30"""
 
 
 def _linkify(match):
@@ -35,7 +32,8 @@ def to_html(text):
     return "\n".join(paragraphs)
 
 
-def email_html(body, footer=""):
+def email_html(body, footer="", ps=""):
+    sign_off = html.escape(SIGN_OFF).replace("\n", "<br>")
     return f"""
 <html>
   <head>
@@ -44,7 +42,9 @@ def email_html(body, footer=""):
   </head>
   <body>
     {to_html(body)}
-    <p>Best,<br>David</p>
+    <p>{sign_off}</p>
+    {to_html(ps) if ps else ""}
+    <pre style="font-family:monospace">{html.escape(SIGNATURE)}</pre>
     {footer}
   </body>
 </html>"""
