@@ -1,6 +1,7 @@
 import os
 import re
 import textwrap
+import time
 import tomllib
 import webbrowser
 from email.message import EmailMessage
@@ -99,8 +100,11 @@ with smtp_connect() as smtp, imap_connect() as imap:
         msg["Subject"] = subject
         msg["Date"] = formatdate(localtime=True)
         msg["Message-ID"] = make_msgid(domain="alvarezrosa.com")
+        msg["List-Id"] = "david.alvarezrosa.com <newsletter.alvarezrosa.com>"
         msg["List-Unsubscribe"] = f"<{unsub}>"
         msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+        msg["Feedback-ID"] = f"{slug}:newsletter:alvarezrosa.com"
+        msg["X-Mailer"] = "david.alvarezrosa.com newsletter"
         msg.set_content(f"{letter}\n\nUnsubscribe: {unsub}\n")
         msg.add_alternative(
             email_html(html_body, footer_html(unsub), ps), subtype="html"
@@ -117,6 +121,7 @@ with smtp_connect() as smtp, imap_connect() as imap:
             imap.append("Sent", "\\Seen", None, bytes(msg))
         except Exception as exc:
             print(f"  (not archived to Sent: {exc})")
+        time.sleep(2)
 
 print(f"\n{len(sent)} sent, {len(failed)} failed.")
 if failed:
