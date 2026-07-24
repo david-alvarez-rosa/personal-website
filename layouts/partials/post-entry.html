@@ -1,13 +1,13 @@
 {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
 {{ $dateHuman := .Date | time.Format ":date_long" }}
-<p>
+<p class="h-entry">
   <span class="side meta">
-    <time class="date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    <time class="date dt-published" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
     {{ partial "visible-tags.html" . }}
   </span>
-  <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  <a class="u-url p-name" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
   <br/>
-  <span class="summary">
+  <span class="summary p-summary">
     {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
   </span>
 </p>

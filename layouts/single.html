@@ -6,17 +6,24 @@
   {{ end }}
 {{ end }}
 {{ define "main" }}
-  <style>main > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
+  {{ $entry := eq .Section "posts" }}
+  {{ if $entry }}
+    <style>main > .h-entry > .e-content > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
+    <article class="h-entry">
+  {{ end }}
   <header>
     <aside class="side byline">
-      <span class="date">{{ $.Date | time.Format ":date_long" }}</span>
-      <span class="author"><i>by</i> <a href="/">{{ index .Params.Author 0 }}</a></span>
+      <time class="date dt-published" datetime="{{ $.Date | time.Format "2006-01-02T15:04:05-07:00" }}">{{ $.Date | time.Format ":date_long" }}</time>
+      <span class="author p-author h-card"><i>by</i> <a class="u-url p-name" href="/">{{ index .Params.Author 0 }}</a></span>
       {{ partial "visible-tags.html" . }}
     </aside>
-    <h1>{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<span class="subtitle">{{ . }}</span>{{ end }}
+    <h1 class="p-name">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<span class="subtitle p-summary">{{ . }}</span>{{ end }}
+    {{ if $entry }}<a class="u-url u-uid" href="{{ .RelPermalink }}" hidden></a>{{ end }}
   </header>
+  {{ if $entry }}<div class="e-content">{{ end }}
   {{ partial "processed-content.html" . }}
+  {{ if $entry }}</div></article>{{ end }}
   {{ if eq .Section "posts" }}
     <div class="ornament" aria-hidden="true"></div>
     {{ partial "subscribe.html" . }}

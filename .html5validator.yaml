@@ -2,7 +2,7 @@ root: public/
 vnu:
   - --also-check-css
 ignore_re:
-  - 'Element "style" not allowed as child of element "main"'
+  - 'Element "style" not allowed as child of element "(main|div)"'
   - '"font-weight": .* is not a "font-weight" value'
   - 'Property "border-block"'
   - 'Property "color-scheme"'
