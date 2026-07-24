@@ -14,12 +14,12 @@
   <header>
     <aside class="side byline">
       <time class="date dt-published" datetime="{{ $.Date | time.Format "2006-01-02T15:04:05-07:00" }}">{{ $.Date | time.Format ":date_long" }}</time>
-      <span class="author p-author h-card"><i>by</i> <a class="u-url p-name" href="/">{{ index .Params.Author 0 }}</a></span>
+      <span class="author p-author h-card"><i>by</i> <a class="u-url p-name" href="/">{{ index .Params.Author 0 }}</a>{{ with resources.Get "images/portrait.png" }}<a class="u-photo" href="{{ (.Resize "480x webp #fcfcfc").Permalink }}" hidden></a>{{ end }}</span>
       {{ partial "visible-tags.html" . }}
     </aside>
     <h1 class="p-name">{{ .Title }}</h1>
     {{ with .Params.subtitle }}<span class="subtitle p-summary">{{ . }}</span>{{ end }}
-    {{ if $entry }}<a class="u-url u-uid" href="{{ .RelPermalink }}" hidden></a>{{ end }}
+    {{ if $entry }}<a class="u-url u-uid" href="{{ .Permalink }}" hidden></a>{{ end }}
   </header>
   {{ if $entry }}<div class="e-content">{{ end }}
   {{ partial "processed-content.html" . }}

@@ -1,5 +1,8 @@
 {{ $lastYear := 0 }}
 <div class="h-feed">
+{{ $name := page.Title }}
+{{ with page.Data.Term }}{{ $name = replace . "cpp" "c++" | title }}{{ end }}
+<data class="p-name" value="{{ $name }}"></data>
 {{ range . }}
   {{ $year := .Date.Year }}
   {{ if ne $year $lastYear }}
