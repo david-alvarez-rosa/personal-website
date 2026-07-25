@@ -1,8 +1,10 @@
 import hmac
+import logging
 from datetime import datetime, timezone
 from email.message import EmailMessage
+from email.utils import formatdate, make_msgid
 
-from fastapi import FastAPI, Form, HTTPException
+from fastapi import BackgroundTasks, FastAPI, Form, HTTPException
 from fastapi.responses import RedirectResponse
 from pydantic import EmailStr
 from sqlmodel import Session, SQLModel, select
@@ -15,6 +17,7 @@ from .core import (
     SITE_BASE,
     Subscription,
     engine,
+    imap_connect,
     sign,
     smtp_connect,
 )
@@ -22,6 +25,15 @@ from .mail import SIGNATURE, email_html
 
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
+log = logging.getLogger(__name__)
+
+
+def archive(msg):
+    try:
+        with imap_connect() as imap:
+            imap.append("Sent", "\\Seen", None, bytes(msg))
+    except Exception:
+        log.exception("could not archive %s to Sent", msg["Subject"])
 
 
 def verify(purpose, email, token):
@@ -34,7 +46,9 @@ def get_subscription(session, email):
 
 
 @app.post("/subscribe")
-def subscribe(email: EmailStr = Form(), website: str = Form("")):
+def subscribe(
+    background: BackgroundTasks, email: EmailStr = Form(), website: str = Form("")
+):
     if website:
         return RedirectResponse(
             f"{SITE_BASE}/subscription-pending",
@@ -46,6 +60,8 @@ def subscribe(email: EmailStr = Form(), website: str = Form("")):
     msg["From"] = FROM
     msg["To"] = email
     msg["Subject"] = "Confirm your subscription to david.alvarezrosa.com"
+    msg["Date"] = formatdate(localtime=True)
+    msg["Message-ID"] = make_msgid(domain="alvarezrosa.com")
     intro = "Almost there! Confirm your email to subscribe:"
     outro = "If you didn't sign up, just ignore this email."
     text_body = f"""{intro}
@@ -62,6 +78,7 @@ def subscribe(email: EmailStr = Form(), website: str = Form("")):
     msg.add_alternative(email_html(html_body), subtype="html")
     with smtp_connect() as smtp:
         smtp.send_message(msg)
+    background.add_task(archive, msg)
     return RedirectResponse(
         f"{SITE_BASE}/subscription-pending",
         status_code=HTTP_303_SEE_OTHER,
