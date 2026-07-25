@@ -14,6 +14,16 @@ async function discoverBlogPosts(page) {
   return blogPostUrls;
 }
 
+async function waitForStableRender(page) {
+  await page.waitForLoadState('networkidle');
+  await page.waitForLoadState('load');
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await Promise.all(
+      Array.from(document.images).map(img => img.decode().catch(() => {})));
+  });
+}
+
 function getSafeFilename(url) {
   const urlObj = new URL(url, 'http://localhost');
   const filename = urlObj.pathname
@@ -27,10 +37,7 @@ function getSafeFilename(url) {
 for (const page of PAGES) {
   test(`${page.name} visual regression`, async ({ page: playwright }) => {
     await playwright.goto(page.url);
-    await playwright.waitForLoadState('networkidle');
-    await playwright.waitForLoadState('load');
-    // Wait for fonts to load to ensure consistent rendering
-    await playwright.evaluate(() => document.fonts.ready);
+    await waitForStableRender(playwright);
     await expect(playwright).toHaveScreenshot(`${page.name}.png`, {
       fullPage: true,
       animations: 'disabled',
@@ -51,9 +58,7 @@ test.describe('Blog Posts', () => {
     const postsToTest = blogPostUrls.slice(0, 3);
     for (const url of postsToTest) {
       await page.goto(url);
-      await page.waitForLoadState('networkidle');
-      await page.waitForLoadState('load');
-      await page.evaluate(() => document.fonts.ready);
+      await waitForStableRender(page);
       await expect(page).toHaveScreenshot(getSafeFilename(url), {
         fullPage: true,
         animations: 'disabled',
