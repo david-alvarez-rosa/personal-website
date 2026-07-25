@@ -14,14 +14,18 @@ from .core import (
     API_BASE,
     EMAIL_POLICY,
     FROM,
+    LIST_ID,
+    MAILER,
     SITE_BASE,
     Subscription,
     engine,
     imap_connect,
+    make_token,
+    read_token,
     sign,
     smtp_connect,
 )
-from .mail import SIGNATURE, email_html
+from .mail import SIGN_OFF, SIGNATURE, email_html, finalize
 
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
@@ -41,6 +45,13 @@ def verify(purpose, email, token):
         raise HTTPException(400)
 
 
+def resolve(purpose, token):
+    email = read_token(purpose, token)
+    if email is None:
+        raise HTTPException(400)
+    return email
+
+
 def get_subscription(session, email):
     return session.exec(select(Subscription).where(Subscription.email == email)).first()
 
@@ -55,27 +66,27 @@ def subscribe(
             status_code=HTTP_303_SEE_OTHER,
         )
     email = email.strip().lower()
-    link = f"{API_BASE}/confirm?email={email}&token={sign('confirm', email)}"
+    link = f"{API_BASE}/confirm/{make_token('confirm', email)}"
+    subject = "Confirm your subscription to david.alvarezrosa.com"
     msg = EmailMessage(policy=EMAIL_POLICY)
     msg["From"] = FROM
     msg["To"] = email
-    msg["Subject"] = "Confirm your subscription to david.alvarezrosa.com"
+    msg["Subject"] = subject
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain="alvarezrosa.com")
-    intro = "Almost there! Confirm your email to subscribe:"
-    outro = "If you didn't sign up, just ignore this email."
-    text_body = f"""{intro}
+    msg["List-Id"] = LIST_ID
+    msg["Feedback-ID"] = "confirm:optin:alvarezrosa.com"
+    msg["X-Mailer"] = MAILER
+    body = f"""Almost there! Confirm your email to subscribe:
 
 {link}
 
-{outro}"""
-    html_body = f"""{intro}
-
-[Confirm subscription]({link})
-
-{outro}"""
-    msg.set_content(f"{text_body}\n{SIGNATURE}")
-    msg.add_alternative(email_html(html_body), subtype="html")
+If you didn't sign up, just ignore this email."""
+    msg.set_content(f"{body}\n\n{SIGN_OFF}\n\n{SIGNATURE}\n", cte="quoted-printable")
+    msg.add_alternative(
+        email_html(body, title=subject), subtype="html", cte="quoted-printable"
+    )
+    finalize(msg)
     with smtp_connect() as smtp:
         smtp.send_message(msg)
     background.add_task(archive, msg)
@@ -85,10 +96,7 @@ def subscribe(
     )
 
 
-@app.get("/confirm")
-def confirm(email: str, token: str):
-    email = email.strip().lower()
-    verify("confirm", email, token)
+def do_confirm(email):
     with Session(engine) as session:
         sub = get_subscription(session, email) or Subscription(email=email)
         sub.unsubscribed_at = None
@@ -97,10 +105,7 @@ def confirm(email: str, token: str):
     return RedirectResponse(f"{SITE_BASE}/subscription", status_code=HTTP_303_SEE_OTHER)
 
 
-@app.api_route("/unsubscribe", methods=["GET", "POST"])
-def unsubscribe(email: str, token: str):
-    email = email.strip().lower()
-    verify("unsub", email, token)
+def do_unsubscribe(email):
     with Session(engine) as session:
         sub = get_subscription(session, email)
         if sub:
@@ -108,3 +113,27 @@ def unsubscribe(email: str, token: str):
             session.add(sub)
             session.commit()
     return RedirectResponse(f"{SITE_BASE}/unsubscribed", status_code=HTTP_303_SEE_OTHER)
+
+
+@app.get("/confirm/{token}")
+def confirm_link(token: str):
+    return do_confirm(resolve("confirm", token))
+
+
+@app.api_route("/unsubscribe/{token}", methods=["GET", "POST"])
+def unsubscribe_link(token: str):
+    return do_unsubscribe(resolve("unsub", token))
+
+
+@app.get("/confirm")
+def confirm(email: str, token: str):
+    email = email.strip().lower()
+    verify("confirm", email, token)
+    return do_confirm(email)
+
+
+@app.api_route("/unsubscribe", methods=["GET", "POST"])
+def unsubscribe(email: str, token: str):
+    email = email.strip().lower()
+    verify("unsub", email, token)
+    return do_unsubscribe(email)

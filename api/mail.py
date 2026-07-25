@@ -11,6 +11,12 @@ email  david@alvarezrosa.com
 tel    +34 647 13 39 30"""
 
 
+def finalize(msg):
+    for part in msg.iter_parts():
+        del part["MIME-Version"]
+    return msg
+
+
 def _linkify(match):
     text = match.group("mdtext")
     url = match.group("mdurl") or match.group("bare")
@@ -32,12 +38,14 @@ def to_html(text):
     return "\n".join(paragraphs)
 
 
-def email_html(body, footer="", ps=""):
+def email_html(body, footer="", ps="", title=""):
     sign_off = html.escape(SIGN_OFF).replace("\n", "<br>")
-    return f"""
-<html>
+    return f"""<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{html.escape(title)}</title>
     <style>a {{ color:#003366; text-decoration:none }} </style>
   </head>
   <body>

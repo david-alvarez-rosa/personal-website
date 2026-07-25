@@ -14,14 +14,16 @@ from .core import (
     API_BASE,
     EMAIL_POLICY,
     FROM,
+    LIST_ID,
+    MAILER,
     SITE_BASE,
     Subscription,
     engine,
     imap_connect,
-    sign,
+    make_token,
     smtp_connect,
 )
-from .mail import SIGN_OFF, SIGNATURE, email_html, footer_html
+from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html
 
 
 def clean(md):
@@ -78,8 +80,8 @@ with Session(engine) as session:
     ]
 
 preview = "/tmp/newsletter_preview.html"
-sample = f"{API_BASE}/unsubscribe?email=you@example.com&token=sample"
-Path(preview).write_text(email_html(html_body, footer_html(sample), ps))
+sample = f"{API_BASE}/unsubscribe/{make_token('unsub', 'you@example.com')}"
+Path(preview).write_text(email_html(html_body, footer_html(sample), ps, subject))
 webbrowser.open(f"file://{preview}")
 
 print(f"Subject: {subject}\n")
@@ -93,22 +95,25 @@ if input("Send? (y/n) ").strip().lower() != "y":
 sent, failed = [], []
 with smtp_connect() as smtp, imap_connect() as imap:
     for email in emails:
-        unsub = f"{API_BASE}/unsubscribe?email={email}&token={sign('unsub', email)}"
+        unsub = f"{API_BASE}/unsubscribe/{make_token('unsub', email)}"
         msg = EmailMessage(policy=EMAIL_POLICY)
         msg["From"] = FROM
         msg["To"] = email
         msg["Subject"] = subject
         msg["Date"] = formatdate(localtime=True)
         msg["Message-ID"] = make_msgid(domain="alvarezrosa.com")
-        msg["List-Id"] = "david.alvarezrosa.com <newsletter.alvarezrosa.com>"
+        msg["List-Id"] = LIST_ID
         msg["List-Unsubscribe"] = f"<{unsub}>"
         msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
         msg["Feedback-ID"] = f"{slug}:newsletter:alvarezrosa.com"
-        msg["X-Mailer"] = "david.alvarezrosa.com newsletter"
-        msg.set_content(f"{letter}\n\nUnsubscribe: {unsub}\n")
+        msg["X-Mailer"] = MAILER
+        msg.set_content(f"{letter}\n\nUnsubscribe: {unsub}\n", cte="quoted-printable")
         msg.add_alternative(
-            email_html(html_body, footer_html(unsub), ps), subtype="html"
+            email_html(html_body, footer_html(unsub), ps, subject),
+            subtype="html",
+            cte="quoted-printable",
         )
+        finalize(msg)
         try:
             smtp.send_message(msg)
         except Exception as exc:

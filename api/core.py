@@ -1,3 +1,4 @@
+import base64
 import hashlib
 import hmac
 import imaplib
@@ -16,6 +17,8 @@ FROM = "David Álvarez Rosa <david@alvarezrosa.com>"
 API_BASE = os.environ.get("API_BASE", "https://api.alvarezrosa.com")
 SITE_BASE = os.environ.get("SITE_BASE", "https://david.alvarezrosa.com")
 EMAIL_POLICY = policy.SMTP.clone(max_line_length=998)
+LIST_ID = "david.alvarezrosa.com <newsletter.alvarezrosa.com>"
+MAILER = "david.alvarezrosa.com newsletter"
 
 
 class Subscription(SQLModel, table=True):
@@ -36,6 +39,22 @@ def sign(purpose, email):
         f"{purpose}:{email}".encode(),
         hashlib.sha256,
     ).hexdigest()
+
+
+def make_token(purpose, email):
+    payload = base64.urlsafe_b64encode(email.encode()).decode().rstrip("=")
+    return f"{payload}.{sign(purpose, email)[:32]}"
+
+
+def read_token(purpose, token):
+    payload, _, mac = token.partition(".")
+    try:
+        email = base64.urlsafe_b64decode(payload + "=" * (-len(payload) % 4)).decode()
+    except (ValueError, UnicodeDecodeError):
+        return None
+    if not hmac.compare_digest(sign(purpose, email)[:32], mac):
+        return None
+    return email
 
 
 def smtp_connect():
