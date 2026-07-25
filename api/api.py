@@ -25,7 +25,7 @@ from .core import (
     sign,
     smtp_connect,
 )
-from .mail import SIGN_OFF, SIGNATURE, email_html, finalize
+from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html
 
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
@@ -56,18 +56,7 @@ def get_subscription(session, email):
     return session.exec(select(Subscription).where(Subscription.email == email)).first()
 
 
-@app.post("/subscribe")
-def subscribe(
-    background: BackgroundTasks, email: EmailStr = Form(), website: str = Form("")
-):
-    if website:
-        return RedirectResponse(
-            f"{SITE_BASE}/subscription-pending",
-            status_code=HTTP_303_SEE_OTHER,
-        )
-    email = email.strip().lower()
-    link = f"{API_BASE}/confirm/{make_token('confirm', email)}"
-    subject = "Confirm your subscription to david.alvarezrosa.com"
+def deliver(background, email, subject, body, feedback_id, unsub=None):
     msg = EmailMessage(policy=EMAIL_POLICY)
     msg["From"] = FROM
     msg["To"] = email
@@ -75,21 +64,63 @@ def subscribe(
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain="alvarezrosa.com")
     msg["List-Id"] = LIST_ID
-    msg["Feedback-ID"] = "confirm:optin:alvarezrosa.com"
+    msg["Feedback-ID"] = feedback_id
     msg["X-Mailer"] = MAILER
-    body = f"""Almost there! Confirm your email to subscribe:
-
-{link}
-
-If you didn't sign up, just ignore this email."""
-    msg.set_content(f"{body}\n\n{SIGN_OFF}\n\n{SIGNATURE}\n", cte="quoted-printable")
+    text = f"{body}\n\n{SIGN_OFF}\n\n{SIGNATURE}\n"
+    if unsub:
+        msg["List-Unsubscribe"] = f"<{unsub}>"
+        msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
+        text += f"\nUnsubscribe: {unsub}\n"
+    msg.set_content(text, cte="quoted-printable")
     msg.add_alternative(
-        email_html(body, title=subject), subtype="html", cte="quoted-printable"
+        email_html(body, footer_html(unsub) if unsub else "", title=subject),
+        subtype="html",
+        cte="quoted-printable",
     )
     finalize(msg)
     with smtp_connect() as smtp:
         smtp.send_message(msg)
     background.add_task(archive, msg)
+
+
+def send_confirm(background, email):
+    link = f"{API_BASE}/confirm/{make_token('confirm', email)}"
+    subject = "Confirm your subscription to david.alvarezrosa.com"
+    body = f"""Almost there! Confirm your email to subscribe:
+
+{link}
+
+If you didn't sign up, just ignore this email."""
+    deliver(background, email, subject, body, "confirm:optin:alvarezrosa.com")
+
+
+def send_already_subscribed(background, email):
+    unsub = f"{API_BASE}/unsubscribe/{make_token('unsub', email)}"
+    subject = "You're already subscribed to david.alvarezrosa.com"
+    body = f"""Someone just used this address to sign up for my mailing
+list, but it's already subscribed, so there's nothing left to confirm
+and nothing has changed.
+
+If you'd rather not receive the newsletter, you can unsubscribe here:
+
+{unsub}
+
+If this wasn't you, just ignore this email."""
+    deliver(background, email, subject, body, "already:optin:alvarezrosa.com", unsub)
+
+
+@app.post("/subscribe")
+def subscribe(
+    background: BackgroundTasks, email: EmailStr = Form(), website: str = Form("")
+):
+    if not website:
+        email = email.strip().lower()
+        with Session(engine) as session:
+            sub = get_subscription(session, email)
+        if sub and sub.unsubscribed_at is None:
+            send_already_subscribed(background, email)
+        else:
+            send_confirm(background, email)
     return RedirectResponse(
         f"{SITE_BASE}/subscription-pending",
         status_code=HTTP_303_SEE_OTHER,
