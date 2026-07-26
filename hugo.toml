@@ -1,6 +1,7 @@
 baseURL = 'https://david.alvarezrosa.com/'
 title = 'David Álvarez Rosa'
 disableHugoGeneratorInject = true
+enableGitInfo = true
 enableRobotsTXT = false
 disableKinds = ['taxonomy']
 

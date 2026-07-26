@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl gnupg \
     && curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" | bash - \
-    && apt-get install -y --no-install-recommends nodejs \
+    && apt-get install -y --no-install-recommends nodejs git \
     && corepack enable \
     && curl -fsSL -o /tmp/hugo.tar.gz \
         "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz" \
@@ -18,6 +18,7 @@ RUN apt-get update \
     && npx -y playwright@${PLAYWRIGHT_VERSION} install --with-deps chromium \
     && apt-get purge -y curl gnupg \
     && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* /tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* \
+    && git config --system --add safe.directory /work
 
 WORKDIR /work
