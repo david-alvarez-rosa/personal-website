@@ -97,12 +97,8 @@ If you didn't sign up, just ignore this email."""
 def send_already_subscribed(background, email):
     unsub = f"{API_BASE}/unsubscribe/{make_token('unsub', email)}"
     subject = "You're already subscribed to david.alvarezrosa.com"
-    body = f"""Someone just signed up with this address, but it's already
+    body = """Someone just signed up with this address, but it's already
 subscribed, so nothing has changed.
-
-If you'd rather not receive the newsletter, unsubscribe here:
-
-{unsub}
 
 If this wasn't you, just ignore this email."""
     deliver(background, email, subject, body, "already:optin:alvarezrosa.com", unsub)
