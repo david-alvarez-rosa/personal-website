@@ -21,5 +21,6 @@ export default defineConfig({
   ],
   webServer: {
     command: 'hugo server',
+    url: 'http://localhost:1313',
   },
 });

@@ -5,8 +5,9 @@ set -eux
 ENGINE="${CONTAINER_ENGINE:-podman}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
-if ! "$ENGINE" image inspect personal-website >/dev/null 2>&1; then
-  "$ENGINE" build -t personal-website - < "$ROOT/Dockerfile"
+HASH="$(sha256sum "$ROOT/Dockerfile" | cut -d' ' -f1)"
+if [ "$("$ENGINE" image inspect personal-website --format '{{index .Labels "dockerfile-sha"}}' 2>/dev/null)" != "$HASH" ]; then
+  "$ENGINE" build --label "dockerfile-sha=$HASH" -t personal-website - < "$ROOT/Dockerfile"
 fi
 
 status=0
