@@ -1,5 +1,6 @@
 :root {
     color-scheme: light dark;
+    font-size: 15px;
     --bg: #fcfcfc;
     --text: #111;
     --selection-bg: #d8e8ff;
@@ -15,6 +16,8 @@
     --font-sc: "Alegreya SC", "Alegreya SC Fallback", serif;
     --font-sans: "Alegreya Sans", sans-serif;
     --font-mono: "Inconsolata", monospace;
+    --fs-body: 1.4rem;
+    --gutter: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,10 +36,6 @@
     }
 }
 
-html {
-    font-size: 15px;
-}
-
 body {
     margin: 4rem auto;
     font-family: var(--font-body);
@@ -53,7 +52,7 @@ body {
 }
 
 main, footer {
-    margin-left: 2rem;
+    margin-left: var(--gutter);
     margin-right: 26rem;
 }
 
@@ -128,7 +127,7 @@ h2 {
 .subtitle {
     font-style: italic;
     margin-bottom: 0.4rem;
-    font-size: 1.4rem;
+    font-size: var(--fs-body);
     display: block;
     font-weight: 400;
 }
@@ -168,7 +167,7 @@ header .subtitle {
 
 main :is(p, dd, li) {
     hyphens: auto;
-    font-size: 1.4rem;
+    font-size: var(--fs-body);
     line-height: 2rem;
     margin-top: 0;
     margin-bottom: 1.2rem;
@@ -344,7 +343,7 @@ code:not(.chroma code) {
     position: relative;
     transition: opacity 0.2s;
     opacity: 0;
-    font-size: 1.4rem;
+    font-size: var(--fs-body);
 }
 .anchor::before {
     content: "";
@@ -408,8 +407,9 @@ h2:focus-within .anchor {
 }
 
 @media screen and (max-width: 860px) {
-    html {
+    :root {
         font-size: 14px;
+        --gutter: 1.2rem;
     }
 
     body {
@@ -418,18 +418,18 @@ h2:focus-within .anchor {
     }
 
     main, footer {
-        margin: 0 1.2rem;
+        margin: 0 var(--gutter);
     }
 
     .notice main, .notice footer {
         max-width: none;
-        margin: 0 1.2rem;
+        margin: 0 var(--gutter);
     }
 
     .side, figcaption {
         float: inline-end;
         margin: 0.4rem 0;
-        width: calc(100% - 1.2rem - 1px);
+        width: calc(100% - var(--gutter) - 1px);
         padding: 0.4rem 0.5rem;
         border: 1px solid var(--border);
         border-left: 3px solid var(--border);
@@ -512,12 +512,12 @@ h2:focus-within .anchor {
 }
 
 @media print {
-    html {
+    :root {
         font-size: 12px;
+        --gutter: 1rem;
     }
 
     main, footer {
-        margin-left: 1rem;
         margin-right: 18rem;
     }
 
