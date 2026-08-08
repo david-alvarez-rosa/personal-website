@@ -117,7 +117,8 @@ line even when it fails.  Waiters must stop writing.
 
 ## Active backoff {#active-backoff}
 
-Exchange once, then spin on a plain load.[^fn:8]
+Exchange once, then spin on a read-only load with
+backoff.[^fn:8]
 
 ```cpp
 class SpinLockV2 {
@@ -128,8 +129,8 @@ public:
     while (true) {
       if (!locked_.exchange(true)) return;
       do {
-        for (volatile auto i = 0; i < 150; ++i);
-      } while (locked_.load());
+        for (volatile auto i = 0; i < 150; ++i);  // Active backoff
+      } while (locked_.load());                   // Read-only
     }
   }
   auto unlock() noexcept -> void { locked_.store(false); }
@@ -181,8 +182,8 @@ public:
     while (true) {
       if (!locked_.exchange(true)) return;
       do {
-        for (auto i = 0; i < 4; ++i) _mm_pause();
-      } while (locked_.load());
+        for (auto i = 0; i < 4; ++i) _mm_pause();  // Passive backoff
+      } while (locked_.load());                    // Read-only
     }
   }
   auto unlock() noexcept -> void { locked_.store(false); }
@@ -233,21 +234,20 @@ class SpinLockV4 {
 
 public:
   auto lock() noexcept -> void {
-    auto backoff_iters = 4;
+    auto iters = 4;
     while (true) {
       if (!locked_.exchange(true)) return;
       do {
-        for (auto i = 0; i < backoff_iters; ++i) _mm_pause();
-        backoff_iters = std::min(backoff_iters << 1, 1024);
-      } while (locked_.load());
+        for (auto i = 0; i < iters; ++i) _mm_pause();  // Passive backoff
+        iters = std::min(iters << 1, 1024);            // Exponential growth
+      } while (locked_.load());                        // Read-only
     }
   }
   auto unlock() noexcept -> void { locked_.store(false); }
 };
 ```
 
-The times collapse to 1.12 ms at two threads and **1.47 ms** at four, 1.5x
-the single-threaded time.
+The times collapse to 1.12 ms at two threads and **1.47 ms** at four.
 
 ```sh
 $ ./benchmark --benchmark_filter='V4>' --benchmark_min_time=200x
@@ -257,7 +257,7 @@ BM_SpinLock<SpinLockV4>/4/real_time       1.47 ms
 ```
 
 That is **3x** faster than the baseline.  Cache misses fall to 1.93% and
-mispredictions to 2.15%, both near their single-thread levels.
+mispredictions to 2.15%.
 
 ```sh
 $ perf stat -d ./benchmark --benchmark_filter='V4>/4' --benchmark_min_time=200x
@@ -266,8 +266,8 @@ $ perf stat -d ./benchmark --benchmark_filter='V4>/4' --benchmark_min_time=200x
     8,288,327      L1-dcache-load-misses  # 1.93% of all L1-dcache accesses
 ```
 
-The instruction count is 1.23 billion, within 10% of the uncontended
-run.
+The instruction count is 1.23 billion, the lowest of the four
+spin-locks.
 
 ```sh
 $ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V4>/4' --benchmark_min_time=200x
@@ -310,9 +310,8 @@ spin-lock only when the threads have dedicated cores,[^fn:12] and you have measu
     [Exchange colocation services](https://www.nyse.com/technology/colo) bill power, and NYSE [caps](https://www.federalregister.gov/documents/2023/11/20/2023-25548/self-regulatory-organizations-new-york-stock-exchange-llc-nyse-american-llc-nysearca-inc-nyse) at 32 kW.
 [^fn:7]: Reading the RAPL counters requires system-wide mode
     (`-a`) and root, so the figure includes idle cores.
-[^fn:8]: `volatile` keeps the
-    compiler from deleting the empty loop.  The 150 iterations are tuned
-    experimentally.
+[^fn:8]: `volatile` keeps the compiler from deleting the empty loop.
+    The 150 iterations are tuned experimentally.
 [^fn:9]: The delay
     loop also floods the branch counter with predictable branches, which is
     why the miss rate collapses to 0.55%.  The contended exchange is still
