@@ -1,13 +1,21 @@
 {{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- $scope := cond .IsHome site.RegularPages .RegularPages -}}
+{{- $pages := (where $scope "Section" "posts").ByDate.Reverse -}}
+{{- $title := site.Title -}}
+{{- if eq .Kind "term" -}}
+  {{- $title = printf "%s | %s" (replace .Data.Term "cpp" "c++" | title) site.Title -}}
+{{- else if not .IsHome -}}
+  {{- $title = printf "%s | %s" .Title site.Title -}}
+{{- end }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.Title }}</title>
+    <title>{{ $title }}</title>
     <link>{{ .Permalink }}</link>
     <description>{{ site.Params.description }}</description>
     <language>en</language>
-    <lastBuildDate>{{ (index site.RegularPages 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{ with $pages }}<lastBuildDate>{{ (index . 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
     <atom:link href="{{ .Permalink }}index.xml" rel="self" type="application/rss+xml" />
-    {{ range site.RegularPages }}
+    {{ range $pages }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
