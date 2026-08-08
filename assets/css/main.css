@@ -1,6 +1,6 @@
 :root {
     color-scheme: light dark;
-    font-size: 15px;
+    font-size: 93.75%;
     --bg: #fcfcfc;
     --text: #111;
     --selection-bg: #d8e8ff;
@@ -408,7 +408,7 @@ h2:focus-within .anchor {
 
 @media screen and (max-width: 860px) {
     :root {
-        font-size: 14px;
+        font-size: 87.5%;
         --gutter: 1.2rem;
     }
 
@@ -513,7 +513,7 @@ h2:focus-within .anchor {
 
 @media print {
     :root {
-        font-size: 12px;
+        font-size: 75%;
         --gutter: 1rem;
     }
 
