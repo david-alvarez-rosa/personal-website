@@ -7,6 +7,7 @@ disableKinds = ['taxonomy']
 
 [params]
   description = 'Personal site of David Álvarez Rosa'
+  hiddenTags = ['blog', 'backlog', 'pers']
 
 [menus]
   [[menus.main]]
