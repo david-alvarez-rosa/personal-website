@@ -309,7 +309,7 @@ sup {
 }
 
 .side code, figcaption p code {
-    font-size: 1.05rem!important;
+    font-size: 1.06rem!important;
 }
 
 .side img {
@@ -333,7 +333,7 @@ code {
 code:not(.chroma code) {
     font-weight: 530;
     color: var(--accent);
-    font-size: 1.33rem;
+    font-size: 1.32rem;
     overflow-wrap: anywhere;
 }
 
