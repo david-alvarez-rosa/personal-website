@@ -1024,8 +1024,8 @@ CLOCK: [2026-06-06 Sat 11:48]--[2026-06-06 Sat 12:05] =>  0:17
 A spin-lock is a mutex that never sleeps.  Instead of yielding to the
 scheduler, the thread stays on the CPU and spins.  No syscalls.  No
 context switches.  The naive implementation loses against standard
-~mutex~, but we'll build step by step a version that outperforms it by
-3x, in a scenario with dedicated cores per thread.
+~mutex~.  We'll build step by step a version that beats it by 3x in our
+benchmark with dedicated cores per thread.
 
 ** Benchmark & baseline
 
@@ -1063,7 +1063,7 @@ pinned.[fn::Run on a box [[/posts/tuning-a-server-for-benchmarking/][tuned for b
   }
 #+end_src
 
-The baseline wraps ~std::mutex~.
+The baseline wraps standard ~mutex~.
 
 #+begin_src sh
   $ ./benchmark --benchmark_filter='V0>' --benchmark_min_time=200x
@@ -1074,8 +1074,8 @@ The baseline wraps ~std::mutex~.
 
 One thread to two triples the time.  Two to four barely moves.[fn::A
 contended ~std::mutex~ parks waiters in the kernel and wakes them one at
-a time, so the damage does not compound.]
-The number to beat is *4.44 ms* at four threads.
+a time, so the damage does not compound.]  The number to beat is *4.44
+ms* at four threads.
 
 ** A basic spin-lock
 
@@ -1093,9 +1093,9 @@ and is now ours.  ~true~ means someone else holds it, so we retry.]
   };
 #+end_src
 
-It wins at one thread.[fn::Locking is now one atomic instruction, with
-no library code around it.]  At two threads it is 1.7x slower.  At four
-it takes *9.56 ms*, 2.2x slower, while burning CPU.
+At one thread it beats the baseline by 1.3x.[fn::Locking is now one
+atomic instruction, with no library code around it.]  At two threads it
+is 1.7x slower, at four *9.56 ms*, 2.2x slower, while burning CPU.
 
 #+begin_src sh
   $ ./benchmark --benchmark_filter='V1>' --benchmark_min_time=200x
@@ -1105,10 +1105,10 @@ it takes *9.56 ms*, 2.2x slower, while burning CPU.
 #+end_src
 
 The cause is cache coherence.  A core must own a cache line exclusively
-to write it.  Every waiter steals the line from the others.  One thread
-misses 0.28% of its L1-d accesses.  Four threads miss 7.93%, and one in
-ten branches is mispredicted.[fn::Whether the exchange succeeds is
-decided by the other cores, so the branch predictor has nothing to
+to write it, so every waiter steals the line from the others.  One
+thread misses 0.28% of its L1-d accesses.  Four threads miss 7.93%, and
+one in ten branches is mispredicted.[fn::Whether the exchange succeeds
+is decided by the other cores, so the branch predictor has nothing to
 learn.]
 
 #+begin_src sh
@@ -1123,29 +1123,25 @@ learn.]
     101,662,950      L1-dcache-load-misses  # 7.93% of all L1-dcache accesses
 #+end_src
 
-Spinning costs energy too.[fn::High-frequency trading shops watch this
-number.  [[https://www.nyse.com/technology/colo][Exchange colocation services]] bill power, and NYSE [[https://www.federalregister.gov/documents/2023/11/20/2023-25548/self-regulatory-organizations-new-york-stock-exchange-llc-nyse-american-llc-nysearca-inc-nyse][caps]] at 32
-kW.]
-At four threads it draws *49.23 J* against the baseline's 32.98 J for
-the same work.[fn::Reading the RAPL counters requires system-wide
-mode (~-a~) and root, so the figure covers the whole package, idle cores
-included.]
+Spinning costs energy.[fn::High-frequency trading shops care about it.
+[[https://www.nyse.com/technology/colo][Exchange colocation services]] bill power, and NYSE [[https://www.federalregister.gov/documents/2023/11/20/2023-25548/self-regulatory-organizations-new-york-stock-exchange-llc-nyse-american-llc-nysearca-inc-nyse][caps]] at 32 kW.]  At
+four threads it draws *49.23 J* against the baseline's 32.98 J for the
+same work.[fn::Reading the RAPL counters requires system-wide mode
+(~-a~) and root, so the figure includes idle cores.]
 
 #+begin_src sh
   $ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V1>/4' --benchmark_min_time=200x
             49.23 Joules power/energy-pkg/
 #+end_src
 
-Both problems come from the same instruction.  The exchange writes to
-the line even when it fails.  Waiters must stop writing.
+Both problems come from the same instruction.  The exchange writes the
+line even when it fails.  Waiters must stop writing.
 
 ** Active backoff
 
-Stop writing while waiting.  Exchange once, then spin on a plain load,
-which every core can keep in its own L1.  On release the waiters still
-exchange at once, so a short delay loop between reads spreads them
-out.[fn::~volatile~ keeps the compiler from deleting the empty loop.  The
-150 iterations are tuned experimentally.]
+Exchange once, then spin on a plain load.[fn::~volatile~ keeps the
+compiler from deleting the empty loop.  The 150 iterations are tuned
+experimentally.]
 
 #+begin_src cpp
   class SpinLockV2 {
@@ -1164,9 +1160,8 @@ out.[fn::~volatile~ keeps the compiler from deleting the empty loop.  The
   };
 #+end_src
 
-Two threads drop to 3.36 ms, 2.1x faster than the previous version and
-ahead of the baseline.  Four threads reach *7.97 ms*, still 1.8x
-behind.
+Two threads drop to 3.36 ms, ahead of the baseline.  Four threads reach
+*7.97 ms*, 1.8x behind.
 
 #+begin_src sh
   $ ./benchmark --benchmark_filter='V2>' --benchmark_min_time=200x
@@ -1175,8 +1170,7 @@ behind.
   BM_SpinLock<SpinLockV2>/4/real_time       7.97 ms
 #+end_src
 
-The read-only spin does what it promised.  L1-d misses at four threads
-fall from 7.93% to 6.28%.
+L1-d misses at four threads fall from 7.93% to 6.28%.
 
 #+begin_src sh
   $ perf stat -d ./benchmark --benchmark_filter='V2>/4' --benchmark_min_time=200x
@@ -1185,26 +1179,25 @@ fall from 7.93% to 6.28%.
       86,760,836      L1-dcache-load-misses  # 6.28% of all L1-dcache accesses
 #+end_src
 
-Note the bump to 28 billion instructions against previous 2 billion, for
-the same work.[fn::The delay loop also floods the branch counter with
-predictable branches, which is why the miss rate collapses to 0.55%.
-The contended exchange is still unpredictable, it is just outnumbered.]
-Each one is an increment of a ~volatile~ counter.
+Instructions jump from 2 to 28 billion for the same work.[fn::The delay
+loop also floods the branch counter with predictable branches, which is
+why the miss rate collapses to 0.55%.  The contended exchange is still
+unpredictable, just outnumbered.]  The extra ones increment the
+~volatile~ counter.
 
 #+begin_src sh
   $ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V2>/4' --benchmark_min_time=200x
             52.97 Joules power/energy-pkg/
 #+end_src
 
-The delay loop draws *52.97 J*, the worst of the five versions.  Waiting
-costs as much as working.  The wait has to be idle, not busy.
+The backoff draws *52.97 J*, the worst of the five versions.  The wait
+has to be idle, not busy.
 
 ** Passive backoff
 
-There is an x86 instruction for exactly this, ~pause~, exposed as the
-~_mm_pause()~ intrinsic.[fn::From ~<immintrin.h>~.  ARM's closest
-equivalent is the ~yield~ instruction.]  It marks the loop as a
-spin-wait, so the core idles instead of racing through it.
+There is an x86 instruction for this, ~pause~, exposed as
+~_mm_pause~.[fn::Declared in ~<xmmintrin.h>~, which ~<immintrin.h>~
+pulls in.]  It marks the loop as a spin-wait, so the core idles.
 
 #+begin_src cpp
   class SpinLockV3 {
@@ -1251,17 +1244,16 @@ doing nothing.
             35.45 Joules power/energy-pkg/
 #+end_src
 
-Energy falls to *35.45 J* from 52.97 J, back to the baseline's level.
-The wait is cheap now, but it is the same wait for every thread.  A
-constant delay keeps the waiters in lockstep, so each release wakes all
-of them, and 8.81% of branches still miss.
+Energy falls from 52.97 J to *35.45 J*, the baseline's level.  The wait
+is cheap, but it is the same wait for every thread.  A constant delay
+keeps the waiters in lockstep, so each release wakes all of them, and
+8.81% of branches still miss.
 
 ** Exponential backoff
 
-Every waiter polls at the same rate, so each release wakes all of them.
 Let each thread double its delay instead, up to a cap.[fn::Without the
 cap, threads would pause long after the lock has become free.  Both
-bounds, 4 and 1024, are tunable.]
+hard-coded bounds, 4 and 1024, are tunable.]
 
 #+begin_src cpp
   class SpinLockV4 {
@@ -1282,8 +1274,8 @@ bounds, 4 and 1024, are tunable.]
   };
 #+end_src
 
-The times collapse to 1.12 ms at two threads and *1.47 ms* at four,
-1.5x the single-threaded time.
+The times collapse to 1.12 ms at two threads and *1.47 ms* at four, 1.5x
+the single-threaded time.
 
 #+begin_src sh
   $ ./benchmark --benchmark_filter='V4>' --benchmark_min_time=200x
@@ -1315,22 +1307,21 @@ backoff.
 
 ** Summary
 
-Feel free to reproduce yourself using the [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/spin_lock.cpp][benchmark]].
+Reproduce it with the [[https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/spin_lock.cpp][benchmark]].
 
 | Version | 1 thread   | 2 threads | 4 threads            |
 |---------+------------+-----------+----------------------|
 | V0      | 1.24 ms    | 4.18 ms   | 4.44 ms / 32.98 J    |
 | V1      | 0.969 ms   | 7.10 ms   | 9.56 ms / 49.23 J    |
-| V2      | *0.964 ms* | 3.36 ms   | 7.97 ms / 52.97 J    |
+| V2      | 0.964 ms   | 3.36 ms   | 7.97 ms / 52.97 J    |
 | V3      | 0.970 ms   | 3.60 ms   | 7.13 ms / 35.45 J    |
 | *V4*    | 0.965 ms   | *1.12 ms* | *1.47 ms* / *9.09 J* |
 
-In generic code, ~std::mutex~ is still the right default.  Reach for a
-spin-lock only when the critical section is tiny, the threads have
-dedicated cores,[fn::The standard library cannot assume that.  A
-spin-lock waits for a holder the scheduler may have descheduled, so
-~std::mutex~ parks the waiters and hands the core back instead.] and you
-have measured the difference.
+In generic code, ~std::mutex~ remains the right default.  Reach for a
+spin-lock only when the threads have dedicated cores,[fn::The standard
+library cannot assume that.  A spin-lock waits for a holder the
+scheduler may have descheduled, so ~std::mutex~ parks the waiters and
+hands the core back instead.] and you have measured the difference.
 
 * DONE [#B] One Hundred Thousand Reads
 CLOSED: [2026-07-16 Thu 11:00]
