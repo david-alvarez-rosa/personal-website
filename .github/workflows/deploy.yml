@@ -39,6 +39,18 @@ jobs:
       - name: Deploy
         run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
 
+      - name: Purge Cloudflare cache
+        run: |
+          mapfile -t urls < <(find public -type f | sed -e 's|^public/|https://beta.alvarezrosa.com/|' -e 's|index\.html$||')
+          for ((i = 0; i < ${#urls[@]}; i += 30)); do
+            printf '%s\n' "${urls[@]:i:30}" | jq -Rsc '{files: split("\n")[:-1]}' | \
+              curl --fail-with-body -sS -X POST \
+                "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+                -H "Content-Type: application/json" \
+                --data @-
+          done
+
   deploy-production:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch != 'main' }}
     runs-on: ubuntu-latest
