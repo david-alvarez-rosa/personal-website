@@ -1,25 +1,24 @@
 +++
 title = "Optimizing a Spin-Lock"
 author = ["David Álvarez Rosa"]
-tags = ["blog"]
+tags = ["blog", "cpp", "performance"]
 draft = true
+subtitle = "Squeezing every pico out of the simplest lock."
 +++
 
-A spin-lock is a mutex that never sleeps: instead of yielding to the
-scheduler when the lock is taken, the thread stays on the CPU and keeps
-retrying---_spinning_---until it succeeds, avoiding syscalls and context
-switches for critical sections of a few nanoseconds.  In this post we'll
-write the basic version, see why it is slow, and fix it step by step
-until it beats `std::mutex` by 3.4x under contention.
+A spin-lock is a mutex that never sleeps.  Instead of yielding to the
+scheduler, the thread stays on the CPU and spins.  No syscalls.  No
+context switches.  The naive implementation loses against standard
+`mutex`, but we'll build step by step a version that outperforms it by
+3x, in a scenario with dedicated cores per thread.
 
 
-## The benchmark {#the-benchmark}
+## Benchmark &amp; baseline {#benchmark-and-baseline}
 
-Each thread increments a shared counter under the lock---250k
-increments in total, split evenly across threads.  The total work is
-_fixed:_ with a perfect lock the time stays flat as threads are added,
-and any growth is pure synchronization overhead.  Threads are pinned to
-their own cores[^fn:1]
+Multiple threads increment 250,000 times a shared counter.  The amount
+of work is fixed.  A perfect lock would keep the time flat as threads
+are added, so any growth is synchronization overhead.  Threads are
+pinned.[^fn:1]
 
 ```cpp
 template <typename SpinLock>
@@ -49,25 +48,22 @@ auto BM_SpinLock(benchmark::State& state) -> void {
 }
 ```
 
-Every version below exposes `lock` and `unlock`.  The baseline,
-`SpinLockV0`, simply wraps `std::mutex`
+The baseline wraps `std::mutex`.
 
 ```sh
-BM_SpinLock<SpinLockV0>/1/real_time       1.62 ms
-BM_SpinLock<SpinLockV0>/2/real_time       5.48 ms
-BM_SpinLock<SpinLockV0>/4/real_time       6.13 ms
+$ ./benchmark --benchmark_filter='V0>' --benchmark_min_time=200x
+BM_SpinLock<SpinLockV0>/1/real_time       1.24 ms
+BM_SpinLock<SpinLockV0>/2/real_time       4.18 ms
+BM_SpinLock<SpinLockV0>/4/real_time       4.44 ms
 ```
 
-Going from one thread to two more than triples the time, but from two
-to four it barely moves: a contended `std::mutex` parks waiters in the
-kernel and wakes them one at a time, so the damage does not compound.
-The number to beat: **6.13 ms** at four threads.
+One thread to two triples the time.  Two to four barely moves.[^fn:2]
+The number to beat is **4.44 ms** at four threads.
 
 
 ## A basic spin-lock {#a-basic-spin-lock}
 
-The simplest correct spin-lock is an atomic bool and an exchange
-loop[^fn:2]
+An atomic bool and an exchange loop.[^fn:3]
 
 ```cpp
 class SpinLockV1 {
@@ -79,80 +75,52 @@ public:
 };
 ```
 
-```sh
-BM_SpinLock<SpinLockV1>/1/real_time       1.20 ms
-BM_SpinLock<SpinLockV1>/2/real_time       10.3 ms
-BM_SpinLock<SpinLockV1>/4/real_time       14.5 ms
-```
-
-Uncontended, the spin-lock already wins: **1.20 ms** against the mutex's
-1.62 ms---locking is now a single atomic instruction with no library
-machinery around it.  Under contention it is a disaster: 1.9x slower
-than the mutex at two threads, 2.4x at four---while burning CPU for the
-entire wait.
-
-The problem is cache coherence.  To write to a cache line, a core must
-first own it exclusively, invalidating every other core's copy.  An
-atomic exchange is a write _even when it fails_ and merely swaps `true`
-over `true`.  So every waiting thread constantly steals the line away
-from everyone else---including from the lock holder, who needs that same
-line back just to _release_ the lock.  The line ping-pongs between
-cores, and the one useful increment drowns in coherence traffic.
-
-`perf stat -d` counts hardware events; compare one thread against four
+It wins at one thread.[^fn:4]  At two threads it is 1.7x slower.  At four
+it takes **9.56 ms**, 2.2x slower, while burning CPU.
 
 ```sh
-$ perf stat -d ./benchmark --benchmark_filter='V1>/1' --benchmark_min_time=500x
-    128,088,290      branches
-      1,896,594      branch-misses            #   1.48% of all branches
-    645,478,415      L1-dcache-loads
-      1,687,482      L1-dcache-load-misses    #   0.26% of all accesses
-
-$ perf stat -d ./benchmark --benchmark_filter='V1>/4' --benchmark_min_time=500x
-    674,575,244      branches
-    105,479,892      branch-misses            #  15.64% of all branches
-  3,262,419,243      L1-dcache-loads
-    293,873,584      L1-dcache-load-misses    #   9.05% of all accesses
+$ ./benchmark --benchmark_filter='V1>' --benchmark_min_time=200x
+BM_SpinLock<SpinLockV1>/1/real_time      0.969 ms
+BM_SpinLock<SpinLockV1>/2/real_time       7.10 ms
+BM_SpinLock<SpinLockV1>/4/real_time       9.56 ms
 ```
 
-A 35x jump in cache miss rate on the same nine bytes of data, and one
-branch in six mispredicted: whether the exchange succeeds is decided by
-the other cores, and the predictor cannot learn it.  `perf
-c2c`---perf's tool for cache-line contention---ranks cache lines by how
-often a core found them dirty in _another_ core's cache (a _HITM_ event)
+The cause is cache coherence.  A core must own a cache line exclusively
+to write it.  Every waiter steals the line from the others.  One thread
+misses 0.28% of its L1-d accesses.  Four threads miss 7.93%, and one in
+ten branches is mispredicted.[^fn:5]
 
 ```sh
-$ perf c2c record -a -- ./benchmark --benchmark_filter='V1>/4'
-$ perf c2c report --stdio
-=================================================
-           Shared Data Cache Line Table
-=================================================
-Index             Address      Hitm
-    0      0x7fffffffb440    91.49%
-    1  0xffff8c025e923700     2.13%
+$ perf stat -d ./benchmark --benchmark_filter='V1>/1' --benchmark_min_time=200x
+1,119,891,388      instructions           # 1.32  insn per cycle
+      828,093      branch-misses          # 0.53% of all branches
+      719,501      L1-dcache-load-misses  # 0.28% of all L1-dcache accesses
+
+$ perf stat -d ./benchmark --benchmark_filter='V1>/4' --benchmark_min_time=200x
+1,999,113,707      instructions           # 0.05  insn per cycle
+   34,676,115      branch-misses          # 9.98% of all branches
+  101,662,950      L1-dcache-load-misses  # 7.93% of all L1-dcache accesses
 ```
 
-A single cache line---the one holding the lock and the
-counter---accounts for 91% of all HITM events.  Spinning is not free in
-watts either; the CPU's own energy meter[^fn:3] puts a number on the wait
+Spinning costs energy too.[^fn:6]
+At four threads it draws **49.23 J** against the baseline's 32.98 J for
+the same work.[^fn:7]
 
 ```sh
 $ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V1>/4' --benchmark_min_time=200x
-          24.43 Joules power/energy-pkg/
+          49.23 Joules power/energy-pkg/
 ```
 
-The mutex does the same 200 iterations for **14.9 J**.
+Both problems come from the same instruction.  The exchange writes to
+the line even when it fails.  Waiters must stop writing.
 
 
 ## Active backoff {#active-backoff}
 
-The fix is to stop writing while waiting: attempt the exchange once and,
-if it fails, spin on a plain load---read-only copies of the line can
-live in every core's L1, so waiting generates no traffic at all.  But
-when the holder releases, every waiter sees the lock free at the same
-instant, and the whole herd stampedes for the exchange---one wins, the
-rest pay the coherence storm anyway.  To thin the herd, space out the
-reads with a small delay loop[^fn:4]
+Stop writing while waiting.  Exchange once, then spin on a plain load,
+which every core can keep in its own L1.  On release the waiters still
+exchange at once, so a short delay loop between reads spreads them
+out.[^fn:8]
 
 ```cpp
 class SpinLockV2 {
@@ -163,7 +131,7 @@ public:
     while (true) {
       if (!locked_.exchange(true)) return;
       do {
-        for (volatile int i = 0; i < 150; ++i);
+        for (volatile auto i = 0; i < 150; ++i);
       } while (locked_.load());
     }
   }
@@ -171,21 +139,45 @@ public:
 };
 ```
 
-At two threads the time drops to **4.82 ms**---2.1x faster than the basic
-version and already ahead of the mutex.  At four threads, **12.0 ms**,
-most of the gain evaporates: the herd is bigger, and a fixed delay no
-longer keeps threads apart.  The counters expose a hidden cost, too:
-the cache misses barely improve (**8.6%** against 9.1%), and the energy
-gets worse, **29.5 J** against 24.4 J---the delay loop is busy-work
-executed at full speed.
+Two threads drop to 3.36 ms, 2.1x faster than the previous version and
+ahead of the baseline.  Four threads reach **7.97 ms**, still 1.8x
+behind.
+
+```sh
+$ ./benchmark --benchmark_filter='V2>' --benchmark_min_time=200x
+BM_SpinLock<SpinLockV2>/1/real_time      0.964 ms
+BM_SpinLock<SpinLockV2>/2/real_time       3.36 ms
+BM_SpinLock<SpinLockV2>/4/real_time       7.97 ms
+```
+
+The read-only spin does what it promised.  L1-d misses at four threads
+fall from 7.93% to 6.28%.
+
+```sh
+$ perf stat -d ./benchmark --benchmark_filter='V2>/4' --benchmark_min_time=200x
+28,319,952,728      instructions           # 0.92  insn per cycle
+    38,335,855      branch-misses          # 0.55% of all branches
+    86,760,836      L1-dcache-load-misses  # 6.28% of all L1-dcache accesses
+```
+
+Note the bump to 28 billion instructions against previous 2 billion, for
+the same work.[^fn:9]
+Each one is an increment of a `volatile` counter.
+
+```sh
+$ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V2>/4' --benchmark_min_time=200x
+          52.97 Joules power/energy-pkg/
+```
+
+The delay loop draws **52.97 J**, the worst of the five versions.  Waiting
+costs as much as working.  The wait has to be idle, not busy.
 
 
 ## Passive backoff {#passive-backoff}
 
-The delay loop burns the whole wait executing useless increments.  x86
-has an instruction for exactly this: `pause`, exposed as the
-`_mm_pause()` intrinsic[^fn:5], which inserts a short delay
-with the pipeline relaxed
+There is an x86 instruction for exactly this, `pause`, exposed as the
+`_mm_pause()` intrinsic.[^fn:10]  It marks the loop as a
+spin-wait, so the core idles instead of racing through it.
 
 ```cpp
 class SpinLockV3 {
@@ -204,22 +196,44 @@ public:
 };
 ```
 
-The four `pause` calls roughly match the delay of the 150-iteration
-loop, and the timings land in the same place: **5.02 ms** at two threads
-and **10.9 ms** at four.  The difference is in what the timings don't
-show: `perf` counts **24x fewer instructions** for the same work---the
-core now spends the wait deliberately doing nothing---and the energy
-drops from active backoff's 29.5 J to **17.9 J**.
+Four `pause` calls replace the 150-iteration loop.  The times barely
+move, 3.60 ms at two threads and **7.13 ms** at four.
+
+```sh
+$ ./benchmark --benchmark_filter='V3>' --benchmark_min_time=200x
+BM_SpinLock<SpinLockV3>/1/real_time      0.970 ms
+BM_SpinLock<SpinLockV3>/2/real_time       3.60 ms
+BM_SpinLock<SpinLockV3>/4/real_time       7.13 ms
+```
+
+The gain is in the counters.
+
+```sh
+$ perf stat -d ./benchmark --benchmark_filter='V3>/4' --benchmark_min_time=200x
+1,582,977,444      instructions           # 0.07  insn per cycle
+   21,412,494      branch-misses          # 8.81% of all branches
+   67,943,161      L1-dcache-load-misses  # 5.14% of all L1-dcache accesses
+```
+
+The loop now runs 1.58 billion instructions, 18x fewer than active
+backoff, at 0.07 instructions per cycle.  That is a core deliberately
+doing nothing.
+
+```sh
+$ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V3>/4' --benchmark_min_time=200x
+          35.45 Joules power/energy-pkg/
+```
+
+Energy falls to **35.45 J** from 52.97 J, back to the baseline's level.
+The wait is cheap now, but it is the same wait for every thread.  A
+constant delay keeps the waiters in lockstep, so each release wakes all
+of them, and 8.81% of branches still miss.
 
 
 ## Exponential backoff {#exponential-backoff}
 
-Pausing made the wait cheap, but the timings barely moved---and with a
-_constant_ delay they cannot: all waiters poll at the same rate, so
-every release still wakes the whole herd, and the collisions remain.
-For the waiters to arrive at different times, their delays must differ:
-let each thread double its delay every time it finds the lock still
-taken, up to a cap[^fn:6]
+Every waiter polls at the same rate, so each release wakes all of them.
+Let each thread double its delay instead, up to a cap.[^fn:11]
 
 ```cpp
 class SpinLockV4 {
@@ -240,62 +254,84 @@ public:
 };
 ```
 
-The timings collapse: **1.62 ms** at two threads and **1.80 ms** at
-four---within 1.5x of the single-threaded time, approaching the flat
-line of a perfect lock.  That is 3.4x faster than `std::mutex` and 8x
-faster than the basic spin-lock.
+The times collapse to 1.12 ms at two threads and **1.47 ms** at four,
+1.5x the single-threaded time.
 
-The counters explain the win: at four threads the cache miss rate falls
-to **1.6%**, branch mispredictions to **2.9%**, and the energy to **3.8 J**, a
-quarter of the mutex's 14.9 J---all near their single-threaded levels.
-That is the signature of threads running one at a time: backoff
-approximately _serializes_ them.  Waiters sit in pause loops of up to
-1024 iterations, so the releasing thread usually re-acquires the lock
-immediately---lock and counter still warm in its L1---and races through
-its share of increments while everyone else stays out of the way.
-Serialization is optimal here, since the increments cannot run in
-parallel anyway.[^fn:7]
+```sh
+$ ./benchmark --benchmark_filter='V4>' --benchmark_min_time=200x
+BM_SpinLock<SpinLockV4>/1/real_time      0.965 ms
+BM_SpinLock<SpinLockV4>/2/real_time       1.12 ms
+BM_SpinLock<SpinLockV4>/4/real_time       1.47 ms
+```
+
+That is **3x** faster than the baseline.  Cache misses fall to 1.93% and
+mispredictions to 2.15%, both near their single-thread levels.
+
+```sh
+$ perf stat -d ./benchmark --benchmark_filter='V4>/4' --benchmark_min_time=200x
+1,226,803,007      instructions           # 0.24  insn per cycle
+    4,048,354      branch-misses          # 2.15% of all branches
+    8,288,327      L1-dcache-load-misses  # 1.93% of all L1-dcache accesses
+```
+
+The instruction count is 1.23 billion, within 10% of the uncontended
+run.
+
+```sh
+$ perf stat -a -e power/energy-pkg/ ./benchmark --benchmark_filter='V4>/4' --benchmark_min_time=200x
+           9.09 Joules power/energy-pkg/
+```
+
+It draws **9.09 J**, 3.6x below the baseline and 5.8x below active
+backoff.
 
 
 ## Summary {#summary}
 
-If you want to reproduce these results, the [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/spin_lock.cpp) lives in my
-[CppPlayground](https://github.com/david-alvarez-rosa/CppPlayground) repository.  Each cell reads time / L1d cache misses,
-with the winners in bold.
+Feel free to reproduce yourself using the [benchmark](https://github.com/david-alvarez-rosa/CppPlayground/blob/main/dsa/spin_lock.cpp).
 
-| Version | 1 thread            | 2 threads               | 4 threads               |
-|---------|---------------------|-------------------------|-------------------------|
-| 0       | 1.62 ms / **0.03%** | 5.48 ms / 1.03%         | 6.13 ms / 1.60%         |
-| 1       | **1.20 ms** / 0.26% | 10.3 ms / 3.78%         | 14.5 ms / 9.05%         |
-| 2       | 1.25 ms / 0.25%     | 4.82 ms / 3.08%         | 12.0 ms / 8.61%         |
-| 3       | 1.25 ms / 0.27%     | 5.02 ms / 2.60%         | 10.9 ms / 6.14%         |
-| 4       | 1.25 ms / 0.28%     | **1.62 ms** / **0.67%** | **1.80 ms** / **1.59%** |
+| Version | 1 thread     | 2 threads   | 4 threads                |
+|---------|--------------|-------------|--------------------------|
+| V0      | 1.24 ms      | 4.18 ms     | 4.44 ms / 32.98 J        |
+| V1      | 0.969 ms     | 7.10 ms     | 9.56 ms / 49.23 J        |
+| V2      | **0.964 ms** | 3.36 ms     | 7.97 ms / 52.97 J        |
+| V3      | 0.970 ms     | 3.60 ms     | 7.13 ms / 35.45 J        |
+| **V4**  | 0.965 ms     | **1.12 ms** | **1.47 ms** / **9.09 J** |
 
-The journey is the interesting part: the basic spin-lock lost to
-`std::mutex` by 2.4x, and three small fixes---each derived from a
-measurement---turned that into a 3.4x win.  In real code,
-`std::mutex` remains the right default; reach for a spin-lock when the
-critical section is tiny, the threads have dedicated cores, and you have
-measured the difference.
+In generic code, `std::mutex` is still the right default.  Reach for a
+spin-lock only when the critical section is tiny, the threads have
+dedicated cores,[^fn:12] and you
+have measured the difference.
 
-[^fn:1]: With `pthread_setaffinity_np`, on a machine tuned
-    for benchmarking (AMD Ryzen 7 PRO 8700GE, 8 cores at 3.65 GHz):
-    performance governor, hyperthreading and turbo boost disabled.
-[^fn:2]: `exchange` atomically writes `true` and returns the previous
-    value: `false` means the lock was free and is now ours; `true` means
-    someone else holds it, and we retry.
-[^fn:3]: The RAPL counters, which
-    perf exposes as `power/energy-pkg/`; reading them requires system-wide
-    mode (`-a`) and root.
-[^fn:4]: `volatile` keeps the compiler from
-    deleting the empty loop.  The 150 iterations are a tunable parameter,
-    experimentally determined.
-[^fn:5]: From `<immintrin.h>`; ARM's closest
+[^fn:1]: Run on a box [tuned for benchmarking](/posts/tuning-a-server-for-benchmarking/) (AMD Ryzen 7 PRO 8700GE,
+    8 cores at 3.65 GHz).  Built with `clang`.  All optimizations enabled.
+[^fn:2]: A
+    contended `std::mutex` parks waiters in the kernel and wakes them one at
+    a time, so the damage does not compound.
+[^fn:3]: `exchange` atomically writes
+    `true` and returns the previous value.  `false` means the lock was free
+    and is now ours.  `true` means someone else holds it, so we retry.
+[^fn:4]: Locking is now one atomic instruction, with
+    no library code around it.
+[^fn:5]: Whether the exchange succeeds is
+    decided by the other cores, so the branch predictor has nothing to
+    learn.
+[^fn:6]: High-frequency trading shops watch this
+    number.  [Exchange colocation services](https://www.nyse.com/technology/colo) bill power, and NYSE [caps](https://www.federalregister.gov/documents/2023/11/20/2023-25548/self-regulatory-organizations-new-york-stock-exchange-llc-nyse-american-llc-nysearca-inc-nyse) at 32
+    kW.
+[^fn:7]: Reading the RAPL counters requires system-wide
+    mode (`-a`) and root, so the figure covers the whole package, idle cores
+    included.
+[^fn:8]: `volatile` keeps the compiler from deleting the empty loop.  The
+    150 iterations are tuned experimentally.
+[^fn:9]: The delay loop also floods the branch counter with
+    predictable branches, which is why the miss rate collapses to 0.55%.
+    The contended exchange is still unpredictable, it is just outnumbered.
+[^fn:10]: From `<immintrin.h>`.  ARM's closest
     equivalent is the `yield` instruction.
-[^fn:6]: Without the cap, threads would end up pausing
-    long after the lock has become free.  Both bounds, 4 and 1024, are
-    tunable.
-[^fn:7]: It is also maximally _unfair:_ nothing stops one
-    thread from re-acquiring the lock indefinitely while another starves in
-    its backoff loop.  Real implementations bound the unfairness, or enforce
-    FIFO order outright with a ticket lock---at a cost in throughput.
+[^fn:11]: Without the
+    cap, threads would pause long after the lock has become free.  Both
+    bounds, 4 and 1024, are tunable.
+[^fn:12]: The standard library cannot assume that.  A
+    spin-lock waits for a holder the scheduler may have descheduled, so
+    `std::mutex` parks the waiters and hands the core back instead.
