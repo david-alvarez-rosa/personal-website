@@ -1011,7 +1011,8 @@ Implement a shared_ptr
 
 Pending.
 
-* TODO [#B] Optimizing a Spin-Lock                          :cpp:performance:
+* DONE [#B] Optimizing a Spin-Lock                          :cpp:performance:
+CLOSED: [2026-08-27 Thu 14:23]
 :PROPERTIES:
 :EXPORT_FILE_NAME: optimizing-a-spin-lock
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Squeezing every pico out of the simplest lock."

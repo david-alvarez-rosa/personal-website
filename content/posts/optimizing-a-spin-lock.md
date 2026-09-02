@@ -1,8 +1,9 @@
 +++
 title = "Optimizing a Spin-Lock"
 author = ["David Álvarez Rosa"]
+date = 2026-08-27T14:23:00+01:00
 tags = ["blog", "cpp", "performance"]
-draft = true
+draft = false
 subtitle = "Squeezing every pico out of the simplest lock."
 +++
 
