@@ -6,8 +6,5 @@
     {{ partial "visible-tags.html" . }}
   </span>
   <a class="u-url p-name" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-  <br/>
-  <span class="summary p-summary">
-    {{ .Summary | replaceRE `<sup id="fnref:.*?</sup>` "" | plainify | truncate 152 }}
-  </span>
+  {{ with .Params.subtitle }}<br/><span class="summary p-summary">{{ . }}</span>{{ end }}
 </p>

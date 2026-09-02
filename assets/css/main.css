@@ -132,6 +132,10 @@ h2 {
     font-weight: 400;
 }
 
+.summary {
+    font-style: italic;
+}
+
 header {
     text-align: center;
     margin-bottom: 2.8rem;
