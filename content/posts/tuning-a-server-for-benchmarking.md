@@ -46,7 +46,7 @@ Compile it in release with all optimizations, `-O3`, and `-march=native
 aggregate them
 
 ```sh
-$ ./benchmark --benchmark_repetitions=10 --benchmark_min_time=200x
+$ ./benchmark --benchmark_repetitions=10 --benchmark_min_time=100x
 BM_Sum_mean      99575 ns
 BM_Sum_stddev     2704 ns
 BM_Sum_cv         2.72 %

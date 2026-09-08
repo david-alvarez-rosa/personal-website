@@ -1023,7 +1023,7 @@ CLOSED: [2026-08-27 Thu 14:23]
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Squeezing every pico out of the simplest lock."
 :END:
 :LOGBOOK:
-CLOCK: [2026-08-08 Sat 12:25]
+CLOCK: [2026-08-08 Sat 12:25]--[2026-09-08 Tue 21:48] => 753:23
 CLOCK: [2026-06-06 Sat 11:48]--[2026-06-06 Sat 12:05] =>  0:17
 :END:
 
@@ -2969,10 +2969,10 @@ CLOSED: [2026-01-24 Sat 12:31]
 2022.]Mathematician and engineer based in sunny Dublin, passionate about
 low-latency, high-performance systems.
 
-Currently working in algorithmic trading at Susquehanna.  Previously
-designed and built systems at Amazon serving 10M+ monthly active
-customers, developed semantic caching for LLMs at Sopra Steria, and
-conducted quantitative cybersecurity risk analysis at Deloitte.
+Works in algorithmic trading at Susquehanna and represents Ireland on
+the C++ standards committee.  Previously designed systems at Amazon
+serving 10M+ monthly active customers, developed semantic caching for
+LLMs at Sopra Steria, and analyzed cybersecurity risk at Deloitte.
 
 Holds a BSc in Mathematics, a BEng in Industrial Engineering, and an MSc
 in Artificial Intelligence.
@@ -2983,6 +2983,10 @@ in Artificial Intelligence.
 [fn::Jul 2024--Present@@html:<span class="sep"></span>@@Dublin, Ireland]\\
 High-frequency options trading.  Low-latency market data and trading
 signals.  Mentor and interviewer.
+
+/Member @ C++ Standards Committee/
+[fn::Jul 2026--Present@@html:<span class="sep"></span>@@Remote]\\
+National expert.  Representing Ireland.
 
 /Software Engineer II @ Amazon/
 [fn::Mar 2022--Aug 2024@@html:<span class="sep"></span>@@Madrid, Spain]\\
