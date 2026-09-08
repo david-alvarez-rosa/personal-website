@@ -4,6 +4,11 @@
 #+filetags: :blog:
 #+CATEGORY: Blog
 
+* TODO [#B] Implementing a hash map
+- https://github.com/rigtorp/spartan/blob/master/HashMap.h
+- https://github.com/rigtorp/HashMap
+- Official implementations
+
 * TODO [#B] Valgrind                                                :backlog:
 
 * TODO [#B] Heaptrack tool                                          :backlog:
