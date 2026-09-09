@@ -65,6 +65,7 @@ awk 'NR==1 && /^\+\+\+/ {f=1; next} f && /^\+\+\+/ {f=0; next} !f' "$src" \
       } {print}' \
   | sed -E "s#\./assets/images/#${BASE_URL}/images/#g" \
   | sed -E 's/\[\^fn:([0-9]+)\]/[^\1]/g' \
+  | sed -E 's/^(#{1,6} .*[^[:space:]])[[:space:]]+\{#[^}]*\}[[:space:]]*$/\1/' \
   | awk '
       function flush() { if (buf != "") { print buf; buf = "" } }
       /^```/ { flush(); print; incode = !incode; next }
