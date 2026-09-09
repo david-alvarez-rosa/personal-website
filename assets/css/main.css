@@ -439,6 +439,10 @@ h2:focus-within .anchor {
         clear: both;
     }
 
+    .ornament {
+        clear: both;
+    }
+
     .side:not(.meta):not(.byline) {
         margin-bottom: 2.4rem;
     }
