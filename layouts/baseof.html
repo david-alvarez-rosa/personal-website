@@ -87,7 +87,23 @@
   {{ with resources.Get "js/instantpage.js" | minify | fingerprint }}
     <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}
-  <script defer src="https://analytics.alvarezrosa.com/script.js" data-website-id="d91623ad-7bf5-4c14-8e39-8c6b2a5596c7" data-performance="true" data-domains="david.alvarezrosa.com,dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion"></script>
+  <script>
+    (() => {
+      const loadUmami = () => {
+        const script = document.createElement('script');
+        script.src = 'https://analytics.alvarezrosa.com/script.js';
+        script.dataset.websiteId = 'd91623ad-7bf5-4c14-8e39-8c6b2a5596c7';
+        script.dataset.performance = 'true';
+        script.dataset.domains = 'david.alvarezrosa.com,dhevt6e4rtgbtr3jh53xrpwmgtilkah6nyjujocsspssrsexc7omxhid.onion';
+        document.head.append(script);
+      };
+      if (document.prerendering) {
+        document.addEventListener('prerenderingchange', loadUmami, { once: true });
+      } else {
+        loadUmami();
+      }
+    })();
+  </script>
 </head>
 <body{{ if .Params.notice }} class="notice"{{ end }}>
   <main>

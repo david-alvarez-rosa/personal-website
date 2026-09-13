@@ -64,7 +64,11 @@ function isPreloadable(anchorElement) {
     return
   }
 
-  if (anchorElement.hash && anchorElement.pathname == location.pathname) {
+  if (anchorElement.pathname == location.pathname) {
+    return
+  }
+
+  if (!anchorElement.pathname.endsWith('/')) {
     return
   }
 
