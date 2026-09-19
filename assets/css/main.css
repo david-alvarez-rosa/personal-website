@@ -513,6 +513,18 @@ h2:focus-within .anchor {
     .fullwidth {
         margin-right: 0;
     }
+
+    table {
+        display: block;
+        width: fit-content;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    table th,
+    table td {
+        padding: 0.5rem;
+    }
 }
 
 @media print {
