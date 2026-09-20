@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 tags = ["blog", "self-hosting"]
 draft = true
 subtitle = "Libre software, libre hardware, and my mother's basement."
+image = "images/self-hosting-behind-cgnat.png"
 +++
 
 There is nothing more satisfying than owning, end to end, the software

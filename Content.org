@@ -801,7 +801,7 @@ Pending.
 * TODO [#B] Self-Hosting Behind CGNAT                          :self_hosting:
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-behind-cgnat
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Libre software, libre hardware, and my mother's basement."
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Libre software, libre hardware, and my mother's basement." :image "images/self-hosting-behind-cgnat.png"
 :END:
 
 There is nothing more satisfying than owning, end to end, the software

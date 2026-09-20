@@ -18,7 +18,11 @@
   {{ $title := or .Params.seotitle (printf "%s | %s" .Title site.Title) }}
   {{ $imageRes := "" }}
   {{ $imageURL := "" }}
-  {{ if .IsPage }}
+  {{ with .Params.image }}
+    {{ $imageRes = resources.Get . }}
+    {{ with $imageRes }}{{ $imageURL = .Permalink }}{{ end }}
+  {{ end }}
+  {{ if and .IsPage (not $imageURL) }}
     {{ with findRE `src="[^"]+"` .Content 1 }}
       {{ $imageURL = replaceRE `^src="|"$` "" (index . 0) | absURL }}
     {{ end }}
