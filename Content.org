@@ -814,9 +814,10 @@ your router and forward it to any machine at home.[fn::A dynamic DNS
 service kept your domain pointing at the right public IP whenever your
 ISP rotated it.]  Nowadays, the shortage of IPv4 addresses means routers
 share the same IP across your neighborhood.  Requests are routed using
-carrier-grade NAT (CGNAT), a second layer NAT inside the carrier's
+carrier-grade NAT (CGNAT), a second-layer NAT inside the carrier's
 network, where your router's address is private and translated by the
-carrier on the way out.
+carrier on the way out.  The public address is the carrier's, so port
+forwarding no longer works.
 
 ** Topology
 
@@ -824,18 +825,19 @@ My services run on a mid-range machine in my mother's basement in
 northern Spain, and are exposed to the Internet through a cheap VPS
 bridge in a French data center.
 
+#+caption: *Topology diagram.*  The homelab is exposed to the Internet through a WireGuard tunnel to a VPS bridge.
 #+begin_example -i
   +-------------------------------------+
   |           public Internet           |
   +-------------------------------------+
         ^                       ^
-        |                       |
+        | inbound               |
         v                       |
   +------------+                |
-  |   bridge   |                |  egress
+  |   bridge   |                | egress
   +------------+                |
         ^^                      |
-        ||  WireGuard           |
+        || WireGuard            |
         vv                      |
   +-------------------------------------+
   |               homelab               |

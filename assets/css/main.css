@@ -161,7 +161,7 @@ header .subtitle {
     font-weight: 400;
 }
 
-.figure-number {
+.figure-number, .src-block-number {
     display: none;
 }
 
@@ -266,7 +266,7 @@ sup {
     line-height: 0;
 }
 
-.side, figcaption {
+.side, figcaption, .src-block-caption {
     float: right;
     clear: right;
     padding-top: 0.2rem;
@@ -275,6 +275,10 @@ sup {
     width: 21rem;
     position: relative;
 }
+
+.src-block-caption {
+    padding-top: 0;
+ }
 
 .fullwidth {
     margin-right: -24rem;
@@ -303,13 +307,23 @@ sup {
     padding-top: 0;
 }
 
-.side, figcaption p {
+.side, figcaption p, .src-block-caption {
     font-size: 1.1rem;
     line-height: 1.54rem;
 }
 
-.side code, figcaption p code {
+.side code, figcaption p code, .src-block-caption code {
     font-size: 1.06rem!important;
+}
+
+.highlight:has(+ .src-block-caption) {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+
+.highlight:has(+ .src-block-caption) .chroma {
+    margin-top: 0;
 }
 
 .side img {
@@ -426,13 +440,22 @@ h2:focus-within .anchor {
         margin: 0 var(--gutter);
     }
 
-    .side, figcaption {
+    .side, figcaption, .src-block-caption {
         float: inline-end;
         margin: 0.4rem 0;
         width: calc(100% - var(--gutter) - 1px);
         padding: 0.4rem 0.5rem;
         border: 1px solid var(--border);
         border-left: 3px solid var(--border);
+    }
+
+    .src-block-caption {
+        float: none;
+        margin-bottom: 1.8rem;
+    }
+
+    .highlight:has(+ .src-block-caption) .chroma {
+        margin-bottom: 0.4rem;
     }
 
     p:has(.side:not(.meta)) {
@@ -533,7 +556,7 @@ h2:focus-within .anchor {
         margin-right: 18rem;
     }
 
-    .side, figcaption {
+    .side, figcaption, .src-block-caption {
         margin-right: -16.5rem;
         width: 15rem;
     }

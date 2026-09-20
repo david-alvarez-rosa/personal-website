@@ -15,9 +15,10 @@ self-host at home, and be truly _libre_.
 In the past, self-hosting was easier.  You just had to open a port on
 your router and forward it to any machine at home.[^fn:1]  Nowadays, the shortage of IPv4 addresses means routers
 share the same IP across your neighborhood.  Requests are routed using
-carrier-grade NAT (CGNAT), a second layer NAT inside the carrier's
+carrier-grade NAT (CGNAT), a second-layer NAT inside the carrier's
 network, where your router's address is private and translated by the
-carrier on the way out.
+carrier on the way out.  The public address is the carrier's, so port
+forwarding no longer works.
 
 
 ## Topology {#topology}
@@ -31,18 +32,22 @@ bridge in a French data center.
   |           public Internet           |
   +-------------------------------------+
         ^                       ^
-        |                       |
+        | inbound               |
         v                       |
   +------------+                |
-  |   bridge   |                |  egress
+  |   bridge   |                | egress
   +------------+                |
         ^^                      |
-        ||  WireGuard           |
+        || WireGuard            |
         vv                      |
   +-------------------------------------+
   |               homelab               |
   +-------------------------------------+
 ```
+<div class="src-block-caption">
+  <span class="src-block-number">Code Snippet 1:</span>
+  <b>Topology diagram.</b>  The homelab is exposed to the Internet through a WireGuard tunnel to a VPS bridge.
+</div>
 
 A bidirectional WireGuard tunnel[^fn:2] forwards all
 packets in all ports from the bridge to the homelab box, and vice versa.
