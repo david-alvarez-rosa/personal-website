@@ -3,20 +3,20 @@ title = "Self-Hosting Behind CGNAT"
 author = ["David Álvarez Rosa"]
 tags = ["blog", "self-hosting"]
 draft = true
-subtitle = "Serving the public Internet from a box at home."
+subtitle = "Libre software, libre hardware, and my mother's basement."
 +++
 
 There is nothing more satisfying than owning, end to end, the software
 and the hardware you use without relying on abusive cloud corporations.
-The Internet is us, not them.  Break free from censorship by learning
-how to self-host at home.
+Internet is us, not them.  Break free from censorship.  Learn how to
+self-host at home, and be truly _libre_.
 
-A few years ago self-hosting was easier.  You opened a port on your
-router and forwarded it to any machine at home.[^fn:1]  Nowadays, however, due to the shortage of IPv4
-addresses, ISPs share the same IP among your neighborhood.  Requests are
-routed using carrier-grade NAT (CGNAT), a second layer of NAT inside the
-carrier's network, where your router's public address is private too and
-the carrier translates it on the way out.
+In the past, self-hosting was easier.  You just had to open a port on
+your router and forward it to any machine at home.[^fn:1]  Nowadays, the shortage of IPv4 addresses means routers
+share the same IP across your neighborhood.  Requests are routed using
+carrier-grade NAT (CGNAT), a second layer NAT inside the carrier's
+network, where your router's address is private and translated by the
+carrier on the way out.
 
 
 ## Topology {#topology}
@@ -99,7 +99,7 @@ AllowedIPs = 0.0.0.0/0
 PersistentKeepalive = 25
 ```
 
-Replies from the homelab have to go back down the tunne.  That is what
+Replies from the homelab have to go back down the tunnel.  That is what
 the config is for, sending those replies through the bridge, while
 leaving the homelab's own traffic on the home router.[^fn:7]
 
