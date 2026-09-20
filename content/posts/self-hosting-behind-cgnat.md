@@ -7,17 +7,16 @@ subtitle = "Serving the public Internet from a box at home."
 +++
 
 There is nothing more satisfying than owning, end to end, the software
-and the hardware you use, without relying on abusive cloud corporations.
+and the hardware you use without relying on abusive cloud corporations.
 The Internet is us, not them.  Break free from censorship by learning
 how to self-host at home.
 
-A few years ago this was easier.  You opened a port on your router and
-forwarded it to any machine at home.[^fn:1]
-Nowadays, however, due to the shortage of IPv4 addresses, ISPs share the
-same IP among your neighborhood.  Requests are routed using
-carrier-grade NAT (CGNAT), a second layer of NAT inside the carrier's
-network, where your router's public address is private too and the
-carrier translates it on the way out.
+A few years ago self-hosting was easier.  You opened a port on your
+router and forwarded it to any machine at home.[^fn:1]  Nowadays, however, due to the shortage of IPv4
+addresses, ISPs share the same IP among your neighborhood.  Requests are
+routed using carrier-grade NAT (CGNAT), a second layer of NAT inside the
+carrier's network, where your router's public address is private too and
+the carrier translates it on the way out.
 
 
 ## Topology {#topology}
@@ -68,9 +67,11 @@ PublicKey = <homelab-public-key>
 AllowedIPs = 10.0.0.2/32
 ```
 
-`PostUp` sets up firewall rules at the kernel level.[^fn:5]  The first two exclude ports
-2222 for SSH, and 51820 for the VPN tunnel itself.  The last three
-forward all traffic in all ports to the homelab.
+`PostUp` sets up NAT and forwarding rules at the kernel level.[^fn:5]  The first two
+exclude ports 2222 for SSH, and 51820 for the VPN tunnel itself.  The
+last three forward all traffic in all ports to the homelab.  The
+destination is rewritten but not the source, so the homelab sees the
+real client IPs.
 
 ```sh
 iptables -t nat -A PREROUTING -i ens3 -p udp --dport 51820 -j RETURN
@@ -99,9 +100,8 @@ PersistentKeepalive = 25
 ```
 
 Replies from the homelab have to go back down the tunne.  That is what
-`Table = off` and the two `PostUp` lines are for, sending those replies
-through the bridge, while leaving the homelab's own traffic on the home
-router.[^fn:7]
+the config is for, sending those replies through the bridge, while
+leaving the homelab's own traffic on the home router.[^fn:7]
 
 
 ## Resilience {#resilience}
@@ -119,17 +119,19 @@ Three pieces can fail.
 
 Own your services.  Have fun!
 
-[^fn:1]: A dynamic DNS service kept your
-    domain pointing at the right public IP whenever your ISP rotated it.
+[^fn:1]: A dynamic DNS
+    service kept your domain pointing at the right public IP whenever your
+    ISP rotated it.
 [^fn:2]: [WireGuard](https://www.wireguard.com/) is a fast, modern and
     secure VPN tunnel that lives inside the Linux kernel.
 [^fn:3]: Buying a static IP from
     your ISP is a valid alternative, at around 20 euros a month in Spain.
 [^fn:4]: See [First Steps on a New Server](/posts/first-steps-on-a-new-server/) for how I set
     up a fresh machine.
-[^fn:5]: And `PostDown`
-    removes them when the tunnel goes down.
+[^fn:5]: And
+    `PostDown` removes them when the tunnel goes down.
 [^fn:6]: Its full configuration lives in my [homelab](https://github.com/david-alvarez-rosa/homelab)
     repository.
-[^fn:7]: From then on, SSH to `ssh.alvarezrosa.com` at ports 22 lands
-    on the homelab, and port 2222 on the bridge.
+[^fn:7]: From then on,
+    SSH to `ssh.alvarezrosa.com` at port 22 lands on the homelab, and port
+    2222 on the bridge.
