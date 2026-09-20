@@ -435,16 +435,12 @@ h2:focus-within .anchor {
         border-left: 3px solid var(--border);
     }
 
-    p:has(.side:not(.meta)) + h2 {
-        clear: both;
+    p:has(.side:not(.meta)) {
+        display: flow-root;
     }
 
     .ornament {
         clear: both;
-    }
-
-    .side:not(.meta):not(.byline) {
-        margin-bottom: 2.4rem;
     }
 
     p:has(> .side.meta) {
