@@ -108,8 +108,8 @@ leaving the homelab's own traffic on the home router.[^fn:7]
 
 Three pieces can fail.
 
--   _Homelab._ It cannot be rebooted from outside, so a cronjob checks
-    whether SSH is reachable and, if it is not, reboots the box.
+-   _Homelab._ A cronjob in the homelab checks whether SSH is still
+    working and, if it is not, reboots the box.
 -   _Bridge._ In case it fails, I recommend a backup entry point like a
     Cloudflare tunnel or Tailscale directly to the homelab.
 -   _Tunnel._ A short drop re-handshakes on its own.  A longer one is
@@ -117,7 +117,7 @@ Three pieces can fail.
 
 <br />
 
-Own your services.  Have fun!
+Own your services.  Be _libre_ and have fun!
 
 [^fn:1]: A dynamic DNS
     service kept your domain pointing at the right public IP whenever your
