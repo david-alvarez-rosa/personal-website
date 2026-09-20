@@ -22,9 +22,9 @@ carrier on the way out.
 
 ## Topology {#topology}
 
-My services run on a mid-range machine in my mother's basement, and are
-exposed to the Internet through a cheap VPS bridge in a French data
-center.
+My services run on a mid-range machine in my mother's basement in
+northern Spain, and are exposed to the Internet through a cheap VPS
+bridge in a French data center.
 
 ```text
   +-------------------------------------+
@@ -46,9 +46,8 @@ center.
 
 A bidirectional WireGuard tunnel[^fn:2] forwards all
 packets in all ports from the bridge to the homelab box, and vice versa.
-The beauty of this is that the tunnel is initiated by the homelab, so we
-don't need a static dedicated IP at home.[^fn:3]
-The penalty of the bridge is 39 ms of RTT.
+The beauty of this is that the tunnel is initiated by the homelab, so
+you don't need a static dedicated IP at home.[^fn:3]  The penalty of the bridge is 39 ms of RTT.
 
 
 ## Tunnel configuration {#tunnel-configuration}
@@ -125,8 +124,9 @@ Own your services.  Be _libre_ and have fun!
     ISP rotated it.
 [^fn:2]: [WireGuard](https://www.wireguard.com/) is a fast, modern and
     secure VPN tunnel that lives inside the Linux kernel.
-[^fn:3]: Buying a static IP from
-    your ISP is a valid alternative, at around 20 euros a month in Spain.
+[^fn:3]: Buying a static IP
+    from your ISP is a valid alternative, at around 20 euros a month in
+    Spain.
 [^fn:4]: See [First Steps on a New Server](/posts/first-steps-on-a-new-server/) for how I set
     up a fresh machine.
 [^fn:5]: And
