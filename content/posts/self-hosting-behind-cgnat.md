@@ -1,8 +1,9 @@
 +++
 title = "Self-Hosting Behind CGNAT"
 author = ["David Álvarez Rosa"]
+date = 2026-09-21T08:32:00+01:00
 tags = ["blog", "self-hosting"]
-draft = true
+draft = false
 subtitle = "Libre software, libre hardware, and my mother's basement."
 image = "images/self-hosting-behind-cgnat.png"
 +++

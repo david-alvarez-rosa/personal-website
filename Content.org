@@ -798,7 +798,8 @@ Implement a shared_ptr
 
 Pending.
 
-* TODO [#B] Self-Hosting Behind CGNAT                          :self_hosting:
+* DONE [#B] Self-Hosting Behind CGNAT                          :self_hosting:
+CLOSED: [2026-09-21 Mon 08:32]
 :PROPERTIES:
 :EXPORT_FILE_NAME: self-hosting-behind-cgnat
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Libre software, libre hardware, and my mother's basement." :image "images/self-hosting-behind-cgnat.png"
