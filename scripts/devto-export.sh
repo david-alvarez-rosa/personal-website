@@ -82,9 +82,15 @@ awk 'NR==1 && /^\+\+\+/ {f=1; next} f && /^\+\+\+/ {f=0; next} !f' "$src" \
         buf = (buf == "" ? line : buf " " line) }
       END { flush() }' > "$body"
 
-# Cover image: same rule as og:image in layouts/baseof.html — first image in
-# the post, else fall back to the home illustration.
-cover=$(grep -oE '!\[[^]]*\]\([^)]+\)' "$body" | head -1 | sed -E 's/.*\(([^)]+)\)$/\1/' || true)
+# Cover image: same rule as og:image in layouts/baseof.html — an explicit
+# front-matter image wins, else the first image in the post, else the home
+# illustration.
+cover=$(grep -m1 '^image = ' "$src" | sed -E 's/^image = "(.*)"/\1/' || true)
+if [[ -n "$cover" ]]; then
+  cover="${BASE_URL}/${cover#/}"
+else
+  cover=$(grep -oE '!\[[^]]*\]\([^)]+\)' "$body" | head -1 | sed -E 's/.*\(([^)]+)\)$/\1/' || true)
+fi
 [[ -n "$cover" ]] || cover="${BASE_URL}/images/home-illustration.png"
 
 {

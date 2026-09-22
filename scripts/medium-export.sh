@@ -72,7 +72,7 @@ fi
     | awk '/^\[[0-9]+\] / {if (!seen) {print "\n---\n\n**Notes**"; seen=1} print ""} {print}'
   echo -e "\n---\n"
   echo "*Originally published at ${BASE_URL} on ${pubdate}.*"
-} | pandoc --from="$fmt" --to=html --no-highlight -o "$out"
+} | pandoc --from="$fmt" --to=html --syntax-highlighting=none -o "$out"
 
 firefox "$out"
 

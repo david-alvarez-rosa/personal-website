@@ -40,7 +40,7 @@ out="${TMPDIR:-/tmp}/substack-${slug}.html"
   [[ -z "$subtitle" ]] || printf '\n*%s*\n' "$subtitle"
   printf '\n%s\n' "$intro"
   printf '\nContinue reading\xe2\x80\x94[%s](%s)\n' "$title" "$url"
-} | pandoc --from=markdown --to=html --no-highlight -o "$out"
+} | pandoc --from=markdown --to=html --syntax-highlighting=none -o "$out"
 
 firefox "$out"
 
