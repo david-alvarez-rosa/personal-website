@@ -25,6 +25,10 @@ def _linkify(match):
     return f'<a href="{url}">{text}</a>'
 
 
+def to_text(text):
+    return re.sub(r"\[[^\]]+\]\((https?://[^)]+)\)", r"\1", text)
+
+
 def to_html(text):
     paragraphs = []
     for p in html.escape(text.strip()).split("\n\n"):
@@ -46,7 +50,7 @@ def email_html(body, footer="", ps="", title=""):
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{html.escape(title)}</title>
-    <style>a {{ color:#003366; text-decoration:none }} </style>
+    <style>a {{ color:#003366; text-decoration:underline }} </style>
   </head>
   <body>
     {to_html(body)}

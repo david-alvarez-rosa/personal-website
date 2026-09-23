@@ -25,7 +25,7 @@ from .core import (
     sign,
     smtp_connect,
 )
-from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html
+from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html, to_text
 
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
@@ -66,7 +66,7 @@ def deliver(background, email, subject, body, feedback_id, unsub=None):
     msg["List-Id"] = LIST_ID
     msg["Feedback-ID"] = feedback_id
     msg["X-Mailer"] = MAILER
-    text = f"{body}\n\n{SIGN_OFF}\n\n{SIGNATURE}\n"
+    text = f"{to_text(body)}\n\n{SIGN_OFF}\n\n{SIGNATURE}\n"
     if unsub:
         msg["List-Unsubscribe"] = f"<{unsub}>"
         msg["List-Unsubscribe-Post"] = "List-Unsubscribe=One-Click"
@@ -86,9 +86,10 @@ def deliver(background, email, subject, body, feedback_id, unsub=None):
 def send_confirm(background, email):
     link = f"{API_BASE}/confirm/{make_token('confirm', email)}"
     subject = "Confirm your subscription to david.alvarezrosa.com"
-    body = f"""Almost there! Confirm your email to subscribe:
+    body = f"""Almost there! Confirm your email to subscribe to the
+david.alvarezrosa.com newsletter:
 
-{link}
+[Confirm my subscription]({link})
 
 If you didn't sign up, just ignore this email."""
     deliver(background, email, subject, body, "confirm:optin:alvarezrosa.com")
