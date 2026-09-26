@@ -1,0 +1,13 @@
+{{ with first 3 (where (site.RegularPages.Related .) "Section" "posts") }}
+  <h2 id="read-next">Read Next <a class="anchor" href="#read-next">&sect;</a></h2>
+  {{ range . }}
+    <p>
+      <span class="side meta">
+        <time class="date" datetime="{{ .Date | time.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date | time.Format ":date_long" }}</time>
+        {{ partial "visible-tags.html" . }}
+      </span>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      {{ with .Params.subtitle }}<br/><span class="summary">{{ . }}</span>{{ end }}
+    </p>
+  {{ end }}
+{{ end }}

@@ -30,6 +30,13 @@ disableKinds = ['taxonomy']
     url = '/index.xml'
     weight = 40
 
+[related]
+  includeNewer = true
+  threshold = 0
+  [[related.indices]]
+    name = 'tags'
+    weight = 100
+
 [imaging]
   [imaging.jpeg]
     quality = 50

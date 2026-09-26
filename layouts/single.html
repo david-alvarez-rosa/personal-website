@@ -26,6 +26,7 @@
   {{ if $entry }}</div></article>{{ end }}
   {{ if eq .Section "posts" }}
     <div class="ornament" aria-hidden="true"></div>
+    {{ partial "read-next.html" . }}
     {{ partial "subscribe.html" . }}
   {{ end }}
 {{ end }}
