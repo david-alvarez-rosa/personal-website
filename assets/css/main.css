@@ -66,9 +66,9 @@ h1 {
     letter-spacing: 0.06rem;
     font-weight: 420;
     margin: 0 auto 2.2rem;
-    max-width: 30rem;
     font-size: 2.8rem;
     line-height: 1;
+    text-wrap: balance;
 }
 
 h1::before {

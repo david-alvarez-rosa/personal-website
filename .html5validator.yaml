@@ -16,6 +16,7 @@ ignore_re:
   - 'error: CSS: .* "revert" is not a .* value.'
   - 'is not a "color-stop" value'
   - 'Property "paint-order"'
+  - 'Property "text-wrap"'
   - 'Property "size-adjust"'
   - 'Property "ascent-override"'
   - 'Property "descent-override"'
