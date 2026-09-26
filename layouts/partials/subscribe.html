@@ -8,6 +8,9 @@
   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
   <button type="submit">Subscribe</button>
 </form>
+<script>
+  document.currentScript.previousElementSibling.addEventListener('submit', () => window.umami?.track('subscribe', { page: location.pathname }));
+</script>
 <p style="margin-top: 0.9rem;">
   Have feedback? Email me at
   <a href="mailto:david@alvarezrosa.com">david@alvarezrosa.com</a>.
