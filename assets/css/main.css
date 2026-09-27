@@ -487,6 +487,10 @@ h2:focus-within .anchor {
         order: 3;
     }
 
+    p:has(> .side.meta) > .side.meta {
+        display: none;
+    }
+
     .side.meta {
         display: block;
         float: none;
@@ -506,13 +510,12 @@ h2:focus-within .anchor {
         margin: 0 0.4rem;
     }
 
+    header .subtitle {
+        text-wrap: balance;
+    }
+
     .byline {
-        float: none;
-        width: auto;
-        margin: 0 0 1.6rem;
-        padding: 0;
-        border: none;
-        text-align: center;
+        display: none;
     }
 
     figure {
