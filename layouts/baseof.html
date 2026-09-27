@@ -72,10 +72,10 @@
   {{ if or .IsHome (eq .RelPermalink "/about/") }} <script type="application/ld+json"> {{ dict "@context" "https://schema.org" "@type" "Person" "name" "David Álvarez Rosa" "alternateName" "David Alvarez Rosa" "url" site.BaseURL "jobTitle" "Software Engineer" "sameAs" $profiles | jsonify | safeJS }} </script> {{ end }}
   {{ if and .IsPage (eq .Section "posts") }} <script type="application/ld+json"> {{ dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" $description "url" .Permalink "mainEntityOfPage" .Permalink "image" $imageURL "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "author" (dict "@type" "Person" "name" (index .Params.Author 0)) "publisher" (dict "@type" "Person" "name" "David Álvarez Rosa" "url" site.BaseURL) | jsonify | safeJS }} </script> {{ end }}
   {{ if .Params.latex }}
-    <link rel="preload" as="style" href="/katex/0.16.9/katex.min.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/katex/0.16.9/katex.min.css"></noscript>
-    <script defer src="/katex/0.16.9/katex.min.js"></script>
-    <script defer src="/katex/0.16.9/contrib/auto-render.min.js" onload="(window.requestIdleCallback||requestAnimationFrame)(function(){renderMathInElement(document.body);});"></script>
+    <link rel="preload" as="style" href="/katex/0.18.9/katex.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/katex/0.18.9/katex.min.css"></noscript>
+    <script defer src="/katex/0.18.9/katex.min.js"></script>
+    <script defer src="/katex/0.18.9/contrib/auto-render.min.js" onload="(window.requestIdleCallback||requestAnimationFrame)(function(){renderMathInElement(document.body);});"></script>
   {{ end }}
   {{ $cssParts := slice (resources.Get "css/fonts.css") (resources.Get "css/main.css") }}
   {{ $bundleName := "css/bundle.css" }}
