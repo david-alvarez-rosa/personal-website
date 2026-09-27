@@ -17,8 +17,40 @@
     line-gap-override: 0%;
 }
 @font-face {
+    font-family: "Alegreya Fallback Noto";
+    src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular");
+    size-adjust: 85.30%;
+    ascent-override: 119.11%;
+    descent-override: 40.45%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "Alegreya Fallback DejaVu";
+    src: local("DejaVu Serif"), local("DejaVuSerif");
+    size-adjust: 80.04%;
+    ascent-override: 126.94%;
+    descent-override: 43.10%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "Alegreya SC Fallback Noto";
+    src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular");
+    size-adjust: 97.81%;
+    ascent-override: 103.87%;
+    descent-override: 35.27%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "Alegreya SC Fallback DejaVu";
+    src: local("DejaVu Serif"), local("DejaVuSerif");
+    size-adjust: 91.78%;
+    ascent-override: 110.69%;
+    descent-override: 37.59%;
+    line-gap-override: 0%;
+}
+@font-face {
     font-family: "Alegreya Sans Fallback";
-    src: local("Arial"), local("Liberation Sans");
+    src: local("Arial"), local("Liberation Sans"), local("Roboto"), local("Roboto-Regular");
     size-adjust: 86.75%;
     ascent-override: 103.74%;
     descent-override: 34.58%;
@@ -27,7 +59,7 @@
 }
 @font-face {
     font-family: "Inconsolata Fallback";
-    src: local("Courier New"), local("Liberation Mono");
+    src: local("Courier New"), local("Liberation Mono"), local("DejaVu Sans Mono"), local("DejaVuSansMono"), local("Droid Sans Mono"), local("DroidSansMono");
     size-adjust: 83.32%;
     ascent-override: 103.10%;
     descent-override: 22.80%;

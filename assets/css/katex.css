@@ -16,9 +16,43 @@
     descent-override: 19.20%;
     line-gap-override: 7.93%;
 }
+@font-face {
+    font-family: "KaTeX_Main Fallback Noto";
+    src: local("Noto Serif"), local("Noto Serif Regular"), local("NotoSerif-Regular");
+    size-adjust: 90.07%;
+    ascent-override: 100.26%;
+    descent-override: 30.20%;
+    line-gap-override: 9.99%;
+}
+@font-face {
+    font-family: "KaTeX_Main Fallback DejaVu";
+    src: local("DejaVu Serif"), local("DejaVuSerif");
+    size-adjust: 84.51%;
+    ascent-override: 106.85%;
+    descent-override: 32.18%;
+    line-gap-override: 10.65%;
+}
+@font-face {
+    font-family: "KaTeX_Math Fallback Noto";
+    font-style: italic;
+    src: local("Noto Serif Italic"), local("NotoSerif-Italic");
+    size-adjust: 97.69%;
+    ascent-override: 73.39%;
+    descent-override: 22.32%;
+    line-gap-override: 9.21%;
+}
+@font-face {
+    font-family: "KaTeX_Math Fallback DejaVu";
+    font-style: italic;
+    src: local("DejaVu Serif Italic"), local("DejaVuSerif-Italic");
+    size-adjust: 88.98%;
+    ascent-override: 80.58%;
+    descent-override: 24.50%;
+    line-gap-override: 10.12%;
+}
 .katex {
-    font-family: KaTeX_Main, "KaTeX_Main Fallback", Times New Roman, serif;
+    font-family: KaTeX_Main, "KaTeX_Main Fallback", "KaTeX_Main Fallback Noto", "KaTeX_Main Fallback DejaVu", Times New Roman, serif;
 }
 .katex .mathnormal {
-    font-family: KaTeX_Math, "KaTeX_Math Fallback";
+    font-family: KaTeX_Math, "KaTeX_Math Fallback", "KaTeX_Math Fallback Noto", "KaTeX_Math Fallback DejaVu";
 }

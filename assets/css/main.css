@@ -12,8 +12,8 @@
     --input-border: dimgray;
     --button-bg: #f5f5f5;
     --button-hover-bg: #e8e8e8;
-    --font-body: "Alegreya", "Alegreya Fallback", serif;
-    --font-sc: "Alegreya SC", "Alegreya SC Fallback", serif;
+    --font-body: "Alegreya", "Alegreya Fallback", "Alegreya Fallback Noto", "Alegreya Fallback DejaVu", serif;
+    --font-sc: "Alegreya SC", "Alegreya SC Fallback", "Alegreya SC Fallback Noto", "Alegreya SC Fallback DejaVu", serif;
     --font-sans: "Alegreya Sans", "Alegreya Sans Fallback", sans-serif;
     --font-mono: "Inconsolata", "Inconsolata Fallback", monospace;
     --fs-body: 1.4rem;
