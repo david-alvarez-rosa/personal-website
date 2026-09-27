@@ -1,0 +1,2 @@
+{{- $tex := replaceRE "\\\\([!-/:-@\\[-`{-~])" "$1" .Inner -}}
+{{- transform.ToMath $tex (dict "displayMode" (eq .Type "block")) -}}

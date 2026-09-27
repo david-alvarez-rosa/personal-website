@@ -1,0 +1,3 @@
+{{- $tex := replaceRE "\\\\([!-/:-@\\[-`{-~])" "$1" .Inner -}}
+{{- $math := transform.ToMath $tex (dict "output" "htmlAndMathml" "displayMode" (eq .Type "block")) -}}
+{{- if eq .Type "block" }}<p><span>{{ $math }}</span></p>{{ else }}<span>{{ $math }}</span>{{ end -}}

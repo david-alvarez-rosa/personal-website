@@ -47,6 +47,11 @@ disableKinds = ['taxonomy']
   unsafe = true
 
 [markup]
+  [markup.goldmark.extensions.passthrough]
+    enable = true
+    [markup.goldmark.extensions.passthrough.delimiters]
+      inline = [['\\(', '\\)']]
+      block = [['\\[', '\\]']]
   [markup.highlight]
     noClasses = false
     style = "modus-operandi"
