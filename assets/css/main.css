@@ -14,8 +14,8 @@
     --button-hover-bg: #e8e8e8;
     --font-body: "Alegreya", "Alegreya Fallback", serif;
     --font-sc: "Alegreya SC", "Alegreya SC Fallback", serif;
-    --font-sans: "Alegreya Sans", sans-serif;
-    --font-mono: "Inconsolata", monospace;
+    --font-sans: "Alegreya Sans", "Alegreya Sans Fallback", sans-serif;
+    --font-mono: "Inconsolata", "Inconsolata Fallback", monospace;
     --fs-body: 1.4rem;
     --gutter: 2rem;
 }
