@@ -22,11 +22,11 @@ median families.  This is what a trillion looks like.
          pixels before it ends.">
       <defs>
         <pattern id="speck" width="6" height="6" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="3" r="2" fill="#111"/>
+          <circle cx="3" cy="3" r="2" fill="currentColor"/>
         </pattern>
       </defs>
-      <text class="halo" x="2" y="16">&#9660; each speck is one million dollars, one comfortable retirement</text>
-      <text class="halo" x="2" y="36">(the median family&#8217;s everything, $192,900, is a fifth of a speck)</text>
+      <text class="halo" x="2" y="16">&#9660; each speck is one million dollars</text>
+      <text class="halo" x="2" y="36">(the median family owns a fifth of one)</text>
       <rect x="0" y="48" width="93750" height="384" fill="url(#speck)"/>
       <text class="halo" x="937.5" y="86" text-anchor="middle">$10 billion</text>
       <text class="halo" x="1875" y="86" text-anchor="middle">$20 billion</text>
@@ -128,7 +128,7 @@ median families.  This is what a trillion looks like.
       <text class="halo" x="91875" y="86" text-anchor="middle">$980 billion</text>
       <text class="halo" x="92812.5" y="86" text-anchor="middle">$990 billion</text>
       <text class="halo" x="300" y="416">&#9758; scroll</text>
-      <line x1="93750.5" y1="48" x2="93750.5" y2="432" stroke="#111" stroke-width="1"/>
+      <line x1="93750.5" y1="48" x2="93750.5" y2="432" stroke="currentColor" stroke-width="1"/>
       <text class="mk-lbl" x="93764" y="246">one trillion dollars</text>
     </svg>
   </div>
@@ -142,15 +142,19 @@ median families.  This is what a trillion looks like.
   .trillion-scroll {
     overflow-x: auto;
   }
+  figure.trillion svg {
+    color: var(--text);
+  }
   figure.trillion svg .halo {
-    font-style: italic; font-size: 1.1rem; fill: #444;
-    stroke: #fcfcfc; stroke-width: 9; paint-order: stroke;
+    font-style: italic; font-size: 1.1rem;
+    fill: color-mix(in srgb, var(--text) 75%, var(--bg));
+    stroke: var(--bg); stroke-width: 9; paint-order: stroke;
   }
   figure.trillion svg .halo.big {
-    font-size: 1.4rem; fill: #222;
+    font-size: 1.4rem; fill: var(--text);
   }
   figure.trillion svg .mk-lbl {
-    fill: #111;
+    fill: var(--text);
     font-family: "Alegreya SC", "Alegreya SC Fallback", serif;
     font-size: 1.3rem;
   }
@@ -165,7 +169,7 @@ The taxes fall mostly on those who work.  The 25 richest Americans added
 $401 billion to their net worth over 2014--2018 and paid $13.6 billion
 in income tax, a true rate of 3.4%.[^fn:3]  Billionaires worldwide pay
 tax equal to 0.3% of their wealth a year.[^fn:4]  A wage earner pays 15.3% payroll tax from the first
-dollar, four and a half times the billionaires' rate, before income tax.
+dollar, before income tax.
 
 None of this breaks the law.  The plutocrats "got their wealth by
 legalizing cheating."[^fn:5]  The law taxes realization, not
