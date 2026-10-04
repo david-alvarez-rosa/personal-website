@@ -2880,7 +2880,7 @@ High-frequency options trading.  Low-latency market data and trading
 signals.  Mentor and interviewer.
 
 /Member @ C++ Standards Committee/
-[fn::Jul 2026--Present@@html:<span class="sep"></span>@@Remote]\\
+[fn::Jul 2026--Present@@html:<span class="sep"></span>@@Ireland]\\
 National expert.  Representing Ireland.
 
 /Software Engineer II @ Amazon/
@@ -2895,17 +2895,15 @@ Researched, designed, and built a semantic cache for LLMs.
 
 /Risk Analyst @ Deloitte/
 [fn::Sep 2021--Mar 2022@@html:<span class="sep"></span>@@Madrid, Spain]\\
-Quantitative analysis of technological and cybersecurity risks for
-top-tier banking companies.
+Quantitative analysis of cybersecurity risk for banks.
 
-/Visiting Researcher @ Vector Institute/
+/Visiting Researcher @ Vector Institute (University of Toronto)/
 [fn::Sep 2020--Jun 2021@@html:<span class="sep"></span>@@Toronto, Canada]\\
-Research thesis on multimodal learning (recomprehension.com).
+Research thesis on multimodal learning (10/10, A+) at recomprehension.com.
 
 /Machine Learning Engineer @ BCN eMotorsport/
 [fn::Sep 2019--Feb 2020@@html:<span class="sep"></span>@@Barcelona, Spain]\\
-Perception at Driverless UPC.  Served as LiDAR lead and collaborated on
-computer vision for a fully autonomous car.
+LiDAR lead and computer vision for a fully autonomous car.
 
 ** Education
 
@@ -2915,10 +2913,6 @@ Official study program focused on AI research and enabling PhD.
 
 /MSc in Mathematics/\\
 Math-lover part-time student.  Dropout (joined Amazon).
-
-/Research Thesis/
-[fn::GPA 10/10 (A+)]\\
-Research thesis on multimodal learning at University of Toronto.
 
 /BSc in Mathematics/
 [fn::GPA 8.12/10 (top 10%)@@html:<span class="sep"></span>@@Honors in 9 subjects]\\
@@ -2941,8 +2935,8 @@ Nova Talent Member --- Nova
 /Mathematics Tutor/\\
 Academic training for the Mathematical Olympiads.
 
-/Volunteer @ Banco de Alimentos/\\
-Food collection for people in need.
+/Food Bank Volunteer/\\
+Food collection at Banco de Alimentos.
 
 ** Honors & awards
 
@@ -2970,8 +2964,7 @@ Catalan --- Intermediate
 
 ** Contact
 
-You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
-39 30.
+You can reach me at david@alvarezrosa.com (preferred) or +34 647 133 930.
 
 * DONE [#B] Home
 CLOSED: [2025-12-02 Tue 19:58]

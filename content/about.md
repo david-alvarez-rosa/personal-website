@@ -64,17 +64,15 @@ Researched, designed, and built a semantic cache for LLMs.
 
 _Risk Analyst @ Deloitte_
 [^fn:6]<br />
-Quantitative analysis of technological and cybersecurity risks for
-top-tier banking companies.
+Quantitative analysis of cybersecurity risk for banks.
 
-_Visiting Researcher @ Vector Institute_
+_Visiting Researcher @ Vector Institute (University of Toronto)_
 [^fn:7]<br />
-Research thesis on multimodal learning (recomprehension.com).
+Research thesis on multimodal learning (10/10, A+) at recomprehension.com.
 
 _Machine Learning Engineer @ BCN eMotorsport_
 [^fn:8]<br />
-Perception at Driverless UPC.  Served as LiDAR lead and collaborated on
-computer vision for a fully autonomous car.
+LiDAR lead and computer vision for a fully autonomous car.
 
 
 ## Education {#education}
@@ -86,16 +84,12 @@ Official study program focused on AI research and enabling PhD.
 _MSc in Mathematics_<br />
 Math-lover part-time student.  Dropout (joined Amazon).
 
-_Research Thesis_
-[^fn:10]<br />
-Research thesis on multimodal learning at University of Toronto.
-
 _BSc in Mathematics_
-[^fn:11]<br />
+[^fn:10]<br />
 Rigorous and proof-oriented degree with a robust mathematical base.
 
 _BEng in Industrial Engineering_
-[^fn:12]<br />
+[^fn:11]<br />
 Multidisciplinary and integrative vision of industrial engineering.
 
 
@@ -113,8 +107,8 @@ Nova Talent Member --- Nova
 _Mathematics Tutor_<br />
 Academic training for the Mathematical Olympiads.
 
-_Volunteer @ Banco de Alimentos_<br />
-Food collection for people in need.
+_Food Bank Volunteer_<br />
+Food collection at Banco de Alimentos.
 
 
 ## Honors &amp; awards {#honors-and-awards}
@@ -126,7 +120,7 @@ _Physics Olympiad_<br />
 Gold in local (Pamplona), silver in national (Seville).
 
 _Mobility Scholarship --- Cellex (CFIS)_
-[^fn:13]<br />
+[^fn:12]<br />
 Scholarship to carry out my research thesis at Toronto (€6k).
 
 _Tuition and Housing Scholarship --- Cellex (CFIS)_<br />
@@ -145,20 +139,18 @@ Catalan --- Intermediate
 
 ## Contact {#contact}
 
-You can reach me at david@alvarezrosa.com (preferred) or +34 647 13
-39 30.
+You can reach me at david@alvarezrosa.com (preferred) or +34 647 133 930.
 
 [^fn:1]: ![](./assets/images/portrait.png) **That's me!** March
     2022.
 [^fn:2]: Jul 2024--Present<span class="sep"></span>Dublin, Ireland
-[^fn:3]: Jul 2026--Present<span class="sep"></span>Remote
+[^fn:3]: Jul 2026--Present<span class="sep"></span>Ireland
 [^fn:4]: Mar 2022--Aug 2024<span class="sep"></span>Madrid, Spain
 [^fn:5]: Apr 2024--Jul 2024<span class="sep"></span>Remote
 [^fn:6]: Sep 2021--Mar 2022<span class="sep"></span>Madrid, Spain
 [^fn:7]: Sep 2020--Jun 2021<span class="sep"></span>Toronto, Canada
 [^fn:8]: Sep 2019--Feb 2020<span class="sep"></span>Barcelona, Spain
 [^fn:9]: GPA 9.00/10<span class="sep"></span>Honors in 6 subjects
-[^fn:10]: GPA 10/10 (A+)
-[^fn:11]: GPA 8.12/10 (top 10%)<span class="sep"></span>Honors in 9 subjects
-[^fn:12]: GPA 8.03/10 (top 2%)<span class="sep"></span>Honors in 14 subjects
-[^fn:13]: Canceled due to Covid-19
+[^fn:10]: GPA 8.12/10 (top 10%)<span class="sep"></span>Honors in 9 subjects
+[^fn:11]: GPA 8.03/10 (top 2%)<span class="sep"></span>Honors in 14 subjects
+[^fn:12]: Canceled due to Covid-19
