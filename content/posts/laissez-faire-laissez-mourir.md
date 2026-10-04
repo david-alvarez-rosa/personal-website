@@ -1,7 +1,7 @@
 +++
 title = "Laissez Faire, Laissez Mourir"
 author = ["David Álvarez Rosa"]
-tags = ["blog", "backlog"]
+tags = ["blog"]
 draft = true
 subtitle = "Visualizing plutocracy."
 +++
