@@ -160,10 +160,10 @@ median families.  This is what a trillion looks like.
   }
 </style>
 
-Capital compounds, labour does not.  At 5%, $1 trillion yields a median
-household income ($83,730)[^fn:2] every 53 seconds and a
-working life every 35 minutes.  Past any possible spending, a fortune is
-no longer earned.  It accrues.
+Capital compounds, labour does not.  At a 7% annual return, $1 trillion
+yields a median household income ($83,730)[^fn:2]
+every 38 seconds and a working life every 25 minutes.  Past any possible
+spending, a fortune is no longer earned.  It accrues.
 
 The taxes fall mostly on those who work.  The 25 richest Americans added
 $401 billion to their net worth over 2014--2018 and paid $13.6 billion
@@ -190,8 +190,8 @@ Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 [^fn:1]: Federal Reserve, [Distributional
     Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/).  The bottom 50% of US households held $4.1 trillion,
     2.5% of household net worth.
-[^fn:2]: U.S. Census Bureau, [_Income in the United
-    States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September 2025.
+[^fn:2]: U.S. Census Bureau,
+    [_Income in the United States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September 2025.
 [^fn:3]: ProPublica, [_The Secret IRS
     Files_](https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax), June 8, 2021.  The "true tax rate" compares federal income tax
     paid with growth in net worth over the same period.  Musk paid 3.27%
@@ -205,4 +205,4 @@ Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
     federal loans.
 [^fn:7]: Oxfam, [_Resisting
     the Rule of the Rich_](https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking), January 19, 2026.
-[^fn:8]: Stallman, ibid.
+[^fn:8]: Ibid.  Stallman.

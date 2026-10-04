@@ -366,11 +366,11 @@ median families.  This is what a trillion looks like.
 </style>
 #+end_export
 
-Capital compounds, labour does not.  At 5%, $1 trillion yields a median
-household income ($83,730)[fn::U.S. Census Bureau, [[https://www.census.gov/library/publications/2025/demo/p60-286.html][/Income in the United
-States: 2024/]], report P60-286, September 2025.] every 53 seconds and a
-working life every 35 minutes.  Past any possible spending, a fortune is
-no longer earned.  It accrues.
+Capital compounds, labour does not.  At a 7% annual return, $1 trillion
+yields a median household income ($83,730)[fn::U.S. Census Bureau,
+[[https://www.census.gov/library/publications/2025/demo/p60-286.html][/Income in the United States: 2024/]], report P60-286, September 2025.]
+every 38 seconds and a working life every 25 minutes.  Past any possible
+spending, a fortune is no longer earned.  It accrues.
 
 The taxes fall mostly on those who work.  The 25 richest Americans added
 $401 billion to their net worth over 2014--2018 and paid $13.6 billion
@@ -397,7 +397,7 @@ nearly all the wealth of the poorest 4.1 billion people.  Aid cuts in
 2025 could cause 14 million more deaths by 2030.[fn::Oxfam, [[https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking][/Resisting
 the Rule of the Rich/]], January 19, 2026.]  Die, then.  The plutocrats
 hold on to their power "by lying and rigging elections" and "have no
-moral right to either this wealth or this power."[fn::Stallman, ibid.]
+moral right to either this wealth or this power."[fn::Ibid.  Stallman.]
 Laissez faire for them, laissez mourir for the rest.
 
 Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
