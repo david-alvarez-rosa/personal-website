@@ -586,7 +586,7 @@ Pending.
 * TODO [#B] Laissez Faire, Laissez Mourir
 :PROPERTIES:
 :EXPORT_FILE_NAME: laissez-faire-laissez-mourir
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Visualizing plutocracy."
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Visualizing plutocracy." :image "images/saint-ignucius.jpg"
 :END:
 
 There is an economic arrangement in which whoever cannot pay to survive

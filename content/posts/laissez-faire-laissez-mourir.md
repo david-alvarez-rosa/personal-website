@@ -4,6 +4,7 @@ author = ["David Álvarez Rosa"]
 tags = ["blog"]
 draft = true
 subtitle = "Visualizing plutocracy."
+image = "images/saint-ignucius.jpg"
 +++
 
 There is an economic arrangement in which whoever cannot pay to survive
