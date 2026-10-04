@@ -210,21 +210,22 @@ action.*] or wiggle in whatever pattern you like.
 
 There is an economic arrangement in which whoever cannot pay to survive
 is told, "Die, then."  We live in it.  The world minted its first
-trillionaire in June 2026, when SpaceX went public and Elon Musk passed
-$1 trillion.  That is a quarter of what the bottom half of America (66
-million households) owns combined,[fn::Federal Reserve, [[https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/][Distributional
-Financial Accounts]].  The bottom 50% of US households held $4.1 trillion,
-2.5% of household net worth.] and the entire wealth of five million
-median families.  This is what a trillion looks like.
+trillionaire in June 2026, when SpaceX went public and Elon Musk's net
+worth passed $1 trillion.  That is a quarter of what the bottom half of
+America (66 million households) owns combined,[fn::Federal Reserve,
+[[https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/][Distributional Financial Accounts]].  The bottom 50% of US households held
+$4.1 trillion, 2.5% of household net worth.] and the entire wealth of
+five million median families.  This is what a trillion looks like.
 
 #+begin_export html
 <figure class="trillion fullwidth">
   <div class="trillion-scroll">
-    <svg width="94090" height="432" viewBox="0 0 94090 432" role="img"
+    <svg width="94340" height="432" viewBox="0 0 94340 432" role="img"
          aria-label="A horizontal halftone field of one million specks,
          each speck one million dollars, together one trillion dollars.
          The field scrolls to the right for ninety-four thousand
-         pixels before it ends.">
+         pixels before it ends, where Saint IGNUcius blesses
+         whoever scrolled that far.">
       <defs>
         <pattern id="speck" width="6" height="6" patternUnits="userSpaceOnUse">
           <circle cx="3" cy="3" r="2" fill="currentColor"/>
@@ -335,6 +336,9 @@ median families.  This is what a trillion looks like.
       <text class="halo" x="300" y="416">&#9758; scroll</text>
       <line x1="93750.5" y1="48" x2="93750.5" y2="432" stroke="currentColor" stroke-width="1"/>
       <text class="mk-lbl" x="93764" y="246">one trillion dollars</text>
+      <image href="/images/saint-ignucius.jpg" x="94050" y="48" width="224" height="310"/>
+      <text class="halo" x="94162" y="386" text-anchor="middle">Thou hast scrolled twenty-five metres.</text>
+      <text class="halo" x="94162" y="410" text-anchor="middle">Go in freedom.</text>
     </svg>
   </div>
   <figcaption><p><strong>One trillion dollars.</strong>  One
@@ -379,15 +383,14 @@ Files/]], June 8, 2021.  The "true tax rate" compares federal income tax
 paid with growth in net worth over the same period.  Musk paid 3.27%
 (zero in 2018), Bezos 0.98%, Buffett 0.10%.]  Billionaires worldwide pay
 tax equal to 0.3% of their wealth a year.[fn::G. Zucman, [[https://gabriel-zucman.eu/files/report-g20.pdf][report to the
-G20]], June 2024.]  A wage earner pays 15.3% payroll tax from the first
-dollar, before income tax.
+G20]], June 2024.]
 
 None of this breaks the law.  The plutocrats "got their wealth by
 legalizing cheating."[fn::Richard Stallman, [[https://stallman.org/notes/2018-jul-oct.html][/Rigged for plutocrats/]],
 political notes, October 28, 2018.]  The law taxes realization, not
 accrual.  Never sell.  Pledge the shares as collateral and borrow
-against them.  Buy, borrow, die.  Tens of millions pass untaxed to heirs
-whose classmates owe an average of $40,467 in student
+against them.  Buy, borrow, die.  Billions pass untaxed to heirs whose
+classmates owe an average of $40,467 in student
 loans.[fn::U.S. Department of Education, [[https://studentaid.gov/data-center/student/portfolio][Federal Student Loan Portfolio]],
 second quarter of 2026.  42.6 million borrowers owe $1.72 trillion in
 federal loans.]  That is not equality of opportunity.

@@ -8,18 +8,19 @@ subtitle = "Visualizing plutocracy."
 
 There is an economic arrangement in which whoever cannot pay to survive
 is told, "Die, then."  We live in it.  The world minted its first
-trillionaire in June 2026, when SpaceX went public and Elon Musk passed
-$1 trillion.  That is a quarter of what the bottom half of America (66
-million households) owns combined,[^fn:1] and the entire wealth of five million
-median families.  This is what a trillion looks like.
+trillionaire in June 2026, when SpaceX went public and Elon Musk's net
+worth passed $1 trillion.  That is a quarter of what the bottom half of
+America (66 million households) owns combined,[^fn:1] and the entire wealth of
+five million median families.  This is what a trillion looks like.
 
 <figure class="trillion fullwidth">
   <div class="trillion-scroll">
-    <svg width="94090" height="432" viewBox="0 0 94090 432" role="img"
+    <svg width="94340" height="432" viewBox="0 0 94340 432" role="img"
          aria-label="A horizontal halftone field of one million specks,
          each speck one million dollars, together one trillion dollars.
          The field scrolls to the right for ninety-four thousand
-         pixels before it ends.">
+         pixels before it ends, where Saint IGNUcius blesses
+         whoever scrolled that far.">
       <defs>
         <pattern id="speck" width="6" height="6" patternUnits="userSpaceOnUse">
           <circle cx="3" cy="3" r="2" fill="currentColor"/>
@@ -130,6 +131,9 @@ median families.  This is what a trillion looks like.
       <text class="halo" x="300" y="416">&#9758; scroll</text>
       <line x1="93750.5" y1="48" x2="93750.5" y2="432" stroke="currentColor" stroke-width="1"/>
       <text class="mk-lbl" x="93764" y="246">one trillion dollars</text>
+      <image href="/images/saint-ignucius.jpg" x="94050" y="48" width="224" height="310"/>
+      <text class="halo" x="94162" y="386" text-anchor="middle">Thou hast scrolled twenty-five metres.</text>
+      <text class="halo" x="94162" y="410" text-anchor="middle">Go in freedom.</text>
     </svg>
   </div>
   <figcaption><p><strong>One trillion dollars.</strong>  One
@@ -168,14 +172,13 @@ spending, a fortune is no longer earned.  It accrues.
 The taxes fall mostly on those who work.  The 25 richest Americans added
 $401 billion to their net worth over 2014--2018 and paid $13.6 billion
 in income tax, a true rate of 3.4%.[^fn:3]  Billionaires worldwide pay
-tax equal to 0.3% of their wealth a year.[^fn:4]  A wage earner pays 15.3% payroll tax from the first
-dollar, before income tax.
+tax equal to 0.3% of their wealth a year.[^fn:4]
 
 None of this breaks the law.  The plutocrats "got their wealth by
 legalizing cheating."[^fn:5]  The law taxes realization, not
 accrual.  Never sell.  Pledge the shares as collateral and borrow
-against them.  Buy, borrow, die.  Tens of millions pass untaxed to heirs
-whose classmates owe an average of $40,467 in student
+against them.  Buy, borrow, die.  Billions pass untaxed to heirs whose
+classmates owe an average of $40,467 in student
 loans.[^fn:6]  That is not equality of opportunity.
 
 Neither is it democracy.  In 2025 billionaire wealth grew $2.5 trillion,
@@ -187,9 +190,9 @@ Laissez faire for them, laissez mourir for the rest.
 
 Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 
-[^fn:1]: Federal Reserve, [Distributional
-    Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/).  The bottom 50% of US households held $4.1 trillion,
-    2.5% of household net worth.
+[^fn:1]: Federal Reserve,
+    [Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/).  The bottom 50% of US households held
+    $4.1 trillion, 2.5% of household net worth.
 [^fn:2]: U.S. Census Bureau,
     [_Income in the United States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September 2025.
 [^fn:3]: ProPublica, [_The Secret IRS
