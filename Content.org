@@ -352,7 +352,7 @@ median families.  This is what a trillion looks like.
   }
   figure.trillion svg .halo {
     font-style: italic; font-size: 1.1rem;
-    fill: color-mix(in srgb, var(--text) 75%, var(--bg));
+    fill: var(--text); fill-opacity: 0.75;
     stroke: var(--bg); stroke-width: 9; paint-order: stroke;
   }
   figure.trillion svg .halo.big {
