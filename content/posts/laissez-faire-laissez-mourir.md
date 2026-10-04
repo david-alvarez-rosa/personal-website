@@ -3,15 +3,15 @@ title = "Laissez Faire, Laissez Mourir"
 author = ["David Álvarez Rosa"]
 tags = ["blog", "backlog"]
 draft = true
+subtitle = "Visualizing plutocracy."
 +++
 
-There is an arrangement in which whoever cannot pay to survive is
-told, "Die, then."  We live in it.  It has been on my mind as the
-world prepares to mint its first trillionaire.  What follows is
-numbers.  They are worse than you think.  Elon Musk is worth $834
-billion---a fifth of what the bottom half of America, 66 million
-households, owns combined[^fn:1]---and his approved pay package
-runs to one trillion.  This is what a trillion looks like.
+There is an economic arrangement in which whoever cannot pay to
+survive is told, "Die, then."  We live in it.  The world minted its
+first trillionaire in June 2026, when SpaceX went public and Elon Musk
+passed $1 trillion.  That is a quarter of what the bottom half of
+America (66 million households) owns combined,[^fn:1] and the entire wealth of five million median
+families.  This is what a trillion looks like.
 
 <figure class="trillion fullwidth">
   <div class="trillion-scroll">
@@ -25,8 +25,8 @@ runs to one trillion.  This is what a trillion looks like.
           <circle cx="3" cy="3" r="2" fill="#111"/>
         </pattern>
       </defs>
-      <text class="halo" x="2" y="16">&#9660; each speck: one million dollars&#8201;&#8212;&#8201;one comfortable retirement</text>
-      <text class="halo" x="2" y="36">(the median family&#8217;s everything, $192,900: a fifth of a speck)</text>
+      <text class="halo" x="2" y="16">&#9660; each speck is one million dollars, one comfortable retirement</text>
+      <text class="halo" x="2" y="36">(the median family&#8217;s everything, $192,900, is a fifth of a speck)</text>
       <rect x="0" y="48" width="93750" height="384" fill="url(#speck)"/>
       <text class="halo" x="937.5" y="86" text-anchor="middle">$10 billion</text>
       <text class="halo" x="1875" y="86" text-anchor="middle">$20 billion</text>
@@ -133,12 +133,10 @@ runs to one trillion.  This is what a trillion looks like.
     </svg>
   </div>
   <figcaption><p><strong>One trillion dollars.</strong>  One
-  million specks, one million dollars each&#8212;64 specks tall, 15,625
-  specks wide.  A speck is a comfortable retirement; the median family
-  owns a fifth of one.  The plate runs ninety-four thousand pixels to
-  the right&#8212;some twenty-five metres of paper&#8212;and it does end.
-  Counted at one dollar per second: a million dollars takes 11&#189;
-  days; a billion, 32 years; the full plate, 31,700 years.</p></figcaption>
+  million specks, 64 tall and 15,625 wide.  The plate runs ninety-four
+  thousand pixels, some twenty-five metres of paper.  At one dollar per
+  second, a million takes 11&#189; days, a billion 32 years, the
+  trillion 31,700 years.</p></figcaption>
 </figure>
 <style>
   .trillion-scroll {
@@ -158,71 +156,52 @@ runs to one trillion.  This is what a trillion looks like.
   }
 </style>
 
-Capital compounds; labour does not.  At a conservative 5%, $834
-billion yields a median household income ($83,730)[^fn:2] every 63 seconds---a forty-year working life every 42 minutes.
-Once returns exceed any possible spending, a fortune is no longer
-earned; it accrues.
+Capital compounds, labour does not.  At 5%, $1 trillion yields a
+median household income ($83,730)[^fn:2] every 53 seconds and a working life every 35
+minutes.  Past any possible spending, a fortune is no longer earned.
+It accrues.
 
-The taxes bind mostly those who work.  The 25 richest Americans added
-$401 billion to their net worth over 2014--2018 and paid $13.6
-billion in income tax---a true rate of 3.4%: Musk 3.27% (zero in
-2018), Bezos 0.98%, Buffett 0.10%.[^fn:3]  A wage earner pays 15.3% from the first dollar---7.65%
-withheld, 7.65% more via the employer, borne by the worker---four and
-a half times the billionaires' rate, before income tax even begins.
+The taxes fall mostly on those who work.  The 25 richest Americans
+added $401 billion to their net worth over 2014--2018 and paid $13.6
+billion in income tax, a true rate of 3.4%.[^fn:3]
+Billionaires worldwide pay tax equal to 0.3% of their wealth a
+year.[^fn:4]  A wage
+earner pays 15.3% payroll tax from the first dollar, four and a half
+times the billionaires' rate, before income tax.
 
-Jeff Yass, owner of Susquehanna ($65 billion),[^fn:4] paid the 20% long-term rate on trading income ordinarily
-taxed near 40%---roughly $1 billion saved, disputed in
-court.[^fn:5]  Susquehanna also owns some 15% of ByteDance, TikTok's
-parent;[^fn:6] Yass put $100 million into the
-2024 election cycle---$16 million linked to anti-Muslim and pro-Israel
-groups[^fn:7]---and days after
-they met in March 2024, Trump reversed his support for the TikTok ban;
-the divest-or-ban law, passed anyway, went unenforced.  $100 million
-shielding a $21 billion stake: 210 to 1.
+None of this breaks the law.  The plutocrats "got their wealth by
+legalizing cheating."[^fn:5]  The law taxes realization, not
+accrual.  Never sell.  Pledge the shares as collateral and borrow
+against them.  Buy, borrow, die.  Tens of millions pass untaxed to
+heirs whose classmates owe an average of $40,467 in student
+loans.[^fn:6]  That is not equality of opportunity.
 
-None of this breaks the law, because the law taxes realization, not
-accrual: never sell; borrow against the shares---loan proceeds are
-not income; die, and the cost basis resets, erasing the gain for the
-heirs.  Buy, borrow, die.  Not a loophole but the design: taxing
-those gains at death would raise $536 billion over a decade in the US
-alone.[^fn:8]  Tens of millions then pass untaxed to heirs whose
-classmates' median family owns $192,900---total.[^fn:9]  That is not equality of
-opportunity.
-
-Neither is it democracy.  Globally, 1.6% of adults own 48.1% of all
-wealth ($226 trillion); the poorest 1.55 billion share under 1%; the
-2,891 billionaires alone hold $15.6 trillion---and wealth buys the
-legislature's attention.[^fn:10]  Laissez faire for them; laissez
+Neither is it democracy.  In 2025 billionaire wealth grew $2.5
+trillion, nearly all the wealth of the poorest 4.1 billion people.
+Aid cuts in 2025 could cause 14 million more deaths by
+2030.[^fn:7]
+Die, then.  The plutocrats hold on to their power "by lying and
+rigging elections" and "have no moral right to either this wealth or
+this power."[^fn:8]  Laissez faire for them, laissez
 mourir for the rest.
 
 Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 
-[^fn:1]: Federal Reserve, [Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/):
-    the bottom 50% of US households held $4.1 trillion---2.5% of
-    household net worth---at end-2024.
+[^fn:1]: Federal Reserve, [Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/).
+    The bottom 50% of US households held $4.1 trillion, 2.5% of household
+    net worth.
 [^fn:2]: U.S. Census Bureau,
     [_Income in the United States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September
     2025.
 [^fn:3]: ProPublica,
     [_The Secret IRS Files_](https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax), June 8, 2021.  The "true tax rate" compares
     federal income tax paid with growth in net worth over the same
-    period.
-[^fn:4]: [Forbes profile](https://www.forbes.com/profile/jeff-yass/),
-    December 2025.
-[^fn:5]: ProPublica, [_How Susquehanna's Jeff Yass Avoided $1 Billion
-    in Taxes_](https://www.propublica.org/article/how-susquehanna-yass-avoided-billion-taxes), 2022.  The Tax Court dispute was filed in 2020 and remains
-    pending.
-[^fn:6]: ["A ban on TikTok would be a blow to local billionaire
-    investor and GOP megadonor Jeff Yass,"](https://www.inquirer.com/politics/pennsylvania/tiktok-ban-jeff-yass-congress-house-20240313.html) _The Philadelphia Inquirer_,
-    March 13, 2024; [ABC News](https://abcnews.go.com/Politics/trumps-tiktok-ban-reversal-after-meeting-megadonor-stake/story?id=108013785), March 2024.
-[^fn:7]: [OpenSecrets, donor detail, 2024 cycle](https://www.opensecrets.org/outside-spending/donor_detail/2024?id=U0000004245&name=Yass%2C+Jeffrey+S); E. Clifton,
-    ["Billionaire Jeff Yass linked to $16m in donations to anti-Muslim and
-    pro-Israel groups,"](https://www.theguardian.com/us-news/2024/apr/24/jeff-yass-anti-muslim-pro-israel-donations) _The Guardian_, April 24, 2024.
-[^fn:8]: Congressional Budget Office, Budget Option:
-    [_Change the Tax Treatment of Capital Gains from Sales of Inherited Assets_](https://www.cbo.gov/budget-options/60943),
-    December 2024.
-[^fn:9]: Federal Reserve Board,
-    [_Changes in U.S. Family Finances from 2019 to 2022_](https://www.federalreserve.gov/publications/october-2023-changes-in-us-family-finances-from-2019-to-2022.htm), Survey of
-    Consumer Finances, October 2023.
-[^fn:10]: UBS, [_Global Wealth Report 2025_](https://www.ubs.com/global/en/wealthmanagement/insights/global-wealth-report.html),
-    June 2025; figures as of end-2024.
+    period.  Musk paid 3.27% (zero in 2018), Bezos 0.98%, Buffett 0.10%.
+[^fn:4]: G. Zucman, [report to the G20](https://gabriel-zucman.eu/files/report-g20.pdf), June 2024.
+[^fn:5]: Richard Stallman, [_Rigged for plutocrats_](https://stallman.org/notes/2018-jul-oct.html),
+    political notes, October 28, 2018.
+[^fn:6]: U.S. Department of Education, [Federal Student Loan
+    Portfolio](https://studentaid.gov/data-center/student/portfolio), second quarter of 2026.  42.6 million borrowers owe $1.72
+    trillion in federal loans.
+[^fn:7]: Oxfam, [_Resisting the Rule of the Rich_](https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking), January 19, 2026.
+[^fn:8]: Stallman, ibid.
