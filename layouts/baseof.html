@@ -20,16 +20,22 @@
   {{ $imageURL := "" }}
   {{ with .Params.image }}
     {{ $imageRes = resources.Get . }}
-    {{ with $imageRes }}{{ $imageURL = .Permalink }}{{ end }}
   {{ end }}
-  {{ if and .IsPage (not $imageURL) }}
+  {{ if and .IsPage (not $imageRes) }}
     {{ with findRE `src="[^"]+"` .Content 1 }}
-      {{ $imageURL = replaceRE `^src="|"$` "" (index . 0) | absURL }}
+      {{ $src := replaceRE `^src="|"$` "" (index . 0) }}
+      {{ $imageRes = resources.Get (strings.TrimPrefix "/" $src) }}
+      {{ if not $imageRes }}{{ $imageURL = $src | absURL }}{{ end }}
     {{ end }}
   {{ end }}
-  {{ if not $imageURL }}
+  {{ if and (not $imageRes) (not $imageURL) }}
     {{ $imageRes = resources.Get "images/home-illustration.png" }}
-    {{ with $imageRes }}{{ $imageURL = .Permalink }}{{ end }}
+  {{ end }}
+  {{ with $imageRes }}
+    {{ if or (gt .Width 1200) (gt (len .Content) 300000) }}
+      {{ $imageRes = .Resize (printf "%dx jpg q80 #fcfcfc" (int (math.Min .Width 1200))) }}
+    {{ end }}
+    {{ $imageURL = $imageRes.Permalink }}
   {{ end }}
   <title>{{ $title }}</title>
   <meta charset="UTF-8">
