@@ -72,6 +72,10 @@ function isPreloadable(anchorElement) {
     return
   }
 
+  if (anchorElement.pathname.startsWith('/tags/')) {
+    return
+  }
+
   if ('noInstant' in anchorElement.dataset) {
     return
   }
