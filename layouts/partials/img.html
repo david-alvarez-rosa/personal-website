@@ -1,7 +1,7 @@
 {{ $src := .src }}
 {{ $priority := .priority }}
 {{ $loading := cond $priority "eager" "lazy" }}
-{{ $sizes := cond $priority "(max-width: 860px) 100vw, 21rem" "auto" }}
+{{ $sizes := cond $priority "(max-width: 860px) 100vw, 21rem" "auto, (max-width: 860px) 100vw, 630px" }}
 
 {{ $alt := path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}
 {{ $src := strings.TrimPrefix "./assets/" .src }}
