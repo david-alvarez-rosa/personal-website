@@ -82,9 +82,22 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: Deploy
+        id: deploy
+        shell: bash
+        run: rsync -az --checksum --delete --itemize-changes -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/david.alvarezrosa.com | tee rsync.log
+
+      - name: Purge Cloudflare cache
+        id: purge
         run: |
-          rsync -az --checksum --delete --itemize-changes -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/david.alvarezrosa.com > rsync.log
-          cat rsync.log
+          mapfile -t urls < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | sed -e 's|^|https://david.alvarezrosa.com/|' -e 's|index\.html$||')
+          for ((i = 0; i < ${#urls[@]}; i += 30)); do
+            printf '%s\n' "${urls[@]:i:30}" | jq -Rsc '{files: split("\n")[:-1]}' | \
+              curl --fail-with-body -sS -X POST \
+                "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+                -H "Content-Type: application/json" \
+                --data @-
+          done
 
       - name: Deploy API backend
         run: |
@@ -100,17 +113,14 @@ jobs:
             systemctl is-active api.service
           '
 
-      - name: Purge Cloudflare cache
+      - name: Purge entire Cloudflare cache
+        if: failure() && steps.deploy.outcome != 'skipped' && steps.purge.outcome != 'success'
         run: |
-          mapfile -t urls < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | sed -e 's|^|https://david.alvarezrosa.com/|' -e 's|index\.html$||')
-          for ((i = 0; i < ${#urls[@]}; i += 30)); do
-            printf '%s\n' "${urls[@]:i:30}" | jq -Rsc '{files: split("\n")[:-1]}' | \
-              curl --fail-with-body -sS -X POST \
-                "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
-                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-                -H "Content-Type: application/json" \
-                --data @-
-          done
+          curl --fail-with-body -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}'
 
   deploy-production-tor:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch != 'main' }}
