@@ -253,7 +253,8 @@ a:has(img):hover {
     background: none;
 }
 
-main img {
+main img,
+main video {
     max-width: 100%;
     height: auto;
     margin-top: 0.2rem;

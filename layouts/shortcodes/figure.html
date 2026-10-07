@@ -1,6 +1,17 @@
+{{- $src := strings.TrimPrefix "./assets/" (.Get "src") }}
+{{- $video := "" }}
+{{- if strings.HasSuffix $src ".gif" }}
+  {{- $video = resources.Get (replaceRE `\.gif$` ".mp4" $src) }}
+{{- end }}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
   {{- with .Get "caption" }}
     <figcaption><p>{{ . | markdownify }}</p></figcaption>
   {{- end }}
-  {{- partial "img.html" (dict "src" (.Get "src")) -}}
+  {{- with $video }}
+    {{- $gif := resources.Get $src }}
+    {{- if not ($.Page.Store.Get "videoPoster") }}{{ $.Page.Store.Set "videoPoster" $gif }}{{ end }}
+    <video src="{{ (. | fingerprint).RelPermalink }}" width="{{ $gif.Width }}" height="{{ $gif.Height }}" autoplay muted loop playsinline></video>
+  {{- else }}
+    {{- partial "img.html" (dict "src" (.Get "src")) -}}
+  {{- end }}
 </figure>

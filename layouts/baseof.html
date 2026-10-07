@@ -22,10 +22,14 @@
     {{ $imageRes = resources.Get . }}
   {{ end }}
   {{ if and .IsPage (not $imageRes) }}
-    {{ with findRE `src="[^"]+"` .Content 1 }}
-      {{ $src := replaceRE `^src="|"$` "" (index . 0) }}
-      {{ $imageRes = resources.Get (strings.TrimPrefix "/" $src) }}
-      {{ if not $imageRes }}{{ $imageURL = $src | absURL }}{{ end }}
+    {{ with findRE `(?s)<img[^>]*?\ssrc="[^"]+"|<video` .Content 1 }}
+      {{ if eq (index . 0) "<video" }}
+        {{ $imageRes = $.Store.Get "videoPoster" }}
+      {{ else }}
+        {{ $src := replaceRE `(?s)^.*\ssrc="([^"]+)"$` "$1" (index . 0) }}
+        {{ $imageRes = resources.Get (strings.TrimPrefix "/" $src) }}
+        {{ if not $imageRes }}{{ $imageURL = $src | absURL }}{{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
   {{ if and (not $imageRes) (not $imageURL) }}
