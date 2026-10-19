@@ -1,4 +1,9 @@
 {{- $content := .RenderShortcodes | replaceRE `(?s)<style>.*?</style>` "" | replaceRE `(?m)^&nbsp;` "" | replaceRE `<span class="sep"></span>` " · " | strings.TrimSpace -}}
+{{- range $m := findRE `(?s)\\\\\(.+?\\\\\)|\\\\\[.+?\\\\\]` $content | uniq -}}
+  {{- $tex := substr $m 3 -3 | replaceRE "\\\\([!-/:-@\\[-`{-~])" "$1" -}}
+  {{- $math := cond (strings.HasPrefix $m `\\[`) (printf "$$%s$$" $tex) (printf "$%s$" (replaceRE `\s*\n\s*` " " $tex | strings.TrimSpace)) -}}
+  {{- $content = replace $content $m $math -}}
+{{- end -}}
 {{- range $m := findRE `\]\((?:\./assets)?/images/[^)\s]+\)` $content | uniq -}}
   {{- $path := replaceRE `^\]\((?:\./assets/)?/?(images/[^)]+)\)$` "$1" $m -}}
   {{- with resources.Get $path -}}
