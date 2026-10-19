@@ -11,7 +11,7 @@
     {{- $gif := resources.Get $src }}
     {{- if not ($.Page.Store.Get "videoPoster") }}{{ $.Page.Store.Set "videoPoster" $gif }}{{ end }}
     {{- $poster := $gif.Resize (printf "%dx webp q70 #fcfcfc" (int (math.Min $gif.Width 660))) }}
-    <video src="{{ (. | fingerprint).RelPermalink }}" poster="{{ $poster.RelPermalink }}" width="{{ $gif.Width }}" height="{{ $gif.Height }}" aria-label="{{ path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}" autoplay muted loop playsinline></video>
+    <video src="{{ (. | fingerprint).RelPermalink }}" poster="{{ $poster.Permalink }}" width="{{ $gif.Width }}" height="{{ $gif.Height }}" aria-label="{{ path.BaseName $src | replaceRE `-` " " | strings.FirstUpper }}" autoplay muted loop playsinline></video>
   {{- else }}
     {{- partial "img.html" (dict "src" (.Get "src")) -}}
   {{- end }}
