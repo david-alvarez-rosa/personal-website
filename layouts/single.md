@@ -1,4 +1,4 @@
-{{- $content := .RenderShortcodes | replaceRE `(?s)<style>.*?</style>` "" | replaceRE `(?m)^&nbsp;` "" | strings.TrimSpace -}}
+{{- $content := .RenderShortcodes | replaceRE `(?s)<style>.*?</style>` "" | replaceRE `(?m)^&nbsp;` "" | replaceRE `<span class="sep"></span>` " · " | strings.TrimSpace -}}
 {{- range $m := findRE `\]\((?:\./assets)?/images/[^)\s]+\)` $content | uniq -}}
   {{- $path := replaceRE `^\]\((?:\./assets/)?/?(images/[^)]+)\)$` "$1" $m -}}
   {{- with resources.Get $path -}}
