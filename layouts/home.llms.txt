@@ -1,0 +1,19 @@
+{{- $clean := .Content
+  | replaceRE `(?s)<div class="footnotes".*?</div>` ""
+  | replaceRE `(?s)<sup[^>]*><a href="#fn:[^"]*".*?</a></sup>` "" -}}
+# {{ site.Title }}
+
+> {{ .Params.subtitle }}. {{ $clean | plainify | htmlUnescape | replaceRE `\s+` " " | replaceRE ` Find me on .*$` "" | strings.TrimSpace }}
+
+Every page below is also available as Markdown at the linked URL; append `index.md` to any post URL.
+
+## Posts
+{{ range (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+- [{{ .Title }}]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ end }}){{ with .Params.subtitle }}: {{ . }}{{ end }}
+{{- end }}
+
+## Optional
+{{ with site.GetPage "/about" }}
+- [About]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ end }}): {{ .Params.subtitle }}
+{{- end }}
+- [RSS feed]({{ site.BaseURL }}index.xml): full text of every post

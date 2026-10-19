@@ -36,6 +36,14 @@ disableKinds = ['taxonomy']
     baseName = 'index'
     isPlainText = true
     rel = 'alternate'
+  [outputFormats.llms]
+    mediaType = 'text/plain'
+    baseName = 'llms'
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ['html', 'rss', 'llms']
 
 [[cascade]]
   outputs = ['html', 'markdown']
