@@ -57,6 +57,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    concurrency: deploy-production
     environment:
       name: production
       url: https://david.alvarezrosa.com
@@ -89,14 +90,20 @@ jobs:
       - name: Purge Cloudflare cache
         id: purge
         run: |
-          mapfile -t urls < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | sed -e 's|^|https://david.alvarezrosa.com/|' -e 's|index\.html$||')
-          for ((i = 0; i < ${#urls[@]}; i += 30)); do
-            printf '%s\n' "${urls[@]:i:30}" | jq -Rsc '{files: split("\n")[:-1]}' | \
-              curl --fail-with-body -sS -X POST \
-                "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
-                -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-                -H "Content-Type: application/json" \
-                --data @-
+          purge() {
+            curl --fail-with-body -sS -X POST \
+              "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              --data "$1"
+          }
+          if (( ${{ github.run_attempt }} > 1 )) || grep -qE '^<f\S*\s+index\.html$' rsync.log; then
+            purge '{"purge_everything":true}'
+            exit
+          fi
+          mapfile -t prefixes < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | sed -e 's|^|david.alvarezrosa.com/|' -e 's|index\.html$||')
+          for ((i = 0; i < ${#prefixes[@]}; i += 100)); do
+            printf '%s\n' "${prefixes[@]:i:100}" | jq -Rsc '{prefixes: split("\n")[:-1]}' | purge @-
           done
 
       - name: Deploy API backend
@@ -114,7 +121,7 @@ jobs:
           '
 
       - name: Purge entire Cloudflare cache
-        if: failure() && steps.deploy.outcome != 'skipped' && steps.purge.outcome != 'success'
+        if: (failure() || cancelled()) && steps.deploy.outcome != 'skipped' && steps.purge.outcome != 'success'
         run: |
           curl --fail-with-body -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/${{ secrets.CLOUDFLARE_ZONE_ID }}/purge_cache" \
