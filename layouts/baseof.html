@@ -73,6 +73,7 @@
   {{ with $imageURL }}<meta name="twitter:image" content="{{ . }}">{{ end }}
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="/index.xml">
+  {{ with .OutputFormats.Get "markdown" }}<link rel="alternate" type="text/markdown" title="{{ $.Title }}" href="{{ .Permalink }}">{{ end }}
   {{ $profiles := slice "https://github.com/david-alvarez-rosa/" "https://gitlab.com/david-alvarez-rosa" "https://linkedin.com/in/david-alvarez-rosa" "https://www.reddit.com/user/david-alvarez-rosa/" "https://news.ycombinator.com/user?id=dalvrosa" "https://davidalvarezrosa.substack.com/" "https://medium.com/@david-alvarez-rosa" "https://dev.to/david-alvarez-rosa" "https://daily.dev/dalvrosa" }}
   {{ range $profiles }}<link rel="me" href="{{ . }}">
   {{ end }}

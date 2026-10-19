@@ -30,6 +30,19 @@ disableKinds = ['taxonomy']
     url = '/index.xml'
     weight = 40
 
+[outputFormats]
+  [outputFormats.markdown]
+    mediaType = 'text/markdown'
+    baseName = 'index'
+    isPlainText = true
+    rel = 'alternate'
+
+[[cascade]]
+  outputs = ['html', 'markdown']
+  [cascade.target]
+    kind = 'page'
+    path = '{/posts/**,/about}'
+
 [related]
   includeNewer = true
   threshold = 0
