@@ -45,6 +45,8 @@
   <meta charset="UTF-8">
   <meta name="description" content="{{ $description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fcfcfc">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#16161a">
   <meta name="robots" content="{{ if .Params.noindex }}noindex,follow{{ else }}index,follow,max-image-preview:large{{ end }}">
   <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:title" content="{{ $title }}">
