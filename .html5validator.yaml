@@ -21,6 +21,7 @@ ignore_re:
   - 'Property "ascent-override"'
   - 'Property "descent-override"'
   - 'Property "line-gap-override"'
-  - 'Bad value "auto" for attribute "sizes"'
+  - 'Bad value "auto[",].* for attribute "sizes"'
+  - 'Attribute "media" not allowed on element "meta"'
   - 'Attribute "fetchpriority" not allowed on element "img"'
   - '"top": Unknown dimension'
