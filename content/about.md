@@ -33,7 +33,7 @@ seotitle = "About | David Álvarez Rosa"
 low-latency, high-performance systems.
 
 Works in algorithmic trading at Susquehanna and represents Ireland on
-the C++ standards committee.  Previously designed systems at Amazon
+the ISO C++ committee.  Previously designed systems at Amazon
 serving 10M+ monthly active customers, developed semantic caching for
 LLMs at Sopra Steria, and analyzed cybersecurity risk at Deloitte.
 
@@ -48,7 +48,7 @@ _Software Engineer @ Susquehanna_
 High-frequency options trading.  Low-latency market data and trading
 signals.  Mentor and interviewer.
 
-_Member @ C++ Standards Committee_
+_Member @ ISO C++ Committee (WG21)_
 [^fn:3]<br />
 National expert.  Representing Ireland.
 
