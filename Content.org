@@ -2868,9 +2868,9 @@ CLOSED: [2026-01-24 Sat 12:31]
 low-latency, high-performance systems.
 
 Works in algorithmic trading at Susquehanna and represents Ireland on
-the ISO C++ committee.  Previously designed systems at Amazon
-serving 10M+ monthly active customers, developed semantic caching for
-LLMs at Sopra Steria, and analyzed cybersecurity risk at Deloitte.
+the ISO C++ committee.  Previously designed systems at Amazon serving
+10M+ customers, developed semantic caching for LLMs at Sopra Steria, and
+analyzed cybersecurity risk at Deloitte.
 
 Holds a BSc in Mathematics, a BEng in Industrial Engineering, and an MSc
 in Artificial Intelligence.
@@ -2880,17 +2880,17 @@ in Artificial Intelligence.
 /Software Engineer @ Susquehanna/
 [fn::Jul 2024--Present@@html:<span class="sep"></span>@@Dublin, Ireland]\\
 High-frequency options trading.  Low-latency market data and trading
-signals.  Mentor and interviewer.
+signals.  Mentor.  Interviewer.
 
-/Member @ C++ Standards Committee/
+/Member @ ISO C++ Committee (WG21)/
 [fn::Jul 2026--Present@@html:<span class="sep"></span>@@Ireland]\\
 National expert.  Representing Ireland.
 
 /Software Engineer II @ Amazon/
 [fn::Mar 2022--Aug 2024@@html:<span class="sep"></span>@@Madrid, Spain]\\
-Designed systems for 10M+ monthly active customers.  Contributed to 100+
-internal repos.  Won org hackathon.  Promoted in 18 months (top 5%).
-Mentored 3.  On-call.  Interviewer.
+Designed systems for 10M+ customers.  Contributed to 100+ repos.  Won
+org hackathon.  Promoted in 18 months (top 5%).  Mentor.  On-call.
+Interviewer.
 
 /Machine Learning Engineer @ Sopra Steria/
 [fn::Apr 2024--Jul 2024@@html:<span class="sep"></span>@@Remote]\\
