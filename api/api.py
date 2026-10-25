@@ -30,6 +30,7 @@ from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html, to_tex
 
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
+logging.basicConfig(level=logging.INFO, format="%(levelname)s:     %(name)s: %(message)s")
 log = logging.getLogger(__name__)
 JS_TOKEN = "subscribe-v1"
 MAIL_INTERVAL = timedelta(hours=24)
@@ -109,15 +110,16 @@ If this wasn't you, just ignore this email."""
 
 
 def mailed_recently(session, email):
-    now = datetime.now(UTC)
     mailed = session.get(Mailed, email)
-    if mailed and now - mailed.sent_at.replace(tzinfo=UTC) < MAIL_INTERVAL:
-        return True
-    mailed = mailed or Mailed(email=email, sent_at=now)
-    mailed.sent_at = now
-    session.add(mailed)
-    session.commit()
-    return False
+    if mailed is None:
+        return False
+    return datetime.now(UTC) - mailed.sent_at.replace(tzinfo=UTC) < MAIL_INTERVAL
+
+
+def record_mailed(email):
+    with Session(engine) as session:
+        session.merge(Mailed(email=email, sent_at=datetime.now(UTC)))
+        session.commit()
 
 
 @app.post("/subscribe")
@@ -127,7 +129,9 @@ def subscribe(
     website: str = Form(""),
     js: str = Form(""),
 ):
-    if not website and js == JS_TOKEN:
+    if website or js != JS_TOKEN:
+        log.info("dropped subscribe for %s: website=%r js=%r", email, website, js)
+    else:
         email = email.strip().lower()
         with Session(engine) as session:
             sub = get_subscription(session, email)
@@ -137,8 +141,10 @@ def subscribe(
             log.info("throttled subscribe mail to %s", email)
         elif subscribed:
             send_already_subscribed(background, email)
+            record_mailed(email)
         else:
             send_confirm(background, email)
+            record_mailed(email)
     return RedirectResponse(
         f"{SITE_BASE}/subscription-pending",
         status_code=HTTP_303_SEE_OTHER,
