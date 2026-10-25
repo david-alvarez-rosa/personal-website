@@ -1,6 +1,6 @@
 import hmac
 import logging
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 
@@ -17,6 +17,7 @@ from .core import (
     LIST_ID,
     MAILER,
     SITE_BASE,
+    Mailed,
     Subscription,
     engine,
     imap_connect,
@@ -30,6 +31,8 @@ from .mail import SIGN_OFF, SIGNATURE, email_html, finalize, footer_html, to_tex
 SQLModel.metadata.create_all(engine)
 app = FastAPI()
 log = logging.getLogger(__name__)
+JS_TOKEN = "subscribe-v1"
+MAIL_INTERVAL = timedelta(hours=24)
 
 
 def archive(msg):
@@ -105,15 +108,34 @@ If this wasn't you, just ignore this email."""
     deliver(background, email, subject, body, "already:optin:alvarezrosa.com", unsub)
 
 
+def mailed_recently(session, email):
+    now = datetime.now(UTC)
+    mailed = session.get(Mailed, email)
+    if mailed and now - mailed.sent_at.replace(tzinfo=UTC) < MAIL_INTERVAL:
+        return True
+    mailed = mailed or Mailed(email=email, sent_at=now)
+    mailed.sent_at = now
+    session.add(mailed)
+    session.commit()
+    return False
+
+
 @app.post("/subscribe")
 def subscribe(
-    background: BackgroundTasks, email: EmailStr = Form(), website: str = Form("")
+    background: BackgroundTasks,
+    email: EmailStr = Form(),
+    website: str = Form(""),
+    js: str = Form(""),
 ):
-    if not website:
+    if not website and js == JS_TOKEN:
         email = email.strip().lower()
         with Session(engine) as session:
             sub = get_subscription(session, email)
-        if sub and sub.unsubscribed_at is None:
+            subscribed = sub is not None and sub.unsubscribed_at is None
+            throttled = mailed_recently(session, email)
+        if throttled:
+            log.info("throttled subscribe mail to %s", email)
+        elif subscribed:
             send_already_subscribed(background, email)
         else:
             send_confirm(background, email)
@@ -136,7 +158,7 @@ def do_unsubscribe(email):
     with Session(engine) as session:
         sub = get_subscription(session, email)
         if sub:
-            sub.unsubscribed_at = datetime.now(timezone.utc)
+            sub.unsubscribed_at = datetime.now(UTC)
             session.add(sub)
             session.commit()
     return RedirectResponse(f"{SITE_BASE}/unsubscribed", status_code=HTTP_303_SEE_OTHER)

@@ -4,7 +4,7 @@ import hmac
 import imaplib
 import os
 import smtplib
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email import policy
 from pathlib import Path
 
@@ -25,9 +25,12 @@ class Subscription(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     email: EmailStr = Field(index=True)
     unsubscribed_at: datetime | None = Field(default=None)
-    created_at: datetime | None = Field(
-        default_factory=lambda: datetime.now(timezone.utc)
-    )
+    created_at: datetime | None = Field(default_factory=lambda: datetime.now(UTC))
+
+
+class Mailed(SQLModel, table=True):
+    email: str = Field(primary_key=True)
+    sent_at: datetime
 
 
 DB_PATH = os.environ.get(

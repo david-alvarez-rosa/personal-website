@@ -56,12 +56,12 @@ _, subject, slug, body = max(posts)
 lead = clean(body).split("\n\n")[0]
 url = f"{SITE_BASE}/posts/{slug}/"
 link = f"{url}?utm_source=newsletter&utm_medium=email&utm_campaign={slug}"
-text_body = f"""{wrap(f'''Hi,
+text_intro = f"""Hi,
 
 {lead}
 
-Continue reading—{subject}'''.replace("—", "--"))}
-{url}"""
+Continue reading—{subject}""".replace("—", "--")
+text_body = f"{wrap(text_intro)}\n{url}"
 html_body = f"""Hi,
 
 {lead}

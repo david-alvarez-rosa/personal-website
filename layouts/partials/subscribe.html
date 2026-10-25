@@ -6,11 +6,16 @@
 <form action="https://api.alvarezrosa.com/subscribe" method="post" class="subscribe-form">
   <input type="email" name="email" required autocomplete="email" aria-label="Email address" placeholder="your-name@domain.com" />
   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />
+  <input type="hidden" name="js" value="" />
   <button type="submit">Subscribe</button>
 </form>
 <script>
-  document.currentScript.previousElementSibling.addEventListener('submit', () => window.umami?.track('subscribe', { page: location.pathname }));
+  document.currentScript.previousElementSibling.addEventListener('submit', (event) => {
+    event.target.elements.js.value = 'subscribe-v1';
+    window.umami?.track('subscribe', { page: location.pathname });
+  });
 </script>
+<noscript><p>Subscribing needs JavaScript. Without it, email me and I will add you.</p></noscript>
 <p style="margin-top: 0.9rem;">
   Have feedback? Email me at
   <a href="mailto:david@alvarezrosa.com">david@alvarezrosa.com</a>.
