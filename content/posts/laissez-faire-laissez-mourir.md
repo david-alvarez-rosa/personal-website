@@ -1,8 +1,9 @@
 +++
 title = "Laissez Faire, Laissez Mourir"
 author = ["David Álvarez Rosa"]
+date = 2026-10-26T19:14:00+00:00
 tags = ["blog"]
-draft = true
+draft = false
 subtitle = "Visualizing plutocracy."
 image = "images/saint-ignucius.jpg"
 +++

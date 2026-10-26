@@ -583,7 +583,8 @@ Implement a shared_ptr
 
 Pending.
 
-* TODO [#B] Laissez Faire, Laissez Mourir
+* DONE [#B] Laissez Faire, Laissez Mourir
+CLOSED: [2026-10-26 Mon 19:14]
 :PROPERTIES:
 :EXPORT_FILE_NAME: laissez-faire-laissez-mourir
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :subtitle "Visualizing plutocracy." :image "images/saint-ignucius.jpg"
