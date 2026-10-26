@@ -165,48 +165,49 @@ five million median families.  This is what a trillion looks like.
   }
 </style>
 
-Capital compounds, labour does not.  At a 7% annual return, $1 trillion
-yields a median household income ($83,730)[^fn:2]
-every 38 seconds and a working life every 25 minutes.  Past any possible
-spending, a fortune is no longer earned.  It accrues.
+Capital compounds, labour does not.  At a modest 7% annual return, $1T
+invested yields a median household income ($83,730)[^fn:2]  every 38 seconds, and a working life every 25 minutes.  For a
+trillionaire, regardless of their eccentric spending, it is virtually
+impossible to outspend their returns, leading to a snowball effect on
+net worth.
 
-The taxes fall mostly on those who work.  The 25 richest Americans added
-$401 billion to their net worth over 2014--2018 and paid $13.6 billion
-in income tax, a true rate of 3.4%.[^fn:3]  Billionaires worldwide pay
-tax equal to 0.3% of their wealth a year.[^fn:4]
+Taxes impact primarily workers.  The 25 richest Americans added $401
+billion to their net worth over 2014--2018 and paid $13.6 billion in
+income tax, a true rate of 3.4%.[^fn:3]  Billionaires worldwide pay tax
+equal to 0.3% of their wealth a year.[^fn:4]
 
 None of this breaks the law.  The plutocrats "got their wealth by
-legalizing cheating."[^fn:5]  The law taxes realization, not
-accrual.  Never sell.  Pledge the shares as collateral and borrow
-against them.  Buy, borrow, die.  Billions pass untaxed to heirs whose
-classmates owe an average of $40,467 in student
-loans.[^fn:6]  That is not equality of opportunity.
+legalizing cheating."[^fn:5]  They never sell, rather they use
+shares as collateral and borrow from the bank (buy, borrow, die).
+Billions pass untaxed to heirs whose classmates owe an average of
+$40,467 in student loans.[^fn:6]
 
-Neither is it democracy.  In 2025 billionaire wealth grew $2.5 trillion,
-nearly all the wealth of the poorest 4.1 billion people.  Aid cuts in
-2025 could cause 14 million more deaths by 2030.[^fn:7]  Die, then.  The plutocrats
-hold on to their power "by lying and rigging elections" and "have no
-moral right to either this wealth or this power."[^fn:8]
-Laissez faire for them, laissez mourir for the rest.
+In 2025 billionaire wealth grew $2.5 trillion, nearly all the wealth of
+the poorest 4.1 billion people.  Aid cuts in 2025 could cause 14 million
+more deaths by 2030.[^fn:7]  Die, then.  The plutocrats hold on to their power
+"by lying and rigging elections" and "have no moral right to either this
+wealth or this power."[^fn:8]  Laissez faire for them,
+laissez mourir for the rest.
 
 Tax the rich.  Tax net worth.  Tax inheritance.  Suckers!
 
 [^fn:1]: Federal Reserve,
     [Distributional Financial Accounts](https://www.federalreserve.gov/releases/z1/dataviz/dfa/distribute/table/).  The bottom 50% of US households held
     $4.1 trillion, 2.5% of household net worth.
-[^fn:2]: U.S. Census Bureau,
-    [_Income in the United States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September 2025.
-[^fn:3]: ProPublica, [_The Secret IRS
-    Files_](https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax), June 8, 2021.  The "true tax rate" compares federal income tax
-    paid with growth in net worth over the same period.  Musk paid 3.27%
-    (zero in 2018), Bezos 0.98%, Buffett 0.10%.
-[^fn:4]: G. Zucman, [report to the
-    G20](https://gabriel-zucman.eu/files/report-g20.pdf), June 2024.
+[^fn:2]: U.S. Census
+    Bureau, [_Income in the United States: 2024_](https://www.census.gov/library/publications/2025/demo/p60-286.html), report P60-286, September
+    2025.
+[^fn:3]: ProPublica, [_The Secret IRS Files_](https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax),
+    June 8, 2021.  The "true tax rate" compares federal income tax paid with
+    growth in net worth over the same period.  Musk paid 3.27% (zero in
+    2018), Bezos 0.98%, Buffett 0.10%.
+[^fn:4]: G. Zucman, [report to the G20](https://gabriel-zucman.eu/files/report-g20.pdf),
+    June 2024.
 [^fn:5]: Richard Stallman, [_Rigged for plutocrats_](https://stallman.org/notes/2018-jul-oct.html),
     political notes, October 28, 2018.
-[^fn:6]: U.S. Department of Education, [Federal Student Loan Portfolio](https://studentaid.gov/data-center/student/portfolio),
-    second quarter of 2026.  42.6 million borrowers owe $1.72 trillion in
-    federal loans.
-[^fn:7]: Oxfam, [_Resisting
-    the Rule of the Rich_](https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking), January 19, 2026.
+[^fn:6]: U.S. Department of Education, [Federal
+    Student Loan Portfolio](https://studentaid.gov/data-center/student/portfolio), second quarter of 2026.  42.6 million borrowers
+    owe $1.72 trillion in federal loans.
+[^fn:7]: Oxfam, [_Resisting the Rule of the Rich_](https://www.oxfam.org/en/press-releases/billionaire-wealth-jumps-three-times-faster-2025-highest-peak-ever-sparking),
+    January 19, 2026.
 [^fn:8]: Ibid.  Stallman.
