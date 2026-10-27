@@ -3,12 +3,23 @@ import re
 
 SIGN_OFF = "Best,\nd."
 
-SIGNATURE = """--
-David Álvarez Rosa
+SIGNATURE = (
+    "-- \n"
+    + """David Álvarez Rosa
 
 web    david.alvarezrosa.com
 email  david@alvarezrosa.com
-tel    +34 647 13 39 30"""
+tel    +34 647 13 39 30
+irc    dalvrosa @ Libera.Chat
+
+I'm sending this message at a time that suits me.  Please know that I
+don't expect you to read, reply, or take action on this outside of your
+regular working hours.
+
+[ To any NSA and FBI agents reading my email: please consider    ]
+[ whether defending the US Constitution against all enemies,     ]
+[ foreign or domestic, requires you to follow Snowden's example. ]"""
+)
 
 
 def finalize(msg):
@@ -42,6 +53,32 @@ def to_html(text):
     return "\n".join(paragraphs)
 
 
+def _bracket(side):
+    return f'<td style="width:4px;border:1px solid;border-{side}:0">&nbsp;</td>'
+
+
+def signature_html():
+    blocks = []
+    for block in SIGNATURE.split("\n\n"):
+        lines = block.split("\n")
+        if all(line.startswith("[ ") and line.endswith(" ]") for line in lines):
+            text = html.escape(" ".join(line[2:-2].strip() for line in lines))
+            blocks.append(
+                '<table role="presentation" cellpadding="0" cellspacing="0" '
+                'style="border-collapse:collapse;font-family:monospace;margin:0 0 1em">'
+                f'<tr>{_bracket("right")}<td style="padding:0 0.5em">{text}</td>'
+                f"{_bracket('left')}</tr></table>"
+            )
+        elif max(map(len, lines)) < 60:
+            text = "<br>".join(html.escape(line) for line in lines)
+            blocks.append(f'<p style="margin:0 0 1em;white-space:pre-wrap">{text}</p>')
+        else:
+            blocks.append(
+                f'<p style="margin:0 0 1em">{html.escape(" ".join(lines))}</p>'
+            )
+    return f'<div style="font-family:monospace;margin-top:1em;max-width:66ch">{"".join(blocks)}</div>'
+
+
 def email_html(body, footer="", ps="", title=""):
     sign_off = html.escape(SIGN_OFF).replace("\n", "<br>")
     return f"""<!DOCTYPE html>
@@ -56,7 +93,7 @@ def email_html(body, footer="", ps="", title=""):
     {to_html(body)}
     <p>{sign_off}</p>
     {to_html(ps) if ps else ""}
-    <pre style="font-family:monospace">{html.escape(SIGNATURE)}</pre>
+    {signature_html()}
     {footer}
   </body>
 </html>"""
