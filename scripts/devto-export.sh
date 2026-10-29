@@ -38,9 +38,10 @@ tags=$(grep -m1 '^tags = ' "$src" | grep -oE '"[^"]+"' | tr -d '"' \
 mathfix() { cat; }
 if grep -q '^latex = true' "$src"; then
   mathfix() {
-    sed -E 's/\\\\\[/{% katex %}/g; s/\\\\\]/{% endkatex %}/g;
-            s/\\\\\(/{% katex inline %}/g; s/\\\\\)/{% endkatex %}/g;
-            s/\\_/_/g'
+    awk '/^[[:space:]]*```/ {c=!c; print; next} c {print; next}
+      {gsub(/\\\\\[/, "{% katex %}"); gsub(/\\\\\]/, "{% endkatex %}");
+       gsub(/\\\\\(/, "{% katex inline %}"); gsub(/\\\\\)/, "{% endkatex %}");
+       gsub(/\\\\/, "\\"); gsub(/\\_/, "_"); print}'
   }
 fi
 
@@ -63,7 +64,7 @@ awk 'NR==1 && /^\+\+\+/ {f=1; next} f && /^\+\+\+/ {f=0; next} !f' "$src" \
         print ""
         next
       } {print}' \
-  | sed -E "s#\./assets/images/#${BASE_URL}/images/#g" \
+  | sed -E "s#\./assets/images/#${BASE_URL}/images/#g; s#\]\(/#](${BASE_URL}/#g" \
   | sed -E 's/\[\^fn:([0-9]+)\]/[^\1]/g' \
   | sed -E 's/^(#{1,6} .*[^[:space:]])[[:space:]]+\{#[^}]*\}[[:space:]]*$/\1/' \
   | awk '
@@ -95,9 +96,9 @@ fi
 
 {
   echo "---"
-  echo "title: ${title}"
+  echo "title: \"${title}\""
   echo "published: true"
-  echo "description: ${subtitle}"
+  echo "description: \"${subtitle}\""
   echo "tags: ${tags}"
   echo "canonical_url: ${canonical}"
   echo "cover_image: ${cover}"

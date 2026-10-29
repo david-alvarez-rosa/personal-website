@@ -39,7 +39,10 @@ fmt="markdown-implicit_figures"
 mathfix() { cat; }
 if grep -q '^latex = true' "$src"; then
   fmt="$fmt+tex_math_single_backslash"
-  mathfix() { sed -E 's/\\\\/\\/g; s/\\_/_/g'; }
+  mathfix() {
+    awk '/^[[:space:]]*```/ {c=!c; print; next} c {print; next}
+      {gsub(/\\\\/, "\\"); gsub(/\\_/, "_"); print}'
+  }
 fi
 
 {
@@ -67,7 +70,7 @@ fi
     | awk '
         /^\|/ {if (!t) {t=1; n++; print ""; print "**\xe2\x9f\xa8 paste table " n " screenshot \xe2\x9f\xa9**"; print ""} next}
         {t=0; print}' \
-    | sed -E "s#\./assets/images/#${BASE_URL}/images/#g" \
+    | sed -E "s#\./assets/images/#${BASE_URL}/images/#g; s#\]\(/#](${BASE_URL}/#g" \
     | sed -E "s/^\[\^fn:([0-9]+)\]: /[\1] /; s/\[\^fn:([0-9]+)\]/[\1]/g" \
     | awk '/^\[[0-9]+\] / {if (!seen) {print "\n---\n\n**Notes**"; seen=1} print ""} {print}'
   echo -e "\n---\n"
