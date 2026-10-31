@@ -39,6 +39,9 @@ jobs:
       - name: Deploy
         run: rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/beta.alvarezrosa.com
 
+      - name: Reload nginx
+        run: ssh -o StrictHostKeyChecking=no root@ssh.alvarezrosa.com systemctl reload nginx
+
       - name: Purge Cloudflare cache
         run: |
           mapfile -t urls < <(find public -type f | sed -e 's|^public/|https://beta.alvarezrosa.com/|' -e 's|index\.html$||')
@@ -87,6 +90,9 @@ jobs:
         id: deploy
         shell: bash
         run: rsync -az --checksum --delete --itemize-changes -e "ssh -o StrictHostKeyChecking=no" public/ root@ssh.alvarezrosa.com:/srv/david.alvarezrosa.com | tee rsync.log
+
+      - name: Reload nginx
+        run: ssh -o StrictHostKeyChecking=no root@ssh.alvarezrosa.com systemctl reload nginx
 
       - name: Purge Cloudflare cache
         id: purge
