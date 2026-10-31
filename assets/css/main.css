@@ -418,6 +418,8 @@ h2:focus-within .anchor {
 .katex-display {
     overflow-x: auto;
     overflow-y: hidden;
+    padding: 0.5em 0;
+    margin: -0.357em 0;
 }
 
 @media screen and (max-width: 860px) {
