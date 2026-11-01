@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <style>.side img { width: 240px; height: auto;  margin-top: -20px; transition: transform 600ms ease-out; } @media (max-width: 860px) { .side img { margin-top: 0!important; margin-bottom: -1.6rem; } }</style>
+  <style>.side img { width: 240px; height: auto;  margin-top: -20px; transition: transform 600ms ease-out; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; } @media (max-width: 860px) { .side img { margin-top: 0!important; margin-bottom: -1.6rem; } }</style>
   {{ with resources.Get "js/easter-egg.js" | minify | fingerprint }}
     <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
   {{ end }}

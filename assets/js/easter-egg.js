@@ -113,7 +113,7 @@
     if (!lastT) { lastT = startT = t; }
     const dt = (t - lastT) / 1000;
     const elapsed = (t - startT) / 1000;
-    const vel = 120 + elapsed * elapsed * 25;
+    const vel = 120 + elapsed * elapsed * 115;
     if (vel >= 3000) { reset(activeImg); explode(); return; }
     angle += vel * dt;
     activeImg.style.transform = "rotate(" + angle + "deg)";
@@ -121,20 +121,55 @@
     raf = requestAnimationFrame(frame);
   }
 
-  document.addEventListener("mouseover", (e) => {
-    if (busy) return;
-    const img = e.target.closest(".side img");
-    if (!img || img === activeImg) return;
+  function start(img) {
     activeImg = img;
     angle = 0; lastT = 0;
     img.style.transition = "none";
     raf = requestAnimationFrame(frame);
+  }
+
+  let touching = false, pressT = 0, swallowClick = false;
+
+  document.addEventListener("pointerover", (e) => {
+    if (busy || e.pointerType !== "mouse") return;
+    const img = e.target.closest(".side img");
+    if (!img || img === activeImg) return;
+    start(img);
   });
 
-  document.addEventListener("mouseout", (e) => {
-    if (busy) return;
+  document.addEventListener("pointerout", (e) => {
+    if (busy || e.pointerType !== "mouse") return;
     const img = e.target.closest(".side img");
     if (!img || img !== activeImg) return;
     reset(img);
+  });
+
+  document.addEventListener("pointerdown", (e) => {
+    if (busy || e.pointerType === "mouse") return;
+    const img = e.target.closest(".side img");
+    if (!img || img === activeImg) return;
+    touching = true;
+    pressT = e.timeStamp;
+    start(img);
+  });
+
+  const release = (e) => {
+    if (e.pointerType === "mouse" || !touching) return;
+    touching = false;
+    swallowClick = e.timeStamp - pressT > 400;
+    if (busy || !activeImg) return;
+    reset(activeImg);
+  };
+  document.addEventListener("pointerup", release);
+  document.addEventListener("pointercancel", release);
+
+  document.addEventListener("click", (e) => {
+    if (!swallowClick) return;
+    swallowClick = false;
+    if (e.target.closest(".side img")) e.preventDefault();
+  }, true);
+
+  document.addEventListener("contextmenu", (e) => {
+    if (touching && e.target.closest(".side img")) e.preventDefault();
   });
 })();
