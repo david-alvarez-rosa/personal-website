@@ -70,8 +70,10 @@ def signature_html():
                 f"{_bracket('left')}</tr></table>"
             )
         elif max(map(len, lines)) < 60:
-            text = "<br>".join(html.escape(line) for line in lines)
-            blocks.append(f'<p style="margin:0 0 1em;white-space:pre-wrap">{text}</p>')
+            text = "<br>".join(
+                re.sub(r" (?= |$)", "&nbsp;", html.escape(line)) for line in lines
+            )
+            blocks.append(f'<p style="margin:0 0 1em">{text}</p>')
         else:
             blocks.append(
                 f'<p style="margin:0 0 1em">{html.escape(" ".join(lines))}</p>'
