@@ -83,9 +83,9 @@
   {{ $topics = apply ($topics | uniq | sort) "replace" "." "cpp" "c++" }}
   {{ range $profiles }}<link rel="me" href="{{ . }}">
   {{ end }}
-  <link rel="icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   {{ if or .IsHome (eq .RelPermalink "/about/") }} <script type="application/ld+json"> {{ dict "@context" "https://schema.org" "@type" "Person" "name" "David Álvarez Rosa" "alternateName" "David Alvarez Rosa" "url" site.BaseURL "jobTitle" "Software Engineer" "knowsAbout" $topics "sameAs" $profiles | jsonify | safeJS }} </script> {{ end }}
   {{ if and .IsPage (eq .Section "posts") }}
     {{ $article := dict "@context" "https://schema.org" "@type" "Article" "headline" .Title "description" $description "url" .Permalink "mainEntityOfPage" .Permalink "image" $imageURL "datePublished" (.Date.Format "2006-01-02T15:04:05Z07:00") "dateModified" (.Lastmod.Format "2006-01-02T15:04:05Z07:00") "inLanguage" "en" "author" (dict "@type" "Person" "name" (index .Params.Author 0) "url" site.BaseURL) "publisher" (dict "@type" "Person" "name" "David Álvarez Rosa" "url" site.BaseURL) }}
