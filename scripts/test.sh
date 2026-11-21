@@ -12,6 +12,7 @@ fi
 
 status=0
 "$ENGINE" run --rm --shm-size=1g \
+  -e COREPACK_HOME=/work/node_modules/.corepack \
   -v "$ROOT":/work:Z \
   -v personal-website-node_modules:/work/node_modules \
   -w /work personal-website \

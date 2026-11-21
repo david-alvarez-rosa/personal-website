@@ -1,9 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { PAGES } from './config.js';
+import { DARK, PAGES, PINNED_POSTS, RECENT_POSTS } from './config.js';
+
+const tagFor = name => ({ tag: DARK.includes(name) ? ['@dark'] : [] });
 
 async function discoverBlogPosts(page) {
   await page.goto('/posts/');
-  await page.waitForLoadState('networkidle');
   const blogPostUrls = await page.evaluate(() => {
     const links = Array.from(document.querySelectorAll('a[href*="/posts/"]'));
     return links
@@ -15,7 +16,6 @@ async function discoverBlogPosts(page) {
 }
 
 async function waitForStableRender(page) {
-  await page.waitForLoadState('networkidle');
   await page.waitForLoadState('load');
   await page.evaluate(async () => {
     await document.fonts.ready;
@@ -35,7 +35,7 @@ function getSafeFilename(url) {
 }
 
 for (const page of PAGES) {
-  test(`${page.name} visual regression`, async ({ page: playwright }) => {
+  test(`${page.name} visual regression`, tagFor(page.name), async ({ page: playwright }) => {
     await playwright.goto(page.url);
     await waitForStableRender(playwright);
     await expect(playwright).toHaveScreenshot(`${page.name}.png`, {
@@ -45,24 +45,28 @@ for (const page of PAGES) {
   });
 }
 
+async function expectPostScreenshot(page, url) {
+  await page.goto(url);
+  await waitForStableRender(page);
+  await expect(page).toHaveScreenshot(getSafeFilename(url), {
+    fullPage: true,
+    animations: 'disabled',
+  });
+}
+
 test.describe('Blog Posts', () => {
-  let blogPostUrls = [];
+  for (const slug of PINNED_POSTS) {
+    test(`${slug} visual regression`, tagFor(slug), async ({ page }) => {
+      await expectPostScreenshot(page, `/posts/${slug}/`);
+    });
+  }
 
-  test.beforeAll(async ({ browser }) => {
-    const page = await browser.newPage();
-    blogPostUrls = await discoverBlogPosts(page);
-    await page.close();
-  });
-
-  test('recent blog posts visual regression', async ({ page }) => {
-    const postsToTest = blogPostUrls.slice(0, 3);
-    for (const url of postsToTest) {
-      await page.goto(url);
-      await waitForStableRender(page);
-      await expect(page).toHaveScreenshot(getSafeFilename(url), {
-        fullPage: true,
-        animations: 'disabled',
-      });
-    }
-  });
+  for (let i = 0; i < RECENT_POSTS; i++) {
+    test(`recent post ${i + 1} visual regression`, async ({ page }) => {
+      const url = (await discoverBlogPosts(page))[i];
+      const slug = new URL(url).pathname.split('/').filter(Boolean).pop();
+      test.skip(PINNED_POSTS.includes(slug), `${slug} is pinned`);
+      await expectPostScreenshot(page, url);
+    });
+  }
 });

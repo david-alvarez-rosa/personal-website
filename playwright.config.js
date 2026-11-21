@@ -18,6 +18,11 @@ export default defineConfig({
       name: 'Mobile Chrome',
       use: { ...devices['Pixel 5'] },
     },
+    {
+      name: 'Desktop Chrome Dark',
+      grep: /@dark/,
+      use: { ...devices['Desktop Chrome'], colorScheme: 'dark' },
+    },
   ],
   webServer: {
     command: 'hugo server',
