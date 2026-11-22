@@ -8,6 +8,7 @@
 {{ $img := resources.Get $src }}
 
 {{ if $img }}
+  {{ $tryLossless := eq $img.MediaType.SubType "png" }}
   {{ $widths := slice 240 360 420 480 768 1024 1536 }}
   {{ $origWidth := $img.Width }}
   {{ $origHeight := $img.Height }}
@@ -24,6 +25,10 @@
   {{ $origSrcset := slice }}
   {{ range $useWidths }}
     {{ $resized := $img.Resize (printf "%dx webp #fcfcfc" .) }}
+    {{ if $tryLossless }}
+      {{ $lossless := $img.Resize (printf "%dx webp lossless #fcfcfc" .) }}
+      {{ if lt (len $lossless.Content) (len $resized.Content) }}{{ $resized = $lossless }}{{ end }}
+    {{ end }}
     {{ $webpSrcset = $webpSrcset | append (printf "%s %dw" $resized.RelPermalink .) }}
     {{ $resizedOrig := $img.Resize (printf "%dx #fcfcfc" .) }}
     {{ $origSrcset = $origSrcset | append (printf "%s %dw" $resizedOrig.RelPermalink .) }}
