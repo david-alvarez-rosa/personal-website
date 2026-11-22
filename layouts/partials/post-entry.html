@@ -6,5 +6,5 @@
     {{ partial "visible-tags.html" . }}
   </span>
   <a class="u-url p-name" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-  {{ with .Params.subtitle }}<br/><span class="summary p-summary">{{ . }}</span>{{ end }}
+  {{ with .Params.subtitle }}<br/><span class="summary p-summary">{{ partial "smallcaps.html" (. | htmlEscape) }}</span>{{ end }}
 </p>

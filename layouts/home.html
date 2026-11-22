@@ -5,7 +5,7 @@
   {{ end }}
   <header class="h-card">
     <h1 class="p-name">{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<span class="subtitle p-note">{{ . }}</span>{{ end }}
+    {{ with .Params.subtitle }}<span class="subtitle p-note">{{ partial "smallcaps.html" (. | htmlEscape) }}</span>{{ end }}
     <a class="u-url u-uid" href="{{ .Permalink }}" hidden></a>
     {{ with resources.Get "images/portrait.png" }}<a class="u-photo" href="{{ (.Resize "480x webp #fcfcfc").Permalink }}" hidden></a>{{ end }}
   </header>

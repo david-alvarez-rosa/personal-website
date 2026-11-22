@@ -1,0 +1,2 @@
+{{ $html := replaceRE `(?s)(<pre.*?</pre>|<code.*?</code>|<svg.*?</svg>|<math.*?</math>|<style.*?</style>|<script.*?</script>|<[^>]*>|\bdoi:[^\s<]+|\b[IVX]{2,}\b)|\b(\d*)([A-Z]{2,}\d*)(e?s?|v\d)\b` `${1}${2}<span class="sc">${3}</span>${4}` . }}
+{{ return (replace $html `<span class="sc"></span>` "" | safeHTML) }}

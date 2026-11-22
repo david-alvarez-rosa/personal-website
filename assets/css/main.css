@@ -61,6 +61,16 @@ h1, h2, .byline .author, .tags {
     text-transform: lowercase;
 }
 
+.sc {
+    font-family: "Alegreya Smallcaps", var(--font-body);
+    letter-spacing: 0.02em;
+}
+
+:is(h2, table, .chart, .katex) .sc {
+    font-family: inherit;
+    letter-spacing: inherit;
+}
+
 h1 {
     text-align: center;
     letter-spacing: 0.06rem;

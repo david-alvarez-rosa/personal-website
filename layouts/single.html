@@ -18,7 +18,7 @@
       {{ partial "visible-tags.html" . }}
     </aside>
     <h1 class="p-name">{{ .Title }}</h1>
-    {{ with .Params.subtitle }}<span class="subtitle p-summary">{{ . }}</span>{{ end }}
+    {{ with .Params.subtitle }}<span class="subtitle p-summary">{{ partial "smallcaps.html" (. | htmlEscape) }}</span>{{ end }}
     {{ if $entry }}<a class="u-url u-uid" href="{{ .Permalink }}" hidden></a>{{ end }}
   </header>
   {{ if $entry }}<div class="e-content">{{ end }}
