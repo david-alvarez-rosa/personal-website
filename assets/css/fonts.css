@@ -132,6 +132,22 @@
     src: url("/fonts/alegreya-smallcaps-italic.woff2") format("woff2");
     unicode-range: U+0041-005A;
 }
+@font-face {
+    font-family: "Alegreya Smallcaps Fallback";
+    font-style: normal;
+    font-weight: 400 900;
+    src: url("/fonts/alegreya-normal-core.a636d179.woff2") format("woff2");
+    unicode-range: U+0041-005A;
+    size-adjust: 86%;
+}
+@font-face {
+    font-family: "Alegreya Smallcaps Fallback";
+    font-style: italic;
+    font-weight: 400 900;
+    src: url("/fonts/alegreya-italic-core.488ad78e.woff2") format("woff2");
+    unicode-range: U+0041-005A;
+    size-adjust: 86%;
+}
 /* Alegreya SC - normal 500 (used by .byline, inherits body weight 440) */
 @font-face {
     font-family: "Alegreya SC";

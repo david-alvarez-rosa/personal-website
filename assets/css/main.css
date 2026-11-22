@@ -62,7 +62,7 @@ h1, h2, .byline .author, .tags {
 }
 
 .sc {
-    font-family: "Alegreya Smallcaps", var(--font-body);
+    font-family: "Alegreya Smallcaps", "Alegreya Smallcaps Fallback", var(--font-body);
     letter-spacing: 0.02em;
 }
 
