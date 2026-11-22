@@ -1,2 +1,2 @@
 {{- $first := and (eq .Ordinal 0) (not (strings.Contains (index (split .Page.RawContent .Destination) 0) "{{< figure")) -}}
-{{- partial "img.html" (dict "src" .Destination "priority" $first) -}}
+{{- partial "img.html" (dict "src" .Destination "priority" $first "sizes" (cond (or .Page.IsHome (eq .Page.RelPermalink "/about/")) "240px" "")) -}}
