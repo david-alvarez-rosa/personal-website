@@ -97,6 +97,9 @@
   {{ if .Params.latex }}
     {{ $cssParts = $cssParts | append (resources.Get "css/katex.css") }}
     {{ $bundleName = "css/bundle-katex.css" }}
+    {{ range findRE `/katex/[^)]*/KaTeX_(Main-Regular|Math-Italic)\.woff2` (resources.Get "css/katex.css").Content }}
+    <link rel="preload" href="{{ . }}" as="font" type="font/woff2" crossorigin>
+    {{ end }}
   {{ end }}
   {{ $cssParts = $cssParts | append (resources.Get "css/main.css") }}
   {{ if and .Content (strings.Contains .Content "chroma") }}
