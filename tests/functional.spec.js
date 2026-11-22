@@ -58,3 +58,23 @@ test.describe('Security', () => {
     expect(insecureResources).toHaveLength(0);
   });
 });
+
+test('pages load only core font subsets', async ({ page }) => {
+  test.setTimeout(120000);
+  const full = new Set();
+  page.on('request', request => {
+    const url = request.url();
+    if (/\/fonts\/.*-latin\.woff2$/.test(url)) full.add(`${page.url()} -> ${url}`);
+  });
+  await page.goto('/posts/');
+  const posts = await page.evaluate(() =>
+    [...new Set(Array.from(document.querySelectorAll('a[href*="/posts/"]'), a => a.pathname))]);
+  for (const url of ['/', '/about/', '/posts/', ...posts]) {
+    await page.goto(url);
+    await page.evaluate(async () => {
+      window.scrollTo(0, document.body.scrollHeight);
+      await document.fonts.ready;
+    });
+  }
+  expect([...full]).toEqual([]);
+});
