@@ -1,14 +1,15 @@
 {{ define "head" }}
   {{ $first := upper (substr (replaceRE "^[^A-Za-z]*" "" .Plain) 0 1) }}
-  {{ if and (default true .Params.dropcap) (ge $first "A") (le $first "Z") }}
+  {{ if and (eq .Section "posts") (default true .Params.dropcap) (ge $first "A") (le $first "Z") }}
+  {{ $adjust := index (dict "A" 116.3 "B" 125.9 "C" 125.9 "D" 116.3 "E" 137.5 "F" 150 "G" 116.3 "H" 116.3 "I" 150 "J" 150 "K" 116.3 "L" 137.5 "M" 94.5 "N" 116.3 "O" 116.3 "P" 150 "Q" 116.3 "R" 125.9 "S" 150 "T" 137.5 "U" 116.3 "V" 116.3 "W" 89.0 "X" 116.3 "Y" 116.3 "Z" 137.5) $first }}
   <link rel="preload" href="/fonts/GoudyInitialen-{{ $first }}.woff2" as="font" type="font/woff2" crossorigin>
-  <style>@font-face { font-family: "GoudyInitialen"; src: url("/fonts/GoudyInitialen-{{ $first }}.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }</style>
+  <style>@font-face { font-family: "GoudyInitialen"; src: url("/fonts/GoudyInitialen-{{ $first }}.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; } @font-face { font-family: "GoudyInitialen Fallback"; src: local("Times New Roman"); size-adjust: {{ $adjust }}%; }</style>
   {{ end }}
 {{ end }}
 {{ define "main" }}
   {{ $entry := eq .Section "posts" }}
   {{ if $entry }}
-    <style>main > .h-entry > .e-content > p:first-of-type::first-letter { font-family: "GoudyInitialen", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
+    <style>main > .h-entry > .e-content > p:first-of-type::first-letter { font-family: "GoudyInitialen", "GoudyInitialen Fallback", "Alegreya", "Alegreya Fallback", serif; float: left; font-size: 6.6rem; line-height: 0.8; padding: 0.43rem 0.3rem 0 0; }</style>
     <article class="h-entry">
   {{ end }}
   <header>
