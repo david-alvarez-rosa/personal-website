@@ -81,6 +81,13 @@ jobs:
       - name: Build site
         run: hugo --minify --panicOnWarning
 
+      - name: Precompress text assets
+        run: |
+          command -v brotli || sudo apt-get install -y brotli
+          find public -type f -size +255c \
+            \( -name '*.html' -o -name '*.xml' -o -name '*.js' -o -name '*.css' -o -name '*.svg' -o -name '*.md' -o -name '*.txt' -o -name '*.json' \) \
+            -exec brotli -q 11 -k {} + -exec gzip -9 -k {} +
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.10.0
         with:
@@ -108,7 +115,7 @@ jobs:
             purge '{"purge_everything":true}'
             exit
           fi
-          mapfile -t prefixes < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | sed -e 's|^|david.alvarezrosa.com/|' -e 's|index\.html$||')
+          mapfile -t prefixes < <(sed -nE 's/^(<f\S*|\*deleting)\s+//p' rsync.log | grep -vE '\.(br|gz)$' | sed -e 's|^|david.alvarezrosa.com/|' -e 's|index\.html$||')
           for ((i = 0; i < ${#prefixes[@]}; i += 100)); do
             printf '%s\n' "${prefixes[@]:i:100}" | jq -Rsc '{prefixes: split("\n")[:-1]}' | purge @-
           done
