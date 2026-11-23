@@ -202,7 +202,8 @@ action.*] or wiggle in whatever pattern you like.
 
 * TODO [#B] Minimalist Invoice                                      :backlog:
 
-* TODO [#B] Deriving Black-Scholes                                  :backlog:
+* DONE [#B] Deriving Black-Scholes
+CLOSED: [2026-11-23 Mon 17:13]
 :PROPERTIES:
 :EXPORT_FILE_NAME: deriving-black-scholes
 :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :latex true :subtitle "Option price from the no-arbitrage hypothesis."
@@ -415,7 +416,6 @@ where \(N\) is the standard normal CDF and
   call ends in the money.
 - \(N(d_2)\) is the risk-neutral probability of exercise, so the second
   term is the present value of the expected strike payment.
-
 
 \\
 
