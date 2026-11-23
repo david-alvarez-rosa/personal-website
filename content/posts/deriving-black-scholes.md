@@ -152,7 +152,7 @@ See how noise and drift cancel.  No \\(dW\\!\\) term is left, and
 everything else is known at time \\(t\\), so over the next instant the
 portfolio change is fixed.[^fn:4]  We've built a riskless portfolio, that
 by the no-arbitrage assumption, it must earn the risk-free rate,
-\\(d\Pi=r\Pi\\,dt\\).  Equating both expressions gives us the Black-Scholes
+\\(d\Pi=r\Pi\\,dt.\\)  Equating both expressions gives us the Black-Scholes
 equation
 
 \\[
@@ -160,7 +160,8 @@ equation
   +\frac{1}{2}\sigma^2S^2\frac{\partial^2V}{\partial S^2}=rV.
 \\]
 
-Lovely, uh?
+Note that \\(\mu\\) is gone, so the option price does not depend on the
+drift.
 
 
 ## Black-Scholes formula {#black-scholes-formula}
