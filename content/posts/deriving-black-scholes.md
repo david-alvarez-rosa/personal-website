@@ -2,7 +2,7 @@
 title = "Deriving Black-Scholes"
 author = ["David Álvarez Rosa"]
 date = 2026-11-23T17:13:00+00:00
-tags = ["blog"]
+tags = ["blog", "mathematics"]
 draft = false
 latex = true
 subtitle = "Option price from the no-arbitrage hypothesis."
