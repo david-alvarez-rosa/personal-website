@@ -2,30 +2,25 @@
 
 Source code for [[https://david.alvarezrosa.com][david.alvarezrosa.com]].
 
-Static site built with Hugo and a custom theme.  Posts are written in
-Emacs Org mode within [[file:Content.org][Content.org]], automatically exported to Markdown
-via [[https://ox-hugo.scripter.co/][ox-hugo]], then built by Hugo.  A Python FastAPI backend handles email
-subscriptions.
+Posts live in [[file:Content.org][Content.org]].
 
 #+begin_example
-  Content.org (Org-mode) -> ox-hugo -> content/*.md -> Hugo -> public/
+  Content.org -> (ox-hugo) -> content/*.md -> (hugo) -> public/*.html
 #+end_example
 
 ** Development
 
-#+begin_src shell
-  hugo server -D  # Dev server with drafts
-  hugo --minify   # Prod build
-#+end_src
-
-** Backend
+Requires Hugo, ~uv~, and ~podman~ for tests.
 
 #+begin_src shell
-  uv sync                       # Install dependencies
-  uvicorn api.api:app --reload  # Dev server on localhost:8000
+  hugo server -D                       # Dev server with drafts
+  hugo --minify                        # Prod build
+  uv run uvicorn api.api:app --reload  # API on localhost:8000
 #+end_src
 
 ** Validation
+
+Use the ~pre-push~ hook or run manually.
 
 #+begin_src shell
   hugo --minify --panicOnWarning                                        # Warnings as errors
@@ -37,8 +32,9 @@ subscriptions.
 
 ** Deployment
 
-Push to ~main~ triggers GitHub Actions to build and deploy via rsync.
+- Push to ~main~ :: will validate, then deploy to [[https://beta.alvarezrosa.com][beta]].
+- Push ~v*~ tag :: will deploy to prod (and darkweb), and release.
 
-** Contributions
+#+html: <br />
 
-Pull requests welcome!
+With :heart: by [[https://david.alvarezrosa.com][David Álvarez Rosa]].
