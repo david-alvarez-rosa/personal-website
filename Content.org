@@ -585,10 +585,10 @@ CLOSED: [2026-11-23 Mon 17:13]
 :END:
 
 Even if it feels unintuitive, the price of an option does not depend on
-whether the underlying moons or tanks.  Under some reasonable market
-hypotheses, we can build a fully hedged portfolio by holding the
-underlying and shorting the option.  Since it is riskless, by
-no-arbitrage assumption, it must return the same as the risk-free
+whether you expect the underlying to moon or tank.  Under some
+reasonable market hypotheses, we can build a fully hedged portfolio by
+holding the underlying and shorting the option.  Since it is riskless,
+by no-arbitrage assumption, it must return the same as the risk-free
 interest rate.  That allows to put together an equation (the
 Black-Scholes equation), and solve for the option price (the
 Black-Scholes formula).
